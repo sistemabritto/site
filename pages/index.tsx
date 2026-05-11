@@ -1,31 +1,43 @@
 import Head from 'next/head';
+import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Benefits from '../components/Benefits';
 import ROICalculator from '../components/ROICalculator';
-import ClubPlugPlay from '../components/ClubPlugPlay';
 import WhatsAppCTA from '../components/WhatsAppCTA';
+import ClubPlugPlay from '../components/ClubPlugPlay';
 import Mission from '../components/Mission';
 import Footer from '../components/Footer';
+
+/**
+ * Workflow API Studio — Homepage
+ * AI-Native UI + Glassmorphism + Aurora
+ * Mobile-first, fancy, insano
+ */
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Workflow API Studio</title>
-        <meta
-          name="description"
-          content="Workflow API Studio é uma empresa especializada em automação de processos e integração de APIs para pequenas e médias empresas (PMEs) que desejam escalar suas operações com eficiência."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>Workflow API Studio — Agentes de IA no WhatsApp</title>
+        <meta name="description" content="Automações inteligentes no WhatsApp que qualificam leads, agendam, vendem e entregam — 24h por dia, 7 dias por semana. Comece agora." />
+        <meta name="keywords" content="WhatsApp Business, automação, IA, chatbot, agente inteligente, leads, vendas, agendamento, delivery" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#7C3AED" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Workflow API Studio" />
-        <meta
-          property="og:description"
-          content="Automação simples, resultados poderosos. Transforme seu WhatsApp em um canal que vende por você."
-        />
-        <meta property="og:image" content="/images/og-image.png" />
+        <meta property="og:title" content="Workflow API Studio — Agentes de IA no WhatsApp" />
+        <meta property="og:description" content="Automações inteligentes que qualificam leads, vendem e entregam por você. 24/7." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://workflowapi.com.br" />
+        <meta property="og:locale" content="pt_BR" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Workflow API Studio — Agentes de IA no WhatsApp" />
+        <meta name="twitter:description" content="Automações inteligentes que qualificam leads, vendem e entregam por você. 24/7." />
+
+        {/* Favicon */}
+        <link rel="icon" href="/favicon.ico" />
         
         {/* Facebook Pixel */}
         <script
@@ -46,12 +58,13 @@ export default function Home() {
         />
       </Head>
 
-      <main>
+      <main className="min-h-screen bg-surface-50">
+        <Navbar />
         <Hero />
         <Benefits />
         <ROICalculator />
-        <ClubPlugPlay />
         <WhatsAppCTA />
+        <ClubPlugPlay />
         <Mission />
         <Footer />
       </main>

@@ -1,117 +1,94 @@
 import React from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+
+/**
+ * Benefits Section — Soft UI + Aurora accents
+ * Mobile-first cards com hover lift
+ */
 
 const benefits = [
   {
-    title: 'Qualificação',
-    description: 'Fluxos de segmentação automática integrado ao seu CRM',
     icon: '🎯',
+    title: 'Qualificação Automática',
+    description: 'Fluxos de segmentação que classificam leads pelo WhatsApp, integrados ao seu CRM. Sem esforço manual.',
+    stat: '3x',
+    statLabel: 'mais leads qualificados',
   },
   {
-    title: 'Interação',
-    description: 'Painel multi usuário para acompanhar as conversas ao vivo',
     icon: '💬',
+    title: 'Interação em Tempo Real',
+    description: 'Painel multi-usuário para acompanhar conversas ao vivo. Intervenha quando quiser, a IA faz o resto.',
+    stat: '24/7',
+    statLabel: 'atendimento sem pausa',
   },
   {
-    title: 'Notificações',
-    description: 'Envio de mensagens estratégicas programadas sob medida',
     icon: '🔔',
+    title: 'Notificações Estratégicas',
+    description: 'Mensagens programadas sob medida. Lembretes, follow-ups e ofertas no momento certo.',
+    stat: '68%',
+    statLabel: 'mais conversões',
   },
 ];
 
 export default function Benefits() {
+  const reveal = useScrollReveal(0.15);
+
   return (
-    <section className="benefits">
-      <div className="container">
-        <h2 className="benefits-title">
-          Automação simples, resultados poderosos
-        </h2>
-        <p className="benefits-subtitle">
-          Tecnologia acessível para negócios de qualquer tamanho
-        </p>
-        
-        <div className="benefits-grid">
-          {benefits.map((benefit) => (
-            <div key={benefit.title} className="benefit-card">
-              <div className="benefit-icon">{benefit.icon}</div>
-              <h3 className="benefit-title">{benefit.title}</h3>
-              <p className="benefit-description">{benefit.description}</p>
+    <section id="beneficios" className="relative py-20 sm:py-32 bg-surface-50">
+      {/* Subtle Aurora Top Border */}
+      <div className="absolute top-0 left-0 right-0 h-1 aurora-bg opacity-50" />
+
+      <div ref={reveal} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <span className="inline-block text-primary-500 text-sm font-semibold uppercase tracking-wider mb-3">
+            Por que Workflow API
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-surface-900 mb-4">
+            Automação simples,
+            <br />
+            <span className="aurora-text">resultados poderosos</span>
+          </h2>
+          <p className="text-surface-700/70 text-lg max-w-xl mx-auto">
+            Tecnologia acessível para negócios de qualquer tamanho. Do primeiro lead ao cliente fiel.
+          </p>
+        </div>
+
+        {/* Benefits Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          {benefits.map((b, i) => (
+            <div
+              key={b.title}
+              className="group relative bg-white rounded-2xl p-8 border border-surface-200/80 hover:border-primary-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary-500/5"
+            >
+              {/* Icon */}
+              <div className="text-4xl mb-5 group-hover:scale-110 transition-transform duration-300">
+                {b.icon}
+              </div>
+
+              {/* Title */}
+              <h3 className="font-heading font-bold text-xl text-surface-900 mb-2">
+                {b.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-surface-700/70 text-sm leading-relaxed mb-6">
+                {b.description}
+              </p>
+
+              {/* Stat */}
+              <div className="pt-4 border-t border-surface-100">
+                <span className="text-3xl font-heading font-bold aurora-text">
+                  {b.stat}
+                </span>
+                <span className="block text-xs text-surface-700/50 mt-1">
+                  {b.statLabel}
+                </span>
+              </div>
             </div>
           ))}
         </div>
       </div>
-      
-      <style jsx>{`
-        .benefits {
-          padding: 80px 20px;
-          background: #ffffff;
-        }
-        
-        .container {
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-        
-        .benefits-title {
-          font-size: 2rem;
-          font-weight: bold;
-          text-align: center;
-          margin-bottom: 16px;
-          color: #1a1a1a;
-        }
-        
-        .benefits-subtitle {
-          font-size: 1.1rem;
-          text-align: center;
-          color: #666;
-          margin-bottom: 48px;
-        }
-        
-        .benefits-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 32px;
-        }
-        
-        .benefit-card {
-          background: #f8f9fa;
-          border-radius: 12px;
-          padding: 32px 24px;
-          text-align: center;
-          transition: transform 0.2s;
-        }
-        
-        .benefit-card:hover {
-          transform: translateY(-4px);
-        }
-        
-        .benefit-icon {
-          font-size: 3rem;
-          margin-bottom: 16px;
-        }
-        
-        .benefit-title {
-          font-size: 1.25rem;
-          font-weight: 600;
-          margin: 0 0 12px;
-          color: #1a1a1a;
-        }
-        
-        .benefit-description {
-          font-size: 0.95rem;
-          color: #666;
-          margin: 0;
-          line-height: 1.5;
-        }
-        
-        @media (max-width: 768px) {
-          .benefits {
-            padding: 60px 20px;
-          }
-          .benefits-title {
-            font-size: 1.5rem;
-          }
-        }
-      `}</style>
     </section>
   );
 }
