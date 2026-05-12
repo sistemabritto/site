@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 /**
- * Navbar — Dark mode, glassmorphism, sticky
- * Logo branca do blog.workflowapi.com.br
+ * Navbar — Dark mode, high contrast, sticky
  */
 
 const navLinks = [
- { label: 'Benefícios', href: '#beneficios' },
- { label: 'ROI', href: '#roi' },
- { label: 'Blog', href: 'https://blog.workflowapi.com.br', external: true },
+  { label: 'Benefícios', href: '#beneficios' },
+  { label: 'ROI', href: '#roi' },
+  { label: 'Blog', href: 'https://blog.workflowapi.com.br', external: true },
 ];
 
 export default function Navbar() {
@@ -54,11 +53,11 @@ export default function Navbar() {
                 href={link.href}
                 target={link.external ? '_blank' : undefined}
                 rel={link.external ? 'noopener noreferrer' : undefined}
-                className="text-white/70 hover:text-white text-sm font-medium transition-colors duration-200"
+                className="text-white hover:text-primary-400 text-sm font-semibold transition-colors duration-200"
               >
                 {link.label}
                 {link.external && (
-                  <span className="ml-1 text-xs opacity-50">↗</span>
+                  <span className="ml-1 text-xs opacity-70">↗</span>
                 )}
               </a>
             ))}
@@ -66,7 +65,7 @@ export default function Navbar() {
               href="https://wa.me/5511914088571?text=Olá!%20Vi%20o%20site%20de%20vocês%20e%20gostaria%20de%20falar%20com%20um%20especialista%20em%20automação"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 cta-glow"
+              className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 cta-glow"
             >
               Falar com Especialista
             </a>
@@ -100,14 +99,14 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {mobileOpen && (
-          <div className="md:hidden mt-4 glass-strong rounded-2xl p-6 space-y-4 animate-in">
+          <div className="md:hidden mt-4 glass-strong rounded-2xl p-6 space-y-4">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 target={link.external ? '_blank' : undefined}
                 rel={link.external ? 'noopener noreferrer' : undefined}
-                className="block text-white/80 hover:text-white text-base font-medium py-2"
+                className="block text-white hover:text-primary-400 text-base font-semibold py-2"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
@@ -117,7 +116,7 @@ export default function Navbar() {
               href="https://wa.me/5511914088571?text=Olá!%20Vi%20o%20site%20de%20vocês%20e%20gostaria%20de%20falar%20com%20um%20especialista%20em%20automação"
               target="_blank"
               rel="noopener noreferrer"
-              className="block text-center bg-primary-600 text-white px-6 py-3 rounded-full font-semibold mt-4 cta-glow"
+              className="block text-center bg-primary-600 text-white px-6 py-3 rounded-full font-bold mt-4 cta-glow"
               onClick={() => setMobileOpen(false)}
             >
               Falar com Especialista

@@ -36,7 +36,7 @@ export default function PoliticasDePrivacidade() {
               <h1 className="text-3xl sm:text-4xl font-heading font-bold text-white mb-2">
                 Política de Privacidade
               </h1>
-              <p className="text-white/50 text-sm">
+              <p className="text-neutral-400 text-sm">
                 Última atualização: {new Date().toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' })}
               </p>
             </div>
@@ -45,7 +45,7 @@ export default function PoliticasDePrivacidade() {
 
         {/* Content */}
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-          <div className="prose-dark space-y-10 text-white/70 text-sm leading-relaxed">
+          <div className="prose-dark space-y-10 text-neutral-200 text-sm leading-relaxed">
 
             <section>
               <h2 className="text-white font-heading font-bold text-xl mb-4">1. Informações Gerais</h2>
@@ -61,10 +61,10 @@ export default function PoliticasDePrivacidade() {
               <h2 className="text-white font-heading font-bold text-xl mb-4">2. Dados que Coletamos</h2>
               <p>Coletamos os seguintes dados pessoais:</p>
               <ul className="list-disc pl-5 mt-3 space-y-2">
-                <li><strong className="text-white/90">Dados de identificação:</strong> nome completo, número de WhatsApp, e-mail e nome da empresa, fornecidos voluntariamente ao entrar em contato conosco.</li>
-                <li><strong className="text-white/90">Dados de navegação:</strong> endereço IP, tipo de navegador, páginas visitadas, tempo de permanência e fonte de tráfego, coletados automaticamente via cookies e tecnologias similares.</li>
-                <li><strong className="text-white/90">Dados de interação:</strong> mensagens enviadas aos nossos agentes de IA via WhatsApp, incluindo conteúdo conversacional processado para prestação do serviço de automação.</li>
-                <li><strong className="text-white/90">Dados de conversão:</strong> informações sobre interações com anúncios e eventos de conversão, coletados via Facebook Pixel para mensuração de campanhas publicitárias.</li>
+                <li><strong className="text-white">Dados de identificação:</strong> nome completo, número de WhatsApp, e-mail e nome da empresa, fornecidos voluntariamente ao entrar em contato conosco.</li>
+                <li><strong className="text-white">Dados de navegação:</strong> endereço IP, tipo de navegador, páginas visitadas, tempo de permanência e fonte de tráfego, coletados automaticamente via cookies e tecnologias similares.</li>
+                <li><strong className="text-white">Dados de interação:</strong> mensagens enviadas aos nossos agentes de IA via WhatsApp, incluindo conteúdo conversacional processado para prestação do serviço de automação.</li>
+                <li><strong className="text-white">Dados de conversão:</strong> informações sobre interações com anúncios e eventos de conversão, coletados via Facebook Pixel para mensuração de campanhas publicitárias.</li>
               </ul>
             </section>
 
@@ -85,10 +85,10 @@ export default function PoliticasDePrivacidade() {
               <h2 className="text-white font-heading font-bold text-xl mb-4">4. Base Legal para o Tratamento</h2>
               <p>O tratamento dos seus dados pessoais se fundamenta nas seguintes bases legais previstas na LGPD:</p>
               <ul className="list-disc pl-5 mt-3 space-y-2">
-                <li><strong className="text-white/90">Consentimento (Art. 7º, I):</strong> para envio de comunicações de marketing e coleta de dados de navegação via cookies</li>
-                <li><strong className="text-white/90">Execução de contrato (Art. 7º, V):</strong> para prestação dos serviços contratados</li>
-                <li><strong className="text-white/90">Legítimo interesse (Art. 7º, IX):</strong> para qualificação de leads, melhoria dos serviços e segurança do sistema</li>
-                <li><strong className="text-white/90">Cumprimento de obrigação legal (Art. 7º, II):</strong> para obrigações fiscais e regulatórias</li>
+                <li><strong className="text-white">Consentimento (Art. 7º, I):</strong> para envio de comunicações de marketing e coleta de dados de navegação via cookies</li>
+                <li><strong className="text-white">Execução de contrato (Art. 7º, V):</strong> para prestação dos serviços contratados</li>
+                <li><strong className="text-white">Legítimo interesse (Art. 7º, IX):</strong> para qualificação de leads, melhoria dos serviços e segurança do sistema</li>
+                <li><strong className="text-white">Cumprimento de obrigação legal (Art. 7º, II):</strong> para obrigações fiscais e regulatórias</li>
               </ul>
             </section>
 
@@ -96,9 +96,9 @@ export default function PoliticasDePrivacidade() {
               <h2 className="text-white font-heading font-bold text-xl mb-4">5. Compartilhamento de Dados</h2>
               <p>Seus dados poderão ser compartilhados com:</p>
               <ul className="list-disc pl-5 mt-3 space-y-2">
-                <li><strong className="text-white/90">Provedores de serviços:</strong> empresas que atuam em nosso nome para processamento de pagamentos, hospedagem e infraestrutura</li>
-                <li><strong className="text-white/90">Plataformas de anúncios:</strong> Meta (Facebook/Instagram) para mensuração e otimização de campanhas</li>
-                <li><strong className="text-white/90">Autoridades:</strong> quando exigido por lei ou decisão judicial</li>
+                <li><strong className="text-white">Provedores de serviços:</strong> empresas que atuam em nosso nome para processamento de pagamentos, hospedagem e infraestrutura</li>
+                <li><strong className="text-white">Plataformas de anúncios:</strong> Meta (Facebook/Instagram) para mensuração e otimização de campanhas</li>
+                <li><strong className="text-white">Autoridades:</strong> quando exigido por lei ou decisão judicial</li>
               </ul>
               <p className="mt-3">Não vendemos, alugamos ou compartilhamos seus dados pessoais com terceiros para fins de marketing.</p>
             </section>
@@ -107,9 +107,9 @@ export default function PoliticasDePrivacidade() {
               <h2 className="text-white font-heading font-bold text-xl mb-4">6. Cookies e Tecnologias de Rastreamento</h2>
               <p>Utilizamos as seguintes tecnologias:</p>
               <ul className="list-disc pl-5 mt-3 space-y-2">
-                <li><strong className="text-white/90">Cookies essenciais:</strong> necessários para o funcionamento do site</li>
-                <li><strong className="text-white/90">Cookies de análise:</strong> para entender como os visitantes usam o site</li>
-                <li><strong className="text-white/90">Facebook Pixel:</strong> para rastreamento de conversões e otimização de anúncios</li>
+                <li><strong className="text-white">Cookies essenciais:</strong> necessários para o funcionamento do site</li>
+                <li><strong className="text-white">Cookies de análise:</strong> para entender como os visitantes usam o site</li>
+                <li><strong className="text-white">Facebook Pixel:</strong> para rastreamento de conversões e otimização de anúncios</li>
               </ul>
               <p className="mt-3">Você pode gerenciar suas preferências de cookies nas configurações do navegador.</p>
             </section>
@@ -138,12 +138,12 @@ export default function PoliticasDePrivacidade() {
               <h2 className="text-white font-heading font-bold text-xl mb-4">9. Seus Direitos (Titular de Dados)</h2>
               <p>Conforme a LGPD, você tem direito a:</p>
               <ul className="list-disc pl-5 mt-3 space-y-2">
-                <li><strong className="text-white/90">Confirmação e acesso:</strong> confirmar a existência e acessar seus dados pessoais</li>
-                <li><strong className="text-white/90">Correção:</strong> solicitar a correção de dados incompletos, inexatos ou desatualizados</li>
-                <li><strong className="text-white/90">Anonimização ou eliminação:</strong> solicitar a anonimização ou eliminação de dados desnecessários</li>
-                <li><strong className="text-white/90">Portabilidade:</strong> solicitar a portabilidade dos seus dados a outro fornecedor</li>
-                <li><strong className="text-white/90">Revogação do consentimento:</strong> revogar o consentimento a qualquer momento</li>
-                <li><strong className="text-white/90">Oposição:</strong> opor-se ao tratamento realizado sem seu consentimento</li>
+                <li><strong className="text-white">Confirmação e acesso:</strong> confirmar a existência e acessar seus dados pessoais</li>
+                <li><strong className="text-white">Correção:</strong> solicitar a correção de dados incompletos, inexatos ou desatualizados</li>
+                <li><strong className="text-white">Anonimização ou eliminação:</strong> solicitar a anonimização ou eliminação de dados desnecessários</li>
+                <li><strong className="text-white">Portabilidade:</strong> solicitar a portabilidade dos seus dados a outro fornecedor</li>
+                <li><strong className="text-white">Revogação do consentimento:</strong> revogar o consentimento a qualquer momento</li>
+                <li><strong className="text-white">Oposição:</strong> opor-se ao tratamento realizado sem seu consentimento</li>
               </ul>
               <p className="mt-3">
                 Para exercer seus direitos, entre em contato conosco através do e-mail <a href="mailto:felipe@workflowapi.com.br" className="text-primary-400 hover:text-primary-300">felipe@workflowapi.com.br</a> ou pelo WhatsApp <a href="https://wa.me/5511914088571?text=Olá!%20Gostaria%20de%20exercer%20meus%20direitos%20de%20titular%20de%20dados%20conforme%20a%20LGPD" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300">+55 11 91408-8571</a>.
@@ -170,10 +170,10 @@ export default function PoliticasDePrivacidade() {
                 Para dúvidas, solicitações ou reclamações sobre esta política ou o tratamento dos seus dados pessoais:
               </p>
               <div className="mt-4 glass-strong rounded-xl p-6 border border-white/10 space-y-2">
-                <p><strong className="text-white/90">Empresa:</strong> Workflow API Studio</p>
-                <p><strong className="text-white/90">E-mail:</strong> <a href="mailto:felipe@workflowapi.com.br" className="text-primary-400 hover:text-primary-300">felipe@workflowapi.com.br</a></p>
-                <p><strong className="text-white/90">WhatsApp:</strong> <a href="https://wa.me/5511914088571?text=Olá!%20Tenho%20dúvidas%20sobre%20a%20política%20de%20privacidade" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300">+55 11 91408-8571</a></p>
-                <p><strong className="text-white/90">Endereço:</strong> São Paulo - SP, Brasil</p>
+                <p><strong className="text-white">Empresa:</strong> Workflow API Studio</p>
+                <p><strong className="text-white">E-mail:</strong> <a href="mailto:felipe@workflowapi.com.br" className="text-primary-400 hover:text-primary-300">felipe@workflowapi.com.br</a></p>
+                <p><strong className="text-white">WhatsApp:</strong> <a href="https://wa.me/5511914088571?text=Olá!%20Tenho%20dúvidas%20sobre%20a%20política%20de%20privacidade" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300">+55 11 91408-8571</a></p>
+                <p><strong className="text-white">Endereço:</strong> São Paulo - SP, Brasil</p>
               </div>
             </section>
 

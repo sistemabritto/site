@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /* ============================================
-   WORKFLOW API STUDIO — Design System v2
-   DARK MODE + High Contrast + Aurora
+   WORKFLOW API STUDIO — Design System v3
+   DARK MODE + MAX CONTRAST
    ============================================ */
 
 /* Custom theme config */
@@ -12,21 +12,16 @@
   --color-surface-800: #1a1a1a;
   --color-surface-700: #262626;
   --color-surface-600: #333333;
-  --color-surface-500: #404040;
-  --color-surface-400: #525252;
-  --color-surface-300: #737373;
-  --color-surface-200: #a3a3a3;
-  --color-surface-100: #d4d4d4;
-  --color-surface-50: #f5f5f5;
   
-  /* AI Purple primary */
-  --color-primary-500: #8B5CF6;
-  --color-primary-600: #7C3AED;
-  --color-primary-700: #6D28D9;
+  /* AI Purple primary - mais vibrante */
+  --color-primary-500: #A78BFA;
+  --color-primary-600: #8B5CF6;
+  --color-primary-700: #7C3AED;
   
-  /* Teal accent */
-  --color-accent-500: #0891B2;
-  --color-accent-600: #0E7490;
+  /* Teal accent - mais vibrante */
+  --color-accent-400: #22D3EE;
+  --color-accent-500: #06B6D4;
+  --color-accent-600: #0891B2;
   
   /* Green for success/WhatsApp */
   --color-success-500: #22C55E;
@@ -38,56 +33,57 @@ body {
   font-family: 'DM Sans', system-ui, sans-serif;
   background-color: var(--color-surface-950);
   color: #ffffff;
+  line-height: 1.6;
 }
 
 /* Headings */
 .font-heading {
   font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 700;
 }
 
-/* Aurora gradient background */
+/* Aurora gradient background - mais escuro */
 .aurora-bg {
   background: linear-gradient(135deg,
     #0a0a0a 0%,
-    #1a0a2e 15%,
-    #16163a 30%,
-    #0c284a 50%,
-    #0a1628 70%,
+    #0f0a1f 15%,
+    #0a0a1a 30%,
+    #0a1428 50%,
     #0a0a0a 100%
   );
 }
 
-/* Aurora text gradient */
+/* Aurora text gradient - mais vibrante */
 .aurora-text {
-  background: linear-gradient(135deg, #8B5CF6 0%, #0891B2 100%);
+  background: linear-gradient(135deg, #A78BFA 0%, #22D3EE 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Glassmorphism - dark version */
+/* Glassmorphism - mais contraste nas bordas */
 .glass {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .glass-strong {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.10);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 /* CTA glow effect */
 .cta-glow {
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
   transition: all 0.3s ease;
 }
 
 .cta-glow:hover {
-  box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
 }
 
 /* Typing indicator animation */
@@ -126,25 +122,6 @@ body {
   transform: translateY(0);
 }
 
-/* High contrast text utilities */
-.text-high-contrast {
-  color: #ffffff;
-}
-
-.text-medium-contrast {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.text-low-contrast {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-/* Dark mode focus rings */
-*:focus-visible {
-  outline: 2px solid #8B5CF6;
-  outline-offset: 2px;
-}
-
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
@@ -153,4 +130,40 @@ html {
 /* Remove tap highlight on mobile */
 * {
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Focus rings - alto contraste */
+*:focus-visible {
+  outline: 2px solid #A78BFA;
+  outline-offset: 2px;
+}
+
+/* Prose dark - texto legível */
+.prose-dark {
+  color: #e5e5e5;
+}
+
+.prose-dark strong {
+  color: #ffffff;
+}
+
+.prose-dark a {
+  color: #A78BFA;
+  text-decoration: underline;
+}
+
+.prose-dark a:hover {
+  color: #C4B5FD;
+}
+
+.prose-dark h2 {
+  color: #ffffff;
+}
+
+.prose-dark ul {
+  color: #d4d4d4;
+}
+
+.prose-dark li {
+  color: #d4d4d4;
 }

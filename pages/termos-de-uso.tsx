@@ -36,7 +36,7 @@ export default function TermosDeUso() {
               <h1 className="text-3xl sm:text-4xl font-heading font-bold text-white mb-2">
                 Termos de Uso
               </h1>
-              <p className="text-white/50 text-sm">
+              <p className="text-neutral-400 text-sm">
                 Última atualização: {new Date().toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' })}
               </p>
             </div>
@@ -45,7 +45,7 @@ export default function TermosDeUso() {
 
         {/* Content */}
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-          <div className="prose-dark space-y-10 text-white/70 text-sm leading-relaxed">
+          <div className="prose-dark space-y-10 text-neutral-200 text-sm leading-relaxed">
 
             <section>
               <h2 className="text-white font-heading font-bold text-xl mb-4">1. Aceitação dos Termos</h2>
@@ -178,10 +178,10 @@ export default function TermosDeUso() {
                 Para dúvidas sobre estes Termos de Uso:
               </p>
               <div className="mt-4 glass-strong rounded-xl p-6 border border-white/10 space-y-2">
-                <p><strong className="text-white/90">Empresa:</strong> Workflow API Studio</p>
-                <p><strong className="text-white/90">E-mail:</strong> <a href="mailto:felipe@workflowapi.com.br" className="text-primary-400 hover:text-primary-300">felipe@workflowapi.com.br</a></p>
-                <p><strong className="text-white/90">WhatsApp:</strong> <a href="https://wa.me/5511914088571?text=Olá!%20Tenho%20dúvidas%20sobre%20os%20termos%20de%20uso" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300">+55 11 91408-8571</a></p>
-                <p><strong className="text-white/90">Endereço:</strong> São Paulo - SP, Brasil</p>
+                <p><strong className="text-white">Empresa:</strong> Workflow API Studio</p>
+                <p><strong className="text-white">E-mail:</strong> <a href="mailto:felipe@workflowapi.com.br" className="text-primary-400 hover:text-primary-300">felipe@workflowapi.com.br</a></p>
+                <p><strong className="text-white">WhatsApp:</strong> <a href="https://wa.me/5511914088571?text=Olá!%20Tenho%20dúvidas%20sobre%20os%20termos%20de%20uso" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300">+55 11 91408-8571</a></p>
+                <p><strong className="text-white">Endereço:</strong> São Paulo - SP, Brasil</p>
               </div>
             </section>
 

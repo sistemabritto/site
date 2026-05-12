@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 /**
- * Footer — Dark mode, links corretos
+ * Footer — Dark mode, MAX CONTRAST
  */
 
 const footerLinks = [
@@ -14,7 +14,7 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-surface-950 border-t border-white/10 py-12 sm:py-16">
+    <footer className="bg-surface-950 border-t border-white/15 py-12 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {/* Brand */}
@@ -28,17 +28,17 @@ export default function Footer() {
                 className="w-10 h-10 object-contain"
               />
               <span className="text-white font-heading font-bold text-lg">
-                Workflow<span className="text-primary-400">API</span>
+                Workflow<span className="text-primary-500">API</span>
               </span>
             </div>
-            <p className="text-white/50 text-sm leading-relaxed">
+            <p className="text-neutral-300 text-sm leading-relaxed font-medium">
               Automações inteligentes no WhatsApp que qualificam, vendem e entregam por você.
             </p>
           </div>
 
           {/* Links */}
           <div>
-            <h4 className="text-white/60 text-xs font-semibold uppercase tracking-wider mb-4">
+            <h4 className="text-white text-xs font-bold uppercase tracking-wider mb-4">
               Links
             </h4>
             <ul className="space-y-2">
@@ -49,15 +49,15 @@ export default function Footer() {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-white/50 hover:text-white transition-colors"
+                      className="text-sm text-neutral-300 hover:text-white font-medium transition-colors"
                     >
                       {link.label}
-                      <span className="ml-1 text-xs opacity-50">↗</span>
+                      <span className="ml-1 text-xs opacity-70">↗</span>
                     </a>
                   ) : (
                     <Link
                       href={link.href}
-                      className="text-sm text-white/50 hover:text-white transition-colors"
+                      className="text-sm text-neutral-300 hover:text-white font-medium transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -69,12 +69,12 @@ export default function Footer() {
 
           {/* Contato */}
           <div>
-            <h4 className="text-white/60 text-xs font-semibold uppercase tracking-wider mb-4">
+            <h4 className="text-white text-xs font-bold uppercase tracking-wider mb-4">
               Contato
             </h4>
             <ul className="space-y-2">
               <li>
-                <a href="mailto:felipe@workflowapi.com.br" className="text-sm text-white/50 hover:text-white transition-colors">
+                <a href="mailto:felipe@workflowapi.com.br" className="text-sm text-neutral-300 hover:text-white font-medium transition-colors">
                   felipe@workflowapi.com.br
                 </a>
               </li>
@@ -83,7 +83,7 @@ export default function Footer() {
                   href="https://wa.me/5511914088571?text=Olá!%20Vi%20o%20site%20de%20vocês%20e%20gostaria%20de%20mais%20informações"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-white/50 hover:text-white transition-colors"
+                  className="text-sm text-neutral-300 hover:text-white font-medium transition-colors"
                 >
                   +55 11 91408-8571
                 </a>
@@ -93,15 +93,15 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/40">
+        <div className="pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-neutral-400 font-medium">
             © {new Date().getFullYear()} Workflow API Studio. Todos os direitos reservados.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="/politicas-de-privacidade" className="text-xs text-white/40 hover:text-white/60 transition-colors">
+            <Link href="/politicas-de-privacidade" className="text-xs text-neutral-400 hover:text-white font-medium transition-colors">
               Privacidade
             </Link>
-            <Link href="/termos-de-uso" className="text-xs text-white/40 hover:text-white/60 transition-colors">
+            <Link href="/termos-de-uso" className="text-xs text-neutral-400 hover:text-white font-medium transition-colors">
               Termos
             </Link>
           </div>

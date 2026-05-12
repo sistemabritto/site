@@ -2,8 +2,7 @@ import React from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 /**
- * WhatsApp CTA — Dark mode, high contrast
- * Mensagens pré-preenchidas por botão
+ * WhatsApp CTA — Dark mode, MAX CONTRAST
  */
 
 const features = [
@@ -23,16 +22,16 @@ export default function WhatsAppCTA() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left — Copy */}
           <div>
-            <span className="inline-block text-primary-400 text-sm font-semibold uppercase tracking-wider mb-4">
+            <span className="inline-block text-primary-400 text-sm font-bold uppercase tracking-wider mb-4">
               WhatsApp Business + IA
             </span>
-            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-white mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-heading text-white mb-6 leading-tight">
               Transforme seu WhatsApp em um canal que
               <span className="aurora-text"> vende por você</span>
             </h2>
 
-            <div className="bg-gradient-to-r from-primary-900/30 to-accent-900/20 rounded-2xl p-6 border border-primary-500/20 mb-8">
-              <p className="text-white/80 text-base leading-relaxed">
+            <div className="bg-gradient-to-r from-primary-900/40 to-accent-900/30 rounded-2xl p-6 border border-primary-500/30 mb-8">
+              <p className="text-neutral-200 text-base leading-relaxed font-medium">
                 Em até <strong className="text-primary-400">1 hora</strong>, você terá seu atendimento estruturado com automações inteligentes e IA funcionando no seu WhatsApp — ao vivo com <strong className="text-primary-400">Felipe Britto</strong>, estrategista especialista em escalar negócios locais, clínicas e prestadores de serviço.
               </p>
             </div>
@@ -41,14 +40,14 @@ export default function WhatsAppCTA() {
               {features.map((f) => (
                 <li key={f.text} className="flex items-start gap-3">
                   <span className="text-lg flex-shrink-0">{f.icon}</span>
-                  <span className="text-white/70 text-sm leading-relaxed">{f.text}</span>
+                  <span className="text-neutral-200 text-sm leading-relaxed font-medium">{f.text}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Right — CTA Card */}
-          <div className="glass-strong rounded-3xl p-8 sm:p-10 border border-white/10">
+          <div className="glass-strong rounded-3xl p-8 sm:p-10">
             {/* WhatsApp Icon */}
             <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-green-500/20 flex items-center justify-center">
               <svg className="w-8 h-8 text-green-400" viewBox="0 0 24 24" fill="currentColor">
@@ -56,10 +55,10 @@ export default function WhatsAppCTA() {
               </svg>
             </div>
 
-            <h3 className="font-heading font-bold text-2xl text-white mb-3">
+            <h3 className="font-heading font-bold text-2xl text-white mb-3 text-center">
               Ative agora
             </h3>
-            <p className="text-white/50 text-sm mb-6">
+            <p className="text-neutral-300 text-sm mb-6 text-center font-medium">
               Sessão ao vivo · Sem compromisso · Resultado na hora
             </p>
 
@@ -67,7 +66,7 @@ export default function WhatsAppCTA() {
               href="https://wa.me/5511914088571?text=Olá!%20Quero%20ativar%20meu%20WhatsApp%20com%20inteligência%20artificial%20—%20vi%20no%20site%20de%20vocês"
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-lg shadow-green-500/25 hover:shadow-green-500/40 mb-3"
+              className="block w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25 hover:shadow-green-500/40 mb-3"
             >
               Quero ativar meu WhatsApp com IA
             </a>
@@ -76,12 +75,12 @@ export default function WhatsAppCTA() {
               href="https://wa.me/5511914088571?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20automação%20do%20meu%20atendimento%20no%20WhatsApp"
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full text-center glass text-white/70 hover:text-white hover:bg-white/10 py-3 rounded-full font-medium text-sm transition-all duration-200 border border-white/10"
+              className="block w-full text-center glass text-neutral-200 hover:text-white hover:bg-white/10 py-3 rounded-full font-semibold text-sm transition-all duration-200 border border-white/15"
             >
               Obter Orçamento
             </a>
 
-            <p className="text-red-400 text-xs font-semibold mt-4 animate-pulse">
+            <p className="text-red-400 text-xs font-bold mt-4 animate-pulse text-center">
               ⚡ Vagas limitadas por conta da agenda
             </p>
           </div>

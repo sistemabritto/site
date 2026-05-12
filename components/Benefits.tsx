@@ -2,30 +2,37 @@ import React from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 /**
- * Benefits Section — Dark mode, high contrast cards
+ * Benefits Section — Dark mode, MAX CONTRAST
  */
 
 const benefits = [
   {
     icon: '🎯',
     title: 'Qualificação Automática',
-    description: 'Fluxos de segmentação que classificam leads pelo WhatsApp, integrados ao seu CRM. Sem esforço manual.',
+    description: 'Seus agentes de IA qualificam cada lead que chega no WhatsApp, perguntando o certo na hora certa.',
     stat: '3x',
     statLabel: 'mais leads qualificados',
   },
   {
-    icon: '💬',
-    title: 'Interação em Tempo Real',
-    description: 'Painel multi-usuário para acompanhar conversas ao vivo. Intervenha quando quiser, a IA faz o resto.',
+    icon: '⏰',
+    title: 'Disponível 24/7',
+    description: 'Nunca mais perca um cliente porque estava dormindo ou fora do expediente.',
     stat: '24/7',
-    statLabel: 'atendimento sem pausa',
+    statLabel: 'sem pausa',
   },
   {
-    icon: '🔔',
-    title: 'Notificações Estratégicas',
-    description: 'Mensagens programadas sob medida. Lembretes, follow-ups e ofertas no momento certo.',
+    icon: '💰',
+    title: 'Redução de Custo',
+    description: 'Automatize o trabalho de 3 atendentes pagando uma fração do custo.',
     stat: '68%',
-    statLabel: 'mais conversões',
+    statLabel: 'de economia',
+  },
+  {
+    icon: '🚀',
+    title: 'Implementação Rápida',
+    description: 'Em 1 hora seu agente de IA já está funcionando no seu WhatsApp — sem instalar nada.',
+    stat: '1h',
+    statLabel: 'para ativar',
   },
 ];
 
@@ -33,56 +40,46 @@ export default function Benefits() {
   const reveal = useScrollReveal(0.15);
 
   return (
-    <section id="beneficios" className="relative py-20 sm:py-32 bg-surface-900">
-      {/* Top border gradient */}
-      <div className="absolute top-0 left-0 right-0 h-px aurora-bg opacity-50" />
-
+    <section id="beneficios" className="py-20 sm:py-32 bg-surface-900">
       <div ref={reveal} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
-        {/* Section Header */}
+        {/* Header */}
         <div className="text-center mb-16">
-          <span className="inline-block text-primary-400 text-sm font-semibold uppercase tracking-wider mb-3">
-            Por que Workflow API
+          <span className="inline-block text-primary-400 text-sm font-bold uppercase tracking-wider mb-4">
+            Benefícios
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-white mb-4">
-            Automação simples,
-            <br />
-            <span className="aurora-text">resultados poderosos</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading text-white mb-6 leading-tight">
+            Resultados que você
+            <span className="aurora-text"> mede no WhatsApp</span>
           </h2>
-          <p className="text-white/60 text-lg max-w-xl mx-auto">
-            Tecnologia acessível para negócios de qualquer tamanho. Do primeiro lead ao cliente fiel.
+          <p className="text-neutral-300 text-lg max-w-2xl mx-auto font-medium">
+            Cada agente é configurado para sua operação. Veja o que muda no primeiro mês.
           </p>
         </div>
 
-        {/* Benefits Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-          {benefits.map((b, i) => (
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {benefits.map((b) => (
             <div
               key={b.title}
-              className="group relative bg-surface-800 rounded-2xl p-8 border border-white/10 hover:border-primary-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary-500/10"
+              className="glass-strong rounded-2xl p-6 transition-all duration-300 hover:bg-white/10 hover:-translate-y-1 group"
             >
               {/* Icon */}
-              <div className="text-4xl mb-5 group-hover:scale-110 transition-transform duration-300">
-                {b.icon}
-              </div>
+              <div className="text-4xl mb-4">{b.icon}</div>
 
               {/* Title */}
-              <h3 className="font-heading font-bold text-xl text-white mb-2">
+              <h3 className="text-white font-heading font-bold text-lg mb-2">
                 {b.title}
               </h3>
 
-              {/* Description */}
-              <p className="text-white/60 text-sm leading-relaxed mb-6">
+              {/* Description — alto contraste */}
+              <p className="text-neutral-300 text-sm leading-relaxed mb-4">
                 {b.description}
               </p>
 
               {/* Stat */}
-              <div className="pt-4 border-t border-white/10">
-                <span className="text-3xl font-heading font-bold aurora-text">
-                  {b.stat}
-                </span>
-                <span className="block text-xs text-white/40 mt-1">
-                  {b.statLabel}
-                </span>
+              <div className="pt-4 border-t border-white/15">
+                <span className="text-primary-400 font-heading font-bold text-2xl">{b.stat}</span>
+                <span className="text-neutral-400 text-xs ml-2 font-medium">{b.statLabel}</span>
               </div>
             </div>
           ))}
