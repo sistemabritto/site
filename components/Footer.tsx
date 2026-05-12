@@ -1,10 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 
-/**
- * Footer — Dark mode, MAX CONTRAST
- */
-
 const footerLinks = [
   { label: 'Política de Privacidade', href: '/politicas-de-privacidade' },
   { label: 'Termos de Uso', href: '/termos-de-uso' },
@@ -13,10 +9,9 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-surface-950 border-t border-white/15 py-12 sm:py-16">
+    <footer className="bg-surface-900 border-t border-white/15 py-12 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10">
@@ -27,11 +22,10 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-neutral-200 text-sm leading-relaxed font-medium">
-              Automações inteligentes no WhatsApp que qualificam, vendem e entregam por você.
+              Workforces de IA que operam seu negócio — do WhatsApp à engenharia de software.
             </p>
           </div>
 
-          {/* Links */}
           <div>
             <h4 className="text-white text-xs font-bold uppercase tracking-wider mb-4">
               Links
@@ -62,7 +56,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contato */}
           <div>
             <h4 className="text-white text-xs font-bold uppercase tracking-wider mb-4">
               Contato
@@ -87,7 +80,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom */}
         <div className="pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-neutral-300 font-medium">
             © {new Date().getFullYear()} Workflow API Studio. Todos os direitos reservados.

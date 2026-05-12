@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-
-/**
- * Navbar — Dark mode, high contrast, sticky
- */
-
 const navLinks = [
-  { label: 'Benefícios', href: '#beneficios' },
+  { label: 'Serviços', href: '#servicos' },
   { label: 'ROI', href: '#roi' },
+  { label: 'Depoimentos', href: '#depoimentos' },
   { label: 'Blog', href: 'https://blog.workflowapi.com.br', external: true },
 ];
 
@@ -31,7 +27,6 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <a href="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 group-hover:scale-110 transition-transform duration-200">
               <img src="/images/logo-loop.svg" alt="Workflow API Studio" className="w-10 h-10" />
@@ -41,7 +36,6 @@ export default function Navbar() {
             </span>
           </a>
 
-          {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
@@ -49,7 +43,7 @@ export default function Navbar() {
                 href={link.href}
                 target={link.external ? '_blank' : undefined}
                 rel={link.external ? 'noopener noreferrer' : undefined}
-                className="text-white hover:text-primary-400 text-sm font-semibold transition-colors duration-200"
+                className="text-neutral-200 hover:text-gold-400 text-sm font-semibold transition-colors duration-200"
               >
                 {link.label}
                 {link.external && (
@@ -58,7 +52,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="https://wa.me/5511914088571?text=Olá!%20Vi%20o%20site%20de%20vocês%20e%20gostaria%20de%20falar%20com%20um%20especialista%20em%20automação"
+              href="https://wa.me/5511914088571?text=Olá!%20Quero%20conversar%20com%20um%20especialista%20em%20workforce%20de%20IA"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gold-500 hover:bg-gold-600 text-surface-900 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 shadow-lg shadow-gold-500/25"
@@ -67,33 +61,19 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile Hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="md:hidden text-white p-2"
             aria-label="Menu"
           >
             <div className="w-6 h-5 flex flex-col justify-between">
-              <span
-                className={`h-0.5 bg-white rounded transition-all duration-300 ${
-                  mobileOpen ? 'rotate-45 translate-y-2' : ''
-                }`}
-              />
-              <span
-                className={`h-0.5 bg-white rounded transition-all duration-300 ${
-                  mobileOpen ? 'opacity-0' : ''
-                }`}
-              />
-              <span
-                className={`h-0.5 bg-white rounded transition-all duration-300 ${
-                  mobileOpen ? '-rotate-45 -translate-y-2' : ''
-                }`}
-              />
+              <span className={`h-0.5 bg-white rounded transition-all ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`} />
+              <span className={`h-0.5 bg-white rounded transition-all ${mobileOpen ? 'opacity-0' : ''}`} />
+              <span className={`h-0.5 bg-white rounded transition-all ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`} />
             </div>
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {mobileOpen && (
           <div className="md:hidden mt-4 glass-strong rounded-2xl p-6 space-y-4">
             {navLinks.map((link) => (
@@ -102,14 +82,14 @@ export default function Navbar() {
                 href={link.href}
                 target={link.external ? '_blank' : undefined}
                 rel={link.external ? 'noopener noreferrer' : undefined}
-                className="block text-white hover:text-primary-400 text-base font-semibold py-2"
+                className="block text-neutral-200 hover:text-gold-400 text-base font-semibold py-2"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
               </a>
             ))}
             <a
-              href="https://wa.me/5511914088571?text=Olá!%20Vi%20o%20site%20de%20vocês%20e%20gostaria%20de%20falar%20com%20um%20especialista%20em%20automação"
+              href="https://wa.me/5511914088571?text=Olá!%20Quero%20conversar%20com%20um%20especialista%20em%20workforce%20de%20IA"
               target="_blank"
               rel="noopener noreferrer"
               className="block text-center bg-gold-500 text-surface-900 px-6 py-3 rounded-full font-bold mt-4 shadow-lg shadow-gold-500/25"

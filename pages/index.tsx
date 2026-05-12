@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
-import Benefits from '../components/Benefits';
+import Services from '../components/Services';
 import Testimonials from '../components/Testimonials';
 import ROICalculator from '../components/ROICalculator';
 import WhatsAppCTA from '../components/WhatsAppCTA';
@@ -9,67 +9,57 @@ import ClubPlugPlay from '../components/ClubPlugPlay';
 import Mission from '../components/Mission';
 import Footer from '../components/Footer';
 
-/**
- * Workflow API Studio — Homepage
- * AI-Native UI + Glassmorphism + Aurora
- * Mobile-first, fancy, insano
- */
-
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Workflow API Studio — Agentes de IA no WhatsApp</title>
-        <meta name="description" content="Automações inteligentes no WhatsApp que qualificam leads, agendam, vendem e entregam — 24h por dia, 7 dias por semana. Comece agora." />
-        <meta name="keywords" content="WhatsApp Business, automação, IA, chatbot, agente inteligente, leads, vendas, agendamento, delivery" />
+        <title>Workflow API Studio — Workforce de IA para seu negócio</title>
+        <meta name="description" content="Agentes autônomos que atendem clientes, gerenciam finanças, coordenam projetos e escrevem código. Uma workforce completa que nunca dorme." />
+        <meta name="keywords" content="WhatsApp Business, automação, IA, agentes autônomos, EvoNexus, Claude Code, Hermes, CRM, evolução API" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="theme-color" content="#7C3AED" />
+        <meta name="theme-color" content="#F59E0B" />
         
-        {/* Open Graph */}
-        <meta property="og:title" content="Workflow API Studio — Agentes de IA no WhatsApp" />
-        <meta property="og:description" content="Automações inteligentes que qualificam leads, vendem e entregam por você. 24/7." />
+        <meta property="og:title" content="Workflow API Studio — Workforce de IA para seu negócio" />
+        <meta property="og:description" content="Agentes autônomos que atendem clientes, gerenciam finanças, coordenam projetos e escrevem código." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://workflowapi.com.br" />
         <meta property="og:locale" content="pt_BR" />
         
-        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Workflow API Studio — Agentes de IA no WhatsApp" />
-        <meta name="twitter:description" content="Automações inteligentes que qualificam leads, vendem e entregam por você. 24/7." />
-
-        {/* Favicon */}
+        <meta name="twitter:title" content="Workflow API Studio — Workforce de IA para seu negócio" />
+        <meta name="twitter:description" content="Agentes autônomos que atendem clientes, gerenciam finanças, coordenam projetos e escrevem código." />
+        
         <link rel="icon" href="/favicon.ico" />
         
-        {/* Facebook Pixel */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '714576184493722');
-              fbq('track', 'PageView');
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '714576184493722');
+fbq('track', 'PageView');
             `,
           }}
         />
       </Head>
 
-  <main className="min-h-screen bg-surface-950" style={{ color: '#ffffff' }}>
-    <Navbar />
-    <Hero />
-    <Benefits />
-    <Testimonials />
-    <ROICalculator />
-    <WhatsAppCTA />
-    <ClubPlugPlay />
-    <Mission />
-    <Footer />
-  </main>
+      <main className="min-h-screen bg-surface-950" style={{ color: '#ffffff' }}>
+        <Navbar />
+        <Hero />
+        <Services />
+        <Testimonials />
+        <ROICalculator />
+        <WhatsAppCTA />
+        <ClubPlugPlay />
+        <Mission />
+        <Footer />
+      </main>
     </>
   );
 }
