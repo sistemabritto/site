@@ -108,10 +108,10 @@ export default function Services() {
             Workforce de IA<br />
             <span className="gold-text">do zero ao deploy</span>
           </h2>
-          <p className="text-neutral-400 text-lg max-w-2xl mx-auto font-medium mt-4">
+          <p className="text-neutral-200 text-lg max-w-2xl mx-auto font-medium mt-4">
             Chega de limites de tokens. Chega de vendor lock-in.
             <br />
-            <span className="text-neutral-300">Escolha seu caminho ou use os 4.</span>
+            <span className="text-white">Escolha seu caminho ou use os 4.</span>
           </p>
         </div>
 

@@ -53,7 +53,7 @@ export default function WhatsAppCTA() {
             <h3 className="font-heading font-bold text-2xl text-white mb-3 text-center">
               Ative seu WhatsApp
             </h3>
-            <p className="text-neutral-200 text-sm mb-6 text-center font-medium">
+            <p className="text-neutral-200 text-sm mb-8 text-center font-medium">
               CRM + IA em 24h · Sem contrato · Resultados ou dinheiro de volta
             </p>
 
@@ -61,21 +61,12 @@ export default function WhatsAppCTA() {
               href="https://wa.me/5511914088571?text=Olá!%20Quero%20transformar%20meu%20WhatsApp%20em%20uma%20central%20comercial%20com%20IA%20e%20CRM"
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full bg-gold-500 hover:bg-gold-600 text-surface-900 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-gold-500/25 mb-3"
+              className="block w-full bg-gold-500 hover:bg-gold-600 text-surface-900 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-gold-500/25 mb-5"
             >
               Quero meu WhatsApp com CRM
             </a>
 
-            <a
-              href="https://wa.me/5511914088571?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20automação%20do%20meu%20atendimento%20no%20WhatsApp"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full text-center glass text-neutral-200 hover:text-white hover:bg-white/10 py-3 rounded-full font-semibold text-sm transition-all duration-200 border border-white/15"
-            >
-              Falar com especialista
-            </a>
-
-            <p className="text-gold-500 text-xs font-bold mt-4 animate-pulse text-center">
+            <p className="text-gold-500 text-xs font-bold mt-5 animate-pulse text-center">
               ⚡ Vagas limitadas — agenda disponível esta semana
             </p>
           </div>
