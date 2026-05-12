@@ -10,7 +10,7 @@ export default function Hero() {
   const reveal = useScrollReveal(0.15);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden aurora-bg">
+    <section className="relative min-h-[90vh] sm:min-h-screen flex items-center justify-center overflow-hidden aurora-bg">
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-surface-950/90" />
       

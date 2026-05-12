@@ -11,15 +11,15 @@ export function useScrollReveal(threshold = 0.15) {
     const el = ref.current;
     if (!el) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold, rootMargin: '0px 0px -50px 0px' }
-    );
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target);
+      }
+    },
+    { threshold, rootMargin: '0px 0px -50px 0px' }
+  );
 
     observer.observe(el);
     return () => observer.disconnect();

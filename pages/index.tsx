@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Benefits from '../components/Benefits';
+import Testimonials from '../components/Testimonials';
 import ROICalculator from '../components/ROICalculator';
 import WhatsAppCTA from '../components/WhatsAppCTA';
 import ClubPlugPlay from '../components/ClubPlugPlay';
@@ -58,16 +59,17 @@ export default function Home() {
         />
       </Head>
 
-      <main className="min-h-screen bg-surface-950" style={{ color: '#ffffff' }}>
-        <Navbar />
-        <Hero />
-        <Benefits />
-        <ROICalculator />
-        <WhatsAppCTA />
-        <ClubPlugPlay />
-        <Mission />
-        <Footer />
-      </main>
+  <main className="min-h-screen bg-surface-950" style={{ color: '#ffffff' }}>
+    <Navbar />
+    <Hero />
+    <Benefits />
+    <Testimonials />
+    <ROICalculator />
+    <WhatsAppCTA />
+    <ClubPlugPlay />
+    <Mission />
+    <Footer />
+  </main>
     </>
   );
 }
