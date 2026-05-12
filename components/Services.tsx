@@ -3,27 +3,6 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const products = [
   {
-    id: 'hermes',
-    name: 'Hermes',
-    icon: '⚡',
-    gradient: 'from-orange-500/20 to-amber-600/20',
-    border: 'border-orange-500/30',
-    badge: 'Framework Aberto',
-    title: 'Liberdade total de provider',
-    problem: 'Chega de limite de tokens da Anthropic. Chega de vendor lock-in.',
-    solution: 'Hermes: multi-provider REAL. NVIDIA, OpenAI, Anthropic, Google, Ollama — por task.',
-    features: [
-      'NVIDIA NIM, OpenAI, Anthropic, Google, Ollama — escolha por task',
-      'Kanban nativo: cada task é um agente',
-      'Auto-aprendizado: skills da experiência, melhora durante uso',
-      'Delega e paraleliza: subagents isolados via RPC',
-      'Automações agendadas: cron built-in, reports diários',
-      'Runs anywhere: local, Docker, Vercel, GPU cluster',
-    ],
-    cta: 'Ver Hermes',
-    href: '/hermes',
-  },
-  {
     id: 'whatsapp',
     name: 'WhatsApp',
     icon: '💬',
@@ -62,6 +41,27 @@ const products = [
     ],
     cta: 'Ver EvoNexus',
     href: '/evonexus',
+  },
+  {
+    id: 'hermes',
+    name: 'Hermes',
+    icon: '⚡',
+    gradient: 'from-orange-500/20 to-amber-600/20',
+    border: 'border-orange-500/30',
+    badge: 'Framework Aberto',
+    title: 'Liberdade total de provider',
+    problem: 'Chega de limite de tokens da Anthropic. Chega de vendor lock-in.',
+    solution: 'Hermes: multi-provider REAL. NVIDIA, OpenAI, Anthropic, Google, Ollama — por task.',
+    features: [
+      'NVIDIA NIM, OpenAI, Anthropic, Google, Ollama — escolha por task',
+      'Kanban nativo: cada task é um agente',
+      'Auto-aprendizado: skills da experiência, melhora durante uso',
+      'Delega e paraleliza: subagents isolados via RPC',
+      'Automações agendadas: cron built-in, reports diários',
+      'Runs anywhere: local, Docker, Vercel, GPU cluster',
+    ],
+    cta: 'Ver Hermes',
+    href: '/hermes',
   },
 ];
 

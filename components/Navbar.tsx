@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 const navLinks = [
   { label: 'WhatsApp', href: '/whatsapp' },
   { label: 'EvoNexus', href: '/evonexus' },
-  { label: 'Claude Code', href: '/claude-code' },
   { label: 'Hermes', href: '/hermes' },
   { label: 'Blog', href: 'https://blog.workflowapi.com.br', external: true },
 ];
