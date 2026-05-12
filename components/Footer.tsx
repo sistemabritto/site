@@ -12,19 +12,18 @@ export default function Footer() {
     <footer className="bg-surface-900 border-t border-white/15 py-12 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10">
-                <img src="/images/logo-loop.svg" alt="Sistema Britto" className="w-10 h-10" />
-              </div>
-              <span className="text-white font-heading font-bold text-lg">
-                Workflow<span className="gold-text">API</span>
-              </span>
-            </div>
-            <p className="text-neutral-200 text-sm leading-relaxed font-medium">
-              Workforces de IA que operam seu negócio — do WhatsApp à engenharia de software.
-            </p>
-          </div>
+      <div>
+        <div className="mb-6">
+          <img 
+            src="/images/logo-horizontal.svg" 
+            alt="Sistema Britto" 
+            className="w-48 h-auto"
+          />
+        </div>
+        <p className="text-neutral-200 text-sm leading-relaxed font-medium">
+          Workforces de IA que operam seu negócio — do WhatsApp à engenharia de software.
+        </p>
+      </div>
 
           <div>
             <h4 className="text-white text-xs font-bold uppercase tracking-wider mb-4">
