@@ -7,30 +7,66 @@ const services = [
     icon: '💬',
     title: 'WhatsApp Business + CRM + IA',
     subtitle: 'Atendimento comercial automatizado',
-    description: 'Agentes de IA no WhatsApp que qualificam leads, agendam consultas, fecham vendas e ativam funis de CRM. Integrado com Evolution API, pipedrive, beds24 e ferramentas de automação.',
-    features: ['Qualificação de leads 24/7', 'Agendamento automático de consultas', 'Funil comercial completo no WhatsApp + CRM', 'Integração sticky com pipedrive', 'Reativação de leads dormantes', 'Multi-atendentes com IA assistida'],
+    description: 'Agentes de IA no WhatsApp que qualificam leads, agendam consultas, fecham vendas e ativam funis de CRM — integrado com as ferramentas que você já usa.',
+    features: [
+      'Qualificação de leads 24/7 com IA',
+      'Agendamento automático de consultas',
+      'Funil comercial completo no WhatsApp + CRM',
+      'Integração com Pipedrive, Sticky e mais',
+      'Reativação de leads dormentes',
+      'Multi-atendentes com IA assistida',
+    ],
     cta: 'Ativar WhatsApp com IA',
     message: 'Olá!%20Quero%20ativar%20meu%20WhatsApp%20com%20inteligência%20artificial%20e%20CRM%20—%20vi%20no%20site%20de%20vocês',
+    highlights: [
+      { icon: '🔄', label: 'Fallback de múltiplos modelos', desc: 'Se um modelo cai, outro assume. Zero downtime.' },
+      { icon: '🌐', label: 'Multi-provider', desc: 'OpenAI, Anthropic, Google, AWS — sem lock-in.' },
+      { icon: '📊', label: 'Gestão de tokens', desc: 'Controle de custo e consumo em tempo real.' },
+    ],
   },
   {
     id: 'evonexus',
     icon: '🏢',
     title: 'Workforce de Negócio',
-    subtitle: '17 agentes operacionais via EvoNexus',
+    subtitle: 'Time de agentes operacionais',
     description: 'Do financeiro ao jurídico, do marketing ao RH — um time de agentes autônomos gerencia sua operação com reports, decisões e acompanhamento em tempo real.',
-    features: ['Finanças: fluxo de caixa, relatórios, projeções', 'Projetos: gestão de sprints, métricas, entregas', 'Comunidade: moderação, sentimento, engajamento', 'Marketing: calendário editorial, SEO, campanhas', 'Vendas: pipeline, propostas, qualificação', 'Jurídico: contratos, compliance, NDA'],
+    features: [
+      'Finanças: fluxo de caixa, relatórios, projeções',
+      'Projetos: gestão de sprints, métricas, entregas',
+      'Comunidade: moderação, sentimento, engajamento',
+      'Marketing: calendário editorial, SEO, campanhas',
+      'Vendas: pipeline, propostas, qualificação',
+      'Jurídico: contratos, compliance, NDA',
+    ],
     cta: 'Ver agentes de negócio',
     message: 'Olá!%20Quero%20conhecer%20a%20workforce%20de%20agentes%20de%20negócio%20do%20EvoNexus',
+    highlights: [
+      { icon: '🧠', label: 'Agentes especializados por domínio', desc: 'Cada agente com system prompt e memória própria.' },
+      { icon: '🔄', label: 'Fallback de múltiplos modelos', desc: 'Resiliência entre providers. Sem ponto único de falha.' },
+      { icon: '📊', label: 'Gestão de tokens centralizada', desc: 'Dashboard de custo, limites e alertas por agente.' },
+    ],
   },
   {
     id: 'engineering',
     icon: '💻',
     title: 'Workforce de Engenharia',
-    subtitle: '21 agentes de desenvolvimento via Claude Code',
-    description: 'Code review, arquitetura, debugging, testes, segurança — um time de IA que codifica, revisa e entrega features 24/7 sem retrabalho humano.',
-    features: ['Arquitetura: planejamento, reviews de tech decisions', 'Implementação: code, testes, deploy', 'Debug: profiling, optimização, incident response', 'Segurança: auditoria de código, vulns, compliance', 'Design: UX, UI, protótipos', 'DevOps: CI/CD, infra, monitoramento'],
+    subtitle: 'Time de agentes de desenvolvimento',
+    description: 'Arquitetura, code review, debugging, testes, segurança — um time de IA que codifica, revisa e entrega features sem retrabalho humano.',
+    features: [
+      'Arquitetura: planejamento, reviews de tech decisions',
+      'Implementação: code, testes, deploy automatizado',
+      'Debug: profiling, optimização, incident response',
+      'Segurança: auditoria de código, vulns, compliance',
+      'Design: UX, UI, protótipos interativos',
+      'DevOps: CI/CD, infra como código, monitoramento',
+    ],
     cta: 'Ver agentes de engenharia',
-    message: 'Olá!%20Quero%20conhecer%20a%20workforce%20de%20agentes%20de%20engenharia%20do%20EvoNexus',
+    message: 'Olá!%20Quero%20conhecer%20a%20workforce%20de%20agentes%20de%20engenharia',
+    highlights: [
+      { icon: '🛡️', label: 'Governança multi-agente', desc: 'Consenso entre agentes antes de cada deploy.' },
+      { icon: '🔄', label: 'Fallback de múltiplos modelos', desc: 'Modelos diferentes para tasks diferentes.' },
+      { icon: '📊', label: 'Gestão de tokens por projeto', desc: 'Orçamento e consumo atrelados a cada sprint.' },
+    ],
   },
 ];
 
@@ -53,15 +89,10 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="space-y-16">
-          {services.map((service, index) => (
-            <div
-              key={service.id}
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                index % 2 === 1 ? 'lg:direction-rtl' : ''
-              }`}
-            >
-              <div className={`${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+        <div className="space-y-20">
+          {services.map((service) => (
+            <div key={service.id} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+              <div>
                 <span className="text-4xl mb-4 block">{service.icon}</span>
                 <span className="inline-block text-neutral-300 text-sm font-bold uppercase tracking-wider mb-3">
                   {service.subtitle}
@@ -75,10 +106,7 @@ export default function Services() {
 
                 <ul className="space-y-2 mb-8">
                   {service.features.map((feature) => (
-                    <li
-                      key={feature}
-                      className="flex items-start gap-3 text-neutral-200 text-sm"
-                    >
+                    <li key={feature} className="flex items-start gap-3 text-neutral-200 text-sm">
                       <span className="text-gold-500 mt-0.5 flex-shrink-0">✓</span>
                       {feature}
                     </li>
@@ -98,28 +126,21 @@ export default function Services() {
                 </a>
               </div>
 
-              <div className={`${index % 2 === 1 ? 'lg:order-1' : ''}`}>
-                <div className="glass-strong rounded-3xl p-8 h-full min-h-[300px] flex flex-col justify-center">
-                  <pre className="text-gold-300 text-xs sm:text-sm overflow-x-auto whitespace-pre-wrap leading-relaxed">
-                    {`# ${service.title}
-// workforce em operação
-
-class ${service.id === 'whatsapp' ? 'WhatsAppAgent' : service.id === 'evonexus' ? 'BusinessLayer' : 'EngineeringLayer'} {
-  status: 'active'
-  uptime: '24/7'
-  models: ['claude-3-7',
-           'qwen-122b',
-           'deepseek-v3']
-  
-  async process() {
-    // action loop
-    // sem prompt injection
-    // com rate limit
-  }
-}
-`}
-                  </pre>
-                </div>
+              <div className="space-y-4">
+                {service.highlights.map((hl) => (
+                  <div
+                    key={hl.label}
+                    className="glass-strong rounded-2xl p-6 border border-gold-500/20 hover:bg-white/10 transition-all duration-200"
+                  >
+                    <div className="flex items-start gap-4">
+                      <span className="text-2xl flex-shrink-0">{hl.icon}</span>
+                      <div>
+                        <h4 className="text-white font-bold text-base mb-1">{hl.label}</h4>
+                        <p className="text-neutral-200 text-sm leading-relaxed">{hl.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           ))}

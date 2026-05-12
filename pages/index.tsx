@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
-import Testimonials from '../components/Testimonials';
+import GoogleReviews from '../components/GoogleReviews';
 import ROICalculator from '../components/ROICalculator';
 import WhatsAppCTA from '../components/WhatsAppCTA';
 import ClubPlugPlay from '../components/ClubPlugPlay';
@@ -53,7 +53,7 @@ fbq('track', 'PageView');
         <Navbar />
         <Hero />
         <Services />
-        <Testimonials />
+        <GoogleReviews />
         <ROICalculator />
         <WhatsAppCTA />
         <ClubPlugPlay />
