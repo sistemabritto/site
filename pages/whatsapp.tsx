@@ -66,36 +66,46 @@ export default function WhatsApp() {
       <Navbar />
       
       <main className="min-h-screen bg-surface-950" style={{ color: '#ffffff' }}>
-        {/* Hero */}
-        <section className="relative pt-32 pb-20 bg-surface-950 overflow-hidden">
-          {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-green-900/10 via-surface-950 to-surface-950" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/10 rounded-full blur-3xl" />
-          
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              {/* Badge Evolution API */}
-              <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-2 mb-6">
-                <img 
-                  src="https://raw.githubusercontent.com/EvolutionAPI/evolution-api/main/public/hover-evolution.png" 
-                  alt="Evolution API" 
-                  className="w-6 h-6"
-                />
-                <span className="text-green-400 text-xs font-bold uppercase tracking-wider">
-                  Powered by Evolution API
-                </span>
-              </div>
-              
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading text-white font-bold mb-6 leading-tight">
-                Seu WhatsApp como
-                <span className="gold-text block mt-2">central comercial</span>
-              </h1>
-              
-              <p className="text-neutral-400 text-lg max-w-2xl mx-auto font-medium mt-4">
-                IA que qualifica leads, agenda consultas, fecha vendas e reativa clientes — 
-                24/7, integrado ao seu CRM. Sem digitação manual, sem lead perdido.
-              </p>
+      {/* Hero */}
+      <section className="relative pt-32 pb-20 bg-surface-950 overflow-hidden">
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-green-900/10 via-surface-950 to-surface-950" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/10 rounded-full blur-3xl" />
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            {/* Badge Evolution API */}
+            <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-2 mb-6">
+              <img 
+                src="/images/evo/evolution-logo-white.svg" 
+                alt="Evolution API" 
+                className="w-6 h-6 invert"
+              />
+              <span className="text-green-400 text-xs font-bold uppercase tracking-wider">
+                Powered by Evolution API
+              </span>
             </div>
+            
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading text-white font-bold mb-6 leading-tight">
+              Seu WhatsApp como
+              <span className="gold-text block mt-2">central comercial</span>
+            </h1>
+            
+            <p className="text-neutral-400 text-lg max-w-2xl mx-auto font-medium mt-4">
+              IA que qualifica leads, agenda consultas, fecha vendas e reativa clientes — 
+              24/7, integrado ao seu CRM. Sem digitação manual, sem lead perdido.
+            </p>
+          </div>
+
+          {/* Hero Image - Chat/CRM Screenshot */}
+          <div className="relative mb-16">
+            <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-transparent to-transparent z-10" />
+            <img 
+              src="/images/evo/chat-atendimento.webp" 
+              alt="Chat de atendimento Evolution API" 
+              className="w-full max-w-5xl mx-auto rounded-2xl border border-green-500/30 shadow-2xl shadow-green-500/20"
+            />
+          </div>
 
             {/* Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
@@ -151,9 +161,9 @@ export default function WhatsApp() {
                 </div>
                 <div className="flex items-center justify-center">
                   <img 
-                    src="https://raw.githubusercontent.com/EvolutionAPI/evolution-api/main/public/hover-evolution.png" 
+                    src="/images/evo/evolution-logo-white.svg" 
                     alt="Evolution API Logo" 
-                    className="w-64 h-auto"
+                    className="w-64 h-auto invert"
                   />
                 </div>
               </div>
@@ -174,6 +184,15 @@ export default function WhatsApp() {
               </h2>
             </div>
 
+            {/* Multi-channel Image */}
+            <div className="mb-16">
+              <img 
+                src="/images/evo/page-channels.webp" 
+                alt="Múltiplos canais integrados" 
+                className="w-full max-w-4xl mx-auto rounded-2xl border border-green-500/30 shadow-xl shadow-green-500/10"
+              />
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {features.map((feature, i) => (
                 <div
@@ -192,6 +211,15 @@ export default function WhatsApp() {
         {/* Cases */}
         <section className="py-20 sm:py-32 bg-surface-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Pipeline Image */}
+            <div className="mb-16">
+              <img 
+                src="/images/evo/page-pipeline.webp" 
+                alt="Pipeline de atendimento" 
+                className="w-full max-w-4xl mx-auto rounded-2xl border border-green-500/30 shadow-xl shadow-green-500/10"
+              />
+            </div>
+
             <div className="text-center mb-16">
               <span className="inline-block text-green-400 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30 px-4 py-2 rounded-full bg-green-500/10">
                 Cases
