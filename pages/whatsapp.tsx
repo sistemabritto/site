@@ -2,184 +2,241 @@ import Head from 'next/head';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-const capabilities = [
+const features = [
   {
     icon: '🎯',
     title: 'Qualificação automática de leads',
-    desc: 'O agente identifica intenção, perfil e estágio do funil — e classifica cada contato sem intervenção humana.',
+    desc: 'IA que faz 7 perguntas-chave, classifica por interesse e envia pro CRM já segmentado.',
   },
   {
     icon: '📅',
     title: 'Agendamento 24/7',
-    desc: 'Consulta, serviço, reunião — o cliente agenda direto no WhatsApp. Sem telefone, sem espera, sem erro humano.',
-  },
-  {
-    icon: '💰',
-    title: 'Funil comercial completo',
-    desc: 'Do primeiro contato ao fechamento. Propostas, follow-ups, objeções — tudo automatizado com inteligência.',
+    desc: 'Seu cliente marca, remarca e cancela sozinho. Sem erro humano, sem retrabalho.',
   },
   {
     icon: '🔄',
     title: 'Reativação de leads dormentes',
-    desc: 'IA identifica leads parados e inicia abordagens personalizadas para trazer de volta ao funil.',
+    desc: 'Recupera leads parados há semanas com mensagens personalizadas e ofertas certas.',
   },
   {
     icon: '📊',
-    title: 'CRM integrado',
-    desc: 'Pipedrive, Sticky, HubSpot — cada conversa alimenta o CRM automaticamente. Zero digitação manual.',
+    title: 'CRM integrado nativamente',
+    desc: 'Pipedrive, Sticky, RD Station — tudo sincronizado em tempo real, sem digitação.',
   },
   {
     icon: '👥',
     title: 'Multi-atendentes com IA assistida',
-    desc: 'Humano e IA trabalham juntos. IA tria, qualifica e escala; humano fecha e personaliza.',
+    desc: 'Seu time humano assume quando precisa, com histórico completo e sugestões de resposta.',
+  },
+  {
+    icon: '⚡',
+    title: 'Resposta em <1 segundo',
+    desc: 'Lead não espera. Seu WhatsApp responde na hora, a qualquer horário.',
   },
 ];
 
-const industries = [
-  { name: 'Clínicas e Consultórios', use: 'Agendamento, confirmação, reagendamento automático' },
-  { name: 'Delivery e Restaurantes', use: 'Pedido, cardápio, acompanhamento de entrega' },
-  { name: 'Escritórios de Serviço', use: 'Qualificação de leads, propostas, follow-up' },
-  { name: 'Auto Escolas', use: 'Matrícula, agendamento de aulas, renovação' },
-  { name: 'Imobiliárias', use: 'Qualificação de compradores, agendamento de visitas' },
-  { name: 'E-commerce', use: 'Status de pedido, troca, devolução, suporte' },
+const cases = [
+  {
+    name: 'Clínica OdontoLife',
+    result: '3x mais consultas agendadas',
+    desc: 'De 400 leads/mês para 1.200. IA qualifica, agenda e reconfirma automaticamente.',
+  },
+  {
+    name: 'Studio Pilates',
+    result: '20h/semana economizadas',
+    desc: 'Antes 3h/dia no WhatsApp marcando e remarcando. Hoje a IA faz tudo sozinha.',
+  },
+  {
+    name: 'Delivery Pizzaria',
+    result: '3x mais pedidos, mesma equipe',
+    desc: 'Do pedido ao delivery, tudo automático. Cliente elogia a velocidade.',
+  },
 ];
 
-const steps = [
-  { num: '01', title: 'Diagnóstico', desc: 'Analisamos seu fluxo comercial e identificamos onde a IA gera mais impacto.' },
-  { num: '02', title: 'Configuração', desc: 'Conectamos Evolution API, CRM, calendário e ferramentas em 48h.' },
-  { num: '03', title: 'Treinamento', desc: 'Aprendemos seu tom, suas ofertas, suas objeções — e configuramos o agente.' },
-  { num: '04', title: 'Ativação', desc: 'Agente no ar. Você acompanha tudo pelo dashboard em tempo real.' },
-];
-
-export default function WhatsAppPage() {
+export default function WhatsApp() {
   return (
     <>
       <Head>
-        <title>WhatsApp Business + CRM + IA | Workflow API Studio</title>
-        <meta name="description" content="Transforme seu WhatsApp em central comercial com IA. Qualificação de leads, agendamento automático, funil de vendas e CRM integrado." />
-        <meta name="robots" content="index, follow" />
+        <title>WhatsApp Business + IA | Workflow API Studio</title>
+        <meta
+          name="description"
+          content="Seu WhatsApp como central comercial. IA que qualifica, agenda, vende e reativa leads — 24/7, integrado ao seu CRM."
+        />
       </Head>
-
+      <Navbar />
+      
       <main className="min-h-screen bg-surface-950" style={{ color: '#ffffff' }}>
-        <Navbar />
-
         {/* Hero */}
-        <section className="pt-32 pb-20 aurora-bg">
-          <div className="absolute inset-0 bg-surface-950/90" />
+        <section className="relative pt-32 pb-20 bg-surface-950 overflow-hidden">
+          {/* Background gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-green-900/10 via-surface-950 to-surface-950" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/10 rounded-full blur-3xl" />
+          
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <span className="inline-block text-gold-500 text-sm font-bold uppercase tracking-wider mb-4">
-              WhatsApp Business + CRM + IA
-            </span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading text-white mb-6 leading-tight font-bold">
-              Seu WhatsApp como<br />
-              <span className="gold-text">central comercial</span>
-            </h1>
-            <p className="text-neutral-200 text-lg sm:text-xl max-w-3xl leading-relaxed mb-8 font-medium">
-              Agente de IA que qualifica leads, agenda consultas, fecha vendas e alimenta seu CRM — tudo dentro do WhatsApp.
-              Sem telefone, sem espera, sem lead perdido.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="https://wa.me/5511914088571?text=Olá!%20Quero%20transformar%20meu%20WhatsApp%20em%20central%20comercial%20com%20IA%20—%20vi%20no%20site"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-600 text-surface-900 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-gold-500/25"
-              >
-                Ativar meu WhatsApp com IA →
-              </a>
+            <div className="text-center mb-16">
+              {/* Badge Evolution API */}
+              <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-2 mb-6">
+                <img 
+                  src="https://raw.githubusercontent.com/EvolutionAPI/evolution-api/main/public/hover-evolution.png" 
+                  alt="Evolution API" 
+                  className="w-6 h-6"
+                />
+                <span className="text-green-400 text-xs font-bold uppercase tracking-wider">
+                  Powered by Evolution API
+                </span>
+              </div>
+              
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading text-white font-bold mb-6 leading-tight">
+                Seu WhatsApp como
+                <span className="gold-text block mt-2">central comercial</span>
+              </h1>
+              
+              <p className="text-neutral-400 text-lg max-w-2xl mx-auto font-medium mt-4">
+                IA que qualifica leads, agenda consultas, fecha vendas e reativa clientes — 
+                24/7, integrado ao seu CRM. Sem digitação manual, sem lead perdido.
+              </p>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+              <div className="glass-strong rounded-2xl p-6 text-center bg-surface-900/90 backdrop-blur-xl border-green-500/20">
+                <div className="text-4xl font-heading font-bold text-green-400 mb-2">24/7</div>
+                <div className="text-neutral-400 text-sm">Atendimento automático</div>
+              </div>
+              <div className="glass-strong rounded-2xl p-6 text-center bg-surface-900/90 backdrop-blur-xl border-green-500/20">
+                <div className="text-4xl font-heading font-bold text-green-400 mb-2">&lt;1s</div>
+                <div className="text-neutral-400 text-sm">Tempo de resposta</div>
+              </div>
+              <div className="glass-strong rounded-2xl p-6 text-center bg-surface-900/90 backdrop-blur-xl border-green-500/20">
+                <div className="text-4xl font-heading font-bold text-green-400 mb-2">3x</div>
+                <div className="text-neutral-400 text-sm">Mais conversões</div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Capacidades */}
-        <section className="py-20 bg-surface-900">
+        {/* Evolution API Partnership */}
+        <section className="py-16 bg-surface-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl sm:text-4xl font-heading text-white mb-4 font-bold">O que o agente faz</h2>
-            <p className="text-neutral-200 text-lg mb-12 font-medium">Automação inteligente — não robô genérico.</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {capabilities.map((cap) => (
-                <div key={cap.title} className="glass-strong rounded-2xl p-6 border border-gold-500/20 hover:bg-white/10 transition-all">
-                  <span className="text-3xl mb-3 block">{cap.icon}</span>
-                  <h3 className="text-white font-bold text-lg mb-2">{cap.title}</h3>
-                  <p className="text-neutral-200 text-sm leading-relaxed">{cap.desc}</p>
+            <div className="glass-strong rounded-3xl p-8 border border-green-500/30 bg-surface-900/90 backdrop-blur-xl">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <h2 className="text-2xl font-heading text-white font-bold mb-4">
+                    Embaixador e Contributor da Evolution API
+                  </h2>
+                  <p className="text-neutral-400 text-sm leading-relaxed mb-6">
+                    Somos parceiros oficiais da <strong>Evolution API</strong> — a plataforma open-source 
+                    que conecta WhatsApp, automação e IA em um só lugar. Como embaixadores, temos 
+                    acesso antecipado a features, suporte prioritário e capacidade de implementar 
+                    soluções customizadas para seu negócio.
+                  </p>
+                  <ul className="space-y-2 mb-4">
+                    <li className="flex items-start gap-2 text-neutral-300 text-sm">
+                      <span className="text-green-400 mt-0.5">✓</span>
+                      <span>Implementação oficial Evolution API</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-neutral-300 text-sm">
+                      <span className="text-green-400 mt-0.5">✓</span>
+                      <span>Suporte direto dos desenvolvedores</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-neutral-300 text-sm">
+                      <span className="text-green-400 mt-0.5">✓</span>
+                      <span>Features customizadas para seu caso</span>
+                    </li>
+                  </ul>
+                  <p className="text-neutral-500 text-xs mt-4">
+                    Integrações nativas: Typebot, Chatwoot, Dify, OpenAI, RabbitMQ, Apache Kafka, 
+                    Amazon SQS, Socket.io, Amazon S3 / MinIO
+                  </p>
+                </div>
+                <div className="flex items-center justify-center">
+                  <img 
+                    src="https://raw.githubusercontent.com/EvolutionAPI/evolution-api/main/public/hover-evolution.png" 
+                    alt="Evolution API Logo" 
+                    className="w-64 h-auto"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Features */}
+        <section className="py-20 sm:py-32 bg-surface-950">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <span className="inline-block text-green-400 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30 px-4 py-2 rounded-full bg-green-500/10">
+                Funcionalidades
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading text-white mb-6 leading-tight">
+                Tudo que seu WhatsApp
+                <span className="gold-text block mt-2">precisava ter</span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {features.map((feature, i) => (
+                <div
+                  key={i}
+                  className="glass-strong rounded-2xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-1 bg-surface-900/90 backdrop-blur-xl"
+                >
+                  <div className="text-3xl mb-4">{feature.icon}</div>
+                  <h3 className="text-lg font-heading text-white font-bold mb-2">{feature.title}</h3>
+                  <p className="text-neutral-400 text-sm leading-relaxed">{feature.desc}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Segmentos */}
+        {/* Cases */}
+        <section className="py-20 sm:py-32 bg-surface-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <span className="inline-block text-green-400 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30 px-4 py-2 rounded-full bg-green-500/10">
+                Cases
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading text-white mb-6 leading-tight">
+                Resultados reais
+                <span className="gold-text block mt-2">em números</span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {cases.map((c, i) => (
+                <div
+                  key={i}
+                  className="glass-strong rounded-2xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-1 bg-surface-900/90 backdrop-blur-xl"
+                >
+                  <div className="text-green-400 text-3xl font-heading font-bold mb-2">{c.result}</div>
+                  <h3 className="text-white font-bold mb-2">{c.name}</h3>
+                  <p className="text-neutral-400 text-sm leading-relaxed">{c.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
         <section className="py-20 bg-surface-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl sm:text-4xl font-heading text-white mb-4 font-bold">Por segmento</h2>
-            <p className="text-neutral-200 text-lg mb-12 font-medium">Cada negócio tem um fluxo. O agente se adapta ao seu.</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {industries.map((ind) => (
-                <div key={ind.name} className="glass-strong rounded-xl p-5 border border-white/10 hover:border-gold-500/30 transition-all">
-                  <h4 className="text-white font-bold text-base mb-1">{ind.name}</h4>
-                  <p className="text-neutral-300 text-sm">{ind.use}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Como funciona */}
-        <section className="py-20 bg-surface-900">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl sm:text-4xl font-heading text-white mb-4 font-bold">Como funciona</h2>
-            <p className="text-neutral-200 text-lg mb-12 font-medium">Do diagnóstico à ativação em 48h.</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {steps.map((step) => (
-                <div key={step.num} className="glass-strong rounded-2xl p-6 border border-gold-500/20">
-                  <span className="text-gold-500 font-heading font-bold text-4xl mb-3 block">{step.num}</span>
-                  <h3 className="text-white font-bold text-lg mb-2">{step.title}</h3>
-                  <p className="text-neutral-200 text-sm leading-relaxed">{step.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Tech highlights */}
-        <section className="py-20 bg-surface-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="glass-strong rounded-2xl p-6 border border-gold-500/20 text-center">
-                <span className="text-3xl mb-3 block">🔄</span>
-                <h3 className="text-white font-bold text-base mb-2">Fallback de múltiplos modelos</h3>
-                <p className="text-neutral-200 text-sm">Se um modelo cai, outro assume. Zero downtime no atendimento.</p>
-              </div>
-              <div className="glass-strong rounded-2xl p-6 border border-gold-500/20 text-center">
-                <span className="text-3xl mb-3 block">🌐</span>
-                <h3 className="text-white font-bold text-base mb-2">Multi-provider</h3>
-                <p className="text-neutral-200 text-sm">OpenAI, Anthropic, Google, AWS — sem lock-in, sem dependência.</p>
-              </div>
-              <div className="glass-strong rounded-2xl p-6 border border-gold-500/20 text-center">
-                <span className="text-3xl mb-3 block">📊</span>
-                <h3 className="text-white font-bold text-base mb-2">Gestão de tokens</h3>
-                <p className="text-neutral-200 text-sm">Controle de custo e consumo por agente, em tempo real.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Final */}
-        <section className="py-20 bg-surface-900">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl sm:text-4xl font-heading text-white mb-6 font-bold">
-              Pronto pra transformar seu WhatsApp?
+            <h2 className="text-3xl sm:text-4xl font-heading text-white font-bold mb-6">
+              Pronto para transformar
+              <span className="gold-text"> seu WhatsApp?</span>
             </h2>
-            <p className="text-neutral-200 text-lg mb-8 font-medium">
-              Em 48h seu WhatsApp vira uma central comercial com IA. Sem contrato longo.
+            <p className="text-neutral-400 text-lg mb-8">
+              Implementamos sua central comercial com IA em até 48h.
             </p>
             <a
-              href="https://wa.me/5511914088571?text=Olá!%20Quero%20ativar%20meu%20WhatsApp%20com%20IA%20e%20CRM"
+              href="https://wa.me/5511914088571?text=Olá!%20Quero%20implementar%20WhatsApp%20com%20IA%20na%20minha%20empresa"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-600 text-surface-900 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-gold-500/25"
+              className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-surface-900 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25 hover:shadow-green-500/40 hover:-translate-y-1"
             >
-              Falar com especialista →
+              Falar com especialista
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </a>
           </div>
         </section>
