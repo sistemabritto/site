@@ -153,7 +153,7 @@ export default function Services() {
                   {/* Features */}
                   <ul className="space-y-2 mb-8">
                     {product.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2 text-neutral-300 text-sm">
+                      <li key={i} className="flex items-start gap-2 text-white text-sm">
                         <span className="text-gold-500 mt-0.5 flex-shrink-0">✓</span>
                         {feature}
                       </li>

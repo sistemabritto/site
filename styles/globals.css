@@ -65,19 +65,19 @@ body {
   background-clip: text;
 }
 
-/* Glassmorphism — bordas mais visíveis */
+/* Glassmorphism — mais escuro pra contraste */
 .glass {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .glass-strong {
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 /* CTA glow — primary */
