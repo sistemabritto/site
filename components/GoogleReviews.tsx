@@ -202,7 +202,7 @@ export default function GoogleReviews() {
 
         <div className="mt-12 text-center">
           <a
-            href="https://g.page/r/SEU_LINK_AQUI/review"
+            href="https://search.google.com/local/reviews?placeid=CAwSKRInCgNwdnESIE9oWXdlREE2TUhnelpXWm1aRE5sT0RZeFlUQTJObUl6GAo"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 glass-strong rounded-full px-5 py-3 border border-white/20 hover:border-gold-500/50 transition-colors"
@@ -212,10 +212,10 @@ export default function GoogleReviews() {
               <path d="M2.86981 7.10535C2.32981 8.54535 1.99981 10.1054 1.99981 11.7454C1.99981 13.3854 2.32981 14.9454 2.86981 16.3854L-0.139809 19.3854C-1.26981 17.2054 -1.99981 14.7654 -1.99981 12.1654C-1.99981 9.56535 -1.26981 7.12535 -0.139809 4.94535L2.86981 7.10535Z" />
               <path d="M12.0098 20.4954C16.7098 20.4954 20.2298 17.8554 21.8698 14.8154L24.8698 17.8154C22.3298 22.4754 17.3698 25.4854 12.0098 25.4854C8.47981 25.4854 5.00981 24.1254 2.21981 21.5254C2.17981 21.4854 2.13981 21.4554 2.09981 21.4154L5.29981 18.2154C7.19981 19.6554 9.51981 20.4954 12.0098 20.4954Z" />
             </svg>
-            <span className="text-neutral-200 text-sm font-semibold">
+            <span className="text-white text-sm font-semibold">
               Avaliado com 5.0 ★ no Google
             </span>
-            <span className="text-xs text-neutral-400">→</span>
+            <span className="text-xs text-gray-300">→</span>
           </a>
         </div>
       </div>

@@ -4,110 +4,103 @@ import Footer from '../components/Footer';
 
 const features = [
   {
-    icon: '📋',
-    title: 'Kanban Nativo',
-    desc: 'Cada task é um agente. Board compartilhado, histórico completo, zero setup — só rodar.',
+    icon: '🔄',
+    title: 'Auto-aprendizado contínuo',
+    desc: 'Cria skills da experiência, melhora durante o uso, persiste conhecimento entre sessões.',
   },
   {
-    icon: '🔄',
-    title: 'Multi-Provider Real',
-    desc: 'NVIDIA, OpenAI, Anthropic, Google, Ollama — troca de modelo por task, sem vendor lock-in.',
+    icon: '🎯',
+    title: 'Multi-provider REAL',
+    desc: 'NVIDIA, OpenAI, Anthropic, Google, Ollama — troca de modelo por task, sem code changes.',
+  },
+  {
+    icon: '📋',
+    title: 'Kanban nativo',
+    desc: 'Cada task é um agente. Skills em markdown, plugins em Python, execução paralela.',
   },
   {
     icon: '⚡',
-    title: 'Execução Autônoma',
-    desc: 'Agentes rodam em background, entregam resultado, atualizam o board. Você só revisa.',
+    title: 'Runs anywhere',
+    desc: 'Local, Docker, SSH, Vercel, GPU cluster. Serverless que custa quase zero quando idle.',
   },
   {
-    icon: '🔌',
-    title: 'Plugins e Skills',
-    desc: 'Skills em markdown, plugins em Python. Estenda com terminal, browser, file, kanban, cron.',
+    icon: '🤖',
+    title: 'Delega e paraleliza',
+    desc: 'Spawn subagents isolados. Escreve scripts Python que chamam tools via RPC.',
   },
   {
-    icon: '🛡️',
-    title: 'Governança Completa',
-    desc: 'Logs em JSONL, métricas de tokens, custo por agente, auditoria de decisões.',
-  },
-  {
-    icon: '🚀',
-    title: 'Deploy Simples',
-    desc: 'Docker Swarm, Vercel, local — sua infra, suas regras. Sem SaaS, sem lock-in.',
-  },
-];
-
-const architecture = [
-  { layer: 'Core', desc: 'Hermes Agent — orchestrator em Python com tool calling estruturado' },
-  { layer: 'Tools', desc: 'terminal, browser, file, kanban, cron, search, vision, delegate' },
-  { layer: 'Memory', desc: 'SQLite + skills em markdown — contexto persistente entre sessões' },
-  { layer: 'UI', desc: 'Dashboard React + Telegram bot — controle total na mão' },
-  { layer: 'Scheduler', desc: 'Cron jobs, triggers, webhooks — automação sob demanda' },
-];
-
-const useCases = [
-  {
-    title: 'Devs que querem coding agent',
-    desc: 'Code review, debug, testes, arquitetura — seu par de programação 24/7.',
-  },
-  {
-    title: 'Empresas que querem automação',
-    desc: 'WhatsApp, CRM, blog, dashboards — automações que rodam sozinhas.',
-  },
-  {
-    title: 'Researchers que querem controle',
-    desc: 'Multi-model, multi-provider, logs completos — reprodutibilidade total.',
+    icon: '📅',
+    title: 'Automações agendadas',
+    desc: 'Cron scheduler built-in. Reports diários, backups, audits — tudo em linguagem natural.',
   },
 ];
 
 const integrations = [
-  'NVIDIA NIM', 'OpenAI', 'Anthropic', 'Google AI', 'Ollama', 'vLLM',
-  'Telegram', 'Discord', 'GitHub', 'GitLab', 'Linear', 'Notion',
-  'Docker', 'SQLite', 'PostgreSQL', 'Redis', 'Valkey', 'S3', 'GCS'
+  'Telegram', 'Discord', 'Slack', 'WhatsApp', 'Signal', 'Email',
+  'NVIDIA NIM', 'OpenRouter', 'OpenAI', 'Anthropic', 'Google', 'Ollama',
+  'Docker', 'SSH', 'Vercel', 'Modal', 'Daytona', 'Singularity',
 ];
 
 export default function HermesPage() {
   return (
     <>
       <Head>
-        <title>H Hermes Agent — Framework Aberto | Workflow API Studio</title>
-        <meta name="description" content="Hermes Agent: framework aberto para agentes autônomos. Kanban, multi-provider (NVIDIA, OpenAI, Anthropic), plugins, skills em markdown." />
+        <title>Hermes Agent — Framework Aberto de IA | Workflow API Studio</title>
+        <meta name="description" content="O framework de IA auto-aprendente. Multi-provider, kanban nativo, automações agendadas. Liberdade total de vendor lock-in." />
         <meta name="robots" content="index, follow" />
       </Head>
 
       <main className="min-h-screen bg-surface-950" style={{ color: '#ffffff' }}>
         <Navbar />
 
-        {/* Hero */}
-        <section className="pt-32 pb-20 aurora-bg">
-          <div className="absolute inset-0 bg-surface-950/90" />
+        {/* Hero com Banner */}
+        <section className="relative pt-32 pb-20 bg-surface-950 overflow-hidden">
+          {/* Background gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-orange-900/10 via-surface-950 to-surface-950" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-500/10 rounded-full blur-3xl" />
+          
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <span className="inline-block text-gold-500 text-sm font-bold uppercase tracking-wider mb-4">
-              Hermes Agent Framework
+            {/* Banner do Hermes */}
+            <div className="relative mb-12">
+              <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-transparent to-transparent z-10" />
+              <img 
+                src="/images/hermes/banner.png" 
+                alt="Hermes Agent Banner" 
+                className="w-full max-w-4xl mx-auto rounded-2xl"
+              />
+            </div>
+
+            <span className="inline-block text-orange-400 text-sm font-bold uppercase tracking-wider mb-4 border border-orange-500/30 px-4 py-2 rounded-full bg-orange-500/10">
+              By Nous Research
             </span>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading text-white mb-6 leading-tight font-bold">
-              Framework aberto pra<br />
-              <span className="gold-text">liberdade total</span>
+              O framework de IA que
+              <span className="gold-text block mt-2">aprende com você</span>
             </h1>
-            <p className="text-neutral-200 text-lg sm:text-xl max-w-3xl leading-relaxed mb-8 font-medium">
-              Enquanto o EvoNexus usa Claude Code como motor, o Hermes é seu framework curinga —
-              multi-provider real (NVIDIA, OpenAI, Anthropic, Google), kanban nativo, skills em markdown.
-              Ideal pra quem quer controle total, sem vendor lock-in.
+            <p className="text-white text-lg sm:text-xl max-w-3xl leading-relaxed mb-8 font-medium">
+              Hermes é o único agente com built-in learning loop — cria skills da experiência, 
+              melhora durante o uso, busca no próprio histórico e constrói modelo profundo de quem você é.
+              <br />
+              <span className="text-gray-200">Liberdade total. Sem vendor lock-in. Rode em qualquer lugar.</span>
             </p>
+            
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="https://wa.me/5511914088571?text=Olá!%20Quero%20implementar%20Hermes%20Agent%20no%20meu%20projeto"
+                href="https://wa.me/5511914088571?text=Olá!%20Quero%20implementar%20o%20Hermes%20Agent%20no%20meu%20negócio"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-600 text-surface-900 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-gold-500/25"
+                className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-orange-500/25"
               >
-                Começar com Hermes →
+                Implementar Hermes
+                <span>→</span>
               </a>
               <a
-                href="https://hermes-agent.nousresearch.com/docs"
+                href="https://hermes-agent.nousresearch.com/docs/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 glass-strong text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-200 hover:bg-white/15"
+                className="inline-flex items-center justify-center gap-2 glass-strong text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-200 hover:bg-white/15"
               >
-                Ver docs ↗
+                Documentação ↗
               </a>
             </div>
           </div>
@@ -116,61 +109,48 @@ export default function HermesPage() {
         {/* Features */}
         <section className="py-20 bg-surface-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl sm:text-4xl font-heading text-white mb-4 font-bold">Por que Hermes?</h2>
-            <p className="text-neutral-200 text-lg mb-12 font-medium">Feito por devs, pra devs. Sem frescura.</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {features.map((f) => (
-                <div key={f.title} className="glass-strong rounded-2xl p-6 border border-gold-500/20 hover:bg-white/10 transition-all">
-                  <span className="text-3xl mb-3 block">{f.icon}</span>
-                  <h3 className="text-white font-bold text-lg mb-2">{f.title}</h3>
-                  <p className="text-neutral-200 text-sm leading-relaxed">{f.desc}</p>
+            <div className="text-center mb-16">
+              <span className="inline-block text-orange-400 text-xs font-bold uppercase tracking-widest mb-4 border border-orange-500/30 px-4 py-2 rounded-full bg-orange-500/10">
+                Features
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-heading text-white mb-6 leading-tight font-bold">
+                Por que Hermes é diferente
+              </h2>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {features.map((feature, i) => (
+                <div
+                  key={i}
+                  className="glass-strong rounded-xl p-6 border border-orange-500/20 hover:border-orange-500/50 hover:bg-white/10 transition-all"
+                >
+                  <div className="text-3xl mb-4">{feature.icon}</div>
+                  <h3 className="text-white font-bold mb-2 text-lg">{feature.title}</h3>
+                  <p className="text-gray-300 text-sm leading-relaxed">{feature.desc}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Architecture */}
-        <section className="py-20 bg-surface-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl sm:text-4xl font-heading text-white mb-4 font-bold">Arquitetura</h2>
-            <p className="text-neutral-200 text-lg mb-12 font-medium">Simples, modular, escalável.</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-              {architecture.map((item, i) => (
-                <div key={item.layer} className="glass-strong rounded-xl p-4 border border-gold-500/20">
-                  <span className="text-gold-500 text-xs font-bold uppercase tracking-wider">Camada {i + 1}</span>
-                  <h3 className="text-white font-bold text-base mt-1">{item.layer}</h3>
-                  <p className="text-neutral-300 text-sm mt-1">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Use Cases */}
-        <section className="py-20 bg-surface-900">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl sm:text-4xl font-heading text-white mb-4 font-bold">Quem usa Hermes</h2>
-            <p className="text-neutral-200 text-lg mb-12 font-medium">De dev solo a enterprise.</p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {useCases.map((uc) => (
-                <div key={uc.title} className="glass-strong rounded-2xl p-6 border border-gold-500/20">
-                  <h3 className="text-gold-400 font-bold text-base mb-2">{uc.title}</h3>
-                  <p className="text-neutral-200 text-sm leading-relaxed">{uc.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Integrations */}
+        {/* Integrações */}
         <section className="py-20 bg-surface-950">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl sm:text-4xl font-heading text-white mb-4 font-bold">Stack e integrações</h2>
-            <p className="text-neutral-200 text-lg mb-12 font-medium">Conectado com o que importa.</p>
+            <span className="inline-block text-orange-400 text-xs font-bold uppercase tracking-widest mb-4 border border-orange-500/30 px-4 py-2 rounded-full bg-orange-500/10">
+              Stack
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-heading text-white mb-6 leading-tight font-bold">
+              Integra com tudo
+            </h2>
+            <p className="text-white text-lg mb-12 font-medium max-w-2xl mx-auto">
+              Conecta com seus canais, seus providers, sua infra.
+            </p>
             <div className="flex flex-wrap gap-3 justify-center">
               {integrations.map((name) => (
-                <span key={name} className="glass-strong px-4 py-2 rounded-full text-neutral-200 text-sm font-medium border border-white/10">
+                <span
+                  key={name}
+                  className="glass-strong px-4 py-2 rounded-full text-gray-300 text-sm font-medium border border-white/10 hover:border-orange-500/30 transition-colors"
+                >
                   {name}
                 </span>
               ))}
@@ -178,66 +158,20 @@ export default function HermesPage() {
           </div>
         </section>
 
-        {/* Comparison */}
+        {/* CTA Final */}
         <section className="py-20 bg-surface-900">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl sm:text-4xl font-heading text-white mb-4 font-bold">EvoNexus vs Hermes</h2>
-            <p className="text-neutral-200 text-lg mb-12 font-medium">Dois caminhos, mesmo objetivo.</p>
-            <div className="overflow-x-auto">
-              <table className="w-full glass-strong rounded-2xl border border-gold-500/20">
-                <thead>
-                  <tr className="border-b border-gold-500/20">
-                    <th className="text-left p-4 text-white font-bold">Característica</th>
-                    <th className="text-left p-4 text-gold-400 font-bold">EvoNexus</th>
-                    <th className="text-left p-4 text-gold-400 font-bold">Hermes</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-white/10">
-                    <td className="p-4 text-neutral-200">Motor</td>
-                    <td className="p-4 text-neutral-300">Claude Code + OpenCode</td>
-                    <td className="p-4 text-neutral-300">Hermes Agent</td>
-                  </tr>
-                  <tr className="border-b border-white/10">
-                    <td className="p-4 text-neutral-200">Providers</td>
-                    <td className="p-4 text-neutral-300">OpenClaude (6 backends)</td>
-                    <td className="p-4 text-neutral-300">NVIDIA, OpenAI, Anthropic, Google, Ollama</td>
-                  </tr>
-                  <tr className="border-b border-white/10">
-                    <td className="p-4 text-neutral-200">Interface</td>
-                    <td className="p-4 text-neutral-300">Terminal + Dashboard</td>
-                    <td className="p-4 text-neutral-300">Kanban + Telegram</td>
-                  </tr>
-                  <tr className="border-b border-white/10">
-                    <td className="p-4 text-neutral-200">Foco</td>
-                    <td className="p-4 text-neutral-300">38 agentes especializados</td>
-                    <td className="p-4 text-neutral-300">Liberdade total, sem lock-in</td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 text-neutral-200">Deploy</td>
-                    <td className="p-4 text-neutral-300">Local + Dashboard</td>
-                    <td className="p-4 text-neutral-300">Docker Swarm, Vercel, local</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="py-20 bg-surface-950">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl sm:text-4xl font-heading text-white mb-6 font-bold">
-              Pronto pra ter liberdade total?
+              Pronto pra ter liberdade total de IA?
             </h2>
-            <p className="text-neutral-200 text-lg mb-8 font-medium">
-              Hermes é open-source. Implemente, modifique, estenda. Sem contrato, sem lock-in.
+            <p className="text-white text-lg mb-8 font-medium">
+              Implementamos, configuramos e treinamos seu Hermes em 48h.
             </p>
             <a
-              href="https://wa.me/5511914088571?text=Olá!%20Quero%20implementar%20Hermes%20Agent%20no%20meu%20projeto"
+              href="https://wa.me/5511914088571?text=Olá!%20Quero%20implementar%20o%20Hermes%20Agent"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-600 text-surface-900 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-gold-500/25"
+              className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-orange-500/25"
             >
               Falar com especialista →
             </a>
