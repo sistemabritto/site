@@ -27,7 +27,7 @@ export default function WhatsAppCTA() {
             </h2>
 
             <div className="bg-gradient-to-r from-gold-600/20 to-surface-800/40 rounded-2xl p-6 border border-gold-500/30 mb-8">
-              <p className="text-neutral-200 text-base leading-relaxed font-medium">
+              <p className="text-white text-base leading-relaxed font-medium">
                 Transforme seu WhatsApp em uma máquina de vendas. Qualificação automática, follow-ups inteligentes,
                 agendamento de consultas e um CRM completo rodando direto no celular — com IA que aprende o padrão do seu negócio.
               </p>
@@ -37,7 +37,7 @@ export default function WhatsAppCTA() {
               {features.map((f) => (
                 <li key={f.text} className="flex items-start gap-3">
                   <span className="text-lg flex-shrink-0">{f.icon}</span>
-                  <span className="text-neutral-200 text-sm leading-relaxed font-medium">{f.text}</span>
+                  <span className="text-white text-sm leading-relaxed font-medium">{f.text}</span>
                 </li>
               ))}
             </ul>
@@ -53,7 +53,7 @@ export default function WhatsAppCTA() {
             <h3 className="font-heading font-bold text-2xl text-white mb-3 text-center">
               Ative seu WhatsApp
             </h3>
-            <p className="text-neutral-200 text-sm mb-8 text-center font-medium">
+            <p className="text-white text-sm mb-8 text-center font-medium">
               CRM + IA em 24h · Sem contrato · Resultados ou dinheiro de volta
             </p>
 

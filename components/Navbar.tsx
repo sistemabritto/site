@@ -27,15 +27,15 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo Horizontal com movimento */}
+          {/* Logo Sistema Britto - Escudo */}
           <a 
             href="/" 
             className="group transition-all duration-500 hover:scale-105"
           >
             <img 
-              src="/images/logo-horizontal.svg" 
+              src="/images/logo-sistema-britto.png" 
               alt="Sistema Britto" 
-              className="h-10 sm:h-12 w-auto transition-transform duration-500 group-hover:scale-110"
+              className="h-12 sm:h-14 w-auto transition-transform duration-500 group-hover:scale-110"
             />
           </a>
 

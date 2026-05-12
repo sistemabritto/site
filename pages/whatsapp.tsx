@@ -77,9 +77,9 @@ export default function WhatsApp() {
   {/* Badge Evolution API */}
   <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-2 mb-6">
     <img 
-      src="/images/evo/evolution-api-logo-green.svg" 
+      src="/images/evo/evolution-api-logo.png" 
       alt="Evolution API" 
-      className="w-8 h-8"
+      className="h-6 w-auto"
     />
     <span className="text-green-400 text-xs font-bold uppercase tracking-wider">
       Powered by Evolution API
@@ -91,7 +91,7 @@ export default function WhatsApp() {
               <span className="gold-text block mt-2">central comercial</span>
             </h1>
             
-            <p className="text-neutral-400 text-lg max-w-2xl mx-auto font-medium mt-4">
+            <p className="text-gray-200 text-lg max-w-2xl mx-auto font-medium mt-4">
               IA que qualifica leads, agenda consultas, fecha vendas e reativa clientes — 
               24/7, integrado ao seu CRM. Sem digitação manual, sem lead perdido.
             </p>
@@ -111,15 +111,15 @@ export default function WhatsApp() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
               <div className="glass-strong rounded-2xl p-6 text-center bg-surface-900/90 backdrop-blur-xl border-green-500/20">
                 <div className="text-4xl font-heading font-bold text-green-400 mb-2">24/7</div>
-                <div className="text-neutral-400 text-sm">Atendimento automático</div>
+                <div className="text-gray-200 text-sm">Atendimento automático</div>
               </div>
               <div className="glass-strong rounded-2xl p-6 text-center bg-surface-900/90 backdrop-blur-xl border-green-500/20">
                 <div className="text-4xl font-heading font-bold text-green-400 mb-2">&lt;1s</div>
-                <div className="text-neutral-400 text-sm">Tempo de resposta</div>
+                <div className="text-gray-200 text-sm">Tempo de resposta</div>
               </div>
               <div className="glass-strong rounded-2xl p-6 text-center bg-surface-900/90 backdrop-blur-xl border-green-500/20">
                 <div className="text-4xl font-heading font-bold text-green-400 mb-2">3x</div>
-                <div className="text-neutral-400 text-sm">Mais conversões</div>
+                <div className="text-gray-200 text-sm">Mais conversões</div>
               </div>
             </div>
           </div>
@@ -134,22 +134,22 @@ export default function WhatsApp() {
                   <h2 className="text-2xl font-heading text-white font-bold mb-4">
                     Embaixador e Contributor da Evolution API
                   </h2>
-                  <p className="text-neutral-400 text-sm leading-relaxed mb-6">
+                  <p className="text-gray-200 text-sm leading-relaxed mb-6">
                     Somos parceiros oficiais da <strong>Evolution API</strong> — a plataforma open-source 
                     que conecta WhatsApp, automação e IA em um só lugar. Como embaixadores, temos 
                     acesso antecipado a features, suporte prioritário e capacidade de implementar 
                     soluções customizadas para seu negócio.
                   </p>
                   <ul className="space-y-2 mb-4">
-                    <li className="flex items-start gap-2 text-neutral-300 text-sm">
+                    <li className="flex items-start gap-2 text-gray-100 text-sm">
                       <span className="text-green-400 mt-0.5">✓</span>
                       <span>Implementação oficial Evolution API</span>
                     </li>
-                    <li className="flex items-start gap-2 text-neutral-300 text-sm">
+                    <li className="flex items-start gap-2 text-gray-100 text-sm">
                       <span className="text-green-400 mt-0.5">✓</span>
                       <span>Suporte direto dos desenvolvedores</span>
                     </li>
-                    <li className="flex items-start gap-2 text-neutral-300 text-sm">
+                    <li className="flex items-start gap-2 text-gray-100 text-sm">
                       <span className="text-green-400 mt-0.5">✓</span>
                       <span>Features customizadas para seu caso</span>
                     </li>
@@ -201,7 +201,7 @@ export default function WhatsApp() {
                 >
                   <div className="text-3xl mb-4">{feature.icon}</div>
                   <h3 className="text-lg font-heading text-white font-bold mb-2">{feature.title}</h3>
-                  <p className="text-neutral-400 text-sm leading-relaxed">{feature.desc}</p>
+                  <p className="text-gray-200 text-sm leading-relaxed">{feature.desc}</p>
                 </div>
               ))}
             </div>
@@ -238,7 +238,7 @@ export default function WhatsApp() {
                 >
                   <div className="text-green-400 text-3xl font-heading font-bold mb-2">{c.result}</div>
                   <h3 className="text-white font-bold mb-2">{c.name}</h3>
-                  <p className="text-neutral-400 text-sm leading-relaxed">{c.desc}</p>
+                  <p className="text-gray-200 text-sm leading-relaxed">{c.desc}</p>
                 </div>
               ))}
             </div>
@@ -252,7 +252,7 @@ export default function WhatsApp() {
               Pronto para transformar
               <span className="gold-text"> seu WhatsApp?</span>
             </h2>
-            <p className="text-neutral-400 text-lg mb-8">
+            <p className="text-gray-200 text-lg mb-8">
               Implementamos sua central comercial com IA em até 48h.
             </p>
             <a

@@ -50,11 +50,11 @@ export default function EvoNexusPage() {
               Sua empresa no
               <span className="gold-text block mt-2">piloto automático</span>
             </h1>
-            <p className="text-neutral-400 text-lg sm:text-xl max-w-3xl leading-relaxed mb-8 font-medium">
+            <p className="text-gray-200 text-lg sm:text-xl max-w-3xl leading-relaxed mb-8 font-medium">
               Finanças, projetos, marketing, vendas, RH, jurídico — cada área com agentes especializados
               que executam rotinas diárias, geram relatórios e tomam decisões. 
               <br />
-              <span className="text-neutral-300">Tudo orquestrado, tudo integrado, tudo rodando.</span>
+              <span className="text-gray-100">Tudo orquestrado, tudo integrado, tudo rodando.</span>
             </p>
             
             {/* Ecossistema Image */}
@@ -105,17 +105,17 @@ export default function EvoNexusPage() {
               <div className="glass-strong rounded-xl p-6 border border-green-500/30">
                 <div className="text-green-400 text-3xl mb-3">⚡</div>
                 <h3 className="text-white font-bold mb-2 text-xl">+40% produtividade</h3>
-                <p className="text-neutral-400 text-sm">Agentes cuidam do operacional, seu time foca no estratégico.</p>
+                <p className="text-gray-200 text-sm">Agentes cuidam do operacional, seu time foca no estratégico.</p>
               </div>
               <div className="glass-strong rounded-xl p-6 border border-blue-500/30">
                 <div className="text-blue-400 text-3xl mb-3">📊</div>
                 <h3 className="text-white font-bold mb-2 text-xl">Decisão em tempo real</h3>
-                <p className="text-neutral-400 text-sm">Relatórios automáticos, dashboards ao vivo, alertas proativos.</p>
+                <p className="text-gray-200 text-sm">Relatórios automáticos, dashboards ao vivo, alertas proativos.</p>
               </div>
               <div className="glass-strong rounded-xl p-6 border border-purple-500/30">
                 <div className="text-purple-400 text-3xl mb-3">💰</div>
                 <h3 className="text-white font-bold mb-2 text-xl">-60% custo operacional</h3>
-                <p className="text-neutral-400 text-sm">Automação de tarefas repetitivas em todos os departamentos.</p>
+                <p className="text-gray-200 text-sm">Automação de tarefas repetitivas em todos os departamentos.</p>
               </div>
             </div>
           </div>
@@ -131,7 +131,7 @@ export default function EvoNexusPage() {
               <h2 className="text-3xl sm:text-4xl font-heading text-white mb-6 leading-tight font-bold">
                 Seu novo time de IA
               </h2>
-              <p className="text-neutral-400 text-lg max-w-2xl mx-auto font-medium">
+              <p className="text-gray-200 text-lg max-w-2xl mx-auto font-medium">
                 17 agentes especializados. Cada um com system prompt, memória persistente e skills do domínio.
               </p>
             </div>
@@ -143,7 +143,7 @@ export default function EvoNexusPage() {
                     <span className="text-blue-400 font-heading font-bold text-lg">{agent.name}</span>
                     <span className="text-xs bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full font-semibold">{agent.domain}</span>
                   </div>
-                  <p className="text-neutral-400 text-sm">{agent.desc}</p>
+                  <p className="text-gray-200 text-sm">{agent.desc}</p>
                 </div>
               ))}
             </div>
@@ -159,12 +159,12 @@ export default function EvoNexusPage() {
             <h2 className="text-3xl sm:text-4xl font-heading text-white mb-6 leading-tight font-bold">
               Integrado com o que você usa
             </h2>
-            <p className="text-neutral-400 text-lg mb-12 font-medium max-w-2xl mx-auto">
+            <p className="text-gray-200 text-lg mb-12 font-medium max-w-2xl mx-auto">
               Conectado nativamente com as ferramentas do seu dia a dia.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               {integrations.map((name) => (
-                <span key={name} className="glass-strong px-4 py-2 rounded-full text-neutral-300 text-sm font-medium border border-white/10 hover:border-blue-500/30 transition-colors">
+                <span key={name} className="glass-strong px-4 py-2 rounded-full text-gray-100 text-sm font-medium border border-white/10 hover:border-blue-500/30 transition-colors">
                   {name}
                 </span>
               ))}
@@ -178,7 +178,7 @@ export default function EvoNexusPage() {
             <h2 className="text-3xl sm:text-4xl font-heading text-white mb-6 font-bold">
               Pronto pra ter uma workforce de negócio?
             </h2>
-            <p className="text-neutral-400 text-lg mb-8 font-medium">
+            <p className="text-gray-200 text-lg mb-8 font-medium">
               Instalamos, configuramos e ativamos seu EvoNexus em 48h. Sem contrato longo.
             </p>
             <a

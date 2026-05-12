@@ -14,7 +14,7 @@ export default function Mission() {
           Democratizar acesso a workforces de IA para
           <span className="gold-text"> empresas brasileiras</span>
         </h2>
-        <p className="text-neutral-200 text-lg max-w-2xl mx-auto leading-relaxed font-medium">
+        <p className="text-white text-lg max-w-2xl mx-auto leading-relaxed font-medium">
           Acreditamos que todo negócio — do autônomo à clínica, da pizzaria ao SaaS — merece ter uma
           workforce inteligente operando 24 horas. Sem contrato longo, sem curva de aprendizado, sem dor de cabeça.
         </p>

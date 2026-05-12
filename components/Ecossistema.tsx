@@ -16,7 +16,7 @@ export default function Ecossistema() {
             Duas formas de usar<br />
             <span className="gold-text">IA que roda seu negócio</span>
           </h2>
-          <p className="text-neutral-400 text-lg max-w-2xl mx-auto font-medium mt-4">
+          <p className="text-gray-200 text-lg max-w-2xl mx-auto font-medium mt-4">
             Estruturado ou sob medida. Escolha seu caminho.
           </p>
         </div>
@@ -47,26 +47,26 @@ export default function Ecossistema() {
                 EvoNexus
               </h3>
               
-              <p className="text-neutral-400 text-sm mb-6">
+              <p className="text-gray-200 text-sm mb-6">
                 Empresa completa em IA: 38 agentes especializados (negócio + engenharia) 
                 que rodam sua operação no piloto automático.
               </p>
 
               {/* Features */}
               <ul className="space-y-2 mb-6">
-                <li className="flex items-start gap-2 text-neutral-300 text-sm">
+                <li className="flex items-start gap-2 text-gray-100 text-sm">
                   <span className="text-blue-400 mt-0.5 flex-shrink-0">✓</span>
                   <span>Business: Fin, Projetos, Vendas, RH, Marketing, Jurídico</span>
                 </li>
-                <li className="flex items-start gap-2 text-neutral-300 text-sm">
+                <li className="flex items-start gap-2 text-gray-100 text-sm">
                   <span className="text-blue-400 mt-0.5 flex-shrink-0">✓</span>
                   <span>Engineering: Code, Review, Debug, Testes, DevOps</span>
                 </li>
-                <li className="flex items-start gap-2 text-neutral-300 text-sm">
+                <li className="flex items-start gap-2 text-gray-100 text-sm">
                   <span className="text-blue-400 mt-0.5 flex-shrink-0">✓</span>
                   <span>OpenClaude: 6 backends, tokens free via OpenRouter</span>
                 </li>
-                <li className="flex items-start gap-2 text-neutral-300 text-sm">
+                <li className="flex items-start gap-2 text-gray-100 text-sm">
                   <span className="text-blue-400 mt-0.5 flex-shrink-0">✓</span>
                   <span>Dashboard web + memória persistente</span>
                 </li>
@@ -106,26 +106,26 @@ export default function Ecossistema() {
                 Hermes Agent
               </h3>
               
-              <p className="text-neutral-400 text-sm mb-6">
+              <p className="text-gray-200 text-sm mb-6">
                 Liberdade total: multi-provider real, Kanban nativo, 
                 skills em markdown. Pra quem quer controle total da stack.
               </p>
 
               {/* Features */}
               <ul className="space-y-2 mb-6">
-                <li className="flex items-start gap-2 text-neutral-300 text-sm">
+                <li className="flex items-start gap-2 text-gray-100 text-sm">
                   <span className="text-orange-400 mt-0.5 flex-shrink-0">✓</span>
                   <span>NVIDIA, OpenAI, Anthropic, Google, Ollama — por task</span>
                 </li>
-                <li className="flex items-start gap-2 text-neutral-300 text-sm">
+                <li className="flex items-start gap-2 text-gray-100 text-sm">
                   <span className="text-orange-400 mt-0.5 flex-shrink-0">✓</span>
                   <span>Kanban nativo: cada task é um agente</span>
                 </li>
-                <li className="flex items-start gap-2 text-neutral-300 text-sm">
+                <li className="flex items-start gap-2 text-gray-100 text-sm">
                   <span className="text-orange-400 mt-0.5 flex-shrink-0">✓</span>
                   <span>Skills em markdown, plugins em Python</span>
                 </li>
-                <li className="flex items-start gap-2 text-neutral-300 text-sm">
+                <li className="flex items-start gap-2 text-gray-100 text-sm">
                   <span className="text-orange-400 mt-0.5 flex-shrink-0">✓</span>
                   <span>Docker Swarm, Vercel, local — sua infra</span>
                 </li>
@@ -148,7 +148,7 @@ export default function Ecossistema() {
             <h3 className="text-xl font-heading text-white font-bold mb-2">
               O motor por trás do EvoNexus
             </h3>
-            <p className="text-neutral-400 text-sm">
+            <p className="text-gray-200 text-sm">
               Claude Code + OpenClaude = base que torna tudo possível
             </p>
           </div>
@@ -160,7 +160,7 @@ export default function Ecossistema() {
                 <span className="text-2xl">💻</span>
                 Claude Code
               </h4>
-              <p className="text-neutral-400 text-sm leading-relaxed mb-3">
+              <p className="text-gray-200 text-sm leading-relaxed mb-3">
                 CLI da Anthropic que transforma seu terminal em workspace de IA.
                 Code review, arquitetura, debug, testes — tudo via terminal.
               </p>
@@ -178,7 +178,7 @@ export default function Ecossistema() {
                 <span className="text-2xl">🔓</span>
                 OpenClaude
               </h4>
-              <p className="text-neutral-400 text-sm leading-relaxed mb-3">
+              <p className="text-gray-200 text-sm leading-relaxed mb-3">
                 Fork do Claude Code que libera OpenRouter (tokens free), 
                 OpenAI, Gemini, AWS Bedrock, Vertex AI. Sem vendor lock-in.
               </p>
@@ -196,7 +196,7 @@ export default function Ecossistema() {
 
         {/* Bottom CTA */}
         <div className="text-center mt-16">
-          <p className="text-neutral-400 text-sm mb-6">
+          <p className="text-gray-200 text-sm mb-6">
             Quer implementar o ecossistema completo?
           </p>
           <a

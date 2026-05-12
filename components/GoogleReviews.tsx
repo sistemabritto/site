@@ -128,7 +128,7 @@ export default function GoogleReviews() {
             Quem usa,
             <span className="gold-text"> recomenda</span>
           </h2>
-          <p className="text-neutral-200 text-lg max-w-2xl mx-auto font-medium">
+          <p className="text-white text-lg max-w-2xl mx-auto font-medium">
             Mais de 50 negócios já automatizaram o atendimento no WhatsApp com a Sistema Britto.
           </p>
         </div>
@@ -172,7 +172,7 @@ export default function GoogleReviews() {
                   ))}
                 </div>
 
-                <p className="text-neutral-200 text-sm leading-relaxed mb-6 line-clamp-4">
+                <p className="text-white text-sm leading-relaxed mb-6 line-clamp-4">
                   &ldquo;{review.text}&rdquo;
                 </p>
 
@@ -191,7 +191,7 @@ export default function GoogleReviews() {
                   <div>
                     <p className="text-white font-semibold text-sm">{review.name}</p>
                     {review.business && (
-                      <p className="text-neutral-300 text-xs">{review.business}</p>
+                      <p className="text-gray-100 text-xs">{review.business}</p>
                     )}
                   </div>
                 </div>

@@ -15,12 +15,12 @@ export default function Footer() {
       <div>
         <div className="mb-6">
           <img 
-            src="/images/logo-horizontal.svg" 
+            src="/images/logo-sistema-britto.png" 
             alt="Sistema Britto" 
-            className="w-48 h-auto"
+            className="w-56 h-auto"
           />
         </div>
-        <p className="text-neutral-200 text-sm leading-relaxed font-medium">
+        <p className="text-white text-sm leading-relaxed font-medium">
           Workforces de IA que operam seu negócio — do WhatsApp à engenharia de software.
         </p>
       </div>
@@ -37,7 +37,7 @@ export default function Footer() {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-neutral-200 hover:text-white font-medium transition-colors"
+                      className="text-sm text-white hover:text-white font-medium transition-colors"
                     >
                       {link.label}
                       <span className="ml-1 text-xs opacity-70">↗</span>
@@ -45,7 +45,7 @@ export default function Footer() {
                   ) : (
                     <Link
                       href={link.href}
-                      className="text-sm text-neutral-200 hover:text-white font-medium transition-colors"
+                      className="text-sm text-white hover:text-white font-medium transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -61,7 +61,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2">
               <li>
-                <a href="mailto:felipe@sistemabritto.com.br" className="text-sm text-neutral-200 hover:text-white font-medium transition-colors">
+                <a href="mailto:felipe@sistemabritto.com.br" className="text-sm text-white hover:text-white font-medium transition-colors">
                   felipe@sistemabritto.com.br
                 </a>
               </li>
@@ -70,7 +70,7 @@ export default function Footer() {
                   href="https://wa.me/5511914088571?text=Olá!%20Vi%20o%20site%20de%20vocês%20e%20gostaria%20de%20mais%20informações"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-neutral-200 hover:text-white font-medium transition-colors"
+                  className="text-sm text-white hover:text-white font-medium transition-colors"
                 >
                   +55 11 91408-8571
                 </a>
@@ -80,14 +80,14 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-neutral-300 font-medium">
+          <p className="text-xs text-gray-100 font-medium">
             © {new Date().getFullYear()} Sistema Britto. Todos os direitos reservados.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="/politicas-de-privacidade" className="text-xs text-neutral-300 hover:text-white font-medium transition-colors">
+            <Link href="/politicas-de-privacidade" className="text-xs text-gray-100 hover:text-white font-medium transition-colors">
               Privacidade
             </Link>
-            <Link href="/termos-de-uso" className="text-xs text-neutral-300 hover:text-white font-medium transition-colors">
+            <Link href="/termos-de-uso" className="text-xs text-gray-100 hover:text-white font-medium transition-colors">
               Termos
             </Link>
           </div>

@@ -25,7 +25,7 @@ export default function Hero() {
           <span className="gold-text">operando seu negócio</span>
         </h1>
 
-        <p className="text-lg sm:text-xl text-neutral-200 max-w-2xl mx-auto mb-12 leading-relaxed">
+        <p className="text-lg sm:text-xl text-white max-w-2xl mx-auto mb-12 leading-relaxed">
           Agentes autônomos que atendem clientes, gerenciam finanças, coordenam projetos e escrevem código.
           <strong className="text-white"> Uma workforce completa que nunca dorme.</strong>
         </p>
@@ -51,7 +51,7 @@ export default function Hero() {
           </a>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-neutral-200 text-sm font-semibold">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-white text-sm font-semibold">
           <div className="flex -space-x-2">
             {['🧑', '👩', '👨', '👩', '🧑'].map((emoji, i) => (
               <div
