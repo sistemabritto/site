@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['img.plasmic.app'], // temporário até migrar todas as imagens
+    domains: ['blog.workflowapi.com.br', 'img.plasmic.app'],
   },
 };
 

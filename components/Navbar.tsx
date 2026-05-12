@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 /**
- * Navbar — Glassmorphism, sticky, mobile-first
- * AI-Native UI style: minimal chrome, ambient feel
+ * Navbar — Dark mode, glassmorphism, sticky
+ * Logo branca do blog.workflowapi.com.br
  */
 
 const navLinks = [
-  { label: 'Agentes', href: '#agentes' },
-  { label: 'Benefícios', href: '#beneficios' },
-  { label: 'ROI', href: '#roi' },
-  { label: 'Blog', href: 'https://blog.workflowapi.com.br', external: true },
+ { label: 'Benefícios', href: '#beneficios' },
+ { label: 'ROI', href: '#roi' },
+ { label: 'Blog', href: 'https://blog.workflowapi.com.br', external: true },
 ];
 
 export default function Navbar() {
@@ -26,19 +26,23 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'glass-dark py-3 shadow-lg shadow-surface-950/10'
+          ? 'glass-strong py-3 shadow-lg shadow-black/50'
           : 'bg-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg aurora-bg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">W</span>
-            </div>
+          <a href="/" className="flex items-center gap-3 group">
+            <Image
+              src="/images/logo-white.png"
+              alt="Workflow API Studio"
+              width={40}
+              height={40}
+              className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-200"
+            />
             <span className="text-white font-heading font-bold text-lg tracking-tight">
-              Workflow<span className="text-primary-400">API</span>
+              Workflow<span className="text-primary-500">API</span>
             </span>
           </a>
 
@@ -59,10 +63,10 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="https://wa.me/5511914088571"
+              href="https://wa.me/5511914088571?text=Olá!%20Vi%20o%20site%20de%20vocês%20e%20gostaria%20de%20falar%20com%20um%20especialista%20em%20automação"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-primary-500 hover:bg-primary-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 cta-glow"
+              className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 cta-glow"
             >
               Falar com Especialista
             </a>
@@ -110,10 +114,10 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="https://wa.me/5511914088571"
+              href="https://wa.me/5511914088571?text=Olá!%20Vi%20o%20site%20de%20vocês%20e%20gostaria%20de%20falar%20com%20um%20especialista%20em%20automação"
               target="_blank"
               rel="noopener noreferrer"
-              className="block text-center bg-primary-500 text-white px-6 py-3 rounded-full font-semibold mt-4 cta-glow"
+              className="block text-center bg-primary-600 text-white px-6 py-3 rounded-full font-semibold mt-4 cta-glow"
               onClick={() => setMobileOpen(false)}
             >
               Falar com Especialista

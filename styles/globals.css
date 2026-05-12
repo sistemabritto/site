@@ -1,168 +1,156 @@
 @import "tailwindcss";
 
 /* ============================================
-   WORKFLOW API STUDIO — Design System
-   AI-Native UI + Glassmorphism + Aurora
+   WORKFLOW API STUDIO — Design System v2
+   DARK MODE + High Contrast + Aurora
    ============================================ */
 
-/* --- Custom Theme --- */
+/* Custom theme config */
 @theme {
-  /* AI Purple Palette */
-  --color-primary-50: #F5F3FF;
-  --color-primary-100: #EDE9FE;
-  --color-primary-200: #DDD6FE;
-  --color-primary-300: #C4B5FD;
-  --color-primary-400: #A78BFA;
-  --color-primary-500: #7C3AED;
-  --color-primary-600: #6D28D9;
-  --color-primary-700: #5B21B6;
-  --color-primary-800: #4C1D95;
-  --color-primary-900: #3B0764;
-
-  /* Teal Accent */
-  --color-accent-400: #22D3EE;
+  --color-surface-950: #0a0a0a;
+  --color-surface-900: #111111;
+  --color-surface-800: #1a1a1a;
+  --color-surface-700: #262626;
+  --color-surface-600: #333333;
+  --color-surface-500: #404040;
+  --color-surface-400: #525252;
+  --color-surface-300: #737373;
+  --color-surface-200: #a3a3a3;
+  --color-surface-100: #d4d4d4;
+  --color-surface-50: #f5f5f5;
+  
+  /* AI Purple primary */
+  --color-primary-500: #8B5CF6;
+  --color-primary-600: #7C3AED;
+  --color-primary-700: #6D28D9;
+  
+  /* Teal accent */
   --color-accent-500: #0891B2;
   --color-accent-600: #0E7490;
-
-  /* Neutrals */
-  --color-surface-50: #F8FAFC;
-  --color-surface-100: #F1F5F9;
-  --color-surface-200: #E2E8F0;
-  --color-surface-700: #334155;
-  --color-surface-800: #1E293B;
-  --color-surface-900: #0F172A;
-  --color-surface-950: #020617;
-
-  /* Fonts */
-  --font-heading: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-  --font-body: 'DM Sans', 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  /* Green for success/WhatsApp */
+  --color-success-500: #22C55E;
+  --color-success-600: #16A34A;
 }
 
-/* --- Base Styles --- */
-@layer base {
-  html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  body {
-    font-family: var(--font-body);
-    color: var(--color-surface-900);
-    background: var(--color-surface-50);
-    overflow-x: hidden;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-  }
+/* Base styles */
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background-color: var(--color-surface-950);
+  color: #ffffff;
 }
 
-/* --- Glassmorphism Utilities --- */
-@layer utilities {
-  .glass {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .glass-strong {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-  }
-
-  .glass-dark {
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  /* Aurora Gradient */
-  .aurora-bg {
-    background: linear-gradient(135deg,
-      #7C3AED 0%,
-      #A78BFA 25%,
-      #0891B2 50%,
-      #22D3EE 75%,
-      #7C3AED 100%
-    );
-    background-size: 300% 300%;
-    animation: aurora-shift 12s ease infinite;
-  }
-
-  .aurora-text {
-    background: linear-gradient(135deg, #7C3AED, #0891B2, #22D3EE);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* CTA Glow */
-  .cta-glow {
-    box-shadow: 0 0 20px rgba(124, 58, 237, 0.3),
-                0 0 60px rgba(124, 58, 237, 0.1);
-    transition: box-shadow 0.3s ease;
-  }
-
-  .cta-glow:hover {
-    box-shadow: 0 0 30px rgba(124, 58, 237, 0.5),
-                0 0 80px rgba(124, 58, 237, 0.2);
-  }
-
-  /* Typing indicator */
-  .typing-dot {
-    animation: typing-bounce 1.4s infinite ease-in-out both;
-  }
-
-  .typing-dot:nth-child(1) { animation-delay: -0.32s; }
-  .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-  .typing-dot:nth-child(3) { animation-delay: 0s; }
-
-  /* Scroll reveal */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Headings */
+.font-heading {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
 }
 
-/* --- Animations --- */
-@keyframes aurora-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Aurora gradient background */
+.aurora-bg {
+  background: linear-gradient(135deg,
+    #0a0a0a 0%,
+    #1a0a2e 15%,
+    #16163a 30%,
+    #0c284a 50%,
+    #0a1628 70%,
+    #0a0a0a 100%
+  );
 }
 
-@keyframes typing-bounce {
-  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-  40% { transform: scale(1); opacity: 1; }
+/* Aurora text gradient */
+.aurora-text {
+  background: linear-gradient(135deg, #8B5CF6 0%, #0891B2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(124, 58, 237, 0.6); }
+/* Glassmorphism - dark version */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.glass-strong {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* CTA glow effect */
+.cta-glow {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  transition: all 0.3s ease;
+}
+
+.cta-glow:hover {
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+}
+
+/* Typing indicator animation */
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-4px); }
+}
+
+.typing-dot {
+  animation: typing 1.4s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Float animation */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
 }
 
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* High contrast text utilities */
+.text-high-contrast {
+  color: #ffffff;
+}
+
+.text-medium-contrast {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.text-low-contrast {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Dark mode focus rings */
+*:focus-visible {
+  outline: 2px solid #8B5CF6;
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
 }

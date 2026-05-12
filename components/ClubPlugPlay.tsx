@@ -2,7 +2,7 @@ import React from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 /**
- * Club Plug & Play — CTA section com aurora gradient
+ * Club Plug & Play — Dark mode aurora
  */
 
 export default function ClubPlugPlay() {
@@ -10,7 +10,6 @@ export default function ClubPlugPlay() {
 
   return (
     <section className="relative py-20 sm:py-32 overflow-hidden">
-      {/* Aurora BG */}
       <div className="absolute inset-0 aurora-bg opacity-90" />
       <div className="absolute inset-0 bg-surface-950/60" />
 
@@ -38,10 +37,10 @@ export default function ClubPlugPlay() {
             <span>→</span>
           </a>
           <a
-            href="https://wa.me/5511914088571?text=Quero+implementar+agora"
+            href="https://wa.me/5511914088571?text=Olá!%20Quero%20implementar%20o%20Clube%20Plug%20and%20Play%20no%20meu%20negócio%20—%20vi%20no%20site"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 glass text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-200 hover:glass-strong"
+            className="inline-flex items-center gap-2 glass-strong text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/15"
           >
             Implementar Agora
             <span>⚡</span>
