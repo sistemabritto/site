@@ -10,8 +10,8 @@ export default function ClubPlugPlay() {
 
   return (
     <section className="relative py-20 sm:py-32 overflow-hidden">
-      <div className="absolute inset-0 aurora-bg opacity-90" />
-      <div className="absolute inset-0 bg-surface-950/60" />
+      <div className="absolute inset-0 aurora-bg opacity-100" />
+      <div className="absolute inset-0 bg-surface-950/80" />
 
       <div ref={reveal} className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
         <span className="inline-block text-accent-400 text-sm font-bold uppercase tracking-wider mb-4">
@@ -22,7 +22,7 @@ export default function ClubPlugPlay() {
           <br />
           <span className="gold-text">Clube Plug & Play</span>
         </h2>
-        <p className="text-gray-200 text-lg max-w-xl mx-auto mb-10 leading-relaxed font-medium">
+        <p className="text-neutral-200 text-lg max-w-xl mx-auto mb-10 leading-relaxed font-medium">
           Acesso imediato às melhores ferramentas para atendimento usando inteligência artificial — inove rápido e sem limites.
         </p>
 

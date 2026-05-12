@@ -14,7 +14,7 @@ export default function Mission() {
           Democratizar o acesso à inteligência artificial para
           <span className="gold-text"> negócios brasileiros</span>
         </h2>
-        <p className="text-gray-200 text-lg max-w-2xl mx-auto leading-relaxed font-medium">
+        <p className="text-neutral-200 text-lg max-w-2xl mx-auto leading-relaxed font-medium">
           Acreditamos que todo negócio — do autônomo à clínica, da pizzaria ao escritório de advocacia — merece ter atendimento inteligente, rápido e disponível 24 horas. Sem complexidade, sem contrato longo, sem dor de cabeça.
         </p>
       </div>

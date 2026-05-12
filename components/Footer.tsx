@@ -26,7 +26,7 @@ export default function Footer() {
                 Workflow<span className="gold-text">API</span>
               </span>
             </div>
-            <p className="text-gray-300 text-sm leading-relaxed font-medium">
+            <p className="text-neutral-200 text-sm leading-relaxed font-medium">
               Automações inteligentes no WhatsApp que qualificam, vendem e entregam por você.
             </p>
           </div>
@@ -44,7 +44,7 @@ export default function Footer() {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-gray-300 hover:text-white font-medium transition-colors"
+                      className="text-sm text-neutral-200 hover:text-white font-medium transition-colors"
                     >
                       {link.label}
                       <span className="ml-1 text-xs opacity-70">↗</span>
@@ -52,7 +52,7 @@ export default function Footer() {
                   ) : (
                     <Link
                       href={link.href}
-                      className="text-sm text-gray-300 hover:text-white font-medium transition-colors"
+                      className="text-sm text-neutral-200 hover:text-white font-medium transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -69,7 +69,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2">
               <li>
-                <a href="mailto:felipe@workflowapi.com.br" className="text-sm text-gray-300 hover:text-white font-medium transition-colors">
+                <a href="mailto:felipe@workflowapi.com.br" className="text-sm text-neutral-200 hover:text-white font-medium transition-colors">
                   felipe@workflowapi.com.br
                 </a>
               </li>
@@ -78,7 +78,7 @@ export default function Footer() {
                   href="https://wa.me/5511914088571?text=Olá!%20Vi%20o%20site%20de%20vocês%20e%20gostaria%20de%20mais%20informações"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-gray-300 hover:text-white font-medium transition-colors"
+                  className="text-sm text-neutral-200 hover:text-white font-medium transition-colors"
                 >
                   +55 11 91408-8571
                 </a>
@@ -89,14 +89,14 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-400 font-medium">
+          <p className="text-xs text-neutral-300 font-medium">
             © {new Date().getFullYear()} Workflow API Studio. Todos os direitos reservados.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="/politicas-de-privacidade" className="text-xs text-gray-400 hover:text-white font-medium transition-colors">
+            <Link href="/politicas-de-privacidade" className="text-xs text-neutral-300 hover:text-white font-medium transition-colors">
               Privacidade
             </Link>
-            <Link href="/termos-de-uso" className="text-xs text-gray-400 hover:text-white font-medium transition-colors">
+            <Link href="/termos-de-uso" className="text-xs text-neutral-300 hover:text-white font-medium transition-colors">
               Termos
             </Link>
           </div>

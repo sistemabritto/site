@@ -19,7 +19,7 @@ export default function TermosDeUso() {
       <div className="min-h-screen bg-surface-950">
         {/* Header */}
         <div className="aurora-bg">
-          <div className="bg-surface-950/70">
+          <div className="bg-surface-950/90">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
               <div className="flex items-center gap-3 mb-6">
                 <Image
@@ -36,7 +36,7 @@ export default function TermosDeUso() {
               <h1 className="text-3xl sm:text-4xl font-heading font-bold text-white mb-2">
                 Termos de Uso
               </h1>
-              <p className="text-gray-400 text-sm">
+              <p className="text-neutral-300 text-sm">
                 Última atualização: {new Date().toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' })}
               </p>
             </div>
@@ -45,7 +45,7 @@ export default function TermosDeUso() {
 
         {/* Content */}
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-          <div className="prose-dark space-y-10 text-gray-200 text-sm leading-relaxed">
+          <div className="prose-dark space-y-10 text-neutral-200 text-sm leading-relaxed">
 
             <section>
               <h2 className="text-white font-heading font-bold text-xl mb-4">1. Aceitação dos Termos</h2>

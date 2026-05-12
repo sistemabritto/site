@@ -12,7 +12,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden aurora-bg">
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-surface-950/70" />
+      <div className="absolute inset-0 bg-surface-950/90" />
       
       {/* Floating Orbs — suaves */}
       <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-gold-500/20 rounded-full blur-3xl animate-[float_6s_ease-in-out_infinite]" />
@@ -65,7 +65,7 @@ export default function Hero() {
         </div>
 
         {/* Social Proof */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-gray-300 text-sm font-semibold">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-neutral-200 text-sm font-semibold">
           <div className="flex -space-x-2">
             {['🧑‍💼', '👩‍⚕️', '👨‍🍳', '👩‍💼', '🧑‍🔧'].map((emoji, i) => (
               <div

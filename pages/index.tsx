@@ -58,7 +58,7 @@ export default function Home() {
         />
       </Head>
 
-      <main className="min-h-screen bg-surface-50">
+      <main className="min-h-screen bg-surface-950" style={{ color: '#ffffff' }}>
         <Navbar />
         <Hero />
         <Benefits />
