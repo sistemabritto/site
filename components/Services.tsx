@@ -5,9 +5,12 @@ const services = [
   {
     id: 'whatsapp',
     icon: '💬',
+    gradient: 'from-green-500/20 to-emerald-600/20',
+    border: 'border-green-500/30',
+    iconBg: 'bg-green-500/20',
     title: 'WhatsApp Business + CRM + IA',
     subtitle: 'Atendimento comercial automatizado',
-    description: 'Agentes de IA no WhatsApp que qualificam leads, agendam consultas, fecham vendas e ativam funis de CRM — integrado com as ferramentas que você já usa.',
+    description: 'Seu WhatsApp vira uma central comercial com IA. Qualifica leads, agenda, vende e alimenta seu CRM — tudo automático, 24/7.',
     features: [
       'Qualificação de leads 24/7 com IA',
       'Agendamento automático de consultas',
@@ -16,20 +19,23 @@ const services = [
       'Reativação de leads dormentes',
       'Multi-atendentes com IA assistida',
     ],
-    cta: 'Ativar WhatsApp com IA',
-    message: 'Olá!%20Quero%20ativar%20meu%20WhatsApp%20com%20inteligência%20artificial%20e%20CRM%20—%20vi%20no%20site%20de%20vocês',
+    cta: 'Ver detalhes do WhatsApp',
+    href: '/whatsapp',
     highlights: [
-      { icon: '🔄', label: 'Fallback de múltiplos modelos', desc: 'Se um modelo cai, outro assume. Zero downtime.' },
-      { icon: '🌐', label: 'Multi-provider', desc: 'OpenAI, Anthropic, Google, AWS — sem lock-in.' },
-      { icon: '📊', label: 'Gestão de tokens', desc: 'Controle de custo e consumo em tempo real.' },
+      { icon: '🔄', label: 'Fallback de modelos', desc: 'Se um modelo cai, outro assume' },
+      { icon: '🌐', label: 'Multi-provider', desc: 'OpenAI, Anthropic, Google, AWS' },
+      { icon: '📊', label: 'Gestão de tokens', desc: 'Controle de custo em tempo real' },
     ],
   },
   {
     id: 'evonexus',
     icon: '🏢',
-    title: 'Workforce de Negócio',
-    subtitle: 'Time de agentes operacionais',
-    description: 'Do financeiro ao jurídico, do marketing ao RH — um time de agentes autônomos gerencia sua operação com reports, decisões e acompanhamento em tempo real.',
+    gradient: 'from-blue-500/20 to-cyan-600/20',
+    border: 'border-blue-500/30',
+    iconBg: 'bg-blue-500/20',
+    title: 'EvoNexus Business',
+    subtitle: 'Workforce de negócio — 17 agentes',
+    description: 'Do financeiro ao jurídico, do marketing ao RH — agentes autônomos que gerenciam sua operação com reports e decisões em tempo real.',
     features: [
       'Finanças: fluxo de caixa, relatórios, projeções',
       'Projetos: gestão de sprints, métricas, entregas',
@@ -39,33 +45,36 @@ const services = [
       'Jurídico: contratos, compliance, NDA',
     ],
     cta: 'Ver agentes de negócio',
-    message: 'Olá!%20Quero%20conhecer%20a%20workforce%20de%20agentes%20de%20negócio%20do%20EvoNexus',
+    href: '/evonexus',
     highlights: [
-      { icon: '🧠', label: 'Agentes especializados por domínio', desc: 'Cada agente com system prompt e memória própria.' },
-      { icon: '🔄', label: 'Fallback de múltiplos modelos', desc: 'Resiliência entre providers. Sem ponto único de falha.' },
-      { icon: '📊', label: 'Gestão de tokens centralizada', desc: 'Dashboard de custo, limites e alertas por agente.' },
+      { icon: '🧠', label: 'Agentes especializados', desc: 'Cada um com memória própria' },
+      { icon: '🔄', label: 'OpenClaude', desc: '6 backends, tokens free' },
+      { icon: '📊', label: 'Dashboard', desc: 'Relatórios e métricas em tempo real' },
     ],
   },
   {
-    id: 'engineering',
+    id: 'claude-code',
     icon: '💻',
-    title: 'Workforce de Engenharia',
-    subtitle: 'Time de agentes de desenvolvimento',
+    gradient: 'from-purple-500/20 to-violet-600/20',
+    border: 'border-purple-500/30',
+    iconBg: 'bg-purple-500/20',
+    title: 'Engineering via Claude Code',
+    subtitle: 'Workforce de engenharia — 21 agentes',
     description: 'Arquitetura, code review, debugging, testes, segurança — um time de IA que codifica, revisa e entrega features sem retrabalho humano.',
     features: [
       'Arquitetura: planejamento, reviews de tech decisions',
       'Implementação: code, testes, deploy automatizado',
-      'Debug: profiling, optimização, incident response',
+      'Debug: profiling, otimização, incident response',
       'Segurança: auditoria de código, vulns, compliance',
       'Design: UX, UI, protótipos interativos',
       'DevOps: CI/CD, infra como código, monitoramento',
     ],
     cta: 'Ver agentes de engenharia',
-    message: 'Olá!%20Quero%20conhecer%20a%20workforce%20de%20agentes%20de%20engenharia',
+    href: '/claude-code',
     highlights: [
-      { icon: '🛡️', label: 'Governança multi-agente', desc: 'Consenso entre agentes antes de cada deploy.' },
-      { icon: '🔄', label: 'Fallback de múltiplos modelos', desc: 'Modelos diferentes para tasks diferentes.' },
-      { icon: '📊', label: 'Gestão de tokens por projeto', desc: 'Orçamento e consumo atrelados a cada sprint.' },
+      { icon: '🛡️', label: 'Governança multi-agente', desc: 'Consenso antes de cada deploy' },
+      { icon: '🔄', label: 'OpenClaude', desc: 'OpenRouter, OpenAI, Gemini, AWS' },
+      { icon: '📊', label: 'Tokens por sprint', desc: 'Orçamento e consumo por projeto' },
     ],
   },
 ];
@@ -74,76 +83,114 @@ export default function Services() {
   const reveal = useScrollReveal(0.15);
 
   return (
-    <section id="servicos" className="py-20 sm:py-32 bg-surface-950">
-      <div ref={reveal} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
-        <div className="text-center mb-16">
-          <span className="inline-block text-gold-500 text-sm font-bold uppercase tracking-wider mb-4">
-            Soluções
+    <section id="servicos" className="relative py-20 sm:py-32 bg-surface-950 overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-surface-950 via-surface-900 to-surface-950" />
+      
+      <div ref={reveal} className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+        {/* Header */}
+        <div className="text-center mb-20">
+          <span className="inline-block text-gold-500 text-sm font-bold uppercase tracking-wider mb-4 border border-gold-500/30 px-4 py-2 rounded-full bg-gold-500/10">
+            Ecossistema
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading text-white mb-6 leading-tight">
             Três pilares para
-            <span className="gold-text"> escalar sua operação</span>
+            <span className="gold-text block mt-2">escalar sua operação</span>
           </h2>
-          <p className="text-neutral-200 text-lg max-w-2xl mx-auto font-medium">
-            Uma workforce de IA completa — desde o primeiro contato com o cliente até deploy em produção.
+          <p className="text-neutral-300 text-lg max-w-2xl mx-auto font-medium">
+            Uma workforce de IA completa — do WhatsApp com CRM até deploy em produção.
           </p>
         </div>
 
-        <div className="space-y-20">
-          {services.map((service) => (
-            <div key={service.id} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-              <div>
-                <span className="text-4xl mb-4 block">{service.icon}</span>
-                <span className="inline-block text-neutral-300 text-sm font-bold uppercase tracking-wider mb-3">
+        {/* Services Grid */}
+        <div className="space-y-24">
+          {services.map((service, index) => (
+            <div
+              key={service.id}
+              className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start ${
+                index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+              }`}
+            >
+              {/* Content Side */}
+              <div className="order-2 lg:order-1">
+                {/* Icon with gradient background */}
+                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl ${service.iconBg} border ${service.border} mb-6`}>
+                  <span className="text-3xl">{service.icon}</span>
+                </div>
+
+                <span className="inline-block text-gold-400 text-xs font-bold uppercase tracking-wider mb-3">
                   {service.subtitle}
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-heading text-white mb-4 leading-tight">
+                
+                <h3 className="text-2xl sm:text-3xl font-heading text-white mb-4 leading-tight font-bold">
                   {service.title}
                 </h3>
-                <p className="text-neutral-200 text-base leading-relaxed mb-6 font-medium">
+                
+                <p className="text-neutral-300 text-base leading-relaxed mb-6 font-medium">
                   {service.description}
                 </p>
 
-                <ul className="space-y-2 mb-8">
-                  {service.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3 text-neutral-200 text-sm">
-                      <span className="text-gold-500 mt-0.5 flex-shrink-0">✓</span>
+                {/* Features list */}
+                <ul className="space-y-3 mb-8">
+                  {service.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-3 text-neutral-300 text-sm">
+                      <span className="text-gold-500 mt-0.5 flex-shrink-0 text-lg">✓</span>
                       {feature}
                     </li>
                   ))}
                 </ul>
 
+                {/* CTA Button */}
                 <a
-                  href={service.id === 'whatsapp' ? '/whatsapp' : service.id === 'evonexus' ? '/evonexus' : '/claude-code'}
-                  target="_self"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-600 text-surface-900 px-6 py-3 rounded-full font-bold transition-all duration-200 shadow-lg shadow-gold-500/25"
+                  href={service.href}
+                  className="inline-flex items-center gap-3 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-surface-900 px-8 py-4 rounded-full font-bold text-base transition-all duration-300 shadow-lg shadow-gold-500/25 hover:shadow-gold-500/40 hover:-translate-y-1"
                 >
                   {service.cta}
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
                 </a>
               </div>
 
-  <div className="space-y-4">
-    {service.highlights.map((hl) => (
-      <div
-        key={hl.label}
-        className="glass-strong rounded-2xl p-6 border border-gold-500/20 hover:bg-white/10 transition-all duration-200 bg-surface-900/80"
-      >
-        <div className="flex items-start gap-4">
-          <span className="text-2xl flex-shrink-0">{hl.icon}</span>
-          <div>
-            <h4 className="text-gold-400 font-bold text-base mb-1">{hl.label}</h4>
-            <p className="text-neutral-300 text-sm leading-relaxed">{hl.desc}</p>
-          </div>
-        </div>
-      </div>
-    ))}
-  </div>
+              {/* Highlights Side - Cards */}
+              <div className="order-1 lg:order-2 mb-8 lg:mb-0">
+                <div className="relative">
+                  {/* Decorative gradient blob */}
+                  <div className={`absolute -inset-4 bg-gradient-to-r ${service.gradient} rounded-3xl blur-2xl opacity-30`} />
+                  
+                  <div className="relative space-y-4">
+                    {service.highlights.map((hl, i) => (
+                      <div
+                        key={i}
+                        className={`glass-strong rounded-2xl p-6 border ${service.border} hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 group bg-surface-900/90 backdrop-blur-xl`}
+                      >
+                        <div className="flex items-start gap-4">
+                          <span className="text-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300">{hl.icon}</span>
+                          <div>
+                            <h4 className="text-gold-400 font-bold text-base mb-1">{hl.label}</h4>
+                            <p className="text-neutral-400 text-sm leading-relaxed">{hl.desc}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-24 text-center">
+          <p className="text-neutral-400 text-sm mb-6">
+            Quer ver o ecossistema completo?
+          </p>
+          <a
+            href="/hermes"
+            className="inline-flex items-center gap-2 glass-strong text-gold-400 px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:bg-white/10 border border-gold-500/30"
+          >
+            Conhecer o Hermes Agent → Framework aberto
+          </a>
         </div>
       </div>
     </section>
