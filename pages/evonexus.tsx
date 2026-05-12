@@ -28,7 +28,7 @@ export default function EvoNexusPage() {
   return (
     <>
       <Head>
-        <title>EvoNexus — Workforce de Negócio | Workflow API Studio</title>
+        <title>EvoNexus — Workforce de Negócio | Sistema Britto</title>
         <meta name="description" content="Agentes autônomos de negócio via EvoNexus. Finanças, projetos, marketing, vendas, RH, jurídico — tudo automatizado com IA." />
         <meta name="robots" content="index, follow" />
       </Head>

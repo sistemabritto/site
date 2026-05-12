@@ -4,7 +4,7 @@ import Link from 'next/link';
 const footerLinks = [
   { label: 'Política de Privacidade', href: '/politicas-de-privacidade' },
   { label: 'Termos de Uso', href: '/termos-de-uso' },
-  { label: 'Blog', href: 'https://blog.workflowapi.com.br', external: true },
+  { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
 ];
 
 export default function Footer() {
@@ -15,7 +15,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10">
-                <img src="/images/logo-loop.svg" alt="Workflow API Studio" className="w-10 h-10" />
+                <img src="/images/logo-loop.svg" alt="Sistema Britto" className="w-10 h-10" />
               </div>
               <span className="text-white font-heading font-bold text-lg">
                 Workflow<span className="gold-text">API</span>
@@ -62,8 +62,8 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2">
               <li>
-                <a href="mailto:felipe@workflowapi.com.br" className="text-sm text-neutral-200 hover:text-white font-medium transition-colors">
-                  felipe@workflowapi.com.br
+                <a href="mailto:felipe@sistemabritto.com.br" className="text-sm text-neutral-200 hover:text-white font-medium transition-colors">
+                  felipe@sistemabritto.com.br
                 </a>
               </li>
               <li>
@@ -82,7 +82,7 @@ export default function Footer() {
 
         <div className="pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-neutral-300 font-medium">
-            © {new Date().getFullYear()} Workflow API Studio. Todos os direitos reservados.
+            © {new Date().getFullYear()} Sistema Britto. Todos os direitos reservados.
           </p>
           <div className="flex items-center gap-4">
             <Link href="/politicas-de-privacidade" className="text-xs text-neutral-300 hover:text-white font-medium transition-colors">

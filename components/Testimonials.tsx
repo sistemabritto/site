@@ -61,7 +61,7 @@ export default function Testimonials() {
             <span className="gold-text"> recomenda</span>
           </h2>
           <p className="text-neutral-200 text-lg max-w-2xl mx-auto font-medium">
-            Mais de 50 negócios já automatizaram o atendimento no WhatsApp com a Workflow API.
+            Mais de 50 negócios já automatizaram o atendimento no WhatsApp com a Sistema Britto.
           </p>
         </div>
 

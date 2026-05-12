@@ -1,6 +1,6 @@
-# Workflow API Studio - Site Standalone
+# Sistema Britto - Site Standalone
 
-Site oficial da Workflow API Studio, migrado do Plasmic para Next.js puro.
+Site oficial da Sistema Britto, migrado do Plasmic para Next.js puro.
 
 ## 🚀 Deploy na Vercel
 
@@ -47,7 +47,7 @@ npm start
 ## 📁 Estrutura
 
 ```
-site-workflowapi/
+site-sistemabritto/
 ├── components/          # Componentes React
 │   ├── Hero.tsx
 │   ├── AgentCard.tsx
@@ -86,13 +86,13 @@ site-workflowapi/
 - [ ] Otimizar imagens (baixar do Plasmic CDN)
 - [ ] Adicionar analytics (GA4)
 - [ ] Manter Facebook Pixel
-- [ ] Linkar blog Ghost (blog.workflowapi.com.br)
+- [ ] Linkar blog Ghost (blog.sistemabritto.com.br)
 - [ ] Adicionar /llms.txt + robots.txt
 
 ## 📊 Links Importantes
 
-- **Produção:** https://workflowapi.com.br
-- **Blog:** https://blog.workflowapi.com.br
+- **Produção:** https://sistemabritto.com.br
+- **Blog:** https://blog.sistemabritto.com.br
 - **GitHub:** https://github.com/sistemabritto/site
 - **Vercel:** https://vercel.com/sistemabritto
 
@@ -111,7 +111,7 @@ site-workflowapi/
 
 ## 📞 Contato
 
-- Email: felipe@workflowapi.com.br
+- Email: felipe@sistemabritto.com.br
 - WhatsApp: +55 11 91408-8571
 
 ---

@@ -57,7 +57,7 @@ export default function WhatsApp() {
   return (
     <>
       <Head>
-        <title>WhatsApp Business + IA | Workflow API Studio</title>
+        <title>WhatsApp Business + IA | Sistema Britto</title>
         <meta
           name="description"
           content="Seu WhatsApp como central comercial. IA que qualifica, agenda, vende e reativa leads — 24/7, integrado ao seu CRM."

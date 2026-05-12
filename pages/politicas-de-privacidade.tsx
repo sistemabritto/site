@@ -4,15 +4,15 @@ import Link from 'next/link';
 
 /**
  * Política de Privacidade — LGPD compliant
- * workflowapi.com.br/politicas-de-privacidade
+ * sistemabritto.com.br/politicas-de-privacidade
  */
 
 export default function PoliticasDePrivacidade() {
   return (
     <>
       <Head>
-        <title>Política de Privacidade — Workflow API Studio</title>
-        <meta name="description" content="Política de Privacidade e tratamento de dados pessoais da Workflow API Studio, em conformidade com a LGPD." />
+        <title>Política de Privacidade — Sistema Britto</title>
+        <meta name="description" content="Política de Privacidade e tratamento de dados pessoais da Sistema Britto, em conformidade com a LGPD." />
         <meta name="robots" content="noindex" />
       </Head>
 
@@ -24,7 +24,7 @@ export default function PoliticasDePrivacidade() {
               <div className="flex items-center gap-3 mb-6">
                 <Image
                   src="/images/logo-white.png"
-                  alt="Workflow API Studio"
+                  alt="Sistema Britto"
                   width={36}
                   height={36}
                   className="w-9 h-9 object-contain"
@@ -50,7 +50,7 @@ export default function PoliticasDePrivacidade() {
             <section>
               <h2 className="text-white font-heading font-bold text-xl mb-4">1. Informações Gerais</h2>
               <p>
-                A <strong className="text-white">Workflow API Studio</strong> ("nós", "nosso" ou "empresa"), inscrita no CNPJ sob o número a ser definido, com sede na cidade de São Paulo - SP, é a controladora dos dados pessoais coletados através do site <strong className="text-white">workflowapi.com.br</strong> e dos serviços de automação via WhatsApp.
+                A <strong className="text-white">Sistema Britto</strong> ("nós", "nosso" ou "empresa"), inscrita no CNPJ sob o número a ser definido, com sede na cidade de São Paulo - SP, é a controladora dos dados pessoais coletados através do site <strong className="text-white">sistemabritto.com.br</strong> e dos serviços de automação via WhatsApp.
               </p>
               <p className="mt-3">
                 Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos seus dados pessoais, em conformidade com a <strong className="text-white">Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018)</strong>.
@@ -146,14 +146,14 @@ export default function PoliticasDePrivacidade() {
                 <li><strong className="text-white">Oposição:</strong> opor-se ao tratamento realizado sem seu consentimento</li>
               </ul>
               <p className="mt-3">
-                Para exercer seus direitos, entre em contato conosco através do e-mail <a href="mailto:felipe@workflowapi.com.br" className="text-primary-400 hover:text-primary-300">felipe@workflowapi.com.br</a> ou pelo WhatsApp <a href="https://wa.me/5511914088571?text=Olá!%20Gostaria%20de%20exercer%20meus%20direitos%20de%20titular%20de%20dados%20conforme%20a%20LGPD" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300">+55 11 91408-8571</a>.
+                Para exercer seus direitos, entre em contato conosco através do e-mail <a href="mailto:felipe@sistemabritto.com.br" className="text-primary-400 hover:text-primary-300">felipe@sistemabritto.com.br</a> ou pelo WhatsApp <a href="https://wa.me/5511914088571?text=Olá!%20Gostaria%20de%20exercer%20meus%20direitos%20de%20titular%20de%20dados%20conforme%20a%20LGPD" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300">+55 11 91408-8571</a>.
               </p>
             </section>
 
             <section>
               <h2 className="text-white font-heading font-bold text-xl mb-4">10. Agente de Proteção de Dados (DPO)</h2>
               <p>
-                Para questões relacionadas à proteção de dados pessoais, você pode contatar nosso Encarregado de Proteção de Dados (DPO) pelo e-mail <a href="mailto:dpo@workflowapi.com.br" className="text-primary-400 hover:text-primary-300">dpo@workflowapi.com.br</a>.
+                Para questões relacionadas à proteção de dados pessoais, você pode contatar nosso Encarregado de Proteção de Dados (DPO) pelo e-mail <a href="mailto:dpo@sistemabritto.com.br" className="text-primary-400 hover:text-primary-300">dpo@sistemabritto.com.br</a>.
               </p>
             </section>
 
@@ -170,8 +170,8 @@ export default function PoliticasDePrivacidade() {
                 Para dúvidas, solicitações ou reclamações sobre esta política ou o tratamento dos seus dados pessoais:
               </p>
               <div className="mt-4 glass-strong rounded-xl p-6 border border-white/10 space-y-2">
-                <p><strong className="text-white">Empresa:</strong> Workflow API Studio</p>
-                <p><strong className="text-white">E-mail:</strong> <a href="mailto:felipe@workflowapi.com.br" className="text-primary-400 hover:text-primary-300">felipe@workflowapi.com.br</a></p>
+                <p><strong className="text-white">Empresa:</strong> Sistema Britto</p>
+                <p><strong className="text-white">E-mail:</strong> <a href="mailto:felipe@sistemabritto.com.br" className="text-primary-400 hover:text-primary-300">felipe@sistemabritto.com.br</a></p>
                 <p><strong className="text-white">WhatsApp:</strong> <a href="https://wa.me/5511914088571?text=Olá!%20Tenho%20dúvidas%20sobre%20a%20política%20de%20privacidade" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300">+55 11 91408-8571</a></p>
                 <p><strong className="text-white">Endereço:</strong> São Paulo - SP, Brasil</p>
               </div>

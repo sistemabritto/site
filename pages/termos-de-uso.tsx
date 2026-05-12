@@ -4,15 +4,15 @@ import Link from 'next/link';
 
 /**
  * Termos de Uso — dark mode, completo
- * workflowapi.com.br/termos-de-uso
+ * sistemabritto.com.br/termos-de-uso
  */
 
 export default function TermosDeUso() {
   return (
     <>
       <Head>
-        <title>Termos de Uso — Workflow API Studio</title>
-        <meta name="description" content="Termos e condições de uso dos serviços da Workflow API Studio." />
+        <title>Termos de Uso — Sistema Britto</title>
+        <meta name="description" content="Termos e condições de uso dos serviços da Sistema Britto." />
         <meta name="robots" content="noindex" />
       </Head>
 
@@ -24,7 +24,7 @@ export default function TermosDeUso() {
               <div className="flex items-center gap-3 mb-6">
                 <Image
                   src="/images/logo-white.png"
-                  alt="Workflow API Studio"
+                  alt="Sistema Britto"
                   width={36}
                   height={36}
                   className="w-9 h-9 object-contain"
@@ -50,14 +50,14 @@ export default function TermosDeUso() {
             <section>
               <h2 className="text-white font-heading font-bold text-xl mb-4">1. Aceitação dos Termos</h2>
               <p>
-                Ao acessar o site <strong className="text-white">workflowapi.com.br</strong> e/ou utilizar os serviços oferecidos pela <strong className="text-white">Workflow API Studio</strong> ("Empresa"), você ("Usuário") concorda com estes Termos de Uso em sua integralidade. Caso não concorde com qualquer disposição, não utilize nossos serviços.
+                Ao acessar o site <strong className="text-white">sistemabritto.com.br</strong> e/ou utilizar os serviços oferecidos pela <strong className="text-white">Sistema Britto</strong> ("Empresa"), você ("Usuário") concorda com estes Termos de Uso em sua integralidade. Caso não concorde com qualquer disposição, não utilize nossos serviços.
               </p>
             </section>
 
             <section>
               <h2 className="text-white font-heading font-bold text-xl mb-4">2. Descrição dos Serviços</h2>
               <p>
-                A Workflow API Studio oferece serviços de automação e inteligência artificial aplicados ao WhatsApp Business, incluindo:
+                A Sistema Britto oferece serviços de automação e inteligência artificial aplicados ao WhatsApp Business, incluindo:
               </p>
               <ul className="list-disc pl-5 mt-3 space-y-2">
                 <li>Agentes de IA para qualificação de leads e atendimento automatizado</li>
@@ -97,7 +97,7 @@ export default function TermosDeUso() {
             <section>
               <h2 className="text-white font-heading font-bold text-xl mb-4">5. Propriedade Intelectual</h2>
               <p>
-                Todo o conteúdo do site, incluindo textos, imagens, logotipos, marcas, software, design e demais elementos, é propriedade da Workflow API Studio ou de seus licenciadores, protegido pelas leis de propriedade intelectual aplicáveis.
+                Todo o conteúdo do site, incluindo textos, imagens, logotipos, marcas, software, design e demais elementos, é propriedade da Sistema Britto ou de seus licenciadores, protegido pelas leis de propriedade intelectual aplicáveis.
               </p>
               <p className="mt-3">
                 É proibida a reprodução, distribuição, modificação ou utilização de qualquer conteúdo sem autorização prévia e expressa.
@@ -140,7 +140,7 @@ export default function TermosDeUso() {
             <section>
               <h2 className="text-white font-heading font-bold text-xl mb-4">9. Limitação de Responsabilidade</h2>
               <p>
-                A Workflow API Studio não se responsabiliza por:
+                A Sistema Britto não se responsabiliza por:
               </p>
               <ul className="list-disc pl-5 mt-3 space-y-2">
                 <li>Danos indiretos, incidentais ou consequenciais decorrentes do uso dos serviços</li>
@@ -178,8 +178,8 @@ export default function TermosDeUso() {
                 Para dúvidas sobre estes Termos de Uso:
               </p>
               <div className="mt-4 glass-strong rounded-xl p-6 border border-white/10 space-y-2">
-                <p><strong className="text-white">Empresa:</strong> Workflow API Studio</p>
-                <p><strong className="text-white">E-mail:</strong> <a href="mailto:felipe@workflowapi.com.br" className="text-primary-400 hover:text-primary-300">felipe@workflowapi.com.br</a></p>
+                <p><strong className="text-white">Empresa:</strong> Sistema Britto</p>
+                <p><strong className="text-white">E-mail:</strong> <a href="mailto:felipe@sistemabritto.com.br" className="text-primary-400 hover:text-primary-300">felipe@sistemabritto.com.br</a></p>
                 <p><strong className="text-white">WhatsApp:</strong> <a href="https://wa.me/5511914088571?text=Olá!%20Tenho%20dúvidas%20sobre%20os%20termos%20de%20uso" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300">+55 11 91408-8571</a></p>
                 <p><strong className="text-white">Endereço:</strong> São Paulo - SP, Brasil</p>
               </div>

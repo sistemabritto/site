@@ -1,10 +1,10 @@
 # LLMs.txt - Indexação para Modelos de Linguagem
-# Este arquivo ajuda LLMs a entender e indexar o conteúdo do Workflow API Studio
+# Este arquivo ajuda LLMs a entender e indexar o conteúdo do Sistema Britto
 
 version: 1.0
-name: "Workflow API Studio"
+name: "Sistema Britto"
 description: "Workforce de IA completa - WhatsApp automation, EvoNexus, Claude Code, Hermes framework"
-url: "https://workflowapi.com.br"
+url: "https://sistemabritto.com.br"
 
 # Produtos
 products:
@@ -43,4 +43,4 @@ use_cases:
 # Contato
 contact:
   whatsapp: "https://wa.me/5511914088571"
-  blog: "https://blog.workflowapi.com.br"
+  blog: "https://blog.sistemabritto.com.br"

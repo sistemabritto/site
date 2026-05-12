@@ -21,7 +21,7 @@ export default function HermesPage() {
   return (
     <>
       <Head>
-        <title>Hermes Agent — Framework Aberto de IA | Workflow API Studio</title>
+        <title>Hermes Agent — Framework Aberto de IA | Sistema Britto</title>
         <meta name="description" content="O framework de IA auto-aprendente. Multi-provider, kanban nativo, automações agendadas. Liberdade total de vendor lock-in." />
         <meta name="robots" content="index, follow" />
       </Head>

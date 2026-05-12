@@ -4,7 +4,7 @@ const navLinks = [
   { label: 'WhatsApp', href: '/whatsapp' },
   { label: 'EvoNexus', href: '/evonexus' },
   { label: 'Hermes', href: '/hermes' },
-  { label: 'Blog', href: 'https://blog.workflowapi.com.br', external: true },
+  { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
 ];
 
 export default function Navbar() {
@@ -29,7 +29,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           <a href="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 group-hover:scale-110 transition-transform duration-200">
-              <img src="/images/logo-loop.svg" alt="Workflow API Studio" className="w-10 h-10" />
+              <img src="/images/logo-loop.svg" alt="Sistema Britto" className="w-10 h-10" />
             </div>
             <span className="text-white font-heading font-bold text-lg tracking-tight">
               Workflow<span className="gold-text">API</span>

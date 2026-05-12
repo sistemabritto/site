@@ -3,7 +3,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 
 /**
  * Google Reviews Component
- * Usa Place ID da Workflow API ou fallback estático
+ * Usa Place ID da Sistema Britto ou fallback estático
  * Para ativar: NEXT_PUBLIC_GOOGLE_PLACE_ID + NEXT_PUBLIC_GOOGLE_PLACES_API_KEY
  */
 
@@ -129,7 +129,7 @@ export default function GoogleReviews() {
             <span className="gold-text"> recomenda</span>
           </h2>
           <p className="text-neutral-200 text-lg max-w-2xl mx-auto font-medium">
-            Mais de 50 negócios já automatizaram o atendimento no WhatsApp com a Workflow API.
+            Mais de 50 negócios já automatizaram o atendimento no WhatsApp com a Sistema Britto.
           </p>
         </div>
 

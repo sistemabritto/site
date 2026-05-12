@@ -69,7 +69,7 @@ export default function EngineeringPage() {
   return (
     <>
       <Head>
-        <title>Workforce de Engenharia | Workflow API Studio</title>
+        <title>Workforce de Engenharia | Sistema Britto</title>
         <meta name="description" content="Agentes de IA para desenvolvimento de software. Arquitetura, code review, debugging, testes, segurança e DevOps automatizados." />
         <meta name="robots" content="index, follow" />
       </Head>

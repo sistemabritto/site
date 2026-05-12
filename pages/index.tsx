@@ -13,32 +13,32 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Workflow API Studio — Workforce de IA para seu negócio</title>
+        <title>Sistema Britto — Workforce de IA para seu negócio</title>
         <meta name="description" content="Agentes autônomos que atendem clientes, gerenciam finanças, coordenam projetos e escrevem código. Uma workforce completa que nunca dorme." />
         <meta name="keywords" content="WhatsApp Business, automação, IA, agentes autônomos, EvoNexus, Claude Code, Hermes, CRM, evolução API" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="theme-color" content="#F59E0B" />
         
-        <meta property="og:title" content="Workflow API Studio — Workforce de IA para seu negócio" />
+        <meta property="og:title" content="Sistema Britto — Workforce de IA para seu negócio" />
         <meta property="og:description" content="Agentes autônomos que atendem clientes, gerenciam finanças, coordenam projetos e escrevem código." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://workflowapi.com.br" />
+        <meta property="og:url" content="https://sistemabritto.com.br" />
         <meta property="og:locale" content="pt_BR" />
         
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Workflow API Studio — Workforce de IA para seu negócio" />
+        <meta name="twitter:title" content="Sistema Britto — Workforce de IA para seu negócio" />
         <meta name="twitter:description" content="Agentes autônomos que atendem clientes, gerenciam finanças, coordenam projetos e escrevem código." />
         
         <link rel="icon" href="/favicon.svg" />
       <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       <link rel="apple-touch-icon" href="/favicon.svg" />
       
-      <meta property="og:image" content="https://workflowapi.com.br/og-image.svg" />
+      <meta property="og:image" content="https://sistemabritto.com.br/og-image.svg" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="Workflow API Studio — Workforce de IA" />
+      <meta property="og:image:alt" content="Sistema Britto — Workforce de IA" />
       
-      <meta name="twitter:image" content="https://workflowapi.com.br/og-image.svg" />
+      <meta name="twitter:image" content="https://sistemabritto.com.br/og-image.svg" />
         
         <script
           dangerouslySetInnerHTML={{
