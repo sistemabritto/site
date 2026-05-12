@@ -49,9 +49,9 @@ export default function Benefits() {
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading text-white mb-6 leading-tight">
             Resultados que você
-            <span className="aurora-text"> mede no WhatsApp</span>
+            <span className="gold-text"> mede no WhatsApp</span>
           </h2>
-          <p className="text-neutral-300 text-lg max-w-2xl mx-auto font-medium">
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto font-medium">
             Cada agente é configurado para sua operação. Veja o que muda no primeiro mês.
           </p>
         </div>
@@ -72,14 +72,14 @@ export default function Benefits() {
               </h3>
 
               {/* Description — alto contraste */}
-              <p className="text-neutral-300 text-sm leading-relaxed mb-4">
+              <p className="text-gray-300 text-sm leading-relaxed mb-4">
                 {b.description}
               </p>
 
               {/* Stat */}
               <div className="pt-4 border-t border-white/15">
                 <span className="text-primary-400 font-heading font-bold text-2xl">{b.stat}</span>
-                <span className="text-neutral-400 text-xs ml-2 font-medium">{b.statLabel}</span>
+                <span className="text-gray-400 text-xs ml-2 font-medium">{b.statLabel}</span>
               </div>
             </div>
           ))}

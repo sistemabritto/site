@@ -12,9 +12,9 @@ export default function Mission() {
         </span>
         <h2 className="text-3xl sm:text-4xl font-heading text-white mb-6 leading-tight">
           Democratizar o acesso à inteligência artificial para
-          <span className="aurora-text"> negócios brasileiros</span>
+          <span className="gold-text"> negócios brasileiros</span>
         </h2>
-        <p className="text-neutral-200 text-lg max-w-2xl mx-auto leading-relaxed font-medium">
+        <p className="text-gray-200 text-lg max-w-2xl mx-auto leading-relaxed font-medium">
           Acreditamos que todo negócio — do autônomo à clínica, da pizzaria ao escritório de advocacia — merece ter atendimento inteligente, rápido e disponível 24 horas. Sem complexidade, sem contrato longo, sem dor de cabeça.
         </p>
       </div>

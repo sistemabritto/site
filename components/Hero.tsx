@@ -1,9 +1,9 @@
 import React from 'react';
-import Image from 'next/image';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 /**
- * Hero Section — Dark mode, MAX CONTRAST, aurora gradient
+ * Hero Section — Dark mode, MAX CONTRAST
+ * Looping dourado animado, texto BRANCO PURO
  */
 
 export default function Hero() {
@@ -11,35 +11,34 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden aurora-bg">
-      {/* Dark overlay for deep black */}
+      {/* Dark overlay */}
       <div className="absolute inset-0 bg-surface-950/70" />
       
-      {/* Floating Orbs — mais visíveis */}
-      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary-600/30 rounded-full blur-3xl animate-[float_6s_ease-in-out_infinite]" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-600/25 rounded-full blur-3xl animate-[float_8s_ease-in-out_infinite_1s]" />
+      {/* Floating Orbs — suaves */}
+      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-gold-500/20 rounded-full blur-3xl animate-[float_6s_ease-in-out_infinite]" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gold-400/15 rounded-full blur-3xl animate-[float_8s_ease-in-out_infinite_1s]" />
 
-      {/* Content */}
       <div ref={reveal} className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 text-center reveal">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 glass-strong rounded-full px-5 py-2.5 mb-8">
+        <div className="inline-flex items-center gap-2 glass-strong rounded-full px-5 py-2.5 mb-8 border border-gold-500/30">
           <span className="flex h-2.5 w-2.5 relative">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-400" />
           </span>
-          <span className="text-white text-sm font-semibold">
+          <span className="text-white text-sm font-bold">
             IA ativa agora — 5 empresas usando em tempo real
           </span>
         </div>
 
-        {/* Headline — branco puro */}
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-heading text-white mb-6 tracking-tight leading-tight">
+        {/* Headline — BRANCO PURO */}
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-heading text-white mb-6 tracking-tight leading-tight font-bold">
           Agentes de IA que
           <br />
-          <span className="aurora-text">trabalham por você</span>
+          <span className="gold-text">trabalham por você</span>
         </h1>
 
-        {/* Subheadline — branco forte */}
-        <p className="text-lg sm:text-xl text-neutral-200 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
+        {/* Subheadline — sólido, nada de transparência */}
+        <p className="text-lg sm:text-xl text-white max-w-2xl mx-auto mb-12 leading-relaxed">
           Automações inteligentes no WhatsApp que qualificam leads, agendam, vendem e entregam — 24 horas por dia, 7 dias por semana.
         </p>
 
@@ -58,7 +57,7 @@ export default function Hero() {
           </a>
           <a
             href="#beneficios"
-            className="inline-flex items-center gap-2 glass-strong text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-200 hover:bg-white/15"
+            className="inline-flex items-center gap-2 glass-strong text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-200 hover:bg-white/15 border border-white/20"
           >
             Saiba mais
             <span className="text-sm">↓</span>
@@ -66,7 +65,7 @@ export default function Hero() {
         </div>
 
         {/* Social Proof */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-neutral-300 text-sm font-medium">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-gray-300 text-sm font-semibold">
           <div className="flex -space-x-2">
             {['🧑‍💼', '👩‍⚕️', '👨‍🍳', '👩‍💼', '🧑‍🔧'].map((emoji, i) => (
               <div
@@ -77,7 +76,7 @@ export default function Hero() {
               </div>
             ))}
           </div>
-          <span className="text-neutral-300">+50 empresas já automatizaram</span>
+          <span>+50 empresas já automatizaram</span>
         </div>
       </div>
     </section>

@@ -28,9 +28,9 @@ export default function ROICalculator() {
           </span>
           <h2 className="text-3xl sm:text-4xl font-heading text-white mb-4 leading-tight">
             Quanto você
-            <span className="aurora-text"> deixa na mesa</span> todo mês?
+            <span className="gold-text"> deixa na mesa</span> todo mês?
           </h2>
-          <p className="text-neutral-300 text-lg font-medium">
+          <p className="text-gray-300 text-lg font-medium">
             Ajuste os valores e veja o impacto real no seu negócio.
           </p>
         </div>
@@ -73,26 +73,26 @@ export default function ROICalculator() {
           {/* Results */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
             <div className="bg-surface-800 rounded-xl p-4 text-center">
-              <p className="text-neutral-400 text-xs font-semibold mb-1">Leads convertidos/mês</p>
+              <p className="text-gray-400 text-xs font-semibold mb-1">Leads convertidos/mês</p>
               <p className="text-white font-heading font-bold text-2xl">{monthlyROI.convertedLeads}</p>
             </div>
             <div className="bg-surface-800 rounded-xl p-4 text-center">
-              <p className="text-neutral-400 text-xs font-semibold mb-1">Receita estimada</p>
+              <p className="text-gray-400 text-xs font-semibold mb-1">Receita estimada</p>
               <p className="text-green-400 font-heading font-bold text-2xl">R$ {monthlyROI.monthlyRevenue.toLocaleString('pt-BR')}</p>
             </div>
             <div className="bg-surface-800 rounded-xl p-4 text-center">
-              <p className="text-neutral-400 text-xs font-semibold mb-1">Custo do agente</p>
+              <p className="text-gray-400 text-xs font-semibold mb-1">Custo do agente</p>
               <p className="text-white font-heading font-bold text-2xl">R$ {monthlyROI.agentCost}</p>
             </div>
             <div className="bg-surface-800 rounded-xl p-4 text-center">
-              <p className="text-neutral-400 text-xs font-semibold mb-1">Economia vs equipe</p>
+              <p className="text-gray-400 text-xs font-semibold mb-1">Economia vs equipe</p>
               <p className="text-primary-400 font-heading font-bold text-2xl">R$ {monthlyROI.savingsVsTeam.toLocaleString('pt-BR')}</p>
             </div>
           </div>
 
           {/* Total */}
           <div className="bg-gradient-to-r from-primary-700/30 to-accent-600/20 rounded-2xl p-6 text-center mb-8 border border-primary-500/30">
-            <p className="text-neutral-300 text-sm font-semibold mb-1">Impacto mensal estimado</p>
+            <p className="text-gray-300 text-sm font-semibold mb-1">Impacto mensal estimado</p>
             <p className="text-white font-heading font-bold text-4xl">
               +R$ {monthlyROI.net.toLocaleString('pt-BR')}
             </p>

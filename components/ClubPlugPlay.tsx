@@ -20,9 +20,9 @@ export default function ClubPlugPlay() {
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading text-white mb-6 leading-tight">
           Comece agora pelo
           <br />
-          <span className="aurora-text">Clube Plug & Play</span>
+          <span className="gold-text">Clube Plug & Play</span>
         </h2>
-        <p className="text-neutral-200 text-lg max-w-xl mx-auto mb-10 leading-relaxed font-medium">
+        <p className="text-gray-200 text-lg max-w-xl mx-auto mb-10 leading-relaxed font-medium">
           Acesso imediato às melhores ferramentas para atendimento usando inteligência artificial — inove rápido e sem limites.
         </p>
 

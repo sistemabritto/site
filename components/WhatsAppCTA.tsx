@@ -27,11 +27,11 @@ export default function WhatsAppCTA() {
             </span>
             <h2 className="text-3xl sm:text-4xl font-heading text-white mb-6 leading-tight">
               Transforme seu WhatsApp em um canal que
-              <span className="aurora-text"> vende por você</span>
+              <span className="gold-text"> vende por você</span>
             </h2>
 
             <div className="bg-gradient-to-r from-primary-900/40 to-accent-900/30 rounded-2xl p-6 border border-primary-500/30 mb-8">
-              <p className="text-neutral-200 text-base leading-relaxed font-medium">
+              <p className="text-gray-200 text-base leading-relaxed font-medium">
                 Em até <strong className="text-primary-400">1 hora</strong>, você terá seu atendimento estruturado com automações inteligentes e IA funcionando no seu WhatsApp — ao vivo com <strong className="text-primary-400">Felipe Britto</strong>, estrategista especialista em escalar negócios locais, clínicas e prestadores de serviço.
               </p>
             </div>
@@ -40,7 +40,7 @@ export default function WhatsAppCTA() {
               {features.map((f) => (
                 <li key={f.text} className="flex items-start gap-3">
                   <span className="text-lg flex-shrink-0">{f.icon}</span>
-                  <span className="text-neutral-200 text-sm leading-relaxed font-medium">{f.text}</span>
+                  <span className="text-gray-200 text-sm leading-relaxed font-medium">{f.text}</span>
                 </li>
               ))}
             </ul>
@@ -58,7 +58,7 @@ export default function WhatsAppCTA() {
             <h3 className="font-heading font-bold text-2xl text-white mb-3 text-center">
               Ative agora
             </h3>
-            <p className="text-neutral-300 text-sm mb-6 text-center font-medium">
+            <p className="text-gray-300 text-sm mb-6 text-center font-medium">
               Sessão ao vivo · Sem compromisso · Resultado na hora
             </p>
 
@@ -75,7 +75,7 @@ export default function WhatsAppCTA() {
               href="https://wa.me/5511914088571?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20automação%20do%20meu%20atendimento%20no%20WhatsApp"
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full text-center glass text-neutral-200 hover:text-white hover:bg-white/10 py-3 rounded-full font-semibold text-sm transition-all duration-200 border border-white/15"
+              className="block w-full text-center glass text-gray-200 hover:text-white hover:bg-white/10 py-3 rounded-full font-semibold text-sm transition-all duration-200 border border-white/15"
             >
               Obter Orçamento
             </a>

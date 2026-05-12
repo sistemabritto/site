@@ -36,7 +36,7 @@ export default function PoliticasDePrivacidade() {
               <h1 className="text-3xl sm:text-4xl font-heading font-bold text-white mb-2">
                 Política de Privacidade
               </h1>
-              <p className="text-neutral-400 text-sm">
+              <p className="text-gray-400 text-sm">
                 Última atualização: {new Date().toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' })}
               </p>
             </div>
@@ -45,7 +45,7 @@ export default function PoliticasDePrivacidade() {
 
         {/* Content */}
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-          <div className="prose-dark space-y-10 text-neutral-200 text-sm leading-relaxed">
+          <div className="prose-dark space-y-10 text-gray-200 text-sm leading-relaxed">
 
             <section>
               <h2 className="text-white font-heading font-bold text-xl mb-4">1. Informações Gerais</h2>

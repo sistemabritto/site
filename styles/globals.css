@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /* ============================================
-   WORKFLOW API STUDIO — Design System v3
-   DARK MODE + MAX CONTRAST
+   WORKFLOW API STUDIO — Design System v4
+   DARK MODE + MAX CONTRAST TAILWIND NATIVO
    ============================================ */
 
 /* Custom theme config */
@@ -11,21 +11,27 @@
   --color-surface-900: #111111;
   --color-surface-800: #1a1a1a;
   --color-surface-700: #262626;
-  --color-surface-600: #333333;
   
-  /* AI Purple primary - mais vibrante */
+  /* AI Purple primary */
+  --color-primary-400: #C4B5FD;
   --color-primary-500: #A78BFA;
   --color-primary-600: #8B5CF6;
   --color-primary-700: #7C3AED;
   
-  /* Teal accent - mais vibrante */
+  /* Gold accent - LOOPING DOURADO */
+  --color-gold-400: #FBBF24;
+  --color-gold-500: #F59E0B;
+  --color-gold-600: #D97706;
+  
+  /* Teal accent */
   --color-accent-400: #22D3EE;
   --color-accent-500: #06B6D4;
   --color-accent-600: #0891B2;
   
-  /* Green for success/WhatsApp */
-  --color-success-500: #22C55E;
-  --color-success-600: #16A34A;
+  /* Green for WhatsApp */
+  --color-green-400: #4ADE80;
+  --color-green-500: #22C55E;
+  --color-green-600: #16A34A;
 }
 
 /* Base styles */
@@ -33,50 +39,48 @@ body {
   font-family: 'DM Sans', system-ui, sans-serif;
   background-color: var(--color-surface-950);
   color: #ffffff;
-  line-height: 1.6;
 }
 
 /* Headings */
 .font-heading {
   font-family: 'Space Grotesk', system-ui, sans-serif;
-  font-weight: 700;
 }
 
-/* Aurora gradient background - mais escuro */
+/* Aurora gradient — mais escuro e sutil */
 .aurora-bg {
   background: linear-gradient(135deg,
     #0a0a0a 0%,
-    #0f0a1f 15%,
-    #0a0a1a 30%,
-    #0a1428 50%,
+    #0d0a1a 20%,
+    #080820 40%,
+    #0a1018 60%,
     #0a0a0a 100%
   );
 }
 
-/* Aurora text gradient - mais vibrante */
-.aurora-text {
-  background: linear-gradient(135deg, #A78BFA 0%, #22D3EE 100%);
+/* Gold text gradient — looping dourado */
+.gold-text {
+  background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 50%, #D97706 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Glassmorphism - mais contraste nas bordas */
+/* Glassmorphism — bordas mais visíveis */
 .glass {
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .glass-strong {
   background: rgba(255, 255, 255, 0.10);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.20);
 }
 
-/* CTA glow effect */
+/* CTA glow — primary */
 .cta-glow {
   box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
   transition: all 0.3s ease;
@@ -86,31 +90,22 @@ body {
   box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
 }
 
-/* Typing indicator animation */
+/* Animations */
 @keyframes typing {
   0%, 60%, 100% { transform: translateY(0); }
   30% { transform: translateY(-4px); }
 }
 
-.typing-dot {
-  animation: typing 1.4s ease-in-out infinite;
-}
+.typing-dot { animation: typing 1.4s ease-in-out infinite; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
-.typing-dot:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.typing-dot:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-/* Float animation */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
 }
 
-/* Reveal animation */
+/* Reveal */
 .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -122,48 +117,11 @@ body {
   transform: translateY(0);
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Remove tap highlight on mobile */
-* {
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Focus rings - alto contraste */
+/* Focus rings — gold */
 *:focus-visible {
-  outline: 2px solid #A78BFA;
+  outline: 2px solid #F59E0B;
   outline-offset: 2px;
 }
 
-/* Prose dark - texto legível */
-.prose-dark {
-  color: #e5e5e5;
-}
-
-.prose-dark strong {
-  color: #ffffff;
-}
-
-.prose-dark a {
-  color: #A78BFA;
-  text-decoration: underline;
-}
-
-.prose-dark a:hover {
-  color: #C4B5FD;
-}
-
-.prose-dark h2 {
-  color: #ffffff;
-}
-
-.prose-dark ul {
-  color: #d4d4d4;
-}
-
-.prose-dark li {
-  color: #d4d4d4;
-}
+html { scroll-behavior: smooth; }
+* { -webkit-tap-highlight-color: transparent; }

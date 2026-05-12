@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+
 
 /**
  * Navbar — Dark mode, high contrast, sticky
@@ -33,15 +33,11 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="flex items-center gap-3 group">
-            <Image
-              src="/images/logo-white.png"
-              alt="Workflow API Studio"
-              width={40}
-              height={40}
-              className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-200"
-            />
+            <div className="w-10 h-10 group-hover:scale-110 transition-transform duration-200">
+              <img src="/images/logo-loop.svg" alt="Workflow API Studio" className="w-10 h-10" />
+            </div>
             <span className="text-white font-heading font-bold text-lg tracking-tight">
-              Workflow<span className="text-primary-500">API</span>
+              Workflow<span className="gold-text">API</span>
             </span>
           </a>
 
