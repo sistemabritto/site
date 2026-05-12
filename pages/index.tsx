@@ -5,7 +5,7 @@ import Services from '../components/Services';
 import GoogleReviews from '../components/GoogleReviews';
 import ROICalculator from '../components/ROICalculator';
 import WhatsAppCTA from '../components/WhatsAppCTA';
-import ClubPlugPlay from '../components/ClubPlugPlay';
+import Ecossistema from '../components/Ecossistema';
 import Mission from '../components/Mission';
 import Footer from '../components/Footer';
 
@@ -56,7 +56,7 @@ fbq('track', 'PageView');
         <GoogleReviews />
         <ROICalculator />
         <WhatsAppCTA />
-        <ClubPlugPlay />
+        <Ecossistema />
         <Mission />
         <Footer />
       </main>

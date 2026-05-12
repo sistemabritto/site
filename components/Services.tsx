@@ -114,8 +114,8 @@ export default function Services() {
                 </ul>
 
                 <a
-                  href={`https://wa.me/5511914088571?text=${service.message}`}
-                  target="_blank"
+                  href={service.id === 'whatsapp' ? '/whatsapp' : service.id === 'evonexus' ? '/evonexus' : '/claude-code'}
+                  target="_self"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-600 text-surface-900 px-6 py-3 rounded-full font-bold transition-all duration-200 shadow-lg shadow-gold-500/25"
                 >
