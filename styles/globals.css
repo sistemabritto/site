@@ -19,9 +19,15 @@
   --color-primary-700: #7C3AED;
   
   /* Gold accent - LOOPING DOURADO */
-  --color-gold-400: #FBBF24;
-  --color-gold-500: #F59E0B;
-  --color-gold-600: #D97706;
+  --color-gold-400: #4ADE80;
+  --color-gold-500: #22C55E;
+  --color-gold-600: #16A34A;
+  
+  /* SB Green - Sistema Britto */
+  --color-sb-green-400: #84CC16;
+  --color-sb-green-500: #65A30D;
+  --color-sb-green-600: #4D7C0F;
+  --color-sb-silver: #94A3B8;
   
   /* Teal accent */
   --color-accent-400: #22D3EE;
@@ -57,9 +63,9 @@ body {
   );
 }
 
-/* Gold text gradient — looping dourado */
+/* Gold text gradient — looping dourado (SB Green agora) */
 .gold-text {
-  background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 50%, #D97706 100%);
+  background: linear-gradient(135deg, #84CC16 0%, #4ADE80 50%, #22C55E 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

@@ -29,9 +29,9 @@ export default function Home() {
         <meta name="twitter:title" content="Sistema Britto — Workforce de IA para seu negócio" />
         <meta name="twitter:description" content="Agentes autônomos que atendem clientes, gerenciam finanças, coordenam projetos e escrevem código." />
         
-        <link rel="icon" href="/favicon.svg" />
-      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-      <link rel="apple-touch-icon" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.png" />
+      <link rel="icon" type="image/png" href="/favicon.png" />
+      <link rel="apple-touch-icon" href="/favicon.png" />
       
       <meta property="og:image" content="https://sistemabritto.com.br/og-image.svg" />
       <meta property="og:image:width" content="1200" />
