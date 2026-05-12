@@ -61,7 +61,7 @@ export default function Navbar() {
               href="https://wa.me/5511914088571?text=Olá!%20Vi%20o%20site%20de%20vocês%20e%20gostaria%20de%20falar%20com%20um%20especialista%20em%20automação"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 cta-glow"
+              className="bg-gold-500 hover:bg-gold-600 text-surface-900 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 shadow-lg shadow-gold-500/25"
             >
               Falar com Especialista
             </a>
@@ -112,7 +112,7 @@ export default function Navbar() {
               href="https://wa.me/5511914088571?text=Olá!%20Vi%20o%20site%20de%20vocês%20e%20gostaria%20de%20falar%20com%20um%20especialista%20em%20automação"
               target="_blank"
               rel="noopener noreferrer"
-              className="block text-center bg-primary-600 text-white px-6 py-3 rounded-full font-bold mt-4 cta-glow"
+              className="block text-center bg-gold-500 text-surface-900 px-6 py-3 rounded-full font-bold mt-4 shadow-lg shadow-gold-500/25"
               onClick={() => setMobileOpen(false)}
             >
               Falar com Especialista

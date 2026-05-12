@@ -26,7 +26,7 @@ export default function Hero() {
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-400" />
           </span>
           <span className="text-white text-sm font-bold">
-            IA ativa agora — 5 empresas usando em tempo real
+            Ecossistema de Agentes Inteligentes
           </span>
         </div>
 
