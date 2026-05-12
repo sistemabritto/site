@@ -98,7 +98,7 @@ export default function HermesPage() {
                 href="https://hermes-agent.nousresearch.com/docs/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 glass-strong text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-200 hover:bg-white/15"
+                className="inline-flex items-center justify-center gap-2 bg-black/80 text-white border border-white/20 hover:border-orange-500/50 px-8 py-4 rounded-full font-bold text-lg transition-all duration-200 hover:bg-black/90"
               >
                 Documentação ↗
               </a>
@@ -122,7 +122,7 @@ export default function HermesPage() {
               {features.map((feature, i) => (
                 <div
                   key={i}
-                  className="glass-strong rounded-xl p-6 border border-orange-500/20 hover:border-orange-500/50 hover:bg-white/10 transition-all"
+                  className="bg-black/80 rounded-xl p-6 border border-orange-500/20 hover:border-orange-500/50 hover:bg-black/90 transition-all"
                 >
                   <div className="text-3xl mb-4">{feature.icon}</div>
                   <h3 className="text-white font-bold mb-2 text-lg">{feature.title}</h3>
@@ -133,8 +133,89 @@ export default function HermesPage() {
           </div>
         </section>
 
-        {/* Integrações */}
+        {/* Dashboard / Mission Control */}
         <section className="py-20 bg-surface-950">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <span className="inline-block text-orange-400 text-xs font-bold uppercase tracking-widest mb-4 border border-orange-500/30 px-4 py-2 rounded-full bg-orange-500/10">
+                Mission Control
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-heading text-white mb-6 leading-tight font-bold">
+                Kanban + Dashboard
+              </h2>
+              <p className="text-white text-lg max-w-2xl mx-auto font-medium">
+                Cada task é um agente. Cada agente tem skills, memória e histórico. 
+                Tudo visível, tudo rastreável.
+              </p>
+            </div>
+            
+            {/* Mockup de Dashboard */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+              <div className="bg-black/80 rounded-xl border border-white/20 p-4">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-white font-bold flex items-center gap-2">
+                    <span className="w-3 h-3 rounded-full bg-yellow-500"></span>
+                    In Progress
+                  </h3>
+                  <span className="text-gray-400 text-xs font-mono">3 tasks</span>
+                </div>
+                <div className="space-y-3">
+                  <div className="bg-surface-800 rounded-lg p-3 border border-white/10">
+                    <p className="text-white text-sm font-medium">Code Review: API Auth</p>
+                    <p className="text-gray-400 text-xs mt-1">Agente: CodeReview-01</p>
+                  </div>
+                  <div className="bg-surface-800 rounded-lg p-3 border border-white/10">
+                    <p className="text-white text-sm font-medium">Bug: Login OAuth</p>
+                    <p className="text-gray-400 text-xs mt-1">Agente: Debug-02</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-black/80 rounded-xl border border-green-500/30 p-4">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-white font-bold flex items-center gap-2">
+                    <span className="w-3 h-3 rounded-full bg-green-500"></span>
+                    Done
+                  </h3>
+                  <span className="text-gray-400 text-xs font-mono">12 tasks</span>
+                </div>
+                <div className="space-y-3">
+                  <div className="bg-surface-800/50 rounded-lg p-3 border border-green-500/20">
+                    <p className="text-green-400 text-sm font-medium line-through">Setup CI/CD Pipeline</p>
+                    <p className="text-gray-400 text-xs mt-1">Agente: DevOps-01</p>
+                  </div>
+                  <div className="bg-surface-800/50 rounded-lg p-3 border border-green-500/20">
+                    <p className="text-green-400 text-sm font-medium line-through">API Docs v2.0</p>
+                    <p className="text-gray-400 text-xs mt-1">Agente: Docs-01</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-black/80 rounded-xl border border-orange-500/30 p-4">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-white font-bold flex items-center gap-2">
+                    <span className="w-3 h-3 rounded-full bg-orange-500"></span>
+                    Scheduled
+                  </h3>
+                  <span className="text-gray-400 text-xs font-mono">5 tasks</span>
+                </div>
+                <div className="space-y-3">
+                  <div className="bg-surface-800 rounded-lg p-3 border border-orange-500/20">
+                    <p className="text-orange-400 text-sm font-medium">Daily Report</p>
+                    <p className="text-gray-400 text-xs mt-1">Cron: 09:00 daily</p>
+                  </div>
+                  <div className="bg-surface-800 rounded-lg p-3 border border-orange-500/20">
+                    <p className="text-orange-400 text-sm font-medium">Weekly Backup</p>
+                    <p className="text-gray-400 text-xs mt-1">Cron: Sundays 02:00</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Integrações */}
+        <section className="py-20 bg-surface-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <span className="inline-block text-orange-400 text-xs font-bold uppercase tracking-widest mb-4 border border-orange-500/30 px-4 py-2 rounded-full bg-orange-500/10">
               Stack
@@ -149,7 +230,7 @@ export default function HermesPage() {
               {integrations.map((name) => (
                 <span
                   key={name}
-                  className="glass-strong px-4 py-2 rounded-full text-gray-300 text-sm font-medium border border-white/10 hover:border-orange-500/30 transition-colors"
+                  className="bg-black/80 px-4 py-2 rounded-full text-gray-300 text-sm font-medium border border-white/10 hover:border-orange-500/30 transition-colors"
                 >
                   {name}
                 </span>
@@ -159,7 +240,7 @@ export default function HermesPage() {
         </section>
 
         {/* CTA Final */}
-        <section className="py-20 bg-surface-900">
+        <section className="py-20 bg-surface-950">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl sm:text-4xl font-heading text-white mb-6 font-bold">
               Pronto pra ter liberdade total de IA?

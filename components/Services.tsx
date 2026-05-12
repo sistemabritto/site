@@ -3,6 +3,27 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const products = [
   {
+    id: 'hermes',
+    name: 'Hermes',
+    icon: '⚡',
+    gradient: 'from-orange-500/20 to-amber-600/20',
+    border: 'border-orange-500/30',
+    badge: 'Framework Aberto',
+    title: 'Liberdade total de provider',
+    problem: 'Chega de limite de tokens da Anthropic. Chega de vendor lock-in.',
+    solution: 'Hermes: multi-provider REAL. NVIDIA, OpenAI, Anthropic, Google, Ollama — por task.',
+    features: [
+      'NVIDIA NIM, OpenAI, Anthropic, Google, Ollama — escolha por task',
+      'Kanban nativo: cada task é um agente',
+      'Auto-aprendizado: skills da experiência, melhora durante uso',
+      'Delega e paraleliza: subagents isolados via RPC',
+      'Automações agendadas: cron built-in, reports diários',
+      'Runs anywhere: local, Docker, Vercel, GPU cluster',
+    ],
+    cta: 'Ver Hermes',
+    href: '/hermes',
+  },
+  {
     id: 'whatsapp',
     name: 'WhatsApp',
     icon: '💬',
@@ -33,59 +54,14 @@ const products = [
     problem: 'Chega de trocar de ferramenta o tempo todo. Chega de dashboard que não conversa.',
     solution: 'EvoNexus + OpenClaude: 6 backends, tokens free, sem vendor lock-in.',
     features: [
-      'Finanças: fluxo de caixa, relatórios, projeções',
-      'Projetos: sprints, métricas, entregas',
-      'Comunidade: moderação, sentimento, engajamento',
-      'Marketing: calendário, SEO, campanhas',
-      'Vendas: pipeline, propostas, qualificação',
-      'Jurídico: contratos, compliance, NDA',
-      'RH: recrutamento, onboarding, desempenho',
-      'Dados: BI, SQL, dashboards',
-      '...e mais 10 departamentos especializados',
+      'Finanças, Projetos, Vendas, RH, Jurídico, Marketing',
+      'Claude Code: code review, debug, deploy multi-agente',
+      'OpenClaude: OpenRouter, OpenAI, Gemini, AWS, Vertex, Codex',
+      'Rotinas agendadas (diárias, semanais, mensais)',
+      'Dashboard web + memória persistente',
     ],
-    cta: 'Ver empresa de IA',
+    cta: 'Ver EvoNexus',
     href: '/evonexus',
-  },
-  {
-    id: 'claude-code',
-    name: 'Claude Code',
-    icon: '💻',
-    gradient: 'from-purple-500/20 to-violet-600/20',
-    border: 'border-purple-500/30',
-    badge: 'Engenharia + SaaS',
-    title: 'Engenharia de software com IA',
-    problem: 'Chega de code review humano lento. Chega de bug em produção.',
-    solution: 'Agentes que codificam, revisam, testam e fazem deploy — consenso multi-agente.',
-    features: [
-      'Arquitetura e planejamento técnico',
-      'Code review automatizado (segurança, performance)',
-      'Debug e incident response',
-      'Testes unitários, integração, E2E',
-      'DevOps: CI/CD, infra como código',
-      'SaaS sob encomenda para gargalos internos',
-    ],
-    cta: 'Ver Claude Code',
-    href: '/claude-code',
-  },
-  {
-    id: 'hermes',
-    name: 'Hermes',
-    icon: '⚡',
-    gradient: 'from-orange-500/20 to-amber-600/20',
-    border: 'border-orange-500/30',
-    badge: 'Framework Aberto',
-    title: 'Liberdade total de provider',
-    problem: 'Chega de limite de tokens da Anthropic. Chega de vendor lock-in.',
-    solution: 'Hermes: multi-provider REAL. NVIDIA, OpenAI, Anthropic, Google, Ollama — por task.',
-    features: [
-      'NVIDIA NIM, OpenAI, Anthropic, Google, Ollama — escolha por task',
-      'Kanban nativo: cada task é um agente',
-      'Skills em markdown, plugins em Python',
-      'Docker Swarm, Vercel, local — sua infra',
-      'Logs JSONL, métricas de tokens, custo por agente',
-    ],
-    cta: 'Ver Hermes',
-    href: '/hermes',
   },
 ];
 
@@ -111,7 +87,7 @@ export default function Services() {
           <p className="text-white text-lg max-w-2xl mx-auto font-medium mt-4">
             Chega de limites de tokens. Chega de vendor lock-in.
             <br />
-            <span className="text-gray-100">Escolha seu caminho ou use os 4.</span>
+            <span className="text-gray-200">Escolha seu caminho ou use os 4.</span>
           </p>
         </div>
 
@@ -124,7 +100,7 @@ export default function Services() {
               className="group relative"
             >
               {/* Card */}
-              <div className={`h-full glass-strong rounded-3xl p-8 border ${product.border} hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 bg-surface-900/90 backdrop-blur-xl`}>
+              <div className="h-full bg-black/80 rounded-3xl p-8 border border-white/15 hover:bg-black/90 hover:border-gold-500/50 transition-all duration-300 hover:-translate-y-2 shadow-2xl">
                 {/* Gradient blob */}
                 <div className={`absolute -inset-px bg-gradient-to-r ${product.gradient} rounded-3xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300`} />
                 
@@ -135,7 +111,7 @@ export default function Services() {
                     <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br ${product.gradient} border ${product.border}`}>
                       <span className="text-2xl">{product.icon}</span>
                     </div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-gold-400 border border-gold-500/30 px-3 py-1 rounded-full">
+                    <span className="text-xs font-bold uppercase tracking-wider text-gold-400 border border-gold-500/30 px-3 py-1 rounded-full bg-gold-500/10">
                       {product.badge}
                     </span>
                   </div>
@@ -146,20 +122,20 @@ export default function Services() {
                   </h3>
 
                   {/* Problem */}
-                  <p className="text-red-300 text-sm font-medium mb-3">
+                  <p className="text-red-400 text-sm font-medium mb-3">
                     {product.problem}
                   </p>
 
                   {/* Solution */}
-                  <p className="text-green-300 text-sm font-medium mb-6">
+                  <p className="text-green-400 text-sm font-medium mb-6">
                     {product.solution}
                   </p>
 
                   {/* Features */}
                   <ul className="space-y-2 mb-8">
                     {product.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2 text-white text-sm">
-                        <span className="text-gold-500 mt-0.5 flex-shrink-0">✓</span>
+                      <li key={i} className="flex items-start gap-2 text-gray-200 text-sm">
+                        <span className="text-gold-400 mt-0.5 flex-shrink-0">✓</span>
                         {feature}
                       </li>
                     ))}
@@ -180,7 +156,7 @@ export default function Services() {
 
         {/* Bottom CTA */}
         <div className="mt-16 text-center">
-          <p className="text-neutral-400 text-sm mb-6">
+          <p className="text-gray-400 text-sm mb-6">
             Não sabe por onde começar?
           </p>
           <a
