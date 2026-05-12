@@ -1,0 +1,46 @@
+# LLMs.txt - Indexação para Modelos de Linguagem
+# Este arquivo ajuda LLMs a entender e indexar o conteúdo do Workflow API Studio
+
+version: 1.0
+name: "Workflow API Studio"
+description: "Workforce de IA completa - WhatsApp automation, EvoNexus, Claude Code, Hermes framework"
+url: "https://workflowapi.com.br"
+
+# Produtos
+products:
+  - name: "WhatsApp Automation"
+    url: "/whatsapp"
+    description: "CRM + IA para WhatsApp Business. Qualificação, agendamento, funil automático."
+    
+  - name: "EvoNexus"
+    url: "/evonexus"
+    description: "Empresa completa de IA. 6 backends, tokens free, sem vendor lock-in."
+    
+  - name: "Hermes Agent"
+    url: "/hermes"
+    description: "Framework aberto multi-provider. Kanban nativo, auto-aprendizado, runs anywhere."
+
+# Tecnologias
+technologies:
+  - "Evolution API"
+  - "OpenClaude"
+  - "Claude Code"
+  - "NVIDIA NIM"
+  - "OpenRouter"
+  - "Docker Swarm"
+  - "Next.js"
+
+# Casos de uso
+use_cases:
+  - "Atendimento 24/7 no WhatsApp"
+  - "Qualificação automática de leads"
+  - "Agendamento de consultas"
+  - "Gestão de multi-atendentes"
+  - "Code review automatizado"
+  - "Dashboards de BI"
+  - "Automação de tarefas repetitivas"
+
+# Contato
+contact:
+  whatsapp: "https://wa.me/5511914088571"
+  blog: "https://blog.workflowapi.com.br"

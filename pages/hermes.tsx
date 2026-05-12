@@ -251,18 +251,18 @@ export default function HermesPage() {
                             <span className="text-xs text-gray-400">T_948828E8</span>
                             <span className="bg-orange-500/20 text-orange-400 text-xs px-1.5 py-0.5 rounded">P1</span>
                           </div>
-                          <p className="text-white text-xs font-medium leading-relaxed">REBUILD SITE WORKFLOWAPI.COM.BR NA VERCEL (SAIR DO PLASMIC)</p>
-                          <p className="text-orange-400 text-xs mt-1">@EXCARPLEX ~1</p>
-                          <p className="text-gray-500 text-xs mt-1">3D AGO</p>
+                          <p className="text-white text-xs font-medium leading-relaxed">IMPLEMENTAR AUTO-DEPLOY NO SERVIDOR PRODUÇÃO</p>
+                          <p className="text-orange-400 text-xs mt-1">@DEVOPS ~2</p>
+                          <p className="text-gray-500 text-xs mt-1">2D AGO</p>
                         </div>
                         <div className="bg-gray-800/80 rounded p-3 border border-orange-500/30">
                           <div className="flex items-center gap-2 mb-1">
                             <span className="text-xs text-gray-400">T_83858933</span>
                             <span className="bg-orange-500/20 text-orange-400 text-xs px-1.5 py-0.5 rounded">P1</span>
                           </div>
-                          <p className="text-white text-xs font-medium leading-relaxed">SEO PARA LLMS — /LLMS.TXT, ROBOTS.TXT, STRUCTURED DATA NO SITE</p>
-                          <p className="text-orange-400 text-xs mt-1">@EXCARPLEX ~1</p>
-                          <p className="text-gray-500 text-xs mt-1">3D AGO</p>
+                          <p className="text-white text-xs font-medium leading-relaxed">CRIAR RELATÓRIO DE FATURAMENTO MENSAL AUTOMATIZADO</p>
+                          <p className="text-orange-400 text-xs mt-1">@FINANCEIRO ~1</p>
+                          <p className="text-gray-500 text-xs mt-1">1D AGO</p>
                         </div>
                       </div>
                     </div>

@@ -74,17 +74,17 @@ export default function WhatsApp() {
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            {/* Badge Evolution API */}
-            <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-2 mb-6">
-              <img 
-                src="/images/evo/evolution-logo-white.svg" 
-                alt="Evolution API" 
-                className="w-6 h-6 invert"
-              />
-              <span className="text-green-400 text-xs font-bold uppercase tracking-wider">
-                Powered by Evolution API
-              </span>
-            </div>
+  {/* Badge Evolution API */}
+  <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-2 mb-6">
+    <img 
+      src="/images/evo/evolution-api-logo-green.svg" 
+      alt="Evolution API" 
+      className="w-8 h-8"
+    />
+    <span className="text-green-400 text-xs font-bold uppercase tracking-wider">
+      Powered by Evolution API
+    </span>
+  </div>
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading text-white font-bold mb-6 leading-tight">
               Seu WhatsApp como

@@ -1,0 +1,25 @@
+# robots.txt - Otimizado para LLMs e buscadores
+User-agent: *
+Allow: /
+
+# Permitir indexação de todas as páginas
+Allow: /whatsapp
+Allow: /evonexus
+Allow: /hermes
+Allow: /engineering
+
+# Arquivos importantes para LLMs
+Allow: /llms.txt
+Allow: /robots.txt
+
+# Bloquear apenas arquivos de sistema
+Disallow: /_next/
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /*.map$
+
+# Sitemap
+Sitemap: https://workflowapi.com.br/sitemap.xml
+
+# Crawl-delay para não sobrecarregar
+Crawl-delay: 1
