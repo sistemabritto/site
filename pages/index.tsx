@@ -29,7 +29,7 @@ export default function Home() {
         <meta name="twitter:title" content="Sistema Britto — Workforce de IA para seu negócio" />
         <meta name="twitter:description" content="Agentes autônomos que atendem clientes, gerenciam finanças, coordenam projetos e escrevem código." />
         
-        <link rel="icon" href="/favicon.png" />
+      <link rel="icon" href="/favicon.png" />
       <link rel="icon" type="image/png" href="/favicon.png" />
       <link rel="apple-touch-icon" href="/favicon.png" />
       

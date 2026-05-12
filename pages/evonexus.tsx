@@ -43,6 +43,15 @@ export default function EvoNexusPage() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/10 rounded-full blur-3xl" />
           
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Logo EVO_NEXUS */}
+            <div className="flex justify-center mb-8">
+              <img 
+                src="/images/evo-nexus-logo.webp" 
+                alt="EvoNexus" 
+                className="h-20 sm:h-24 md:h-28 w-auto drop-shadow-lg"
+              />
+            </div>
+            
             <span className="inline-block text-blue-400 text-sm font-bold uppercase tracking-wider mb-4 border border-blue-500/30 px-4 py-2 rounded-full bg-blue-500/10">
               EvoNexus Business Layer
             </span>
@@ -117,6 +126,32 @@ export default function EvoNexusPage() {
                 <h3 className="text-white font-bold mb-2 text-xl">-60% custo operacional</h3>
                 <p className="text-gray-200 text-sm">Automação de tarefas repetitivas em todos os departamentos.</p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Dashboard Screenshot */}
+        <section className="py-20 bg-surface-950">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <span className="inline-block text-blue-400 text-xs font-bold uppercase tracking-widest mb-4 border border-blue-500/30 px-4 py-2 rounded-full bg-blue-500/10">
+                Dashboard
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-heading text-white mb-6 leading-tight font-bold">
+                Visão geral do seu negócio
+              </h2>
+              <p className="text-gray-200 text-lg max-w-2xl mx-auto font-medium">
+                Acompanhe todos os agentes, tarefas e resultados em um só lugar.
+              </p>
+            </div>
+            
+            <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-transparent to-transparent z-10 pointer-events-none" />
+              <img 
+                src="/images/nexus-dashboard.jpg" 
+                alt="EvoNexus Dashboard" 
+                className="w-full h-auto"
+              />
             </div>
           </div>
         </section>
