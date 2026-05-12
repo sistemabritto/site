@@ -126,22 +126,22 @@ export default function Services() {
                 </a>
               </div>
 
-              <div className="space-y-4">
-                {service.highlights.map((hl) => (
-                  <div
-                    key={hl.label}
-                    className="glass-strong rounded-2xl p-6 border border-gold-500/20 hover:bg-white/10 transition-all duration-200"
-                  >
-                    <div className="flex items-start gap-4">
-                      <span className="text-2xl flex-shrink-0">{hl.icon}</span>
-                      <div>
-                        <h4 className="text-white font-bold text-base mb-1">{hl.label}</h4>
-                        <p className="text-neutral-200 text-sm leading-relaxed">{hl.desc}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+  <div className="space-y-4">
+    {service.highlights.map((hl) => (
+      <div
+        key={hl.label}
+        className="glass-strong rounded-2xl p-6 border border-gold-500/20 hover:bg-white/10 transition-all duration-200 bg-surface-900/80"
+      >
+        <div className="flex items-start gap-4">
+          <span className="text-2xl flex-shrink-0">{hl.icon}</span>
+          <div>
+            <h4 className="text-gold-400 font-bold text-base mb-1">{hl.label}</h4>
+            <p className="text-neutral-300 text-sm leading-relaxed">{hl.desc}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
             </div>
           ))}
         </div>
