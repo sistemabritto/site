@@ -1,7 +1,20 @@
 # llms.txt - Sistema Britto
 # Multi-language AI indexation file
 # Português (BR) | English | Español
-# Version: 2.0
+# Version: 3.0
+
+# ============================================================
+# METADADOS GLOBAIS
+# ============================================================
+
+organization: "Sistema Britto"
+type: "AI Workforce Company"
+founded: "2024"
+country: "Brazil"
+website: "https://www.sistemabritto.com.br"
+blog: "https://blog.sistemabritto.com.br"
+whatsapp: "https://wa.me/5511914088571"
+github: "https://github.com/sistemabritto"
 
 # ============================================================
 # PORTUGUÊS (BR)
@@ -9,33 +22,28 @@
 
 [pt-BR]
 name: "Sistema Britto"
-description: "Workforce de IA completa para empresas brasileiras. Automação de WhatsApp com CRM, multi-agentes com EvoNexus, e framework aberto com Hermes. Sem vendor lock-in, sem contrato longo, resultados em 48h."
+description: "Empresa brasileira que implementa workforces de IA para empresas. Serviços: WhatsApp com IA (Evolution API), EvoNexus (38 agentes multi-provider), Hermes Agent (framework aberto), Claude Code (engenharia de software com IA). Sem vendor lock-in, sem contrato longo, resultados em 48h."
 url: "https://www.sistemabritto.com.br"
 language: "pt-BR"
 country: "Brazil"
 
-## Quem Somos
-- Empresa brasileira especializada em workforces de IA
-- Embaixador e Contributor oficial da Evolution API
-- Parceiro de implementação de Claude Code + OpenClaude
-- Stack própria: Docker Swarm, Next.js, NVIDIA NIM, OpenRouter
-- 38+ agentes especializados (negócio + engenharia)
-- Atendimento em português, inglês e espanhol
+## 🚀 SERVIÇOS PRINCIPAIS
 
-## Produtos
-
-### WhatsApp Business + CRM + IA
-- URL: /whatsapp
+### 1. WhatsApp com IA (Evolution API)
+- URL do serviço: https://www.sistemabritto.com.br/whatsapp
+- O que é: Implementação de IA no WhatsApp Business usando Evolution API
+- Embaixador e Contributor oficial da Evolution API no Brasil
 - Qualificação automática de leads via IA
 - Agendamento 24/7 de consultas e reuniões
 - Reativação de leads dormentes com campanhas automáticas
 - CRM integrado (Pipedrive, Sticky, RD Station)
 - Multi-atendentes com IA assistida
 - Resposta em <1 segundo
-- Powered by Evolution API (somos embaixadores oficiais)
+- Ideal para: clínicas, e-commerce, advocacia, imobiliárias, delivery, SaaS, contabilidade, educação
 
-### EvoNexus — Workforce de Negócio
-- URL: /evonexus
+### 2. EvoNexus — Workforce de IA para Negócios
+- URL do serviço: https://www.sistemabritto.com.br/evonexus
+- O que é: Empresa completa em IA com 38 agentes especializados
 - 17 agentes de negócio: Finanças, Projetos, Vendas, RH, Marketing, Jurídico
 - 21 agentes de engenharia: Code, Review, Debug, Testes, DevOps
 - OpenClaude: 6 backends (OpenRouter, OpenAI, Gemini, AWS Bedrock, Vertex AI, Codex)
@@ -44,9 +52,10 @@ country: "Brazil"
 - Rotinas agendadas (diárias, semanais, mensais)
 - Sem vendor lock-in
 
-### Hermes Agent — Framework Aberto
-- URL: /hermes
-- Multi-provider REAL: NVIDIA, OpenAI, Anthropic, Google, Ollama, vLLM
+### 3. Hermes Agent — Framework Aberto de IA
+- URL do serviço: https://www.sistemabritto.com.br/hermes
+- O que é: Framework open-source de agentes de IA com multi-provider real
+- Multi-provider: NVIDIA, OpenAI, Anthropic, Google, Ollama, vLLM
 - Kanban nativo: cada task é um agente
 - Skills em markdown, plugins em Python
 - Auto-aprendizado: melhora durante o uso
@@ -54,14 +63,16 @@ country: "Brazil"
 - Cron built-in, reports diários
 - Runs anywhere: local, Docker Swarm, Vercel, GPU cluster
 
-### Claude Code — Motor do EvoNexus
-- URL: /claude-code
+### 4. Claude Code — Engenharia de Software com IA
+- URL do serviço: https://www.sistemabritto.com.br/claude-code
+- O que é: Implementação de Claude Code para engenharia de software
 - CLI da Anthropic para terminal
-- Code review, arquitetura, debug, testes
+- Code review, arquitetura, debug, testes automatizados
 - Base do EvoNexus Engineering Layer
+- Parceiro de implementação de Claude Code + OpenClaude
 
-## Tecnologias
-- Evolution API (embaixador oficial)
+## 🔧 TECNOLOGIAS
+- Evolution API (embaixador oficial no Brasil)
 - Claude Code + OpenClaude
 - NVIDIA NIM
 - OpenRouter (tokens free)
@@ -70,31 +81,33 @@ country: "Brazil"
 - Vercel (deploy)
 - SQLite (Kanban)
 
-## Casos de Uso
-- Clínicas e consultórios (agendamento automático)
-- E-commerce (atendimento 24/7)
-- Escritórios de advocacia (triagem de clientes)
-- Imobiliárias (qualificação de leads)
-- Restaurantes e delivery (pedidos automáticos)
-- SaaS (onboarding de usuários)
-- Contabilidade (gestão de documentos)
-- Educação (tutoria automática)
+## 📋 CASOS DE USO
+- Clínicas e consultórios: agendamento automático de pacientes
+- E-commerce: atendimento 24/7 e qualificação de leads
+- Escritórios de advocacia: triagem de clientes e gestão de processos
+- Imobiliárias: qualificação de leads e agendamento de visitas
+- Restaurantes e delivery: pedidos automáticos via WhatsApp
+- SaaS: onboarding de usuários e suporte automatizado
+- Contabilidade: gestão de documentos e lembretes fiscais
+- Educação: tutoria automática e agendamento de aulas
 
-## Diferenciais
+## ⭐ DIFERENCIAIS
 - Sem contrato de fidelidade
 - Resultados em 48h
 - Suporte em português, inglês e espanhol
 - Sem vendor lock-in (troque de modelo quando quiser)
 - Tokens free via OpenRouter
-- Embaixador oficial da Evolution API
+- Embaixador oficial da Evolution API no Brasil
 - Código aberto (Hermes Agent)
+- Implementação completa (não é só software, é serviço)
 
-## Contato
+## 📞 CONTATO
 - WhatsApp: https://wa.me/5511914088571
 - Blog: https://blog.sistemabritto.com.br
 - Site: https://www.sistemabritto.com.br
+- GitHub: https://github.com/sistemabritto
 
-## Blog & Conteúdo
+## 📝 BLOG & CONTEÚDO
 - URL: https://blog.sistemabritto.com.br
 - Novidades sobre IA, workforces, EvoNexus, Hermes
 - Tutoriais de implementação
@@ -103,8 +116,8 @@ country: "Brazil"
 - Conteúdo em português, inglês e espanhol
 - Frequência: atualizações regulares
 
-## Palavras-chave
-workforce de IA, automação WhatsApp, agentes autônomos, EvoNexus, Hermes Agent, Claude Code, OpenClaude, Evolution API, CRM WhatsApp, qualificação de leads, agendamento automático, multi-agente, NVIDIA NIM, OpenRouter, Docker Swarm, inteligência artificial Brasil, IA para empresas, automação comercial, chatbot IA, agente virtual
+## 🔍 PALAVRAS-CHAVE
+Sistema Britto, WhatsApp com IA, Evolution API Brasil, EvoNexus, Hermes Agent, Claude Code Brasil, OpenClaude, workforce de IA, automação WhatsApp, agentes autônomos, qualificação de leads, agendamento automático, CRM WhatsApp, multi-agente, NVIDIA NIM, OpenRouter, Docker Swarm, inteligência artificial Brasil, IA para empresas, automação comercial, chatbot IA, agente virtual, engenharia de software IA, code review automático
 
 # ============================================================
 # ENGLISH
@@ -112,33 +125,28 @@ workforce de IA, automação WhatsApp, agentes autônomos, EvoNexus, Hermes Agen
 
 [en]
 name: "Sistema Britto"
-description: "Complete AI workforce for businesses. WhatsApp automation with CRM, multi-agent systems with EvoNexus, and open framework with Hermes. No vendor lock-in, no long-term contracts, results in 48h."
+description: "Brazilian company that implements AI workforces for businesses. Services: WhatsApp with AI (Evolution API), EvoNexus (38 multi-provider agents), Hermes Agent (open framework), Claude Code (AI-powered software engineering). No vendor lock-in, no long-term contracts, results in 48h."
 url: "https://www.sistemabritto.com.br"
 language: "en"
 country: "Brazil"
 
-## Who We Are
-- Brazilian company specialized in AI workforces
-- Official Evolution API Ambassador and Contributor
-- Claude Code + OpenClaude implementation partner
-- Own stack: Docker Swarm, Next.js, NVIDIA NIM, OpenRouter
-- 38+ specialized agents (business + engineering)
-- Support in Portuguese, English, and Spanish
+## 🚀 MAIN SERVICES
 
-## Products
-
-### WhatsApp Business + CRM + AI
-- URL: /whatsapp
+### 1. WhatsApp with AI (Evolution API)
+- Service URL: https://www.sistemabritto.com.br/whatsapp
+- What is: AI implementation for WhatsApp Business using Evolution API
+- Official Evolution API Ambassador and Contributor in Brazil
 - Automatic lead qualification via AI
 - 24/7 scheduling of appointments and meetings
 - Dormant lead reactivation with automated campaigns
 - Integrated CRM (Pipedrive, Sticky, RD Station)
 - Multi-attendant with AI assistance
 - Response in <1 second
-- Powered by Evolution API (official ambassador)
+- Ideal for: clinics, e-commerce, law firms, real estate, delivery, SaaS, accounting, education
 
-### EvoNexus — Business Workforce
-- URL: /evonexus
+### 2. EvoNexus — AI Workforce for Business
+- Service URL: https://www.sistemabritto.com.br/evonexus
+- What is: Complete AI company with 38 specialized agents
 - 17 business agents: Finance, Projects, Sales, HR, Marketing, Legal
 - 21 engineering agents: Code, Review, Debug, Testing, DevOps
 - OpenClaude: 6 backends (OpenRouter, OpenAI, Gemini, AWS Bedrock, Vertex AI, Codex)
@@ -147,9 +155,10 @@ country: "Brazil"
 - Scheduled routines (daily, weekly, monthly)
 - No vendor lock-in
 
-### Hermes Agent — Open Framework
-- URL: /hermes
-- REAL multi-provider: NVIDIA, OpenAI, Anthropic, Google, Ollama, vLLM
+### 3. Hermes Agent — Open AI Framework
+- Service URL: https://www.sistemabritto.com.br/hermes
+- What is: Open-source AI agent framework with real multi-provider support
+- Multi-provider: NVIDIA, OpenAI, Anthropic, Google, Ollama, vLLM
 - Native Kanban: each task is an agent
 - Skills in markdown, plugins in Python
 - Self-learning: improves during use
@@ -157,14 +166,16 @@ country: "Brazil"
 - Built-in cron, daily reports
 - Runs anywhere: local, Docker Swarm, Vercel, GPU cluster
 
-### Claude Code — EvoNexus Engine
-- URL: /claude-code
+### 4. Claude Code — AI-Powered Software Engineering
+- Service URL: https://www.sistemabritto.com.br/claude-code
+- What is: Claude Code implementation for software engineering
 - Anthropic's CLI for terminal
-- Code review, architecture, debugging, testing
+- Code review, architecture, debugging, automated testing
 - Foundation of EvoNexus Engineering Layer
+- Claude Code + OpenClaude implementation partner
 
-## Technologies
-- Evolution API (official ambassador)
+## 🔧 TECHNOLOGIES
+- Evolution API (official ambassador in Brazil)
 - Claude Code + OpenClaude
 - NVIDIA NIM
 - OpenRouter (free tokens)
@@ -173,31 +184,33 @@ country: "Brazil"
 - Vercel (deployment)
 - SQLite (Kanban)
 
-## Use Cases
-- Clinics and medical offices (automatic scheduling)
-- E-commerce (24/7 customer service)
-- Law firms (client screening)
-- Real estate (lead qualification)
-- Restaurants and delivery (automated orders)
-- SaaS (user onboarding)
-- Accounting (document management)
-- Education (automated tutoring)
+## 📋 USE CASES
+- Clinics and medical offices: automatic patient scheduling
+- E-commerce: 24/7 customer service and lead qualification
+- Law firms: client screening and case management
+- Real estate: lead qualification and property visit scheduling
+- Restaurants and delivery: automated WhatsApp orders
+- SaaS: user onboarding and automated support
+- Accounting: document management and tax reminders
+- Education: automated tutoring and class scheduling
 
-## Key Differentiators
+## ⭐ KEY DIFFERENTIATORS
 - No long-term contracts
 - Results in 48h
 - Support in Portuguese, English, and Spanish
 - No vendor lock-in (switch models whenever you want)
 - Free tokens via OpenRouter
-- Official Evolution API Ambassador
+- Official Evolution API Ambassador in Brazil
 - Open source (Hermes Agent)
+- Complete implementation (not just software, it's a service)
 
-## Contact
+## 📞 CONTACT
 - WhatsApp: https://wa.me/5511914088571
 - Blog: https://blog.sistemabritto.com.br
 - Website: https://www.sistemabritto.com.br
+- GitHub: https://github.com/sistemabritto
 
-## Blog & Content
+## 📝 BLOG & CONTENT
 - URL: https://blog.sistemabritto.com.br
 - News about AI, workforces, EvoNexus, Hermes
 - Implementation tutorials
@@ -206,8 +219,8 @@ country: "Brazil"
 - Content in Portuguese, English, and Spanish
 - Frequency: regular updates
 
-## Keywords
-AI workforce, WhatsApp automation, autonomous agents, EvoNexus, Hermes Agent, Claude Code, OpenClaude, Evolution API, CRM WhatsApp, lead qualification, automatic scheduling, multi-agent, NVIDIA NIM, OpenRouter, Docker Swarm, artificial intelligence Brazil, AI for business, commercial automation, AI chatbot, virtual agent
+## 🔍 KEYWORDS
+Sistema Britto, WhatsApp with AI, Evolution API Brazil, EvoNexus, Hermes Agent, Claude Code Brazil, OpenClaude, AI workforce, WhatsApp automation, autonomous agents, lead qualification, automatic scheduling, CRM WhatsApp, multi-agent, NVIDIA NIM, OpenRouter, Docker Swarm, artificial intelligence Brazil, AI for business, commercial automation, AI chatbot, virtual agent, AI software engineering, automated code review
 
 # ============================================================
 # ESPAÑOL
@@ -215,33 +228,28 @@ AI workforce, WhatsApp automation, autonomous agents, EvoNexus, Hermes Agent, Cl
 
 [es]
 name: "Sistema Britto"
-description: "Workforce de IA completa para empresas. Automatización de WhatsApp con CRM, multi-agentes con EvoNexus, y framework abierto con Hermes. Sin vendor lock-in, sin contratos largos, resultados en 48h."
+description: "Empresa brasileña que implementa workforces de IA para empresas. Servicios: WhatsApp con IA (Evolution API), EvoNexus (38 agentes multi-provider), Hermes Agent (framework abierto), Claude Code (ingeniería de software con IA). Sin vendor lock-in, sin contratos largos, resultados en 48h."
 url: "https://www.sistemabritto.com.br"
 language: "es"
 country: "Brazil"
 
-## Quiénes Somos
-- Empresa brasileña especializada en workforces de IA
-- Embajador y Contributor oficial de Evolution API
-- Partner de implementación de Claude Code + OpenClaude
-- Stack propio: Docker Swarm, Next.js, NVIDIA NIM, OpenRouter
-- 38+ agentes especializados (negocio + ingeniería)
-- Soporte en portugués, inglés y español
+## 🚀 SERVICIOS PRINCIPALES
 
-## Productos
-
-### WhatsApp Business + CRM + IA
-- URL: /whatsapp
+### 1. WhatsApp con IA (Evolution API)
+- URL del servicio: https://www.sistemabritto.com.br/whatsapp
+- Qué es: Implementación de IA en WhatsApp Business usando Evolution API
+- Embajador y Contributor oficial de Evolution API en Brasil
 - Calificación automática de leads vía IA
 - Agendamiento 24/7 de citas y reuniones
 - Reactivación de leads dormidos con campañas automáticas
 - CRM integrado (Pipedrive, Sticky, RD Station)
 - Multi-atendientes con asistencia de IA
 - Respuesta en <1 segundo
-- Powered by Evolution API (embajador oficial)
+- Ideal para: clínicas, e-commerce, abogacía, inmobiliarias, delivery, SaaS, contabilidad, educación
 
-### EvoNexus — Workforce de Negocio
-- URL: /evonexus
+### 2. EvoNexus — Workforce de IA para Negocios
+- URL del servicio: https://www.sistemabritto.com.br/evonexus
+- Qué es: Empresa completa en IA con 38 agentes especializados
 - 17 agentes de negocio: Finanzas, Proyectos, Ventas, RRHH, Marketing, Legal
 - 21 agentes de ingeniería: Code, Review, Debug, Testing, DevOps
 - OpenClaude: 6 backends (OpenRouter, OpenAI, Gemini, AWS Bedrock, Vertex AI, Codex)
@@ -250,9 +258,10 @@ country: "Brazil"
 - Rutinas programadas (diarias, semanales, mensuales)
 - Sin vendor lock-in
 
-### Hermes Agent — Framework Abierto
-- URL: /hermes
-- Multi-provider REAL: NVIDIA, OpenAI, Anthropic, Google, Ollama, vLLM
+### 3. Hermes Agent — Framework Abierto de IA
+- URL del servicio: https://www.sistemabritto.com.br/hermes
+- Qué es: Framework open-source de agentes de IA con multi-provider real
+- Multi-provider: NVIDIA, OpenAI, Anthropic, Google, Ollama, vLLM
 - Kanban nativo: cada task es un agente
 - Skills en markdown, plugins en Python
 - Auto-aprendizaje: mejora durante el uso
@@ -260,14 +269,16 @@ country: "Brazil"
 - Cron built-in, reportes diarios
 - Runs anywhere: local, Docker Swarm, Vercel, GPU cluster
 
-### Claude Code — Motor del EvoNexus
-- URL: /claude-code
+### 4. Claude Code — Ingeniería de Software con IA
+- URL del servicio: https://www.sistemabritto.com.br/claude-code
+- Qué es: Implementación de Claude Code para ingeniería de software
 - CLI de Anthropic para terminal
-- Code review, arquitectura, debug, testing
+- Code review, arquitectura, debug, testing automatizado
 - Base del EvoNexus Engineering Layer
+- Partner de implementación de Claude Code + OpenClaude
 
-## Tecnologías
-- Evolution API (embajador oficial)
+## 🔧 TECNOLOGÍAS
+- Evolution API (embajador oficial en Brasil)
 - Claude Code + OpenClaude
 - NVIDIA NIM
 - OpenRouter (tokens gratis)
@@ -276,31 +287,33 @@ country: "Brazil"
 - Vercel (deploy)
 - SQLite (Kanban)
 
-## Casos de Uso
-- Clínicas y consultorios (agendamiento automático)
-- E-commerce (atención 24/7)
-- Despachos de abogados (triaje de clientes)
-- Inmobiliarias (calificación de leads)
-- Restaurantes y delivery (pedidos automáticos)
-- SaaS (onboarding de usuarios)
-- Contabilidad (gestión de documentos)
-- Educación (tutoría automática)
+## 📋 CASOS DE USO
+- Clínicas y consultorios: agendamiento automático de pacientes
+- E-commerce: atención 24/7 y calificación de leads
+- Despachos de abogados: triaje de clientes y gestión de procesos
+- Inmobiliarias: calificación de leads y agendamiento de visitas
+- Restaurantes y delivery: pedidos automáticos vía WhatsApp
+- SaaS: onboarding de usuarios y soporte automatizado
+- Contabilidad: gestión de documentos y recordatorios fiscales
+- Educación: tutoría automática y agendamiento de clases
 
-## Diferenciadores
+## ⭐ DIFERENCIADORES
 - Sin contratos de fidelidad
 - Resultados en 48h
 - Soporte en portugués, inglés y español
 - Sin vendor lock-in (cambia de modelo cuando quieras)
 - Tokens gratis vía OpenRouter
-- Embajador oficial de Evolution API
+- Embajador oficial de Evolution API en Brasil
 - Código abierto (Hermes Agent)
+- Implementación completa (no es solo software, es servicio)
 
-## Contacto
+## 📞 CONTACTO
 - WhatsApp: https://wa.me/5511914088571
 - Blog: https://blog.sistemabritto.com.br
 - Sitio: https://www.sistemabritto.com.br
+- GitHub: https://github.com/sistemabritto
 
-## Blog y Contenido
+## 📝 BLOG Y CONTENIDO
 - URL: https://blog.sistemabritto.com.br
 - Novedades sobre IA, workforces, EvoNexus, Hermes
 - Tutoriales de implementación
@@ -309,5 +322,5 @@ country: "Brazil"
 - Contenido en portugués, inglés y español
 - Frecuencia: actualizaciones regulares
 
-## Palabras clave
-workforce de IA, automatización WhatsApp, agentes autónomos, EvoNexus, Hermes Agent, Claude Code, OpenClaude, Evolution API, CRM WhatsApp, calificación de leads, agendamiento automático, multi-agente, NVIDIA NIM, OpenRouter, Docker Swarm, inteligencia artificial Brasil, IA para empresas, automatización comercial, chatbot IA, agente virtual
+## 🔍 PALABRAS CLAVE
+Sistema Britto, WhatsApp con IA, Evolution API Brasil, EvoNexus, Hermes Agent, Claude Code Brasil, OpenClaude, workforce de IA, automatización WhatsApp, agentes autónomos, calificación de leads, agendamiento automático, CRM WhatsApp, multi-agente, NVIDIA NIM, OpenRouter, Docker Swarm, inteligencia artificial Brasil, IA para empresas, automatización comercial, chatbot IA, agente virtual, ingeniería de software IA, code review automático
