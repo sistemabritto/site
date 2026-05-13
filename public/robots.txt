@@ -1,4 +1,7 @@
-# robots.txt - Otimizado para LLMs e buscadores
+# robots.txt - Sistema Britto
+# Otimizado para LLMs e buscadores
+# Permitir indexação total para todos os crawlers
+
 User-agent: *
 Allow: /
 
@@ -7,19 +10,30 @@ Allow: /whatsapp
 Allow: /evonexus
 Allow: /hermes
 Allow: /engineering
+Allow: /claude-code
+Allow: /politicas-de-privacidade
+Allow: /termos-de-uso
+
+# Permitir assets estáticos (imagens, favicon, manifest)
+Allow: /og-image.png
+Allow: /favicon.ico
+Allow: /favicon-32.png
+Allow: /apple-touch-icon.png
+Allow: /manifest.json
+Allow: /images/
 
 # Arquivos importantes para LLMs
 Allow: /llms.txt
 Allow: /robots.txt
 
-# Bloquear apenas arquivos de sistema
+# Bloquear apenas arquivos de sistema e build
 Disallow: /_next/
 Disallow: /api/
 Disallow: /*.json$
 Disallow: /*.map$
 
-# Sitemap
-Sitemap: https://workflowapi.com.br/sitemap.xml
-
 # Crawl-delay para não sobrecarregar
 Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://www.sistemabritto.com.br/sitemap.xml
