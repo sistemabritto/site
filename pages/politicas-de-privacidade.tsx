@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Meta from '../components/Meta';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -10,11 +10,11 @@ import Link from 'next/link';
 export default function PoliticasDePrivacidade() {
   return (
     <>
-      <Head>
-        <title>Política de Privacidade — Sistema Britto</title>
-        <meta name="description" content="Política de Privacidade e tratamento de dados pessoais da Sistema Britto, em conformidade com a LGPD." />
-        <meta name="robots" content="noindex" />
-      </Head>
+<Meta 
+        title="Política de Privacidade | Sistema Britto"
+        description="Política de privacidade e tratamento de dados pessoais conforme LGPD."
+        path="/politicas-de-privacidade"
+      />
 
       <div className="min-h-screen bg-surface-950">
         {/* Header */}

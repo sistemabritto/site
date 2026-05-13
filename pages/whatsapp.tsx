@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -56,13 +56,12 @@ const cases = [
 export default function WhatsApp() {
   return (
     <>
-      <Head>
-        <title>WhatsApp Business + IA | Sistema Britto</title>
-        <meta
-          name="description"
-          content="Seu WhatsApp como central comercial. IA que qualifica, agenda, vende e reativa leads — 24/7, integrado ao seu CRM."
-        />
-      </Head>
+      <Meta 
+        title="WhatsApp Business + IA | Sistema Britto"
+        description="Seu WhatsApp como central comercial. IA que qualifica, agenda, vende e reativa leads — 24/7, integrado ao seu CRM."
+        path="/whatsapp"
+      />
+      
       <Navbar />
       
       <main className="min-h-screen bg-surface-950" style={{ color: '#ffffff' }}>

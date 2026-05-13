@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -20,11 +20,11 @@ const integrations = [
 export default function HermesPage() {
   return (
     <>
-      <Head>
-        <title>Hermes Agent — Framework Aberto de IA | Sistema Britto</title>
-        <meta name="description" content="O framework de IA auto-aprendente. Multi-provider, kanban nativo, automações agendadas. Liberdade total de vendor lock-in." />
-        <meta name="robots" content="index, follow" />
-      </Head>
+<Meta 
+        title="Hermes Agent — Framework Aberto de IA | Sistema Britto"
+        description="Framework de agentes de IA com multi-provider real, Kanban nativo, skills em markdown. Controle total da stack sem vendor lock-in."
+        path="/hermes"
+      />
 
       <main className="min-h-screen bg-surface-950" style={{ color: '#ffffff' }}>
         <Navbar />

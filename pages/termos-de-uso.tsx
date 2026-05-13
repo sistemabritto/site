@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Meta from '../components/Meta';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -10,11 +10,11 @@ import Link from 'next/link';
 export default function TermosDeUso() {
   return (
     <>
-      <Head>
-        <title>Termos de Uso — Sistema Britto</title>
-        <meta name="description" content="Termos e condições de uso dos serviços da Sistema Britto." />
-        <meta name="robots" content="noindex" />
-      </Head>
+<Meta 
+        title="Termos de Uso | Sistema Britto"
+        description="Termos e condições de uso dos serviços da Sistema Britto."
+        path="/termos-de-uso"
+      />
 
       <div className="min-h-screen bg-surface-950">
         {/* Header */}

@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -27,11 +27,11 @@ const integrations = ['Google Workspace', 'GitHub', 'Linear', 'Stripe', 'Omie', 
 export default function EvoNexusPage() {
   return (
     <>
-      <Head>
-        <title>EvoNexus — Workforce de Negócio | Sistema Britto</title>
-        <meta name="description" content="Agentes autônomos de negócio via EvoNexus. Finanças, projetos, marketing, vendas, RH, jurídico — tudo automatizado com IA." />
-        <meta name="robots" content="index, follow" />
-      </Head>
+<Meta 
+        title="EvoNexus — Workforce de IA para Negócios | Sistema Britto"
+        description="Workforce completa de IA com agentes especializados em finanças, vendas, projetos, RH, marketing e engenharia. Automatize seu negócio no piloto automático."
+        path="/evonexus"
+      />
 
       <main className="min-h-screen bg-surface-950" style={{ color: '#ffffff' }}>
         <Navbar />

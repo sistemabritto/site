@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -68,11 +68,11 @@ const tools = ['Claude Code', 'GitHub Copilot', 'Hermes Agent', 'CI/CD (GitHub A
 export default function EngineeringPage() {
   return (
     <>
-      <Head>
-        <title>Workforce de Engenharia | Sistema Britto</title>
-        <meta name="description" content="Agentes de IA para desenvolvimento de software. Arquitetura, code review, debugging, testes, segurança e DevOps automatizados." />
-        <meta name="robots" content="index, follow" />
-      </Head>
+<Meta 
+        title="Workforce de Engenharia | Sistema Britto"
+        description="Agentes de IA que escrevem código, revisam PRs, debugam, testam e fazem deploy. Workforce de engenharia completa."
+        path="/engineering"
+      />
 
       <main className="min-h-screen bg-surface-950" style={{ color: '#ffffff' }}>
         <Navbar />
