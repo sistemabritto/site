@@ -8,7 +8,7 @@ interface MetaProps {
 }
 
 export default function Meta({ title, description, path = '', ogImage = '/og-image.png' }: MetaProps) {
-  const baseUrl = 'https://sistemabritto.com.br';
+  const baseUrl = 'https://www.sistemabritto.com.br';
   const url = `${baseUrl}${path}`;
 
   return (
