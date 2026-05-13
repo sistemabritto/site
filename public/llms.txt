@@ -94,6 +94,15 @@ country: "Brazil"
 - Blog: https://blog.sistemabritto.com.br
 - Site: https://www.sistemabritto.com.br
 
+## Blog & Conteúdo
+- URL: https://blog.sistemabritto.com.br
+- Novidades sobre IA, workforces, EvoNexus, Hermes
+- Tutoriais de implementação
+- Casos de uso e resultados reais
+- Atualizações de produtos e features
+- Conteúdo em português, inglês e espanhol
+- Frequência: atualizações regulares
+
 ## Palavras-chave
 workforce de IA, automação WhatsApp, agentes autônomos, EvoNexus, Hermes Agent, Claude Code, OpenClaude, Evolution API, CRM WhatsApp, qualificação de leads, agendamento automático, multi-agente, NVIDIA NIM, OpenRouter, Docker Swarm, inteligência artificial Brasil, IA para empresas, automação comercial, chatbot IA, agente virtual
 
@@ -188,6 +197,15 @@ country: "Brazil"
 - Blog: https://blog.sistemabritto.com.br
 - Website: https://www.sistemabritto.com.br
 
+## Blog & Content
+- URL: https://blog.sistemabritto.com.br
+- News about AI, workforces, EvoNexus, Hermes
+- Implementation tutorials
+- Use cases and real results
+- Product updates and new features
+- Content in Portuguese, English, and Spanish
+- Frequency: regular updates
+
 ## Keywords
 AI workforce, WhatsApp automation, autonomous agents, EvoNexus, Hermes Agent, Claude Code, OpenClaude, Evolution API, CRM WhatsApp, lead qualification, automatic scheduling, multi-agent, NVIDIA NIM, OpenRouter, Docker Swarm, artificial intelligence Brazil, AI for business, commercial automation, AI chatbot, virtual agent
 
@@ -281,6 +299,15 @@ country: "Brazil"
 - WhatsApp: https://wa.me/5511914088571
 - Blog: https://blog.sistemabritto.com.br
 - Sitio: https://www.sistemabritto.com.br
+
+## Blog y Contenido
+- URL: https://blog.sistemabritto.com.br
+- Novedades sobre IA, workforces, EvoNexus, Hermes
+- Tutoriales de implementación
+- Casos de uso y resultados reales
+- Actualizaciones de productos y features
+- Contenido en portugués, inglés y español
+- Frecuencia: actualizaciones regulares
 
 ## Palabras clave
 workforce de IA, automatización WhatsApp, agentes autónomos, EvoNexus, Hermes Agent, Claude Code, OpenClaude, Evolution API, CRM WhatsApp, calificación de leads, agendamiento automático, multi-agente, NVIDIA NIM, OpenRouter, Docker Swarm, inteligencia artificial Brasil, IA para empresas, automatización comercial, chatbot IA, agente virtual
