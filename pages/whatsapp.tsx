@@ -41,7 +41,6 @@ export default function WhatsApp() {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        // Fallback pro WhatsApp se der erro
         window.location.href = 'https://wa.me/5511914088571?text=Olá!%20Quero%20o%20WhatsApp%20IA%20de%20R$297';
       }
     } catch {
@@ -59,11 +58,11 @@ export default function WhatsApp() {
       
       <Navbar />
       
-      <main className="min-h-screen bg-surface-950" style={{ color: '#ffffff' }}>
+      <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>
 
-        {/* ===== HERO COM PREÇO ===== */}
+        {/* ===== HERO SEM PREÇO ===== */}
         <section className="relative pt-32 pb-20 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-green-900/10 via-surface-950 to-surface-950" />
+          <div className="absolute inset-0 bg-gradient-to-b from-green-900/10 via-[#0a0a0a] to-[#0a0a0a]" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/10 rounded-full blur-3xl" />
           
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -72,9 +71,9 @@ export default function WhatsApp() {
               <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Vagas Disponíveis</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading text-white font-bold mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
               Seu WhatsApp como<br />
-              <span className="gold-text">central comercial</span>
+              <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">central comercial</span>
             </h1>
             
             <p className="text-gray-200 text-lg max-w-2xl mx-auto font-medium mb-8">
@@ -82,49 +81,158 @@ export default function WhatsApp() {
               24/7, integrado ao seu CRM. Sem digitação manual, sem lead perdido.
             </p>
 
-            {/* Preço */}
-            <div className="flex items-baseline justify-center gap-2 mb-8">
-              <span className="text-gray-400 text-lg">A partir de</span>
-              <span className="text-white text-6xl font-bold">R$ 297</span>
-              <span className="text-gray-400 text-xl">/mês</span>
-            </div>
-
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={handleCheckout}
                 disabled={loading}
-                className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-surface-900 px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25 disabled:opacity-50"
+                className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25 disabled:opacity-50"
               >
                 {loading ? 'Carregando...' : 'QUERO MEU WHATSAPP IA →'}
               </button>
             </div>
 
-            <p className="text-gray-500 text-sm mt-4">Sem fidelidade. Cancele quando quiser. 7 dias de garantia.</p>
+            <p className="text-gray-400 text-sm mt-4">Sem fidelidade. Cancele quando quiser. 7 dias de garantia.</p>
           </div>
         </section>
 
         {/* ===== STATS ===== */}
-        <section className="py-12 bg-surface-900">
+        <section className="py-12 bg-[#111111]">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="glass-strong rounded-2xl p-6 text-center border border-green-500/20">
-                <div className="text-4xl font-heading font-bold text-green-400 mb-2">24/7</div>
+              <div className="bg-black/80 rounded-2xl p-6 text-center border border-green-500/20">
+                <div className="text-4xl font-bold text-green-400 mb-2">24/7</div>
                 <div className="text-gray-200 text-sm">Atendimento automático</div>
               </div>
-              <div className="glass-strong rounded-2xl p-6 text-center border border-green-500/20">
-                <div className="text-4xl font-heading font-bold text-green-400 mb-2">&lt;1s</div>
+              <div className="bg-black/80 rounded-2xl p-6 text-center border border-green-500/20">
+                <div className="text-4xl font-bold text-green-400 mb-2">&lt;1s</div>
                 <div className="text-gray-200 text-sm">Tempo de resposta</div>
               </div>
-              <div className="glass-strong rounded-2xl p-6 text-center border border-green-500/20">
-                <div className="text-4xl font-heading font-bold text-green-400 mb-2">3x</div>
+              <div className="bg-black/80 rounded-2xl p-6 text-center border border-green-500/20">
+                <div className="text-4xl font-bold text-green-400 mb-2">3x</div>
                 <div className="text-gray-200 text-sm">Mais conversões</div>
               </div>
             </div>
           </div>
         </section>
 
+        {/* ===== PRINTS DO CRM ===== */}
+        <section className="py-20 px-4 bg-[#0a0a0a]">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="inline-block text-green-400 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30 px-4 py-2 rounded-full bg-green-500/10">
+                Na prática
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+                Seu CRM vai funcionar assim:
+              </h2>
+              <p className="text-gray-300 text-lg">Leads qualificados, organizados e prontos pra fechar.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Print 1 - Funil */}
+              <div className="bg-[#111111] rounded-2xl p-4 border border-white/10">
+                <div className="bg-black rounded-xl overflow-hidden">
+                  <div className="bg-[#1a1a1a] px-4 py-3 border-b border-white/10 flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                    <div className="w-3 h-3 rounded-full bg-green-500" />
+                    <span className="text-gray-400 text-xs ml-2">CRM - Funil de Vendas</span>
+                  </div>
+                  <div className="p-6">
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between bg-green-500/10 border border-green-500/30 rounded-lg p-4">
+                        <div className="flex items-center gap-3">
+                          <span className="text-2xl">🔥</span>
+                          <div>
+                            <div className="text-white font-semibold">Leads Quentes</div>
+                            <div className="text-gray-400 text-sm">23 leads aguardando contato</div>
+                          </div>
+                        </div>
+                        <span className="text-green-400 font-bold text-xl">R$ 47.200</span>
+                      </div>
+                      <div className="flex items-center justify-between bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+                        <div className="flex items-center gap-3">
+                          <span className="text-2xl">⚡</span>
+                          <div>
+                            <div className="text-white font-semibold">Leads Mornos</div>
+                            <div className="text-gray-400 text-sm">45 leads em follow-up</div>
+                          </div>
+                        </div>
+                        <span className="text-yellow-400 font-bold text-xl">R$ 89.500</span>
+                      </div>
+                      <div className="flex items-center justify-between bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                        <div className="flex items-center gap-3">
+                          <span className="text-2xl">❄️</span>
+                          <div>
+                            <div className="text-white font-semibold">Leads Frios</div>
+                            <div className="text-gray-400 text-sm">112 leads para nutrir</div>
+                          </div>
+                        </div>
+                        <span className="text-blue-400 font-bold text-xl">R$ 156.000</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm mt-4 text-center">Funil automático com leads classificados pela IA</p>
+              </div>
+
+              {/* Print 2 - Conversa */}
+              <div className="bg-[#111111] rounded-2xl p-4 border border-white/10">
+                <div className="bg-black rounded-xl overflow-hidden">
+                  <div className="bg-[#1a1a1a] px-4 py-3 border-b border-white/10 flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                    <div className="w-3 h-3 rounded-full bg-green-500" />
+                    <span className="text-gray-400 text-xs ml-2">WhatsApp - IA Assistant</span>
+                  </div>
+                  <div className="p-4 space-y-3">
+                    <div className="flex justify-end">
+                      <div className="bg-green-500/20 border border-green-500/30 rounded-2xl rounded-br-sm px-4 py-2 max-w-[80%]">
+                        <p className="text-gray-200 text-sm">Olá! Vi que você se interessou pelo nosso plano Premium. Posso te ajudar? 😊</p>
+                        <span className="text-gray-500 text-xs">10:32 ✓✓</span>
+                      </div>
+                    </div>
+                    <div className="flex justify-start">
+                      <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl rounded-bl-sm px-4 py-2 max-w-[80%]">
+                        <p className="text-gray-200 text-sm">Sim! Quero saber mais sobre a automação do WhatsApp</p>
+                        <span className="text-gray-500 text-xs">10:33</span>
+                      </div>
+                    </div>
+                    <div className="flex justify-end">
+                      <div className="bg-green-500/20 border border-green-500/30 rounded-2xl rounded-br-sm px-4 py-2 max-w-[80%]">
+                        <p className="text-gray-200 text-sm">Perfeito! Qual seu nome e quantos leads você recebe por mês?</p>
+                        <span className="text-gray-500 text-xs">10:33 ✓✓</span>
+                      </div>
+                    </div>
+                    <div className="flex justify-start">
+                      <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl rounded-bl-sm px-4 py-2 max-w-[80%]">
+                        <p className="text-gray-200 text-sm">Meu nome é Carlos, recebo uns 500 leads/mês</p>
+                        <span className="text-gray-500 text-xs">10:34</span>
+                      </div>
+                    </div>
+                    <div className="flex justify-end">
+                      <div className="bg-green-500/20 border border-green-500/30 rounded-2xl rounded-br-sm px-4 py-2 max-w-[80%]">
+                        <p className="text-gray-200 text-sm">Carlos, com 500 leads/mês você deve estar perdendo muita venda! Vou te mostrar como a IA pode te ajudar a converter pelo menos 3x mais. Posso agendar uma demonstração?</p>
+                        <span className="text-gray-500 text-xs">10:34 ✓✓</span>
+                      </div>
+                    </div>
+                    <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3 mt-4">
+                      <div className="flex items-center gap-2">
+                        <span className="text-blue-400">🤖</span>
+                        <span className="text-blue-300 text-xs font-semibold">IA classificou como: LEAD QUENTE</span>
+                      </div>
+                      <p className="text-gray-400 text-xs mt-1">Enviado notificação para o vendedor • Agendamento sugerido: Amanhã 10h</p>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm mt-4 text-center">IA qualifica e classifica automaticamente</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ===== DOR ===== */}
-        <section className="py-20 px-4 bg-surface-950">
+        <section className="py-20 px-4 bg-[#0a0a0a]">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-white mb-12 text-center">
               Você perde vendas porque:
@@ -137,9 +245,9 @@ export default function WhatsApp() {
                 'Perde cliente fora do horário comercial',
                 'Não consegue acompanhar tudo manualmente',
               ].map((text, i) => (
-                <div key={i} className="flex items-center gap-4 bg-surface-900 p-5 rounded-xl border border-red-500/20">
+                <div key={i} className="flex items-center gap-4 bg-[#111111] p-5 rounded-xl border border-red-500/20">
                   <span className="text-2xl">❌</span>
-                  <p className="text-gray-300 text-lg">{text}</p>
+                  <p className="text-gray-200 text-lg">{text}</p>
                 </div>
               ))}
             </div>
@@ -147,16 +255,15 @@ export default function WhatsApp() {
         </section>
 
         {/* ===== EVOLUTION API PARTNERSHIP ===== */}
-        <section className="py-16 bg-surface-900">
+        <section className="py-16 bg-[#111111]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="glass-strong rounded-3xl p-8 border border-green-500/30">
+            <div className="bg-black/80 rounded-3xl p-8 border border-green-500/30">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div>
                   <div className="inline-flex items-center gap-2 mb-4">
-                    <img src="/images/evo/evolution-api-logo.png" alt="Evolution API" className="h-8 w-auto" />
                     <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Embaixador & Contributor</span>
                   </div>
-                  <h2 className="text-2xl font-heading text-white font-bold mb-4">
+                  <h2 className="text-2xl font-bold text-white mb-4">
                     Parceiro oficial da Evolution API
                   </h2>
                   <p className="text-gray-200 text-sm leading-relaxed mb-6">
@@ -175,7 +282,9 @@ export default function WhatsApp() {
                   </ul>
                 </div>
                 <div className="flex items-center justify-center">
-                  <img src="/images/evo/evolution-logo-white.svg" alt="Evolution API Logo" className="w-56 h-auto opacity-80" />
+                  <div className="w-56 h-56 bg-gradient-to-br from-green-500/20 to-green-600/10 rounded-full flex items-center justify-center border border-green-500/30">
+                    <span className="text-6xl">⚡</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -183,23 +292,23 @@ export default function WhatsApp() {
         </section>
 
         {/* ===== FEATURES ===== */}
-        <section className="py-20 sm:py-32 bg-surface-950">
+        <section className="py-20 sm:py-32 bg-[#0a0a0a]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <span className="inline-block text-green-400 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30 px-4 py-2 rounded-full bg-green-500/10">
                 Funcionalidades
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading text-white mb-6 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
                 Tudo que seu WhatsApp<br />
-                <span className="gold-text">precisava ter</span>
+                <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">precisava ter</span>
               </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {features.map((f, i) => (
-                <div key={i} className="glass-strong rounded-2xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-1">
+                <div key={i} className="bg-black/80 rounded-2xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-1">
                   <div className="text-3xl mb-4">{f.icon}</div>
-                  <h3 className="text-lg font-heading text-white font-bold mb-2">{f.title}</h3>
+                  <h3 className="text-lg font-bold text-white mb-2">{f.title}</h3>
                   <p className="text-gray-200 text-sm leading-relaxed">{f.desc}</p>
                 </div>
               ))}
@@ -208,22 +317,22 @@ export default function WhatsApp() {
         </section>
 
         {/* ===== CASES ===== */}
-        <section className="py-20 sm:py-32 bg-surface-900">
+        <section className="py-20 sm:py-32 bg-[#111111]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <span className="inline-block text-green-400 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30 px-4 py-2 rounded-full bg-green-500/10">
                 Cases
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading text-white mb-6 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
                 Resultados reais<br />
-                <span className="gold-text">em números</span>
+                <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">em números</span>
               </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {cases.map((c, i) => (
-                <div key={i} className="glass-strong rounded-2xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-1">
-                  <div className="text-green-400 text-3xl font-heading font-bold mb-2">{c.result}</div>
+                <div key={i} className="bg-black/80 rounded-2xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-1">
+                  <div className="text-green-400 text-3xl font-bold mb-2">{c.result}</div>
                   <h3 className="text-white font-bold mb-2">{c.name}</h3>
                   <p className="text-gray-200 text-sm leading-relaxed">{c.desc}</p>
                 </div>
@@ -233,7 +342,7 @@ export default function WhatsApp() {
         </section>
 
         {/* ===== OFERTA R$ 297 ===== */}
-        <section id="plano" className="py-20 px-4 bg-surface-950">
+        <section id="plano" className="py-20 px-4 bg-[#0a0a0a]">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-white mb-8">
               Comece agora por R$ 297/mês
@@ -251,7 +360,7 @@ export default function WhatsApp() {
                   'Suporte via WhatsApp',
                   'Setup incluso (sem taxa extra)',
                 ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-gray-300">
+                  <li key={i} className="flex items-center gap-3 text-gray-200">
                     <span className="text-green-400 text-xl">✓</span>
                     <span>{item}</span>
                   </li>
@@ -260,11 +369,11 @@ export default function WhatsApp() {
 
               <div className="mt-8 pt-8 border-t border-green-500/30">
                 <div className="flex items-baseline justify-center gap-2 mb-6">
-                  <span className="text-gray-400 text-lg">De</span>
-                  <span className="text-gray-500 text-2xl line-through">R$ 750</span>
-                  <span className="text-gray-400 text-lg">por</span>
+                  <span className="text-gray-300 text-lg">De</span>
+                  <span className="text-gray-400 text-2xl line-through">R$ 750</span>
+                  <span className="text-gray-300 text-lg">por</span>
                   <span className="text-white text-6xl font-bold">R$ 297</span>
-                  <span className="text-gray-400 text-xl">/mês</span>
+                  <span className="text-gray-300 text-xl">/mês</span>
                 </div>
 
                 <button
@@ -275,16 +384,16 @@ export default function WhatsApp() {
                   {loading ? 'Carregando...' : 'QUERO MEU WHATSAPP IA →'}
                 </button>
 
-                <p className="text-gray-400 text-sm mt-4">Sem fidelidade. Cancele quando quiser.</p>
+                <p className="text-gray-300 text-sm mt-4">Sem fidelidade. Cancele quando quiser.</p>
               </div>
             </div>
 
-            <div className="bg-surface-900 rounded-2xl p-6 border border-white/10">
+            <div className="bg-[#111111] rounded-2xl p-6 border border-white/10">
               <div className="flex items-center gap-4">
                 <span className="text-4xl">🛡️</span>
                 <div className="text-left">
                   <h3 className="text-lg font-bold text-white">7 dias de garantia incondicional</h3>
-                  <p className="text-gray-400 text-sm">Se não gostar, devolvemos seu dinheiro. Sem perguntas.</p>
+                  <p className="text-gray-300 text-sm">Se não gostar, devolvemos seu dinheiro. Sem perguntas.</p>
                 </div>
               </div>
             </div>
@@ -300,9 +409,9 @@ export default function WhatsApp() {
 
             <div className="space-y-6">
               {faqs.map((item, i) => (
-                <div key={i} className="bg-surface-900 rounded-xl p-6 border border-white/10">
+                <div key={i} className="bg-[#111111] rounded-xl p-6 border border-white/10">
                   <h3 className="text-lg font-bold text-white mb-2">{item.q}</h3>
-                  <p className="text-gray-400">{item.a}</p>
+                  <p className="text-gray-300">{item.a}</p>
                 </div>
               ))}
             </div>
@@ -310,26 +419,22 @@ export default function WhatsApp() {
         </section>
 
         {/* ===== CTA FINAL ===== */}
-        <section className="py-20 bg-surface-950">
+        <section className="py-20 bg-[#0a0a0a]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl sm:text-4xl font-heading text-white font-bold mb-6">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
               Pronto para transformar<br />
-              <span className="gold-text">seu WhatsApp?</span>
+              <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">seu WhatsApp?</span>
             </h2>
             <p className="text-gray-200 text-lg mb-8">
               Implementamos sua central comercial com IA em até 48h.
             </p>
-            <a
-              href="https://wa.me/5511914088571?text=Olá!%20Quero%20implementar%20WhatsApp%20com%20IA%20na%20minha%20empresa"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-surface-900 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25"
+            <button
+              onClick={handleCheckout}
+              disabled={loading}
+              className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25 disabled:opacity-50"
             >
-              Falar com especialista
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </a>
+              {loading ? 'Carregando...' : 'QUERO MEU WHATSAPP IA →'}
+            </button>
           </div>
         </section>
 

@@ -1,24 +1,99 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+const EVO_API_URL = process.env.EVO_API_URL || 'https://go.workflowapi.com.br';
+const EVO_INSTANCE = process.env.EVO_INSTANCE || 'sistema-britto-business';
+const EVO_TOKEN = process.env.EVO_TOKEN || 'ed260550-affc-42f1-92e3-45affea89e05';
+const SDR_PHONE = '5511914088571';
+
+interface QualificacaoBody {
+  answers: Record<string, string>;
+  utm: Record<string, string>;
+  result: 'high-ticket' | 'downsell';
+  timestamp: string;
+  userAgent: string;
+}
+
+function formatAnswers(body: QualificacaoBody): string {
+  const { answers, utm, result } = body;
+  
+  const labels: Record<string, string> = {
+    p1: 'Leads/mês',
+    p2: 'Ticket médio',
+    p3: 'Tempo resposta',
+    p4: 'Investimento R$3k+',
+  };
+
+  const answerLabels: Record<string, Record<string, string>> = {
+    p1: { '0-100': '< 100', '100-500': '100-500', '500-1000': '500-1000', '1000+': '1000+' },
+    p2: { 'ate-100': 'Até R$100', '100-500': 'R$100-500', '500-2000': 'R$500-2k', '2000+': 'R$2k+' },
+    p3: { 'imediato': '< 5min', 'rapido': '5-30min', 'demorado': '30min-2h', 'muito-demorado': '+2h' },
+    p4: { 'sim': '✅ SIM (high-ticket)', 'nao': '❌ NÃO (downsell)' },
+  };
+
+  let msg = `🎯 *NOVO LEAD QUALIFICADO*\n`;
+  msg += `📊 Resultado: ${result === 'high-ticket' ? 'HIGH TICKET' : 'DOWNSELL R$297'}\n\n`;
+  
+  msg += `*Respostas:*\n`;
+  for (const [key, label] of Object.entries(labels)) {
+    const val = answers[key];
+    const display = answerLabels[key]?.[val] || val || '-';
+    msg += `• ${label}: ${display}\n`;
+  }
+
+  if (Object.keys(utm).length > 0) {
+    msg += `\n*UTM/Tracking:*\n`;
+    for (const [key, val] of Object.entries(utm)) {
+      msg += `• ${key}: ${val}\n`;
+    }
+  }
+
+  return msg;
+}
+
+async function sendWhatsAppNotification(message: string) {
+  try {
+    const response = await fetch(`${EVO_API_URL}/message/sendText/${EVO_INSTANCE}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': EVO_TOKEN,
+      },
+      body: JSON.stringify({
+        number: SDR_PHONE,
+        text: message,
+      }),
+    });
+    return response.ok;
+  } catch (e) {
+    console.error('[Evo API Error]', e);
+    return false;
+  }
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const { answers, timestamp, userAgent } = req.body;
+    const body: QualificacaoBody = req.body;
+    const { answers, utm, result } = body;
 
     console.log('[Qualificação Lead]', {
       answers,
-      timestamp,
-      userAgent,
-      result: answers?.p4_investment === 'sim' ? 'high-ticket' : 'downsell',
+      utm,
+      result,
+      timestamp: body.timestamp,
     });
 
-    // TODO: Enviar para Evo CRM via webhook
-    // TODO: Notificar WhatsApp SDR
+    // Formatar mensagem pro SDR
+    const message = formatAnswers(body);
 
-    res.status(200).json({ received: true });
+    // Enviar notificação pro WhatsApp do SDR
+    const sent = await sendWhatsAppNotification(message);
+    console.log('[WhatsApp Notification]', sent ? 'Sent' : 'Failed');
+
+    res.status(200).json({ received: true, notified: sent });
   } catch (error) {
     console.error('[Qualificação Error]', error);
     res.status(500).json({ error: 'Internal server error' });

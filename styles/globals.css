@@ -2,76 +2,43 @@
 
 /* ============================================
    WORKFLOW API STUDIO — Design System v4
-   DARK MODE + MAX CONTRAST TAILWIND NATIVO
+   DARK MODE + MAX CONTRAST
    ============================================ */
 
-/* Custom theme config */
 @theme {
   --color-surface-950: #0a0a0a;
   --color-surface-900: #111111;
   --color-surface-800: #1a1a1a;
   --color-surface-700: #262626;
   
-  /* AI Purple primary */
-  --color-primary-400: #C4B5FD;
-  --color-primary-500: #A78BFA;
-  --color-primary-600: #8B5CF6;
-  --color-primary-700: #7C3AED;
+  --color-gold-400: #D4AF37;
+  --color-gold-500: #C5A028;
+  --color-gold-600: #B08D1E;
   
-  /* Gold accent - LOOPING DOURADO */
-  --color-gold-400: #4ADE80;
-  --color-gold-500: #22C55E;
-  --color-gold-600: #16A34A;
-  
-  /* SB Green - Sistema Britto */
-  --color-sb-green-400: #84CC16;
-  --color-sb-green-500: #65A30D;
-  --color-sb-green-600: #4D7C0F;
-  --color-sb-silver: #94A3B8;
-  
-  /* Teal accent */
-  --color-accent-400: #22D3EE;
-  --color-accent-500: #06B6D4;
-  --color-accent-600: #0891B2;
-  
-  /* Green for WhatsApp */
-  --color-green-400: #4ADE80;
-  --color-green-500: #22C55E;
-  --color-green-600: #16A34A;
+  --color-whatsapp-400: #4ADE80;
+  --color-whatsapp-500: #22C55E;
+  --color-whatsapp-600: #16A34A;
+
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
 }
 
 /* Base styles */
 body {
-  font-family: 'DM Sans', system-ui, sans-serif;
-  background-color: var(--color-surface-950);
+  font-family: var(--font-body);
+  background-color: #0a0a0a;
   color: #ffffff;
 }
 
-/* Headings */
-.font-heading {
-  font-family: 'Space Grotesk', system-ui, sans-serif;
-}
-
-/* Aurora gradient — mais escuro e sutil */
-.aurora-bg {
-  background: linear-gradient(135deg,
-    #0a0a0a 0%,
-    #0d0a1a 20%,
-    #080820 40%,
-    #0a1018 60%,
-    #0a0a0a 100%
-  );
-}
-
-/* Gold text gradient — looping dourado (SB Green agora) */
+/* Gold text gradient */
 .gold-text {
-  background: linear-gradient(135deg, #84CC16 0%, #4ADE80 50%, #22C55E 100%);
+  background: linear-gradient(13deg, #D4AF37 0%, #F5D76E 50%, #C5A028 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Glassmorphism — mais escuro pra contraste */
+/* Glassmorphism */
 .glass {
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(12px);
@@ -86,16 +53,6 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* CTA glow — primary */
-.cta-glow {
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
-  transition: all 0.3s ease;
-}
-
-.cta-glow:hover {
-  box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
-}
-
 /* Animations */
 @keyframes typing {
   0%, 60%, 100% { transform: translateY(0); }
@@ -105,29 +62,6 @@ body {
 .typing-dot { animation: typing 1.4s ease-in-out infinite; }
 .typing-dot:nth-child(2) { animation-delay: 0.2s; }
 .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-/* Reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Focus rings — gold */
-*:focus-visible {
-  outline: 2px solid #F59E0B;
-  outline-offset: 2px;
-}
 
 html { scroll-behavior: smooth; }
 * { -webkit-tap-highlight-color: transparent; }
