@@ -1,28 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0a0a0a;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:1" />
-    </linearGradient>
+    <style>
+      .bg { fill: #0a0a0a; }
+      .text-white { fill: #ffffff; font-family: Arial, sans-serif; }
+      .text-green { fill: #22cb22; font-family: Arial, sans-serif; }
+      .text-gray { fill: #b4b4b4; font-family: Arial, sans-serif; }
+      .logo-sistema { font-size: 24px; font-weight: bold; }
+      .logo-britto { font-size: 52px; font-weight: bold; }
+      .missao { font-size: 28px; font-weight: bold; }
+      .titulo1 { font-size: 42px; font-weight: 600; }
+      .titulo2 { font-size: 64px; font-weight: bold; }
+      .desc { font-size: 28px; }
+      .footer { font-size: 24px; }
+    </style>
   </defs>
   
-  <!-- Background -->
-  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Fundo -->
+  <rect class="bg" width="1200" height="630"/>
   
-  <!-- Loop dourado -->
-  <circle cx="600" cy="200" r="80" fill="none" stroke="url(#gold)" stroke-width="8"/>
-  <path d="M540 200 Q600 120 660 200 Q600 280 540 200" fill="none" stroke="url(#gold)" stroke-width="6"/>
+  <!-- Header / Logo -->
+  <text class="text-green logo-sistema" x="30" y="45">SISTEMA</text>
+  <text class="text-white logo-britto" x="30" y="100">BRITTO</text>
   
-  <!-- Title -->
-  <text x="600" y="380" font-family="Arial, sans-serif" font-size="56" font-weight="bold" fill="#D4AF37" text-anchor="middle">Workflow API Studio</text>
+  <!-- Missão -->
+  <text class="text-green missao" x="545" y="150">NOSSA MISSÃO</text>
   
-  <!-- Subtitle -->
-  <text x="600" y="460" font-family="Arial, sans-serif" font-size="32" fill="#ffffff" text-anchor="middle">WhatsApp com CRM e IA</text>
+  <!-- Título Principal -->
+  <text class="text-white titulo1" x="60" y="270">Democratizar acesso a workforces de IA para</text>
+  <text class="text-green titulo2" x="60" y="360">empresas brasileiras</text>
   
-  <!-- Footer -->
-  <text x="600" y="540" font-family="Arial, sans-serif" font-size="24" fill="#999999" text-anchor="middle">workflowapi.com.br</text>
+  <!-- Descrição -->
+  <text class="text-gray desc" x="60" y="450">Acreditamos que todo negócio — do autônomo à clínica,</text>
+  <text class="text-gray desc" x="60" y="500">da pizzaria ao SaaS — merece ter uma workforce</text>
+  <text class="text-gray desc" x="60" y="550">inteligente operando 24 horas. Sem contrato longo,</text>
+  <text class="text-gray desc" x="60" y="600">sem curva de aprendizado, sem dor de cabeça.</text>
+  
+  <!-- Rodapé -->
+  <line x1="0" y1="580" x2="1200" y2="580" stroke="#282828" stroke-width="1"/>
+  <text class="text-gray footer" x="60" y="620">Workforces de IA que operam seu negócio — do WhatsApp à engenharia de software.</text>
 </svg>

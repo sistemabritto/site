@@ -40,12 +40,16 @@ export default function WorkforceLP() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href="https://wa.me/5511914088571?text=Olá!%20Li%20a%20carta%20de%20vendas%20e%20quero%20implementar%20minha%20força%20de%20trabalho%20de%20IA"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/qualificacao"
                 className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25"
               >
                 QUERO MINHA WORKFORCE DE IA →
+              </a>
+              <a
+                href="#como-funciona"
+                className="inline-flex items-center gap-2 glass-strong text-white px-8 py-4 rounded-full font-semibold transition-all duration-200 hover:bg-white/10 border border-white/20"
+              >
+                Saiba mais ↓
               </a>
             </div>
 
@@ -56,7 +60,7 @@ export default function WorkforceLP() {
         </section>
 
         {/* A Dor */}
-        <section className="py-20 px-4 bg-surface-950">
+        <section id="como-funciona" className="py-20 px-4 bg-surface-950">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold text-white mb-12 text-center">
               Você já deve ter percebido:
