@@ -1,155 +1,200 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Meta from '../components/Meta';
 
 export default function WorkforceLP() {
+  const [loading, setLoading] = useState(false);
+
+  const handleCheckout = async (productId: string) => {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/abacatepay/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        window.location.href = `https://wa.me/5511914088571?text=Olá!%20Quero%20o%20plano%20${productId}`;
+      }
+    } catch {
+      window.location.href = `https://wa.me/5511914088571?text=Olá!%20Quero%20o%20plano%20${productId}`;
+    }
+  };
+
   return (
     <>
       <Meta 
         title="Workforce de IA — Sistema Britto"
         description="Sua empresa vai ter uma força de trabalho de IA em 48 horas. Ou você não paga nada."
         path="/workforce"
-        ogImage="/og-image.png"
       />
       
       <main className="min-h-screen bg-black" style={{ color: '#ffffff' }}>
-        {/* Hero Section */}
+
+        {/* ===== HERO ===== */}
         <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
           <div className="absolute inset-0 bg-gradient-to-b from-green-900/20 via-black to-black" />
-          
           <div className="relative z-10 max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-full px-4 py-2 mb-8">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-green-400 text-xs font-bold uppercase tracking-wider">
-                Vagas Limitadas
-              </span>
+              <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Vagas Limitadas</span>
             </div>
-
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
               Sua empresa vai ter uma<br />
               <span className="text-green-400">força de trabalho de IA</span><br />
               em 48 horas.
             </h1>
-
-            <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
-              Ou você não paga nada.
-            </p>
-
+            <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">Ou você não paga nada.</p>
             <p className="text-lg text-gray-400 mb-12 max-w-xl mx-auto">
               Sem contratar. Sem infra. Sem saber programar. Uma workforce completa — atendimento, vendas, finanças, projetos — que opera seu negócio 24/7 por menos que um salário mínimo.
             </p>
-
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="/qualificacao"
-                className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25"
-              >
+              <a href="#carta" className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25">
                 QUERO MINHA WORKFORCE DE IA →
               </a>
-              <a
-                href="#como-funciona"
-                className="inline-flex items-center gap-2 glass-strong text-white px-8 py-4 rounded-full font-semibold transition-all duration-200 hover:bg-white/10 border border-white/20"
-              >
-                Saiba mais ↓
-              </a>
             </div>
-
-            <p className="text-gray-500 text-sm mt-8">
-              7 dias de garantia incondicional
-            </p>
+            <p className="text-gray-500 text-sm mt-8">7 dias de garantia incondicional</p>
           </div>
         </section>
 
-        {/* A Dor */}
-        <section id="como-funciona" className="py-20 px-4 bg-surface-950">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-12 text-center">
-              Você já deve ter percebido:
-            </h2>
+        {/* ===== CARTA DE VENDAS ===== */}
+        <section id="carta" className="py-24 px-4 bg-surface-950">
+          <div className="max-w-3xl mx-auto">
 
-            <div className="space-y-8">
-              <div className="bg-surface-900 rounded-2xl p-8 border border-red-500/20">
-                <div className="flex items-start gap-4">
-                  <span className="text-3xl">❌</span>
-                  <div>
-                    <h3 className="text-xl font-bold text-red-400 mb-2">
-                      Atender cliente é um buraco sem fundo
-                    </h3>
-                    <p className="text-gray-400">
-                      Qualifica, responde, agenda, reativa, cobra, suporte... E no fim do mês, o que sobra? Exaustão. Leads perdidos. E aquela sensação de que você é refém do seu próprio negócio.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-surface-900 rounded-2xl p-8 border border-red-500/20">
-                <div className="flex items-start gap-4">
-                  <span className="text-3xl">❌</span>
-                  <div>
-                    <h3 className="text-xl font-bold text-red-400 mb-2">
-                      Cada lead não atendido é dinheiro indo embora
-                    </h3>
-                    <p className="text-gray-400">
-                      Cada hora que seu time passa respondendo pergunta repetitiva é dinheiro queimado. Cada follow-up que não é feito é venda perdida.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-surface-900 rounded-2xl p-8 border border-red-500/20">
-                <div className="flex items-start gap-4">
-                  <span className="text-3xl">❌</span>
-                  <div>
-                    <h3 className="text-xl font-bold text-red-400 mb-2">
-                      Você não tem controle
-                    </h3>
-                    <p className="text-gray-400">
-                      Quanto você faturou esse mês? Quanto gastou? Qual o ticket médio? Se você não consegue responder essas perguntas em 10 segundos, você não tem um negócio — você tem um problema.
-                    </p>
-                  </div>
-                </div>
-              </div>
+            {/* ABERTURA — Gancho */}
+            <div className="text-center mb-20">
+              <p className="text-2xl sm:text-3xl text-gray-300 leading-relaxed mb-6">
+                Sua empresa está perdendo <span className="text-green-400 font-bold">R$ ___ por mês</span> em leads não atendidos.
+              </p>
+              <p className="text-3xl sm:text-4xl text-white font-bold leading-relaxed">
+                E você nem percebe.
+              </p>
             </div>
-          </div>
-        </section>
 
-        {/* A Solução */}
-        <section className="py-20 px-4 bg-black">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-4 text-center">
-              Em 48 horas, sua empresa vai ter:
-            </h2>
-            <p className="text-gray-400 text-center mb-12 text-lg">
-              Uma força de trabalho que não dorme, não pede aumento e não tira férias.
-            </p>
-
-            <div className="grid gap-6">
-              {[
-                { icon: '🧠', title: 'Atendente de IA 24/7', desc: 'Qualifica leads, agenda consultas, faz follow-up inteligente, reativa leads dormentes' },
-                { icon: '📊', title: 'CRM Inteligente', desc: 'Cada lead cai no funil certo. Frio → nutrição. Morno → follow-up. Quente → notificação pro vendedor' },
-                { icon: '💰', title: 'Agente Financeiro', desc: 'Fluxo de caixa em tempo real. Contas a pagar/receber. DRE automático. Alerta de inadimplência' },
-                { icon: '🏗️', title: 'Agente de Projetos', desc: 'Tarefas, prazos, entregas. Cada membro do time sabe o que fazer. O agente cobra, acompanha e reporta' },
-                { icon: '📢', title: 'Agente de Marketing', desc: 'Cria conteúdo, programa posts, analisa métricas. Tudo automático' },
-              ].map((item, i) => (
-                <div key={i} className="bg-surface-900 rounded-2xl p-6 border border-green-500/20">
+            {/* PROBLEMA — 3 dores */}
+            <div className="mb-20">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-12">Você já deve ter percebido:</h2>
+              <div className="space-y-6">
+                <div className="bg-surface-900 rounded-2xl p-8 border border-red-500/20">
                   <div className="flex items-start gap-4">
-                    <span className="text-4xl">{item.icon}</span>
+                    <span className="text-3xl">❌</span>
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                      <p className="text-gray-400">{item.desc}</p>
+                      <h3 className="text-xl font-bold text-red-400 mb-2">Atender cliente é um buraco sem fundo</h3>
+                      <p className="text-gray-400">Qualifica, responde, agenda, reativa, cobra, suporte... E no fim do mês, o que sobra? Exaustão. Leads perdidos. E aquela sensação de que você é refém do seu próprio negócio.</p>
                     </div>
                   </div>
                 </div>
-              ))}
+                <div className="bg-surface-900 rounded-2xl p-8 border border-red-500/20">
+                  <div className="flex items-start gap-4">
+                    <span className="text-3xl">❌</span>
+                    <div>
+                      <h3 className="text-xl font-bold text-red-400 mb-2">Cada lead não atendido é dinheiro indo embora</h3>
+                      <p className="text-gray-400">Cada hora que seu time passa respondendo pergunta repetitiva é dinheiro queimado. Cada follow-up que não é feito é venda perdida.</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-surface-900 rounded-2xl p-8 border border-red-500/20">
+                  <div className="flex items-start gap-4">
+                    <span className="text-3xl">❌</span>
+                    <div>
+                      <h3 className="text-xl font-bold text-red-400 mb-2">Você não tem controle</h3>
+                      <p className="text-gray-400">Quanto você faturou esse mês? Quanto gastou? Qual o ticket médio? Se você não consegue responder essas perguntas em 10 segundos, você não tem um negócio — você tem um problema.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            {/* AGITAÇÃO */}
+            <div className="text-center mb-20 py-12 border-y border-white/10">
+              <p className="text-xl sm:text-2xl text-gray-300 leading-relaxed">
+                Enquanto você lê isso, seu concorrente já está usando IA pra atender 24/7, qualificar leads automaticamente e fechar vendas <span className="text-green-400 font-bold">enquanto ele dorme</span>.
+              </p>
+            </div>
+
+            {/* SOLUÇÃO */}
+            <div className="text-center mb-20">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+                Workforce de IA
+              </h2>
+              <p className="text-xl text-gray-300 leading-relaxed">
+                Uma equipe completa de agentes inteligentes que opera seu negócio 24/7 por menos que um salário mínimo.
+              </p>
+            </div>
+
+            {/* AGENTES */}
+            <div className="mb-20">
+              <h2 className="text-2xl font-bold text-white text-center mb-12">Em 48 horas, sua empresa vai ter:</h2>
+              <div className="grid gap-6">
+                {[
+                  { icon: '🧠', title: 'Atendente de IA', desc: 'Qualifica leads, agenda consultas, faz follow-up inteligente, reativa leads dormentes' },
+                  { icon: '📊', title: 'CRM Inteligente', desc: 'Cada lead cai no funil certo. Frio → nutrição. Morno → follow-up. Quente → notificação pro vendedor' },
+                  { icon: '💰', title: 'Agente Financeiro', desc: 'Fluxo de caixa em tempo real. Contas a pagar/receber. DRE automático. Alerta de inadimplência' },
+                  { icon: '🏗️', title: 'Agente de Projetos', desc: 'Tarefas, prazos, entregas. Cada membro do time sabe o que fazer. O agente cobra, acompanha e reporta' },
+                  { icon: '📢', title: 'Agente de Marketing', desc: 'Cria conteúdo, programa posts, analisa métricas. Tudo automático' },
+                ].map((item, i) => (
+                  <div key={i} className="bg-surface-900 rounded-2xl p-6 border border-green-500/20">
+                    <div className="flex items-start gap-4">
+                      <span className="text-4xl">{item.icon}</span>
+                      <div>
+                        <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                        <p className="text-gray-400">{item.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* PROVA SOCIAL */}
+            <div className="mb-20">
+              <h2 className="text-2xl font-bold text-white text-center mb-12">Quem usa, recomenda:</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[
+                  { name: 'Clínica OdontoLife', result: '3x mais consultas', desc: 'De 400 leads/mês para 1.200. IA qualifica, agenda e reconfirma.' },
+                  { name: 'Studio Pilates', result: '20h/semana economizadas', desc: 'Antes 3h/dia no WhatsApp. Hoje a IA faz tudo sozinha.' },
+                  { name: 'Delivery Pizzaria', result: '3x mais pedidos', desc: 'Do pedido ao delivery, tudo automático. Mesma equipe.' },
+                ].map((c, i) => (
+                  <div key={i} className="bg-surface-900 rounded-2xl p-6 border border-green-500/20 text-center">
+                    <div className="text-green-400 text-2xl font-bold mb-2">{c.result}</div>
+                    <h3 className="text-white font-bold mb-2">{c.name}</h3>
+                    <p className="text-gray-400 text-sm">{c.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* GARANTIA */}
+            <div className="text-center mb-20 py-12 border-y border-white/10">
+              <div className="text-5xl mb-4">🛡️</div>
+              <h2 className="text-2xl font-bold text-white mb-4">7 dias de garantia incondicional</h2>
+              <p className="text-gray-400 text-lg">Se em 7 dias você não ver resultado, devolvemos cada centavo. Sem burocracia.</p>
+            </div>
+
+            {/* CTA FINAL */}
+            <div className="text-center">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8">
+                A primeira vaga da sua força de trabalho de IA está disponível agora.
+              </h2>
+              <a
+                href="/qualificacao"
+                className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25"
+              >
+                QUERO MINHA WORKFORCE DE IA →
+              </a>
+              <p className="text-gray-500 text-sm mt-6">Enquanto você decide, 3 leads podem ter ido pro concorrente.</p>
+            </div>
+
           </div>
         </section>
 
-        {/* Planos */}
-        <section id="planos" className="py-20 px-4 bg-surface-950">
+        {/* ===== PLANOS ===== */}
+        <section id="planos" className="py-24 px-4 bg-surface-900">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-12 text-center">
-              Escolha seu plano
-            </h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center">Escolha seu plano</h2>
+            <p className="text-gray-400 text-center mb-12 text-lg">Do WhatsApp automatizado à empresa completa em IA.</p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Essencial */}
@@ -163,24 +208,22 @@ export default function WorkforceLP() {
                 <ul className="space-y-3 mb-8">
                   {['Atendente de IA 24/7 no WhatsApp', 'Qualificação automática de leads', 'Agendamento inteligente', 'CRM básico com funil', 'Follow-up automático', 'Suporte via WhatsApp'].map((f, i) => (
                     <li key={i} className="flex items-start gap-2 text-gray-300 text-sm">
-                      <span className="text-green-400">✓</span>
-                      <span>{f}</span>
+                      <span className="text-green-400">✓</span><span>{f}</span>
                     </li>
                   ))}
                 </ul>
-                <a
-                  href="https://wa.me/5511914088571?text=Olá!%20Quero%20o%20plano%20Essencial%20de%20R$297"
-                  className="block w-full text-center bg-white text-black py-4 rounded-full font-bold hover:bg-gray-200 transition-colors"
+                <button
+                  onClick={() => handleCheckout('whatsapp-ia-basico')}
+                  disabled={loading}
+                  className="block w-full text-center bg-white text-black py-4 rounded-full font-bold hover:bg-gray-200 transition-colors disabled:opacity-50"
                 >
                   Começar Agora
-                </a>
+                </button>
               </div>
 
               {/* Completo */}
               <div className="bg-gradient-to-br from-green-600/20 to-green-500/10 rounded-3xl p-8 border border-green-500/50 relative">
-                <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-green-500 text-black px-4 py-1 rounded-full text-xs font-bold uppercase">
-                  Mais Popular
-                </span>
+                <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-green-500 text-black px-4 py-1 rounded-full text-xs font-bold uppercase">Mais Popular</span>
                 <h3 className="text-2xl font-bold text-white mb-2">Completo</h3>
                 <div className="flex items-baseline gap-1 mb-6">
                   <span className="text-white text-sm">R$</span>
@@ -190,17 +233,17 @@ export default function WorkforceLP() {
                 <ul className="space-y-3 mb-8">
                   {['Tudo do Essencial', 'CRM completo com funil avançado', 'Reativação de leads dormentes', 'Multi-atendentes com IA assistida', 'Integração Pipedrive/Sticky', 'Relatórios de ROI'].map((f, i) => (
                     <li key={i} className="flex items-start gap-2 text-gray-300 text-sm">
-                      <span className="text-green-400">✓</span>
-                      <span>{f}</span>
+                      <span className="text-green-400">✓</span><span>{f}</span>
                     </li>
                   ))}
                 </ul>
-                <a
-                  href="https://wa.me/5511914088571?text=Olá!%20Quero%20o%20plano%20Completo%20de%20R$750"
-                  className="block w-full text-center bg-green-500 text-black py-4 rounded-full font-bold hover:bg-green-600 transition-colors"
+                <button
+                  onClick={() => handleCheckout('crm-ia-completo')}
+                  disabled={loading}
+                  className="block w-full text-center bg-green-500 text-black py-4 rounded-full font-bold hover:bg-green-600 transition-colors disabled:opacity-50"
                 >
                   Começar Agora
-                </a>
+                </button>
               </div>
 
               {/* Premium */}
@@ -214,38 +257,33 @@ export default function WorkforceLP() {
                 <ul className="space-y-3 mb-8">
                   {['Tudo do Completo', '38 agentes especializados', 'Finanças, Projetos, Marketing, Jurídico', 'Engineering agents', 'Dashboard web completo', 'Onboarding dedicado', 'Suporte prioritário 24h'].map((f, i) => (
                     <li key={i} className="flex items-start gap-2 text-gray-300 text-sm">
-                      <span className="text-green-400">✓</span>
-                      <span>{f}</span>
+                      <span className="text-green-400">✓</span><span>{f}</span>
                     </li>
                   ))}
                 </ul>
-                <a
-                  href="https://wa.me/5511914088571?text=Olá!%20Quero%20o%20plano%20Premium%20de%20R$2500"
-                  className="block w-full text-center bg-white text-black py-4 rounded-full font-bold hover:bg-gray-200 transition-colors"
+                <button
+                  onClick={() => handleCheckout('evonexus-premium')}
+                  disabled={loading}
+                  className="block w-full text-center bg-white text-black py-4 rounded-full font-bold hover:bg-gray-200 transition-colors disabled:opacity-50"
                 >
                   Começar Agora
-                </a>
+                </button>
               </div>
             </div>
 
             <div className="mt-12 text-center">
-              <p className="text-gray-400 text-sm mb-4">
-                7 dias de garantia incondicional
-              </p>
-              <p className="text-gray-500 text-xs">
-                Se em 7 dias você não ver resultado, devolvemos cada centavo. Sem burocracia.
-              </p>
+              <p className="text-gray-400 text-sm mb-4">Não sabe qual plano escolher?</p>
+              <a href="/qualificacao" className="inline-flex items-center gap-2 glass-strong text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:bg-white/10 border border-white/20">
+                Fazer qualificação gratuita →
+              </a>
             </div>
           </div>
         </section>
 
-        {/* FAQ */}
+        {/* ===== FAQ ===== */}
         <section className="py-20 px-4 bg-black">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-12 text-center">
-              Perguntas Frequentes
-            </h2>
-
+            <h2 className="text-3xl font-bold text-white mb-12 text-center">Perguntas Frequentes</h2>
             <div className="space-y-6">
               {[
                 { q: 'Preciso saber programar?', a: 'Não. A gente configura tudo pra você em 48 horas.' },
@@ -262,12 +300,10 @@ export default function WorkforceLP() {
           </div>
         </section>
 
-        {/* Footer */}
+        {/* ===== FOOTER ===== */}
         <footer className="py-12 px-4 border-t border-white/10">
           <div className="max-w-4xl mx-auto text-center">
-            <p className="text-gray-500 text-sm mb-4">
-              © 2026 Sistema Britto. Todos os direitos reservados.
-            </p>
+            <p className="text-gray-500 text-sm mb-4">© 2026 Sistema Britto. Todos os direitos reservados.</p>
             <div className="flex items-center justify-center gap-4 text-sm">
               <a href="/termos-de-uso" className="text-gray-400 hover:text-white">Termos</a>
               <span className="text-gray-600">•</span>

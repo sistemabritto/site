@@ -136,11 +136,15 @@ export default function Qualificacao() {
     // Redirecionar
     setTimeout(() => {
       if (isHighTicket) {
-        // High ticket → página de agendamento ou WhatsApp
+        // High ticket → WhatsApp direto
         window.location.href = `https://wa.me/5511914088571?text=Olá!%20Fiz%20a%20qualificação%20e%20quero%20implementar%20minha%20workforce%20de%20IA%20(high-ticket)`;
       } else {
-        // Downsell → página do WhatsApp IA
-        window.location.href = '/whatsapp';
+        // Downsell → página de resultado com plano recomendado
+        if (typeof window !== 'undefined') {
+          sessionStorage.setItem('qualificacao_answers', JSON.stringify(finalAnswers));
+        }
+        const answersParam = encodeURIComponent(JSON.stringify(finalAnswers));
+        window.location.href = `/resultado?answers=${answersParam}`;
       }
     }, 500);
   };
