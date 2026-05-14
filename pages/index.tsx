@@ -8,6 +8,7 @@ import WhatsAppCTA from '../components/WhatsAppCTA';
 import Ecossistema from '../components/Ecossistema';
 import Mission from '../components/Mission';
 import Footer from '../components/Footer';
+import PlansSection from '../components/PlansSection';
 
 export default function Home() {
   return (
@@ -18,17 +19,18 @@ export default function Home() {
         path="/"
       />
       
-      <main className="min-h-screen bg-surface-950" style={{ color: '#ffffff' }}>
-        <Navbar />
-        <Hero />
-        <Services />
-        <GoogleReviews />
-        <ROICalculator />
-        <WhatsAppCTA />
-        <Ecossistema />
-        <Mission />
-        <Footer />
-      </main>
+ <main className="min-h-screen bg-surface-950" style={{ color: '#ffffff' }}>
+ <Navbar />
+ <Hero />
+ <Services />
+ <GoogleReviews />
+ <ROICalculator />
+ <PlansSection />
+ <WhatsAppCTA />
+ <Ecossistema />
+ <Mission />
+ <Footer />
+ </main>
     </>
   );
 }
