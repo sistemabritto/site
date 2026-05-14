@@ -3,13 +3,11 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 const ABACATEPAY_API = 'https://api.abacatepay.com/v2';
 const ABACATEPAY_KEY = process.env.ABACATEPAY_API_KEY || 'abc_dev_6xbMgNHha22tetRbE0GUpuWZ';
 
-// Mapeamento de produtos
 const PRODUCTS: Record<string, string> = {
   'whatsapp-ia-basico': 'prod_jRg20GUgAmEjhy3QCr45ZtKn',
   'crm-ia-completo': 'prod_CWRuQwLLLJyKcFcUYCEfwUAG',
   'evonexus-premium': 'prod_uqRB2KTALEQWumHkp3h2PJLX',
   'hermes-selfhosted': 'prod_bzFSpy31qQc2z6rTpBhASz2X',
-  'consultoria-tecnica-whatsapp': 'prod_ORDER_BUMP_CONSULTORIA_250',
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -18,39 +16,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { productId, customer, orderBump } = req.body;
-    
+    const { productId, customer } = req.body;
     const abacateProductId = PRODUCTS[productId] || productId;
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.sistemabritto.com.br';
 
-    // Montar items (produto principal + order bump se marcado)
-    const items = [{ id: abacateProductId, quantity: 1 }];
-    if (orderBump) {
-      const bumpId = PRODUCTS['consultoria-tecnica-whatsapp'];
-      if (bumpId) {
-        items.push({ id: bumpId, quantity: 1 });
-      }
-    }
-
-    // Criar checkout na AbacatePay
-    const response = await fetch(`${ABACATEPAY_API}/checkouts/create`, {
+    const response = await fetch(ABACATEPAY_API + '/checkouts/create', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${ABACATEPAY_KEY}`,
+        'Authorization': 'Bearer ' + ABACATEPAY_KEY,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        items,
+        items: [{ id: abacateProductId, quantity: 1 }],
         customer: customer ? {
           email: customer.email,
           name: customer.name,
           cellphone: customer.cellphone,
-          // Pré-preencher telefone no checkout
-          metadata: {
-            whatsapp: customer.cellphone,
-          },
         } : undefined,
-        returnUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.sistemabritto.com.br'}/obrigado`,
-        completionUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.sistemabritto.com.br'}/obrigado`,
+        returnUrl: siteUrl + '/obrigado',
+        completionUrl: siteUrl + '/obrigado',
       }),
     });
 

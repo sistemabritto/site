@@ -4,17 +4,44 @@ import Footer from '../components/Footer';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
+// Produto de upsell (consultoria técnica)
+const UPSELL_PRODUCT = 'prod_consultoria_tecnica_250';
+
 export default function Obrigado() {
   const router = useRouter();
   const [status, setStatus] = useState<'pending' | 'approved' | 'unknown'>('pending');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Verificar status do pagamento via query params
     const { status: qs } = router.query;
     if (qs === 'approved') setStatus('approved');
     else if (qs === 'pending') setStatus('pending');
     else setStatus('unknown');
   }, [router]);
+
+  const handleUpsell = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/abacatepay/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          productId: 'consultoria-tecnica-whatsapp',
+        }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch (e) {
+      console.error('Upsell error:', e);
+    }
+    setLoading(false);
+  };
+
+  const skipUpsell = () => {
+    window.location.href = '/';
+  };
 
   return (
     <>
@@ -24,13 +51,13 @@ export default function Obrigado() {
         path="/obrigado"
       />
       
-      <main className="min-h-screen bg-surface-950" style={{ color: '#ffffff' }}>
+      <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>
         <Navbar />
         
         <div className="min-h-screen flex items-center justify-center px-4">
           <div className="max-w-2xl mx-auto text-center reveal">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gold-500/20 border border-gold-500/30 mb-8">
-              <svg className="w-10 h-10 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/20 border border-green-500/30 mb-8">
+              <svg className="w-10 h-10 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
@@ -51,32 +78,52 @@ export default function Obrigado() {
                   Aguardando confirmação do pagamento...
                 </p>
                 <div className="flex items-center justify-center gap-2">
-                  <div className="w-2 h-2 bg-gold-400 rounded-full animate-pulse"></div>
-                  <div className="w-2 h-2 bg-gold-400 rounded-full animate-pulse delay-75"></div>
-                  <div className="w-2 h-2 bg-gold-400 rounded-full animate-pulse delay-150"></div>
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse delay-75"></div>
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse delay-150"></div>
                 </div>
               </div>
             )}
 
-            <div className="space-y-4">
-              <a
-                href="https://wa.me/5511914088571?text=Olá!%20Acabei%20de%20assinar%20meu%20plano%20e%20gostaria%20de%20iniciar%20o%20onboarding"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-600 text-surface-900 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-gold-500/25"
-              >
-                Iniciar Onboarding →
-              </a>
+            {/* UPSell SECTION */}
+            {status === 'approved' && (
+              <div className="mt-12 bg-gradient-to-br from-[#D4AF37]/20 to-[#C5A028]/10 rounded-3xl p-8 border border-[#D4AF37]/30">
+                <h2 className="text-2xl font-bold text-white mb-4">
+                  🚀 Potencialize seu resultado!
+                </h2>
+                <p className="text-gray-300 mb-6">
+                  Adicione suporte técnico humano especializado via WhatsApp com SLA de 24h.
+                  Configuração, integrações, troubleshooting — tudo incluso.
+                </p>
+                
+                <div className="flex items-center justify-center gap-2 mb-6">
+                  <span className="text-gray-400 text-lg line-through">R$ 250</span>
+                  <span className="text-[#D4AF37] text-4xl font-bold">R$ 150</span>
+                  <span className="text-gray-300 text-lg">/único</span>
+                </div>
 
-              <div className="block">
-                <a
-                  href="/"
-                  className="inline-flex items-center gap-2 glass-strong text-white px-8 py-4 rounded-full font-semibold transition-all duration-200 hover:bg-white/10 border border-white/20"
-                >
-                  ← Voltar ao início
-                </a>
+                <div className="space-y-4">
+                  <button
+                    onClick={handleUpsell}
+                    disabled={loading}
+                    className="w-full bg-[#D4AF37] hover:bg-[#C5A028] text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {loading ? 'Carregando...' : 'SIM! Quero potencializar meu resultado →'}
+                  </button>
+                  
+                  <button
+                    onClick={skipUpsell}
+                    className="w-full glass-strong text-white px-8 py-4 rounded-full font-semibold transition-all duration-200 hover:bg-white/10 border border-white/20"
+                  >
+                    Não, obrigado. Vou configurar sozinho.
+                  </button>
+                </div>
+
+                <p className="text-gray-500 text-xs mt-4">
+                  Oferta válida apenas nesta página. Após sair, não haverá mais disponibilidade.
+                </p>
               </div>
-            </div>
+            )}
 
             <div className="mt-12 p-6 bg-surface-900/50 rounded-2xl border border-white/10">
               <h3 className="text-white font-bold mb-3">Próximos passos:</h3>
