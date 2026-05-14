@@ -12,7 +12,18 @@ const nextConfig = {
   
   // Minificação
   swcMinify: true,
-  
+
+  // Redirects
+  async redirects() {
+    return [
+      {
+        source: '/whatsapp-ia',
+        destination: '/whatsapp',
+        permanent: true,
+      },
+    ];
+  },
+
   // Headers para cache
   async headers() {
     return [
