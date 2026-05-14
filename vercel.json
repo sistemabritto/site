@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "name": "sistema-britto-site",
+  "framework": "nextjs",
+  "buildCommand": "next build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "regions": ["gru1"]
+}
