@@ -1,6 +1,7 @@
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { useState } from 'react';
 
 const features = [
   { icon: '🎯', title: 'Qualificação automática de leads', desc: 'IA que faz perguntas-chave, classifica por interesse e envia pro CRM já segmentado.' },
@@ -26,6 +27,28 @@ const faqs = [
 ];
 
 export default function WhatsApp() {
+  const [loading, setLoading] = useState(false);
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/abacatepay/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId: 'whatsapp-ia-basico' }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        // Fallback pro WhatsApp se der erro
+        window.location.href = 'https://wa.me/5511914088571?text=Olá!%20Quero%20o%20WhatsApp%20IA%20de%20R$297';
+      }
+    } catch {
+      window.location.href = 'https://wa.me/5511914088571?text=Olá!%20Quero%20o%20WhatsApp%20IA%20de%20R$297';
+    }
+  };
+
   return (
     <>
       <Meta 
@@ -67,12 +90,13 @@ export default function WhatsApp() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="https://wa.me/5511914088571?text=Olá!%20Quero%20implementar%20WhatsApp%20com%20IA%20na%20minha%20empresa"
-                className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-surface-900 px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25"
+              <button
+                onClick={handleCheckout}
+                disabled={loading}
+                className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-surface-900 px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25 disabled:opacity-50"
               >
-                QUERO MEU WHATSAPP IA →
-              </a>
+                {loading ? 'Carregando...' : 'QUERO MEU WHATSAPP IA →'}
+              </button>
             </div>
 
             <p className="text-gray-500 text-sm mt-4">Sem fidelidade. Cancele quando quiser. 7 dias de garantia.</p>
@@ -243,12 +267,13 @@ export default function WhatsApp() {
                   <span className="text-gray-400 text-xl">/mês</span>
                 </div>
 
-                <a
-                  href="https://wa.me/5511914088571?text=Olá!%20Quero%20o%20WhatsApp%20IA%20de%20R$297"
-                  className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25 w-full justify-center"
+                <button
+                  onClick={handleCheckout}
+                  disabled={loading}
+                  className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25 w-full justify-center disabled:opacity-50"
                 >
-                  QUERO MEU WHATSAPP IA →
-                </a>
+                  {loading ? 'Carregando...' : 'QUERO MEU WHATSAPP IA →'}
+                </button>
 
                 <p className="text-gray-400 text-sm mt-4">Sem fidelidade. Cancele quando quiser.</p>
               </div>

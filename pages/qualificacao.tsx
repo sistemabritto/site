@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useState, useEffect } from 'react';
 import Meta from '../components/Meta';
 
-// Perguntas de qualificação (PLACEHOLDERS - definir com Felipe)
 const QUESTIONS = [
   {
-    id: 'p1_volume',
-    event: 'Qualification_P1_Volume',
+    id: 'p1',
     question: 'Quantos leads sua empresa recebe por mês no WhatsApp?',
     options: [
       { label: 'Menos de 100', value: '0-100' },
@@ -16,19 +13,17 @@ const QUESTIONS = [
     ],
   },
   {
-    id: 'p2_ticket',
-    event: 'Qualification_P2_Ticket',
+    id: 'p2',
     question: 'Qual seu ticket médio atual?',
     options: [
       { label: 'Até R$ 100', value: 'ate-100' },
       { label: 'R$ 100 - R$ 500', value: '100-500' },
-      { label: 'R$ 500 - R$ 2000', value: '500-2000' },
-      { label: 'Acima de R$ 2000', value: '2000+' },
+      { label: 'R$ 500 - R$ 2.000', value: '500-2000' },
+      { label: 'Acima de R$ 2.000', value: '2000+' },
     ],
   },
   {
-    id: 'p3_time',
-    event: 'Qualification_P3_Time',
+    id: 'p3',
     question: 'Quanto tempo sua equipe leva pra responder um lead no WhatsApp?',
     options: [
       { label: 'Imediato (até 5 min)', value: 'imediato' },
@@ -38,8 +33,7 @@ const QUESTIONS = [
     ],
   },
   {
-    id: 'p4_investment',
-    event: 'Qualification_P4_Investment',
+    id: 'p4',
     question: 'Pra implementar essa força de trabalho, investimento a partir de R$ 3.000. Você está disposto, é capaz e tem o dinheiro na mão?',
     options: [
       { label: 'Sim, estou disposto', value: 'sim', redirect: 'high-ticket' },
@@ -49,86 +43,104 @@ const QUESTIONS = [
 ];
 
 export default function Qualificacao() {
-  const router = useRouter();
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [utmParams, setUtmParams] = useState<Record<string, string>>({});
+
+  // Capturar UTM params na montagem
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const utm: Record<string, string> = {};
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'fbclid', 'gclid'].forEach(key => {
+        const val = params.get(key);
+        if (val) utm[key] = val;
+      });
+      setUtmParams(utm);
+      console.log('[Qualificacao] UTM params:', utm);
+    }
+  }, []);
 
   const currentQuestion = QUESTIONS[currentStep];
   const progress = ((currentStep + 1) / QUESTIONS.length) * 100;
 
-  // Track event no Facebook Pixel
+  // Track event (Facebook Pixel + console)
   const trackEvent = (eventName: string, eventData?: any) => {
-    if (typeof window !== 'undefined') {
-      // Facebook Pixel
-      if ((window as any).fbq) {
-        (window as any).fbq('track', eventName, eventData);
-      }
-      
-      // Google Analytics
-      if ((window as any).gtag) {
-        (window as any).gtag('event', eventName.toLowerCase().replace('_', ' '), eventData);
-      }
-
-      // Console log pra debug
-      console.log('[Track Event]', eventName, eventData);
+    if (typeof window === 'undefined') return;
+    
+    const payload = { ...eventData, ...utmParams, timestamp: new Date().toISOString() };
+    
+    // Facebook Pixel
+    if ((window as any).fbq) {
+      (window as any).fbq('trackCustom', eventName, payload);
     }
+    
+    // Google Analytics
+    if ((window as any).gtag) {
+      (window as any).gtag('event', eventName, payload);
+    }
+    
+    console.log('[Track]', eventName, payload);
   };
 
   const handleAnswer = (value: string) => {
     if (!currentQuestion) return;
 
-    // Track resposta
-    trackEvent(currentQuestion.event, {
-      question_id: currentQuestion.id,
-      answer: value,
-      step: currentStep + 1,
-      total_steps: QUESTIONS.length,
-    });
-
-    // Salvar resposta
     const newAnswers = { ...answers, [currentQuestion.id]: value };
     setAnswers(newAnswers);
 
-    // Avançar ou finalizar
+    // Track resposta com UTM
+    trackEvent(`Qualificacao_P${currentStep + 1}`, {
+      question_id: currentQuestion.id,
+      answer: value,
+      step: currentStep + 1,
+    });
+
     if (currentStep < QUESTIONS.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      // Última pergunta - processar
       processQualification(newAnswers);
     }
   };
 
-  const processQualification = (finalAnswers: Record<string, string>) => {
+  const processQualification = async (finalAnswers: Record<string, string>) => {
     setIsSubmitting(true);
 
-    const p4Answer = finalAnswers['p4_investment'];
-    const isHighTicket = p4Answer === 'sim';
+    const isHighTicket = finalAnswers['p4'] === 'sim';
 
-    // Track final qualification
+    // Track qualificação completa
     trackEvent('Qualification_Completed', {
       answers: finalAnswers,
       result: isHighTicket ? 'high-ticket' : 'downsell',
+      ...utmParams,
     });
 
-    // Enviar para Evo CRM (webhook)
-    fetch('/api/qualificacao', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        answers: finalAnswers,
-        timestamp: new Date().toISOString(),
-        userAgent: typeof window !== 'undefined' ? navigator.userAgent : '',
-      }),
-    })
-      .catch(console.error);
+    // Enviar pro backend (salva no CRM + UTM)
+    try {
+      await fetch('/api/qualificacao', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          answers: finalAnswers,
+          utm: utmParams,
+          result: isHighTicket ? 'high-ticket' : 'downsell',
+          timestamp: new Date().toISOString(),
+          userAgent: typeof window !== 'undefined' ? navigator.userAgent : '',
+        }),
+      });
+    } catch (e) {
+      console.error('[Qualificacao] Erro ao salvar:', e);
+    }
 
     // Redirecionar
     setTimeout(() => {
       if (isHighTicket) {
-        router.push('/agendamento');
+        // High ticket → página de agendamento ou WhatsApp
+        window.location.href = `https://wa.me/5511914088571?text=Olá!%20Fiz%20a%20qualificação%20e%20quero%20implementar%20minha%20workforce%20de%20IA%20(high-ticket)`;
       } else {
-        router.push('/whatsapp-ia');
+        // Downsell → página do WhatsApp IA
+        window.location.href = '/whatsapp';
       }
     }, 500);
   };
@@ -188,7 +200,6 @@ export default function Qualificacao() {
               ))}
             </div>
 
-            {/* Back button (se não for primeira pergunta) */}
             {currentStep > 0 && (
               <button
                 onClick={() => setCurrentStep(currentStep - 1)}
@@ -199,10 +210,9 @@ export default function Qualificacao() {
             )}
           </div>
 
-          {/* Trust indicators */}
           <div className="mt-8 text-center">
             <p className="text-gray-500 text-sm">
-              🔒 Suas respostas são confidenciais e serão usadas apenas para qualificação
+              🔒 Suas respostas são confidenciais
             </p>
           </div>
         </div>
