@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 const navLinks = [
   { label: 'Workforce', href: '/workforce' },
   { label: 'WhatsApp', href: '/whatsapp' },
-  { label: 'Qualificação', href: '/qualificacao' },
   { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
 ];
 
@@ -21,13 +20,14 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'glass-strong py-2 shadow-lg shadow-black/50 scale-[0.98]'
-          : 'bg-transparent py-4 scale-100'
+          ? 'py-2 shadow-lg shadow-black/50'
+          : 'bg-transparent py-4'
       }`}
+      style={{ backgroundColor: scrolled ? 'rgba(0,0,0,0.9)' : 'transparent' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo Sistema Britto - Escudo */}
+          {/* Logo Sistema Britto */}
           <a 
             href="/" 
             className="group transition-all duration-500 hover:scale-105"
@@ -47,23 +47,20 @@ export default function Navbar() {
                 href={link.href}
                 target={link.external ? '_blank' : undefined}
                 rel={link.external ? 'noopener noreferrer' : undefined}
-                className="text-neutral-200 hover:text-green-400 text-sm font-semibold transition-colors duration-200 relative group"
+                className="text-gray-200 hover:text-green-400 text-sm font-semibold transition-colors duration-200 relative group"
               >
                 {link.label}
                 {link.external && (
                   <span className="ml-1 text-xs opacity-70">↗</span>
                 )}
-                {/* Hover underline animation */}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
             <a
-              href="https://wa.me/5511914088571?text=Olá!%20Quero%20conversar%20com%20um%20especialista%20em%20workforce%20de%20IA"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-green-500 hover:bg-green-600 text-surface-900 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 shadow-lg shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105"
+              href="/qualificacao"
+              className="bg-green-500 hover:bg-green-600 text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 shadow-lg shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105"
             >
-              Falar com Especialista
+              Orçamento em Tempo Real
             </a>
           </div>
 
@@ -81,29 +78,27 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile menu com animação */}
+        {/* Mobile menu */}
         <div className={`md:hidden overflow-hidden transition-all duration-500 ${mobileOpen ? 'max-h-96 mt-4' : 'max-h-0'}`}>
-          <div className="glass-strong rounded-2xl p-6 space-y-4">
+          <div className="rounded-2xl p-6 space-y-4" style={{ backgroundColor: 'rgba(0,0,0,0.9)' }}>
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 target={link.external ? '_blank' : undefined}
                 rel={link.external ? 'noopener noreferrer' : undefined}
-                className="block text-neutral-200 hover:text-green-400 text-base font-semibold py-2 transition-colors duration-200"
+                className="block text-gray-200 hover:text-green-400 text-base font-semibold py-2 transition-colors duration-200"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
               </a>
             ))}
             <a
-              href="https://wa.me/5511914088571?text=Olá!%20Quero%20conversar%20com%20um%20especialista%20em%20workforce%20de%20IA"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block text-center bg-green-500 text-surface-900 px-6 py-3 rounded-full font-bold mt-4 shadow-lg shadow-green-500/25 hover:bg-green-600 transition-all duration-200"
+              href="/qualificacao"
+              className="block text-center bg-green-500 text-black px-6 py-3 rounded-full font-bold mt-4 shadow-lg shadow-green-500/25 hover:bg-green-600 transition-all duration-200"
               onClick={() => setMobileOpen(false)}
             >
-              Falar com Especialista
+              Orçamento em Tempo Real
             </a>
           </div>
         </div>

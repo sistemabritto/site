@@ -28,14 +28,57 @@ const faqs = [
 
 export default function WhatsApp() {
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [orderBump, setOrderBump] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '' });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmitLead = async () => {
+    if (!formData.email || !formData.whatsapp) return;
+    
+    // Salvar lead no CRM (API local)
+    try {
+      await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          source: 'whatsapp-landing',
+          utm_source: new URLSearchParams(window.location.search).get('utm_source') || '',
+          utm_medium: new URLSearchParams(window.location.search).get('utm_medium') || '',
+          utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign') || '',
+        }),
+      });
+    } catch (e) {
+      console.error('Lead save error:', e);
+    }
+    
+    setSubmitted(true);
+    setTimeout(() => {
+      handleCheckout();
+    }, 800);
+  };
 
   const handleCheckout = async () => {
     setLoading(true);
     try {
+      const products = ['whatsapp-ia-basico'];
+      if (orderBump) {
+        products.push('consultoria-tecnica-whatsapp');
+      }
+      
       const res = await fetch('/api/abacatepay/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ productId: 'whatsapp-ia-basico' }),
+        body: JSON.stringify({ 
+          productId: products[0],
+          customer: {
+            email: formData.email,
+            name: formData.name || formData.email.split('@')[0],
+            cellphone: formData.whatsapp,
+          },
+          orderBump: orderBump,
+        }),
       });
       const data = await res.json();
       if (data.url) {
@@ -46,6 +89,10 @@ export default function WhatsApp() {
     } catch {
       window.location.href = 'https://wa.me/5511914088571?text=Olá!%20Quero%20o%20WhatsApp%20IA%20de%20R$297';
     }
+  };
+
+  const openCheckout = () => {
+    setShowModal(true);
   };
 
   return (
@@ -59,6 +106,100 @@ export default function WhatsApp() {
       <Navbar />
       
       <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>
+
+        {/* ===== MODAL EMAIL + WHATSAPP ===== */}
+        {showModal && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0,0,0,0.9)' }}>
+            <div className="bg-[#111111] rounded-3xl p-8 max-w-md w-full border border-green-500/30 relative">
+              {!submitted ? (
+                <>
+                  <button 
+                    onClick={() => setShowModal(false)}
+                    className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl"
+                  >×</button>
+                  
+                  <div className="text-center mb-6">
+                    <div className="text-4xl mb-3">🚀</div>
+                    <h3 className="text-2xl font-bold text-white mb-2">Quase lá!</h3>
+                    <p className="text-gray-300 text-sm">Seus dados = checkout mais rápido. Sem repetir tudo.</p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
+                      <input
+                        type="text"
+                        placeholder="Seu nome"
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
+                      <input
+                        type="email"
+                        placeholder="seu@email.com"
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp *</label>
+                      <input
+                        type="tel"
+                        placeholder="(11) 99999-9999"
+                        value={formData.whatsapp}
+                        onChange={(e) => setFormData({...formData, whatsapp: e.target.value})}
+                        className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+                        required
+                      />
+                    </div>
+
+                    {/* ORDER BUMP */}
+                    <div 
+                      className="flex items-center gap-3 bg-[#0a0a0a] rounded-xl p-4 border cursor-pointer transition-all"
+                      style={{ borderColor: orderBump ? '#D4AF37' : 'rgba(255,255,255,0.1)' }}
+                      onClick={() => setOrderBump(!orderBump)}
+                    >
+                      <div 
+                        className="w-6 h-6 rounded border-2 flex items-center justify-center flex-shrink-0"
+                        style={{ borderColor: orderBump ? '#D4AF37' : '#666', backgroundColor: orderBump ? '#D4AF37' : 'transparent' }}
+                      >
+                        {orderBump && <span className="text-black font-bold text-sm">✓</span>}
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between">
+                          <span className="text-white font-semibold text-sm">+ Consultoria Técnica WhatsApp</span>
+                          <span className="text-[#D4AF37] font-bold text-sm">R$ 250</span>
+                        </div>
+                        <p className="text-gray-400 text-xs mt-1">Suporte técnico humano via WhatsApp com SLA de 24h. Configuração, integrações, troubleshooting.</p>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={handleSubmitLead}
+                      disabled={!formData.email || !formData.whatsapp || loading}
+                      className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {loading ? 'Carregando...' : `CONTINUAR — R$ ${orderBump ? '547' : '297'}`}
+                    </button>
+                    
+                    <p className="text-gray-500 text-xs text-center">Seus dados estão seguros. Sem spam.</p>
+                  </div>
+                </>
+              ) : (
+                <div className="text-center py-8">
+                  <div className="text-5xl mb-4">✅</div>
+                  <h3 className="text-xl font-bold text-white mb-2">Redirecionando pro checkout...</h3>
+                  <p className="text-gray-400 text-sm">Seus dados foram salvos. Você será redirecionado em instantes.</p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* ===== HERO — SEM PREÇO, COPY AGRESSIVA ===== */}
         <section className="relative pt-32 pb-20 overflow-hidden">
@@ -87,11 +228,10 @@ export default function WhatsApp() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
-                onClick={handleCheckout}
-                disabled={loading}
-                className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25 disabled:opacity-50"
+                onClick={openCheckout}
+                className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25"
               >
-                {loading ? 'Carregando...' : 'ATIVAR MEU WHATSAPP IA →'}
+                ATIVAR MEU WHATSAPP IA →
               </button>
             </div>
 
@@ -132,7 +272,6 @@ export default function WhatsApp() {
               <p className="text-gray-300 text-lg">Leads qualificados, organizados e prontos pra fechar. Sem trabalho manual.</p>
             </div>
 
-            {/* Print 1 - Chat Atendimento */}
             <div className="mb-8">
               <img 
                 src="/images/evo/chat-atendimento.webp" 
@@ -142,7 +281,6 @@ export default function WhatsApp() {
               <p className="text-gray-300 text-sm mt-4 text-center">Atendimento automático com IA que qualifica e classifica leads em tempo real</p>
             </div>
 
-            {/* Print 2 - Pipeline */}
             <div className="mb-8">
               <img 
                 src="/images/evo/page-pipeline.webp" 
@@ -152,7 +290,6 @@ export default function WhatsApp() {
               <p className="text-gray-300 text-sm mt-4 text-center">Pipeline automático: leads quentes, mornos e frios organizados por valor</p>
             </div>
 
-            {/* Print 3 - Channels */}
             <div>
               <img 
                 src="/images/evo/page-channels.webp" 
@@ -294,7 +431,7 @@ export default function WhatsApp() {
           </div>
         </section>
 
-        {/* ===== OFERTA R$ 297 — COM GOLD ===== */}
+        {/* ===== OFERTA R$ 297 — COM GOLD + ORDER BUMP ===== */}
         <section id="plano" className="py-20 px-4 bg-[#0a0a0a]">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-white mb-2">
@@ -334,12 +471,32 @@ export default function WhatsApp() {
                   <span className="text-gray-300 text-xl">/mês</span>
                 </div>
 
-                <button
-                  onClick={handleCheckout}
-                  disabled={loading}
-                  className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-[#D4AF37]/25 w-full justify-center disabled:opacity-50"
+                {/* ORDER BUMP INLINE */}
+                <div 
+                  className="flex items-center gap-3 bg-black/60 rounded-xl p-4 mb-6 border cursor-pointer transition-all text-left"
+                  style={{ borderColor: orderBump ? '#D4AF37' : 'rgba(255,255,255,0.1)' }}
+                  onClick={() => setOrderBump(!orderBump)}
                 >
-                  {loading ? 'Carregando...': 'ATIVAR MEU WHATSAPP IA →'}
+                  <div 
+                    className="w-6 h-6 rounded border-2 flex items-center justify-center flex-shrink-0"
+                    style={{ borderColor: orderBump ? '#D4AF37' : '#666', backgroundColor: orderBump ? '#D4AF37' : 'transparent' }}
+                  >
+                    {orderBump && <span className="text-black font-bold text-sm">✓</span>}
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-white font-semibold text-sm">+ Consultoria Técnica WhatsApp</span>
+                      <span className="text-[#D4AF37] font-bold text-sm">R$ 250</span>
+                    </div>
+                    <p className="text-gray-400 text-xs mt-1">Suporte técnico humano via WhatsApp com SLA de 24h</p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={openCheckout}
+                  className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-[#D4AF37]/25 w-full justify-center"
+                >
+                  ATIVAR MEU WHATSAPP IA →
                 </button>
 
                 <p className="text-gray-300 text-sm mt-4">Sem fidelidade. Cancele quando quiser. 7 dias de garantia.</p>
@@ -387,11 +544,10 @@ export default function WhatsApp() {
               Para de perder tempo. Ativa seu WhatsApp IA agora.
             </p>
             <button
-              onClick={handleCheckout}
-              disabled={loading}
-              className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25 disabled:opacity-50"
+              onClick={openCheckout}
+              className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25"
             >
-              {loading ? 'Carregando...' : 'ATIVAR MEU WHATSAPP IA →'}
+              ATIVAR MEU WHATSAPP IA →
             </button>
           </div>
         </section>

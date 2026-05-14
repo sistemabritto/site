@@ -36,19 +36,21 @@ const QUESTIONS = [
     id: 'p4',
     question: 'Pra implementar essa força de trabalho, investimento a partir de R$ 3.000. Você está disposto, é capaz e tem o dinheiro na mão?',
     options: [
-      { label: 'Sim, estou disposto', value: 'sim', redirect: 'high-ticket' },
-      { label: 'Não, preciso de algo mais acessível', value: 'nao', redirect: 'downsell' },
+      { label: 'Sim, estou disposto', value: 'sim' },
+      { label: 'Não, preciso de algo mais acessível', value: 'nao' },
     ],
   },
 ];
 
 export default function Qualificacao() {
+  const [step, setStep] = useState<'email' | 'quiz'>('email');
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [utmParams, setUtmParams] = useState<Record<string, string>>({});
 
-  // Capturar UTM params na montagem
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
@@ -58,44 +60,41 @@ export default function Qualificacao() {
         if (val) utm[key] = val;
       });
       setUtmParams(utm);
-      console.log('[Qualificacao] UTM params:', utm);
     }
   }, []);
 
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !name) return;
+
+    // Salvar lead no CRM
+    try {
+      await fetch('/api/qualificacao', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event: 'lead_captured',
+          email,
+          name,
+          utm: utmParams,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+    } catch (err) {
+      console.error('[Lead Capture Error]', err);
+    }
+
+    setStep('quiz');
+  };
+
   const currentQuestion = QUESTIONS[currentStep];
   const progress = ((currentStep + 1) / QUESTIONS.length) * 100;
-
-  // Track event (Facebook Pixel + console)
-  const trackEvent = (eventName: string, eventData?: any) => {
-    if (typeof window === 'undefined') return;
-    
-    const payload = { ...eventData, ...utmParams, timestamp: new Date().toISOString() };
-    
-    // Facebook Pixel
-    if ((window as any).fbq) {
-      (window as any).fbq('trackCustom', eventName, payload);
-    }
-    
-    // Google Analytics
-    if ((window as any).gtag) {
-      (window as any).gtag('event', eventName, payload);
-    }
-    
-    console.log('[Track]', eventName, payload);
-  };
 
   const handleAnswer = (value: string) => {
     if (!currentQuestion) return;
 
     const newAnswers = { ...answers, [currentQuestion.id]: value };
     setAnswers(newAnswers);
-
-    // Track resposta com UTM
-    trackEvent(`Qualificacao_P${currentStep + 1}`, {
-      question_id: currentQuestion.id,
-      answer: value,
-      step: currentStep + 1,
-    });
 
     if (currentStep < QUESTIONS.length - 1) {
       setCurrentStep(currentStep + 1);
@@ -109,19 +108,14 @@ export default function Qualificacao() {
 
     const isHighTicket = finalAnswers['p4'] === 'sim';
 
-    // Track qualificação completa
-    trackEvent('Qualification_Completed', {
-      answers: finalAnswers,
-      result: isHighTicket ? 'high-ticket' : 'downsell',
-      ...utmParams,
-    });
-
-    // Enviar pro backend (salva no CRM + UTM)
     try {
       await fetch('/api/qualificacao', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          event: 'qualification_completed',
+          email,
+          name,
           answers: finalAnswers,
           utm: utmParams,
           result: isHighTicket ? 'high-ticket' : 'downsell',
@@ -133,13 +127,10 @@ export default function Qualificacao() {
       console.error('[Qualificacao] Erro ao salvar:', e);
     }
 
-    // Redirecionar
     setTimeout(() => {
       if (isHighTicket) {
-        // High ticket → WhatsApp direto
         window.location.href = `https://wa.me/5511914088571?text=Olá!%20Fiz%20a%20qualificação%20e%20quero%20implementar%20minha%20workforce%20de%20IA%20(high-ticket)`;
       } else {
-        // Downsell → página de resultado com plano recomendado
         if (typeof window !== 'undefined') {
           sessionStorage.setItem('qualificacao_answers', JSON.stringify(finalAnswers));
         }
@@ -149,9 +140,77 @@ export default function Qualificacao() {
     }, 500);
   };
 
+  // Tela de captura de email
+  if (step === 'email') {
+    return (
+      <>
+        <Meta 
+          title="Qualificação — Sistema Britto"
+          description="Responda 4 perguntas rápidas e descubra o plano ideal para sua empresa."
+          path="/qualificacao"
+        />
+        
+        <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 py-20">
+          <div className="w-full max-w-md">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-full px-4 py-2 mb-6">
+                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Qualificação Gratuita</span>
+              </div>
+              <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+                Antes de começar...
+              </h1>
+              <p className="text-gray-300 text-lg">
+                Precisamos do seu email pra salvar seus resultados e te enviar uma análise personalizada.
+              </p>
+            </div>
+
+            <form onSubmit={handleEmailSubmit} className="bg-[#111111] rounded-3xl p-8 border border-white/10">
+              <div className="mb-6">
+                <label className="block text-gray-300 text-sm font-semibold mb-2">Seu nome</label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Ex: João Silva"
+                  required
+                  className="w-full bg-black/80 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none transition-colors"
+                />
+              </div>
+
+              <div className="mb-8">
+                <label className="block text-gray-300 text-sm font-semibold mb-2">Seu melhor email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Ex: joao@empresa.com.br"
+                  required
+                  className="w-full bg-black/80 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none transition-colors"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25"
+              >
+                COMEÇAR QUALIFICAÇÃO →
+              </button>
+
+              <p className="text-gray-500 text-xs text-center mt-4">
+                🔒 Seus dados são confidenciais. Não enviamos spam.
+              </p>
+            </form>
+          </div>
+        </main>
+      </>
+    );
+  }
+
+  // Tela do quiz
   if (!currentQuestion) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto mb-4" />
           <p className="text-white">Carregando...</p>
@@ -168,7 +227,7 @@ export default function Qualificacao() {
         path="/qualificacao"
       />
       
-      <main className="min-h-screen bg-black flex items-center justify-center px-4 py-20">
+      <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 py-20">
         <div className="w-full max-w-2xl">
           {/* Progress Bar */}
           <div className="mb-8">
@@ -176,7 +235,7 @@ export default function Qualificacao() {
               <span>Questão {currentStep + 1} de {QUESTIONS.length}</span>
               <span>{Math.round(progress)}% concluído</span>
             </div>
-            <div className="w-full bg-surface-900 rounded-full h-2">
+            <div className="w-full bg-[#111111] rounded-full h-2">
               <div 
                 className="bg-green-500 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${progress}%` }}
@@ -185,7 +244,7 @@ export default function Qualificacao() {
           </div>
 
           {/* Question Card */}
-          <div className="bg-surface-900 rounded-3xl p-8 sm:p-12 border border-white/10">
+          <div className="bg-[#111111] rounded-3xl p-8 sm:p-12 border border-white/10">
             <h1 className="text-2xl sm:text-3xl font-bold text-white mb-8 leading-tight">
               {currentQuestion.question}
             </h1>

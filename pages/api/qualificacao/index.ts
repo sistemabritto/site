@@ -6,11 +6,14 @@ const EVO_TOKEN = process.env.EVO_TOKEN || 'ed260550-affc-42f1-92e3-45affea89e05
 const SDR_PHONE = '5511914088571';
 
 interface QualificacaoBody {
-  answers: Record<string, string>;
-  utm: Record<string, string>;
-  result: 'high-ticket' | 'downsell';
-  timestamp: string;
-  userAgent: string;
+  answers?: Record<string, string>;
+  utm?: Record<string, string>;
+  result?: 'high-ticket' | 'downsell';
+  timestamp?: string;
+  userAgent?: string;
+  event?: string;
+  email?: string;
+  name?: string;
 }
 
 function formatAnswers(body: QualificacaoBody): string {
@@ -35,12 +38,12 @@ function formatAnswers(body: QualificacaoBody): string {
   
   msg += `*Respostas:*\n`;
   for (const [key, label] of Object.entries(labels)) {
-    const val = answers[key];
-    const display = answerLabels[key]?.[val] || val || '-';
+    const val = answers?.[key];
+    const display = val ? (answerLabels[key]?.[val] || val) : '-';
     msg += `• ${label}: ${display}\n`;
   }
 
-  if (Object.keys(utm).length > 0) {
+  if (utm && Object.keys(utm).length > 0) {
     msg += `\n*UTM/Tracking:*\n`;
     for (const [key, val] of Object.entries(utm)) {
       msg += `• ${key}: ${val}\n`;
@@ -77,14 +80,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const body: QualificacaoBody = req.body;
-    const { answers, utm, result } = body;
+    const { answers, utm, result, event, email, name } = body;
 
     console.log('[Qualificação Lead]', {
+      event,
+      email,
+      name,
       answers,
       utm,
       result,
       timestamp: body.timestamp,
     });
+
+    // Se for captura de email, salvar lead e retornar
+    if (event === 'lead_captured') {
+      const message = `📧 *NOVO LEAD CAPTURADO*\n\n*Nome:* ${name || 'Não informado'}\n*Email:* ${email}\n\nAguardando qualificação...`;
+      await sendWhatsAppNotification(message);
+      return res.status(200).json({ received: true });
+    }
 
     // Formatar mensagem pro SDR
     const message = formatAnswers(body);
