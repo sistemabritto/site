@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 const navLinks = [
+  { label: 'Workforce', href: '/workforce' },
   { label: 'WhatsApp', href: '/whatsapp' },
-  { label: 'EvoNexus', href: '/evonexus' },
-  { label: 'Hermes', href: '/hermes' },
+  { label: 'Qualificação', href: '/qualificacao' },
   { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
 ];
 

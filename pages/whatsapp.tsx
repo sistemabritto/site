@@ -19,8 +19,8 @@ const cases = [
 ];
 
 const faqs = [
-  { q: 'Preciso de chip novo?', a: 'Não! Funciona no seu número atual. Você pode usar um número específico ou fazer o desvio do seu principal.' },
-  { q: 'Demora pra configurar?', a: 'O setup leva 24-48h. A gente configura tudo pra você. É só aprovar e começar a usar.' },
+  { q: 'Preciso de chip novo?', a: 'Não. Funciona no seu número atual. Você pode usar um número específico ou fazer o desvio do seu principal.' },
+  { q: 'Demora pra configurar?', a: 'O setup leva 24-48h. A gente configura tudo. É só aprovar e começar a usar.' },
   { q: 'Posso cancelar?', a: 'Pode cancelar quando quiser. Sem multa. Sem fidelidade. Sem letra miúda.' },
   { q: 'Funciona no meu negócio?', a: 'Se você usa WhatsApp pra atender cliente, funciona. Clínica, escritório, loja, delivery, serviços — todos os segmentos.' },
   { q: 'Meus clientes vão saber que é IA?', a: 'Só se você quiser. A IA pode se apresentar como assistente, atendente virtual ou com o nome da sua empresa.' },
@@ -51,8 +51,8 @@ export default function WhatsApp() {
   return (
     <>
       <Meta 
-        title="WhatsApp Business + IA | Sistema Britto"
-        description="Seu WhatsApp como central comercial. IA que qualifica, agenda, vende e reativa leads 24/7. A partir de R$ 297/mês. Sem fidelidade."
+        title="WhatsApp + IA — Sistema Britto"
+        description="Seu WhatsApp como central comercial. IA que qualifica, agenda, vende e reativa leads 24/7. R$ 297/mês. Sem fidelidade."
         path="/whatsapp"
       />
       
@@ -60,7 +60,7 @@ export default function WhatsApp() {
       
       <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>
 
-        {/* ===== HERO SEM PREÇO ===== */}
+        {/* ===== HERO — SEM PREÇO, COPY AGRESSIVA ===== */}
         <section className="relative pt-32 pb-20 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-green-900/10 via-[#0a0a0a] to-[#0a0a0a]" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/10 rounded-full blur-3xl" />
@@ -72,13 +72,17 @@ export default function WhatsApp() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              Seu WhatsApp como<br />
-              <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">central comercial</span>
+              Seu concorrente responde<br />
+              <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">em 1 segundo.</span><br />
+              Você, em 1 hora.
             </h1>
             
-            <p className="text-gray-200 text-lg max-w-2xl mx-auto font-medium mb-8">
-              IA que qualifica leads, agenda consultas, fecha vendas e reativa clientes — 
-              24/7, integrado ao seu CRM. Sem digitação manual, sem lead perdido.
+            <p className="text-gray-200 text-lg max-w-2xl mx-auto font-medium mb-4">
+              Enquanto você dorme, 47 leads mandaram mensagem no seu WhatsApp. 
+              Amanhã, 30 deles vão pro concorrente.
+            </p>
+            <p className="text-gray-400 text-base max-w-xl mx-auto mb-8">
+              Não é falta de esforço. É falta de escala. A IA resolve isso por R$ 297/mês.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -87,7 +91,7 @@ export default function WhatsApp() {
                 disabled={loading}
                 className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25 disabled:opacity-50"
               >
-                {loading ? 'Carregando...' : 'QUERO MEU WHATSAPP IA →'}
+                {loading ? 'Carregando...' : 'ATIVAR MEU WHATSAPP IA →'}
               </button>
             </div>
 
@@ -115,7 +119,7 @@ export default function WhatsApp() {
           </div>
         </section>
 
-        {/* ===== PRINTS DO CRM ===== */}
+        {/* ===== PRINTS REAIS DO CRM ===== */}
         <section className="py-20 px-4 bg-[#0a0a0a]">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
@@ -123,110 +127,61 @@ export default function WhatsApp() {
                 Na prática
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                Seu CRM vai funcionar assim:
+                É assim que seu CRM vai funcionar:
               </h2>
-              <p className="text-gray-300 text-lg">Leads qualificados, organizados e prontos pra fechar.</p>
+              <p className="text-gray-300 text-lg">Leads qualificados, organizados e prontos pra fechar. Sem trabalho manual.</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Print 1 - Funil */}
-              <div className="bg-[#111111] rounded-2xl p-4 border border-white/10">
-                <div className="bg-black rounded-xl overflow-hidden">
-                  <div className="bg-[#1a1a1a] px-4 py-3 border-b border-white/10 flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                    <div className="w-3 h-3 rounded-full bg-green-500" />
-                    <span className="text-gray-400 text-xs ml-2">CRM - Funil de Vendas</span>
-                  </div>
-                  <div className="p-6">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between bg-green-500/10 border border-green-500/30 rounded-lg p-4">
-                        <div className="flex items-center gap-3">
-                          <span className="text-2xl">🔥</span>
-                          <div>
-                            <div className="text-white font-semibold">Leads Quentes</div>
-                            <div className="text-gray-400 text-sm">23 leads aguardando contato</div>
-                          </div>
-                        </div>
-                        <span className="text-green-400 font-bold text-xl">R$ 47.200</span>
-                      </div>
-                      <div className="flex items-center justify-between bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
-                        <div className="flex items-center gap-3">
-                          <span className="text-2xl">⚡</span>
-                          <div>
-                            <div className="text-white font-semibold">Leads Mornos</div>
-                            <div className="text-gray-400 text-sm">45 leads em follow-up</div>
-                          </div>
-                        </div>
-                        <span className="text-yellow-400 font-bold text-xl">R$ 89.500</span>
-                      </div>
-                      <div className="flex items-center justify-between bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
-                        <div className="flex items-center gap-3">
-                          <span className="text-2xl">❄️</span>
-                          <div>
-                            <div className="text-white font-semibold">Leads Frios</div>
-                            <div className="text-gray-400 text-sm">112 leads para nutrir</div>
-                          </div>
-                        </div>
-                        <span className="text-blue-400 font-bold text-xl">R$ 156.000</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <p className="text-gray-300 text-sm mt-4 text-center">Funil automático com leads classificados pela IA</p>
-              </div>
+            {/* Print 1 - Chat Atendimento */}
+            <div className="mb-8">
+              <img 
+                src="/images/evo/chat-atendimento.webp" 
+                alt="Chat de atendimento - IA qualificando leads no WhatsApp"
+                className="w-full max-w-5xl mx-auto rounded-2xl border border-green-500/30 shadow-2xl shadow-green-500/10"
+              />
+              <p className="text-gray-300 text-sm mt-4 text-center">Atendimento automático com IA que qualifica e classifica leads em tempo real</p>
+            </div>
 
-              {/* Print 2 - Conversa */}
-              <div className="bg-[#111111] rounded-2xl p-4 border border-white/10">
-                <div className="bg-black rounded-xl overflow-hidden">
-                  <div className="bg-[#1a1a1a] px-4 py-3 border-b border-white/10 flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                    <div className="w-3 h-3 rounded-full bg-green-500" />
-                    <span className="text-gray-400 text-xs ml-2">WhatsApp - IA Assistant</span>
-                  </div>
-                  <div className="p-4 space-y-3">
-                    <div className="flex justify-end">
-                      <div className="bg-green-500/20 border border-green-500/30 rounded-2xl rounded-br-sm px-4 py-2 max-w-[80%]">
-                        <p className="text-gray-200 text-sm">Olá! Vi que você se interessou pelo nosso plano Premium. Posso te ajudar? 😊</p>
-                        <span className="text-gray-500 text-xs">10:32 ✓✓</span>
-                      </div>
-                    </div>
-                    <div className="flex justify-start">
-                      <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl rounded-bl-sm px-4 py-2 max-w-[80%]">
-                        <p className="text-gray-200 text-sm">Sim! Quero saber mais sobre a automação do WhatsApp</p>
-                        <span className="text-gray-500 text-xs">10:33</span>
-                      </div>
-                    </div>
-                    <div className="flex justify-end">
-                      <div className="bg-green-500/20 border border-green-500/30 rounded-2xl rounded-br-sm px-4 py-2 max-w-[80%]">
-                        <p className="text-gray-200 text-sm">Perfeito! Qual seu nome e quantos leads você recebe por mês?</p>
-                        <span className="text-gray-500 text-xs">10:33 ✓✓</span>
-                      </div>
-                    </div>
-                    <div className="flex justify-start">
-                      <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl rounded-bl-sm px-4 py-2 max-w-[80%]">
-                        <p className="text-gray-200 text-sm">Meu nome é Carlos, recebo uns 500 leads/mês</p>
-                        <span className="text-gray-500 text-xs">10:34</span>
-                      </div>
-                    </div>
-                    <div className="flex justify-end">
-                      <div className="bg-green-500/20 border border-green-500/30 rounded-2xl rounded-br-sm px-4 py-2 max-w-[80%]">
-                        <p className="text-gray-200 text-sm">Carlos, com 500 leads/mês você deve estar perdendo muita venda! Vou te mostrar como a IA pode te ajudar a converter pelo menos 3x mais. Posso agendar uma demonstração?</p>
-                        <span className="text-gray-500 text-xs">10:34 ✓✓</span>
-                      </div>
-                    </div>
-                    <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3 mt-4">
-                      <div className="flex items-center gap-2">
-                        <span className="text-blue-400">🤖</span>
-                        <span className="text-blue-300 text-xs font-semibold">IA classificou como: LEAD QUENTE</span>
-                      </div>
-                      <p className="text-gray-400 text-xs mt-1">Enviado notificação para o vendedor • Agendamento sugerido: Amanhã 10h</p>
-                    </div>
-                  </div>
+            {/* Print 2 - Pipeline */}
+            <div className="mb-8">
+              <img 
+                src="/images/evo/page-pipeline.webp" 
+                alt="Pipeline de vendas - CRM integrado"
+                className="w-full max-w-4xl mx-auto rounded-2xl border border-green-500/30 shadow-xl shadow-green-500/10"
+              />
+              <p className="text-gray-300 text-sm mt-4 text-center">Pipeline automático: leads quentes, mornos e frios organizados por valor</p>
+            </div>
+
+            {/* Print 3 - Channels */}
+            <div>
+              <img 
+                src="/images/evo/page-channels.webp" 
+                alt="Canais de comunicação - Evolution API"
+                className="w-full max-w-4xl mx-auto rounded-2xl border border-green-500/30 shadow-xl shadow-green-500/10"
+              />
+              <p className="text-gray-300 text-sm mt-4 text-center">Multi-canais: WhatsApp, Instagram, Telegram — tudo centralizado</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== ANALYTICS DO CRM ===== */}
+        <section className="py-16 bg-[#111111]">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-white mb-12 text-center">Métricas que importam</h2>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { value: '94%', label: 'Taxa de resposta automática', icon: '✅' },
+                { value: '3.2x', label: 'Mais agendamentos', icon: '📅' },
+                { value: '67%', label: 'Redução no tempo de follow-up', icon: '⚡' },
+                { value: 'R$ 12k', label: 'Economia média/mês', icon: '💰' },
+              ].map((stat, i) => (
+                <div key={i} className="bg-black/80 rounded-2xl p-6 text-center border border-green-500/20">
+                  <div className="text-3xl mb-2">{stat.icon}</div>
+                  <div className="text-3xl font-bold text-green-400 mb-1">{stat.value}</div>
+                  <div className="text-gray-300 text-sm">{stat.label}</div>
                 </div>
-                <p className="text-gray-300 text-sm mt-4 text-center">IA qualifica e classifica automaticamente</p>
-              </div>
+              ))}
             </div>
           </div>
         </section>
@@ -270,7 +225,7 @@ export default function WhatsApp() {
                     Somos parceiros oficiais da <strong>Evolution API</strong> — a plataforma open-source 
                     que conecta WhatsApp, automação e IA em um só lugar. Como embaixadores, temos 
                     acesso antecipado a features, suporte prioritário e capacidade de implementar 
-                    soluções customizadas para seu negócio.
+                    soluções customizadas.
                   </p>
                   <ul className="space-y-2">
                     {['Implementação oficial Evolution API', 'Suporte direto dos desenvolvedores', 'Features customizadas para seu caso'].map((item, i) => (
@@ -282,9 +237,7 @@ export default function WhatsApp() {
                   </ul>
                 </div>
                 <div className="flex items-center justify-center">
-                  <div className="w-56 h-56 bg-gradient-to-br from-green-500/20 to-green-600/10 rounded-full flex items-center justify-center border border-green-500/30">
-                    <span className="text-6xl">⚡</span>
-                  </div>
+                  <img src="/images/evo/evolution-api-logo.png" alt="Evolution API" className="w-48 h-auto opacity-80" />
                 </div>
               </div>
             </div>
@@ -341,15 +294,20 @@ export default function WhatsApp() {
           </div>
         </section>
 
-        {/* ===== OFERTA R$ 297 ===== */}
+        {/* ===== OFERTA R$ 297 — COM GOLD ===== */}
         <section id="plano" className="py-20 px-4 bg-[#0a0a0a]">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-white mb-8">
-              Comece agora por R$ 297/mês
+            <h2 className="text-3xl font-bold text-white mb-2">
+              Oferta de lançamento
             </h2>
+            <p className="text-gray-400 mb-8">Preço válido enquanto durarem as vagas.</p>
 
-            <div className="bg-gradient-to-br from-green-600/20 to-green-500/10 rounded-3xl p-8 border border-green-500/50 mb-8">
-              <ul className="space-y-4 text-left">
+            <div className="bg-gradient-to-br from-[#D4AF37]/20 to-[#C5A028]/10 rounded-3xl p-8 border border-[#D4AF37]/50 mb-8">
+              <div className="inline-block bg-[#D4AF37] text-black px-4 py-1 rounded-full text-xs font-bold uppercase mb-6">
+                ⚡ R$ 453 de desconto
+              </div>
+              
+              <ul className="space-y-4 text-left mb-8">
                 {[
                   'Atendente de IA 24/7 no WhatsApp',
                   'Qualificação automática de leads',
@@ -361,13 +319,13 @@ export default function WhatsApp() {
                   'Setup incluso (sem taxa extra)',
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-gray-200">
-                    <span className="text-green-400 text-xl">✓</span>
+                    <span className="text-[#D4AF37] text-xl">✓</span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
 
-              <div className="mt-8 pt-8 border-t border-green-500/30">
+              <div className="pt-8 border-t border-[#D4AF37]/30">
                 <div className="flex items-baseline justify-center gap-2 mb-6">
                   <span className="text-gray-300 text-lg">De</span>
                   <span className="text-gray-400 text-2xl line-through">R$ 750</span>
@@ -379,12 +337,12 @@ export default function WhatsApp() {
                 <button
                   onClick={handleCheckout}
                   disabled={loading}
-                  className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25 w-full justify-center disabled:opacity-50"
+                  className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-[#D4AF37]/25 w-full justify-center disabled:opacity-50"
                 >
-                  {loading ? 'Carregando...' : 'QUERO MEU WHATSAPP IA →'}
+                  {loading ? 'Carregando...': 'ATIVAR MEU WHATSAPP IA →'}
                 </button>
 
-                <p className="text-gray-300 text-sm mt-4">Sem fidelidade. Cancele quando quiser.</p>
+                <p className="text-gray-300 text-sm mt-4">Sem fidelidade. Cancele quando quiser. 7 dias de garantia.</p>
               </div>
             </div>
 
@@ -393,7 +351,7 @@ export default function WhatsApp() {
                 <span className="text-4xl">🛡️</span>
                 <div className="text-left">
                   <h3 className="text-lg font-bold text-white">7 dias de garantia incondicional</h3>
-                  <p className="text-gray-300 text-sm">Se não gostar, devolvemos seu dinheiro. Sem perguntas.</p>
+                  <p className="text-gray-300 text-sm">Se não gostar, devolvemos cada centavo. Sem perguntas.</p>
                 </div>
               </div>
             </div>
@@ -422,18 +380,18 @@ export default function WhatsApp() {
         <section className="py-20 bg-[#0a0a0a]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-              Pronto para transformar<br />
-              <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">seu WhatsApp?</span>
+              Cada lead que espera<br />
+              <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">é uma venda perdida.</span>
             </h2>
             <p className="text-gray-200 text-lg mb-8">
-              Implementamos sua central comercial com IA em até 48h.
+              Para de perder tempo. Ativa seu WhatsApp IA agora.
             </p>
             <button
               onClick={handleCheckout}
               disabled={loading}
               className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25 disabled:opacity-50"
             >
-              {loading ? 'Carregando...' : 'QUERO MEU WHATSAPP IA →'}
+              {loading ? 'Carregando...' : 'ATIVAR MEU WHATSAPP IA →'}
             </button>
           </div>
         </section>

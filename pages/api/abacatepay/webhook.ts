@@ -58,7 +58,66 @@ async function notifyCRM(data: any) {
   try {
     const { customer, items, externalId } = data;
     
-    // Enviar para EvoNexus/CRM via webhook interno
+    const productNames: Record<string, string> = {
+      'whatsapp-ia-basico': 'WhatsApp IA Básico (R$ 297/mês)',
+      'crm-ia-completo': 'CRM + IA Completo (R$ 750/mês)',
+      'evonexus-premium': 'EvoNexus Premium (R$ 2.500/mês)',
+      'hermes-selfhosted': 'Hermes Self-Hosted (R$ 3.500)',
+    };
+
+    const productName = productNames[externalId] || items?.[0]?.name || externalId;
+    const customerName = customer?.name || 'Cliente';
+    const customerEmail = customer?.email || 'Não informado';
+    const customerPhone = customer?.cellphone || 'Não informado';
+
+    // 1. Notificar SDR via Evolution API (WhatsApp)
+    const evolutionApi = process.env.EVO_API_URL || 'https://go.workflowapi.com.br';
+    const instanceId = process.env.EVO_INSTANCE || 'sistema-britto-business';
+    const apiToken = process.env.EVO_TOKEN || 'ed260550-affc-42f1-92e3-45affea89e05';
+    const sdrPhone = '5511914088571';
+    
+    const sdrMessage = `🎉 *NOVO PAGAMENTO APROVADO!*\n\n*Produto:* ${productName}\n*Cliente:* ${customerName}\n*Email:* ${customerEmail}\n*Telefone:* ${customerPhone}\n\n⚠️ Entrar em contato para onboarding!`;
+    
+    try {
+      await fetch(`${evolutionApi}/message/sendText/${instanceId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': apiToken,
+        },
+        body: JSON.stringify({
+          number: sdrPhone,
+          text: sdrMessage,
+        }),
+      });
+      console.log('[SDR Notified] WhatsApp sent to', sdrPhone);
+    } catch (e) {
+      console.error('[SDR Notify Error]', e);
+    }
+
+    // 2. Enviar mensagem de boas-vindas pro cliente
+    if (customer?.cellphone) {
+      const welcomeMessage = `🎉 *Pagamento aprovado!*\n\nOlá ${customerName.split(' ')[0]}!\n\nSeu plano *${productName}* foi ativado com sucesso.\n\nEm breve um de nossos especialistas vai entrar em contato pra configurar tudo pra você.\n\nEnquanto isso, se tiver qualquer dúvida, é só responder essa mensagem.`;
+      
+      try {
+        await fetch(`${evolutionApi}/message/sendText/${instanceId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': apiToken,
+          },
+          body: JSON.stringify({
+            number: customer.cellphone.replace(/\D/g, ''),
+            text: welcomeMessage,
+          }),
+        });
+        console.log('[Customer Notified] WhatsApp sent to', customer.cellphone);
+      } catch (e) {
+        console.error('[Customer Notify Error]', e);
+      }
+    }
+
+    // 3. Enviar para CRM webhook (se configurado)
     const crmWebhook = process.env.CRM_WEBHOOK_URL;
     if (crmWebhook) {
       await fetch(crmWebhook, {
@@ -67,38 +126,17 @@ async function notifyCRM(data: any) {
         body: JSON.stringify({
           event: 'new_customer',
           customer: {
-            name: customer?.name,
-            email: customer?.email,
-            phone: customer?.cellphone,
+            name: customerName,
+            email: customerEmail,
+            phone: customerPhone,
           },
-          product: items?.[0]?.name || externalId,
+          product: productName,
           timestamp: new Date().toISOString(),
         }),
       });
     }
 
-    // Opcional: Enviar WhatsApp automático via Evolution API
-    const evolutionApi = process.env.EVOLUTION_API_URL;
-    const instanceId = process.env.EVOLUTION_INSTANCE_ID;
-    const apiToken = process.env.EVOLUTION_API_TOKEN;
-    
-    if (evolutionApi && instanceId && apiToken) {
-      const message = `🎉 *Pagamento Aprovado!*\n\nOlá ${customer?.name || 'Cliente'},\nSeu plano *${items?.[0]?.name || 'Sistema Britto'}* foi ativado com sucesso!\n\nEm breve um de nossos especialistas entrará em contato para as boas-vindas.`;
-      
-      await fetch(`${evolutionApi}/message/sendText/${instanceId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': apiToken,
-        },
-        body: JSON.stringify({
-          number: customer?.cellphone?.replace(/\D/g, '') || '',
-          message,
-        }),
-      });
-    }
-
-    console.log('[CRM Notified]', customer?.email);
+    console.log('[CRM Notified]', customerEmail);
   } catch (error) {
     console.error('[NotifyCRM Error]', error);
   }

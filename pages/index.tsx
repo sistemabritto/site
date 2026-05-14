@@ -15,29 +15,31 @@ export default function Home() {
       
       <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>
 
-        {/* ===== HERO ===== */}
+        {/* ===== HERO — COPY AGRESSIVA ===== */}
         <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
           <div className="absolute inset-0 bg-gradient-to-b from-green-900/20 via-[#0a0a0a] to-[#0a0a0a]" />
           <div className="relative z-10 max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-full px-4 py-2 mb-8">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Workforce de IA</span>
+              <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Vagas Limitadas</span>
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              Sua empresa vai ter uma<br />
-              <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">força de trabalho de IA</span><br />
-              em 48 horas.
+              Seu concorrente já usa<br />
+              <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">IA pra operar 24/7.</span><br />
+              Você ainda faz tudo manual.
             </h1>
-            <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">Ou você não paga nada.</p>
+            <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
+              Enquanto você dorme, 47 leads mandaram mensagem. Amanhã, 30 vão pro concorrente.
+            </p>
             <p className="text-lg text-gray-400 mb-12 max-w-xl mx-auto">
-              Sem contratar. Sem infra. Sem saber programar. Uma workforce completa — atendimento, vendas, finanças, projetos — que opera seu negócio 24/7.
+              Não é falta de esforço. É falta de escala. A gente resolve isso em 48 horas.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="/workforce" className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25">
-                CONHECER A WORKFORCE →
+                VER COMO FUNCIONA →
               </a>
-              <a href="/whatsapp" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
-                WhatsApp + IA
+              <a href="/qualificacao" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
+                Fazer qualificação gratuita
               </a>
             </div>
           </div>
@@ -54,7 +56,7 @@ export default function Home() {
               <a href="/workforce" className="group bg-black/80 rounded-3xl p-8 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-2">
                 <div className="text-5xl mb-6">🏭</div>
                 <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors">Workforce de IA</h3>
-                <p className="text-gray-300 mb-6">Empresas que precisam de uma equipe completa de agentes: atendimento, vendas, finanças, projetos, marketing.</p>
+                <p className="text-gray-300 mb-6">Empresas que precisam de uma equipe completa: atendimento, vendas, finanças, projetos, marketing — tudo automatizado.</p>
                 <div className="text-green-400 font-semibold">A partir de R$ 297/mês →</div>
               </a>
 
@@ -62,7 +64,7 @@ export default function Home() {
               <a href="/whatsapp" className="group bg-black/80 rounded-3xl p-8 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-2">
                 <div className="text-5xl mb-6">💬</div>
                 <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors">WhatsApp + IA</h3>
-                <p className="text-gray-300 mb-6">Transforme seu WhatsApp em uma máquina de vendas com IA que qualifica, agenda e fecha 24/7.</p>
+                <p className="text-gray-300 mb-6">Transforme seu WhatsApp em máquina de vendas. IA que qualifica, agenda e fecha 24/7.</p>
                 <div className="text-green-400 font-semibold">R$ 297/mês →</div>
               </a>
 
@@ -70,7 +72,7 @@ export default function Home() {
               <a href="/qualificacao" className="group bg-black/80 rounded-3xl p-8 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-2">
                 <div className="text-5xl mb-6">🎯</div>
                 <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors">Qualificação Gratuita</h3>
-                <p className="text-gray-300 mb-6">Responda 4 perguntas e descubra o plano ideal para sua empresa. Sem compromisso.</p>
+                <p className="text-gray-300 mb-6">Responda 4 perguntas e descubra o plano ideal. Sem compromisso.</p>
                 <div className="text-green-400 font-semibold">Fazer agora →</div>
               </a>
             </div>
@@ -103,10 +105,11 @@ export default function Home() {
         <section className="py-24 px-4 bg-[#111111]">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-              Pronto para transformar seu negócio?
+              Cada dia sem automação<br />
+              <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">é dinheiro indo embora.</span>
             </h2>
             <p className="text-gray-300 text-lg mb-8">
-              Comece agora. Sem fidelidade. 7 dias de garantia.
+              Para de perder tempo. Comece agora.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="/workforce" className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25">
