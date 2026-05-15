@@ -150,28 +150,40 @@ export default function WhatsApp() {
 
                     {/* ORDER BUMP */}
                     <div 
-                      className="bg-[#0a0a00] border border-[#D4AF37]/40 rounded-xl p-4 cursor-pointer hover:border-[#D4AF37]/70 transition-all"
+                      className={`rounded-xl p-4 cursor-pointer transition-all border-2 ${
+                        orderBump 
+                          ? 'bg-[#D4AF37]/10 border-[#D4AF37]' 
+                          : 'bg-[#0a0a0a] border-white/10 hover:border-[#D4AF37]/50'
+                      }`}
                       onClick={() => setOrderBump(!orderBump)}
                     >
                       <div className="flex items-start gap-3">
                         <div className="mt-0.5">
-                          <input 
-                            type="checkbox" 
-                            checked={orderBump}
-                            onChange={() => setOrderBump(!orderBump)}
-                            className="w-5 h-5 accent-[#D4AF37]"
-                          />
+                          <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
+                            orderBump 
+                              ? 'bg-[#D4AF37] border-[#D4AF37]' 
+                              : 'border-gray-500'
+                          }`}>
+                            {orderBump && <span className="text-black font-bold text-xs">✓</span>}
+                          </div>
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center justify-between">
                             <span className="text-white font-bold text-sm">+ Consultoria Técnica WhatsApp</span>
                             <span className="text-[#D4AF37] font-bold text-sm">R$ 250/mês</span>
                           </div>
-                          <p className="text-gray-400 text-xs mt-1">
-                            Suporte técnico humano com SLA 24h. Infra, Docker, APIs, deploy, segurança. 
-                            Especialista no seu WhatsApp quando você precisar.
+                          <p className="text-gray-300 text-xs mt-1 leading-relaxed">
+                            Especialista técnico no seu WhatsApp com <strong className="text-white">SLA de 24h</strong>. 
+                            Docker, APIs, deploy, segurança, troubleshooting — resolve pra você.
                           </p>
-                          <p className="text-[#D4AF37] text-xs mt-1 font-semibold">⚡ Oferta exclusiva no checkout</p>
+                          <div className="mt-2 flex items-center gap-2">
+                            <span className="bg-[#D4AF37]/20 text-[#D4AF37] text-xs px-2 py-0.5 rounded-full font-semibold">
+                              ⚡ Recomendado
+                            </span>
+                            <span className="text-gray-400 text-xs">
+                              Quem tem IA precisa de suporte humano pra configurar
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -181,7 +193,7 @@ export default function WhatsApp() {
                       disabled={!formData.email || !formData.whatsapp || loading}
                       className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {loading ? 'Carregando...' : 'CONTINUAR →'}
+                      {loading ? 'Carregando...' : orderBump ? 'CONTINUAR — R$ 547/mês →' : 'CONTINUAR — R$ 297/mês →'}
                     </button>
                     
                     <p className="text-gray-500 text-xs text-center">Seus dados estão seguros. Sem spam.</p>

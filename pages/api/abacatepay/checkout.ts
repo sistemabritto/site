@@ -8,8 +8,7 @@ const PRODUCTS: Record<string, string> = {
   'crm-ia-completo': 'prod_CWRuQwLLLJyKcFcUYCEfwUAG',
   'evonexus-premium': 'prod_uqRB2KTALEQWumHkp3h2PJLX',
   'hermes-selfhosted': 'prod_bzFSpy31qQc2z6rTpBhASz2X',
-  'consultoria-whatsapp-sla24h': 'prod_ubx3sEukhDWdAECcQdhXQpHa',
-  'consultoria-whatsapp-sla24h-upsell': 'prod_puXY0f5YfRCyku3ErDez0Emt',
+  'whatsapp-ia-combo-consultoria': 'prod_0GBDbERsmaarw0GMRkRLg2EF',
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -19,7 +18,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const { productId, customer, orderBump } = req.body;
-    const abacateProductId = PRODUCTS[productId] || productId;
+    
+    // Se order bump marcado, usa produto combo (R$297 + R$250 = R$547/mês)
+    const finalProductId = orderBump ? 'whatsapp-ia-combo-consultoria' : productId;
+    const abacateProductId = PRODUCTS[finalProductId] || finalProductId;
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.sistemabritto.com.br';
 
     const body: Record<string, unknown> = {
@@ -34,11 +36,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         name: customer.name,
         cellphone: customer.cellphone,
       };
-    }
-
-    // Order bump: consultoria técnica R$250 como upsell pós-pagamento (produto único, não assinatura)
-    if (orderBump) {
-      body.upSellProductId = PRODUCTS['consultoria-whatsapp-sla24h-upsell'];
     }
 
     console.log('[AbacatePay Request]', JSON.stringify(body));
