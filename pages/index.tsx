@@ -167,10 +167,10 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center">3 soluções. 1 problema: escala.</h2>
             <p className="text-gray-400 text-center mb-16 text-lg">Do atendimento ao código. Da infra ao SaaS. A gente escala sua operação.</p>
 
-            {/* DEGRAU 1: ENTRY */}
+            {/* DEGRAU 1 */}
             <div className="mb-16">
               <div className="flex items-center gap-3 mb-6">
-                <span className="bg-green-500 text-black px-3 py-1 rounded-full text-xs font-bold">DEGRAU 1 — ENTRY</span>
+                <span className="bg-green-500 text-black px-3 py-1 rounded-full text-xs font-bold">PRIMEIRO PASSO</span>
                 <span className="text-gray-400 text-sm">Comece por aqui</span>
               </div>
               <a href="/whatsapp" className="group block bg-black/80 rounded-3xl p-8 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-2">
@@ -178,8 +178,8 @@ export default function Home() {
                   <div>
                     <div className="text-5xl mb-4">💬</div>
                     <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-green-400 transition-colors">CRM com IA no WhatsApp</h3>
-                    <p className="text-gray-300 mb-4"><strong className="text-white">Dor:</strong> Lead manda mensagem, ninguém responde. Venda se perde no follow-up. Equipe sobrecarregada.</p>
-                    <p className="text-gray-300 mb-4"><strong className="text-white">Solução:</strong> IA qualifica, agenda, cobra e fecha 24/7. CRM integrado. Zero trabalho manual.</p>
+                    <p className="text-gray-300 mb-4">Lead manda mensagem, ninguém responde. Venda se perde no follow-up. Equipe sobrecarregada.</p>
+                    <p className="text-gray-300 mb-4">IA qualifica, agenda, cobra e fecha 24/7. CRM integrado. Zero trabalho manual.</p>
                     <p className="text-green-400 font-semibold">A partir de R$ 297/mês</p>
                   </div>
                   <div className="flex flex-col justify-center">
@@ -196,10 +196,10 @@ export default function Home() {
               </a>
             </div>
 
-            {/* DEGRAU 2: MIDDLE */}
+            {/* DEGRAU 2 */}
             <div className="mb-16">
               <div className="flex items-center gap-3 mb-6">
-                <span className="bg-[#D4AF37] text-black px-3 py-1 rounded-full text-xs font-bold">DEGRAU 2 — MIDDLE TICKET</span>
+                <span className="bg-[#D4AF37] text-black px-3 py-1 rounded-full text-xs font-bold">INFRAESTRUTURA</span>
                 <span className="text-gray-400 text-sm">Quando a operação cresce</span>
               </div>
               <a href="/devops" className="group block bg-black/80 rounded-3xl p-8 border border-[#D4AF37]/20 hover:border-[#D4AF37]/50 transition-all duration-300 hover:-translate-y-2">
@@ -207,8 +207,8 @@ export default function Home() {
                   <div>
                     <div className="text-5xl mb-4">⚙️</div>
                     <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#D4AF37] transition-colors">DevOps + Suporte Técnico</h3>
-                    <p className="text-gray-300 mb-4"><strong className="text-white">Dor:</strong> Infra cai, deploy quebra, API falha. Você depende de freelancer ou tenta resolver sozinho. Perde horas/dia com problema técnico.</p>
-                    <p className="text-gray-300 mb-4"><strong className="text-white">Solução:</strong> Especialista técnico no seu WhatsApp com SLA 24h. Docker, APIs, deploy, segurança, troubleshooting. Resolve pra você.</p>
+                    <p className="text-gray-300 mb-4">Infra cai, deploy quebra, API falha. Você depende de freelancer ou tenta resolver sozinho. Perde horas/dia com problema técnico.</p>
+                    <p className="text-gray-300 mb-4">Especialista técnico no seu WhatsApp com SLA 24h. Docker, APIs, deploy, segurança, troubleshooting. Resolve pra você.</p>
                     <p className="text-[#D4AF37] font-semibold">Solicitar orçamento</p>
                   </div>
                   <div className="flex flex-col justify-center">
@@ -225,10 +225,10 @@ export default function Home() {
               </a>
             </div>
 
-            {/* DEGRAU 3: HIGH TICKET */}
+            {/* DEGRAU 3 */}
             <div className="mb-16">
               <div className="flex items-center gap-3 mb-6">
-                <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-bold">DEGRAU 3 — HIGH TICKET</span>
+                <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-bold">WORKFORCE COMPLETA</span>
                 <span className="text-gray-400 text-sm">Operação completa</span>
               </div>
               <a href="/workforce" className="group block bg-black/80 rounded-3xl p-8 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-2">
@@ -236,8 +236,8 @@ export default function Home() {
                   <div>
                     <div className="text-5xl mb-4">🏭</div>
                     <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">Workforce de IA</h3>
-                    <p className="text-gray-300 mb-4"><strong className="text-white">Dor:</strong> Você precisa de mais braços, não de mais ferramentas. Vendas, atendimento, finanças, projetos — tudo manual.</p>
-                    <p className="text-gray-300 mb-4"><strong className="text-white">Solução:</strong> 38 agentes de IA especializados. Cada um com uma função. Todos integrados. Operação 24/7 sem você levantar um dedo.</p>
+                    <p className="text-gray-300 mb-4">Você precisa de mais braços, não de mais ferramentas. Vendas, atendimento, finanças, projetos — tudo manual.</p>
+                    <p className="text-gray-300 mb-4">38 agentes de IA especializados. Cada um com uma função. Todos integrados. Operação 24/7 sem você levantar um dedo.</p>
                     <p className="text-purple-400 font-semibold">Solicitar orçamento</p>
                   </div>
                   <div className="flex flex-col justify-center">

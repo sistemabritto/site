@@ -41,8 +41,8 @@ export default function DevOps() {
   return (
     <>
       <Meta 
-        title="DevOps + Suporte Técnico — Sistema Britto"
-        description="Infra, Docker, APIs, deploy, segurança. Especialista técnico no seu WhatsApp com SLA 24h."
+        title="Infraestrutura e Suporte Técnico — Sistema Britto"
+        description="Docker, APIs, deploy, segurança. Especialista técnico no seu WhatsApp com SLA 24h."
         path="/devops"
       />
       
@@ -59,8 +59,8 @@ export default function DevOps() {
                   <button onClick={() => setShowModal(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">×</button>
                   <div className="text-center mb-6">
                     <div className="text-4xl mb-3">⚙️</div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Solicitar Suporte</h3>
-                    <p className="text-gray-300 text-sm">Conte seu problema. Especialista responde em 24h.</p>
+                    <h3 className="text-2xl font-bold text-white mb-2">Fale com um especialista</h3>
+                    <p className="text-gray-300 text-sm">Descreva seu problema. A gente responde em até 24h.</p>
                   </div>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
@@ -80,8 +80,8 @@ export default function DevOps() {
                       <input type="text" placeholder="Nome da empresa" value={formData.company} onChange={(e) => setFormData({...formData, company: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none" />
                     </div>
                     <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">Qual seu problema? *</label>
-                      <textarea placeholder="Ex: Meu servidor cai toda semana..." value={formData.problem} onChange={(e) => setFormData({...formData, problem: e.target.value})} rows={3} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none resize-none" required />
+                      <label className="text-gray-300 text-sm font-semibold block mb-1">O que tá acontecendo? *</label>
+                      <textarea placeholder="Ex: Servidor derrubando, API lenta..." value={formData.problem} onChange={(e) => setFormData({...formData, problem: e.target.value})} rows={3} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none resize-none" required />
                     </div>
                     <button type="submit" disabled={!formData.email || !formData.whatsapp} className="w-full bg-[#D4AF37] hover:bg-[#C5A028] text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">
                       ENVIAR →
@@ -91,7 +91,7 @@ export default function DevOps() {
               ) : (
                 <div className="text-center py-8">
                   <div className="text-5xl mb-4">✅</div>
-                  <h3 className="text-xl font-bold text-white mb-2">Enviado!</h3>
+                  <h3 className="text-xl font-bold text-white mb-2">Recebido</h3>
                   <p className="text-gray-300 text-sm">Especialista responde em até 24h.</p>
                 </div>
               )}
@@ -105,20 +105,20 @@ export default function DevOps() {
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="inline-flex items-center gap-2 bg-[#D4AF37]/20 border border-[#D4AF37]/30 rounded-full px-4 py-2 mb-6">
               <span className="w-2 h-2 bg-[#D4AF37] rounded-full animate-pulse" />
-              <span className="text-[#D4AF37] text-xs font-bold uppercase tracking-wider">Middle Ticket</span>
+              <span className="text-[#D4AF37] text-xs font-bold uppercase tracking-wider">Infra + Suporte</span>
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
               Sua infra não pode<br />
               <span className="bg-gradient-to-r from-[#D4AF37] to-[#C5A028] bg-clip-text text-transparent">depender de sorte.</span>
             </h1>
             <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
-              Especialista técnico no seu WhatsApp com SLA de 24h. Docker, APIs, deploy, segurança, troubleshooting.
+              Servidor cai. Deploy quebra. API fica lenta. A gente resolve em até 24h.
             </p>
             <p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
-              Você foca no negócio. A gente cuida da infra.
+              Especialista técnico no seu WhatsApp. Docker, APIs, segurança, troubleshooting.
             </p>
             <button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-[#D4AF37]/25">
-              SOLICITAR SUPORTE →
+              PRECISO DE AJUDA →
             </button>
           </div>
         </section>
@@ -126,7 +126,7 @@ export default function DevOps() {
         {/* ===== DOR ===== */}
         <section className="py-20 px-4 bg-[#111111]">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-12 text-center">Isso acontece com você?</h2>
+            <h2 className="text-3xl font-bold text-white mb-12 text-center">Cê tá nessa?</h2>
             <div className="space-y-4">
               {[
                 { emoji: '🔥', text: 'Servidor cai em horário de pico. Cliente reclama. Você corre pra resolver.' },
@@ -170,10 +170,10 @@ export default function DevOps() {
         {/* ===== CTA ===== */}
         <section className="py-20 px-4 bg-[#111111]">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-white mb-6">Pare de apagar incêndio.</h2>
+            <h2 className="text-3xl font-bold text-white mb-6">Sem palestra. Sem enrolação.</h2>
             <p className="text-gray-300 text-lg mb-8">Especialista técnico no seu WhatsApp. SLA 24h. Resolve pra você.</p>
             <button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-[#D4AF37]/25">
-              SOLICITAR SUPORTE →
+              PRECISO DE AJUDA →
             </button>
           </div>
         </section>
