@@ -9,7 +9,6 @@ interface PlanResult {
   tag: string;
   tagColor: string;
   features: string[];
-  ctaText: string;
   productId: string;
 }
 
@@ -28,7 +27,6 @@ const PLANS: Record<string, PlanResult> = {
       'Follow-up automático',
       'Suporte via WhatsApp',
     ],
-    ctaText: 'Começar Agora — R$ 297/mês',
     productId: 'whatsapp-ia-basico',
   },
   completo: {
@@ -46,7 +44,6 @@ const PLANS: Record<string, PlanResult> = {
       'Relatórios de ROI',
       'Suporte prioritário',
     ],
-    ctaText: 'Começar Agora — R$ 750/mês',
     productId: 'crm-ia-completo',
   },
   premium: {
@@ -64,9 +61,15 @@ const PLANS: Record<string, PlanResult> = {
       'Onboarding dedicado',
       'Suporte prioritário 24h',
     ],
-    ctaText: 'Falar com Especialista',
     productId: 'evonexus-premium',
   },
+};
+
+// Combos com order bump
+const COMBOS: Record<string, { productId: string; price: number }> = {
+  essencial: { productId: 'whatsapp-ia-combo-consultoria', price: 547 },
+  completo: { productId: 'crm-ia-completo-combo-consultoria', price: 1000 },
+  premium: { productId: 'evonexus-premium-combo-consultoria', price: 2750 },
 };
 
 function calculatePlan(answers: Record<string, string>): string {
@@ -87,6 +90,7 @@ export default function Resultado() {
   const [plan, setPlan] = useState<PlanResult | null>(null);
   const [loading, setLoading] = useState(true);
   const [customerData, setCustomerData] = useState({ name: '', email: '', whatsapp: '' });
+  const [orderBump, setOrderBump] = useState(false);
 
   useEffect(() => {
     const answersParam = router.query.answers as string;
@@ -138,11 +142,14 @@ export default function Resultado() {
 
     // Essencial e Completo → Checkout AbacatePay
     try {
+      const productId = orderBump ? COMBOS[plan.id]?.productId : plan.productId;
+      
       const res = await fetch('/api/abacatepay/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          productId: plan.productId,
+          productId,
+          orderBump,
           customer: customerData.email ? {
             email: customerData.email,
             name: customerData.name,
@@ -155,8 +162,7 @@ export default function Resultado() {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        const msg = encodeURIComponent(`Olá! Quero o plano ${plan.name} (R$${plan.price}/mês). Nome: ${customerData.name}, Email: ${customerData.email}`);
-        window.location.href = `https://wa.me/5511914088571?text=${msg}`;
+        throw new Error('No checkout URL');
       }
     } catch (err) {
       console.error('[Checkout Error]', err);
@@ -175,6 +181,8 @@ export default function Resultado() {
       </div>
     );
   }
+
+  const finalPrice = orderBump ? (COMBOS[plan.id]?.price || plan.price) : plan.price;
 
   return (
     <>
@@ -210,7 +218,7 @@ export default function Resultado() {
 
             <div className="flex items-baseline gap-1 mb-8">
               <span className="text-white text-lg">R$</span>
-              <span className="text-6xl font-bold text-white">{plan.price.toLocaleString('pt-BR')}</span>
+              <span className="text-6xl font-bold text-white">{finalPrice.toLocaleString('pt-BR')}</span>
               <span className="text-gray-400 text-xl">/mês</span>
             </div>
 
@@ -223,11 +231,51 @@ export default function Resultado() {
               ))}
             </ul>
 
+            {/* ORDER BUMP */}
+            <div 
+              className={`rounded-xl p-4 cursor-pointer transition-all border-2 mb-6 ${
+                orderBump 
+                  ? 'bg-[#D4AF37]/10 border-[#D4AF37]' 
+                  : 'bg-[#0a0a0a] border-white/10 hover:border-[#D4AF37]/50'
+              }`}
+              onClick={() => setOrderBump(!orderBump)}
+            >
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5">
+                  <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
+                    orderBump 
+                      ? 'bg-[#D4AF37] border-[#D4AF37]' 
+                      : 'border-gray-500'
+                  }`}>
+                    {orderBump && <span className="text-black font-bold text-xs">✓</span>}
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-white font-bold text-sm">+ Consultoria Técnica WhatsApp</span>
+                    <span className="text-[#D4AF37] font-bold text-sm">R$ 250/mês</span>
+                  </div>
+                  <p className="text-gray-300 text-xs mt-1 leading-relaxed">
+                    Especialista técnico no seu WhatsApp com <strong className="text-white">SLA de 24h</strong>. 
+                    Docker, APIs, deploy, segurança, troubleshooting — resolve pra você.
+                  </p>
+                  <div className="mt-2 flex items-center gap-2">
+                    <span className="bg-[#D4AF37]/20 text-[#D4AF37] text-xs px-2 py-0.5 rounded-full font-semibold">
+                      ⚡ Recomendado
+                    </span>
+                    <span className="text-gray-400 text-xs">
+                      Quem tem IA precisa de suporte humano pra configurar
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <button
               onClick={handleCheckout}
               className="w-full bg-green-500 hover:bg-green-600 text-black py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25"
             >
-              {plan.ctaText}
+              {orderBump ? `ASSINAR COMBO — R$ ${finalPrice}/mês →` : `ASSINAR AGORA — R$ ${finalPrice}/mês →`}
             </button>
 
             <p className="text-gray-500 text-sm text-center mt-4">

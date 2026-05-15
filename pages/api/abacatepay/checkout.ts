@@ -4,11 +4,15 @@ const ABACATEPAY_API = 'https://api.abacatepay.com/v2';
 const ABACATEPAY_KEY = process.env.ABACATEPAY_API_KEY || 'abc_dev_6xbMgNHha22tetRbE0GUpuWZ';
 
 const PRODUCTS: Record<string, string> = {
+  // Produtos individuais
   'whatsapp-ia-basico': 'prod_jRg20GUgAmEjhy3QCr45ZtKn',
   'crm-ia-completo': 'prod_CWRuQwLLLJyKcFcUYCEfwUAG',
   'evonexus-premium': 'prod_uqRB2KTALEQWumHkp3h2PJLX',
   'hermes-selfhosted': 'prod_bzFSpy31qQc2z6rTpBhASz2X',
+  // Combos (produto + consultoria R$250)
   'whatsapp-ia-combo-consultoria': 'prod_0GBDbERsmaarw0GMRkRLg2EF',
+  'crm-ia-completo-combo-consultoria': 'prod_GsYQrUcz0GTEe1aYrXJXsT05',
+  'evonexus-premium-combo-consultoria': 'prod_cSXakYDjq5tLnf0KT1gDmbHE',
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -17,11 +21,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { productId, customer, orderBump } = req.body;
-    
-    // Se order bump marcado, usa produto combo (R$297 + R$250 = R$547/mês)
-    const finalProductId = orderBump ? 'whatsapp-ia-combo-consultoria' : productId;
-    const abacateProductId = PRODUCTS[finalProductId] || finalProductId;
+    const { productId, customer } = req.body;
+    const abacateProductId = PRODUCTS[productId] || productId;
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.sistemabritto.com.br';
 
     const body: Record<string, unknown> = {
@@ -30,7 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       completionUrl: siteUrl + '/obrigado',
     };
 
-    if (customer) {
+    if (customer?.email) {
       body.customer = {
         email: customer.email,
         name: customer.name,
