@@ -147,17 +147,17 @@ export default function Home() {
             <p className="text-lg text-gray-400 mb-12 max-w-xl mx-auto">
               Não é falta de esforço. É falta de escala. A gente resolve isso em 48 horas.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button 
-                onClick={() => setShowModal(true)}
-                className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25"
-              >
-                ORÇAMENTO EM TEMPO REAL →
-              </button>
-              <a href="#solucoes" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20 scroll-smooth">
-                Ver soluções
-              </a>
-            </div>
+<div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+  <button 
+  onClick={() => setShowModal(true)}
+  className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25"
+  >
+  ORÇAMENTO EM TEMPO REAL →
+  </button>
+  <a href="/qualificacao-digital" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
+  ESCALAR MEU NEGÓCIO DIGITAL →
+  </a>
+</div>
           </div>
         </section>
 

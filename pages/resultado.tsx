@@ -76,9 +76,14 @@ function calculatePlan(answers: Record<string, string>): string {
   const leads = answers['p1'] || '';
   const ticket = answers['p2'] || '';
   const responseTime = answers['p3'] || '';
-  const investment = answers['p4'] || '';
+  const automationLevel = answers['p4'] || '';
 
-  if (investment === 'sim') return 'premium';
+  // Se escolheu nível direto na P4, usa isso
+  if (automationLevel === 'basico') return 'essencial';
+  if (automationLevel === 'completo') return 'completo';
+  if (automationLevel === 'premium') return 'premium';
+
+  // Fallback: lógica automática baseada em leads + ticket
   if (ticket === '2000+' || leads === '1000+') return 'completo';
   if (ticket === '500-2000' || leads === '500-1000' || responseTime === 'muito-demorado') return 'completo';
   
@@ -339,24 +344,24 @@ export default function Resultado() {
                     {orderBump && <span className="text-black font-bold text-xs">✓</span>}
                   </div>
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-white font-bold text-sm">+ Consultoria Técnica WhatsApp</span>
-                    <span className="text-[#D4AF37] font-bold text-sm">R$ 250/mês</span>
-                  </div>
-                  <p className="text-gray-300 text-xs mt-1 leading-relaxed">
-                    Especialista técnico no seu WhatsApp com <strong className="text-white">SLA de 24h</strong>. 
-                    Docker, APIs, deploy, segurança, troubleshooting — resolve pra você.
-                  </p>
-                  <div className="mt-2 flex items-center gap-2">
-                    <span className="bg-[#D4AF37]/20 text-[#D4AF37] text-xs px-2 py-0.5 rounded-full font-semibold">
-                      ⚡ Recomendado
-                    </span>
-                    <span className="text-gray-400 text-xs">
-                      Quem tem IA precisa de suporte humano pra configurar
-                    </span>
-                  </div>
-                </div>
+ <div className="flex-1">
+          <div className="flex items-center justify-between">
+            <span className="text-white font-bold text-sm">+ Especialista Técnico no WhatsApp</span>
+            <span className="text-[#D4AF37] font-bold text-sm">R$ 250/mês</span>
+          </div>
+          <p className="text-gray-300 text-xs mt-1 leading-relaxed">
+            Não configure IA sozinho. Tenha um especialista pra garantir que seu Docker não quebre e 
+            sua API não saia do ar. <strong className="text-white">SLA 24h</strong>.
+          </p>
+          <div className="mt-2 flex items-center gap-2">
+            <span className="bg-[#D4AF37]/20 text-[#D4AF37] text-xs px-2 py-0.5 rounded-full font-semibold">
+              ⚡ Recomendado
+            </span>
+            <span className="text-gray-400 text-xs">
+              Quem tem IA precisa de suporte humano pra configurar
+            </span>
+          </div>
+        </div>
               </div>
             </div>
 

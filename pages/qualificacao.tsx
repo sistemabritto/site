@@ -34,10 +34,11 @@ const QUESTIONS = [
   },
   {
     id: 'p4',
-    question: 'Pra implementar essa força de trabalho, investimento a partir de R$ 3.000. Você está disposto, é capaz e tem o dinheiro na mão?',
+    question: 'Qual nível de automação você quer?',
     options: [
-      { label: 'Sim, estou disposto', value: 'sim' },
-      { label: 'Não, preciso de algo mais acessível', value: 'nao' },
+      { label: 'Básico: só qualificar e agendar (R$ 297/mês)', value: 'basico' },
+      { label: 'Completo: CRM avançado + reativação (R$ 750/mês)', value: 'completo' },
+      { label: 'Workforce: 10+ agentes especializados (R$ 2.500+/mês)', value: 'premium' },
     ],
   },
 ];
