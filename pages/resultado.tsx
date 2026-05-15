@@ -91,6 +91,8 @@ export default function Resultado() {
   const [loading, setLoading] = useState(true);
   const [customerData, setCustomerData] = useState({ name: '', email: '', whatsapp: '' });
   const [orderBump, setOrderBump] = useState(false);
+  const [showDataModal, setShowDataModal] = useState(false);
+  const [pendingCheckout, setPendingCheckout] = useState(false);
 
   useEffect(() => {
     const answersParam = router.query.answers as string;
@@ -131,6 +133,30 @@ export default function Resultado() {
   }, [router.query]);
 
   const handleCheckout = async () => {
+    // Se não tiver dados do cliente, pedir antes
+    if (!customerData.email || !customerData.whatsapp) {
+      setPendingCheckout(true);
+      setShowDataModal(true);
+      return;
+    }
+    
+    await doCheckout();
+  };
+
+  const handleDataSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!customerData.email || !customerData.whatsapp) return;
+    
+    // Salvar no sessionStorage
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('qualificacao_customer', JSON.stringify(customerData));
+    }
+    
+    setShowDataModal(false);
+    await doCheckout();
+  };
+
+  const doCheckout = async () => {
     if (!plan) return;
     
     // Premium → WhatsApp direto (high ticket)
@@ -191,6 +217,69 @@ export default function Resultado() {
         description="Veja o plano ideal para sua empresa baseado nas suas respostas."
         path="/resultado"
       />
+
+      {/* ===== MODAL CAPTURA DADOS (se não tiver) ===== */}
+      {showDataModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0,0,0,0.9)' }}>
+          <div className="bg-[#111111] rounded-3xl p-8 max-w-md w-full border border-green-500/30 relative">
+            <button 
+              onClick={() => setShowDataModal(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl"
+            >×</button>
+            
+            <div className="text-center mb-6">
+              <div className="text-4xl mb-3">🚀</div>
+              <h3 className="text-2xl font-bold text-white mb-2">Quase lá!</h3>
+              <p className="text-gray-300 text-sm">Seus dados = checkout mais rápido. Sem repetir tudo.</p>
+            </div>
+
+            <form onSubmit={handleDataSubmit} className="space-y-4">
+              <div>
+                <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
+                <input
+                  type="text"
+                  placeholder="Seu nome"
+                  value={customerData.name}
+                  onChange={(e) => setCustomerData({...customerData, name: e.target.value})}
+                  className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
+                <input
+                  type="email"
+                  placeholder="seu@email.com"
+                  value={customerData.email}
+                  onChange={(e) => setCustomerData({...customerData, email: e.target.value})}
+                  className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+                  required
+                />
+              </div>
+              <div>
+                <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp *</label>
+                <input
+                  type="tel"
+                  placeholder="(11) 99999-9999"
+                  value={customerData.whatsapp}
+                  onChange={(e) => setCustomerData({...customerData, whatsapp: e.target.value})}
+                  className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={!customerData.email || !customerData.whatsapp}
+                className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                CONTINUAR →
+              </button>
+              
+              <p className="text-gray-500 text-xs text-center">Seus dados estão seguros. Sem spam.</p>
+            </form>
+          </div>
+        </div>
+      )}
       
       <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>
         <div className="max-w-2xl mx-auto px-4 py-20">

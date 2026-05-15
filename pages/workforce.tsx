@@ -6,8 +6,9 @@ import { useState } from 'react';
 export default function Workforce() {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '' });
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.email || !formData.whatsapp) return;
     
@@ -16,8 +17,29 @@ export default function Workforce() {
       sessionStorage.setItem('qualificacao_customer', JSON.stringify(formData));
     }
     
-    // Redirecionar pra qualificação
-    window.location.href = '/qualificacao';
+    // Salvar lead no CRM
+    try {
+      await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          source: 'workforce-landing',
+          utm_source: new URLSearchParams(window.location.search).get('utm_source') || '',
+          utm_medium: new URLSearchParams(window.location.search).get('utm_medium') || '',
+          utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign') || '',
+        }),
+      });
+    } catch (err) {
+      console.error('Lead save error:', err);
+    }
+    
+    setSubmitted(true);
+    
+    // Redirecionar pra qualificação depois de 1.5s
+    setTimeout(() => {
+      window.location.href = '/qualificacao';
+    }, 1500);
   };
 
   const openModal = () => {
@@ -50,61 +72,76 @@ export default function Workforce() {
         {showModal && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0,0,0,0.9)' }}>
             <div className="bg-[#111111] rounded-3xl p-8 max-w-md w-full border border-green-500/30 relative">
-              <button 
-                onClick={() => setShowModal(false)}
-                className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl"
-              >×</button>
-              
-              <div className="text-center mb-6">
-                <div className="text-4xl mb-3">🚀</div>
-                <h3 className="text-2xl font-bold text-white mb-2">Quase lá!</h3>
-                <p className="text-gray-300 text-sm">Seus dados = qualificação personalizada. Sem repetir depois.</p>
-              </div>
+              {!submitted ? (
+                <>
+                  <button 
+                    onClick={() => setShowModal(false)}
+                    className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl"
+                  >×</button>
+                  
+                  <div className="text-center mb-6">
+                    <div className="text-4xl mb-3">🚀</div>
+                    <h3 className="text-2xl font-bold text-white mb-2">Solicitar Orçamento</h3>
+                    <p className="text-gray-300 text-sm">Seus dados = qualificação personalizada. Sem repetir depois.</p>
+                  </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
-                  <input
-                    type="text"
-                    placeholder="Seu nome"
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
-                  <input
-                    type="email"
-                    placeholder="seu@email.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp *</label>
-                  <input
-                    type="tel"
-                    placeholder="(11) 99999-9999"
-                    value={formData.whatsapp}
-                    onChange={(e) => setFormData({...formData, whatsapp: e.target.value})}
-                    className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
-                    required
-                  />
-                </div>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
+                      <input
+                        type="text"
+                        placeholder="Seu nome"
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
+                      <input
+                        type="email"
+                        placeholder="seu@email.com"
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp *</label>
+                      <input
+                        type="tel"
+                        placeholder="(11) 99999-9999"
+                        value={formData.whatsapp}
+                        onChange={(e) => setFormData({...formData, whatsapp: e.target.value})}
+                        className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+                        required
+                      />
+                    </div>
 
-                <button
-                  type="submit"
-                  disabled={!formData.email || !formData.whatsapp}
-                  className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  CONTINUAR →
-                </button>
-                
-                <p className="text-gray-500 text-xs text-center">Seus dados estão seguros. Sem spam.</p>
-              </form>
+                    <button
+                      type="submit"
+                      disabled={!formData.email || !formData.whatsapp}
+                      className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      SOLICITAR ORÇAMENTO →
+                    </button>
+                    
+                    <p className="text-gray-500 text-xs text-center">Seus dados estão seguros. Sem spam.</p>
+                  </form>
+                </>
+              ) : (
+                <div className="text-center py-8">
+                  <div className="text-5xl mb-4">✅</div>
+                  <h3 className="text-xl font-bold text-white mb-2">Dados salvos!</h3>
+                  <p className="text-gray-300 text-sm">Te redirecionando pra qualificação...</p>
+                  <div className="flex items-center justify-center gap-2 mt-4">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -142,7 +179,7 @@ export default function Workforce() {
                 onClick={openModal}
                 className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25"
               >
-                CONTRATAR MEU WORKFORCE →
+                SOLICITAR ORÇAMENTO →
               </button>
               <a
                 href="#prova"
@@ -151,10 +188,6 @@ export default function Workforce() {
                 Ver resultados reais
               </a>
             </div>
-
-            <p className="text-gray-400 text-sm mt-6">
-              7 dias de garantia. Sem fidelidade. Setup em até 30 dias.
-            </p>
           </div>
         </section>
 
@@ -305,89 +338,6 @@ export default function Workforce() {
           </div>
         </section>
 
-        {/* ===== NÚMEROS ===== */}
-        <section className="py-16 bg-[#0a0a0a]">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[
-                { value: '3x', label: 'Mais conversões', icon: '📈' },
-                { value: '24/7', label: 'Sem parar', icon: '⏰' },
-                { value: '<1s', label: 'Tempo de resposta', icon: '⚡' },
-                { value: '67%', label: 'Menos trabalho manual', icon: '📉' },
-              ].map((stat, i) => (
-                <div key={i} className="bg-[#111111] rounded-2xl p-6 text-center border border-green-500/20">
-                  <div className="text-3xl mb-2">{stat.icon}</div>
-                  <div className="text-3xl font-bold text-green-400 mb-1">{stat.value}</div>
-                  <div className="text-gray-200 text-sm">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ===== PLANOS ===== */}
-        <section id="planos" className="py-20 px-4 bg-[#111111]">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center">
-              Escolha seu nível
-            </h2>
-            <p className="text-gray-400 text-center mb-12">Comece pequeno. Escale sem limite.</p>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-[#0a0a0a] rounded-2xl p-8 border border-white/10">
-                <h3 className="text-xl font-bold text-white mb-2">Básico</h3>
-                <p className="text-gray-400 text-sm mb-6">Pra quem tá começando</p>
-                <div className="text-4xl font-bold text-white mb-6">R$ 297<span className="text-lg text-gray-400">/mês</span></div>
-                <ul className="space-y-3 mb-8">
-                  {['1 agente de IA', 'Até 500 conversas/mês', 'WhatsApp apenas', 'CRM básico', 'Suporte por email'].map((f, i) => (
-                    <li key={i} className="flex items-center gap-2 text-gray-300 text-sm">
-                      <span className="text-green-400">✓</span> {f}
-                    </li>
-                  ))}
-                </ul>
-                <button onClick={openModal} className="block text-center py-3 rounded-full font-bold border border-white/20 text-white hover:bg-white/10 transition-all w-full">
-                  Começar
-                </button>
-              </div>
-
-              <div className="bg-[#0a0a0a] rounded-2xl p-8 border-2 border-green-500 relative">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-green-500 text-black px-4 py-1 rounded-full text-xs font-bold">
-                  MAIS POPULAR
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">Profissional</h3>
-                <p className="text-gray-400 text-sm mb-6">Time em crescimento</p>
-                <div className="text-4xl font-bold text-white mb-6">R$ 750<span className="text-lg text-gray-400">/mês</span></div>
-                <ul className="space-y-3 mb-8">
-                  {['3 agentes de IA', 'Até 2.000 conversas/mês', 'WhatsApp + Instagram', 'CRM completo', 'Relatórios avançados', 'Suporte prioritário'].map((f, i) => (
-                    <li key={i} className="flex items-center gap-2 text-gray-300 text-sm">
-                      <span className="text-green-400">✓</span> {f}
-                    </li>
-                  ))}
-                </ul>
-                <button onClick={openModal} className="block text-center py-3 rounded-full font-bold bg-green-500 hover:bg-green-600 text-black transition-all w-full">
-                  Começar
-                </button>
-              </div>
-
-              <div className="bg-[#0a0a0a] rounded-2xl p-8 border border-[#D4AF37]/30">
-                <h3 className="text-xl font-bold text-white mb-2">Empresarial</h3>
-                <p className="text-gray-400 text-sm mb-6">Operação consolidada</p>
-                <div className="text-4xl font-bold text-white mb-6">R$ 2.500<span className="text-lg text-gray-400">/mês</span></div>
-                <ul className="space-y-3 mb-8">
-                  {['Agentes ilimitados', 'Conversas ilimitadas', 'Todos os canais', 'CRM + API', 'Onboarding dedicado', 'SLA 24h'].map((f, i) => (
-                    <li key={i} className="flex items-center gap-2 text-gray-300 text-sm">
-                      <span className="text-[#D4AF37]">✓</span> {f}
-                    </li>
-                  ))}
-                </ul>
-                <button onClick={openModal} className="block text-center py-3 rounded-full font-bold border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-all w-full">
-                  Falar com especialista
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ===== GARANTIA ===== */}
         <section className="py-16 px-4 bg-[#0a0a0a]">
           <div className="max-w-2xl mx-auto text-center">
@@ -429,15 +379,14 @@ export default function Workforce() {
               Pronto pra ter seu exército de IA?
             </h2>
             <p className="text-gray-400 text-lg mb-8">
-              Responda 4 perguntas rápidas e descubra qual plano é ideal pra você.
+              Solicite seu orçamento personalizado. Sem compromisso.
             </p>
             <button
               onClick={openModal}
               className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25"
             >
-              FAZER MINHA QUALIFICAÇÃO →
+              SOLICITAR ORÇAMENTO →
             </button>
-            <p className="text-gray-500 text-sm mt-4">Leva menos de 2 minutos</p>
           </div>
         </section>
 
