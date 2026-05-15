@@ -116,7 +116,7 @@ export default function Home() {
                 <div className="text-center py-8">
                   <div className="text-5xl mb-4">✅</div>
                   <h3 className="text-xl font-bold text-white mb-2">Dados salvos!</h3>
-                  <p className="text-gray-300 text-sm">Te redirecionando pra qualificação...</p>
+                  <p className="text-gray-300 text-sm">Te redirecionando...</p>
                   <div className="flex items-center justify-center gap-2 mt-4">
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
@@ -154,7 +154,7 @@ export default function Home() {
               >
                 ORÇAMENTO EM TEMPO REAL →
               </button>
-              <a href="/workforce" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
+              <a href="#solucoes" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20 scroll-smooth">
                 Ver soluções
               </a>
             </div>
@@ -162,90 +162,131 @@ export default function Home() {
         </section>
 
         {/* ===== SERVIÇOS ===== */}
-        <section className="py-24 px-4 bg-[#111111]">
+        <section id="solucoes" className="py-24 px-4 bg-[#111111]">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center">3 soluções. 1 problema: escala.</h2>
-            <p className="text-gray-400 text-center mb-12 text-lg">Escolha por onde começar. Todas se conectam.</p>
+            <p className="text-gray-400 text-center mb-16 text-lg">Do atendimento ao código. Da infra ao SaaS. A gente escala sua operação.</p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* WhatsApp + IA */}
-              <a href="/whatsapp" className="group bg-black/80 rounded-3xl p-8 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-2">
-                <div className="text-5xl mb-6">💬</div>
-                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors">WhatsApp + IA</h3>
-                <p className="text-gray-300 mb-6">Seu WhatsApp vira máquina de vendas. IA qualifica, agenda, cobra e fecha 24/7. Sem você levantar um dedo.</p>
-                <div className="text-green-400 font-semibold">A partir de R$ 297/mês →</div>
-              </a>
-
-              {/* DevOps + Suporte */}
-              <a href="/workforce" className="group bg-black/80 rounded-3xl p-8 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-2">
-                <div className="text-5xl mb-6">⚙️</div>
-                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors">DevOps + Suporte</h3>
-                <p className="text-gray-300 mb-6">Infra, Docker, APIs, deploy, segurança. Especialista técnico no seu WhatsApp com SLA 24h. Resolve pra você.</p>
-                <div className="text-green-400 font-semibold">Solicitar orçamento →</div>
-              </a>
-
-              {/* Workforce */}
-              <a href="/workforce" className="group bg-black/80 rounded-3xl p-8 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-2">
-                <div className="text-5xl mb-6">🏭</div>
-                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors">Workforce de IA</h3>
-                <p className="text-gray-300 mb-6">38 agentes especializados. Vendas, atendimento, finanças, projetos — tudo automatizado e integrado.</p>
-                <div className="text-green-400 font-semibold">Solicitar orçamento →</div>
+            {/* DEGRAU 1: ENTRY */}
+            <div className="mb-16">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="bg-green-500 text-black px-3 py-1 rounded-full text-xs font-bold">DEGRAU 1 — ENTRY</span>
+                <span className="text-gray-400 text-sm">Comece por aqui</span>
+              </div>
+              <a href="/whatsapp" className="group block bg-black/80 rounded-3xl p-8 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-2">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <div className="text-5xl mb-4">💬</div>
+                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-green-400 transition-colors">CRM com IA no WhatsApp</h3>
+                    <p className="text-gray-300 mb-4"><strong className="text-white">Dor:</strong> Lead manda mensagem, ninguém responde. Venda se perde no follow-up. Equipe sobrecarregada.</p>
+                    <p className="text-gray-300 mb-4"><strong className="text-white">Solução:</strong> IA qualifica, agenda, cobra e fecha 24/7. CRM integrado. Zero trabalho manual.</p>
+                    <p className="text-green-400 font-semibold">A partir de R$ 297/mês</p>
+                  </div>
+                  <div className="flex flex-col justify-center">
+                    <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 mb-4">
+                      <p className="text-red-400 text-sm font-semibold mb-1">Custo de oportunidade</p>
+                      <p className="text-gray-300 text-sm">Cada lead não respondido = R$ 50-500 perdido. 30 leads/dia = <strong className="text-white">R$ 45k/mês no lixo</strong>.</p>
+                    </div>
+                    <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4">
+                      <p className="text-green-400 text-sm font-semibold mb-1">Benefício imediato</p>
+                      <p className="text-gray-300 text-sm">3x mais conversões em 14 dias. Equipe foca no que importa.</p>
+                    </div>
+                  </div>
+                </div>
               </a>
             </div>
-          </div>
-        </section>
 
-        {/* ===== ESTEIRA ===== */}
-        <section className="py-24 px-4 bg-[#0a0a0a]">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-12 text-center">Como funciona</h2>
-            
-            <div className="space-y-8">
-              <div className="flex items-start gap-6">
-                <div className="w-12 h-12 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center flex-shrink-0">
-                  <span className="text-green-400 font-bold">1</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">Você solicita orçamento</h3>
-                  <p className="text-gray-300">Preenche nome, email e WhatsApp. Sem compromisso.</p>
-                </div>
+            {/* DEGRAU 2: MIDDLE */}
+            <div className="mb-16">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="bg-[#D4AF37] text-black px-3 py-1 rounded-full text-xs font-bold">DEGRAU 2 — MIDDLE TICKET</span>
+                <span className="text-gray-400 text-sm">Quando a operação cresce</span>
               </div>
+              <a href="/devops" className="group block bg-black/80 rounded-3xl p-8 border border-[#D4AF37]/20 hover:border-[#D4AF37]/50 transition-all duration-300 hover:-translate-y-2">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <div className="text-5xl mb-4">⚙️</div>
+                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#D4AF37] transition-colors">DevOps + Suporte Técnico</h3>
+                    <p className="text-gray-300 mb-4"><strong className="text-white">Dor:</strong> Infra cai, deploy quebra, API falha. Você depende de freelancer ou tenta resolver sozinho. Perde horas/dia com problema técnico.</p>
+                    <p className="text-gray-300 mb-4"><strong className="text-white">Solução:</strong> Especialista técnico no seu WhatsApp com SLA 24h. Docker, APIs, deploy, segurança, troubleshooting. Resolve pra você.</p>
+                    <p className="text-[#D4AF37] font-semibold">Solicitar orçamento</p>
+                  </div>
+                  <div className="flex flex-col justify-center">
+                    <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 mb-4">
+                      <p className="text-red-400 text-sm font-semibold mb-1">Custo de oportunidade</p>
+                      <p className="text-gray-300 text-sm">Cada hora sua resolvendo problema técnico = hora que não vende. <strong className="text-white">R$ 200-500/hora de oportunidade perdida</strong>.</p>
+                    </div>
+                    <div className="bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-xl p-4">
+                      <p className="text-[#D4AF37] text-sm font-semibold mb-1">Benefício imediato</p>
+                      <p className="text-gray-300 text-sm">Zero downtime. Você foca no negócio, a gente cuida da infra.</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
 
-              <div className="flex items-start gap-6">
-                <div className="w-12 h-12 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center flex-shrink-0">
-                  <span className="text-green-400 font-bold">2</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">Faz a qualificação</h3>
-                  <p className="text-gray-300">4 perguntas rápidas. Descobrimos o plano ideal pro seu negócio.</p>
-                </div>
+            {/* DEGRAU 3: HIGH TICKET */}
+            <div className="mb-16">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-bold">DEGRAU 3 — HIGH TICKET</span>
+                <span className="text-gray-400 text-sm">Operação completa</span>
               </div>
+              <a href="/workforce" className="group block bg-black/80 rounded-3xl p-8 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-2">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <div className="text-5xl mb-4">🏭</div>
+                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">Workforce de IA</h3>
+                    <p className="text-gray-300 mb-4"><strong className="text-white">Dor:</strong> Você precisa de mais braços, não de mais ferramentas. Vendas, atendimento, finanças, projetos — tudo manual.</p>
+                    <p className="text-gray-300 mb-4"><strong className="text-white">Solução:</strong> 38 agentes de IA especializados. Cada um com uma função. Todos integrados. Operação 24/7 sem você levantar um dedo.</p>
+                    <p className="text-purple-400 font-semibold">Solicitar orçamento</p>
+                  </div>
+                  <div className="flex flex-col justify-center">
+                    <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 mb-4">
+                      <p className="text-red-400 text-sm font-semibold mb-1">Custo de oportunidade</p>
+                      <p className="text-gray-300 text-sm">Cada processo manual = gargalo. <strong className="text-white">R$ 10k-50k/mês em eficiência perdida</strong>.</p>
+                    </div>
+                    <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
+                      <p className="text-purple-400 text-sm font-semibold mb-1">Benefício imediato</p>
+                      <p className="text-gray-300 text-sm">47 leads qualificados, 23 consultas agendadas, R$ 12k cobrados — toda segunda-feira.</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
 
-              <div className="flex items-start gap-6">
-                <div className="w-12 h-12 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center flex-shrink-0">
-                  <span className="text-green-400 font-bold">3</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">Recebe o plano personalizado</h3>
-                  <p className="text-gray-300">Com preço, prazo e escopo. Se aprovar, começa em 48h.</p>
-                </div>
+            {/* CEREJA: SAAS */}
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <span className="bg-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold">🍒 CEREJA DO BOLO</span>
+                <span className="text-gray-400 text-sm">Produto próprio</span>
               </div>
-
-              <div className="flex items-start gap-6">
-                <div className="w-12 h-12 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center flex-shrink-0">
-                  <span className="text-green-400 font-bold">4</span>
+              <a href="https://voicedream.vercel.app" target="_blank" rel="noopener noreferrer" className="group block bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-3xl p-8 border border-pink-500/20 hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-2">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <div className="text-5xl mb-4">🎙️</div>
+                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-pink-400 transition-colors">SaaS sob Encomenda</h3>
+                    <p className="text-gray-300 mb-4"><strong className="text-white">Dor:</strong> Você tem uma ideia de produto digital mas não tem time pra construir. Ou precisa de um SaaS personalizado pro seu negócio.</p>
+                    <p className="text-gray-300 mb-4"><strong className="text-white">Solução:</strong> A gente constrói seu SaaS. Do MVP ao produto final. Exemplo: <strong className="text-white">VoiceDream</strong> — plataforma de áudio adulto com IA. Faturamento desde o primeiro mês.</p>
+                    <p className="text-pink-400 font-semibold">Ver case VoiceDream →</p>
+                  </div>
+                  <div className="flex flex-col justify-center">
+                    <div className="bg-pink-500/10 border border-pink-500/20 rounded-xl p-4 mb-4">
+                      <p className="text-pink-400 text-sm font-semibold mb-1">VoiceDream em números</p>
+                      <p className="text-gray-300 text-sm">R$ 900 em tokens + R$ 5.000 faturamento inicial. <strong className="text-white">50% de margem</strong>.</p>
+                    </div>
+                    <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
+                      <p className="text-purple-400 text-sm font-semibold mb-1">Benefício</p>
+                      <p className="text-gray-300 text-sm">Produto próprio = receita recorrente. A gente constrói, você fatura.</p>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">Sua operação escala</h3>
-                  <p className="text-gray-300">IA trabalhando 24/7. Você foca no que importa: crescer.</p>
-                </div>
-              </div>
+              </a>
             </div>
           </div>
         </section>
 
         {/* ===== CASES ===== */}
-        <section className="py-24 px-4 bg-[#111111]">
+        <section className="py-24 px-4 bg-[#0a0a0a]">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center">Resultados reais</h2>
             <p className="text-gray-400 text-center mb-12 text-lg">Empresas que já usam nossas soluções.</p>
@@ -256,7 +297,7 @@ export default function Home() {
                 { name: 'Studio Pilates', result: '20h/semana economizadas', desc: 'Antes 3h/dia no WhatsApp. Hoje a IA faz tudo sozinha.' },
                 { name: 'Delivery Pizzaria', result: '3x mais pedidos', desc: 'Do pedido ao delivery, tudo automático. Mesma equipe.' },
               ].map((c, i) => (
-                <div key={i} className="bg-black/80 rounded-2xl p-6 border border-green-500/20 text-center">
+                <div key={i} className="bg-[#111111] rounded-2xl p-6 border border-green-500/20 text-center">
                   <div className="text-green-400 text-2xl font-bold mb-2">{c.result}</div>
                   <h3 className="text-white font-bold mb-2">{c.name}</h3>
                   <p className="text-gray-300 text-sm">{c.desc}</p>
@@ -267,14 +308,14 @@ export default function Home() {
         </section>
 
         {/* ===== CTA FINAL ===== */}
-        <section className="py-24 px-4 bg-[#0a0a0a]">
+        <section className="py-24 px-4 bg-[#111111]">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
               Cada dia sem automação<br />
               <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">é dinheiro indo embora.</span>
             </h2>
             <p className="text-gray-300 text-lg mb-8">
-              Para de perder tempo. Comece agora.
+              Do WhatsApp ao SaaS. A gente escala sua operação.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button 
