@@ -25,14 +25,15 @@ export default function WhatsApp() {
   const [submitted, setSubmitted] = useState(false);
   const [orderBump, setOrderBump] = useState(false);
 
-  const handleSubmitLead = async () => {
+  const handleSubmit = async () => {
     if (!formData.email || !formData.whatsapp) return;
     
-    // Salvar dados no sessionStorage ANTES de qualquer coisa
+    // Salvar dados no sessionStorage
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('qualificacao_customer', JSON.stringify(formData));
     }
     
+    // Salvar lead no CRM
     try {
       await fetch('/api/leads', {
         method: 'POST',
@@ -51,20 +52,24 @@ export default function WhatsApp() {
     }
     
     setSubmitted(true);
+    
+    // Redirecionar pro checkout depois de 1.5s
     setTimeout(() => {
       handleCheckout();
-    }, 1200);
+    }, 1500);
   };
 
   const handleCheckout = async () => {
     setLoading(true);
+    // Se order bump marcado, usa produto combo (R$547)
+    // Se não, produto base (R$297)
+    const productId = orderBump ? 'whatsapp-ia-combo-consultoria' : 'whatsapp-ia-basico';
     try {
       const res = await fetch('/api/abacatepay/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          productId: 'whatsapp-ia-basico',
-          orderBump,
+          productId,
           customer: {
             email: formData.email,
             name: formData.name || formData.email.split('@')[0],
@@ -119,7 +124,7 @@ export default function WhatsApp() {
                     <p className="text-gray-300 text-sm">Seus dados = checkout mais rápido. Sem repetir tudo.</p>
                   </div>
 
-                  <div className="space-y-4">
+                  <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="space-y-4">
                     <div>
                       <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
                       <input
@@ -194,7 +199,7 @@ export default function WhatsApp() {
                     </div>
 
                     <button
-                      onClick={handleSubmitLead}
+                      type="submit"
                       disabled={!formData.email || !formData.whatsapp || loading}
                       className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     >
@@ -202,7 +207,7 @@ export default function WhatsApp() {
                     </button>
                     
                     <p className="text-gray-500 text-xs text-center">Seus dados estão seguros. Sem spam.</p>
-                  </div>
+                  </form>
                 </>
               ) : (
                 <div className="text-center py-8">

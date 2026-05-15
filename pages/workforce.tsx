@@ -165,7 +165,7 @@ export default function Workforce() {
             </h1>
             
             <p className="text-gray-200 text-xl mb-6 leading-relaxed">
-              38 agentes de IA. Cada um com uma função. Todos trabalhando 24 horas por dia, 7 dias por semana, 
+              Dezenas de agentes de IA. Cada um com uma função. Todos trabalhando 24 horas por dia, 7 dias por semana, 
               sem férias, sem atraso, sem pedir aumento.
             </p>
 
