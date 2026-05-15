@@ -54,7 +54,7 @@ const PLANS: Record<string, PlanResult> = {
     name: 'Premium',
     price: 2500,
     tag: 'Empresarial',
-    tagColor: 'bg-blue-500 text-white',
+    tagColor: 'bg-[#D4AF37] text-black',
     features: [
       'Tudo do Completo',
       '38 agentes especializados',
@@ -75,12 +75,10 @@ function calculatePlan(answers: Record<string, string>): string {
   const responseTime = answers['p3'] || '';
   const investment = answers['p4'] || '';
 
-  // High ticket: disposto a investir R$3k+ OU ticket alto OU muitos leads
   if (investment === 'sim') return 'premium';
   if (ticket === '2000+' || leads === '1000+') return 'completo';
   if (ticket === '500-2000' || leads === '500-1000' || responseTime === 'muito-demorado') return 'completo';
   
-  // Default: essencial
   return 'essencial';
 }
 
@@ -88,9 +86,9 @@ export default function Resultado() {
   const router = useRouter();
   const [plan, setPlan] = useState<PlanResult | null>(null);
   const [loading, setLoading] = useState(true);
+  const [customerData, setCustomerData] = useState({ name: '', email: '', whatsapp: '' });
 
   useEffect(() => {
-    // Pegar respostas da query string ou sessionStorage
     const answersParam = router.query.answers as string;
     let answers: Record<string, string> = {};
 
@@ -111,6 +109,18 @@ export default function Resultado() {
       }
     }
 
+    // Recuperar dados do cliente do sessionStorage
+    if (typeof window !== 'undefined') {
+      const storedCustomer = sessionStorage.getItem('qualificacao_customer');
+      if (storedCustomer) {
+        try {
+          setCustomerData(JSON.parse(storedCustomer));
+        } catch {
+          // ignore
+        }
+      }
+    }
+
     const planId = calculatePlan(answers);
     setPlan(PLANS[planId] || PLANS.essencial);
     setLoading(false);
@@ -119,33 +129,45 @@ export default function Resultado() {
   const handleCheckout = async () => {
     if (!plan) return;
     
-    // Se for Premium, manda pro WhatsApp (high ticket)
+    // Premium → WhatsApp direto (high ticket)
     if (plan.id === 'premium') {
-      window.location.href = `https://wa.me/5511914088571?text=Olá!%20Fiz%20a%20qualificação%20e%20quero%20conhecer%20o%20plano%20Premium%20(R$2.500/mês)`;
+      const msg = encodeURIComponent(`Olá! Fiz a qualificação e quero conhecer o plano Premium (R$2.500/mês). Nome: ${customerData.name}, Email: ${customerData.email}`);
+      window.location.href = `https://wa.me/5511914088571?text=${msg}`;
       return;
     }
 
-    // Essencial e Completo → checkout AbacatePay
+    // Essencial e Completo → Checkout AbacatePay
     try {
       const res = await fetch('/api/abacatepay/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ productId: plan.productId }),
+        body: JSON.stringify({ 
+          productId: plan.productId,
+          customer: customerData.email ? {
+            email: customerData.email,
+            name: customerData.name,
+            cellphone: customerData.whatsapp,
+          } : undefined,
+        }),
       });
       const data = await res.json();
+      console.log('[Checkout Response]', data);
       if (data.url) {
         window.location.href = data.url;
       } else {
-        window.location.href = `https://wa.me/5511914088571?text=Olá!%20Quero%20o%20plano%20${plan.name}`;
+        const msg = encodeURIComponent(`Olá! Quero o plano ${plan.name} (R$${plan.price}/mês). Nome: ${customerData.name}, Email: ${customerData.email}`);
+        window.location.href = `https://wa.me/5511914088571?text=${msg}`;
       }
-    } catch {
-      window.location.href = `https://wa.me/5511914088571?text=Olá!%20Quero%20o%20plano%20${plan.name}`;
+    } catch (err) {
+      console.error('[Checkout Error]', err);
+      const msg = encodeURIComponent(`Olá! Quero o plano ${plan.name} (R$${plan.price}/mês). Nome: ${customerData.name}, Email: ${customerData.email}`);
+      window.location.href = `https://wa.me/5511914088571?text=${msg}`;
     }
   };
 
   if (loading || !plan) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto mb-4" />
           <p className="text-white">Analisando suas respostas...</p>
@@ -162,7 +184,7 @@ export default function Resultado() {
         path="/resultado"
       />
       
-      <main className="min-h-screen bg-black" style={{ color: '#ffffff' }}>
+      <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>
         <div className="max-w-2xl mx-auto px-4 py-20">
           
           {/* Header */}
@@ -178,7 +200,7 @@ export default function Resultado() {
           </div>
 
           {/* Plan Card */}
-          <div className="bg-surface-900 rounded-3xl p-8 sm:p-10 border border-green-500/30 mb-8">
+          <div className="bg-[#111111] rounded-3xl p-8 sm:p-10 border border-green-500/30 mb-8">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-3xl font-bold text-white">{plan.name}</h2>
               <span className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase ${plan.tagColor}`}>
@@ -214,7 +236,7 @@ export default function Resultado() {
           </div>
 
           {/* Garantia */}
-          <div className="bg-surface-900 rounded-2xl p-6 border border-white/10 text-center">
+          <div className="bg-[#111111] rounded-2xl p-6 border border-white/10 text-center">
             <div className="text-4xl mb-3">🛡️</div>
             <h3 className="text-lg font-bold text-white mb-2">7 dias de garantia incondicional</h3>
             <p className="text-gray-400 text-sm">Se não gostar, devolvemos seu dinheiro. Sem perguntas.</p>

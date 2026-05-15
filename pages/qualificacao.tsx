@@ -46,6 +46,7 @@ export default function Qualificacao() {
   const [step, setStep] = useState<'email' | 'quiz'>('email');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [whatsapp, setWhatsapp] = useState('');
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -65,7 +66,12 @@ export default function Qualificacao() {
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !name) return;
+    if (!email || !name || !whatsapp) return;
+
+    // Salvar dados do cliente no sessionStorage
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('qualificacao_customer', JSON.stringify({ name, email, whatsapp }));
+    }
 
     // Salvar lead no CRM
     try {
@@ -76,6 +82,7 @@ export default function Qualificacao() {
           event: 'lead_captured',
           email,
           name,
+          whatsapp,
           utm: utmParams,
           timestamp: new Date().toISOString(),
         }),
@@ -116,6 +123,7 @@ export default function Qualificacao() {
           event: 'qualification_completed',
           email,
           name,
+          whatsapp,
           answers: finalAnswers,
           utm: utmParams,
           result: isHighTicket ? 'high-ticket' : 'downsell',
@@ -129,7 +137,8 @@ export default function Qualificacao() {
 
     setTimeout(() => {
       if (isHighTicket) {
-        window.location.href = `https://wa.me/5511914088571?text=Olá!%20Fiz%20a%20qualificação%20e%20quero%20implementar%20minha%20workforce%20de%20IA%20(high-ticket)`;
+        const msg = encodeURIComponent(`Olá! Fiz a qualificação e quero implementar minha workforce de IA (high-ticket). Nome: ${name}, Email: ${email}, WhatsApp: ${whatsapp}`);
+        window.location.href = `https://wa.me/5511914088571?text=${msg}`;
       } else {
         if (typeof window !== 'undefined') {
           sessionStorage.setItem('qualificacao_answers', JSON.stringify(finalAnswers));
@@ -188,6 +197,19 @@ export default function Qualificacao() {
                   required
                   className="w-full bg-black/80 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none transition-colors"
                 />
+              </div>
+
+              <div className="mb-6">
+                <label className="block text-gray-300 text-sm font-semibold mb-2">Seu WhatsApp *</label>
+                <input
+                  type="tel"
+                  value={whatsapp}
+                  onChange={(e) => setWhatsapp(e.target.value)}
+                  placeholder="(11) 99999-9999"
+                  required
+                  className="w-full bg-black/80 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none transition-colors"
+                />
+                <p className="text-gray-500 text-xs mt-1">Pra gente te avisar quando seu plano estiver pronto</p>
               </div>
 
               <button

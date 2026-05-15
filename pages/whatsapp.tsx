@@ -66,13 +66,18 @@ export default function WhatsApp() {
         }),
       });
       const data = await res.json();
+      console.log('[Checkout Response]', data);
       if (data.url) {
         window.location.href = data.url;
       } else {
-        window.location.href = 'https://wa.me/5511914088571?text=Olá!%20Quero%20o%20WhatsApp%20IA%20de%20R$297';
+        // Fallback: redirect to WhatsApp with context
+        const msg = encodeURIComponent(`Olá! Quero ativar o WhatsApp IA. Nome: ${formData.name}, Email: ${formData.email}`);
+        window.location.href = `https://wa.me/5511914088571?text=${msg}`;
       }
-    } catch {
-      window.location.href = 'https://wa.me/5511914088571?text=Olá!%20Quero%20o%20WhatsApp%20IA%20de%20R$297';
+    } catch (err) {
+      console.error('[Checkout Error]', err);
+      const msg = encodeURIComponent(`Olá! Quero ativar o WhatsApp IA. Nome: ${formData.name}, Email: ${formData.email}`);
+      window.location.href = `https://wa.me/5511914088571?text=${msg}`;
     }
   };
 
@@ -156,9 +161,14 @@ export default function WhatsApp() {
                 </>
               ) : (
                 <div className="text-center py-8">
-                  <div className="text-5xl mb-4">✅</div>
-                  <h3 className="text-xl font-bold text-white mb-2">Redirecionando pro checkout...</h3>
-                  <p className="text-gray-400 text-sm">Seus dados foram salvos. Você será redirecionado em instantes.</p>
+                  <div className="text-5xl mb-4">🔒</div>
+                  <h3 className="text-xl font-bold text-white mb-2">Dados salvos com sucesso!</h3>
+                  <p className="text-gray-400 text-sm">Te redirecionando pro checkout seguro...</p>
+                  <div className="flex items-center justify-center gap-2 mt-4">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse delay-75"></div>
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse delay-150"></div>
+                  </div>
                 </div>
               )}
             </div>
