@@ -28,6 +28,11 @@ export default function WhatsApp() {
   const handleSubmitLead = async () => {
     if (!formData.email || !formData.whatsapp) return;
     
+    // Salvar dados no sessionStorage ANTES de qualquer coisa
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('qualificacao_customer', JSON.stringify(formData));
+    }
+    
     try {
       await fetch('/api/leads', {
         method: 'POST',

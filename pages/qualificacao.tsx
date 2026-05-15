@@ -51,8 +51,10 @@ export default function Qualificacao() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [utmParams, setUtmParams] = useState<Record<string, string>>({});
+  const [hasExistingData, setHasExistingData] = useState(false);
 
   useEffect(() => {
+    // Carregar UTM params
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const utm: Record<string, string> = {};
@@ -61,6 +63,22 @@ export default function Qualificacao() {
         if (val) utm[key] = val;
       });
       setUtmParams(utm);
+
+      // Tentar recuperar dados do cliente do sessionStorage (vindo do WhatsApp)
+      const storedCustomer = sessionStorage.getItem('qualificacao_customer');
+      if (storedCustomer) {
+        try {
+          const customer = JSON.parse(storedCustomer);
+          if (customer.name) setName(customer.name);
+          if (customer.email) setEmail(customer.email);
+          if (customer.whatsapp) setWhatsapp(customer.whatsapp);
+          if (customer.name && customer.email && customer.whatsapp) {
+            setHasExistingData(true);
+          }
+        } catch {
+          // ignore
+        }
+      }
     }
   }, []);
 
@@ -68,7 +86,7 @@ export default function Qualificacao() {
     e.preventDefault();
     if (!email || !name || !whatsapp) return;
 
-    // Salvar dados do cliente no sessionStorage
+    // Salvar/atualizar dados do cliente no sessionStorage
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('qualificacao_customer', JSON.stringify({ name, email, whatsapp }));
     }
@@ -115,6 +133,12 @@ export default function Qualificacao() {
 
     const isHighTicket = finalAnswers['p4'] === 'sim';
 
+    // Garantir que os dados estão salvos no sessionStorage
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('qualificacao_customer', JSON.stringify({ name, email, whatsapp }));
+      sessionStorage.setItem('qualificacao_answers', JSON.stringify(finalAnswers));
+    }
+
     try {
       await fetch('/api/qualificacao', {
         method: 'POST',
@@ -140,9 +164,6 @@ export default function Qualificacao() {
         const msg = encodeURIComponent(`Olá! Fiz a qualificação e quero implementar minha workforce de IA (high-ticket). Nome: ${name}, Email: ${email}, WhatsApp: ${whatsapp}`);
         window.location.href = `https://wa.me/5511914088571?text=${msg}`;
       } else {
-        if (typeof window !== 'undefined') {
-          sessionStorage.setItem('qualificacao_answers', JSON.stringify(finalAnswers));
-        }
         const answersParam = encodeURIComponent(JSON.stringify(finalAnswers));
         window.location.href = `/resultado?answers=${answersParam}`;
       }
@@ -164,13 +185,15 @@ export default function Qualificacao() {
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-full px-4 py-2 mb-6">
                 <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Qualificação Gratuita</span>
+                <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Orçamento em Tempo Real</span>
               </div>
               <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                Antes de começar...
+                {hasExistingData ? 'Seus dados já estão aqui!' : 'Antes de começar...'}
               </h1>
               <p className="text-gray-300 text-lg">
-                Precisamos do seu email pra salvar seus resultados e te enviar uma análise personalizada.
+                {hasExistingData 
+                  ? 'Confirme seus dados e faça a qualificação. Leva menos de 2 minutos.'
+                  : 'Precisamos dos seus dados pra personalizar sua qualificação.'}
               </p>
             </div>
 
@@ -187,7 +210,7 @@ export default function Qualificacao() {
                 />
               </div>
 
-              <div className="mb-8">
+              <div className="mb-6">
                 <label className="block text-gray-300 text-sm font-semibold mb-2">Seu melhor email</label>
                 <input
                   type="email"
@@ -216,7 +239,7 @@ export default function Qualificacao() {
                 type="submit"
                 className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25"
               >
-                COMEÇAR QUALIFICAÇÃO →
+                {hasExistingData ? 'CONTINUAR QUALIFICAÇÃO →' : 'COMEÇAR QUALIFICAÇÃO →'}
               </button>
 
               <p className="text-gray-500 text-xs text-center mt-4">

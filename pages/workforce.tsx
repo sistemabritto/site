@@ -1,9 +1,39 @@
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Workforce() {
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '' });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.email || !formData.whatsapp) return;
+    
+    // Salvar no sessionStorage
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('qualificacao_customer', JSON.stringify(formData));
+    }
+    
+    // Redirecionar pra qualificação
+    window.location.href = '/qualificacao';
+  };
+
+  const openModal = () => {
+    // Pré-preencher se já tiver dados
+    if (typeof window !== 'undefined') {
+      const stored = sessionStorage.getItem('qualificacao_customer');
+      if (stored) {
+        try {
+          const data = JSON.parse(stored);
+          setFormData({ name: data.name || '', email: data.email || '', whatsapp: data.whatsapp || '' });
+        } catch { /* ignore */ }
+      }
+    }
+    setShowModal(true);
+  };
+
   return (
     <>
       <Meta 
@@ -15,6 +45,69 @@ export default function Workforce() {
       <Navbar />
       
       <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>
+
+        {/* ===== MODAL CAPTURA DADOS ===== */}
+        {showModal && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0,0,0,0.9)' }}>
+            <div className="bg-[#111111] rounded-3xl p-8 max-w-md w-full border border-green-500/30 relative">
+              <button 
+                onClick={() => setShowModal(false)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl"
+              >×</button>
+              
+              <div className="text-center mb-6">
+                <div className="text-4xl mb-3">🚀</div>
+                <h3 className="text-2xl font-bold text-white mb-2">Quase lá!</h3>
+                <p className="text-gray-300 text-sm">Seus dados = qualificação personalizada. Sem repetir depois.</p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
+                  <input
+                    type="text"
+                    placeholder="Seu nome"
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
+                  <input
+                    type="email"
+                    placeholder="seu@email.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp *</label>
+                  <input
+                    type="tel"
+                    placeholder="(11) 99999-9999"
+                    value={formData.whatsapp}
+                    onChange={(e) => setFormData({...formData, whatsapp: e.target.value})}
+                    className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+                    required
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={!formData.email || !formData.whatsapp}
+                  className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  CONTINUAR →
+                </button>
+                
+                <p className="text-gray-500 text-xs text-center">Seus dados estão seguros. Sem spam.</p>
+              </form>
+            </div>
+          </div>
+        )}
         
         {/* ===== HERO: CARTA DE VENDAS ===== */}
         <section className="relative pt-32 pb-20 overflow-hidden">
@@ -45,12 +138,12 @@ export default function Workforce() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
-              <Link
-                href="/qualificacao"
+              <button
+                onClick={openModal}
                 className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25"
               >
                 CONTRATAR MEU WORKFORCE →
-              </Link>
+              </button>
               <a
                 href="#prova"
                 className="inline-flex items-center gap-2 text-white px-8 py-5 rounded-full font-semibold transition-all duration-200 hover:bg-white/10 border border-white/20"
@@ -151,13 +244,11 @@ export default function Workforce() {
                 <div className="space-y-4">
                   <div>
                     <p className="text-red-400 text-sm font-semibold mb-1">ANTES DO WORKFORCE:</p>
-                    <p className="text-gray-300">Recebia 400 leads/mês. Secretária respondia quando dava conta — tempo médio: 47 minutos. 
-                    Paciente esperava, desistia, ia pro concorrente. 30% das consultas eram no-show porque ninguém reconfirmava.</p>
+                    <p className="text-gray-300">Recebia 400 leads/mês. Secretária respondia quando dava conta — tempo médio: 47 minutos. Paciente esperava, desistia, ia pro concorrente. 30% das consultas eram no-show porque ninguém reconfirmava.</p>
                   </div>
                   <div>
                     <p className="text-green-400 text-sm font-semibold mb-1">DEPOIS DO WORKFORCE:</p>
-                    <p className="text-gray-300">IA qualifica o lead em 3 segundos, agenda automaticamente, reconfirma 24h antes, cobra no dia. 
-                    Secretária agora só faz o atendimento presencial.</p>
+                    <p className="text-gray-300">IA qualifica o lead em 3 segundos, agenda automaticamente, reconfirma 24h antes, cobra no dia. Secretária agora só faz o atendimento presencial.</p>
                   </div>
                   <div className="bg-green-500/10 rounded-xl p-4 border border-green-500/20">
                     <p className="text-green-400 font-bold text-lg">Resultado: 1.200 consultas/mês. 3x mais. Mesma equipe. Zero contratações.</p>
@@ -176,13 +267,11 @@ export default function Workforce() {
                 <div className="space-y-4">
                   <div>
                     <p className="text-red-400 text-sm font-semibold mb-1">ANTES DO WORKFORCE:</p>
-                    <p className="text-gray-300">Cliente mandava documentos pelo WhatsApp. Se perdiam na conversa. 
-                    Advogado gastava 3 horas/dia organizando papel. Prazo perdido = processo atrasado.</p>
+                    <p className="text-gray-300">Cliente mandava documentos pelo WhatsApp. Se perdiam na conversa. Advogado gastava 3 horas/dia organizando papel. Prazo perdido = processo atrasado.</p>
                   </div>
                   <div>
                     <p className="text-green-400 text-sm font-semibold mb-1">DEPOIS DO WORKFORCE:</p>
-                    <p className="text-gray-300">IA recebe o documento, organiza por tipo, classifica, anexa no processo e envia checklist automático pro cliente. 
-                    Advogado foca no que importa: o processo.</p>
+                    <p className="text-gray-300">IA recebe o documento, organiza por tipo, classifica, anexa no processo e envia checklist automático pro cliente. Advogado foca no que importa: o processo.</p>
                   </div>
                   <div className="bg-green-500/10 rounded-xl p-4 border border-green-500/20">
                     <p className="text-green-400 font-bold text-lg">Resultado: 100% dos documentos organizados. 0 prazo perdido. 3h/dia devolvidas ao advogado.</p>
@@ -201,13 +290,11 @@ export default function Workforce() {
                 <div className="space-y-4">
                   <div>
                     <p className="text-red-400 text-sm font-semibold mb-1">ANTES DO WORKFORCE:</p>
-                    <p className="text-gray-300">Atendente anotava pedido no WhatsApp, passava pro entregador, confirmava endereço. 
-                    Tudo manual. Caos nos horários de pico. Cliente reclamava de demora.</p>
+                    <p className="text-gray-300">Atendente anotava pedido no WhatsApp, passava pro entregador, confirmava endereço. Tudo manual. Caos nos horários de pico. Cliente reclamava de demora.</p>
                   </div>
                   <div>
                     <p className="text-green-400 text-sm font-semibold mb-1">DEPOIS DO WORKFORCE:</p>
-                    <p className="text-gray-300">IA recebe pedido, confirma endereço, calcula tempo de entrega, faz upsell ("quer uma bebida por R$8?"), 
-                    acompanha o delivery e pede avaliação depois.</p>
+                    <p className="text-gray-300">IA recebe pedido, confirma endereço, calcula tempo de entrega, faz upsell ("quer uma bebida por R$8?"), acompanha o delivery e pede avaliação depois.</p>
                   </div>
                   <div className="bg-green-500/10 rounded-xl p-4 border border-green-500/20">
                     <p className="text-green-400 font-bold text-lg">Resultado: 3x mais pedidos processados. Mesma equipe. Nota no Google subiu de 3.8 para 4.7.</p>
@@ -247,7 +334,6 @@ export default function Workforce() {
             <p className="text-gray-400 text-center mb-12">Comece pequeno. Escale sem limite.</p>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {/* Básico */}
               <div className="bg-[#0a0a0a] rounded-2xl p-8 border border-white/10">
                 <h3 className="text-xl font-bold text-white mb-2">Básico</h3>
                 <p className="text-gray-400 text-sm mb-6">Pra quem tá começando</p>
@@ -259,12 +345,11 @@ export default function Workforce() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/qualificacao" className="block text-center py-3 rounded-full font-bold border border-white/20 text-white hover:bg-white/10 transition-all">
+                <button onClick={openModal} className="block text-center py-3 rounded-full font-bold border border-white/20 text-white hover:bg-white/10 transition-all w-full">
                   Começar
-                </Link>
+                </button>
               </div>
 
-              {/* Profissional */}
               <div className="bg-[#0a0a0a] rounded-2xl p-8 border-2 border-green-500 relative">
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-green-500 text-black px-4 py-1 rounded-full text-xs font-bold">
                   MAIS POPULAR
@@ -279,12 +364,11 @@ export default function Workforce() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/qualificacao" className="block text-center py-3 rounded-full font-bold bg-green-500 hover:bg-green-600 text-black transition-all">
+                <button onClick={openModal} className="block text-center py-3 rounded-full font-bold bg-green-500 hover:bg-green-600 text-black transition-all w-full">
                   Começar
-                </Link>
+                </button>
               </div>
 
-              {/* Empresarial */}
               <div className="bg-[#0a0a0a] rounded-2xl p-8 border border-[#D4AF37]/30">
                 <h3 className="text-xl font-bold text-white mb-2">Empresarial</h3>
                 <p className="text-gray-400 text-sm mb-6">Operação consolidada</p>
@@ -296,9 +380,9 @@ export default function Workforce() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/qualificacao" className="block text-center py-3 rounded-full font-bold border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-all">
+                <button onClick={openModal} className="block text-center py-3 rounded-full font-bold border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-all w-full">
                   Falar com especialista
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -347,12 +431,12 @@ export default function Workforce() {
             <p className="text-gray-400 text-lg mb-8">
               Responda 4 perguntas rápidas e descubra qual plano é ideal pra você.
             </p>
-            <Link
-              href="/qualificacao"
+            <button
+              onClick={openModal}
               className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25"
             >
               FAZER MINHA QUALIFICAÇÃO →
-            </Link>
+            </button>
             <p className="text-gray-500 text-sm mt-4">Leva menos de 2 minutos</p>
           </div>
         </section>
