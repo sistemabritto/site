@@ -8,6 +8,8 @@ const PRODUCTS: Record<string, string> = {
   'crm-ia-completo': 'prod_CWRuQwLLLJyKcFcUYCEfwUAG',
   'evonexus-premium': 'prod_uqRB2KTALEQWumHkp3h2PJLX',
   'hermes-selfhosted': 'prod_bzFSpy31qQc2z6rTpBhASz2X',
+  'consultoria-whatsapp-sla24h': 'prod_ubx3sEukhDWdAECcQdhXQpHa',
+  'consultoria-whatsapp-sla24h-upsell': 'prod_puXY0f5YfRCyku3ErDez0Emt',
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -16,35 +18,48 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { productId, customer } = req.body;
+    const { productId, customer, orderBump } = req.body;
     const abacateProductId = PRODUCTS[productId] || productId;
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.sistemabritto.com.br';
 
-    const response = await fetch(ABACATEPAY_API + '/checkouts/create', {
+    const body: Record<string, unknown> = {
+      items: [{ id: abacateProductId, quantity: 1 }],
+      returnUrl: siteUrl + '/obrigado',
+      completionUrl: siteUrl + '/obrigado',
+    };
+
+    if (customer) {
+      body.customer = {
+        email: customer.email,
+        name: customer.name,
+        cellphone: customer.cellphone,
+      };
+    }
+
+    // Order bump: consultoria técnica R$250 como upsell pós-pagamento (produto único, não assinatura)
+    if (orderBump) {
+      body.upSellProductId = PRODUCTS['consultoria-whatsapp-sla24h-upsell'];
+    }
+
+    console.log('[AbacatePay Request]', JSON.stringify(body));
+
+    const response = await fetch(ABACATEPAY_API + '/subscriptions/create', {
       method: 'POST',
       headers: {
         'Authorization': 'Bearer ' + ABACATEPAY_KEY,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        items: [{ id: abacateProductId, quantity: 1 }],
-        customer: customer ? {
-          email: customer.email,
-          name: customer.name,
-          cellphone: customer.cellphone,
-        } : undefined,
-        returnUrl: siteUrl + '/obrigado',
-        completionUrl: siteUrl + '/obrigado',
-      }),
+      body: JSON.stringify(body),
     });
 
     const data = await response.json();
+    console.log('[AbacatePay Response]', data);
 
     if (data.success && data.data?.url) {
       res.status(200).json({ url: data.data.url });
     } else {
       console.error('[AbacatePay Error]', data);
-      res.status(400).json({ error: data.error || 'Erro ao criar checkout' });
+      res.status(400).json({ error: data.error || 'Erro ao criar assinatura' });
     }
   } catch (error) {
     console.error('[Checkout Error]', error);

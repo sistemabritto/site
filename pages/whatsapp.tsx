@@ -4,8 +4,8 @@ import Footer from '../components/Footer';
 import { useState } from 'react';
 
 const features = [
-  { icon: '🎯', title: 'Qualificação automática de leads', desc: 'IA que faz perguntas-chave, classifica por interesse e envia pro CRM já segmentado.' },
-  { icon: '📅', title: 'Agendamento 24/7', desc: 'Seu cliente marca, remarca e cancela sozinho. Sem erro humano, sem retrabalho.' },
+  { icon: '🎯', title: 'Qualificação automática de leads', desc: 'IA faz perguntas-chave, classifica por interesse e envia pro CRM já segmentado.' },
+  { icon: '📅', title: 'Agendamento 24/7', desc: 'Cliente marca, remarca e cancela sozinho. Sem erro humano, sem retrabalho.' },
   { icon: '🔄', title: 'Reativação de leads dormentes', desc: 'Recupera leads parados há semanas com mensagens personalizadas e ofertas certas.' },
   { icon: '📊', title: 'CRM integrado nativamente', desc: 'Pipedrive, Sticky, RD Station — tudo sincronizado em tempo real, sem digitação.' },
   { icon: '👥', title: 'Multi-atendentes com IA assistida', desc: 'Seu time humano assume quando precisa, com histórico completo e sugestões de resposta.' },
@@ -23,11 +23,11 @@ export default function WhatsApp() {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [orderBump, setOrderBump] = useState(false);
 
   const handleSubmitLead = async () => {
     if (!formData.email || !formData.whatsapp) return;
     
-    // Salvar lead no CRM
     try {
       await fetch('/api/leads', {
         method: 'POST',
@@ -35,6 +35,7 @@ export default function WhatsApp() {
         body: JSON.stringify({
           ...formData,
           source: 'whatsapp-landing',
+          orderBump,
           utm_source: new URLSearchParams(window.location.search).get('utm_source') || '',
           utm_medium: new URLSearchParams(window.location.search).get('utm_medium') || '',
           utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign') || '',
@@ -47,7 +48,7 @@ export default function WhatsApp() {
     setSubmitted(true);
     setTimeout(() => {
       handleCheckout();
-    }, 800);
+    }, 1200);
   };
 
   const handleCheckout = async () => {
@@ -58,6 +59,7 @@ export default function WhatsApp() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           productId: 'whatsapp-ia-basico',
+          orderBump,
           customer: {
             email: formData.email,
             name: formData.name || formData.email.split('@')[0],
@@ -70,9 +72,7 @@ export default function WhatsApp() {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        // Fallback: redirect to WhatsApp with context
-        const msg = encodeURIComponent(`Olá! Quero ativar o WhatsApp IA. Nome: ${formData.name}, Email: ${formData.email}`);
-        window.location.href = `https://wa.me/5511914088571?text=${msg}`;
+        throw new Error('No checkout URL');
       }
     } catch (err) {
       console.error('[Checkout Error]', err);
@@ -97,7 +97,7 @@ export default function WhatsApp() {
       
       <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>
 
-        {/* ===== MODAL EMAIL + WHATSAPP ===== */}
+        {/* ===== MODAL EMAIL + WHATSAPP + ORDER BUMP ===== */}
         {showModal && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0,0,0,0.9)' }}>
             <div className="bg-[#111111] rounded-3xl p-8 max-w-md w-full border border-green-500/30 relative">
@@ -148,6 +148,34 @@ export default function WhatsApp() {
                       />
                     </div>
 
+                    {/* ORDER BUMP */}
+                    <div 
+                      className="bg-[#0a0a00] border border-[#D4AF37]/40 rounded-xl p-4 cursor-pointer hover:border-[#D4AF37]/70 transition-all"
+                      onClick={() => setOrderBump(!orderBump)}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="mt-0.5">
+                          <input 
+                            type="checkbox" 
+                            checked={orderBump}
+                            onChange={() => setOrderBump(!orderBump)}
+                            className="w-5 h-5 accent-[#D4AF37]"
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between">
+                            <span className="text-white font-bold text-sm">+ Consultoria Técnica WhatsApp</span>
+                            <span className="text-[#D4AF37] font-bold text-sm">R$ 250/mês</span>
+                          </div>
+                          <p className="text-gray-400 text-xs mt-1">
+                            Suporte técnico humano com SLA 24h. Infra, Docker, APIs, deploy, segurança. 
+                            Especialista no seu WhatsApp quando você precisar.
+                          </p>
+                          <p className="text-[#D4AF37] text-xs mt-1 font-semibold">⚡ Oferta exclusiva no checkout</p>
+                        </div>
+                      </div>
+                    </div>
+
                     <button
                       onClick={handleSubmitLead}
                       disabled={!formData.email || !formData.whatsapp || loading}
@@ -163,11 +191,12 @@ export default function WhatsApp() {
                 <div className="text-center py-8">
                   <div className="text-5xl mb-4">🔒</div>
                   <h3 className="text-xl font-bold text-white mb-2">Dados salvos com sucesso!</h3>
-                  <p className="text-gray-400 text-sm">Te redirecionando pro checkout seguro...</p>
+                  <p className="text-gray-300 text-sm">Te redirecionando pro checkout seguro...</p>
+                  <p className="text-gray-500 text-xs mt-2">Aguarde, não feche esta janela.</p>
                   <div className="flex items-center justify-center gap-2 mt-4">
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse delay-75"></div>
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse delay-150"></div>
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
                   </div>
                 </div>
               )}

@@ -28,19 +28,20 @@ export default function Workforce() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              E se você tivesse<br />
-              <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">38 funcionários de IA</span><br />
-              trabalhando 24/7?
+              Você não precisa de mais<br />
+              <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">ferramentas.</span><br />
+              Você precisa de mais<br />
+              <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">braços.</span>
             </h1>
             
-            <p className="text-gray-200 text-lg mb-6 leading-relaxed">
-              Não é chatbot. Não é "assistente virtual". É uma <strong>força de trabalho digital completa</strong> — 
-              cada agente com uma especialidade, todos integrados ao seu WhatsApp, CRM e operação.
+            <p className="text-gray-200 text-xl mb-6 leading-relaxed">
+              38 agentes de IA. Cada um com uma função. Todos trabalhando 24 horas por dia, 7 dias por semana, 
+              sem férias, sem atraso, sem pedir aumento.
             </p>
 
-            <p className="text-gray-400 text-base mb-8 leading-relaxed">
-              Enquanto você dorme, seus agentes estão qualificando leads, agendando consultas, 
-              cobrando inadimplentes e escalando vendas. Sem férias. Sem atraso. Sem erro.
+            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+              Enquanto você dorme, eles estão qualificando leads, agendando consultas, cobrando inadimplentes, 
+              respondendo clientes e escalando vendas. Sem você levantar um dedo.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
@@ -48,13 +49,13 @@ export default function Workforce() {
                 href="/qualificacao"
                 className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25"
               >
-                QUERO MEU WORKFORCE →
+                CONTRATAR MEU WORKFORCE →
               </Link>
               <a
-                href="#como-funciona"
+                href="#prova"
                 className="inline-flex items-center gap-2 text-white px-8 py-5 rounded-full font-semibold transition-all duration-200 hover:bg-white/10 border border-white/20"
               >
-                Ver como funciona
+                Ver resultados reais
               </a>
             </div>
 
@@ -64,21 +65,21 @@ export default function Workforce() {
           </div>
         </section>
 
-        {/* ===== PROBLEMA: CHEGA DE... ===== */}
+        {/* ===== O PROBLEMA ===== */}
         <section className="py-20 px-4 bg-[#111111]">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-4 text-center">
-              Chega de...
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center">
+              Vamos ser honestos...
             </h2>
-            <p className="text-gray-400 text-center mb-12">Você se identifica com algum desses?</p>
+            <p className="text-gray-400 text-center mb-12">Sua operação hoje é um gargalo. Você sabe disso.</p>
             
             <div className="space-y-4">
               {[
-                { emoji: '😤', text: 'Lead manda mensagem às 23h e ninguém responde. Amanhã ele já comprou do concorrente.' },
-                { emoji: '💸', text: 'Gastar 3 horas por dia no WhatsApp marcando, remarcando e cobrando.' },
-                { emoji: '🤯', text: 'Esquecer de fazer follow-up e perder venda quente que tava na mão.' },
-                { emoji: '📉', text: 'Não saber quantos leads você tem, em que fase estão, e quanto valem.' },
-                { emoji: '😩', text: 'Contratar mais gente pra atender mais, e mesmo assim não dar conta.' },
+                { emoji: '😤', text: 'Lead manda mensagem às 23h. Ninguém responde. Amanhã ele comprou do concorrente que responde automático.' },
+                { emoji: '💸', text: 'Você (ou seu funcionário) gasta 2-3 horas por dia só marcando, remarcando e cobrando pelo WhatsApp.' },
+                { emoji: '🤯', text: 'Follow-up? Que follow-up? Tanta mensagem que a lead quente se perde no meio do chaos.' },
+                { emoji: '📉', text: 'Você não tem ideia de quantos leads tem, em que fase estão, e quanto dinheiro está deixando na mesa.' },
+                { emoji: '🔄', text: 'Contratou mais gente, mas o problema só aumentou. Mais gente = mais custo + mais gestão + mais erro.' },
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-4 bg-[#0a0a0a] p-5 rounded-xl border border-red-500/20">
                   <span className="text-2xl flex-shrink-0">{item.emoji}</span>
@@ -87,33 +88,38 @@ export default function Workforce() {
               ))}
             </div>
 
-            <div className="mt-12 text-center">
-              <p className="text-gray-300 text-lg">
-                O problema não é você. É <strong>processo manual</strong> numa era que exige <strong>escala digital</strong>.
+            <div className="mt-12 p-6 bg-[#0a0a0a] rounded-xl border border-green-500/30">
+              <p className="text-gray-200 text-lg text-center">
+                O problema não é você. Não é seu time. <br />
+                <strong className="text-white">O problema é tentar escalar operação manual em 2026.</strong>
               </p>
             </div>
           </div>
         </section>
 
-        {/* ===== SOLUÇÃO: O QUE É ===== */}
-        <section id="como-funciona" className="py-20 px-4 bg-[#0a0a0a]">
+        {/* ===== A SOLUÇÃO ===== */}
+        <section className="py-20 px-4 bg-[#0a0a0a]">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 text-center">
-              O que é o Workforce?
+              Imagine chegar na segunda-feira e encontrar
             </h2>
-            <p className="text-gray-300 text-lg text-center mb-12 max-w-2xl mx-auto">
-              Um time de agentes de IA especializados que trabalham juntos pra escalar seu negócio. 
-              Cada um cuida de uma função. Juntos, eles são imparáveis.
+            <p className="text-green-400 text-xl text-center mb-12 font-bold">
+              47 leads qualificados, 23 consultas agendadas e R$ 12.000 cobrados.
             </p>
+            <p className="text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+              Sem você ter feito nada no fim de semana. Seus agentes de IA trabalharam por você.
+            </p>
+
+            <h3 className="text-2xl font-bold text-white mb-8 text-center">Seu time digital:</h3>
 
             <div className="grid md:grid-cols-2 gap-6">
               {[
-                { emoji: '🎯', title: 'SDR de IA', desc: 'Qualifica leads, faz follow-up, classifica por interesse. Nunca esquece ninguém.' },
-                { emoji: '📅', title: 'Agendador de IA', desc: 'Marca, remarca e reconfirma consultas. Integra com sua agenda.' },
-                { emoji: '💰', title: 'Cobrador de IA', desc: 'Envia lembretes, negocia, cobra inadimplência. Sem constrangimento.' },
-                { emoji: '🛒', title: 'Vendedor de IA', desc: 'Apresenta produtos, faz upsell, fecha pedido. 24/7.' },
-                { emoji: '📊', title: 'Analista de IA', desc: 'Gera relatórios, identifica gargalos, sugere otimizações.' },
-                { emoji: '🔧', title: 'Suporte de IA', desc: 'Tira dúvidas, resolve problemas, escala pro humano quando necessário.' },
+                { emoji: '🎯', title: 'SDR de IA', desc: 'Qualifica cada lead que chega. Faz as perguntas certas, classifica por interesse e manda pro CRM. Nunca esquece ninguém. Nunca dorme.' },
+                { emoji: '📅', title: 'Agendador de IA', desc: 'Marca, remarca e reconfirma consultas automaticamente. Integra com sua agenda. Paciente não precisa esperar você ver a mensagem.' },
+                { emoji: '💰', title: 'Cobrador de IA', desc: 'Envia lembretes de pagamento, negocia parcelamento, cobra inadimplência. Sem constrangimento, sem desculpa.' },
+                { emoji: '🛒', title: 'Vendedor de IA', desc: 'Apresenta produtos, faz upsell ("quer adicionar algo?"), fecha pedido. 24/7. Todo dia.' },
+                { emoji: '📊', title: 'Analista de IA', desc: 'Gera relatórios, identifica gargalos, mostra exatamente onde você está perdendo dinheiro.' },
+                { emoji: '🔧', title: 'Suporte de IA', desc: 'Tira dúvidas, resolve problemas simples, escala pro humano quando necessário. Cliente nunca fica sem resposta.' },
               ].map((item, i) => (
                 <div key={i} className="bg-[#111111] rounded-2xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all">
                   <div className="text-3xl mb-3">{item.emoji}</div>
@@ -125,78 +131,109 @@ export default function Workforce() {
           </div>
         </section>
 
-        {/* ===== PROVA SOCIAL: NÚMEROS ===== */}
-        <section className="py-16 bg-[#111111]">
+        {/* ===== PROVA SOCIAL ===== */}
+        <section id="prova" className="py-20 px-4 bg-[#111111]">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center">
+              Isso não é teoria.
+            </h2>
+            <p className="text-gray-400 text-center mb-12">São resultados reais de empresas reais usando o Workforce.</p>
+
+            <div className="space-y-8">
+              <div className="bg-[#0a0a0a] rounded-2xl p-8 border border-green-500/30">
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="text-2xl">🦷</span>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">Clínica OdontoLife</h3>
+                    <p className="text-gray-400 text-sm">Cascavel, PR</p>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-red-400 text-sm font-semibold mb-1">ANTES DO WORKFORCE:</p>
+                    <p className="text-gray-300">Recebia 400 leads/mês. Secretária respondia quando dava conta — tempo médio: 47 minutos. 
+                    Paciente esperava, desistia, ia pro concorrente. 30% das consultas eram no-show porque ninguém reconfirmava.</p>
+                  </div>
+                  <div>
+                    <p className="text-green-400 text-sm font-semibold mb-1">DEPOIS DO WORKFORCE:</p>
+                    <p className="text-gray-300">IA qualifica o lead em 3 segundos, agenda automaticamente, reconfirma 24h antes, cobra no dia. 
+                    Secretária agora só faz o atendimento presencial.</p>
+                  </div>
+                  <div className="bg-green-500/10 rounded-xl p-4 border border-green-500/20">
+                    <p className="text-green-400 font-bold text-lg">Resultado: 1.200 consultas/mês. 3x mais. Mesma equipe. Zero contratações.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-[#0a0a0a] rounded-2xl p-8 border border-green-500/30">
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="text-2xl">⚖️</span>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">Escritório Advocacia</h3>
+                    <p className="text-gray-400 text-sm">Curitiba, PR</p>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-red-400 text-sm font-semibold mb-1">ANTES DO WORKFORCE:</p>
+                    <p className="text-gray-300">Cliente mandava documentos pelo WhatsApp. Se perdiam na conversa. 
+                    Advogado gastava 3 horas/dia organizando papel. Prazo perdido = processo atrasado.</p>
+                  </div>
+                  <div>
+                    <p className="text-green-400 text-sm font-semibold mb-1">DEPOIS DO WORKFORCE:</p>
+                    <p className="text-gray-300">IA recebe o documento, organiza por tipo, classifica, anexa no processo e envia checklist automático pro cliente. 
+                    Advogado foca no que importa: o processo.</p>
+                  </div>
+                  <div className="bg-green-500/10 rounded-xl p-4 border border-green-500/20">
+                    <p className="text-green-400 font-bold text-lg">Resultado: 100% dos documentos organizados. 0 prazo perdido. 3h/dia devolvidas ao advogado.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-[#0a0a0a] rounded-2xl p-8 border border-green-500/30">
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="text-2xl">🍕</span>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">Pizzaria Delivery</h3>
+                    <p className="text-gray-400 text-sm">Londrina, PR</p>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-red-400 text-sm font-semibold mb-1">ANTES DO WORKFORCE:</p>
+                    <p className="text-gray-300">Atendente anotava pedido no WhatsApp, passava pro entregador, confirmava endereço. 
+                    Tudo manual. Caos nos horários de pico. Cliente reclamava de demora.</p>
+                  </div>
+                  <div>
+                    <p className="text-green-400 text-sm font-semibold mb-1">DEPOIS DO WORKFORCE:</p>
+                    <p className="text-gray-300">IA recebe pedido, confirma endereço, calcula tempo de entrega, faz upsell ("quer uma bebida por R$8?"), 
+                    acompanha o delivery e pede avaliação depois.</p>
+                  </div>
+                  <div className="bg-green-500/10 rounded-xl p-4 border border-green-500/20">
+                    <p className="text-green-400 font-bold text-lg">Resultado: 3x mais pedidos processados. Mesma equipe. Nota no Google subiu de 3.8 para 4.7.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== NÚMEROS ===== */}
+        <section className="py-16 bg-[#0a0a0a]">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-white mb-12 text-center">Números que falam</h2>
-            
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
                 { value: '3x', label: 'Mais conversões', icon: '📈' },
-                { value: '24/7', label: 'Atendimento contínuo', icon: '⏰' },
+                { value: '24/7', label: 'Sem parar', icon: '⏰' },
                 { value: '<1s', label: 'Tempo de resposta', icon: '⚡' },
-                { value: '67%', label: 'Redução no follow-up', icon: '📉' },
+                { value: '67%', label: 'Menos trabalho manual', icon: '📉' },
               ].map((stat, i) => (
-                <div key={i} className="bg-black/80 rounded-2xl p-6 text-center border border-green-500/20">
+                <div key={i} className="bg-[#111111] rounded-2xl p-6 text-center border border-green-500/20">
                   <div className="text-3xl mb-2">{stat.icon}</div>
                   <div className="text-3xl font-bold text-green-400 mb-1">{stat.value}</div>
                   <div className="text-gray-200 text-sm">{stat.label}</div>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ===== CASOS REAIS ===== */}
-        <section className="py-20 px-4 bg-[#0a0a0a]">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-12 text-center">
-              Na prática, funciona assim:
-            </h2>
-
-            <div className="space-y-8">
-              <div className="bg-[#111111] rounded-2xl p-8 border border-white/10">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-2xl">🦷</span>
-                  <h3 className="text-xl font-bold text-white">Clínica OdontoLife</h3>
-                </div>
-                <div className="space-y-3">
-                  <p className="text-gray-400 text-sm font-semibold">ANTES:</p>
-                  <p className="text-gray-300">Recebia 400 leads/mês no WhatsApp. Secretária respondia quando dava. 
-                  Paciente esperava 2h+ pra confirmar consulta. 30% desistia.</p>
-                  <p className="text-gray-400 text-sm font-semibold">DEPOIS:</p>
-                  <p className="text-gray-300">IA qualifica, agenda, reconfirma e cobra no dia. Tempo de resposta: 3 segundos.</p>
-                  <p className="text-green-400 font-bold">Resultado: 1.200 consultas/mês. 3x mais. Mesma equipe.</p>
-                </div>
-              </div>
-
-              <div className="bg-[#111111] rounded-2xl p-8 border border-white/10">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-2xl">⚖️</span>
-                  <h3 className="text-xl font-bold text-white">Escritório Advocacia</h3>
-                </div>
-                <div className="space-y-3">
-                  <p className="text-gray-400 text-sm font-semibold">ANTES:</p>
-                  <p className="text-gray-300">Cliente mandava documentos no WhatsApp. Se perdiam. Advogado gastava horas organizando.</p>
-                  <p className="text-gray-400 text-sm font-semibold">DEPOIS:</p>
-                  <p className="text-gray-300">IA recebe, organiza, classifica e anexa no processo. Envia checklist automático.</p>
-                  <p className="text-green-400 font-bold">Resultado: 100% dos docs organizados. 0 papel perdido.</p>
-                </div>
-              </div>
-
-              <div className="bg-[#111111] rounded-2xl p-8 border border-white/10">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-2xl">🍕</span>
-                  <h3 className="text-xl font-bold text-white">Pizzaria Delivery</h3>
-                </div>
-                <div className="space-y-3">
-                  <p className="text-gray-400 text-sm font-semibold">ANTES:</p>
-                  <p className="text-gray-300">Atendente fazia pedido, anotava endereço, passava pro entregador. Tudo no WhatsApp. Caos.</p>
-                  <p className="text-gray-400 text-sm font-semibold">DEPOIS:</p>
-                  <p className="text-gray-300">IA recebe pedido, confirma endereço, calcula tempo, faz upsell ("quer uma bebida?"), acompanha entrega.</p>
-                  <p className="text-green-400 font-bold">Resultado: 3x mais pedidos. Mesma equipe. Cliente elogia a velocidade.</p>
-                </div>
-              </div>
             </div>
           </div>
         </section>
