@@ -15,11 +15,10 @@ const PRODUCTS: Record<string, string> = {
   'evonexus-premium-combo-consultoria': 'prod_cSXakYDjq5tLnf0KT1gDmbHE',
 };
 
-// Cria ou busca customer na AbacatePay
-async function createOrGetCustomer(customer: { email: string; name: string; cellphone: string }) {
+// Cria customer na AbacatePay e retorna o ID
+async function createCustomer(customer: { email: string; name: string; cellphone: string }): Promise<string | null> {
   try {
-    // Tenta criar customer
-    const createRes = await fetch(`${ABACATEPAY_API}/customers/create`, {
+    const res = await fetch(`${ABACATEPAY_API}/customers/create`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${ABACATEPAY_KEY}`,
@@ -34,27 +33,13 @@ async function createOrGetCustomer(customer: { email: string; name: string; cell
       }),
     });
 
-    const createData = await createRes.json();
+    const data = await res.json();
     
-    if (createData.success && createData.data?.id) {
-      return createData.data.id;
+    if (data.success && data.data?.id) {
+      return data.data.id;
     }
 
-    // Se falhar, tenta listar customers (fallback)
-    const listRes = await fetch(`${ABACATEPAY_API}/customers/list`, {
-      headers: { 'Authorization': `Bearer ${ABACATEPAY_KEY}` },
-    });
-    
-    const listData = await listRes.json();
-    
-    if (listData.success && listData.data?.length > 0) {
-      // Procura por email
-      const existing = listData.data.find((c: any) => c.email === customer.email);
-      if (existing) {
-        return existing.id;
-      }
-    }
-
+    console.error('[Customer Create Error]', data);
     return null;
   } catch (error) {
     console.error('[Customer Error]', error);
@@ -74,13 +59,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     let customerId: string | null = null;
 
-    // Se tiver dados do customer, cria/retorna o customerId
-    if (customerData?.email) {
-      customerId = await createOrGetCustomer({
+    // Se tiver dados do customer, CRIA ele primeiro e pega o ID
+    if (customerData?.email && customerData?.cellphone) {
+      customerId = await createCustomer({
         email: customerData.email,
         name: customerData.name || customerData.email.split('@')[0],
         cellphone: customerData.cellphone,
       });
+      
+      console.log('[Customer Created]', customerId ? customerId : 'FAILED');
     }
 
     const body: Record<string, unknown> = {
@@ -89,16 +76,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       completionUrl: siteUrl + '/obrigado',
     };
 
-    // Se conseguiu customerId, usa ele (checkout pré-preenchido)
-    // Se não, envia os dados inline (fallback)
+    // Usa customerId se conseguiu criar
     if (customerId) {
       body.customerId = customerId;
-    } else if (customerData?.email) {
-      body.customer = {
-        email: customerData.email,
-        name: customerData.name,
-        cellphone: customerData.cellphone,
-      };
     }
 
     console.log('[AbacatePay Request]', JSON.stringify(body));

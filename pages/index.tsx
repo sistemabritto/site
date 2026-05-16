@@ -61,11 +61,13 @@ export default function Home() {
                     className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl"
                   >×</button>
                   
-                  <div className="text-center mb-6">
-                    <div className="text-4xl mb-3">🚀</div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Orçamento em Tempo Real</h3>
-                    <p className="text-gray-300 text-sm">Seus dados = qualificação personalizada. Sem repetir depois.</p>
-                  </div>
+ <div className="text-center mb-6">
+          <div className="text-4xl mb-3">🚀</div>
+          <h3 className="text-2xl font-bold text-white mb-2">Agendar Consultoria (R$ 500)</h3>
+          <p className="text-gray-300 text-sm">
+            <strong className="text-green-400">Bônus:</strong> Fechando hoje, ganha <strong>1 mês de Suporte Técnico (R$ 500)</strong> grátis.
+          </p>
+        </div>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
@@ -101,12 +103,11 @@ export default function Home() {
                       />
                     </div>
 
-                    <button
+<button
                       type="submit"
-                      disabled={!formData.email || !formData.whatsapp}
-                      className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all"
                     >
-                      SOLICITAR ORÇAMENTO →
+                      AGENDAR CONSULTORIA →
                     </button>
                     
                     <p className="text-gray-500 text-xs text-center">Sem compromisso. Resposta em até 24h.</p>
@@ -136,23 +137,23 @@ export default function Home() {
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
               <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Vagas Limitadas</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              Seu concorrente já usa<br />
-              <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">IA pra operar 24/7.</span><br />
-              Você ainda faz tudo manual.
-            </h1>
-            <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
-              Enquanto você dorme, 47 leads mandaram mensagem. Amanhã, 30 vão pro concorrente.
-            </p>
-            <p className="text-lg text-gray-400 mb-12 max-w-xl mx-auto">
-              Não é falta de esforço. É falta de escala. A gente resolve isso em 48 horas.
-            </p>
-<div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+ <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+  <strong className="text-green-400">10% dos seus concorrentes</strong><br />
+  <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">já usam IA pra operar 24/7.</span><br />
+  Sua empresa ainda faz do jeito antigo.
+  </h1>
+  <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
+  Enquanto você dorme, 47 leads mandaram mensagem. Amanhã, 30 vão pro concorrente.
+  </p>
+  <p className="text-lg text-gray-400 mb-12 max-w-xl mx-auto">
+  Não é falta de esforço. É falta de escala. A gente resolve isso em 48 horas.
+  </p>
+  <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
   <button 
   onClick={() => setShowModal(true)}
   className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25"
   >
-  ORÇAMENTO EM TEMPO REAL →
+  AGENDAR CONSULTORIA (R$ 500) →
   </button>
   <a href="/qualificacao-digital" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
   ESCALAR MEU NEGÓCIO DIGITAL →

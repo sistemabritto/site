@@ -58,12 +58,12 @@ export default function Navbar() {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
-            <a
-              href="/qualificacao"
-              className="bg-green-500 hover:bg-green-600 text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 shadow-lg shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105"
-            >
-              Orçamento em Tempo Real
-            </a>
+<a
+  href="/"
+  className="bg-green-500 hover:bg-green-600 text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 shadow-lg shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105"
+>
+  Agendar Consultoria
+</a>
           </div>
 
           {/* Mobile menu button */}
@@ -95,13 +95,13 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
-            <a
-              href="/qualificacao"
-              className="block text-center bg-green-500 text-black px-6 py-3 rounded-full font-bold mt-4 shadow-lg shadow-green-500/25 hover:bg-green-600 transition-all duration-200"
-              onClick={() => setMobileOpen(false)}
-            >
-              Orçamento em Tempo Real
-            </a>
+<a
+  href="/"
+  className="block text-center bg-green-500 text-black px-6 py-3 rounded-full font-bold mt-4 shadow-lg shadow-green-500/25 hover:bg-green-600 transition-all duration-200"
+  onClick={() => setMobileOpen(false)}
+>
+  Agendar Consultoria
+</a>
           </div>
         </div>
       </div>
