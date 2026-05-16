@@ -239,15 +239,6 @@ export default function WhatsApp() {
 
  <p className="text-gray-400 text-sm mt-4">Sem fidelidade. Cancele quando quiser. 7 dias de garantia.</p>
  </div>
- 
- {/* WhatsApp Mockup Image */}
- <div className="mt-12">
- <img 
- src="/images/hero-whatsapp-mockup.png"
- alt="WhatsApp IA em ação"
- className="w-full max-w-3xl mx-auto rounded-2xl border border-green-500/30 shadow-2xl shadow-green-500/10"
- />
- </div>
  </section>
 
         {/* ===== STATS ===== */}

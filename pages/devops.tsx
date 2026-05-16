@@ -115,15 +115,6 @@ Especialista técnico no seu WhatsApp. Docker, APIs, segurança, troubleshooting
 <button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-[#D4AF37]/25">
 PRECISO DE BRAÇO →
 </button>
-
-{/* Diagrama DevOps */}
-<div className="mt-12">
-<img 
-src="/images/devops-diagram.png"
-alt="Diagrama DevOps"
-className="w-full max-w-4xl mx-auto rounded-2xl border border-[#D4AF37]/30 shadow-2xl shadow-[#D4AF37]/10"
-/>
-</div>
 </div>
 </section>
         <section className="py-20 px-4 bg-[#111111]">

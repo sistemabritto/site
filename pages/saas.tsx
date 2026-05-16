@@ -116,20 +116,6 @@ export default function SaaS() {
 <button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-pink-500 hover:bg-pink-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-pink-500/25">
 FALAR COM ESPECIALISTA →
 </button>
-
-{/* Dashboard SaaS + Timeline */}
-<div className="mt-12 space-y-8">
-<img 
-src="/images/saas-dashboard.png"
-alt="Dashboard SaaS"
-className="w-full max-w-4xl mx-auto rounded-2xl border border-pink-500/30 shadow-2xl shadow-pink-500/10"
-/>
-<img 
-src="/images/saas-timeline.png"
-alt="Timeline de desenvolvimento SaaS"
-className="w-full max-w-4xl mx-auto rounded-2xl border border-pink-500/30 shadow-xl shadow-pink-500/10"
-/>
-</div>
 </div>
 </section>
         <section className="py-20 px-4 bg-[#111111]">

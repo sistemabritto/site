@@ -61,13 +61,13 @@ export default function Home() {
                     className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl"
                   >×</button>
                   
- <div className="text-center mb-6">
-          <div className="text-4xl mb-3">🚀</div>
-          <h3 className="text-2xl font-bold text-white mb-2">Agendar Consultoria (R$ 500)</h3>
-          <p className="text-gray-300 text-sm">
-            <strong className="text-green-400">Bônus:</strong> Fechando hoje, ganha <strong>1 mês de Suporte Técnico (R$ 500)</strong> grátis.
-          </p>
-        </div>
+<div className="text-center mb-6">
+ <div className="text-4xl mb-3">🚀</div>
+ <h3 className="text-2xl font-bold text-white mb-2">Fala com a gente</h3>
+ <p className="text-gray-300 text-sm">
+ Preenche aí que a gente te explica como funciona.
+ </p>
+ </div>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
@@ -107,7 +107,7 @@ export default function Home() {
                       type="submit"
                       className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all"
                     >
-                      AGENDAR CONSULTORIA →
+                      FALAR COM ESPECIALISTA →
                     </button>
                     
                     <p className="text-gray-500 text-xs text-center">Sem compromisso. Resposta em até 24h.</p>
@@ -130,13 +130,8 @@ export default function Home() {
         )}
 
  {/* ===== HERO ===== */}
- <section className="relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden">
- {/* Background image com overlay */}
- <div 
- className="absolute inset-0 bg-cover bg-center opacity-20"
- style={{ backgroundImage: "url('/images/home-hero-abstract.png')" }}
- />
- <div className="absolute inset-0 bg-gradient-to-b from-green-900/20 via-[#0a0a0a]/90 to-[#0a0a0a]" />
+ <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
+ <div className="absolute inset-0 bg-gradient-to-b from-green-900/20 via-[#0a0a0a] to-[#0a0a0a]" />
           <div className="relative z-10 max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-full px-4 py-2 mb-8">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
