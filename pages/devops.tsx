@@ -111,15 +111,15 @@ export default function DevOps() {
               Sua infra não pode<br />
               <span className="bg-gradient-to-r from-[#D4AF37] to-[#C5A028] bg-clip-text text-transparent">depender de sorte.</span>
             </h1>
-            <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
-              Servidor cai. Deploy quebra. API fica lenta. A gente resolve em até 24h.
-            </p>
-            <p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
-              Especialista técnico no seu WhatsApp. Docker, APIs, segurança, troubleshooting.
-            </p>
-            <button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-[#D4AF37]/25">
-              PRECISO DE AJUDA →
-            </button>
+<p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
+Servidor cai. Deploy quebra. API fica lenta. <strong>Não é falta de esforço. É falta de braço.</strong>
+</p>
+<p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
+Especialista técnico no seu WhatsApp. Docker, APIs, segurança, troubleshooting.
+</p>
+<button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-[#D4AF37]/25">
+PRECISO DE BRAÇO →
+</button>
           </div>
         </section>
 
@@ -168,15 +168,15 @@ export default function DevOps() {
         </section>
 
         {/* ===== CTA ===== */}
-        <section className="py-20 px-4 bg-[#111111]">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-white mb-6">Sem palestra. Sem enrolação.</h2>
-            <p className="text-gray-300 text-lg mb-8">Especialista técnico no seu WhatsApp. SLA 24h. Resolve pra você.</p>
-            <button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-[#D4AF37]/25">
-              PRECISO DE AJUDA →
-            </button>
-          </div>
-        </section>
+<section className="py-20 px-4 bg-[#111111]">
+<div className="max-w-3xl mx-auto text-center">
+<h2 className="text-3xl font-bold text-white mb-6">Sem palestra. Sem enrolação.</h2>
+<p className="text-gray-300 text-lg mb-8">Especialista técnico no seu WhatsApp. SLA 24h. Resolve pra você.</p>
+<button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-[#D4AF37]/25">
+PRECISO DE BRAÇO →
+</button>
+</div>
+</section>
 
         <Footer />
       </main>

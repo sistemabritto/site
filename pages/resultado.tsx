@@ -73,20 +73,14 @@ const COMBOS: Record<string, { productId: string; price: number }> = {
 };
 
 function calculatePlan(answers: Record<string, string>): string {
-  const leads = answers['p1'] || '';
-  const ticket = answers['p2'] || '';
-  const responseTime = answers['p3'] || '';
   const automationLevel = answers['p4'] || '';
 
   // Se escolheu nível direto na P4, usa isso
   if (automationLevel === 'basico') return 'essencial';
   if (automationLevel === 'completo') return 'completo';
   if (automationLevel === 'premium') return 'premium';
-
-  // Fallback: lógica automática baseada em leads + ticket
-  if (ticket === '2000+' || leads === '1000+') return 'completo';
-  if (ticket === '500-2000' || leads === '500-1000' || responseTime === 'muito-demorado') return 'completo';
   
+  // Fallback: se não tiver P4, usa essencial
   return 'essencial';
 }
 

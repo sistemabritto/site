@@ -140,7 +140,7 @@ export default function Home() {
  <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
   <strong className="text-green-400">10% dos seus concorrentes</strong><br />
   <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">já usam IA pra operar 24/7.</span><br />
-  Sua empresa ainda faz do jeito antigo.
+  Sua empresa ainda faz tudo no braço?
   </h1>
   <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
   Enquanto você dorme, 47 leads mandaram mensagem. Amanhã, 30 vão pro concorrente.
