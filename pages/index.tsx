@@ -129,9 +129,14 @@ export default function Home() {
           </div>
         )}
 
-        {/* ===== HERO ===== */}
-        <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
-          <div className="absolute inset-0 bg-gradient-to-b from-green-900/20 via-[#0a0a0a] to-[#0a0a0a]" />
+ {/* ===== HERO ===== */}
+ <section className="relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden">
+ {/* Background image com overlay */}
+ <div 
+ className="absolute inset-0 bg-cover bg-center opacity-20"
+ style={{ backgroundImage: "url('/images/home-hero-abstract.png')" }}
+ />
+ <div className="absolute inset-0 bg-gradient-to-b from-green-900/20 via-[#0a0a0a]/90 to-[#0a0a0a]" />
           <div className="relative z-10 max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-full px-4 py-2 mb-8">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />

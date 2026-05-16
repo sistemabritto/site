@@ -113,13 +113,25 @@ export default function SaaS() {
             <p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
               Não é falta de esforço. É falta de braço. A gente constrói seu SaaS em 30 dias. Você foca em vender.
             </p>
-            <button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-pink-500 hover:bg-pink-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-pink-500/25">
-              FALAR COM ESPECIALISTA →
-            </button>
-          </div>
-        </section>
+<button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-pink-500 hover:bg-pink-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-pink-500/25">
+FALAR COM ESPECIALISTA →
+</button>
 
-        {/* ===== PROBLEMA ===== */}
+{/* Dashboard SaaS + Timeline */}
+<div className="mt-12 space-y-8">
+<img 
+src="/images/saas-dashboard.png"
+alt="Dashboard SaaS"
+className="w-full max-w-4xl mx-auto rounded-2xl border border-pink-500/30 shadow-2xl shadow-pink-500/10"
+/>
+<img 
+src="/images/saas-timeline.png"
+alt="Timeline de desenvolvimento SaaS"
+className="w-full max-w-4xl mx-auto rounded-2xl border border-pink-500/30 shadow-xl shadow-pink-500/10"
+/>
+</div>
+</div>
+</section>
         <section className="py-20 px-4 bg-[#111111]">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-white mb-12 text-center">O problema é tentar construir SaaS sem time técnico.</h2>

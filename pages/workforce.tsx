@@ -113,13 +113,20 @@ export default function Workforce() {
             <p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
               Dezenas de agentes de IA. Cada um com uma função. Todos trabalhando 24 horas por dia, 7 dias por semana, respondendo clientes e escalando vendas. Sem você levantar um dedo.
             </p>
-            <button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25">
-              SOLICITAR ORÇAMENTO →
-            </button>
-          </div>
-        </section>
-
-        {/* ===== PROBLEMA ===== */}
+ <button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25">
+ SOLICITAR ORÇAMENTO →
+ </button>
+ 
+ {/* Dashboard Image */}
+ <div className="mt-12">
+ <img 
+ src="/images/workforce-dashboard.png"
+ alt="Dashboard Workforce IA"
+ className="w-full max-w-4xl mx-auto rounded-2xl border border-green-500/30 shadow-2xl shadow-green-500/10"
+ />
+ </div>
+ </div>
+ </section>
         <section className="py-20 px-4 bg-[#111111]">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-white mb-12 text-center">O problema é tentar escalar operação manual em 2026.</h2>
