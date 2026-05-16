@@ -1,23 +1,39 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { createClient } from '@supabase/supabase-js';
 
 const ABACATEPAY_API = 'https://api.abacatepay.com/v2';
 const ABACATEPAY_KEY = process.env.ABACATEPAY_API_KEY || 'abc_dev_6xbMgNHha22tetRbE0GUpuWZ';
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
+const supabaseKey = process.env.SUPABASE_SERVICE_KEY || '';
 
 const PRODUCTS: Record<string, string> = {
-  // Produtos individuais
   'whatsapp-ia-basico': 'prod_jRg20GUgAmEjhy3QCr45ZtKn',
   'crm-ia-completo': 'prod_CWRuQwLLLJyKcFcUYCEfwUAG',
   'evonexus-premium': 'prod_uqRB2KTALEQWumHkp3h2PJLX',
   'hermes-selfhosted': 'prod_bzFSpy31qQc2z6rTpBhASz2X',
-  // Combos (produto + consultoria R$250)
   'whatsapp-ia-combo-consultoria': 'prod_0GBDbERsmaarw0GMRkRLg2EF',
   'crm-ia-completo-combo-consultoria': 'prod_GsYQrUcz0GTEe1aYrXJXsT05',
   'evonexus-premium-combo-consultoria': 'prod_cSXakYDjq5tLnf0KT1gDmbHE',
 };
 
-// Cria customer na AbacatePay e retorna o ID
-async function createCustomer(customer: { email: string; name: string; cellphone: string }): Promise<string | null> {
+// Cria ou busca customer na AbacatePay
+async function getOrCreateCustomer(customer: { email: string; name?: string; cellphone?: string }): Promise<string | null> {
   try {
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    
+    // Tenta achar customer existente no Supabase
+    const { data: existing } = await supabase
+      .from('customers')
+      .select('abacate_customer_id')
+      .eq('email', customer.email)
+      .single();
+
+    if (existing?.abacate_customer_id) {
+      console.log('[Customer Found]', existing.abacate_customer_id);
+      return existing.abacate_customer_id;
+    }
+
+    // Cria novo customer na AbacatePay
     const res = await fetch(`${ABACATEPAY_API}/customers/create`, {
       method: 'POST',
       headers: {
@@ -27,8 +43,8 @@ async function createCustomer(customer: { email: string; name: string; cellphone
       body: JSON.stringify({
         data: {
           email: customer.email,
-          name: customer.name,
-          cellphone: customer.cellphone,
+          name: customer.name || customer.email.split('@')[0],
+          cellphone: customer.cellphone || customer.email, // Fallback: usa email se não tiver telefone
         },
       }),
     });
@@ -36,7 +52,18 @@ async function createCustomer(customer: { email: string; name: string; cellphone
     const data = await res.json();
     
     if (data.success && data.data?.id) {
-      return data.data.id;
+      const customerId = data.data.id;
+      
+      // Salva no Supabase
+      await supabase.from('customers').insert({
+        abacate_customer_id: customerId,
+        email: customer.email,
+        name: customer.name || customer.email.split('@')[0],
+        cellphone: customer.cellphone || customer.email,
+      });
+
+      console.log('[Customer Created]', customerId);
+      return customerId;
     }
 
     console.error('[Customer Create Error]', data);
@@ -59,15 +86,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     let customerId: string | null = null;
 
-    // Se tiver dados do customer, CRIA ele primeiro e pega o ID
-    if (customerData?.email && customerData?.cellphone) {
-      customerId = await createCustomer({
+    // Se tiver email, tenta criar/buscar customer
+    if (customerData?.email) {
+      customerId = await getOrCreateCustomer({
         email: customerData.email,
-        name: customerData.name || customerData.email.split('@')[0],
+        name: customerData.name,
         cellphone: customerData.cellphone,
       });
-      
-      console.log('[Customer Created]', customerId ? customerId : 'FAILED');
     }
 
     const body: Record<string, unknown> = {
@@ -79,9 +104,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Usa customerId se conseguiu criar
     if (customerId) {
       body.customerId = customerId;
+      console.log('[AbacatePay Request with Customer]', customerId);
+    } else {
+      console.log('[AbacatePay Request without Customer]');
     }
-
-    console.log('[AbacatePay Request]', JSON.stringify(body));
 
     const response = await fetch(`${ABACATEPAY_API}/subscriptions/create`, {
       method: 'POST',
