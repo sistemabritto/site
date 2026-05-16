@@ -247,9 +247,9 @@ export default function WhatsApp() {
               Enquanto você dorme, 47 leads mandaram mensagem no seu WhatsApp. 
               Amanhã, 30 deles vão pro concorrente.
             </p>
-            <p className="text-gray-400 text-base max-w-xl mx-auto mb-8">
-              Não é falta de esforço. É falta de escala. A IA resolve isso por R$ 297/mês.
-            </p>
+<p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
+  <strong>Não é falta de esforço. É falta de braço.</strong> A IA resolve isso por R$ 297/mês.
+  </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button

@@ -152,16 +152,16 @@ export default function ResultadoDigital() {
             <h3 className="text-xl font-bold text-white mb-6 text-center">Quem já fez com a gente:</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-[#111111] rounded-2xl p-6 border border-white/10">
-                <div className="text-green-400 font-bold mb-2">VoiceDream</div>
+                <div className="text-green-400 font-bold mb-2">SaaS de Áudio</div>
                 <p className="text-gray-300 text-sm">
-                  SaaS de áudio adulto. Do zero ao faturamento em 30 dias.
+                  Do zero ao faturamento em 30 dias.
                   Infra própria, pagamentos recorrentes, escala.
                 </p>
               </div>
               <div className="bg-[#111111] rounded-2xl p-6 border border-white/10">
-                <div className="text-green-400 font-bold mb-2">VGRA Jurídico</div>
+                <div className="text-green-400 font-bold mb-2">Infra para Escritório</div>
                 <p className="text-gray-300 text-sm">
-                  Infraestrutura completa para escritório. 
+                  Infraestrutura completa. 
                   Servidor próprio, backup, segurança, zero downtime.
                 </p>
               </div>

@@ -146,14 +146,14 @@ export default function Home() {
   Enquanto você dorme, 47 leads mandaram mensagem. Amanhã, 30 vão pro concorrente.
   </p>
   <p className="text-lg text-gray-400 mb-12 max-w-xl mx-auto">
-  Não é falta de esforço. É falta de escala. A gente resolve isso em 48 horas.
+  <strong>Não é falta de esforço. É falta de braço.</strong> A gente resolve isso em 48 horas.
   </p>
   <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
   <button 
   onClick={() => setShowModal(true)}
   className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25"
   >
-  AGENDAR CONSULTORIA (R$ 500) →
+  AGENDAR CONSULTORIA + SUPORTE →
   </button>
   <a href="/qualificacao-digital" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
   ESCALAR MEU NEGÓCIO DIGITAL →
@@ -165,8 +165,8 @@ export default function Home() {
         {/* ===== SERVIÇOS ===== */}
         <section id="solucoes" className="py-24 px-4 bg-[#111111]">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center">3 soluções. 1 problema: escala.</h2>
-            <p className="text-gray-400 text-center mb-16 text-lg">Do atendimento ao código. Da infra ao SaaS. A gente escala sua operação.</p>
+<h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center">3 soluções. 1 problema: falta de braço.</h2>
+<p className="text-gray-400 text-center mb-16 text-lg">Do atendimento ao código. Da infra ao SaaS. A gente dá braço pra sua operação.</p>
 
             {/* DEGRAU 1 */}
             <div className="mb-16">
@@ -267,13 +267,13 @@ export default function Home() {
                     <div className="text-5xl mb-4">🎙️</div>
                     <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-pink-400 transition-colors">SaaS sob Encomenda</h3>
                     <p className="text-gray-300 mb-4"><strong className="text-white">Dor:</strong> Você tem uma ideia de produto digital mas não tem time pra construir. Ou precisa de um SaaS personalizado pro seu negócio.</p>
-                    <p className="text-gray-300 mb-4"><strong className="text-white">Solução:</strong> A gente constrói seu SaaS. Do MVP ao produto final. Exemplo: <strong className="text-white">VoiceDream</strong> — plataforma de áudio adulto com IA. Faturamento desde o primeiro mês.</p>
-                    <p className="text-pink-400 font-semibold">Ver case VoiceDream →</p>
+<p className="text-gray-300 mb-4"><strong className="text-white">Solução:</strong> A gente constrói seu SaaS. Do MVP ao produto final. Faturamento desde o primeiro mês.</p>
+<p className="text-pink-400 font-semibold">Ver case →</p>
                   </div>
                   <div className="flex flex-col justify-center">
-                    <div className="bg-pink-500/10 border border-pink-500/20 rounded-xl p-4 mb-4">
-                      <p className="text-pink-400 text-sm font-semibold mb-1">VoiceDream em números</p>
-                      <p className="text-gray-300 text-sm">R$ 900 em tokens + R$ 5.000 faturamento inicial. <strong className="text-white">50% de margem</strong>.</p>
+<div className="bg-pink-500/10 border border-pink-500/20 rounded-xl p-4 mb-4">
+                <p className="text-pink-400 text-sm font-semibold mb-1">Números do case</p>
+                <p className="text-gray-300 text-sm">R$ 900 em tokens + R$ 5.000 faturamento inicial. <strong className="text-white">50% de margem</strong>.</p>
                     </div>
                     <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
                       <p className="text-purple-400 text-sm font-semibold mb-1">Benefício</p>
@@ -314,10 +314,10 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
               Cada dia sem automação<br />
               <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">é dinheiro indo embora.</span>
-            </h2>
-            <p className="text-gray-300 text-lg mb-8">
-              Do WhatsApp ao SaaS. A gente escala sua operação.
-            </p>
+</h2>
+<p className="text-gray-300 text-lg mb-8">
+Do WhatsApp ao SaaS. A gente dá braço pra sua operação.
+</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button 
                 onClick={() => setShowModal(true)}
