@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 export default function Workforce() {
   const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '', company: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '' });
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -57,33 +57,29 @@ export default function Workforce() {
               {!submitted ? (
                 <>
                   <button onClick={() => setShowModal(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">×</button>
-                  <div className="text-center mb-6">
-                    <div className="text-4xl mb-3">🚀</div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Solicitar orçamento</h3>
-                    <p className="text-gray-300 text-sm">Preenche aí. A gente responde em até 24h.</p>
-                  </div>
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
-                      <input type="text" placeholder="Seu nome" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" />
-                    </div>
-                    <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
-                      <input type="email" placeholder="seu@email.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" required />
-                    </div>
-                    <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp *</label>
-                      <input type="tel" placeholder="(11) 99999-9999" value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" required />
-                    </div>
-                    <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">Empresa</label>
-                      <input type="text" placeholder="Nome da empresa" value={formData.company} onChange={(e) => setFormData({...formData, company: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" />
-                    </div>
-                    <button type="submit" className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all">
-                      SOLICITAR ORÇAMENTO →
-                    </button>
-                    <p className="text-gray-500 text-xs text-center">Sem spam. Promessa.</p>
-                  </form>
+ <div className="text-center mb-6">
+ <div className="text-4xl mb-3">🚀</div>
+ <h3 className="text-2xl font-bold text-white mb-2">Solicitar orçamento</h3>
+ <p className="text-gray-300 text-sm">Suas respostas = qualificação personalizada. Sem repetir tudo.</p>
+ </div>
+ <form onSubmit={handleSubmit} className="space-y-4">
+ <div>
+ <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
+ <input type="text" placeholder="Seu nome" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" />
+ </div>
+ <div>
+ <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
+ <input type="email" placeholder="seu@email.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" required />
+ </div>
+ <div>
+ <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp *</label>
+ <input type="tel" placeholder="(11) 99999-9999" value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" required />
+ </div>
+ <button type="submit" className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all">
+ SOLICITAR ORÇAMENTO →
+ </button>
+ <p className="text-gray-500 text-xs text-center">Sem spam. Promessa.</p>
+ </form>
                 </>
               ) : (
                 <div className="text-center py-8">

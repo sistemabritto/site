@@ -21,16 +21,16 @@ const cases = [
 export default function WhatsApp() {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '' });
+  const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [orderBump, setOrderBump] = useState(false);
 
   const handleSubmit = async () => {
-    if (!formData.email || !formData.whatsapp) return;
+    if (!email) return;
     
-    // Salvar dados no sessionStorage
+    // Salvar email no sessionStorage
     if (typeof window !== 'undefined') {
-      sessionStorage.setItem('qualificacao_customer', JSON.stringify(formData));
+      sessionStorage.setItem('qualificacao_customer', JSON.stringify({ email }));
     }
     
     // Salvar lead no CRM
@@ -39,7 +39,7 @@ export default function WhatsApp() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...formData,
+          email,
           source: 'whatsapp-landing',
           orderBump,
           utm_source: new URLSearchParams(window.location.search).get('utm_source') || '',
@@ -61,8 +61,6 @@ export default function WhatsApp() {
 
   const handleCheckout = async () => {
     setLoading(true);
-    // Se order bump marcado, usa produto combo (R$547)
-    // Se não, produto base (R$297)
     const productId = orderBump ? 'whatsapp-ia-combo-consultoria' : 'whatsapp-ia-basico';
     try {
       const res = await fetch('/api/abacatepay/checkout', {
@@ -71,9 +69,9 @@ export default function WhatsApp() {
         body: JSON.stringify({ 
           productId,
           customer: {
-            email: formData.email,
-            name: formData.name || formData.email.split('@')[0],
-            cellphone: formData.whatsapp,
+            email,
+            name: email.split('@')[0],
+            cellphone: '',
           },
         }),
       });
@@ -86,7 +84,7 @@ export default function WhatsApp() {
       }
     } catch (err) {
       console.error('[Checkout Error]', err);
-      const msg = encodeURIComponent(`Olá! Quero ativar o WhatsApp IA. Nome: ${formData.name}, Email: ${formData.email}`);
+      const msg = encodeURIComponent(`Olá! Quero ativar o WhatsApp IA. Email: ${email}`);
       window.location.href = `https://wa.me/5511914088571?text=${msg}`;
     }
   };
@@ -119,44 +117,23 @@ export default function WhatsApp() {
                   >×</button>
                   
                   <div className="text-center mb-6">
-                    <div className="text-4xl mb-3">🚀</div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Quase lá!</h3>
-                    <p className="text-gray-300 text-sm">Seus dados = checkout mais rápido. Sem repetir tudo.</p>
-                  </div>
+ <div className="text-4xl mb-3">🚀</div>
+ <h3 className="text-2xl font-bold text-white mb-2">Quase lá!</h3>
+ <p className="text-gray-300 text-sm">Seu email = checkout mais rápido. Sem repetir tudo.</p>
+ </div>
 
-                  <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="space-y-4">
-                    <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
-                      <input
-                        type="text"
-                        placeholder="Seu nome"
-                        value={formData.name}
-                        onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
-                      <input
-                        type="email"
-                        placeholder="seu@email.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp *</label>
-                      <input
-                        type="tel"
-                        placeholder="(11) 99999-9999"
-                        value={formData.whatsapp}
-                        onChange={(e) => setFormData({...formData, whatsapp: e.target.value})}
-                        className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
-                        required
-                      />
-                    </div>
+ <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="space-y-4">
+ <div>
+ <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
+ <input
+ type="email"
+ placeholder="seu@email.com"
+ value={email}
+ onChange={(e) => setEmail(e.target.value)}
+ className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+ required
+ />
+ </div>
 
                     {/* ORDER BUMP */}
                     <div 
@@ -198,13 +175,13 @@ export default function WhatsApp() {
                       </div>
                     </div>
 
-                    <button
-                      type="submit"
-                      disabled={!formData.email || !formData.whatsapp || loading}
-                      className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {loading ? 'Carregando...' : orderBump ? 'CONTINUAR — R$ 547/mês →' : 'CONTINUAR — R$ 297/mês →'}
-                    </button>
+ <button
+ type="submit"
+ disabled={!email || loading}
+ className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+ >
+ {loading ? 'Carregando...' : orderBump ? 'CONTINUAR — R$ 547/mês →' : 'CONTINUAR — R$ 297/mês →'}
+ </button>
                     
                     <p className="text-gray-500 text-xs text-center">Seus dados estão seguros. Sem spam.</p>
                   </form>
