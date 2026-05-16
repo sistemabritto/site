@@ -30,7 +30,7 @@ function formatAnswers(body: QualificacaoBody): string {
     p1: { '0-100': '< 100', '100-500': '100-500', '500-1000': '500-1000', '1000+': '1000+' },
     p2: { 'ate-100': 'Até R$100', '100-500': 'R$100-500', '500-2000': 'R$500-2k', '2000+': 'R$2k+' },
     p3: { 'imediato': '< 5min', 'rapido': '5-30min', 'demorado': '30min-2h', 'muito-demorado': '+2h' },
-    p4: { 'sim': '✅ SIM (high-ticket)', 'nao': '❌ NÃO (downsell)' },
+    p4: { 'sim': '✅ SIM (Workforce)', 'nao': '❌ NÃO (WhatsApp IA)' },
   };
 
   let msg = `🎯 *NOVO LEAD QUALIFICADO*\n`;

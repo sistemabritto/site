@@ -160,15 +160,15 @@ export default function Qualificacao() {
       console.error('[Qualificacao] Erro ao salvar:', e);
     }
 
-    setTimeout(() => {
-      if (isHighTicket) {
-        const msg = encodeURIComponent(`Olá! Fiz a qualificação e quero implementar minha workforce de IA (high-ticket). Nome: ${name}, Email: ${email}, WhatsApp: ${whatsapp}`);
-        window.location.href = `https://wa.me/5511914088571?text=${msg}`;
-      } else {
-        const answersParam = encodeURIComponent(JSON.stringify(finalAnswers));
-        window.location.href = `/resultado?answers=${answersParam}`;
-      }
-    }, 500);
+ setTimeout(() => {
+ if (isHighTicket) {
+ const msg = encodeURIComponent(`Fala, Felipe. Fiz o teste de perfil e deu **Workforce**. Tô precisando de braço digital. Me chama.\n\nNome: ${name}\nEmail: ${email}\nWhatsApp: ${whatsapp}`);
+ window.location.href = `https://wa.me/5511914088571?text=${msg}`;
+ } else {
+ const answersParam = encodeURIComponent(JSON.stringify(finalAnswers));
+ window.location.href = `/resultado?answers=${answersParam}`;
+ }
+ }, 500);
   };
 
   // Tela de captura de email
