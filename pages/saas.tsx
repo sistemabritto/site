@@ -193,16 +193,26 @@ export default function SaaS() {
           </div>
         </section>
 
-        {/* ===== CTA ===== */}
-        <section className="py-20 px-4 bg-[#111111]">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-white mb-6">Chega de adiar seu SaaS por falta de braço técnico.</h2>
-            <p className="text-gray-300 text-lg mb-8">Você traz a ideia. A gente constrói, opera e escala. Produto no ar em 30 dias.</p>
-            <button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-pink-500 hover:bg-pink-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-pink-500/25">
-              FALAR COM ESPECIALISTA →
-            </button>
-          </div>
-        </section>
+ {/* ===== CTA ===== */}
+<section className="py-20 px-4 bg-[#111111]">
+<div className="max-w-3xl mx-auto text-center">
+<h2 className="text-3xl font-bold text-white mb-6">Chega de adiar seu SaaS por falta de braço técnico.</h2>
+<p className="text-gray-300 text-lg mb-8">Você traz a ideia. A gente constrói, opera e escala. Produto no ar em 30 dias.</p>
+<button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-pink-500 hover:bg-pink-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-pink-500/25">
+FALAR COM ESPECIALISTA →
+</button>
+</div>
+</section>
+
+{/* ===== LINK CRUZADO DevOps ===== */}
+<section className="py-12 px-4 bg-[#0a0a0a] border-t border-[#D4AF37]/20">
+<div className="max-w-3xl mx-auto text-center">
+<p className="text-gray-400 text-sm mb-4">Já tem produto e precisa de infra?</p>
+<a href="/devops" className="text-[#D4AF37] hover:text-[#C5A028] font-semibold text-lg">
+  Conheça Infraestrutura e DevOps →
+</a>
+</div>
+</section>
 
         <Footer />
       </main>

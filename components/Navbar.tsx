@@ -4,7 +4,7 @@ const navLinks = [
   { label: 'Workforce', href: '/workforce' },
   { label: 'WhatsApp', href: '/whatsapp' },
   { label: 'DevOps', href: '/devops' },
-  { label: 'SaaS', href: '/saas' },
+  { label: 'Infra/SaaS', href: '/saas' },
   { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
 ];
 

@@ -34,7 +34,7 @@ export default function DevOps() {
     
     setSubmitted(true);
     setTimeout(() => {
-      window.location.href = '/qualificacao';
+      window.location.href = '/qualificacao-digital';
     }, 1500);
   };
 
@@ -167,7 +167,7 @@ PRECISO DE BRAÇO →
           </div>
         </section>
 
-        {/* ===== CTA ===== */}
+         {/* ===== CTA ===== */}
 <section className="py-20 px-4 bg-[#111111]">
 <div className="max-w-3xl mx-auto text-center">
 <h2 className="text-3xl font-bold text-white mb-6">Sem palestra. Sem enrolação.</h2>
@@ -175,6 +175,16 @@ PRECISO DE BRAÇO →
 <button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-[#D4AF37]/25">
 PRECISO DE BRAÇO →
 </button>
+</div>
+</section>
+
+{/* ===== LINK CRUZADO SaaS ===== */}
+<section className="py-12 px-4 bg-[#0a0a0a] border-t border-pink-500/20">
+<div className="max-w-3xl mx-auto text-center">
+<p className="text-gray-400 text-sm mb-4">Quer criar um produto digital do zero?</p>
+<a href="/saas" className="text-pink-400 hover:text-pink-300 font-semibold text-lg">
+  Conheça o SaaS sob Encomenda →
+</a>
 </div>
 </section>
 
