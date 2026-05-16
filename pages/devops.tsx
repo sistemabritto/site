@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 export default function DevOps() {
   const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '', company: '', problem: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '' });
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -33,9 +33,12 @@ export default function DevOps() {
     }
     
     setSubmitted(true);
+    
+    // Envia direto pro WhatsApp (high-ticket)
     setTimeout(() => {
-      window.location.href = '/qualificacao-digital';
-    }, 1500);
+      const msg = encodeURIComponent(`Fala, Felipe. Fiz o teste de perfil e deu **Infra/SaaS**. Tô precisando de braço técnico. Me chama.\n\nNome: ${formData.name}\nEmail: ${formData.email}\nWhatsApp: ${formData.whatsapp}`);
+      window.location.href = `https://wa.me/5511914088571?text=${msg}`;
+    }, 1000);
   };
 
   return (
@@ -57,36 +60,28 @@ export default function DevOps() {
               {!submitted ? (
                 <>
                   <button onClick={() => setShowModal(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">×</button>
-                  <div className="text-center mb-6">
-                    <div className="text-4xl mb-3">⚙️</div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Fale com um especialista</h3>
-                    <p className="text-gray-300 text-sm">Descreva seu problema. A gente responde em até 24h.</p>
-                  </div>
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
-                      <input type="text" placeholder="Seu nome" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none" />
-                    </div>
-                    <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
-                      <input type="email" placeholder="seu@email.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none" required />
-                    </div>
-                    <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp *</label>
-                      <input type="tel" placeholder="(11) 99999-9999" value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none" required />
-                    </div>
-                    <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">Empresa</label>
-                      <input type="text" placeholder="Nome da empresa" value={formData.company} onChange={(e) => setFormData({...formData, company: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none" />
-                    </div>
-                    <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">O que tá acontecendo? *</label>
-                      <textarea placeholder="Ex: Servidor derrubando, API lenta..." value={formData.problem} onChange={(e) => setFormData({...formData, problem: e.target.value})} rows={3} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none resize-none" required />
-                    </div>
-                    <button type="submit" disabled={!formData.email || !formData.whatsapp} className="w-full bg-[#D4AF37] hover:bg-[#C5A028] text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">
-                      ENVIAR →
-                    </button>
-                  </form>
+ <div className="text-center mb-6">
+ <div className="text-4xl mb-3">⚙️</div>
+ <h3 className="text-2xl font-bold text-white mb-2">Fale com um especialista</h3>
+ <p className="text-gray-300 text-sm">Descreva seu problema. A gente responde em até 24h.</p>
+ </div>
+ <form onSubmit={handleSubmit} className="space-y-4">
+ <div>
+ <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
+ <input type="text" placeholder="Seu nome" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none" />
+ </div>
+ <div>
+ <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
+ <input type="email" placeholder="seu@email.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none" required />
+ </div>
+ <div>
+ <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp *</label>
+ <input type="tel" placeholder="(11) 99999-9999" value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none" required />
+ </div>
+ <button type="submit" disabled={!formData.email || !formData.whatsapp} className="w-full bg-[#D4AF37] hover:bg-[#C5A028] text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+ ENVIAR →
+ </button>
+ </form>
                 </>
               ) : (
                 <div className="text-center py-8">

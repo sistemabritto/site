@@ -41,11 +41,9 @@ async function getOrCreateCustomer(customer: { email: string; name?: string; cel
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        data: {
-          email: customer.email,
-          name: customer.name || customer.email.split('@')[0],
-          cellphone: customer.cellphone || customer.email, // Fallback: usa email se não tiver telefone
-        },
+        email: customer.email,
+        name: customer.name || customer.email.split('@')[0],
+        cellphone: customer.cellphone || customer.email, // Fallback: usa email se não tiver telefone
       }),
     });
 
