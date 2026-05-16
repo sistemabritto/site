@@ -261,27 +261,26 @@ export default function Home() {
                 <span className="bg-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold">🍒 CEREJA DO BOLO</span>
                 <span className="text-gray-400 text-sm">Produto próprio</span>
               </div>
-              <a href="https://voicedream.vercel.app" target="_blank" rel="noopener noreferrer" className="group block bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-3xl p-8 border border-pink-500/20 hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-2">
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div>
-                    <div className="text-5xl mb-4">🎙️</div>
-                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-pink-400 transition-colors">SaaS sob Encomenda</h3>
-                    <p className="text-gray-300 mb-4"><strong className="text-white">Dor:</strong> Você tem uma ideia de produto digital mas não tem time pra construir. Ou precisa de um SaaS personalizado pro seu negócio.</p>
-<p className="text-gray-300 mb-4"><strong className="text-white">Solução:</strong> A gente constrói seu SaaS. Do MVP ao produto final. Faturamento desde o primeiro mês.</p>
-<p className="text-pink-400 font-semibold">Ver case →</p>
-                  </div>
-                  <div className="flex flex-col justify-center">
+<a href="/saas" className="group block bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-3xl p-8 border border-pink-500/20 hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-2">
+<div className="grid md:grid-cols-2 gap-8">
+<div>
+<div className="text-5xl mb-4">🎙️</div>
+<h3 className="text-2xl font-bold text-white mb-3 group-hover:text-pink-400 transition-colors">SaaS sob Encomenda</h3>
+<p className="text-gray-300 mb-4">Você tem a ideia. A gente constrói. Do MVP ao produto final. Faturamento desde o primeiro mês.</p>
+<p className="text-pink-400 font-semibold">Saiba mais →</p>
+</div>
+<div className="flex flex-col justify-center">
 <div className="bg-pink-500/10 border border-pink-500/20 rounded-xl p-4 mb-4">
-                <p className="text-pink-400 text-sm font-semibold mb-1">Números do case</p>
-                <p className="text-gray-300 text-sm">R$ 900 em tokens + R$ 5.000 faturamento inicial. <strong className="text-white">50% de margem</strong>.</p>
-                    </div>
-                    <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
-                      <p className="text-purple-400 text-sm font-semibold mb-1">Benefício</p>
-                      <p className="text-gray-300 text-sm">Produto próprio = receita recorrente. A gente constrói, você fatura.</p>
-                    </div>
-                  </div>
-                </div>
-              </a>
+ <p className="text-pink-400 text-sm font-semibold mb-1">Números do case</p>
+ <p className="text-gray-300 text-sm">R$ 900 em tokens + R$ 5.000 faturamento inicial. <strong className="text-white">50% de margem</strong>.</p>
+</div>
+<div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
+ <p className="text-purple-400 text-sm font-semibold mb-1">Benefício</p>
+ <p className="text-gray-300 text-sm">Produto próprio = receita recorrente. A gente constrói, você fatura.</p>
+</div>
+</div>
+</div>
+</a>
             </div>
           </div>
         </section>
