@@ -19,6 +19,21 @@ export default function ResultadoDigital() {
         // ignore
       }
     }
+    
+    // Tentar ler do sessionStorage primeiro (quando vem direto do modal)
+    if (typeof window !== 'undefined') {
+      const storedAnswers = sessionStorage.getItem('qualificacao_answers');
+      if (storedAnswers) {
+        try {
+          const fromStorage = JSON.parse(storedAnswers);
+          // Só sobrescreve se não veio da URL
+          if (!answersParam && fromStorage) {
+            parsedAnswers = fromStorage;
+          }
+        } catch {}
+      }
+    }
+    
     setAnswers(parsedAnswers);
 
     // Recuperar dados do cliente

@@ -32,12 +32,11 @@ export default function Home() {
       console.error('Lead save error:', err);
     }
     
-    setSubmitted(true);
+setSubmitted(true);
     
-    // Envia direto pro WhatsApp
     setTimeout(() => {
-      const msg = encodeURIComponent(`Fala, Felipe. Vi o site e quero saber mais sobre como sua IA pode ajudar meu negócio. Me chama.\n\nNome: ${formData.name}\nEmail: ${formData.email}\nWhatsApp: ${formData.whatsapp}`);
-      window.location.href = `https://wa.me/5511914088571?text=${msg}`;
+      sessionStorage.setItem('qualificacao_customer', JSON.stringify(formData));
+      window.location.href = '/qualificacao-digital';
     }, 1000);
   };
 

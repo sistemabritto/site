@@ -32,12 +32,13 @@ export default function Workforce() {
       console.error('Lead save error:', err);
     }
     
-    setSubmitted(true);
+setSubmitted(true);
     
-    // Envia direto pro WhatsApp (high-ticket)
+    // Vai pra página de resultado (não direto pro WhatsApp)
     setTimeout(() => {
-      const msg = encodeURIComponent(`Fala, Felipe. Fiz o teste de perfil e deu **Workforce**. Tô precisando de braço digital. Me chama.\n\nNome: ${formData.name}\nEmail: ${formData.email}\nWhatsApp: ${formData.whatsapp}`);
-      window.location.href = `https://wa.me/5511914088571?text=${msg}`;
+      sessionStorage.setItem('qualificacao_customer', JSON.stringify(formData));
+      sessionStorage.setItem('qualificacao_answers', JSON.stringify({ produto: 'workforce' }));
+      window.location.href = '/resultado-workforce';
     }, 1000);
   };
 
