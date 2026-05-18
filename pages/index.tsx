@@ -157,9 +157,9 @@ setSubmitted(true);
   >
   AGENDAR CONSULTORIA + SUPORTE →
   </button>
-  <a href="/qualificacao-digital" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
+<a href="/qualificacao-digital" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-5 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
   ESCALAR MEU NEGÓCIO DIGITAL →
-  </a>
+</a>
 </div>
           </div>
         </section>

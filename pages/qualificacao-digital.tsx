@@ -120,12 +120,25 @@ export default function QualificacaoDigital() {
       console.error('[Qualificacao Digital] Erro ao salvar:', e);
     }
 
-    // Redirecionar para resultado digital
-    setTimeout(() => {
-      const answersParam = encodeURIComponent(JSON.stringify(finalAnswers));
-      window.location.href = `/resultado-digital?answers=${answersParam}`;
-    }, 500);
-  };
+  // Enviar direto pro WhatsApp com a mensagem montada
+  setTimeout(() => {
+    const d1 = finalAnswers['d1'] || '';
+    const d2 = finalAnswers['d2'] || '';
+    const d3 = finalAnswers['d3'] || '';
+    const d4 = finalAnswers['d4'] || '';
+    
+    let msg = '';
+    if (d1 === 'infra' || d1 === 'ambos') {
+      msg = `Fala, Felipe. Fiz a qualificação DIGITAL e quero cuidar da minha INFRAESTRUTURA.\n\nObjetivo: ${d1}\nProblema: ${d2}\nOrçamento: ${d3}\nPrazo: ${d4}\n\nNome: ${customerData.name}\nEmail: ${customerData.email}\nWhatsApp: ${customerData.whatsapp}`;
+    } else if (d1 === 'saas') {
+      msg = `Fala, Felipe. Fiz a qualificação DIGITAL e quero CRIAR UM SAAS/PRODUTO DIGITAL.\n\nObjetivo: ${d1}\nProblema: ${d2}\nOrçamento: ${d3}\nPrazo: ${d4}\n\nNome: ${customerData.name}\nEmail: ${customerData.email}\nWhatsApp: ${customerData.whatsapp}`;
+    } else {
+      msg = `Fala, Felipe. Fiz a qualificação DIGITAL e preciso de um orçamento sob medida.\n\nResumo: ${d1} - ${d2}\nOrçamento: ${d3}\nPrazo: ${d4}\n\nNome: ${customerData.name}\nEmail: ${customerData.email}\nWhatsApp: ${customerData.whatsapp}`;
+    }
+    
+    window.location.href = `https://wa.me/5511914088571?text=${encodeURIComponent(msg)}`;
+  }, 500);
+};
 
   const currentQuestion = QUESTIONS[currentStep];
   const progress = ((currentStep + 1) / QUESTIONS.length) * 100;

@@ -1,189 +1,142 @@
 import React, { useState, useEffect } from 'react';
 import Meta from '../components/Meta';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import { useRouter } from 'next/router';
+
+const PHONE = '5511914088571';
 
 export default function ResultadoDigital() {
   const router = useRouter();
-  const [answers, setAnswers] = useState<Record<string, string>>({});
   const [customerData, setCustomerData] = useState({ name: '', email: '', whatsapp: '' });
+  const [produto, setProduto] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const answersParam = router.query.answers as string;
-    let parsedAnswers: Record<string, string> = {};
-
-    if (answersParam) {
-      try {
-        parsedAnswers = JSON.parse(decodeURIComponent(answersParam));
-      } catch {
-        // ignore
-      }
-    }
-    
-    // Tentar ler do sessionStorage primeiro (quando vem direto do modal)
-    if (typeof window !== 'undefined') {
-      const storedAnswers = sessionStorage.getItem('qualificacao_answers');
-      if (storedAnswers) {
-        try {
-          const fromStorage = JSON.parse(storedAnswers);
-          // Só sobrescreve se não veio da URL
-          if (!answersParam && fromStorage) {
-            parsedAnswers = fromStorage;
-          }
-        } catch {}
-      }
-    }
-    
-    setAnswers(parsedAnswers);
-
-    // Recuperar dados do cliente
     if (typeof window !== 'undefined') {
       const storedCustomer = sessionStorage.getItem('qualificacao_customer');
       if (storedCustomer) {
+        try { setCustomerData(JSON.parse(storedCustomer)); } catch {}
+      }
+      const storedAnswers = sessionStorage.getItem('qualificacao_answers');
+      if (storedAnswers) {
         try {
-          setCustomerData(JSON.parse(storedCustomer));
-        } catch {
-          // ignore
-        }
+          const parsed = JSON.parse(storedAnswers);
+          if (parsed.produto) setProduto(parsed.produto);
+        } catch {}
       }
     }
     setLoading(false);
-  }, [router.query]);
+  }, []);
 
   const handleWhatsAppContact = () => {
-    const d1 = answers['d1'] || '';
-    const d2 = answers['d2'] || '';
-    const d3 = answers['d3'] || '';
+    const isDevops = produto === 'devops';
+    const isSaaS = produto === 'saas';
     
     let message = '';
-    
-    if (d1 === 'infra' || d1 === 'ambos') {
-      message = `Olá! Fiz a qualificação DIGITAL e quero cuidar da minha INFRAESTRUTURA.\n\nObjetivo: ${d1}\nProblema: ${d2}\nOrçamento: ${d3}\n\nNome: ${customerData.name}\nEmail: ${customerData.email}\nWhatsApp: ${customerData.whatsapp}`;
-    } else if (d1 === 'saas') {
-      message = `Olá! Fiz a qualificação DIGITAL e quero CRIAR UM SAAS/PRODUTO DIGITAL.\n\nObjetivo: ${d1}\nProblema: ${d2}\nOrçamento: ${d3}\n\nNome: ${customerData.name}\nEmail: ${customerData.email}\nWhatsApp: ${customerData.whatsapp}`;
+    if (isDevops) {
+      message = `Fala, Felipe. Tô precisando de braço técnico pra infraestrutura/DevOps. Bora conversar?\n\nNome: ${customerData.name}\nEmail: ${customerData.email}\nWhatsApp: ${customerData.whatsapp}`;
+    } else if (isSaaS) {
+      message = `Fala, Felipe. Tô precisando de braço pra criar um SaaS. Bora conversar?\n\nNome: ${customerData.name}\nEmail: ${customerData.email}\nWhatsApp: ${customerData.whatsapp}`;
     } else {
-      message = `Olá! Fiz a qualificação DIGITAL e preciso de um orçamento sob medida.\n\nResumo: ${d1} - ${d2}\nOrçamento: ${d3}\n\nNome: ${customerData.name}\nEmail: ${customerData.email}\nWhatsApp: ${customerData.whatsapp}`;
+      message = `Fala, Felipe. Preciso de um orçamento sob medida. Bora conversar?\n\nNome: ${customerData.name}\nEmail: ${customerData.email}\nWhatsApp: ${customerData.whatsapp}`;
     }
-
-    const encoded = encodeURIComponent(message);
-    window.location.href = `https://wa.me/5511914088571?text=${encoded}`;
+    
+    window.location.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(message)}`;
   };
 
   if (loading) {
     return (
       <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto mb-4" />
-          <p className="text-white">Analisando seu perfil...</p>
-        </div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto mb-4" />
+        <p className="text-white">Preparando sua consultoria...</p>
       </div>
     );
   }
 
+  const isDevops = produto === 'devops';
+  const isSaaS = produto === 'saas';
+
   return (
     <>
       <Meta 
-        title="Soluções Digitais Sob Medida — Sistema Britto"
-        description="Infraestrutura e SaaS sob encomenda para escalar seu negócio digital."
+        title={isDevops ? "Infraestrutura & DevOps — Sistema Britto" : isSaaS ? "SaaS Sob Encomenda — Sistema Britto" : "Soluções Digitais Sob Medida — Sistema Britto"}
+        description="Sua solução digital sob medida. Infraestrutura, DevOps ou SaaS."
         path="/resultado-digital"
       />
-
+      <Navbar />
       <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>
-        <div className="max-w-3xl mx-auto px-4 py-20">
-          
-          {/* Header */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/20 border border-green-500/30 mb-6">
-              <svg className="w-8 h-8 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            </div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Seu perfil é para soluções sob medida
+        <section className="pt-32 pb-16 px-4 text-center">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-5xl mb-4">{isDevops ? '⚙️' : isSaaS ? '💻' : '🚀'}</div>
+            <h1 className="text-4xl font-bold text-white mb-4">
+              {isDevops ? 'Sua infra não pode depender de sorte.' : isSaaS ? 'Você tem a ideia. A gente constrói o SaaS.' : 'Seu perfil é para soluções sob medida'}
             </h1>
-            <p className="text-gray-300 text-lg">
-              Você precisa de infraestrutura robusta ou um produto digital próprio.
+            <p className="text-gray-300 text-lg mb-8">
+              {isDevops ? 'Servidor cai, deploy quebra, API lenta. Não é falta de esforço. É falta de braço.' : isSaaS ? 'Do MVP ao produto final. Infra própria, pagamentos recorrentes, escala.' : 'Infraestrutura ou SaaS — você escolhe.'}
             </p>
-          </div>
-
-          {/* Card Principal */}
-          <div className="bg-[#111111] rounded-3xl p-8 sm:p-10 border border-green-500/30 mb-8">
-            <h2 className="text-2xl font-bold text-white mb-6">
-              O que a gente faz pra você:
-            </h2>
             
-            <div className="space-y-6 mb-8">
-              <div className="bg-[#0a0a0a] rounded-xl p-6 border border-white/10">
-                <div className="flex items-start gap-4">
-                  <span className="text-3xl">🔧</span>
-                  <div>
-                    <h3 className="text-lg font-bold text-white mb-2">Infraestrutura & DevOps</h3>
-                    <p className="text-gray-300 text-sm leading-relaxed">
-                      Servidor próprio, Docker, Deploy automático, APIs, Monitoramento, Segurança.
-                      Para quem não quer depender de sorte e precisa de estabilidade.
-                    </p>
-                  </div>
-                </div>
+            {/* Cards */}
+            <div className="grid md:grid-cols-2 gap-6 mb-8 text-left">
+              <div className={`bg-[#111111] rounded-2xl p-6 border-2 ${isDevops ? 'border-[#D4AF37]' : 'border-white/10'}`}>
+                <div className="text-3xl mb-3">🔧</div>
+                <h3 className="text-xl font-bold text-white mb-2">Infraestrutura & DevOps</h3>
+                <p className="text-gray-300 text-sm mb-4">Servidor próprio, Docker, deploy, monitoramento, segurança. SLA 24h.</p>
+                <button
+                  onClick={() => {
+                    const msg = encodeURIComponent(`Fala, Felipe. Quero estruturar minha INFRA. Me chama.\n\nNome: ${customerData.name}\nEmail: ${customerData.email}\nWhatsApp: ${customerData.whatsapp}`);
+                    window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+                  }}
+                  className="w-full bg-[#D4AF37] hover:bg-[#C5A028] text-black py-3 rounded-full font-bold transition-all"
+                >
+                  QUERO INFRA →
+                </button>
               </div>
-
-              <div className="bg-[#0a0a0a] rounded-xl p-6 border border-white/10">
-                <div className="flex items-start gap-4">
-                  <span className="text-3xl">💻</span>
-                  <div>
-                    <h3 className="text-lg font-bold text-white mb-2">SaaS Sob Encomenda</h3>
-                    <p className="text-gray-300 text-sm leading-relaxed">
-                      Do zero ao lançamento. Ideia, validação, MVP, escala.
-                      Você é dono do código, da marca e do lucro.
-                    </p>
-                  </div>
-                </div>
+              <div className={`bg-[#111111] rounded-2xl p-6 border-2 ${isSaaS ? 'border-pink-500' : 'border-white/10'}`}>
+                <div className="text-3xl mb-3">💻</div>
+                <h3 className="text-xl font-bold text-white mb-2">SaaS Sob Encomenda</h3>
+                <p className="text-gray-300 text-sm mb-4">Do zero ao faturamento em 30 dias. Você é dono do código, da marca e do lucro.</p>
+                <button
+                  onClick={() => {
+                    const msg = encodeURIComponent(`Fala, Felipe. Quero criar um SAAS. Me chama.\n\nNome: ${customerData.name}\nEmail: ${customerData.email}\nWhatsApp: ${customerData.whatsapp}`);
+                    window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+                  }}
+                  className="w-full bg-pink-500 hover:bg-pink-600 text-black py-3 rounded-full font-bold transition-all"
+                >
+                  QUERO SAAS →
+                </button>
               </div>
             </div>
 
-            <div className="bg-green-500/10 rounded-xl p-6 border border-green-500/30 mb-8">
-              <p className="text-green-400 font-bold text-lg mb-2">
-                Por que isso é pra você?
-              </p>
-              <p className="text-gray-300 text-sm leading-relaxed">
-                Seu qualificação indicou que você precisa de algo além do pronto. 
-                Quer controle total, white label, ou criar um ativo digital que possa vender depois.
-              </p>
-            </div>
-
+            {/* CTA principal */}
             <button
               onClick={handleWhatsAppContact}
-              className="w-full bg-green-500 hover:bg-green-600 text-black py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25"
+              className="bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all shadow-lg shadow-green-500/25"
             >
-              FALAR COM ESPECIALISTA AGORA →
+              FALAR COM FELIPE AGORA →
             </button>
-
-            <p className="text-gray-500 text-sm text-center mt-4">
-              Orçamento sob medida em até 24h. Sem compromisso.
-            </p>
+            <p className="text-gray-500 text-sm mt-3">Orçamento sob medida em até 24h. Sem compromisso.</p>
           </div>
+        </section>
 
-          {/* Cases */}
-          <div className="mt-12">
-            <h3 className="text-xl font-bold text-white mb-6 text-center">Quem já fez com a gente:</h3>
+        {/* Cases */}
+        <section className="py-16 px-4 bg-[#111111]">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl font-bold text-white mb-8 text-center">Quem já fez com a gente:</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-[#111111] rounded-2xl p-6 border border-white/10">
-                <div className="text-green-400 font-bold mb-2">SaaS de Áudio</div>
-                <p className="text-gray-300 text-sm">
-                  Do zero ao faturamento em 30 dias.
-                  Infra própria, pagamentos recorrentes, escala.
-                </p>
+              <div className="bg-[#0a0a0a] rounded-2xl p-6 border border-[#D4AF37]/20">
+                <div className="text-[#D4AF37] font-bold mb-2">🔧 Infraestrutura</div>
+                <p className="text-gray-300 text-sm">Infra completa pra escritório de advocacia. Servidor próprio, backup, segurança, zero downtime.</p>
               </div>
-              <div className="bg-[#111111] rounded-2xl p-6 border border-white/10">
-                <div className="text-green-400 font-bold mb-2">Infra para Escritório</div>
-                <p className="text-gray-300 text-sm">
-                  Infraestrutura completa. 
-                  Servidor próprio, backup, segurança, zero downtime.
-                </p>
+              <div className="bg-[#0a0a0a] rounded-2xl p-6 border border-pink-500/20">
+                <div className="text-pink-400 font-bold mb-2">💻 SaaS de Áudio</div>
+                <p className="text-gray-300 text-sm">Do zero ao faturamento em 30 dias. Infra própria, pagamentos recorrentes, 50% de margem.</p>
               </div>
             </div>
           </div>
+        </section>
 
-        </div>
+        <Footer />
       </main>
     </>
   );
