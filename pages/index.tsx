@@ -140,14 +140,15 @@ setSubmitted(true);
               <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Para donos de negócio digital</span>
             </div>
  <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-  Você tem a ideia, sabe vender, entende de oferta.<br />
-  <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">Mas a execução técnica trava tudo.</span>
+  <strong className="text-green-400">10% dos seus concorrentes</strong><br />
+  <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">já operam com IA 24/7.</span><br />
+  Sua empresa ainda faz tudo no braço?
   </h1>
   <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
-  Enquanto você perde tempo com servidor que cai, deploy que quebra ou lead que ninguém responde, seu concorrente já opera 24/7 com IA.
+  Servidor cai, deploy quebra, lead morre no WhatsApp. Você perde hora com problema técnico enquanto eles faturam sem levantar um dedo.
   </p>
 <p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
- <strong>Não é falta de esforço. É falta de braço.</strong> Bota dezenas de agentes de IA pra trabalhar 24 horas por dia, 7 dias por semana. Setup em 48 horas.
+ <strong className="text-green-400">Não é falta de esforço. É falta de braço.</strong> A gente bota dezenas de agentes de IA pra trabalhar 24/7 por você. Setup em 48h. Resultado em 7 dias.
 </p>
 
  {/* VSL Placeholder */}

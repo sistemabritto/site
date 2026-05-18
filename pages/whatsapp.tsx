@@ -21,6 +21,7 @@ const cases = [
 export default function WhatsApp() {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [orderBump, setOrderBump] = useState(false);
@@ -28,9 +29,9 @@ export default function WhatsApp() {
   const handleSubmit = async () => {
     if (!email) return;
     
-    // Salvar email no sessionStorage
+    // Salvar dados no sessionStorage
     if (typeof window !== 'undefined') {
-      sessionStorage.setItem('qualificacao_customer', JSON.stringify({ email }));
+      sessionStorage.setItem('qualificacao_customer', JSON.stringify({ name, email }));
     }
     
     // Salvar lead no CRM
@@ -39,6 +40,7 @@ export default function WhatsApp() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          name,
           email,
           source: 'whatsapp-landing',
           orderBump,
@@ -70,8 +72,8 @@ export default function WhatsApp() {
           productId,
           customer: {
             email,
-            name: email.split('@')[0],
-            cellphone: '',
+            name: name || email.split('@')[0],
+            cellphone: email,
           },
         }),
       });
@@ -122,18 +124,15 @@ export default function WhatsApp() {
  <p className="text-gray-300 text-sm">Seu email = checkout mais rápido. Sem repetir tudo.</p>
  </div>
 
- <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="space-y-4">
- <div>
- <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
- <input
- type="email"
- placeholder="seu@email.com"
- value={email}
- onChange={(e) => setEmail(e.target.value)}
- className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
- required
- />
- </div>
+<form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="space-y-4">
+<div>
+<label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
+<input type="text" placeholder="Seu nome" value={name} onChange={(e) => setName(e.target.value)} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" />
+</div>
+<div>
+<label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
+<input type="email" placeholder="seu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" required />
+</div>
 
                     {/* ORDER BUMP */}
  <div 
