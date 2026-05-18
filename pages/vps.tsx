@@ -264,11 +264,11 @@ export default function VPS() {
                 </li>
               </ul>
 
-              <button
-                onClick={() => handleCheckout(false)}
-                className="w-full bg-[#D4AF37] hover:bg-[#C5A028] text-black py-5 rounded-full font-bold text-xl transition-all shadow-lg shadow-[#D4AF37]/25"
-              >
-                QUERO MINHA VPS ESTRUTURADA &#x2192;
+<button
+ onClick={() => setShowModal(true)}
+ className="w-full bg-[#D4AF37] hover:bg-[#C5A028] text-black py-5 rounded-full font-bold text-xl transition-all shadow-lg shadow-[#D4AF37]/25"
+>
+ QUERO MINHA VPS ESTRUTURADA &#x2192;
               </button>
               <p className="text-gray-500 text-sm mt-3">Pagamento seguro via AbacatePay</p>
             </div>
