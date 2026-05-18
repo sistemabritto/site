@@ -5,8 +5,8 @@ import Footer from '../components/Footer';
 
 const PHONE = '5511914088571';
 
-const CHECKOUT_VPS = 'https://pay.abacatepay.com/checkout/YOUR_VPS_ID';
-const CHECKOUT_VPS_COMBO = 'https://pay.abacatepay.com/checkout/YOUR_VPS_COMBO_ID';
+const VPS_PRODUCT_ID = 'prod_tZQyF6wjgnECwGAy203fPL0U';
+const VPS_COMBO_PRODUCT_ID = 'prod_DREjFsNq1ApYt31ggWssMJzL';
 
 export default function VPS() {
   const [customerData, setCustomerData] = useState({ name: '', email: '', whatsapp: '' });
@@ -51,16 +51,42 @@ export default function VPS() {
 
     setSubmitted(true);
 
-    // Redirecionar pro checkout com dados preenchidos
-    setTimeout(() => {
-      const url = new URL(orderBump ? CHECKOUT_VPS_COMBO : CHECKOUT_VPS);
-      url.searchParams.set('customer', JSON.stringify({
-        name: customer.name,
-        email: customer.email,
-        cellphone: customer.whatsapp || customer.email,
-      }));
-      window.location.href = url.toString();
-    }, 1000);
+    // Criar checkout via API com dados do cliente
+    const productId = orderBump ? VPS_COMBO_PRODUCT_ID : VPS_PRODUCT_ID;
+
+    try {
+      const res = await fetch('/api/abacatepay/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          productId,
+          customer: {
+            name: customer.name,
+            email: customer.email,
+            cellphone: customer.whatsapp || customer.email,
+          },
+          returnUrl: `${window.location.origin}/obrigado`,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        // Fallback: abrir WhatsApp
+        const msg = encodeURIComponent(
+          `Fala, Felipe. Quero a VPS Estruturada${orderBump ? ' com Suporte Técnico' : ''}.\n\nNome: ${customer.name}\nEmail: ${customer.email}\nWhatsApp: ${customer.whatsapp}`
+        );
+        window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+      }
+    } catch {
+      // Fallback WhatsApp
+      const msg = encodeURIComponent(
+        `Fala, Felipe. Quero a VPS Estruturada${orderBump ? ' com Suporte Técnico' : ''}.\n\nNome: ${customer.name}\nEmail: ${customer.email}\nWhatsApp: ${customer.whatsapp}`
+      );
+      window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+    }
   };
 
   const handleWhatsApp = () => {
@@ -74,7 +100,7 @@ export default function VPS() {
     <>
       <Meta
         title="VPS Estruturada — Servidor que não cai. Deploy que não quebra."
-        description="Docker, monitoramento, backup automático, SSL, firewall. SLA 24h. A partir de R$ 97/mês."
+        description="Docker, monitoramento, backup automático, SSL, firewall. SLA 24h. A partir de R$ 297/mês."
         path="/vps"
       />
       <Navbar />
@@ -106,24 +132,27 @@ export default function VPS() {
                       <input type="tel" placeholder="(11) 99999-9999" value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none" />
                     </div>
 
-                    {/* ORDER BUMP */}
-                    <label className="flex items-start gap-3 cursor-pointer bg-red-500/10 rounded-xl p-4 border border-red-500/30">
+                    {/* ORDER BUMP — Suporte Técnico */}
+                    <label className="flex items-start gap-3 cursor-pointer bg-[#D4AF37]/10 rounded-xl p-4 border border-[#D4AF37]/30">
                       <input
                         type="checkbox"
                         checked={orderBump}
                         onChange={(e) => setOrderBump(e.target.checked)}
-                        className="mt-1 w-5 h-5 rounded border-white/20 bg-[#111111] text-red-500 focus:ring-red-500"
+                        className="mt-1 w-5 h-5 rounded border-white/20 bg-[#111111] text-[#D4AF37] focus:ring-[#D4AF37]"
                       />
                       <div>
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-0.5 rounded-full">⚡ ONE TIME OFFER</span>
-                          <span className="text-gray-400 text-sm">+ Suporte DevOps</span>
+                          <span className="text-[#D4AF37] font-bold">+ Suporte Técnico</span>
+                          <span className="text-gray-400 text-xs">(recomendado)</span>
                         </div>
                         <p className="text-gray-300 text-sm">
-                          Especialista no WhatsApp com SLA 24h. Ajuda com atualizações, backup, integrações e deploy. 50% de desconto — essa oferta não vai se repetir.
+                          Especialista no WhatsApp com SLA 24h. Ajuda com deploy, backup, segurança e troubleshooting. Quem tem infra precisa de suporte humano pra configurar.
                         </p>
-                        <p className="text-red-400 font-bold text-lg mt-1">+ R$ 250/mês</p>
-                        <p className="text-[#D4AF37] font-bold">→ R$ 547/mês (VPS + Suporte)</p>
+                        <div className="flex items-center gap-3 mt-1">
+                          <p className="text-[#D4AF37] font-bold text-lg">+ R$ 250/mês</p>
+                          <p className="text-gray-500 text-xs line-through">R$ 547/mês</p>
+                          <p className="text-white font-bold">→ R$ 547/mês</p>
+                        </div>
                       </div>
                     </label>
 

@@ -14,6 +14,8 @@ const PRODUCTS: Record<string, string> = {
   'whatsapp-ia-combo-consultoria': 'prod_0GBDbERsmaarw0GMRkRLg2EF',
   'crm-ia-completo-combo-consultoria': 'prod_GsYQrUcz0GTEe1aYrXJXsT05',
   'evonexus-premium-combo-consultoria': 'prod_cSXakYDjq5tLnf0KT1gDmbHE',
+  'vps-gerenciada': 'prod_tZQyF6wjgnECwGAy203fPL0U',
+  'vps-gerenciada-combo-suporte': 'prod_DREjFsNq1ApYt31ggWssMJzL',
 };
 
 // Cria ou busca customer na AbacatePay
@@ -78,7 +80,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { productId, customer: customerData } = req.body;
+    const { productId, customer: customerData, returnUrl } = req.body;
     const abacateProductId = PRODUCTS[productId] || productId;
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.sistemabritto.com.br';
 
@@ -95,8 +97,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const body: Record<string, unknown> = {
       items: [{ id: abacateProductId, quantity: 1 }],
-      returnUrl: siteUrl + '/obrigado',
-      completionUrl: siteUrl + '/obrigado',
+      returnUrl: returnUrl || siteUrl + '/obrigado',
+      completionUrl: returnUrl || siteUrl + '/obrigado',
     };
 
     // Usa customerId se conseguiu criar
