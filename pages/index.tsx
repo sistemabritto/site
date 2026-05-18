@@ -199,29 +199,29 @@ setSubmitted(true);
               </a>
             </div>
 
-            {/* DEGRAU 2 */}
+            {/* DEGRAU 2: INFRAESTRUTURA & SAAS (unificado) */}
             <div className="mb-16">
               <div className="flex items-center gap-3 mb-6">
-                <span className="bg-[#D4AF37] text-black px-3 py-1 rounded-full text-xs font-bold">INFRAESTRUTURA</span>
-                <span className="text-gray-400 text-sm">Quando a operação cresce</span>
+                <span className="bg-gradient-to-r from-[#D4AF37] to-pink-500 text-black px-3 py-1 rounded-full text-xs font-bold">INFRA & SAAS</span>
+                <span className="text-gray-400 text-sm">Sob medida</span>
               </div>
-              <a href="/devops" className="group block bg-black/80 rounded-3xl p-8 border border-[#D4AF37]/20 hover:border-[#D4AF37]/50 transition-all duration-300 hover:-translate-y-2">
+              <a href="/qualificacao-digital" className="group block bg-gradient-to-br from-[#D4AF37]/10 to-pink-500/10 rounded-3xl p-8 border border-[#D4AF37]/20 hover:border-[#D4AF37]/50 transition-all duration-300 hover:-translate-y-2">
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
-                    <div className="text-5xl mb-4">⚙️</div>
-                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#D4AF37] transition-colors">DevOps + Suporte Técnico</h3>
-                    <p className="text-gray-300 mb-4">Infra cai, deploy quebra, API falha. Você depende de freelancer ou tenta resolver sozinho. Perde horas/dia com problema técnico.</p>
-                    <p className="text-gray-300 mb-4">Especialista técnico no seu WhatsApp com SLA 24h. Docker, APIs, deploy, segurança, troubleshooting. Resolve pra você.</p>
+                    <div className="text-5xl mb-4">🔧</div>
+                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#D4AF37] transition-colors">Infraestrutura & Produto Próprio</h3>
+                    <p className="text-gray-300 mb-4">Sua operação cresceu. O servidor cai, o deploy quebra, a API fica lenta. Ou você tem uma ideia de SaaS e não sabe por onde começar. Nos dois casos, é falta de braço técnico.</p>
+                    <p className="text-gray-300 mb-4">Especialista no WhatsApp com SLA 24h. Docker, deploy, segurança, APIs. Ou do zero ao MVP em 30 dias. Você foca no negócio, a gente constrói.</p>
                     <p className="text-[#D4AF37] font-semibold">Solicitar orçamento</p>
                   </div>
                   <div className="flex flex-col justify-center">
                     <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 mb-4">
                       <p className="text-red-400 text-sm font-semibold mb-1">Custo de oportunidade</p>
-                      <p className="text-gray-300 text-sm">Cada hora sua resolvendo problema técnico = hora que não vende. <strong className="text-white">R$ 200-500/hora de oportunidade perdida</strong>.</p>
+                      <p className="text-gray-300 text-sm">Cada hora sua resolvendo problema técnico ou tentando contratar dev = hora que não vende. <strong className="text-white">R$ 200-500/hora perdida</strong>.</p>
                     </div>
-                    <div className="bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-xl p-4">
-                      <p className="text-[#D4AF37] text-sm font-semibold mb-1">Benefício imediato</p>
-                      <p className="text-gray-300 text-sm">Zero downtime. Você foca no negócio, a gente cuida da infra.</p>
+                    <div className="bg-gradient-to-r from-[#D4AF37]/10 to-pink-500/10 border border-[#D4AF37]/20 rounded-xl p-4">
+                      <p className="text-[#D4AF37] text-sm font-semibold mb-1">Resultado real</p>
+                      <p className="text-gray-300 text-sm">Zero downtime + R$ 900 em tokens gerando R$ 5.000 de faturamento. Produto próprio no ar em 30 dias.</p>
                     </div>
                   </div>
                 </div>
@@ -257,33 +257,6 @@ setSubmitted(true);
               </a>
             </div>
 
-            {/* CEREJA: SAAS */}
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <span className="bg-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold">🍒 CEREJA DO BOLO</span>
-                <span className="text-gray-400 text-sm">Produto próprio</span>
-              </div>
-<a href="/saas" className="group block bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-3xl p-8 border border-pink-500/20 hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-2">
-<div className="grid md:grid-cols-2 gap-8">
-<div>
-<div className="text-5xl mb-4">🎙️</div>
-<h3 className="text-2xl font-bold text-white mb-3 group-hover:text-pink-400 transition-colors">SaaS sob Encomenda</h3>
-<p className="text-gray-300 mb-4">Você tem a ideia. A gente constrói. Do MVP ao produto final. Faturamento desde o primeiro mês.</p>
-<p className="text-pink-400 font-semibold">Saiba mais →</p>
-</div>
-<div className="flex flex-col justify-center">
-<div className="bg-pink-500/10 border border-pink-500/20 rounded-xl p-4 mb-4">
- <p className="text-pink-400 text-sm font-semibold mb-1">Números do case</p>
- <p className="text-gray-300 text-sm">R$ 900 em tokens + R$ 5.000 faturamento inicial. <strong className="text-white">50% de margem</strong>.</p>
-</div>
-<div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
- <p className="text-purple-400 text-sm font-semibold mb-1">Benefício</p>
- <p className="text-gray-300 text-sm">Produto próprio = receita recorrente. A gente constrói, você fatura.</p>
-</div>
-</div>
-</div>
-</a>
-            </div>
           </div>
         </section>
 
