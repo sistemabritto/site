@@ -140,32 +140,29 @@ export default function VPS() {
 
             {/* Card de Preço */}
             <div className="bg-[#111111] rounded-3xl p-8 border border-[#D4AF37]/30 max-w-lg mx-auto">
-              <div className="text-[#D4AF37] text-sm font-bold uppercase tracking-wider mb-2">PLANO ÚNICO</div>
-              <div className="text-5xl font-bold text-white mb-2">R$ 97</div>
-              <div className="text-gray-400 text-sm mb-6">por mês por VPS • cancele quando quiser</div>
+              <div className="bg-red-500/20 text-red-400 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full inline-block mb-3">{'\\u26A0\\uFE0F'} OFERTA ÚNICA</div>
+              <div className="text-[#D4AF37] text-sm font-bold uppercase tracking-wider mb-2">VPS ESTRUTURADA</div>
+              <div className="text-5xl font-bold text-white mb-2">R$ 297</div>
+              <div className="text-gray-400 text-sm mb-6">por mês • setup em 24h • cancele quando quiser</div>
               <ul className="text-left space-y-3 mb-8">
                 <li className="flex items-start gap-3 text-gray-300">
-                  <span className="text-[#D4AF37]">&#x2713;</span>
+                  <span className="text-[#D4AF37]">{'\\u2713'}</span>
                   Docker + Docker Compose configurado
                 </li>
                 <li className="flex items-start gap-3 text-gray-300">
-                  <span className="text-[#D4AF37]">&#x2713;</span>
+                  <span className="text-[#D4AF37]">{'\\u2713'}</span>
                   Monitoramento 24/7 com alerta no WhatsApp
                 </li>
                 <li className="flex items-start gap-3 text-gray-300">
-                  <span className="text-[#D4AF37]">&#x2713;</span>
+                  <span className="text-[#D4AF37]">{'\\u2713'}</span>
                   Backup automático diário
                 </li>
                 <li className="flex items-start gap-3 text-gray-300">
-                  <span className="text-[#D4AF37]">&#x2713;</span>
+                  <span className="text-[#D4AF37]">{'\\u2713'}</span>
                   SSL automático + firewall
                 </li>
                 <li className="flex items-start gap-3 text-gray-300">
-                  <span className="text-[#D4AF37]">&#x2713;</span>
-                  Suporte WhatsApp (SLA 24h)
-                </li>
-                <li className="flex items-start gap-3 text-gray-300">
-                  <span className="text-[#D4AF37]">&#x2713;</span>
+                  <span className="text-[#D4AF37]">{'\\u2713'}</span>
                   Setup em 24h
                 </li>
               </ul>
@@ -174,36 +171,37 @@ export default function VPS() {
                 onClick={() => handleCheckout(false)}
                 className="w-full bg-[#D4AF37] hover:bg-[#C5A028] text-black py-5 rounded-full font-bold text-xl transition-all shadow-lg shadow-[#D4AF37]/25"
               >
-                QUERO MINHA VPS ESTRUTURADA &#x2192;
+                QUERO MINHA VPS ESTRUTURADA {'\\u2192'}
               </button>
               <p className="text-gray-500 text-sm mt-3">Pagamento seguro via AbacatePay</p>
             </div>
 
-            {/* Order Bump */}
-            <div className="bg-[#0a0a0a] rounded-2xl p-6 border border-white/10 max-w-lg mx-auto mt-6">
+            {/* Order Bump — One Time Offer (só aparece no modal) */}
+            <div className="bg-gradient-to-r from-red-500/10 to-[#D4AF37]/10 rounded-2xl p-6 border border-red-500/30 max-w-lg mx-auto mt-6">
               <label className="flex items-start gap-3 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={orderBump}
                   onChange={(e) => setOrderBump(e.target.checked)}
-                  className="mt-1 w-5 h-5 rounded border-white/20 bg-[#111111] text-[#D4AF37] focus:ring-[#D4AF37]"
+                  className="mt-1 w-5 h-5 rounded border-white/20 bg-[#111111] text-red-500 focus:ring-red-500"
                 />
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="bg-[#D4AF37]/20 text-[#D4AF37] text-xs font-bold px-2 py-0.5 rounded-full">&#x26A1; Recomendado</span>
+                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-0.5 rounded-full">{'\\u26A1'} ONE TIME OFFER</span>
                     <span className="text-gray-400 text-sm">+ Suporte DevOps</span>
                   </div>
                   <p className="text-gray-300 text-sm">
-                    Especialista técnico no WhatsApp com SLA 24h. Configuração de deploy, troubleshooting, otimização de performance. Quem tem servidor precisa de suporte humano pra não ficar no escuro.
+                    Especialista técnico no WhatsApp com SLA 24h. Ajuda com atualizações, backup, integrações, deploy e troubleshooting. 50% de desconto no suporte técnico mensal de DevOps. Essa oferta não vai aparecer de novo.
                   </p>
-                  <p className="text-[#D4AF37] font-bold text-lg mt-2">+ R$ 150/mês</p>
+                  <p className="text-red-400 font-bold text-lg mt-2">+ R$ 250/mês</p>
+                  <p className="text-[#D4AF37] font-bold text-lg">{'\\u2192'} R$ 547/mês (VPS + Suporte)</p>
                 </div>
               </label>
               <button
                 onClick={() => handleCheckout(true)}
-                className="w-full bg-white/10 hover:bg-white/20 text-white py-3 rounded-full font-bold transition-all border border-white/20 mt-4"
+                className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-full font-bold transition-all mt-4"
               >
-                QUERO COM SUPORTE DEVOPS &#x2192;
+                QUERO COM SUPORTE DEVOPS {'\\u2192'}
               </button>
             </div>
           </div>

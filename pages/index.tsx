@@ -131,25 +131,24 @@ setSubmitted(true);
           </div>
         )}
 
- {/* ===== HERO ===== */}
+{/* ===== HERO ===== */}
  <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
  <div className="absolute inset-0 bg-gradient-to-b from-green-900/20 via-[#0a0a0a] to-[#0a0a0a]" />
           <div className="relative z-10 max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-full px-4 py-2 mb-8">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Vagas Limitadas</span>
+              <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Para donos de negócio digital</span>
             </div>
  <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-  <strong className="text-green-400">10% dos seus concorrentes</strong><br />
-  <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">já usam IA pra operar 24/7.</span><br />
-  Sua empresa ainda faz tudo no braço?
+  Você tem a ideia, sabe vender, entende de oferta.<br />
+  <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">Mas a execução técnica trava tudo.</span>
   </h1>
   <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
-  Enquanto você dorme, 47 leads mandaram mensagem. Amanhã, 30 vão pro concorrente.
+  Enquanto você perde tempo com servidor que cai, deploy que quebra ou lead que ninguém responde, seu concorrente já opera 24/7 com IA.
   </p>
 <p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
- <strong>Não é falta de esforço. É falta de braço.</strong> A gente resolve isso em 48 horas.
- </p>
+ <strong>Não é falta de esforço. É falta de braço.</strong> Bota dezenas de agentes de IA pra trabalhar 24 horas por dia, 7 dias por semana. Setup em 48 horas.
+</p>
 
  {/* VSL Placeholder */}
  <div className="max-w-2xl mx-auto mb-10">
@@ -175,10 +174,10 @@ setSubmitted(true);
   onClick={() => setShowModal(true)}
   className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25"
   >
-  AGENDAR CONSULTORIA + SUPORTE →
+  QUERO MEU BRAÇO DE IA →
   </button>
-<a href="/qualificacao-digital" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-5 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
-  ESCALAR MEU NEGÓCIO DIGITAL →
+<a href="/quiz-infra" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-5 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
+  PRECISO DE INFRA OU SAAS →
 </a>
 </div>
           </div>
