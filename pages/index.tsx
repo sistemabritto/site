@@ -205,7 +205,7 @@ setSubmitted(true);
                 <span className="bg-gradient-to-r from-[#D4AF37] to-pink-500 text-black px-3 py-1 rounded-full text-xs font-bold">INFRA & SAAS</span>
                 <span className="text-gray-400 text-sm">Sob medida</span>
               </div>
-              <a href="/qualificacao-digital" className="group block bg-gradient-to-br from-[#D4AF37]/10 to-pink-500/10 rounded-3xl p-8 border border-[#D4AF37]/20 hover:border-[#D4AF37]/50 transition-all duration-300 hover:-translate-y-2">
+              <a href="/quiz-infra" className="group block bg-gradient-to-br from-[#D4AF37]/10 to-pink-500/10 rounded-3xl p-8 border border-[#D4AF37]/20 hover:border-[#D4AF37]/50 transition-all duration-300 hover:-translate-y-2">
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
                     <div className="text-5xl mb-4">🔧</div>
@@ -234,7 +234,7 @@ setSubmitted(true);
                 <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-bold">WORKFORCE COMPLETA</span>
                 <span className="text-gray-400 text-sm">Operação completa</span>
               </div>
-              <a href="/workforce" className="group block bg-black/80 rounded-3xl p-8 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-2">
+              <a href="/quiz-workforce" className="group block bg-black/80 rounded-3xl p-8 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-2">
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
                     <div className="text-5xl mb-4">🏭</div>

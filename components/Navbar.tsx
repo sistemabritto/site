@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 const navLinks = [
   { label: 'Workforce', href: '/workforce' },
   { label: 'WhatsApp', href: '/whatsapp' },
-  { label: 'DevOps', href: '/devops' },
-  { label: 'Infra/SaaS', href: '/saas' },
   { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
 ];
 
