@@ -147,10 +147,30 @@ setSubmitted(true);
   <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
   Enquanto você dorme, 47 leads mandaram mensagem. Amanhã, 30 vão pro concorrente.
   </p>
-  <p className="text-lg text-gray-400 mb-12 max-w-xl mx-auto">
-  <strong>Não é falta de esforço. É falta de braço.</strong> A gente resolve isso em 48 horas.
-  </p>
-  <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+<p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
+ <strong>Não é falta de esforço. É falta de braço.</strong> A gente resolve isso em 48 horas.
+ </p>
+
+ {/* VSL Placeholder */}
+ <div className="max-w-2xl mx-auto mb-10">
+ <a href="#" onClick={(e) => { e.preventDefault(); setShowModal(true); }} className="group relative block aspect-video w-full overflow-hidden rounded-2xl border border-green-500/20 hover:border-green-500/50 transition-all duration-300">
+ <img 
+ src="/images/vsl-thumbnail.jpg" 
+ alt="Clique para assistir" 
+ className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+ />
+ <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-all duration-300" />
+ <div className="absolute inset-0 flex items-center justify-center">
+ <div className="flex flex-col items-center gap-2 rounded-xl bg-green-500/60 px-6 py-4 shadow-[0_0_30px_rgba(34,197,94,0.3)] backdrop-blur-sm group-hover:scale-105 transition-all duration-300 animate-pulse">
+ <p className="text-sm font-bold text-black">▶ Seu vídeo já começou</p>
+ <p className="text-xs text-black/70">Clique para assistir</p>
+ </div>
+ </div>
+ </a>
+ <p className="text-gray-500 text-xs text-center mt-2">2 min • Felipe Britto explica como funciona</p>
+ </div>
+
+ <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
   <button 
   onClick={() => setShowModal(true)}
   className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25"
