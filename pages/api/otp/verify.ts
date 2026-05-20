@@ -1,5 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { supabase } from '../../../utils/supabaseClient';
+
+// In-memory OTP store (shared with send.ts in production use Redis/DB)
+// For now, we import from a shared module
+const otpStore = (global as any).__otp_store || new Map<string, { otp: string; expires: number }>();
+if (!(global as any).__otp_store) {
+  (global as any).__otp_store = otpStore;
+}
 
 /**
  * POST /api/otp/verify
@@ -17,29 +23,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ success: false, message: 'Phone and OTP required' });
   }
 
-  // Check OTP in Supabase
-  const { data, error } = await supabase
-    .from('otp_codes')
-    .select('*')
-    .eq('phone', phone)
-    .eq('otp', otp)
-    .single();
-
-  if (error || !data) {
-    return res.status(401).json({ success: false, message: 'Invalid OTP' });
+  const stored = otpStore.get(phone);
+  if (!stored) {
+    return res.status(401).json({ success: false, message: 'OTP not found' });
   }
 
-  // Check if OTP is expired
-  if (new Date(data.expires_at) < new Date()) {
-    // Delete expired OTP
-    await supabase.from('otp_codes').delete().eq('phone', phone);
+  if (Date.now() > stored.expires) {
+    otpStore.delete(phone);
     return res.status(401).json({ success: false, message: 'OTP expired' });
   }
 
-  // OTP is valid — delete it (one-time use)
-  await supabase.from('otp_codes').delete().eq('phone', phone);
+  if (stored.otp !== otp) {
+    return res.status(401).json({ success: false, message: 'Invalid OTP' });
+  }
 
-  // Create a session for the user (using Supabase magic link approach)
-  // For now, we just return success — the client will handle the session
-  return res.status(200).json({ success: true, message: 'OTP verified' });
+  // Valid — delete and return success
+  otpStore.delete(phone);
+  return res.status(200).json({ success: true, message: 'Verified' });
 }

@@ -1,9 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { supabase } from '../../../utils/supabaseClient';
 
-// Evolution API credentials (already known)
-const EVO_URL = 'https://go.workflowapi.com.br/send/text'; // EvolutionGo correct endpoint
+// Evolution API credentials
+const EVO_URL = 'https://go.workflowapi.com.br/send/text';
 const EVO_API_KEY = 'ed260550-affc-42f1-92e3-45affea89e05';
+
+// In-memory OTP store (use Redis/DB in production)
+const otpStore = new Map<string, { otp: string; expires: number }>();
 
 /**
  * POST /api/otp/send
@@ -21,27 +23,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ success: false, message: 'Phone number required' });
   }
 
-  // Generate 6‑digit OTP
+  // Generate 6-digit OTP
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
-  const expiresAt = new Date(Date.now() + 5 * 60 * 1000).toISOString(); // 5 min
 
-  // Store OTP in Supabase (table otp_codes must exist)
-  const { error: dbErr } = await supabase.from('otp_codes').upsert({
-    phone,
-    otp,
-    expires_at: expiresAt,
-  }, { onConflict: 'phone' });
-
-  if (dbErr) {
-    console.error('Supabase OTP insert error:', dbErr);
-    return res.status(500).json({ success: false, message: 'DB error' });
-  }
+  // Store OTP in memory (5 min expiry)
+  otpStore.set(phone, { otp, expires: Date.now() + 5 * 60 * 1000 });
 
   // Send via Evolution API
   try {
     const payload = {
       number: phone,
-      text: `✅ *Seu código OTP*: ${otp}\n🔐 Sistema Britto – login seguro`,
+      text: `✅ *Seu código de acesso*: ${otp}\n\n🔐 Sistema Britto\n\nExpira em 5 minutos.`,
     };
     const evoRes = await fetch(EVO_URL, {
       method: 'POST',
@@ -56,7 +48,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(200).json({ success: true, message: 'OTP enviado' });
     }
     console.error('Evolution response error:', evoData);
-    return res.status(502).json({ success: false, message: 'OTP not sent' });
+    return res.status(502).json({ success: false, message: 'Evolution API error' });
   } catch (e) {
     console.error('Evolution request failed:', e);
     return res.status(502).json({ success: false, message: 'OTP request failed' });
