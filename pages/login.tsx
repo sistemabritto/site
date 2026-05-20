@@ -31,14 +31,29 @@ export default function Login() {
     }
   };
 
-  const handleWhatsApp = () => {
+  const handleWhatsApp = async () => {
     setIsLoading(true);
-    // TODO: integrate Evolution API OTP flow
-    setTimeout(() => {
-      alert('Login via WhatsApp — em breve.');
+    try {
+      const res = await fetch('/api/otp/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: '5571999841612' }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        alert('✅ Código OTP enviado ao WhatsApp');
+      } else {
+        console.error('OTP error:', data);
+        alert('⚠️ Falha ao enviar OTP. Tente novamente.');
+      }
+    } catch (e) {
+      console.error('OTP request failed:', e);
+      alert('⚠️ Erro inesperado ao enviar OTP');
+    } finally {
       setIsLoading(false);
-    }, 300);
+    }
   };
+
 
   // If already authenticated, redirect immediately
   useEffect(() => {
@@ -111,13 +126,7 @@ export default function Login() {
               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
             ) : (
               <>
-                {/* WhatsApp Logo - Proper SVG */}
-                <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path 
-                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.296-.767.965-.94 1.164-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.134.298-.347.446-.52.149-.174.198-.298.298-.496.099-.198.05-.373-.025-.52-.075-.149-.669-1.612-.917-2.21-.24-.58-.48-.5-.669-.51l-.57-.01c-.198 0-.52.074-.793.372-.273.298-1.044 1.025-1.044 2.494 0 1.468 1.069 2.886 1.214 3.082.149.197 2.104 3.21 5.097 4.512.709.305 1.26.488 1.69.624.712.226 1.348.195 1.854.12.567-.08 1.755-.718 2.002-1.41.248-.692.248-1.284.173-1.41-.075-.124-.272-.198-.57-.347m-4.945 5.836c-3.3 0-6.002-2.703-6.002-6.002 0-3.299 2.702-6.001 6.002-6.001 3.299 0 6.001 2.702 6.001 6.001 0 3.299-2.702 6.002-6.001 6.002zm0-13.503c-4.132 0-7.501 3.369-7.501 7.501s3.369 7.501 7.501 7.501 7.501-3.369 7.501-7.501-3.369-7.501-7.501-7.501z" 
-                    fill="currentColor"
-                  />
-                </svg>
+                <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 flex-shrink-0" />
                 <span>Entrar com WhatsApp</span>
               </>
             )}
