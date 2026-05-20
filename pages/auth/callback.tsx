@@ -7,30 +7,31 @@ async function getSupabase() {
   return mod.supabase;
 }
 
-export async function getServerSideProps() {
-  return { props: {} };
-}
-
 export default function AuthCallback() {
   const router = useRouter();
 
   useEffect(() => {
-    // Supabase Auth gerencia o callback automaticamente
-    // O session é recuperado via cookie/localStorage
-    // Após login bem-sucedido, redireciona para a página desejada
-    
     const checkSession = async () => {
-      const supabase = await getSupabase();
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (session) {
-        // Usuário logado com sucesso
-        // Redireciona para a página que ele estava tentando acessar ou home
-        const next = (router.query.next as string) || (router.query.redirect as string) || '/';
-        router.replace(next);
-      } else {
-        // Se não tem sessão, redireciona para login
-        router.replace('/login');
+      try {
+        const supabase = await getSupabase();
+        
+        // Wait a bit for Supabase to process the OAuth callback
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (session) {
+          // Get the redirect URL from query params or default to home
+          const params = new URLSearchParams(window.location.search);
+          const next = params.get('next') || params.get('redirect') || '/';
+          window.location.href = next;
+        } else {
+          // No session, redirect to login
+          window.location.href = '/login';
+        }
+      } catch (err) {
+        console.error('Auth callback error:', err);
+        window.location.href = '/login';
       }
     };
 

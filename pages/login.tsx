@@ -27,16 +27,24 @@ export default function Login() {
       const supabase = await getSupabase();
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
       });
       if (error) {
         console.error('Google login error:', error);
-        alert('Erro ao fazer login com Google. Tente novamente.');
-        setIsLoading(false);
+        // Fallback: redirect manually to Supabase OAuth
+        const supabaseUrl = 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
+        const redirectUrl = `${supabaseUrl}/auth/v1/authorize?provider=google&redirect_to=${encodeURIComponent(window.location.origin + '/auth/callback')}`;
+        window.location.href = redirectUrl;
       }
-    } catch (err) {
+      // If no error, Supabase handles the redirect automatically
+    } catch (err: any) {
       console.error('Unexpected error:', err);
-      alert('Erro inesperado. Tente novamente.');
-      setIsLoading(false);
+      // Fallback: redirect manually
+      const supabaseUrl = 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
+      const redirectUrl = `${supabaseUrl}/auth/v1/authorize?provider=google&redirect_to=${encodeURIComponent(window.location.origin + '/auth/callback')}`;
+      window.location.href = redirectUrl;
     }
   };
 
@@ -89,8 +97,8 @@ export default function Login() {
     // Client-side OTP verification (demo mode)
     if (otpCode === sentOtp) {
       setShowPhoneModal(false);
-      alert('✅ Login realizado com sucesso!');
-      router.replace(target);
+      // Use window.location for reliable redirect
+      window.location.href = target;
     } else {
       alert('❌ Código inválido. Tente novamente.');
     }
