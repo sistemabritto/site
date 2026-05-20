@@ -69,7 +69,7 @@ export default function Workforce() {
                   <button onClick={() => setShowModal(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">{'\u00D7'}</button>
                   <div className="text-center mb-6">
                     <div className="text-4xl mb-3">{'\uD83D\uDE80'}</div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Solicitar orçamento</h3>
+                    <h3 className="text-2xl font-bold text-white mb-2">Peça seu braço IA</h3>
                     <p className="text-gray-300 text-sm">Preenche aí que a gente te explica como funciona.</p>
                   </div>
                   <form onSubmit={handleSubmit} className="space-y-4">
@@ -85,9 +85,9 @@ export default function Workforce() {
                       <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp *</label>
                       <input type="tel" placeholder="(11) 99999-9999" value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-purple-500 focus:outline-none" required />
                     </div>
-                    <button type="submit" className="w-full bg-purple-500 hover:bg-purple-600 text-white py-4 rounded-full font-bold text-lg transition-all">
-                      SOLICITAR ORÇAMENTO {'\u2192'}
-                    </button>
+<button type="submit" className="w-full bg-purple-500 hover:bg-purple-600 text-white py-4 rounded-full font-bold text-lg transition-all">
+                        QUERO MEU BRAÇO →
+                      </button>
                     <p className="text-gray-500 text-xs text-center">Sem spam. Promessa.</p>
                   </form>
                 </>
@@ -121,8 +121,8 @@ export default function Workforce() {
               Duas frentes numa só: agentes prontos com controle visual e rotinas organizadas (EvoNexus) + framework autônomo com self-healing e navegação em browser (Hermes).
             </p>
             <button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-purple-500 hover:bg-purple-600 text-white px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-purple-500/25">
-              SOLICITAR ORÇAMENTO {'\u2192'}
-            </button>
+                QUERO MEU BRAÇO →
+              </button>
           </div>
         </section>
 
@@ -254,7 +254,7 @@ export default function Workforce() {
             <h2 className="text-3xl font-bold text-white mb-6">Chega de fazer tudo manual.</h2>
             <p className="text-gray-300 text-lg mb-8">EvoNexus + Hermes. Agentes prontos e framework livre. Os dois.</p>
             <button onClick={() => setShowModal(true)} className="inline-flex items-center gap-3 bg-purple-500 hover:bg-purple-600 text-white px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-purple-500/25">
-              SOLICITAR ORÇAMENTO {'\u2192'}
+              QUERO MEU BRAÇO →
             </button>
           </div>
         </section>

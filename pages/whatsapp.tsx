@@ -13,9 +13,9 @@ const features = [
 ];
 
 const cases = [
-  { name: 'Clínica OdontoLife', result: '3x mais consultas agendadas', desc: 'De 400 leads/mês para 1.200. IA qualifica, agenda e reconfirma automaticamente.' },
-  { name: 'Studio Pilates', result: '20h/semana economizadas', desc: 'Antes 3h/dia no WhatsApp marcando e remarcando. Hoje a IA faz tudo sozinha.' },
-  { name: 'Delivery Pizzaria', result: '3x mais pedidos, mesma equipe', desc: 'Do pedido ao delivery, tudo automático. Cliente elogia a velocidade.' },
+  { name: 'Clínica de Odontologia', result: '3x mais consultas agendadas', desc: 'De 400 leads/mês para 1.200. IA qualifica, agenda e reconfirma automaticamente.' },
+  { name: 'Estúdio de Pilates', result: '20h/semana economizadas', desc: 'Antes 3h/dia no WhatsApp marcando e remarcando. Hoje a IA faz tudo sozinha.' },
+  { name: 'Delivery', result: '3x mais pedidos, mesma equipe', desc: 'Do pedido ao delivery, tudo automático. Cliente elogia a velocidade.' },
 ];
 
 export default function WhatsApp() {
@@ -119,20 +119,16 @@ export default function WhatsApp() {
                   >×</button>
                   
                   <div className="text-center mb-6">
- <div className="text-4xl mb-3">🚀</div>
- <h3 className="text-2xl font-bold text-white mb-2">Quase lá!</h3>
- <p className="text-gray-300 text-sm">Seu email = checkout mais rápido. Sem repetir tudo.</p>
- </div>
+                  <div className="text-4xl mb-3">🚀</div>
+                  <h3 className="text-2xl font-bold text-white mb-2">Quase lá!</h3>
+                  <p className="text-gray-300 text-sm">Seu email = checkout mais rápido. Sem repetir tudo.</p>
+                </div>
 
-<form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="space-y-4">
-<div>
-<label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
-<input type="text" placeholder="Seu nome" value={name} onChange={(e) => setName(e.target.value)} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" />
-</div>
-<div>
-<label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
-<input type="email" placeholder="seu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" required />
-</div>
+                <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="space-y-4">
+                  <div>
+                    <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
+                    <input type="email" placeholder="seu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" required />
+                  </div>
 
                     {/* ORDER BUMP */}
  <div 
@@ -236,9 +232,9 @@ export default function WhatsApp() {
               </button>
             </div>
 
- <p className="text-gray-400 text-sm mt-4">Sem fidelidade. Cancele quando quiser. 7 dias de garantia.</p>
- </div>
- </section>
+            <p className="text-gray-400 text-sm mt-4">Sem fidelidade. Cancele quando quiser. 7 dias de garantia incondicional.</p>
+          </div>
+        </section>
 
         {/* ===== STATS ===== */}
         <section className="py-12 bg-[#111111]">
@@ -296,13 +292,12 @@ export default function WhatsApp() {
         {/* ===== FEATURES ===== */}
         <section className="py-20 sm:py-32 bg-[#0a0a0a]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <span className="inline-block text-green-400 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30 px-4 py-2 rounded-full bg-green-500/10">
-                Funcionalidades
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                Tudo que seu WhatsApp<br />
-                <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">precisava ter</span>
+          <div className="text-center mb-16">
+            <span className="inline-block text-green-400 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30 px-4 py-2 rounded-full bg-green-500/10">
+              Funcionalidades
+              </span><h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                Funcionalidades que<br />
+                <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">transformam seu WhatsApp</span>
               </h2>
             </div>
 
@@ -321,15 +316,14 @@ export default function WhatsApp() {
         {/* ===== CASES ===== */}
         <section className="py-20 sm:py-32 bg-[#111111]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <span className="inline-block text-green-400 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30 px-4 py-2 rounded-full bg-green-500/10">
-                Cases
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                Resultados reais<br />
-                <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">em números</span>
-              </h2>
-            </div>
+          <div className="text-center mb-16">
+            <span className="inline-block text-green-400 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30 px-4 py-2 rounded-full bg-green-500/10">
+              Cases
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+              Resultados comprovados
+            </h2>
+          </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {cases.map((c, i) => (
@@ -350,6 +344,10 @@ export default function WhatsApp() {
               Oferta de lançamento
             </h2>
             <p className="text-gray-400 mb-8">Preço válido enquanto durarem as vagas.</p>
+            {/* Garantia de 7 dias */}
+            <div className="inline-flex items-center gap-2 bg-green-500/20 text-green-500 px-3 py-1 rounded-full text-sm font-bold mb-4">
+              7 dias de garantia incondicional
+            </div>
 
             <div className="bg-gradient-to-br from-green-500/20 to-green-900/10 rounded-3xl p-8 border border-green-500/30 mb-8">
               <ul className="space-y-4 text-left mb-8">

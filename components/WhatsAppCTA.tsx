@@ -58,12 +58,12 @@ export default function WhatsAppCTA() {
             </p>
 
             <a
-              href="https://wa.me/5511914088571?text=Olá!%20Quero%20transformar%20meu%20WhatsApp%20em%20uma%20central%20comercial%20com%20IA%20e%20CRM"
+              href="https://wa.me/5511914088571?text=Ol%C3%A1!%20Quero%20transformar%20meu%20WhatsApp%20em%20uma%20central%20comercial%20com%20IA%20e%20CRM"
               target="_blank"
               rel="noopener noreferrer"
               className="block w-full bg-gold-500 hover:bg-gold-600 text-surface-900 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-gold-500/25 mb-5"
             >
-              Quero meu WhatsApp com CRM
+              QUERO MEU BRAÇO →
             </a>
 
             <p className="text-gold-500 text-xs font-bold mt-5 animate-pulse text-center">

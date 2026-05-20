@@ -54,7 +54,7 @@ const PLANS: Record<string, PlanResult> = {
     tagColor: 'bg-[#D4AF37] text-black',
     features: [
       'Tudo do Completo',
-      '38 agentes especializados',
+      'Dezenas de agentes especializados',
       'Finanças, Projetos, Marketing, Jurídico',
       'Engineering agents (Code, Review, Debug)',
       'Dashboard web completo',
@@ -160,7 +160,8 @@ export default function Resultado() {
     
     // Premium → WhatsApp direto (high ticket)
     if (plan.id === 'premium') {
-      const msg = encodeURIComponent(`Olá! Fiz a qualificação e quero conhecer o plano Premium (R$2.500/mês). Nome: ${customerData.name}, Email: ${customerData.email}`);
+      // Mensagem sem preço, conforme regra de copy
+      const msg = encodeURIComponent(`Olá! Fiz a qualificação e quero conhecer o plano Premium. Nome: ${customerData.name}, Email: ${customerData.email}`);
       window.location.href = `https://wa.me/5511914088571?text=${msg}`;
       return;
     }
@@ -381,7 +382,7 @@ export default function Resultado() {
           {/* Outros planos */}
           <div className="mt-12 text-center">
             <p className="text-gray-500 text-sm mb-4">Quer ver outros planos?</p>
-            <a href="/workforce#planos" className="text-green-400 hover:text-green-300 font-semibold">
+            <a href="/workforce#plano" className="text-green-400 hover:text-green-300 font-semibold">
               Ver todos os planos →
             </a>
           </div>

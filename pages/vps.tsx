@@ -148,11 +148,10 @@ export default function VPS() {
                         <p className="text-gray-300 text-sm">
                           Especialista no WhatsApp com SLA 24h. Ajuda com deploy, backup, segurança e troubleshooting. Quem tem infra precisa de suporte humano pra configurar.
                         </p>
-                        <div className="flex items-center gap-3 mt-1">
-                          <p className="text-[#D4AF37] font-bold text-lg">+ R$ 250/mês</p>
-                          <p className="text-gray-500 text-xs line-through">R$ 547/mês</p>
-                          <p className="text-white font-bold">→ R$ 547/mês</p>
-                        </div>
+                      <div className="flex items-center gap-3 mt-1">
+                        <p className="text-gray-500 text-xs line-through">De R$ 547/mês</p>
+                        <p className="text-[#D4AF37] font-bold text-lg">R$ 250/mês</p>
+                      </div>
                       </div>
                     </label>
 

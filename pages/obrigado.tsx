@@ -26,7 +26,7 @@ export default function Obrigado() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          productId: 'consultoria-tecnica-whatsapp',
+          productId: UPSELL_PRODUCT,
         }),
       });
       const data = await res.json();

@@ -58,14 +58,10 @@ export default function Navbar() {
                 <button onClick={() => setShowModal(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
                 <div className="text-center mb-6">
                   <div className="text-4xl mb-3">&#x1F680;</div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Agendar Consultoria</h3>
-                  <p className="text-gray-300 text-sm">Preenche aí que a gente te entende e já recomenda a melhor solução.</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">Sua empresa ainda faz tudo no braço?</h3>
+                  <p className="text-gray-300 text-sm">Seu email nos ajuda a entender o que você precisa. Sem repetir nada.</p>
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
-                    <input type="text" placeholder="Seu nome" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" />
-                  </div>
                   <div>
                     <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
                     <input type="email" placeholder="seu@email.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" required />
@@ -134,7 +130,7 @@ export default function Navbar() {
                 onClick={() => setShowModal(true)}
                 className="bg-green-500 hover:bg-green-600 text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 shadow-lg shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105"
               >
-                Agendar Consultoria
+                PRECISO DE BRAÇO →
               </button>
             </div>
 
@@ -171,7 +167,7 @@ export default function Navbar() {
                 onClick={() => { setMobileOpen(false); setShowModal(true); }}
                 className="block w-full text-center bg-green-500 text-black px-6 py-3 rounded-full font-bold mt-4 shadow-lg shadow-green-500/25 hover:bg-green-600 transition-all duration-200"
               >
-                Agendar Consultoria
+                PRECISO DE BRAÇO →
               </button>
             </div>
           </div>
