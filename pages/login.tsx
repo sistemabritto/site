@@ -10,36 +10,12 @@ async function getSupabase() {
   return mod.supabase;
 }
 
-// Country codes for WhatsApp modal
-const COUNTRIES = [
-  { code: '55', name: 'Brasil', flag: '🇧🇷', ddd: true },
-  { code: '1', name: 'EUA', flag: '🇺🇸', ddd: false },
-  { code: '44', name: 'Reino Unido', flag: '🇬🇧', ddd: false },
-  { code: '351', name: 'Portugal', flag: '🇵🇹', ddd: false },
-  { code: '34', name: 'Espanha', flag: '🇪🇸', ddd: false },
-  { code: '49', name: 'Alemanha', flag: '🇩🇪', ddd: false },
-  { code: '33', name: 'França', flag: '🇫🇷', ddd: false },
-  { code: '39', name: 'Itália', flag: '🇮🇹', ddd: false },
-  { code: '81', name: 'Japão', flag: '🇯🇵', ddd: false },
-  { code: '86', name: 'China', flag: '🇨🇳', ddd: false },
-  { code: '91', name: 'Índia', flag: '🇮🇳', ddd: false },
-  { code: '7', name: 'Rússia', flag: '🇷🇺', ddd: false },
-  { code: '61', name: 'Austrália', flag: '🇦🇺', ddd: false },
-  { code: '52', name: 'México', flag: '🇲🇽', ddd: false },
-  { code: '54', name: 'Argentina', flag: '🇦🇷', ddd: false },
-  { code: '56', name: 'Chile', flag: '🇨🇱', ddd: false },
-  { code: '57', name: 'Colômbia', flag: '🇨🇴', ddd: false },
-  { code: '51', name: 'Peru', flag: '🇵🇪', ddd: false },
-  { code: '58', name: 'Venezuela', flag: '🇻🇪', ddd: false },
-];
-
 export default function Login() {
   const router = useRouter();
   const { next, redirect } = router.query;
   const target = (next as string) || (redirect as string) || '/';
   const [isLoading, setIsLoading] = useState(false);
   const [showPhoneModal, setShowPhoneModal] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]); // Brasil default
   const [phoneNumber, setPhoneNumber] = useState('');
   const [otpCode, setOtpCode] = useState('');
   const [otpSent, setOtpSent] = useState(false);
@@ -78,7 +54,7 @@ export default function Login() {
     }
 
     setOtpLoading(true);
-    const fullNumber = `${selectedCountry.code}${phoneNumber}`;
+    const fullNumber = `55${phoneNumber}`;
 
     try {
       const res = await fetch('/api/otp/send', {
@@ -113,7 +89,7 @@ export default function Login() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          phone: `${selectedCountry.code}${phoneNumber}`,
+          phone: `55${phoneNumber}`,
           otp: otpCode,
         }),
       });
@@ -230,44 +206,27 @@ export default function Login() {
 
             {!otpSent ? (
               <>
-                {/* Country Selector */}
-                <div className="mb-4">
-                  <label className="block text-gray-400 text-sm mb-2 text-left">País</label>
-                  <select
-                    value={selectedCountry.code}
-                    onChange={(e) => {
-                      const country = COUNTRIES.find(c => c.code === e.target.value);
-                      if (country) setSelectedCountry(country);
-                    }}
-                    className="w-full bg-[#1a1a1a] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37] transition"
-                  >
-                    {COUNTRIES.map((country) => (
-                      <option key={country.code} value={country.code}>
-                        {country.flag} {country.name} (+{country.code})
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Phone Input */}
+                {/* Phone Input with country flag inline */}
                 <div className="mb-6">
-                  <label className="block text-gray-400 text-sm mb-2 text-left">Número com DDD</label>
+                  <label className="block text-gray-400 text-sm mb-2 text-left">Número do WhatsApp</label>
                   <div className="flex gap-2">
-                    <div className="bg-[#1a1a1a] border border-gray-700 rounded-lg px-4 py-3 text-gray-400 font-medium flex-shrink-0">
-                      {selectedCountry.flag} +{selectedCountry.code}
+                    <div className="bg-[#1a1a1a] border border-gray-700 rounded-lg px-3 py-3 text-gray-400 font-medium flex-shrink-0 flex items-center gap-1 cursor-pointer">
+                      <span className="text-lg">🇧🇷</span>
+                      <span className="text-sm">+55</span>
                     </div>
                     <input
                       type="tel"
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ''))}
-                      placeholder={selectedCountry.ddd ? '11 99999-9999' : '9999999999'}
+                      placeholder="11 99999-9999"
                       className="flex-1 bg-[#1a1a1a] border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#D4AF37] transition"
                       maxLength={15}
+                      autoFocus
                     />
                   </div>
                 </div>
 
-                {/* Send OTP Button */}
+                {/* Receive Code Button */}
                 <button
                   onClick={handleSendOTP}
                   disabled={otpLoading || !phoneNumber}
@@ -287,7 +246,7 @@ export default function Login() {
                   ) : (
                     <>
                       <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 flex-shrink-0" />
-                      <span>Enviar código</span>
+                      <span>Receber código</span>
                     </>
                   )}
                 </button>
@@ -297,9 +256,9 @@ export default function Login() {
                 {/* OTP Input */}
                 <div className="mb-4">
                   <p className="text-gray-400 text-sm mb-4 text-left">
-                    Enviamos um código de 6 dígitos para <span className="text-white font-medium">+{selectedCountry.code} {phoneNumber}</span>
+                    Enviamos um código de 6 dígitos para <span className="text-white font-medium">+55 {phoneNumber}</span>
                   </p>
-                  <label className="block text-gray-400 text-sm mb-2 text-left">Código OTP</label>
+                  <label className="block text-gray-400 text-sm mb-2 text-left">Código</label>
                   <input
                     type="text"
                     value={otpCode}
@@ -329,7 +288,7 @@ export default function Login() {
                       <span>Verificando...</span>
                     </>
                   ) : (
-                    <span>✓ Verificar código</span>
+                    <span>Entrar</span>
                   )}
                 </button>
 
