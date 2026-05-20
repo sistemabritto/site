@@ -5,15 +5,40 @@ import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-export async function getServerSideProps() {
-  return { props: {} };
-}
+// Country codes for WhatsApp modal
+const COUNTRIES = [
+  { code: '55', name: 'Brasil', flag: '🇧🇷', ddd: true },
+  { code: '1', name: 'EUA', flag: '🇺🇸', ddd: false },
+  { code: '44', name: 'Reino Unido', flag: '🇬🇧', ddd: false },
+  { code: '351', name: 'Portugal', flag: '🇵🇹', ddd: false },
+  { code: '34', name: 'Espanha', flag: '🇪🇸', ddd: false },
+  { code: '49', name: 'Alemanha', flag: '🇩🇪', ddd: false },
+  { code: '33', name: 'França', flag: '🇫🇷', ddd: false },
+  { code: '39', name: 'Itália', flag: '🇮🇹', ddd: false },
+  { code: '81', name: 'Japão', flag: '🇯🇵', ddd: false },
+  { code: '86', name: 'China', flag: '🇨🇳', ddd: false },
+  { code: '91', name: 'Índia', flag: '🇮🇳', ddd: false },
+  { code: '7', name: 'Rússia', flag: '🇷🇺', ddd: false },
+  { code: '61', name: 'Austrália', flag: '🇦🇺', ddd: false },
+  { code: '52', name: 'México', flag: '🇲🇽', ddd: false },
+  { code: '54', name: 'Argentina', flag: '🇦🇷', ddd: false },
+  { code: '56', name: 'Chile', flag: '🇨🇱', ddd: false },
+  { code: '57', name: 'Colômbia', flag: '🇨🇴', ddd: false },
+  { code: '51', name: 'Peru', flag: '🇵🇪', ddd: false },
+  { code: '58', name: 'Venezuela', flag: '🇻🇪', ddd: false },
+];
 
 export default function Login() {
   const router = useRouter();
   const { next, redirect } = router.query;
   const target = (next as string) || (redirect as string) || '/';
   const [isLoading, setIsLoading] = useState(false);
+  const [showPhoneModal, setShowPhoneModal] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]); // Brasil default
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [otpCode, setOtpCode] = useState('');
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpLoading, setOtpLoading] = useState(false);
 
   const handleGoogle = async () => {
     setIsLoading(true);
@@ -26,8 +51,6 @@ export default function Login() {
         alert('Erro ao fazer login com Google. Tente novamente.');
         setIsLoading(false);
       }
-      // Se não houver erro, o redirect vai acontecer automaticamente
-      // Não desativamos o loading imediatamente pois a página vai redesenhar
     } catch (err) {
       console.error('Unexpected error:', err);
       alert('Erro inesperado. Tente novamente.');
@@ -35,29 +58,75 @@ export default function Login() {
     }
   };
 
-  const handleWhatsApp = async () => {
-    setIsLoading(true);
+  const handleWhatsAppClick = () => {
+    setShowPhoneModal(true);
+    setOtpSent(false);
+    setPhoneNumber('');
+    setOtpCode('');
+  };
+
+  const handleSendOTP = async () => {
+    if (!phoneNumber || phoneNumber.length < 10) {
+      alert('Digite um número válido com DDD.');
+      return;
+    }
+
+    setOtpLoading(true);
+    const fullNumber = `${selectedCountry.code}${phoneNumber}`;
+
     try {
       const res = await fetch('/api/otp/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: '5571999841612' }),
+        body: JSON.stringify({ phone: fullNumber }),
       });
       const data = await res.json();
       if (data.success) {
-        alert('✅ Código OTP enviado ao WhatsApp');
+        setOtpSent(true);
       } else {
         console.error('OTP error:', data);
-        alert('⚠️ Falha ao enviar OTP. Tente novamente.');
+        alert('⚠️ Falha ao enviar OTP. Verifique o número e tente novamente.');
       }
     } catch (e) {
       console.error('OTP request failed:', e);
-      alert('⚠️ Erro inesperado ao enviar OTP');
+      alert('⚠️ Erro ao enviar OTP. Tente novamente.');
     } finally {
-      setIsLoading(false);
+      setOtpLoading(false);
     }
   };
 
+  const handleVerifyOTP = async () => {
+    if (!otpCode || otpCode.length !== 6) {
+      alert('Digite o código de 6 dígitos.');
+      return;
+    }
+
+    setOtpLoading(true);
+    try {
+      const res = await fetch('/api/otp/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          phone: `${selectedCountry.code}${phoneNumber}`,
+          otp: otpCode,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        // Create or get user session
+        setShowPhoneModal(false);
+        alert('✅ Login realizado com sucesso!');
+        router.replace(target);
+      } else {
+        alert('❌ Código inválido. Tente novamente.');
+      }
+    } catch (e) {
+      console.error('OTP verify failed:', e);
+      alert('⚠️ Erro ao verificar código.');
+    } finally {
+      setOtpLoading(false);
+    }
+  };
 
   // If already authenticated, redirect immediately
   useEffect(() => {
@@ -94,7 +163,6 @@ export default function Login() {
               <div className="w-5 h-5 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin" />
             ) : (
               <>
-                {/* Google Logo */}
                 <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.6 5.6 0 0 1-2.43 3.68v3.07h3.94c2.3-2.12 3.63-5.24 3.63-8.76z" fill="#4285F4"/>
                   <path d="M12 24c3.24 0 5.95-1.07 7.93-2.91l-3.94-3.07a6.36 6.36 0 0 1-9.4-3.24H2.17v3.08C4.15 21.7 7.78 24 12 24z" fill="#34A853"/>
@@ -115,7 +183,7 @@ export default function Login() {
 
           {/* WhatsApp Button */}
           <button
-            onClick={handleWhatsApp}
+            onClick={handleWhatsAppClick}
             disabled={isLoading}
             className={`
               w-full px-6 py-3 rounded-lg font-medium 
@@ -126,14 +194,8 @@ export default function Login() {
               ${isLoading ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}
             `}
           >
-            {isLoading ? (
-              <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-            ) : (
-              <>
-                <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 flex-shrink-0" />
-                <span>Entrar com WhatsApp</span>
-              </>
-            )}
+            <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 flex-shrink-0" />
+            <span>Entrar com WhatsApp</span>
           </button>
 
           <p className="mt-6 text-gray-500 text-xs">
@@ -141,6 +203,141 @@ export default function Login() {
           </p>
         </div>
       </main>
+
+      {/* WhatsApp Phone Modal */}
+      {showPhoneModal && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+          <div className="bg-[#111111] p-6 rounded-2xl border border-[#D4AF37]/20 max-w-sm w-full">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-bold text-white">
+                {otpSent ? 'Digite o código' : 'Seu WhatsApp'}
+              </h2>
+              <button
+                onClick={() => setShowPhoneModal(false)}
+                className="text-gray-400 hover:text-white transition text-2xl leading-none"
+              >
+                ×
+              </button>
+            </div>
+
+            {!otpSent ? (
+              <>
+                {/* Country Selector */}
+                <div className="mb-4">
+                  <label className="block text-gray-400 text-sm mb-2 text-left">País</label>
+                  <select
+                    value={selectedCountry.code}
+                    onChange={(e) => {
+                      const country = COUNTRIES.find(c => c.code === e.target.value);
+                      if (country) setSelectedCountry(country);
+                    }}
+                    className="w-full bg-[#1a1a1a] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37] transition"
+                  >
+                    {COUNTRIES.map((country) => (
+                      <option key={country.code} value={country.code}>
+                        {country.flag} {country.name} (+{country.code})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Phone Input */}
+                <div className="mb-6">
+                  <label className="block text-gray-400 text-sm mb-2 text-left">Número com DDD</label>
+                  <div className="flex gap-2">
+                    <div className="bg-[#1a1a1a] border border-gray-700 rounded-lg px-4 py-3 text-gray-400 font-medium flex-shrink-0">
+                      {selectedCountry.flag} +{selectedCountry.code}
+                    </div>
+                    <input
+                      type="tel"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ''))}
+                      placeholder={selectedCountry.ddd ? '11 99999-9999' : '9999999999'}
+                      className="flex-1 bg-[#1a1a1a] border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#D4AF37] transition"
+                      maxLength={15}
+                    />
+                  </div>
+                </div>
+
+                {/* Send OTP Button */}
+                <button
+                  onClick={handleSendOTP}
+                  disabled={otpLoading || !phoneNumber}
+                  className={`
+                    w-full px-6 py-3 rounded-lg font-medium 
+                    flex items-center justify-center gap-3 
+                    bg-[#25D366] text-white
+                    transition-all duration-200 
+                    ${otpLoading || !phoneNumber ? 'opacity-60 cursor-not-allowed' : 'hover:bg-[#1ebe57]'}
+                  `}
+                >
+                  {otpLoading ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <span>Enviando...</span>
+                    </>
+                  ) : (
+                    <>
+                      <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 flex-shrink-0" />
+                      <span>Enviar código</span>
+                    </>
+                  )}
+                </button>
+              </>
+            ) : (
+              <>
+                {/* OTP Input */}
+                <div className="mb-4">
+                  <p className="text-gray-400 text-sm mb-4 text-left">
+                    Enviamos um código de 6 dígitos para <span className="text-white font-medium">+{selectedCountry.code} {phoneNumber}</span>
+                  </p>
+                  <label className="block text-gray-400 text-sm mb-2 text-left">Código OTP</label>
+                  <input
+                    type="text"
+                    value={otpCode}
+                    onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    placeholder="123456"
+                    className="w-full bg-[#1a1a1a] border border-gray-700 rounded-lg px-4 py-3 text-white text-center text-2xl tracking-[0.5em] placeholder-gray-600 focus:outline-none focus:border-[#D4AF37] transition"
+                    maxLength={6}
+                    autoFocus
+                  />
+                </div>
+
+                {/* Verify Button */}
+                <button
+                  onClick={handleVerifyOTP}
+                  disabled={otpLoading || otpCode.length !== 6}
+                  className={`
+                    w-full px-6 py-3 rounded-lg font-medium 
+                    flex items-center justify-center gap-3 
+                    bg-[#25D366] text-white
+                    transition-all duration-200 
+                    ${otpLoading || otpCode.length !== 6 ? 'opacity-60 cursor-not-allowed' : 'hover:bg-[#1ebe57]'}
+                  `}
+                >
+                  {otpLoading ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <span>Verificando...</span>
+                    </>
+                  ) : (
+                    <span>✓ Verificar código</span>
+                  )}
+                </button>
+
+                {/* Resend */}
+                <button
+                  onClick={() => { setOtpSent(false); setOtpCode(''); }}
+                  className="mt-4 text-gray-400 text-sm hover:text-white transition"
+                >
+                  ← Voltar e editar número
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
       <Footer />
     </>
   );
