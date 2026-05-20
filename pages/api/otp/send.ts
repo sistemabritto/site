@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { supabase } from '../../../utils/supabaseClient';
 
 // Evolution API credentials (already known)
-const EVO_URL = 'https://go.workflowapi.com.br/message/sendText/evonexus'; // replace with your instance name if different
+const EVO_URL = 'https://go.workflowapi.com.br/send/text'; // EvolutionGo correct endpoint
 const EVO_API_KEY = 'ed260550-affc-42f1-92e3-45affea89e05';
 
 /**

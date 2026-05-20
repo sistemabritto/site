@@ -1,16 +1,30 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+// Lazy initialization - only create client when actually used (runtime, not build time)
+let _client: SupabaseClient | undefined;
 
-if (!supabaseUrl || !supabaseKey) {
-  console.error('Supabase environment variables missing! Login will not work.');
-  // Optionally throw to fail fast in dev
-  // throw new Error('Supabase env vars missing');
+export function getSupabaseClient(): SupabaseClient {
+  if (!_client) {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    
+    if (!url || !key) {
+      throw new Error('Supabase environment variables not configured. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.');
+    }
+    
+    _client = createClient(url, key);
+  }
+  return _client;
 }
 
-// Create client with fallback for build time
-export const supabase = createClient(
-  supabaseUrl || 'https://placeholder.supabase.co',
-  supabaseKey || 'placeholder-key'
-);
+// For backward compatibility - proxy that lazy-initializes
+export const supabase: SupabaseClient = new Proxy({} as SupabaseClient, {
+  get(_target, prop: string | symbol) {
+    const client = getSupabaseClient();
+    const value = (client as any)[prop];
+    if (typeof value === 'function') {
+      return value.bind(client);
+    }
+    return value;
+  },
+});
