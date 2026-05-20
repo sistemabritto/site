@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { supabase } from '../utils/supabaseClient';
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+
+// Dynamic import helper - only loads Supabase at runtime (browser), never at build time
+async function getSupabase() {
+  const mod = await import('../utils/supabaseClient');
+  return mod.supabase;
+}
 
 // Country codes for WhatsApp modal
 const COUNTRIES = [
@@ -43,6 +48,7 @@ export default function Login() {
   const handleGoogle = async () => {
     setIsLoading(true);
     try {
+      const supabase = await getSupabase();
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
       });
@@ -130,10 +136,12 @@ export default function Login() {
 
   // If already authenticated, redirect immediately
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session?.user) {
-        router.replace(target);
-      }
+    getSupabase().then((supabase) => {
+      supabase.auth.getSession().then(({ data }) => {
+        if (data.session?.user) {
+          router.replace(target);
+        }
+      });
     });
   }, [router, target]);
 

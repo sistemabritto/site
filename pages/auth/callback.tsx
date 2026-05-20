@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { supabase } from '../../utils/supabaseClient';
+
+// Dynamic import helper - only loads Supabase at runtime (browser), never at build time
+async function getSupabase() {
+  const mod = await import('../../utils/supabaseClient');
+  return mod.supabase;
+}
 
 export async function getServerSideProps() {
   return { props: {} };
@@ -15,6 +20,7 @@ export default function AuthCallback() {
     // Após login bem-sucedido, redireciona para a página desejada
     
     const checkSession = async () => {
+      const supabase = await getSupabase();
       const { data: { session } } = await supabase.auth.getSession();
       
       if (session) {

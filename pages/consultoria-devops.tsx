@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { supabase } from '../utils/supabaseClient';
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+
+// Dynamic import helper - only loads Supabase at runtime (browser), never at build time
+async function getSupabase() {
+  const mod = await import('../utils/supabaseClient');
+  return mod.supabase;
+}
 
 export default function ConsultoriaDevOps() {
   const router = useRouter();
@@ -13,6 +18,7 @@ export default function ConsultoriaDevOps() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
+        const supabase = await getSupabase();
         const { data: { session } } = await supabase.auth.getSession();
         if (!session) {
           router.push('/login?next=/consultoria-devops');
