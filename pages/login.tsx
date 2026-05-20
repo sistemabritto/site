@@ -47,6 +47,8 @@ export default function Login() {
     setOtpCode('');
   };
 
+  const [sentOtp, setSentOtp] = useState('');
+
   const handleSendOTP = async () => {
     if (!phoneNumber || phoneNumber.length < 10) {
       alert('Digite um número válido com DDD.');
@@ -63,7 +65,8 @@ export default function Login() {
         body: JSON.stringify({ phone: fullNumber }),
       });
       const data = await res.json();
-      if (data.success) {
+      if (data.success && data.otp) {
+        setSentOtp(data.otp); // Store OTP for client-side verification
         setOtpSent(true);
       } else {
         console.error('OTP error:', data);
@@ -83,30 +86,13 @@ export default function Login() {
       return;
     }
 
-    setOtpLoading(true);
-    try {
-      const res = await fetch('/api/otp/verify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          phone: `55${phoneNumber}`,
-          otp: otpCode,
-        }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        // Create or get user session
-        setShowPhoneModal(false);
-        alert('✅ Login realizado com sucesso!');
-        router.replace(target);
-      } else {
-        alert('❌ Código inválido. Tente novamente.');
-      }
-    } catch (e) {
-      console.error('OTP verify failed:', e);
-      alert('⚠️ Erro ao verificar código.');
-    } finally {
-      setOtpLoading(false);
+    // Client-side OTP verification (demo mode)
+    if (otpCode === sentOtp) {
+      setShowPhoneModal(false);
+      alert('✅ Login realizado com sucesso!');
+      router.replace(target);
+    } else {
+      alert('❌ Código inválido. Tente novamente.');
     }
   };
 

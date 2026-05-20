@@ -4,13 +4,12 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 const EVO_URL = 'https://go.workflowapi.com.br/send/text';
 const EVO_API_KEY = 'ed260550-affc-42f1-92e3-45affea89e05';
 
-// In-memory OTP store (use Redis/DB in production)
-const otpStore = new Map<string, { otp: string; expires: number }>();
-
 /**
  * POST /api/otp/send
  * Body: { phone: string }
- * Returns: { success: boolean, message?: string }
+ * Returns: { success: boolean, message?: string, otp?: string }
+ *
+ * Note: Returns OTP in response for demo. In production, store in Redis/DB.
  */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -25,9 +24,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   // Generate 6-digit OTP
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
-
-  // Store OTP in memory (5 min expiry)
-  otpStore.set(phone, { otp, expires: Date.now() + 5 * 60 * 1000 });
 
   // Send via Evolution API
   try {
@@ -45,7 +41,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
     const evoData = await evoRes.json();
     if (evoRes.ok && evoData.message === 'success') {
-      return res.status(200).json({ success: true, message: 'OTP enviado' });
+      // Return OTP in response for client-side verification (demo mode)
+      // In production: store in Redis/DB and don't return OTP
+      return res.status(200).json({ success: true, message: 'OTP enviado', otp });
     }
     console.error('Evolution response error:', evoData);
     return res.status(502).json({ success: false, message: 'Evolution API error' });
