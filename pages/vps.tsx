@@ -164,8 +164,8 @@ export default function VPS() {
               ) : (
                 <div className="text-center py-8">
                   <div className="text-5xl mb-4">✅</div>
-                  <h3 className="text-xl font-bold text-white mb-2">Redirecionando pro checkout...</h3>
-                  <p className="text-gray-300 text-sm">Seus dados já vão preenchidos.</p>
+                  <h3 className="text-xl font-bold text-white mb-2">Redirecionando para o checkout…</h3>
+                  <p className="text-gray-300 text-sm">Seus dados já foram preenchidos automaticamente.</p>
                 </div>
               )}
             </div>
