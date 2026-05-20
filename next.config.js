@@ -21,6 +21,16 @@ const nextConfig = {
         destination: '/whatsapp',
         permanent: true,
       },
+      {
+        source: '/evonexus',
+        destination: '/workforce',
+        permanent: true,
+      },
+      {
+        source: '/hermes',
+        destination: '/workforce',
+        permanent: true,
+      },
     ];
   },
 

@@ -95,7 +95,7 @@ export default function QualificarWorkforce() {
         title: 'Você tem fit!',
         desc: 'Sua empresa está pronta para uma workforce de IA. Vamos mostrar como funciona na prática.',
         cta: 'Ver apresentação →',
-        ctaLink: '/consultoria-devops',
+        ctaLink: '/login?next=/consultoria-devops',
       };
     }
 
