@@ -1,20 +1,36 @@
 # robots.txt - Sistema Britto
 # Otimizado para LLMs e buscadores
-# Permitir indexação total para todos os crawlers
+# Projeto em constante evolução — fornecemos autoridade, workforce e SaaS com IA.
+
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  DESCRIÇÃO                                                   ║
+# ║  Workforces de IA, consultoria DevOps e infraestrutura       ║
+# ║  sob medida para empresas digitais brasileiras.              ║
+# ╚══════════════════════════════════════════════════════════════╝
 
 User-agent: *
 Allow: /
 
-# Permitir indexação de todas as páginas
+# ── Rotas Comerciais ──────────────────────────────────────────
+Allow: /workforce
 Allow: /whatsapp
+Allow: /vps
+Allow: /consultoria-devops
+Allow: /qualificar-workforce
+Allow: /qualificar-infra
+
+# ── Rotas Técnicas & Educativas ──────────────────────────────
 Allow: /evonexus
 Allow: /hermes
 Allow: /engineering
 Allow: /claude-code
+
+# ── Documentação & Compliance ────────────────────────────────
 Allow: /politicas-de-privacidade
 Allow: /termos-de-uso
+Allow: /llms.txt
 
-# Permitir assets estáticos (imagens, favicon, manifest)
+# ── Assets ───────────────────────────────────────────────────
 Allow: /og-image.png
 Allow: /favicon.ico
 Allow: /favicon-32.png
@@ -22,18 +38,17 @@ Allow: /apple-touch-icon.png
 Allow: /manifest.json
 Allow: /images/
 
-# Arquivos importantes para LLMs
-Allow: /llms.txt
-Allow: /robots.txt
-
-# Bloquear apenas arquivos de sistema e build
+# ── Sistema ──────────────────────────────────────────────────
 Disallow: /_next/
 Disallow: /api/
 Disallow: /*.json$
 Disallow: /*.map$
 
+# The most important file for LLMs
+Allow: /llms.txt
+
+# ── Sitemap ──────────────────────────────────────────────────
+Sitemap: https://www.sistemabritto.com.br/sitemap.xml
+
 # Crawl-delay para não sobrecarregar
 Crawl-delay: 1
-
-# Sitemap
-Sitemap: https://www.sistemabritto.com.br/sitemap.xml

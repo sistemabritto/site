@@ -1,66 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
+
+  <!-- Funil A: Workforce / EvoNexus / Hermes -->
   <url>
-    <loc>https://www.sistemabritto.com.br/</loc>
-    <lastmod>2026-05-13</lastmod>
+    <loc>https://www.sistemabritto.com.br/workforce</loc>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  
   <url>
-    <loc>https://www.sistemabritto.com.br/whatsapp</loc>
-    <lastmod>2026-05-13</lastmod>
+    <loc>https://www.sistemabritto.com.br/qualificar-workforce</loc>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-  
+  <!-- Resultados Funil A -->
   <url>
-    <loc>https://www.sistemabritto.com.br/evonexus</loc>
-    <lastmod>2026-05-13</lastmod>
+    <loc>https://www.sistemabritto.com.br/consultoria-devops</loc>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-  
+
+  <!-- Funil B: Infra / SaaS / VPS -->
   <url>
-    <loc>https://www.sistemabritto.com.br/hermes</loc>
-    <lastmod>2026-05-13</lastmod>
+    <loc>https://www.sistemabritto.com.br/qualificar-infra</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.sistemabritto.com.br/vps</loc>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
+  <url>
+    <loc>https://www.sistemabritto.com.br/whatsapp</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Páginas Técnicas & Educativas -->
+  <url>
+    <loc>https://www.sistemabritto.com.br/evonexus</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sistemabritto.com.br/hermes</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://www.sistemabritto.com.br/engineering</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
   <url>
     <loc>https://www.sistemabritto.com.br/claude-code</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
+
+  <!-- Compliance -->
   <url>
     <loc>https://www.sistemabritto.com.br/politicas-de-privacidade</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-  
   <url>
     <loc>https://www.sistemabritto.com.br/termos-de-uso</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
+  <!-- Blog -->
   <url>
     <loc>https://blog.sistemabritto.com.br/</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>

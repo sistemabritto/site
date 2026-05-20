@@ -2,9 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 
 const footerLinks = [
+  { label: 'Workforce', href: '/workforce' },
+  { label: 'WhatsApp IA', href: '/whatsapp' },
+  { label: 'VPS', href: '/vps' },
+  { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
   { label: 'Política de Privacidade', href: '/politicas-de-privacidade' },
   { label: 'Termos de Uso', href: '/termos-de-uso' },
-  { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
 ];
 
 export default function Footer() {
