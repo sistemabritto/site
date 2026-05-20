@@ -2,6 +2,7 @@ import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Services from '../components/Services';
+import ROICalculator from '../components/ROICalculator';
 import { useState } from 'react';
 
 export default function Home() {
@@ -213,6 +214,8 @@ setSubmitted(true);
             </div>
           </div>
         </section>
+
+        <ROICalculator />
 
         {/* ===== CTA FINAL ===== */}
         <section className="py-24 px-4 bg-[#111111]">

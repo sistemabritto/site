@@ -15,26 +15,26 @@ export default function ROICalculator() {
   }, [leads, ticket]);
 
   return (
-    <section id="roi" className="py-20 sm:py-32 bg-surface-900">
+    <section id="roi" className="py-20 sm:py-32 bg-[#111111]">
       <div ref={reveal} className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
         <div className="text-center mb-12">
-          <span className="inline-block text-gold-500 text-sm font-bold uppercase tracking-wider mb-4">
+          <span className="inline-block text-[#D4AF37] text-sm font-bold uppercase tracking-wider mb-4">
             Calculadora de ROI
           </span>
-          <h2 className="text-3xl sm:text-4xl font-heading text-white mb-4 leading-tight">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
             Quanto você
-            <span className="gold-text"> deixa na mesa</span> todo mês?
+            <span className="text-[#D4AF37]"> deixa na mesa</span> todo mês?
           </h2>
-          <p className="text-neutral-200 text-lg font-medium">
+          <p className="text-gray-300 text-lg font-medium">
             Ajuste os valores e veja o impacto real no seu negócio.
           </p>
         </div>
 
-        <div className="glass-strong rounded-3xl p-8 sm:p-10">
+        <div className="bg-[#0a0a0a] rounded-3xl p-8 sm:p-10 border border-white/10">
           <div className="mb-8">
             <label className="flex items-center justify-between mb-3">
               <span className="text-white font-semibold text-sm">Leads por dia no WhatsApp</span>
-              <span className="text-gold-500 font-heading font-bold text-xl">{leads}</span>
+              <span className="text-[#D4AF37] font-bold text-xl">{leads}</span>
             </label>
             <input
               type="range"
@@ -42,14 +42,14 @@ export default function ROICalculator() {
               max={100}
               value={leads}
               onChange={(e) => setLeads(Number(e.target.value))}
-              className="w-full h-2 bg-surface-700 rounded-lg appearance-none cursor-pointer accent-gold-600"
+              className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#D4AF37]"
             />
           </div>
 
           <div className="mb-10">
             <label className="flex items-center justify-between mb-3">
               <span className="text-white font-semibold text-sm">Ticket médio (R$)</span>
-              <span className="text-gold-500 font-heading font-bold text-xl">R$ {ticket}</span>
+              <span className="text-[#D4AF37] font-bold text-xl">R$ {ticket}</span>
             </label>
             <input
               type="range"
@@ -58,47 +58,41 @@ export default function ROICalculator() {
               step={50}
               value={ticket}
               onChange={(e) => setTicket(Number(e.target.value))}
-              className="w-full h-2 bg-surface-700 rounded-lg appearance-none cursor-pointer accent-gold-600"
+              className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#D4AF37]"
             />
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-            <div className="bg-surface-800 rounded-xl p-4 text-center border border-white/10
-">
-              <p className="text-neutral-300 text-xs font-semibold mb-1">Leads convertidos/mês</p>
-              <p className="text-white font-heading font-bold text-2xl">{monthlyROI.convertedLeads}</p>
+            <div className="bg-[#111111] rounded-xl p-4 text-center border border-white/10">
+              <p className="text-gray-400 text-xs font-semibold mb-1">Leads convertidos/mês</p>
+              <p className="text-white font-bold text-2xl">{monthlyROI.convertedLeads}</p>
             </div>
-            <div className="bg-surface-800 rounded-xl p-4 text-center border border-white/10
-">
-              <p className="text-neutral-300 text-xs font-semibold mb-1">Receita estimada</p>
-              <p className="text-gold-400 font-heading font-bold text-2xl">R$ {monthlyROI.monthlyRevenue.toLocaleString('pt-BR')}</p>
+            <div className="bg-[#111111] rounded-xl p-4 text-center border border-white/10">
+              <p className="text-gray-400 text-xs font-semibold mb-1">Receita estimada</p>
+              <p className="text-[#D4AF37] font-bold text-2xl">R$ {monthlyROI.monthlyRevenue.toLocaleString('pt-BR')}</p>
             </div>
-            <div className="bg-surface-800 rounded-xl p-4 text-center border border-white/10
-">
-              <p className="text-neutral-300 text-xs font-semibold mb-1">Custo do agente</p>
-              <p className="text-white font-heading font-bold text-2xl">R$ {monthlyROI.agentCost}</p>
+            <div className="bg-[#111111] rounded-xl p-4 text-center border border-white/10">
+              <p className="text-gray-400 text-xs font-semibold mb-1">Custo do agente</p>
+              <p className="text-white font-bold text-2xl">R$ {monthlyROI.agentCost}</p>
             </div>
-            <div className="bg-surface-800 rounded-xl p-4 text-center border border-white/10
-">
-              <p className="text-neutral-300 text-xs font-semibold mb-1">Economia vs equipe</p>
-              <p className="text-gold-400 font-heading font-bold text-2xl">R$ {monthlyROI.savingsVsTeam.toLocaleString('pt-BR')}</p>
+            <div className="bg-[#111111] rounded-xl p-4 text-center border border-white/10">
+              <p className="text-gray-400 text-xs font-semibold mb-1">Economia vs equipe</p>
+              <p className="text-[#D4AF37] font-bold text-2xl">R$ {monthlyROI.savingsVsTeam.toLocaleString('pt-BR')}</p>
             </div>
           </div>
 
-          <div className="bg-gradient-to-r from-gold-600/30 to-gold-500/20 rounded-2xl p-6 text-center mb-8 border border-gold-500/30">
-            <p className="text-neutral-200 text-sm font-semibold mb-1">Impacto mensal estimado</p>
-            <p className="text-white font-heading font-bold text-4xl">
+          <div className="bg-gradient-to-r from-[#D4AF37]/30 to-[#D4AF37]/20 rounded-2xl p-6 text-center mb-8 border border-[#D4AF37]/30">
+            <p className="text-gray-300 text-sm font-semibold mb-1">Impacto mensal estimado</p>
+            <p className="text-white font-bold text-4xl">
               +R$ {monthlyROI.net.toLocaleString('pt-BR')}
             </p>
           </div>
 
           <a
-            href="https://wa.me/5511914088571?text=Olá!%20Vi%20a%20calculadora%20de%20ROI%20no%20site%20e%20quero%20saber%20quanto%20posso%20economizar%20com%20automação"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block w-full bg-gold-500 hover:bg-gold-600 text-surface-900 text-center py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-gold-500/25"
+            href="/whatsapp"
+            className="block w-full bg-[#D4AF37] hover:bg-[#C5A028] text-black text-center py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-[#D4AF37]/25"
           >
-            Quero esses resultados
+            Quero esses resultados →
           </a>
         </div>
       </div>
