@@ -4,7 +4,7 @@ import { supabase } from '../utils/supabaseClient';
 
 export default function ConsultoriaDevOps() {
   const router = useRouter();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     // Verificar se o usuário está logado
