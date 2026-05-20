@@ -1,13 +1,7 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
-  // Redirects
-  async redirects() {
-    return [
-      {
-        source: '/whatsapp-ia',
-        destination: '/whatsapp',
-        permanent: true,
-      },
-    ];
-  },
+const nextConfig = {
+  // This tells Next.js to not static-prerender these pages
+  // We use `dynamic` export in page files instead
 };
+
+module.exports = nextConfig;

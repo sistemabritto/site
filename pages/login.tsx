@@ -5,6 +5,10 @@ import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
+export async function getServerSideProps() {
+  return { props: {} };
+}
+
 export default function Login() {
   const router = useRouter();
   const { next, redirect } = router.query;

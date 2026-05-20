@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { supabase } from '../utils/supabaseClient';
 
+export async function getServerSideProps() {
+  return { props: {} };
+}
+
 export default function ConsultoriaDevOps() {
   const router = useRouter();
   const [user, setUser] = useState<any>(null);

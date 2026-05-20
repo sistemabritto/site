@@ -9,4 +9,8 @@ if (!supabaseUrl || !supabaseKey) {
   // throw new Error('Supabase env vars missing');
 }
 
-export const supabase = createClient(supabaseUrl!, supabaseKey!);
+// Create client with fallback for build time
+export const supabase = createClient(
+  supabaseUrl || 'https://placeholder.supabase.co',
+  supabaseKey || 'placeholder-key'
+);
