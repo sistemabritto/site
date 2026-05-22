@@ -117,7 +117,8 @@ export default function Navbar() {
                   href={link.href}
                   target={link.external ? '_blank' : undefined}
                   rel={link.external ? 'noopener noreferrer' : undefined}
-                  className="text-gray-200 hover:text-green-400 text-sm font-semibold transition-colors duration-200 relative group"
+                  aria-label={link.label}
+                  className="text-gray-200 hover:text-green-400 text-sm font-semibold transition-colors duration-200 relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
                 >
                   {link.label}
                   {link.external && (
@@ -152,12 +153,13 @@ export default function Navbar() {
           <div className={`md:hidden overflow-hidden transition-all duration-500 ${mobileOpen ? 'max-h-96 mt-4' : 'max-h-0'}`}>
             <div className="rounded-2xl p-6 space-y-4" style={{ backgroundColor: 'rgba(0,0,0,0.9)' }}>
               {navLinks.map((link) => (
-                <a
+<a
                   key={link.label}
                   href={link.href}
                   target={link.external ? '_blank' : undefined}
                   rel={link.external ? 'noopener noreferrer' : undefined}
-                  className="block text-gray-200 hover:text-green-400 text-base font-semibold py-2 transition-colors duration-200"
+                  aria-label={link.label}
+                  className="block w-full text-center text-gray-200 hover:text-green-400 text-base font-semibold py-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
