@@ -184,7 +184,7 @@ export default function Qualificacao() {
         <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 py-20">
           <div className="w-full max-w-md">
             <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-full px-4 py-2 mb-6">
+              <div className="inline-flex items-center gap-2 bg-primary-500/20 border border-green-500/30 rounded-full px-4 py-2 mb-6">
                 <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                 <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Orçamento em Tempo Real</span>
               </div>
@@ -238,7 +238,7 @@ export default function Qualificacao() {
 
               <button
                 type="submit"
-                className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25"
+                className="w-full bg-primary-500 hover:bg-primary-600 text-black py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-primary-500/25"
               >
                 {hasExistingData ? 'CONTINUAR QUALIFICAÇÃO →' : 'COMEÇAR QUALIFICAÇÃO →'}
               </button>
@@ -283,7 +283,7 @@ export default function Qualificacao() {
             </div>
             <div className="w-full bg-[#111111] rounded-full h-2">
               <div 
-                className="bg-green-500 h-2 rounded-full transition-all duration-300"
+                className="bg-primary-500 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -300,7 +300,7 @@ export default function Qualificacao() {
                 <button
                   key={i}
                   onClick={() => handleAnswer(option.value)}
-                  className="w-full text-left p-6 rounded-xl border border-white/10 hover:border-green-500/50 hover:bg-green-500/10 transition-all duration-200 group"
+                  className="w-full text-left p-6 rounded-xl border border-white/10 hover:border-green-500/50 hover:bg-primary-500/10 transition-all duration-200 group"
                 >
                   <span className="text-white text-lg font-medium group-hover:text-green-400 transition-colors">
                     {option.label}

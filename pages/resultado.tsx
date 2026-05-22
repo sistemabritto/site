@@ -34,7 +34,7 @@ const PLANS: Record<string, PlanResult> = {
     name: 'Completo',
     price: 750,
     tag: 'Mais Popular',
-    tagColor: 'bg-green-500 text-black',
+    tagColor: 'bg-primary-500 text-black',
     features: [
       'Tudo do Essencial',
       'CRM completo com funil avançado',
@@ -270,7 +270,7 @@ export default function Resultado() {
               <button
                 type="submit"
                 disabled={!customerData.email || !customerData.whatsapp}
-                className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-primary-500 hover:bg-primary-600 text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 CONTINUAR →
               </button>
@@ -286,7 +286,7 @@ export default function Resultado() {
           
           {/* Header */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/20 border border-green-500/30 mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-500/20 border border-green-500/30 mb-6">
               <svg className="w-8 h-8 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
@@ -362,7 +362,7 @@ export default function Resultado() {
 
             <button
               onClick={handleCheckout}
-              className="w-full bg-green-500 hover:bg-green-600 text-black py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25"
+              className="w-full bg-primary-500 hover:bg-primary-600 text-black py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-primary-500/25"
             >
               {orderBump ? `ASSINAR COMBO — R$ ${finalPrice}/mês →` : `ASSINAR AGORA — R$ ${finalPrice}/mês →`}
             </button>

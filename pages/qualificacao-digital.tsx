@@ -173,7 +173,7 @@ export default function QualificacaoDigital() {
             </div>
             <div className="w-full bg-[#111111] rounded-full h-2">
               <div 
-                className="bg-green-500 h-2 rounded-full transition-all duration-300"
+                className="bg-primary-500 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -191,7 +191,7 @@ export default function QualificacaoDigital() {
                   key={i}
                   onClick={() => handleAnswer(option.value)}
                   disabled={isSubmitting}
-                  className="w-full text-left p-6 rounded-xl border border-white/10 hover:border-green-500/50 hover:bg-green-500/10 transition-all duration-200 group disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full text-left p-6 rounded-xl border border-white/10 hover:border-green-500/50 hover:bg-primary-500/10 transition-all duration-200 group disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <span className="text-white text-lg font-medium group-hover:text-green-400 transition-colors">
                     {option.label}

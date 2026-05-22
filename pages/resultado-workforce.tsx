@@ -81,7 +81,7 @@ WhatsApp: ${customerData.whatsapp}`
           </p>
           <button
             onClick={handleWhatsApp}
-            className="bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all shadow-lg shadow-green-500/25"
+            className="bg-primary-500 hover:bg-primary-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all shadow-lg shadow-primary-500/25"
           >
             FALAR COM FELIPE →
           </button>
@@ -119,7 +119,7 @@ WhatsApp: ${customerData.whatsapp}`
                     <p className="text-red-400 text-sm font-semibold mb-1">Antes</p>
                     <p className="text-gray-300 text-sm">{c.antesDesc}</p>
                   </div>
-                  <div className="bg-green-500/10 rounded-xl p-4 border border-green-500/20">
+                  <div className="bg-primary-500/10 rounded-xl p-4 border border-green-500/20">
                     <p className="text-green-400 text-sm font-semibold mb-1">Depois</p>
                     <p className="text-gray-300 text-sm">{c.depois}</p>
                   </div>
@@ -151,7 +151,7 @@ WhatsApp: ${customerData.whatsapp}`
         <p className="text-gray-400 mb-8">Fala com Felipe agora e descobre como funciona.</p>
         <button
           onClick={handleWhatsApp}
-          className="bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all shadow-lg shadow-green-500/25"
+          className="bg-primary-500 hover:bg-primary-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all shadow-lg shadow-primary-500/25"
         >
           FALAR COM FELIPE →
         </button>

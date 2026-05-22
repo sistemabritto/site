@@ -310,7 +310,7 @@ export default function VPS() {
           <p className="text-gray-300 mb-8">Fala com a gente. A gente entende seu caso e monta a solução certa.</p>
           <button
             onClick={handleWhatsApp}
-            className="bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all shadow-lg shadow-green-500/25"
+            className="bg-primary-500 hover:bg-primary-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all shadow-lg shadow-primary-500/25"
           >
             FALAR COM ESPECIALISTA &#x2192;
           </button>

@@ -109,7 +109,7 @@ setSubmitted(true);
 
 <button
                       type="submit"
-                      className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all"
+                      className="w-full bg-primary-500 hover:bg-primary-600 text-black py-4 rounded-full font-bold text-lg transition-all"
                     >
                       QUERO MEU BRAÇO →
                     </button>
@@ -137,7 +137,7 @@ setSubmitted(true);
  <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
  <div className="absolute inset-0 bg-gradient-to-b from-green-900/20 via-[#0a0a0a] to-[#0a0a0a]" />
           <div className="relative z-10 max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-full px-4 py-2 mb-8">
+            <div className="inline-flex items-center gap-2 bg-primary-500/20 border border-green-500/30 rounded-full px-4 py-2 mb-8">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
               <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Para donos de negócio digital</span>
             </div>
@@ -156,7 +156,7 @@ setSubmitted(true);
  <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button 
                 onClick={() => setShowModal(true)}
-                className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25"
+                className="inline-flex items-center gap-3 bg-primary-500 hover:bg-primary-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-primary-500/25"
               >
                 QUERO MEU BRAÇO →
               </button>
@@ -230,7 +230,7 @@ Do WhatsApp ao SaaS. A gente dá braço pra sua operação.
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <button 
                 onClick={() => setShowModal(true)}
-                className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25"
+                className="inline-flex items-center gap-3 bg-primary-500 hover:bg-primary-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-primary-500/25"
               >
                 QUERO MEU BRAÇO →
               </button>

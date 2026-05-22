@@ -271,7 +271,7 @@ export default function HermesPage() {
                     <div className="bg-black/40 rounded-lg p-3">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                          <div className="w-2 h-2 rounded-full bg-primary-500"></div>
                           <span className="text-white font-bold text-xs uppercase">IN PROGRESS</span>
                         </div>
                         <span className="text-gray-400 text-xs">0</span>

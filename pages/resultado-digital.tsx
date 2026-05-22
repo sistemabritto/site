@@ -111,7 +111,7 @@ export default function ResultadoDigital() {
             {/* CTA principal */}
             <button
               onClick={handleWhatsAppContact}
-              className="bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all shadow-lg shadow-green-500/25"
+              className="bg-primary-500 hover:bg-primary-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all shadow-lg shadow-primary-500/25"
             >
               FALAR COM FELIPE AGORA →
             </button>

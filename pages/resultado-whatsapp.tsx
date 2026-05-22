@@ -90,7 +90,7 @@ export default function ResultadoWhatsApp() {
 
               <button
                 onClick={handleCheckout}
-                className="w-full bg-green-500 hover:bg-green-600 text-black py-5 rounded-full font-bold text-xl transition-all shadow-lg shadow-green-500/25"
+                className="w-full bg-primary-500 hover:bg-primary-600 text-black py-5 rounded-full font-bold text-xl transition-all shadow-lg shadow-primary-500/25"
               >
                 QUERO MEU WHATSAPP COM IA {'\u2192'}
               </button>

@@ -70,7 +70,7 @@ export default function Navbar() {
                     <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp</label>
                     <input type="tel" placeholder="(11) 99999-9999" value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" />
                   </div>
-                  <button type="submit" className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all">
+                  <button type="submit" className="w-full bg-primary-500 hover:bg-primary-600 text-black py-4 rounded-full font-bold text-lg transition-all">
                     CONTINUAR &#x2192;
                   </button>
                   <p className="text-gray-500 text-xs text-center">Sem spam. Promessa.</p>
@@ -128,7 +128,7 @@ export default function Navbar() {
               ))}
               <button
                 onClick={() => setShowModal(true)}
-                className="bg-green-500 hover:bg-green-600 text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 shadow-lg shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105"
+                className="bg-primary-500 hover:bg-primary-600 text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 hover:scale-105"
               >
                 PRECISO DE BRAÇO →
               </button>
@@ -165,7 +165,7 @@ export default function Navbar() {
               ))}
               <button
                 onClick={() => { setMobileOpen(false); setShowModal(true); }}
-                className="block w-full text-center bg-green-500 text-black px-6 py-3 rounded-full font-bold mt-4 shadow-lg shadow-green-500/25 hover:bg-green-600 transition-all duration-200"
+                className="block w-full text-center bg-primary-500 text-black px-6 py-3 rounded-full font-bold mt-4 shadow-lg shadow-primary-500/25 hover:bg-primary-600 transition-all duration-200"
               >
                 PRECISO DE BRAÇO →
               </button>

@@ -173,7 +173,7 @@ export default function WhatsApp() {
  <button
  type="submit"
  disabled={!email || loading}
- className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+ className="w-full bg-primary-500 hover:bg-primary-600 text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
  >
  {loading ? 'Carregando...' : orderBump ? 'CONTINUAR — R$ 547/mês →' : 'CONTINUAR — R$ 297/mês →'}
  </button>
@@ -201,10 +201,10 @@ export default function WhatsApp() {
         {/* ===== HERO ===== */}
         <section className="relative pt-32 pb-20 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-green-900/10 via-[#0a0a0a] to-[#0a0a0a]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-500/10 rounded-full blur-3xl" />
           
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="inline-flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-full px-4 py-2 mb-6">
+            <div className="inline-flex items-center gap-2 bg-primary-500/20 border border-green-500/30 rounded-full px-4 py-2 mb-6">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
               <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Vagas Disponíveis</span>
             </div>
@@ -226,7 +226,7 @@ export default function WhatsApp() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={openCheckout}
-                className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25"
+                className="inline-flex items-center gap-3 bg-primary-500 hover:bg-primary-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-primary-500/25"
               >
                 ATIVAR MEU WHATSAPP IA →
               </button>
@@ -260,7 +260,7 @@ export default function WhatsApp() {
         <section className="py-20 px-4 bg-[#0a0a0a]">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <span className="inline-block text-green-400 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30 px-4 py-2 rounded-full bg-green-500/10">
+              <span className="inline-block text-green-400 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30 px-4 py-2 rounded-full bg-primary-500/10">
                 Na prática
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
@@ -273,7 +273,7 @@ export default function WhatsApp() {
               <img 
                 src="/images/evo/chat-atendimento.webp" 
                 alt="Chat de atendimento"
-                className="w-full max-w-5xl mx-auto rounded-2xl border border-green-500/30 shadow-2xl shadow-green-500/10"
+                className="w-full max-w-5xl mx-auto rounded-2xl border border-green-500/30 shadow-2xl shadow-primary-500/10"
               />
               <p className="text-gray-300 text-sm mt-4 text-center">Atendimento automático com IA que qualifica e classifica leads em tempo real</p>
             </div>
@@ -282,7 +282,7 @@ export default function WhatsApp() {
               <img 
                 src="/images/evo/page-pipeline.webp" 
                 alt="Pipeline de vendas"
-                className="w-full max-w-4xl mx-auto rounded-2xl border border-green-500/30 shadow-xl shadow-green-500/10"
+                className="w-full max-w-4xl mx-auto rounded-2xl border border-green-500/30 shadow-xl shadow-primary-500/10"
               />
               <p className="text-gray-300 text-sm mt-4 text-center">Pipeline automático: leads quentes, mornos e frios organizados por valor</p>
             </div>
@@ -293,7 +293,7 @@ export default function WhatsApp() {
         <section className="py-20 sm:py-32 bg-[#0a0a0a]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <span className="inline-block text-green-400 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30 px-4 py-2 rounded-full bg-green-500/10">
+            <span className="inline-block text-green-400 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30 px-4 py-2 rounded-full bg-primary-500/10">
               Funcionalidades
               </span><h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
                 Funcionalidades que<br />
@@ -317,7 +317,7 @@ export default function WhatsApp() {
         <section className="py-20 sm:py-32 bg-[#111111]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <span className="inline-block text-green-400 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30 px-4 py-2 rounded-full bg-green-500/10">
+            <span className="inline-block text-green-400 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30 px-4 py-2 rounded-full bg-primary-500/10">
               Cases
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
@@ -345,7 +345,7 @@ export default function WhatsApp() {
             </h2>
             <p className="text-gray-400 mb-8">Preço válido enquanto durarem as vagas.</p>
             {/* Garantia de 7 dias */}
-            <div className="inline-flex items-center gap-2 bg-green-500/20 text-green-500 px-3 py-1 rounded-full text-sm font-bold mb-4">
+            <div className="inline-flex items-center gap-2 bg-primary-500/20 text-green-500 px-3 py-1 rounded-full text-sm font-bold mb-4">
               7 dias de garantia incondicional
             </div>
 
@@ -379,7 +379,7 @@ export default function WhatsApp() {
 
                 <button
                   onClick={openCheckout}
-                  className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25 w-full justify-center"
+                  className="inline-flex items-center gap-3 bg-primary-500 hover:bg-primary-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-primary-500/25 w-full justify-center"
                 >
                   ATIVAR MEU WHATSAPP IA →
                 </button>
