@@ -2,6 +2,7 @@ import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useState } from 'react';
+import PhoneInput from '../components/PhoneInput';
 
 const features = [
   { icon: '🎯', title: 'Qualificação automática de leads', desc: 'IA faz perguntas-chave, classifica por interesse e envia pro CRM já segmentado.' },
@@ -23,35 +24,37 @@ export default function WhatsApp() {
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [whatsapp, setWhatsapp] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [orderBump, setOrderBump] = useState(false);
 
   const handleSubmit = async () => {
-    if (!email) return;
-    
-    // Salvar dados no sessionStorage
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem('qualificacao_customer', JSON.stringify({ name, email }));
-    }
-    
-    // Salvar lead no CRM
-    try {
-      await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name,
-          email,
-          source: 'whatsapp-landing',
-          orderBump,
-          utm_source: new URLSearchParams(window.location.search).get('utm_source') || '',
-          utm_medium: new URLSearchParams(window.location.search).get('utm_medium') || '',
-          utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign') || '',
-        }),
-      });
-    } catch (e) {
-      console.error('Lead save error:', e);
-    }
+  if (!email) return;
+ 
+  // Salvar dados no sessionStorage
+  if (typeof window !== 'undefined') {
+  sessionStorage.setItem('qualificacao_customer', JSON.stringify({ name, email, whatsapp }));
+  }
+ 
+  // Salvar lead no CRM
+  try {
+  await fetch('/api/leads', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+  name,
+  email,
+  whatsapp,
+  source: 'whatsapp-landing',
+  orderBump,
+  utm_source: new URLSearchParams(window.location.search).get('utm_source') || '',
+  utm_medium: new URLSearchParams(window.location.search).get('utm_medium') || '',
+  utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign') || '',
+  }),
+  });
+  } catch (e) {
+  console.error('Lead save error:', e);
+  }
     
     setSubmitted(true);
     
@@ -71,9 +74,9 @@ export default function WhatsApp() {
         body: JSON.stringify({ 
           productId,
           customer: {
-            email,
-            name: name || email.split('@')[0],
-            cellphone: email,
+          email,
+          name: name || email.split('@')[0],
+          cellphone: whatsapp || email,
           },
         }),
       });
@@ -119,16 +122,21 @@ export default function WhatsApp() {
                   >×</button>
                   
                   <div className="text-center mb-6">
-                  <div className="text-4xl mb-3">🚀</div>
+                  <div className="text-4xl mb-3">💬</div>
                   <h3 className="text-2xl font-bold text-white mb-2">Quase lá!</h3>
-                  <p className="text-gray-300 text-sm">Seu email = checkout mais rápido. Sem repetir tudo.</p>
-                </div>
+                  <p className="text-gray-300 text-sm">Preencha seus dados para ativar o WhatsApp IA.</p>
+                  </div>
 
                 <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="space-y-4">
-                  <div>
-                    <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
-                    <input type="email" placeholder="seu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" required />
-                  </div>
+                <div>
+                <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
+                <input type="text" placeholder="Seu nome" value={name} onChange={(e) => setName(e.target.value)} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" />
+                </div>
+                <div>
+                <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
+                <input type="email" placeholder="seu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" required />
+                </div>
+                <PhoneInput value={whatsapp} onChange={(v) => setWhatsapp(v)} accentColor="#22C55E" required />
 
                     {/* ORDER BUMP */}
  <div 
@@ -183,15 +191,19 @@ export default function WhatsApp() {
                 </>
               ) : (
                 <div className="text-center py-8">
-                  <div className="text-5xl mb-4">🔒</div>
-                  <h3 className="text-xl font-bold text-white mb-2">Dados salvos com sucesso!</h3>
-                  <p className="text-gray-300 text-sm">Te redirecionando pro checkout seguro...</p>
-                  <p className="text-gray-500 text-xs mt-2">Aguarde, não feche esta janela.</p>
-                  <div className="flex items-center justify-center gap-2 mt-4">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-                  </div>
+                <div className="text-5xl mb-4">🔒</div>
+                <h3 className="text-xl font-bold text-white mb-2">Dados salvos com sucesso!</h3>
+                <p className="text-gray-300 text-sm">Te redirecionando pro checkout seguro...</p>
+                <p className="text-gray-500 text-xs mt-2">Aguarde, não feche esta janela.</p>
+                <div className="w-full bg-white/10 rounded-full h-1.5 mt-4 overflow-hidden">
+                <div className="bg-green-400 h-full rounded-full" style={{ width: '100%', animation: 'progressBar 1.5s ease-in-out' }}></div>
+                </div>
+                <style jsx>{`
+                @keyframes progressBar {
+                from { width: 0%; }
+                to { width: 100%; }
+                }
+                `}</style>
                 </div>
               )}
             </div>

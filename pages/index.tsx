@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Services from '../components/Services';
 import ROICalculator from '../components/ROICalculator';
+import PhoneInput from '../components/PhoneInput';
 import { useState } from 'react';
 
 export default function Home() {
@@ -95,17 +96,12 @@ setSubmitted(true);
                         required
                       />
                     </div>
-                    <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp *</label>
-                      <input
-                        type="tel"
-                        placeholder="(11) 99999-9999"
-                        value={formData.whatsapp}
-                        onChange={(e) => setFormData({...formData, whatsapp: e.target.value})}
-                        className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
-                        required
-                      />
-                    </div>
+                    <PhoneInput
+                    value={formData.whatsapp}
+                    onChange={(v) => setFormData({...formData, whatsapp: v})}
+                    accentColor="#22C55E"
+                    required
+                    />
 
 <button
                       type="submit"
@@ -118,16 +114,21 @@ setSubmitted(true);
                   </form>
                 </>
               ) : (
-                <div className="text-center py-8">
-                  <div className="text-5xl mb-4">🔒</div>
-                  <h3 className="text-xl font-bold text-white mb-2">Dados salvos com sucesso!</h3>
-                  <p className="text-gray-300 text-sm">Te redirecionando pro checkout seguro...</p>
-                  <div className="flex items-center justify-center gap-2 mt-4">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-                  </div>
-                </div>
+              <div className="text-center py-8">
+              <div className="text-5xl mb-4">🔒</div>
+              <h3 className="text-xl font-bold text-white mb-2">Dados salvos com sucesso!</h3>
+              <p className="text-gray-300 text-sm">Te redirecionando pro checkout seguro...</p>
+              <p className="text-gray-500 text-xs mt-2">Aguarde, não feche esta janela.</p>
+              <div className="w-full bg-white/10 rounded-full h-1.5 mt-4 overflow-hidden">
+              <div className="bg-green-400 h-full rounded-full" style={{ width: '100%', animation: 'progressBar 1.5s ease-in-out' }}></div>
+              </div>
+              <style jsx>{`
+              @keyframes progressBar {
+              from { width: 0%; }
+              to { width: 100%; }
+              }
+              `}</style>
+              </div>
               )}
             </div>
           </div>

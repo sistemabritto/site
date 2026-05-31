@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PhoneInput from './PhoneInput';
 
 const navLinks = [
   { label: 'Workforce', href: '/workforce' },
@@ -62,14 +63,15 @@ export default function Navbar() {
                   <p className="text-gray-300 text-sm">Seu email nos ajuda a entender o que você precisa. Sem repetir nada.</p>
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
-                    <input type="email" placeholder="seu@email.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" required />
-                  </div>
-                  <div>
-                    <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp</label>
-                    <input type="tel" placeholder="(11) 99999-9999" value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" />
-                  </div>
+                <div>
+                <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
+                <input type="text" placeholder="Seu nome" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" />
+                </div>
+                <div>
+                <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
+                <input type="email" placeholder="seu@email.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none" required />
+                </div>
+                <PhoneInput value={formData.whatsapp} onChange={(v) => setFormData({...formData, whatsapp: v})} accentColor="#22C55E" />
                   <button type="submit" className="w-full bg-primary-500 hover:bg-primary-600 text-black py-4 rounded-full font-bold text-lg transition-all">
                     CONTINUAR &#x2192;
                   </button>
@@ -78,9 +80,12 @@ export default function Navbar() {
               </>
             ) : (
               <div className="text-center py-8">
-                <div className="text-5xl mb-4">&#x2705;</div>
-                <h3 className="text-xl font-bold text-white mb-2">Recebido!</h3>
-                <p className="text-gray-300 text-sm">Redirecionando pro quiz...</p>
+              <div className="text-5xl mb-4">✅</div>
+              <h3 className="text-xl font-bold text-white mb-2">Recebido!</h3>
+              <p className="text-gray-300 text-sm">Redirecionando pro quiz...</p>
+              <div className="w-full bg-white/10 rounded-full h-1.5 mt-4 overflow-hidden">
+              <div className="bg-green-400 h-full rounded-full animate-pulse" style={{ width: '60%' }}></div>
+              </div>
               </div>
             )}
           </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import PhoneInput from '../components/PhoneInput';
 
 const PHONE = '5511914088571';
 
@@ -127,10 +128,11 @@ export default function VPS() {
                       <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
                       <input type="email" placeholder="seu@email.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none" required />
                     </div>
-                    <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp</label>
-                      <input type="tel" placeholder="(11) 99999-9999" value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none" />
-                    </div>
+                    <PhoneInput
+                    value={formData.whatsapp}
+                    onChange={(v) => setFormData({...formData, whatsapp: v})}
+                    accentColor="#D4AF37"
+                    />
 
                     {/* ORDER BUMP — Suporte Técnico */}
                     <label className="flex items-start gap-3 cursor-pointer bg-[#D4AF37]/10 rounded-xl p-4 border border-[#D4AF37]/30">
@@ -163,9 +165,19 @@ export default function VPS() {
                 </>
               ) : (
                 <div className="text-center py-8">
-                  <div className="text-5xl mb-4">✅</div>
-                  <h3 className="text-xl font-bold text-white mb-2">Redirecionando para o checkout…</h3>
-                  <p className="text-gray-300 text-sm">Seus dados já foram preenchidos automaticamente.</p>
+                <div className="text-5xl mb-4">✅</div>
+                <h3 className="text-xl font-bold text-white mb-2">Redirecionando para o checkout…</h3>
+                <p className="text-gray-300 text-sm">Seus dados já foram preenchidos automaticamente.</p>
+                <p className="text-gray-500 text-xs mt-2">Aguarde, não feche esta janela.</p>
+                <div className="w-full bg-white/10 rounded-full h-1.5 mt-4 overflow-hidden">
+                <div className="bg-[#D4AF37] h-full rounded-full" style={{ width: '100%', animation: 'progressBar 2s ease-in-out' }}></div>
+                </div>
+                <style jsx>{`
+                @keyframes progressBar {
+                from { width: 0%; }
+                to { width: 100%; }
+                }
+                `}</style>
                 </div>
               )}
             </div>

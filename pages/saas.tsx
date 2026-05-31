@@ -1,6 +1,7 @@
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import PhoneInput from '../components/PhoneInput';
 import { useState } from 'react';
 
 export default function SaaS() {
@@ -75,10 +76,7 @@ export default function SaaS() {
  <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
  <input type="email" placeholder="seu@email.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-pink-500 focus:outline-none" required />
  </div>
- <div>
- <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp *</label>
- <input type="tel" placeholder="(11) 99999-9999" value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-pink-500 focus:outline-none" required />
- </div>
+ <PhoneInput value={formData.whatsapp} onChange={(v) => setFormData({...formData, whatsapp: v})} accentColor="#EC4899" required />
  <button type="submit" className="w-full bg-pink-500 hover:bg-pink-600 text-black py-4 rounded-full font-bold text-lg transition-all">
  FALAR COM ESPECIALISTA →
  </button>
@@ -90,6 +88,15 @@ export default function SaaS() {
                   <div className="text-5xl mb-4">✅</div>
                   <h3 className="text-xl font-bold text-white mb-2">Recebido</h3>
                   <p className="text-gray-300 text-sm">Especialista entra em contato em até 24h.</p>
+                  <div className="w-full bg-white/10 rounded-full h-1.5 mt-4 overflow-hidden">
+                    <div className="bg-pink-400 h-full rounded-full" style={{ width: '100%', animation: 'progressBar 1.5s ease-in-out' }}></div>
+                  </div>
+                  <style jsx>{`
+                    @keyframes progressBar {
+                      from { width: 0%; }
+                      to { width: 100%; }
+                    }
+                  `}</style>
                 </div>
               )}
             </div>

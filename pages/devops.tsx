@@ -1,6 +1,7 @@
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import PhoneInput from '../components/PhoneInput';
 import { useState } from 'react';
 
 export default function DevOps() {
@@ -75,10 +76,12 @@ export default function DevOps() {
  <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
  <input type="email" placeholder="seu@email.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none" required />
  </div>
- <div>
- <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp *</label>
- <input type="tel" placeholder="(11) 99999-9999" value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none" required />
- </div>
+ <PhoneInput
+ value={formData.whatsapp}
+ onChange={(v) => setFormData({...formData, whatsapp: v})}
+ accentColor="#D4AF37"
+ required
+ />
  <button type="submit" disabled={!formData.email || !formData.whatsapp} className="w-full bg-[#D4AF37] hover:bg-[#C5A028] text-black py-4 rounded-full font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">
  ENVIAR →
  </button>
@@ -86,9 +89,18 @@ export default function DevOps() {
                 </>
               ) : (
                 <div className="text-center py-8">
-                  <div className="text-5xl mb-4">✅</div>
-                  <h3 className="text-xl font-bold text-white mb-2">Recebido</h3>
-                  <p className="text-gray-300 text-sm">Especialista responde em até 24h.</p>
+                <div className="text-5xl mb-4">✅</div>
+                <h3 className="text-xl font-bold text-white mb-2">Recebido</h3>
+                <p className="text-gray-300 text-sm">Especialista responde em até 24h.</p>
+                <div className="w-full bg-white/10 rounded-full h-1.5 mt-4 overflow-hidden">
+                <div className="bg-[#D4AF37] h-full rounded-full" style={{ width: '100%', animation: 'progressBar 1.5s ease-in-out' }}></div>
+                </div>
+                <style jsx>{`
+                @keyframes progressBar {
+                from { width: 0%; }
+                to { width: 100%; }
+                }
+                `}</style>
                 </div>
               )}
             </div>

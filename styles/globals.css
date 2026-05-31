@@ -6,21 +6,26 @@
    ============================================ */
 
 @theme {
-  --color-surface-950: #0a0a0a;
-  --color-surface-900: #111111;
-  --color-surface-800: #1a1a1a;
-  --color-surface-700: #262626;
-  
-  --color-gold-400: #D4AF37;
-  --color-gold-500: #C5A028;
-  --color-gold-600: #B08D1E;
-  
-  --color-whatsapp-400: #4ADE80;
-  --color-whatsapp-500: #22C55E;
-  --color-whatsapp-600: #16A34A;
+ --color-surface-950: #0a0a0a;
+ --color-surface-900: #111111;
+ --color-surface-800: #1a1a1a;
+ --color-surface-700: #262626;
+ 
+ --color-primary-300: #E8C84A;
+ --color-primary-400: #D4AF37;
+ --color-primary-500: #D4AF37;
+ --color-primary-600: #C5A028;
+ 
+ --color-gold-400: #D4AF37;
+ --color-gold-500: #C5A028;
+ --color-gold-600: #B08D1E;
+ 
+ --color-whatsapp-400: #4ADE80;
+ --color-whatsapp-500: #25D366;
+ --color-whatsapp-600: #16A34A;
 
-  --font-heading: 'Space Grotesk', system-ui, sans-serif;
-  --font-body: 'DM Sans', system-ui, sans-serif;
+ --font-heading: 'Space Grotesk', system-ui, sans-serif;
+ --font-body: 'DM Sans', system-ui, sans-serif;
 }
 
 /* Base styles */
