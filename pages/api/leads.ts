@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-const EVOCRM_API_URL = 'https://evoapi.workflowapi.com.br/api/v1';
+const EVOCRM_API_URL = 'https://evoapi.workflowapi.com.br/public/api/v1';
 const EVOCRM_TOKEN = '3e21328779b31ad40f791f18126b86ffd41cb9739b7a9c3fde42bc296f20f20a';
 
 // Pipeline "Leads do Site" — stage "Novo Lead"
