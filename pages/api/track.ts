@@ -2,18 +2,25 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
-const supabaseServiceKey = process.env['SUPABASE' + '_SERVICE_KEY'] || '';
+// Use anon key for inserts — RLS policy allows public INSERT on pageviews + cta_clicks
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
 // POST /api/track — register pageview or CTA click
-// Body: { type: 'pageview' | 'cta', ...payload }
-// Public endpoint — no auth required (RLS allows INSERT)
+// Public endpoint — no auth required (RLS allows INSERT with anon key)
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const supabase = createClient(supabaseUrl, supabaseServiceKey);
+  // Validate required fields first
   const { type } = req.body;
+
+  if (!type || (type !== 'pageview' && type !== 'cta')) {
+    return res.status(400).json({ error: 'type must be pageview or cta' });
+  }
+
+  // Create client with anon key (INSERT RLS is public)
+  const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
   if (type === 'pageview') {
     const { session_id, path, referrer, utm_source, utm_medium, utm_campaign, utm_content } = req.body;
@@ -34,7 +41,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (error) {
       console.error('pageview insert error:', error.message);
-      return res.status(200).json({ ok: false }); // silent fail — never block the user
+      // Silent fail — never block the user experience
+      return res.status(200).json({ ok: false });
     }
 
     return res.status(200).json({ ok: true });
@@ -61,6 +69,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.status(200).json({ ok: true });
   }
-
-  return res.status(400).json({ error: 'type must be pageview or cta' });
 }
