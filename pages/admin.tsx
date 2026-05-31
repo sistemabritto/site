@@ -21,6 +21,20 @@ interface StageCount {
   count: number;
 }
 
+interface AnalyticsData {
+  totalPageviews: number;
+  uniqueVisitors: number;
+  onlineNow: number;
+  totalCtaClicks: number;
+  conversionRate: number;
+  topPages: { path: string; views: number }[];
+  trafficBySource: { source: string; views: number }[];
+  dailyViews: { date: string; views: number }[];
+  ctaClicks: { page: string; label: string; action: string; clicks: number }[];
+  range: string;
+  days: number;
+}
+
 export default function Admin() {
   const [authenticated, setAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
@@ -42,7 +56,12 @@ export default function Admin() {
   const [evoApiStatus, setEvoApiStatus] = useState<'checking' | 'ok' | 'error'>('checking');
 
   // Active tab
-  const [activeTab, setActiveTab] = useState<'leads' | 'config'>('leads');
+  const [activeTab, setActiveTab] = useState<'leads' | 'analytics' | 'config'>('leads');
+
+  // Analytics
+  const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
+  const [analyticsRange, setAnalyticsRange] = useState<'7d' | '30d' | '90d'>('30d');
+  const [analyticsLoading, setAnalyticsLoading] = useState(false);
 
   // Check existing session
   useEffect(() => {
@@ -154,7 +173,6 @@ export default function Admin() {
       if (res.ok) {
         setPixelSaved(true);
         setTimeout(() => setPixelSaved(false), 2000);
-        // Also keep localStorage as fallback for _app.tsx
         if (pixelId) {
           localStorage.setItem('meta_pixel_id', pixelId);
         } else {
@@ -165,6 +183,26 @@ export default function Admin() {
       // silently fail
     } finally {
       setPixelSaving(false);
+    }
+  };
+
+  // Load analytics from Supabase via /api/admin/analytics
+  const loadAnalytics = async (token: string, range: string = '30d') => {
+    setAnalyticsLoading(true);
+    try {
+      const res = await fetch(`/api/admin/analytics?range=${range}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setAnalytics(data);
+      } else {
+        setAnalytics(null);
+      }
+    } catch {
+      setAnalytics(null);
+    } finally {
+      setAnalyticsLoading(false);
     }
   };
 
@@ -255,6 +293,16 @@ export default function Admin() {
               }`}
             >
               📋 Leads
+            </button>
+            <button
+              onClick={() => { setActiveTab('analytics'); if (!analytics) loadAnalytics(adminToken, analyticsRange); }}
+              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                activeTab === 'analytics'
+                  ? 'bg-green-500 text-black'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              }`}
+            >
+              📊 Analytics
             </button>
             <button
               onClick={() => setActiveTab('config')}
@@ -394,6 +442,156 @@ export default function Admin() {
                   </div>
                 </div>
               </div>
+            </>
+          )}
+
+          {/* === ANALYTICS TAB === */}
+          {activeTab === 'analytics' && (
+            <>
+              {/* Range selector */}
+              <div className="flex gap-2 mb-6">
+                {(['7d', '30d', '90d'] as const).map((r) => (
+                  <button
+                    key={r}
+                    onClick={() => { setAnalyticsRange(r); loadAnalytics(adminToken, r); }}
+                    className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                      analyticsRange === r ? 'bg-green-500 text-black' : 'bg-white/10 text-gray-300 hover:bg-white/20'
+                    }`}
+                  >
+                    {r === '7d' ? '7 dias' : r === '30d' ? '30 dias' : '90 dias'}
+                  </button>
+                ))}
+              </div>
+
+              {analyticsLoading ? (
+                <div className="p-12 text-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-500 mx-auto mb-3" />
+                  <p className="text-gray-400 text-sm">Carregando analytics...</p>
+                </div>
+              ) : !analytics ? (
+                <div className="bg-[#111111] rounded-2xl p-12 border border-green-500/20 text-center">
+                  <div className="text-4xl mb-3">📊</div>
+                  <p className="text-gray-400">Nenhum dado de analytics ainda. Os pageviews começam a ser rastreados a partir do próximo deploy.</p>
+                </div>
+              ) : (
+                <>
+                  {/* KPI cards */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+                    <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20">
+                      <div className="text-gray-400 text-xs uppercase tracking-wider mb-1">Pageviews</div>
+                      <div className="text-3xl font-bold text-white">{analytics.totalPageviews.toLocaleString('pt-BR')}</div>
+                    </div>
+                    <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20">
+                      <div className="text-gray-400 text-xs uppercase tracking-wider mb-1">Visitantes Únicos</div>
+                      <div className="text-3xl font-bold text-white">{analytics.uniqueVisitors.toLocaleString('pt-BR')}</div>
+                    </div>
+                    <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20">
+                      <div className="text-gray-400 text-xs uppercase tracking-wider mb-1">🟢 Online Agora</div>
+                      <div className="text-3xl font-bold text-green-400">{analytics.onlineNow}</div>
+                    </div>
+                    <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20">
+                      <div className="text-gray-400 text-xs uppercase tracking-wider mb-1">Taxa de Conversão</div>
+                      <div className="text-3xl font-bold text-purple-400">{analytics.conversionRate}%</div>
+                      <div className="text-gray-500 text-xs mt-1">{analytics.totalCtaClicks} cliques CTA</div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    {/* Daily views mini chart (CSS bars) */}
+                    <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20">
+                      <h3 className="text-lg font-bold text-white mb-4">📅 Visitas por Dia</h3>
+                      {analytics.dailyViews.length === 0 ? (
+                        <p className="text-gray-500 text-sm">Sem dados ainda</p>
+                      ) : (
+                        <div className="flex items-end gap-1 h-32">
+                          {analytics.dailyViews.slice(-30).map((d) => {
+                            const max = Math.max(...analytics.dailyViews.map(x => x.views), 1);
+                            const h = Math.max((d.views / max) * 100, 2);
+                            return (
+                              <div key={d.date} className="flex-1 flex flex-col items-center gap-1" title={`${d.date}: ${d.views}`}>
+                                <div
+                                  className="w-full bg-green-500/80 rounded-t hover:bg-green-400 transition-colors"
+                                  style={{ height: `${h}%` }}
+                                />
+                                {analytics.dailyViews.length <= 15 && (
+                                  <span className="text-gray-500 text-[8px]">{d.date.slice(5)}</span>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Traffic by source */}
+                    <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20">
+                      <h3 className="text-lg font-bold text-white mb-4">🔗 Tráfego por Origem</h3>
+                      {analytics.trafficBySource.length === 0 ? (
+                        <p className="text-gray-500 text-sm">Sem dados ainda</p>
+                      ) : (
+                        <div className="space-y-3">
+                          {analytics.trafficBySource.map((s) => {
+                            const maxViews = analytics.trafficBySource[0]?.views || 1;
+                            const pct = (s.views / maxViews) * 100;
+                            return (
+                              <div key={s.source}>
+                                <div className="flex items-center justify-between text-sm mb-1">
+                                  <span className="text-gray-200 font-medium">{s.source === 'direct' ? '🔍 Direto' : s.source}</span>
+                                  <span className="text-gray-400">{s.views.toLocaleString('pt-BR')}</span>
+                                </div>
+                                <div className="w-full bg-white/5 rounded-full h-2">
+                                  <div className="bg-blue-500 h-2 rounded-full transition-all" style={{ width: `${pct}%` }} />
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {/* Top pages */}
+                    <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20">
+                      <h3 className="text-lg font-bold text-white mb-4">📄 Páginas Mais Visitadas</h3>
+                      {analytics.topPages.length === 0 ? (
+                        <p className="text-gray-500 text-sm">Sem dados ainda</p>
+                      ) : (
+                        <div className="space-y-2">
+                          {analytics.topPages.map((p, i) => (
+                            <div key={p.path} className="flex items-center gap-3 text-sm">
+                              <span className="text-gray-500 w-5 text-right">{i + 1}.</span>
+                              <span className="text-gray-200 font-mono flex-1 truncate">{p.path}</span>
+                              <span className="text-green-400 font-semibold">{p.views.toLocaleString('pt-BR')}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* CTA clicks */}
+                    <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20">
+                      <h3 className="text-lg font-bold text-white mb-4">👆 Cliques em CTAs</h3>
+                      {analytics.ctaClicks.length === 0 ? (
+                        <p className="text-gray-500 text-sm">Sem cliques em CTAs registrados ainda. Adicione trackCta() nos botões do site.</p>
+                      ) : (
+                        <div className="space-y-2">
+                          {analytics.ctaClicks.map((c, i) => (
+                            <div key={i} className="flex items-center gap-3 text-sm">
+                              <span className="text-gray-500 w-5 text-right">{i + 1}.</span>
+                              <div className="flex-1 min-w-0">
+                                <div className="text-gray-200 font-medium truncate">{c.label}</div>
+                                <div className="text-gray-500 text-xs font-mono truncate">{c.page}</div>
+                              </div>
+                              <span className="text-purple-400 font-semibold">{c.clicks.toLocaleString('pt-BR')}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </>
+              )}
             </>
           )}
 
