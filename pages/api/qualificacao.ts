@@ -4,12 +4,12 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 const EVOCRM_API_URL = 'https://evoapi.workflowapi.com.br/public/api/v1';
-const EVOCRM_TOKEN = '3e2132...f20a';
+const EVOCRM_TOKEN='3e2132...f20a';
 
 const DEFAULT_PIPELINE_ID = 'eb72af5c-28f7-4948-ae50-9c81922d161e';
-const QUALIFICACAO_STAGE_ID = '534893fe-843e-4731-9783-e26064ac8498'; // "Qualificação"
+const NOVO_LEAD_STAGE_ID = '0e31e649-af37-4a6f-87fb-cd25d52225e5';
+const QUALIFICACAO_STAGE_ID = '534893fe-843e-4731-9783-e26064ac8498';
 
-// POST /api/qualificacao — save qualification + lead to Supabase + EvoCRM
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -26,12 +26,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   let supabaseOk = false;
   let evocrmOk = false;
 
-  // 1) Save to Supabase — leads table (upsert by email)
+  // 1) Save/upsert to Supabase leads
   if (supabaseKey) {
     try {
-      const supabase = createClient(supabaseUrl, supabaseKey);
-
-      // Upsert lead (update if same email)
+      const supabase = createClient(supabaseUrl, supabaseKey, {
+        auth: { persistSession: false },
+      });
       const { error } = await supabase.from('leads').upsert({
         name: name || email.split('@')[0],
         email,
@@ -40,22 +40,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         utm_source: utm?.utm_source || '',
         utm_medium: utm?.utm_medium || '',
         utm_campaign: utm?.utm_campaign || '',
+        utm_content: utm?.utm_content || '',
         answers: answers ? JSON.stringify(answers) : null,
         created_at: now,
       }, { onConflict: 'email' });
-
       if (!error) supabaseOk = true;
       else console.error('Supabase qualificacao error:', error.message);
     } catch (err: any) {
-      console.error('Supabase qualificacao error:', err?.message || err);
+      console.error('Supabase qualificacao exception:', err?.message || err);
     }
   }
 
   // 2) Create/update lead in EvoCRM
   try {
-    const stageId = event === 'qualification_completed' || event === 'qualification_digital_completed'
+    const stageId = (event === 'qualification_completed' || event === 'qualification_digital_completed')
       ? QUALIFICACAO_STAGE_ID
-      : '0e31e649-af37-4a6f-87fb-cd25d52225e5'; // "Novo Lead"
+      : NOVO_LEAD_STAGE_ID;
 
     const leadPayload: any = {
       contact: {
@@ -102,7 +102,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.error('EvoCRM qualificacao error:', evoResp.status, errBody.slice(0, 300));
     }
   } catch (err: any) {
-    console.error('EvoCRM qualificacao error:', err?.message || err);
+    console.error('EvoCRM qualificacao exception:', err?.message || err);
   }
 
   return res.status(200).json({

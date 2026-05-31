@@ -113,8 +113,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   return res.status(200).json({
     ok: supabaseOk || evocrmOk,
     supabase: supabaseOk,
-    supabaseError: supabaseError || undefined,
     evocrm: evocrmOk,
-    evocrmError: evocrmError || undefined,
   });
 }
