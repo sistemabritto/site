@@ -4,58 +4,59 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 const EVOCRM_API_URL = 'https://evoapi.workflowapi.com.br/api/v1';
-const EVOCRM_TOKEN = '3e21328779b31ad40f791f18126b86ffd41cb9739b7a9c3fde42bc296f20f20a';
+const EVOCRM_TOKEN = '3e2132...f20a';
 
-// Pipeline "Leads do Site" — stage "Novo Lead"
 const DEFAULT_PIPELINE_ID = 'eb72af5c-28f7-4948-ae50-9c81922d161e';
-const DEFAULT_STAGE_ID = '0e31e649-af37-4a6f-87fb-cd25d52225e5';
+const QUALIFICACAO_STAGE_ID = '534893fe-843e-4731-9783-e26064ac8498'; // "Qualificação"
 
-// POST /api/leads — save lead to Supabase + EvoCRM
+// POST /api/qualificacao — save qualification + lead to Supabase + EvoCRM
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { name, email, whatsapp, phone, source, utm_source, utm_medium, utm_campaign, utm_content, answers, order_bump, value } = req.body;
+  const { event, email, name, whatsapp, phone, answers, result, utm, timestamp, userAgent } = req.body;
 
   if (!email) {
     return res.status(400).json({ error: 'email is required' });
   }
 
   const phone_number = whatsapp || phone || '';
-  const now = new Date().toISOString();
-
+  const now = timestamp || new Date().toISOString();
   let supabaseOk = false;
   let evocrmOk = false;
-  let evocrmError = '';
 
-  // 1) Save to Supabase
+  // 1) Save to Supabase — leads table (upsert by email)
   if (supabaseKey) {
     try {
       const supabase = createClient(supabaseUrl, supabaseKey);
-      const { error } = await supabase.from('leads').insert({
-        name: name || '',
+
+      // Upsert lead (update if same email)
+      const { error } = await supabase.from('leads').upsert({
+        name: name || email.split('@')[0],
         email,
         phone: phone_number,
-        source: source || 'direct',
-        utm_source: utm_source || '',
-        utm_medium: utm_medium || '',
-        utm_campaign: utm_campaign || '',
-        utm_content: utm_content || '',
+        source: event || 'qualificacao',
+        utm_source: utm?.utm_source || '',
+        utm_medium: utm?.utm_medium || '',
+        utm_campaign: utm?.utm_campaign || '',
         answers: answers ? JSON.stringify(answers) : null,
-        order_bump: order_bump || false,
-        value: value || 0,
         created_at: now,
-      });
+      }, { onConflict: 'email' });
+
       if (!error) supabaseOk = true;
-      else console.error('Supabase lead insert error:', error.message);
+      else console.error('Supabase qualificacao error:', error.message);
     } catch (err: any) {
-      console.error('Supabase lead error:', err?.message || err);
+      console.error('Supabase qualificacao error:', err?.message || err);
     }
   }
 
-  // 2) Create lead in EvoCRM
+  // 2) Create/update lead in EvoCRM
   try {
+    const stageId = event === 'qualification_completed' || event === 'qualification_digital_completed'
+      ? QUALIFICACAO_STAGE_ID
+      : '0e31e649-af37-4a6f-87fb-cd25d52225e5'; // "Novo Lead"
+
     const leadPayload: any = {
       contact: {
         name: name || email.split('@')[0],
@@ -64,21 +65,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
       deal: {
         pipeline_id: DEFAULT_PIPELINE_ID,
-        stage_id: DEFAULT_STAGE_ID,
-        name: `${name || email.split('@')[0]} — ${source || 'site'}`,
+        stage_id: stageId,
+        name: `${name || email.split('@')[0]} — ${event || 'qualificacao'}`,
       },
       custom_fields: {
-        source: source || 'direct',
+        source: event || 'qualificacao',
         lead_source: 'public_api',
-        order_bump: order_bump || false,
-        value: value || 0,
+        order_bump: false,
+        value: 0,
         lead_metadata: {
-          utm_source: utm_source || 'direct',
-          utm_medium: utm_medium || '',
-          utm_campaign: utm_campaign || '',
-          utm_content: utm_content || '',
+          utm_source: utm?.utm_source || 'direct',
+          utm_medium: utm?.utm_medium || '',
+          utm_campaign: utm?.utm_campaign || '',
           captured_at: now,
+          qualification_event: event || '',
+          ...(result ? { result } : {}),
           ...(answers ? { answers } : {}),
+          ...(userAgent ? { user_agent: userAgent.slice(0, 200) } : {}),
         },
       },
     };
@@ -96,18 +99,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       evocrmOk = true;
     } else {
       const errBody = await evoResp.text();
-      evocrmError = errBody.slice(0, 200);
-      console.error('EvoCRM lead error:', evoResp.status, errBody.slice(0, 300));
+      console.error('EvoCRM qualificacao error:', evoResp.status, errBody.slice(0, 300));
     }
   } catch (err: any) {
-    evocrmError = err?.message || 'fetch failed';
-    console.error('EvoCRM lead error:', evocrmError);
+    console.error('EvoCRM qualificacao error:', err?.message || err);
   }
 
   return res.status(200).json({
     ok: supabaseOk || evocrmOk,
     supabase: supabaseOk,
     evocrm: evocrmOk,
-    ...(evocrmError ? { evocrm_error: evocrmError } : {}),
   });
 }
