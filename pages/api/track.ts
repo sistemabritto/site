@@ -2,8 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
-// Use service key to bypass RLS on INSERT (same as /api/config/pixel)
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || '';
+// Try service key first, fallback to anon key (INSERT is public via RLS)
+const supabaseKey = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
 // POST /api/track — register pageview or CTA click
 // Public endpoint — no auth required
@@ -18,8 +18,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ error: 'type must be pageview or cta' });
   }
 
+  if (!supabaseKey) {
+    console.error('track error: no Supabase key available');
+    return res.status(200).json({ ok: false });
+  }
+
   try {
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+    const supabase = createClient(supabaseUrl, supabaseKey);
 
     if (type === 'pageview') {
       const { session_id, path, referrer, utm_source, utm_medium, utm_campaign, utm_content } = req.body;
@@ -40,7 +45,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       if (error) {
         console.error('pageview insert error:', error.message);
-        // Silent fail — never block the user experience
         return res.status(200).json({ ok: false });
       }
 
@@ -70,7 +74,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
   } catch (err: any) {
     console.error('track error:', err?.message || err);
-    // Silent fail — never block UX
     return res.status(200).json({ ok: false });
   }
 }

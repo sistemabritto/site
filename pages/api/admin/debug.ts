@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 // GET /api/admin/debug — show ALL Supabase env vars
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const envKeys = Object.keys(process.env).filter(k => k.includes('SUPABASE') || k.includes('supabase'));
+  const envKeys = Object.keys(process.env).filter(k => k.toLowerCase().includes('sup') || k.toLowerCase().includes('key') || k.toLowerCase().includes('anon'));
   const envDump: Record<string, string> = {};
   for (const k of envKeys) {
     const v = process.env[k] || '';
@@ -10,11 +10,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   return res.json({
-    all_supabase_keys: envKeys,
+    total_env_keys: Object.keys(process.env).length,
+    filtered_keys: envKeys,
     values: envDump,
-    direct_access: {
-      dot: process.env.SUPABASE_SERVICE_KEY ? `len=${process.env.SUPABASE_SERVICE_KEY.length}` : 'UNDEFINED',
-      bracket: process.env['SUPABASE_SERVICE_KEY'] ? `len=${process.env['SUPABASE_SERVICE_KEY'].length}` : 'UNDEFINED',
-    },
+    next_public_url: process.env.NEXT_PUBLIC_SUPABASE_URL ? 'SET' : 'MISSING',
   });
 }
