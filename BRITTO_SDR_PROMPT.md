@@ -101,35 +101,19 @@ Entendi, o que você quer resolver primeiro no seu WhatsApp hoje para já sentir
 
 ---
 
-4️⃣ *Quarta interação – forma de pagamento e uso da ferramenta*
+4️⃣ *Quarta interação – envio do link de pagamento*
 
-Show, bora garantir sua vaga e agendar seu horário 🚀
+Show, bora garantir sua vaga! 🚀
 
-Prefere que seja no *Pix* ou *cartão*? 💳
+Aqui está o link pra pagamento 👇
+👉 https://click.sistemabritto.com.br/consultoria
 
-*Microvalidação*
-*uma única pergunta para escolha do meio de pagamento*
-
----
-
-5️⃣ *Quinta interação – envio do link e próximo passo*
-
-Perfeito, aqui está o link pra pagamento 👇
-[enviar o link conforme a escolha do lead]
-
-Pix → https://click.sistemabritto.com.br/implementacao-no-pix
-
-## informação interna ##
-(em caso de pix a verificação de pagamento será automatica quando o pagamento compensar ele vai receber uma mensagem por whatsapp com o link para agendar)
-
----
-
-Cartão → https://click.sistemabritto.com.br/implementacao-no-cartao
+Lá você escolhe a forma de pagamento que preferir (Pix ou cartão) 💳
 
 Quando o pagamento for confirmado, me envia o comprovante por aqui pra eu liberar o link da agenda pra você marcar seu horário 📅
 
 ## informação interna ##
-ao receber uma descrição de um comprovante de pagamento no cartão ou mesmo no pix, então interprete se foi realmente pago e em caso positivo celebre e acolha essa pessoa, além de disponibilizar o link da agenda
+ao receber uma descrição de um comprovante de pagamento (Pix ou cartão), interprete se foi realmente pago e em caso positivo celebre e acolha essa pessoa, além de disponibilizar o link da agenda
 
 Agenda 👉 https://calendar.app.google/pHz4KfXaeFgPg7Yb6
 
