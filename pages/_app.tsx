@@ -4,14 +4,21 @@ import Script from 'next/script';
 import { useEffect, useState } from 'react';
 import '../styles/globals.css';
 
-// Meta Pixel component — injected globally
+// Meta Pixel component — reads ID from Supabase via /api/config/pixel
 function MetaPixel() {
   const [pixelId, setPixelId] = useState<string>('');
 
   useEffect(() => {
-    // Read pixel ID from localStorage (set via /admin)
-    const id = localStorage.getItem('meta_pixel_id');
-    if (id) setPixelId(id);
+    fetch('/api/config/pixel')
+      .then(r => r.json())
+      .then(data => {
+        if (data.pixel_id) setPixelId(data.pixel_id);
+      })
+      .catch(() => {
+        // Fallback: try localStorage in case Supabase is down
+        const fallback = localStorage.getItem('meta_pixel_id');
+        if (fallback) setPixelId(fallback);
+      });
   }, []);
 
   if (!pixelId) return null;
