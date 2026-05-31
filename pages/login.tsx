@@ -180,7 +180,7 @@ export default function Login() {
           </button>
 
           <p className="mt-6 text-gray-500 text-xs">
-            Ao continuar, você concorda com nossos <a href="/termos-de-uso" className="text-[#D4AF37] hover:underline">Termos de Uso</a>.
+            Ao continuar, você concorda com nossos <a href="/termos-de-uso" className="text-[#D4AF37] hover:underline">termos</a> e <a href="/politicas-de-privacidade" className="text-[#D4AF37] hover:underline">políticas de privacidade</a>. Somente assuntos do seu interesse.
           </p>
         </div>
       </main>

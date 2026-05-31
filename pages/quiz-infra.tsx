@@ -7,31 +7,32 @@ const PHONE = '5511914088571';
 const QUESTIONS = [
   {
     id: 'i1',
-    question: 'Qual seu objetivo principal?',
+    question: 'Como você usa o WhatsApp no seu negócio hoje?',
     options: [
-      { label: 'Estruturar minha infra (VPS, Docker, deploy)', value: 'infra' },
-      { label: 'Criar um SaaS / Produto Digital', value: 'saas' },
-      { label: 'Ambos: infra + produto próprio', value: 'ambos' },
+      { label: 'Atendo manualmente, um por um', value: 'manual' },
+      { label: 'Tenho algumas automações, mas nada inteligente', value: 'semi-auto' },
+      { label: 'Quero automatizar do zero', value: 'do-zero' },
+      { label: 'Já uso IA, mas quero escalar mais', value: 'escalar' },
     ],
   },
   {
     id: 'i2',
-    question: 'Qual seu maior problema hoje?',
+    question: 'Qual seu maior gargalo no atendimento?',
     options: [
-      { label: 'Servidor cai / Deploy quebra / API lenta', value: 'infra-problema' },
-      { label: 'Preciso de um dev mas não quero contratar CLT', value: 'sem-dev' },
-      { label: 'Quero criar um SaaS do zero', value: 'criar-saas' },
-      { label: 'Já tenho ideia, preciso executar rápido', value: 'executar' },
+      { label: 'Resposta lenta = cliente vai embora', value: 'resposta-lenta' },
+      { label: 'Não consigo filtrar quem é lead de quem é curiosidade', value: 'sem-filtro' },
+      { label: 'Follow-up inexistente ou falho', value: 'follow-up' },
+      { label: 'Dependo de pessoas pra tudo', value: 'depende-pessoas' },
     ],
   },
   {
     id: 'i3',
-    question: 'Qual seu orçamento mensal pra isso?',
+    question: 'O que faria mais diferença pra você agora?',
     options: [
-      { label: 'Até R$ 500/mês', value: 'ate-500' },
-      { label: 'R$ 500 - R$ 2.000/mês', value: '500-2000' },
-      { label: 'R$ 2.000 - R$ 5.000/mês', value: '2000-5000' },
-      { label: 'Acima de R$ 5.000/mês', value: '5000+' },
+      { label: 'Um agente de IA que qualifica e atende no WhatsApp 24/7', value: 'agente-ia' },
+      { label: 'Funis de vendas automatizados que convertem sozinhos', value: 'funil-auto' },
+      { label: 'Estratégia + ferramenta configuradas com especialista', value: 'estrategia-completa' },
+      { label: 'Quero entender o que é possível antes de decidir', value: 'entender-primeiro' },
     ],
   },
 ];
@@ -130,19 +131,20 @@ export default function QuizInfra() {
     }
 
     setTimeout(() => {
-      const i1 = finalAnswers['i1'] || '';
-      const i3 = finalAnswers['i3'] || '';
+    const i1 = finalAnswers['i1'] || '';
+    const i2 = finalAnswers['i2'] || '';
+    const i3 = finalAnswers['i3'] || '';
 
-      // Se for infra + orçamento adequado -> mostra página VPS
-      if ((i1 === 'infra' || i1 === 'ambos') && (i3 === '500-2000' || i3 === '2000-5000' || i3 === '5000+')) {
-        window.location.href = '/vps';
-      } else {
-        // Não fitou -> manda pro WhatsApp do Felipe
-        const msg = encodeURIComponent(
-          `Fala, Felipe. Fiz a qualificação de Infra/SaaS. Bora conversar?\n\nObjetivo: ${i1}\nProblema: ${finalAnswers['i2']}\nOrçamento: ${i3}\n\nNome: ${customerData.name}\nEmail: ${customerData.email}\nWhatsApp: ${customerData.whatsapp}`
-        );
-        window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
-      }
+    // Lead qualificado -> página de qualificação
+    if (i3 === 'agente-ia' || i3 === 'funil-auto' || i3 === 'estrategia-completa') {
+    window.location.href = '/qualificacao';
+    } else {
+    // Quer entender melhor -> manda pro WhatsApp do Felipe
+    const msg = encodeURIComponent(
+    `Fala, Felipe! Fiz o quiz de automação e quero entender melhor as possibilidades.\n\nComo uso WhatsApp: ${i1}\nGargalo: ${i2}\nO que quero: ${i3}\n\nNome: ${customerData.name}\nEmail: ${customerData.email}\nWhatsApp: ${customerData.whatsapp}`
+    );
+    window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+    }
     }, 800);
   };
 
@@ -154,8 +156,8 @@ export default function QuizInfra() {
     return (
       <>
         <Meta
-          title="Quiz Infra & SaaS — Sistema Britto"
-          description="Descubra a melhor solução de infraestrutura pro seu negócio."
+          title="Quiz Automação WhatsApp — Sistema Britto"
+          description="Descubra como automatizar seu atendimento no WhatsApp com IA."
           path="/quiz-infra"
         />
 
@@ -212,8 +214,8 @@ export default function QuizInfra() {
               </button>
 
               <p className="text-gray-500 text-xs text-center mt-4">
-                🔒 Seus dados são confidenciais. Não enviamos spam.
-              </p>
+                        Ao continuar, você concorda com nossos <a href="/termos-de-uso" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">termos</a> e <a href="/politicas-de-privacidade" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">políticas de privacidade</a>. Somente assuntos do seu interesse.
+                      </p>
             </form>
           </div>
         </main>
@@ -235,8 +237,8 @@ export default function QuizInfra() {
   return (
     <>
       <Meta
-        title="Quiz Infra & SaaS — Sistema Britto"
-        description="Descubra a melhor solução de infraestrutura pro seu negócio."
+        title="Quiz Automação WhatsApp — Sistema Britto"
+        description="Descubra como automatizar seu atendimento no WhatsApp com IA."
         path="/quiz-infra"
       />
 
@@ -286,7 +288,7 @@ export default function QuizInfra() {
           </div>
 
           <div className="mt-8 text-center">
-            <p className="text-gray-500 text-sm">{'\uD83D\uDD12'} Suas respostas são confidenciais</p>
+            <p className="text-gray-500 text-sm">Seus dados são protegidos conforme LGPD. Somente assuntos do seu interesse.</p>
           </div>
         </div>
       </main>

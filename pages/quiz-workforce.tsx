@@ -218,8 +218,8 @@ export default function QuizWorkforce() {
   </button>
 
   <p className="text-gray-500 text-xs text-center mt-4">
-   🔒 Seus dados são confidenciais. Não enviamos spam.
-  </p>
+            Ao continuar, você concorda com nossos <a href="/termos-de-uso" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">termos</a> e <a href="/politicas-de-privacidade" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">políticas de privacidade</a>. Somente assuntos do seu interesse.
+          </p>
   </form>
   </div>
   </main>
@@ -295,7 +295,7 @@ export default function QuizWorkforce() {
   </div>
 
   <div className="mt-8 text-center">
-  <p className="text-gray-500 text-sm">{'\uD83D\uDD12'} Suas respostas são confidenciais</p>
+  <p className="text-gray-500 text-sm">Seus dados são protegidos conforme LGPD. Somente assuntos do seu interesse.</p>
   </div>
   </div>
   </main>

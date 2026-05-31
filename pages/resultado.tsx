@@ -273,7 +273,7 @@ export default function Resultado() {
                 CONTINUAR →
               </button>
               
-              <p className="text-gray-500 text-xs text-center">Seus dados estão seguros. Sem spam.</p>
+              <p className="text-gray-500 text-xs text-center">Ao continuar, você concorda com nossos <a href="/termos-de-uso" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">termos</a> e <a href="/politicas-de-privacidade" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">políticas de privacidade</a>. Somente assuntos do seu interesse.</p>
             </form>
           </div>
         </div>
