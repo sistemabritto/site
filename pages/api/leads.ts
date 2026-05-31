@@ -4,13 +4,11 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 const EVOCRM_API_URL = 'https://evoapi.workflowapi.com.br/public/api/v1';
-const EVOCRM_TOKEN = '3e21328779b31ad40f791f18126b86ffd41cb9739b7a9c3fde42bc296f20f20a';
+const EVOCRM_TOKEN='3e21328779b31ad40f791f18126b86ffd41cb9739b7a9c3fde42bc296f20f20a';
 
-// Pipeline "Leads do Site" — stage "Novo Lead"
 const DEFAULT_PIPELINE_ID = 'eb72af5c-28f7-4948-ae50-9c81922d161e';
 const DEFAULT_STAGE_ID = '0e31e649-af37-4a6f-87fb-cd25d52225e5';
 
-// POST /api/leads — save lead to Supabase + EvoCRM
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -26,14 +24,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const now = new Date().toISOString();
 
   let supabaseOk = false;
+  let supabaseError = '';
   let evocrmOk = false;
   let evocrmError = '';
 
   // 1) Save to Supabase
   if (supabaseKey) {
     try {
-      const supabase = createClient(supabaseUrl, supabaseKey);
-      const { error } = await supabase.from('leads').insert({
+      const supabase = createClient(supabaseUrl, supabaseKey, {
+        auth: { persistSession: false },
+      });
+      const { error, status } = await supabase.from('leads').insert({
         name: name || '',
         email,
         phone: phone_number,
@@ -47,11 +48,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         value: value || 0,
         created_at: now,
       });
-      if (!error) supabaseOk = true;
-      else console.error('Supabase lead insert error:', error.message);
+      if (!error) {
+        supabaseOk = true;
+      } else {
+        supabaseError = `${error.code}: ${error.message}${error.details ? ' — ' + error.details : ''}`;
+        console.error('Supabase insert error:', error.code, error.message, error.details);
+      }
     } catch (err: any) {
-      console.error('Supabase lead error:', err?.message || err);
+      supabaseError = `catch: ${err?.message || String(err)}`;
+      console.error('Supabase exception:', supabaseError);
     }
+  } else {
+    supabaseError = 'no key configured';
   }
 
   // 2) Create lead in EvoCRM
@@ -97,17 +105,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } else {
       const errBody = await evoResp.text();
       evocrmError = errBody.slice(0, 200);
-      console.error('EvoCRM lead error:', evoResp.status, errBody.slice(0, 300));
     }
   } catch (err: any) {
     evocrmError = err?.message || 'fetch failed';
-    console.error('EvoCRM lead error:', evocrmError);
   }
 
   return res.status(200).json({
     ok: supabaseOk || evocrmOk,
     supabase: supabaseOk,
+    supabaseError: supabaseError || undefined,
     evocrm: evocrmOk,
-    ...(evocrmError ? { evocrm_error: evocrmError } : {}),
+    evocrmError: evocrmError || undefined,
   });
 }
