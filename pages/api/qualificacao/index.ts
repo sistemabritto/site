@@ -1,4 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { createClient } from '@supabase/supabase-js';
+
+// Supabase config
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
+const supabaseKey = process.env.SUPABASE_SERVICE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
 // EvoCRM config — env var approach avoids redactor issues
 function getEnv(name: string): string | undefined {
@@ -116,7 +121,28 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       timestamp: body.timestamp,
     });
 
-    // 1. Criar lead no EvoCRM
+    // 0. Upsert lead no Supabase
+ if (supabaseKey) {
+ try {
+ const supabase = createClient(supabaseUrl, supabaseKey, { auth: { persistSession: false } });
+ await supabase.from('leads').upsert({
+ name: name || email?.split('@')[0] || '',
+ email: email || `qual-${Date.now()}@unknown.com`,
+ phone: whatsapp ? formatPhoneE164(whatsapp) : '',
+ source: event || 'qualificacao',
+ utm_source: utm?.utm_source || '',
+ utm_medium: utm?.utm_medium || '',
+ utm_campaign: utm?.utm_campaign || '',
+ utm_content: utm?.utm_content || '',
+ answers: answers ? JSON.stringify(answers) : null,
+ created_at: new Date().toISOString(),
+ }, { onConflict: 'email' });
+ } catch (e) {
+ console.error('[Supabase Qualificação Error]', e);
+ }
+ }
+
+ // 1. Criar lead no EvoCRM
     try {
       const stageId = result === 'high-ticket' ? STAGE_QUALIFICACAO : STAGE_NOVO_LEAD;
       const dealTitle = result === 'high-ticket'
