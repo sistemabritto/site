@@ -48,7 +48,7 @@ export default function Ecossistema() {
               </h3>
               
               <p className="text-gray-200 text-sm mb-6">
-                Empresa completa em IA: 38 agentes especializados (negócio + engenharia) 
+                Empresa completa em IA: dezenas de agentes especializados (negócio + engenharia) 
                 que rodam sua operação no piloto automático.
               </p>
 

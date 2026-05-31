@@ -37,9 +37,9 @@ const plans = [
   {
     name: 'EvoNexus Premium',
     price: 2500,
-    description: 'Empresa completa com 38 agentes especializados operando 24/7',
+    description: 'Empresa completa com dezenas de agentes especializados operando 24/7',
     features: [
-      '38 agentes especializados',
+      'Dezenas de agentes especializados',
       'Módulos: Fin, Projetos, Vendas, RH, Marketing, Jurídico',
       'Engineering agents (Code, Review, Debug, Testes, DevOps)',
       'OpenClaude com 6 backends (tokens free)',

@@ -1,13 +1,14 @@
 import Head from 'next/head';
 
 interface MetaProps {
-  title: string;
-  description: string;
-  path?: string;
-  ogImage?: string;
+ title: string;
+ description: string;
+ path?: string;
+ ogImage?: string;
+ noIndex?: boolean;
 }
 
-export default function Meta({ title, description, path = '', ogImage = '/og-image.jpg' }: MetaProps) {
+export default function Meta({ title, description, path = '', ogImage = '/og-image.jpg', noIndex = false }: MetaProps) {
   const baseUrl = 'https://www.sistemabritto.com.br';
   const url = `${baseUrl}${path}`;
   const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`;
@@ -17,6 +18,7 @@ export default function Meta({ title, description, path = '', ogImage = '/og-ima
       {/* Primary Meta Tags */}
       <title>{title}</title>
       <meta name="description" content={description} />
+      {noIndex && <meta name="robots" content="noindex, nofollow" />}
       <meta name="keywords" content="WhatsApp Business, automação, IA, agentes autônomos, EvoNexus, Claude Code, Hermes, CRM, evolução API, Sistema Britto" />
       <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       <meta name="theme-color" content="#0a0a0a" />
@@ -98,7 +100,7 @@ export default function Meta({ title, description, path = '', ogImage = '/og-ima
               "name": "EvoNexus — Workforce de IA para Negócios",
               "url": "https://www.sistemabritto.com.br/evonexus",
               "provider": { "@id": "https://www.sistemabritto.com.br/#organization" },
-              "description": "Workforce completa de IA com 38 agentes especializados em negócios e engenharia. Multi-provider, dashboard web, memória persistente."
+              "description": "Workforce completa de IA com dezenas de agentes especializados em negócios e engenharia. Multi-provider, dashboard web, memória persistente."
             },
             {
               "@type": "Service",
@@ -117,7 +119,7 @@ export default function Meta({ title, description, path = '', ogImage = '/og-ima
                   "name": "O que é o Sistema Britto?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Empresa brasileira que implementa workforces de IA para empresas. Serviços: WhatsApp com IA, EvoNexus (38 agentes), Hermes Agent (framework aberto), Claude Code (engenharia de software com IA)."
+                    "text": "Empresa brasileira que implementa workforces de IA para empresas. Serviços: WhatsApp com IA, EvoNexus (dezenas de agentes), Hermes Agent (framework aberto), Claude Code (engenharia de software com IA)."
                   }
                 },
                 {
