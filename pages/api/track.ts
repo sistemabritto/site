@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
 // Use service key to bypass RLS on INSERT (same as /api/config/pixel)
-const supabaseKey = process.env['SUPABASE' + '_SERVICE_KEY'] || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || '';
 
 // POST /api/track — register pageview or CTA click
 // Public endpoint — no auth required
@@ -19,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const supabase = createClient(supabaseUrl, supabaseKey);
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     if (type === 'pageview') {
       const { session_id, path, referrer, utm_source, utm_medium, utm_campaign, utm_content } = req.body;

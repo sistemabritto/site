@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
-const supabaseServiceKey = process.env['SUPABASE' + '_SERVICE_KEY'] || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || '';
 
 // GET /api/config/pixel — public endpoint, returns only the pixel ID
 // Used by _app.tsx to inject Meta Pixel globally

@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import { verifyToken } from './auth';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
-const supabaseServiceKey = process.env['SUPABASE' + '_SERVICE_KEY'] || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || '';
 
 function getSupabase() {
   return createClient(supabaseUrl, supabaseServiceKey);

@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import { verifyToken } from './auth';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
-const supabaseServiceKey = process.env['SUPABASE' + '_SERVICE_KEY'] || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || '';
 
 // GET /api/admin/analytics?range=7d|30d|90d
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
