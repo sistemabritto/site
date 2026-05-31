@@ -106,7 +106,7 @@ Entendi, o que você quer resolver primeiro no seu WhatsApp hoje para já sentir
 Show, bora garantir sua vaga! 🚀
 
 Aqui está o link pra pagamento 👇
-👉 https://click.sistemabritto.com.br/consultoria
+👉 https://click.sistemabritto.com.br/pay
 
 Lá você escolhe a forma de pagamento que preferir (Pix ou cartão) 💳
 
