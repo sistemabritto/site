@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import PhoneInput from '../components/PhoneInput';
 
 // Dynamic import helper - only loads Supabase at runtime (browser), never at build time
 async function getSupabase() {
@@ -58,13 +59,15 @@ export default function Login() {
   const [sentOtp, setSentOtp] = useState('');
 
   const handleSendOTP = async () => {
-    if (!phoneNumber || phoneNumber.length < 10) {
+    const cleanPhone = phoneNumber.replace(/[^0-9]/g, '');
+    if (cleanPhone.length < 10) {
       alert('Digite um número válido com DDD.');
       return;
     }
 
     setOtpLoading(true);
-    const fullNumber = `55${phoneNumber}`;
+    // If phone already has 55 country code prefix, don't add it again
+    const fullNumber = cleanPhone.startsWith('55') ? cleanPhone : `55${cleanPhone}`;
 
     try {
       const res = await fetch('/api/otp/send', {
@@ -200,25 +203,12 @@ export default function Login() {
 
             {!otpSent ? (
               <>
-                {/* Phone Input with country flag inline */}
-                <div className="mb-6">
-                  <label className="block text-gray-400 text-sm mb-2 text-left">Número do WhatsApp</label>
-                  <div className="flex gap-2">
-                    <div className="bg-[#1a1a1a] border border-gray-700 rounded-lg px-3 py-3 text-gray-400 font-medium flex-shrink-0 flex items-center gap-1 cursor-pointer">
-                      <span className="text-lg">🇧🇷</span>
-                      <span className="text-sm">+55</span>
-                    </div>
-                    <input
-                      type="tel"
-                      value={phoneNumber}
-                      onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ''))}
-                      placeholder="11 99999-9999"
-                      className="flex-1 bg-[#1a1a1a] border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#D4AF37] transition"
-                      maxLength={15}
-                      autoFocus
-                    />
-                  </div>
-                </div>
+                <PhoneInput
+                  value={phoneNumber}
+                  onChange={(v) => setPhoneNumber(v)}
+                  accentColor="#D4AF37"
+                  required
+                />
 
                 {/* Receive Code Button */}
                 <button

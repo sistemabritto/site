@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Meta from '../components/Meta';
+import PhoneInput from '../components/PhoneInput';
 
 const PHONE = '5511914088571';
 
@@ -36,6 +37,10 @@ const QUESTIONS = [
 ];
 
 export default function QuizInfra() {
+  const [step, setStep] = useState<'email' | 'quiz'>('email');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [whatsapp, setWhatsapp] = useState('');
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -47,15 +52,46 @@ export default function QuizInfra() {
       if (stored) {
         try {
           const customer = JSON.parse(stored);
-          setCustomerData({
+          const parsed = {
             name: customer.name || '',
             email: customer.email || '',
             whatsapp: customer.whatsapp || '',
-          });
+          };
+          setCustomerData(parsed);
+          setName(parsed.name);
+          setEmail(parsed.email);
+          setWhatsapp(parsed.whatsapp);
         } catch {}
       }
     }
   }, []);
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !name || !whatsapp) return;
+
+    const data = { name, email, whatsapp };
+    setCustomerData(data);
+
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('qualificacao_customer', JSON.stringify(data));
+    }
+
+    try {
+      await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...data,
+          source: 'quiz-infra',
+        }),
+      });
+    } catch (err) {
+      console.error('[Lead Capture Error]', err);
+    }
+
+    setStep('quiz');
+  };
 
   const handleAnswer = (value: string) => {
     if (!QUESTIONS[currentStep]) return;
@@ -112,6 +148,78 @@ export default function QuizInfra() {
 
   const currentQuestion = QUESTIONS[currentStep];
   const progress = ((currentStep + 1) / QUESTIONS.length) * 100;
+
+  // Email capture step
+  if (step === 'email') {
+    return (
+      <>
+        <Meta
+          title="Quiz Infra & SaaS — Sistema Britto"
+          description="Descubra a melhor solução de infraestrutura pro seu negócio."
+          path="/quiz-infra"
+        />
+
+        <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 py-20">
+          <div className="w-full max-w-md">
+            <div className="text-center mb-8">
+              <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+                Antes de começar...
+              </h1>
+              <p className="text-gray-300 text-lg">
+                Precisamos dos seus dados pra personalizar sua qualificação.
+              </p>
+            </div>
+
+            <form onSubmit={handleEmailSubmit} className="bg-[#111111] rounded-3xl p-8 border border-white/10">
+              <div className="mb-6">
+                <label className="block text-gray-300 text-sm font-semibold mb-2">Seu nome</label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Ex: João Silva"
+                  required
+                  className="w-full bg-black/80 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none transition-colors"
+                />
+              </div>
+
+              <div className="mb-6">
+                <label className="block text-gray-300 text-sm font-semibold mb-2">Seu melhor email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Ex: joao@empresa.com.br"
+                  required
+                  className="w-full bg-black/80 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none transition-colors"
+                />
+              </div>
+
+              <div className="mb-6">
+                <PhoneInput
+                  value={whatsapp}
+                  onChange={(v) => setWhatsapp(v)}
+                  accentColor="#D4AF37"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-[#D4AF37] hover:bg-[#c9a230] text-black py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-[#D4AF37]/25"
+              >
+                COMEÇAR QUIZ →
+              </button>
+
+              <p className="text-gray-500 text-xs text-center mt-4">
+                🔒 Seus dados são confidenciais. Não enviamos spam.
+              </p>
+            </form>
+          </div>
+        </main>
+      </>
+    );
+  }
 
   if (!currentQuestion) {
     return (

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Meta from '../components/Meta';
+import PhoneInput from '../components/PhoneInput';
 import { useRouter } from 'next/router';
 
 interface PlanResult {
@@ -256,13 +257,10 @@ export default function Resultado() {
                 />
               </div>
               <div>
-                <label className="text-gray-300 text-sm font-semibold block mb-1">WhatsApp *</label>
-                <input
-                  type="tel"
-                  placeholder="(11) 99999-9999"
+                <PhoneInput
                   value={customerData.whatsapp}
-                  onChange={(e) => setCustomerData({...customerData, whatsapp: e.target.value})}
-                  className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+                  onChange={(v) => setCustomerData({...customerData, whatsapp: v})}
+                  accentColor="#22C55E"
                   required
                 />
               </div>

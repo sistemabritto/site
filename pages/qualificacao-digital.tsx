@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Meta from '../components/Meta';
+import PhoneInput from '../components/PhoneInput';
 import { useRouter } from 'next/router';
 
 const QUESTIONS = [
@@ -45,12 +46,14 @@ const QUESTIONS = [
 ];
 
 export default function QualificacaoDigital() {
-  const router = useRouter();
-  const [currentStep, setCurrentStep] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [customerData, setCustomerData] = useState({ name: '', email: '', whatsapp: '' });
-  const [utmParams, setUtmParams] = useState<Record<string, string>>({});
+ const router = useRouter();
+ const [page, setPage] = useState<'email' | 'quiz'>('email');
+ const [currentStep, setCurrentStep] = useState(0);
+ const [answers, setAnswers] = useState<Record<string, string>>({});
+ const [isSubmitting, setIsSubmitting] = useState(false);
+ const [customerData, setCustomerData] = useState({ name: '', email: '', whatsapp: '' });
+ const [utmParams, setUtmParams] = useState<Record<string, string>>({});
+ const [hasExistingData, setHasExistingData] = useState(false);
 
   useEffect(() => {
     // Carregar UTM params
@@ -66,19 +69,50 @@ export default function QualificacaoDigital() {
       // Recuperar dados do cliente do sessionStorage
       const storedCustomer = sessionStorage.getItem('qualificacao_customer');
       if (storedCustomer) {
-        try {
-          const customer = JSON.parse(storedCustomer);
-          setCustomerData({
-            name: customer.name || '',
-            email: customer.email || '',
-            whatsapp: customer.whatsapp || '',
-          });
-        } catch {
-          // ignore
-        }
+      try {
+      const customer = JSON.parse(storedCustomer);
+      const newData = {
+      name: customer.name || '',
+      email: customer.email || '',
+      whatsapp: customer.whatsapp || '',
+      };
+      setCustomerData(newData);
+      if (newData.name && newData.email && newData.whatsapp) {
+      setHasExistingData(true);
+      }
+      } catch {
+      // ignore
+      }
       }
     }
   }, []);
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (!customerData.email || !customerData.name || !customerData.whatsapp) return;
+
+  if (typeof window !== 'undefined') {
+  sessionStorage.setItem('qualificacao_customer', JSON.stringify(customerData));
+  }
+
+  try {
+  await fetch('/api/qualificacao', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+  event: 'lead_captured_digital',
+  ...customerData,
+  source: 'qualificacao-digital-capture',
+  utm: utmParams,
+  timestamp: new Date().toISOString(),
+  }),
+  });
+  } catch (err) {
+  console.error('[Lead Capture Error]', err);
+  }
+
+  setPage('quiz');
+  };
 
   const handleAnswer = (value: string) => {
     if (!QUESTIONS[currentStep]) return;
@@ -142,6 +176,84 @@ export default function QualificacaoDigital() {
 
   const currentQuestion = QUESTIONS[currentStep];
   const progress = ((currentStep + 1) / QUESTIONS.length) * 100;
+
+  // Tela de captura de dados
+  if (page === 'email') {
+  return (
+  <>
+  <Meta
+  title="Qualificação Digital — Sistema Britto"
+  description="Descubra se sua empresa é elegível para nossa força de trabalho digital."
+  path="/qualificacao-digital"
+  />
+
+  <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 py-20">
+  <div className="w-full max-w-md">
+  <div className="text-center mb-8">
+  <div className="inline-flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-full px-4 py-2 mb-6">
+  <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+  <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Qualificação Digital</span>
+  </div>
+  <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+  {hasExistingData ? 'Seus dados já estão aqui!' : 'Antes de começar...'}
+  </h1>
+  <p className="text-gray-300 text-lg">
+  {hasExistingData
+  ? 'Confirme seus dados e faça a qualificação. Leva menos de 2 minutos.'
+  : 'Precisamos dos seus dados pra personalizar seu resultado.'}
+  </p>
+  </div>
+
+  <form onSubmit={handleEmailSubmit} className="bg-[#111111] rounded-3xl p-8 border border-white/10">
+  <div className="mb-6">
+  <label className="block text-gray-300 text-sm font-semibold mb-2">Seu nome</label>
+  <input
+  type="text"
+  value={customerData.name}
+  onChange={(e) => setCustomerData({...customerData, name: e.target.value})}
+  placeholder="Ex: João Silva"
+  required
+  className="w-full bg-black/80 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none transition-colors"
+  />
+  </div>
+
+  <div className="mb-6">
+  <label className="block text-gray-300 text-sm font-semibold mb-2">Seu melhor email</label>
+  <input
+  type="email"
+  value={customerData.email}
+  onChange={(e) => setCustomerData({...customerData, email: e.target.value})}
+  placeholder="Ex: joao@empresa.com.br"
+  required
+  className="w-full bg-black/80 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none transition-colors"
+  />
+  </div>
+
+  <div className="mb-6">
+  <PhoneInput
+  value={customerData.whatsapp}
+  onChange={(v) => setCustomerData({...customerData, whatsapp: v})}
+  accentColor="#22C55E"
+  required={true}
+  />
+  </div>
+
+  <button
+  type="submit"
+  className="w-full bg-primary-500 hover:bg-primary-600 text-black py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-500/25"
+  >
+  {hasExistingData ? 'COMEÇAR A QUALIFICAÇÃO →' : 'COMEÇAR →'}
+  </button>
+
+  <p className="text-gray-500 text-xs text-center mt-4">
+  🔒 Seus dados são confidenciais. Não enviamos spam.
+  </p>
+  </form>
+  </div>
+  </main>
+  </>
+  );
+  }
 
   // Tela de carregamento
   if (!currentQuestion) {

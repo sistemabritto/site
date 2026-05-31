@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Meta from '../components/Meta';
+import PhoneInput from '../components/PhoneInput';
 
 const QUESTIONS = [
   {
@@ -224,14 +225,11 @@ export default function Qualificacao() {
               </div>
 
               <div className="mb-6">
-                <label className="block text-gray-300 text-sm font-semibold mb-2">Seu WhatsApp *</label>
-                <input
-                  type="tel"
+                <PhoneInput
                   value={whatsapp}
-                  onChange={(e) => setWhatsapp(e.target.value)}
-                  placeholder="(11) 99999-9999"
+                  onChange={(v) => setWhatsapp(v)}
+                  accentColor="#22C55E"
                   required
-                  className="w-full bg-black/80 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none transition-colors"
                 />
                 <p className="text-gray-500 text-xs mt-1">Pra gente te avisar quando seu plano estiver pronto</p>
               </div>
