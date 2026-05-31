@@ -1,38 +1,20 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || '';
-
-// GET /api/admin/debug — test Supabase connection + tables
+// GET /api/admin/debug — show ALL Supabase env vars
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (!supabaseServiceKey) {
-    return res.json({ error: 'SUPABASE_SERVICE_KEY not set' });
+  const envKeys = Object.keys(process.env).filter(k => k.includes('SUPABASE') || k.includes('supabase'));
+  const envDump: Record<string, string> = {};
+  for (const k of envKeys) {
+    const v = process.env[k] || '';
+    envDump[k] = `len=${v.length} prefix=${v.slice(0, 15)}...`;
   }
 
-  const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
-  try {
-    // Test: can we insert into pageviews?
-    const { error: insertErr } = await supabase.from('pageviews').insert({
-      session_id: 'debug-test',
-      path: '/debug',
-      referrer: '',
-      utm_source: 'debug',
-    });
-
-    // Test: can we select from site_config?
-    const { data: config, error: selectErr } = await supabase
-      .from('site_config')
-      .select('key, value');
-
-    return res.json({
-      service_key_len: supabaseServiceKey.length,
-      service_key_prefix: supabaseServiceKey.slice(0, 20),
-      pageview_insert: insertErr ? `ERR: ${insertErr.message}` : 'OK',
-      site_config: selectErr ? `ERR: ${selectErr.message}` : `${config?.length || 0} rows`,
-    });
-  } catch (e: any) {
-    return res.json({ catch_error: e?.message || String(e) });
-  }
+  return res.json({
+    all_supabase_keys: envKeys,
+    values: envDump,
+    direct_access: {
+      dot: process.env.SUPABASE_SERVICE_KEY ? `len=${process.env.SUPABASE_SERVICE_KEY.length}` : 'UNDEFINED',
+      bracket: process.env['SUPABASE_SERVICE_KEY'] ? `len=${process.env['SUPABASE_SERVICE_KEY'].length}` : 'UNDEFINED',
+    },
+  });
 }
