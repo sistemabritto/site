@@ -19,28 +19,7 @@ const AGENTS = [
   { name: 'Pulse', domain: 'Comunidade', desc: 'Engajamento, DMs e sentimento do público.', detail: 'Responde comentários, qualifica DMs e identifica quando alguém tá pronto pra comprar.' },
 ];
 
-const INTEGRATIONS = ['Instagram', 'YouTube', 'LinkedIn', 'TikTok', 'X (Twitter)', 'Notion', 'Google Workspace', 'Discord', 'Telegram', 'Canva', 'ChatGPT', 'Figma'];
-
-const CASES = [
-  {
-    antes: 'Escritório de Advocacia',
-    antesDesc: 'Zero presença digital. Ninguém conhecia o escritório fora da cidade.',
-    depois: 'Dezenas de novos clientes vieram pelo LinkedIn. Autoridade construída sem esforço manual.',
-    metric: 'LinkedIn como canhal de aquisição',
-  },
-  {
-    antes: 'Clínica Estética',
-    antesDesc: 'Postava 1 vez por semana. Sem reels. Zero alcance orgânico.',
-    depois: 'Conteúdo diário em 5 redes. Reels com dezenas de milhares de views. Agenda lotou.',
-    metric: 'Agenda lotada orgânico',
-  },
-  {
-    antes: 'SaaS de Produtividade',
-    antesDesc: 'Blog morto. Sem social. Usuários só vinham de ads pagos.',
-    depois: 'YouTube + X como canais de aquisição. CAC caiu significativamente com conteúdo orgânico.',
-    metric: 'CAC reduzido com orgânico',
-  },
-];
+const INTEGRATIONS = ['Instagram', 'YouTube', 'LinkedIn', 'TikTok', 'X (Twitter)', 'WhatsApp', 'Stripe', 'Linear', 'GitHub', 'Todoist'];
 
 const BENEFITS = [
   { icon: '🎬', title: 'Conteúdo todo dia sem você pensar', desc: 'YouTube Shorts, TikTok, Instagram Reels, LinkedIn, X — a IA cria, edita e agenda. Você aprova ou deixa no automático.' },
@@ -55,7 +34,13 @@ const STEPS = [
   { num: '01', title: 'Conectamos', desc: '5 redes linkadas ao sistema em 48h. Sua conta, sua audiência, seus dados.' },
   { num: '02', title: 'IA cria', desc: 'Dezenas de agentes geram posts, reels, shorts e threads alinhados ao seu tom de voz.' },
   { num: '03', title: 'Você aprova', desc: 'Todo conteúdo passa por você antes de publicar. Ou deixa no piloto automático.' },
-  { num: '04', title: 'Publica e aprende', desc: 'Conteúdo vai pro ar todo dia. A IA mediu o que engajou e ajusta a próxima semana.' },
+  { num: '04', title: 'Publica e aprende', desc: 'Conteúdo vai pro ar todo dia. A IA mede o que engajou e ajusta a próxima semana.' },
+];
+
+const NEXUS_IMAGES = [
+  { src: 'https://openclaude.evolutionfoundation.com.br/assets/print-agents-B4xXbObQ.webp', alt: 'Painel Multi-Agentes — dezenas de agentes coordenados', label: 'Painel Multi-Agentes' },
+  { src: 'https://openclaude.evolutionfoundation.com.br/assets/print-chat-DELVefMZ.webp', alt: 'Chat IA — agentes respondendo em tempo real', label: 'Chat IA em Tempo Real' },
+  { src: 'https://openclaude.evolutionfoundation.com.br/assets/print-integrations-mcX4DEEM.webp', alt: 'Integrações — conectado com tudo que você usa', label: 'Integrações Nativas' },
 ];
 
 export default function SocialJobs() {
@@ -64,6 +49,7 @@ export default function SocialJobs() {
   const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '' });
   const [submitted, setSubmitted] = useState(false);
   const [hoveredAgent, setHoveredAgent] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -170,6 +156,14 @@ export default function SocialJobs() {
           </div>
         )}
 
+        {/* ===== LIGHTBOX ===== */}
+        {selectedImage !== null && (
+          <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 backdrop-blur-md" style={{ backgroundColor: 'rgba(0,0,0,0.92)' }} onClick={() => setSelectedImage(null)}>
+            <button onClick={() => setSelectedImage(null)} className="absolute top-6 right-6 text-gray-400 hover:text-white text-3xl transition-colors z-10">&times;</button>
+            <img src={NEXUS_IMAGES[selectedImage].src} alt={NEXUS_IMAGES[selectedImage].alt} className="max-w-[90vw] max-h-[85vh] rounded-2xl shadow-2xl border border-white/10" onClick={(e) => e.stopPropagation()} />
+          </div>
+        )}
+
         {/* ===== HERO ===== */}
         <section className="relative pt-32 pb-24 px-4 text-center overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-orange-500/8 via-[#0a0a0a] to-[#0a0a0a]" />
@@ -182,8 +176,8 @@ export default function SocialJobs() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
-              Seu concorrente posta todo dia.<br />
-              <span className="text-orange-400">Você ainda depende de freela.</span>
+              Enquanto seu concorrente posta,<br />
+              <span className="text-orange-400">você ainda depende de alguém...</span>
             </h1>
 
             <p className="text-xl text-gray-300 mb-3 max-w-2xl mx-auto leading-relaxed">
@@ -203,6 +197,28 @@ export default function SocialJobs() {
             <p className="text-gray-500 text-sm mt-4">
               Quiz rápido. Sem compromisso. Resposta em 2 minutos.
             </p>
+          </div>
+        </section>
+
+        {/* ===== SCREENSHOTS DO NEXUS ===== */}
+        <section className="py-16 px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {NEXUS_IMAGES.map((img, i) => (
+                <div
+                  key={i}
+                  className="group relative bg-[#111111]/80 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/[0.06] hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                  onClick={() => setSelectedImage(i)}
+                >
+                  <img src={img.src} alt={img.alt} className="w-full h-48 object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <span className="text-white font-bold text-sm">{img.label}</span>
+                    <p className="text-gray-400 text-xs mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200">Clique para ampliar</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -240,7 +256,6 @@ export default function SocialJobs() {
               <p className="text-gray-400 text-lg">Do zero ao post publicado em 4 passos.</p>
             </div>
             <div className="grid md:grid-cols-4 gap-6 relative">
-              {/* Connecting line */}
               <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-orange-500/0 via-orange-500/30 to-orange-500/0" />
               {STEPS.map((item, i) => (
                 <div key={i} className="text-center relative">
@@ -302,9 +317,9 @@ export default function SocialJobs() {
               <span className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
               <span className="text-orange-400 text-xs font-bold uppercase tracking-wider">Stack</span>
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Integrado com o que você já usa</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Conectado com o que você usa</h2>
             <p className="text-gray-400 text-lg mb-10 max-w-2xl mx-auto">
-              Conectado nativamente com as redes e ferramentas do seu dia a dia.
+              Integração nativa com as redes e ferramentas do seu dia a dia.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               {INTEGRATIONS.map((name) => (
@@ -332,38 +347,6 @@ export default function SocialJobs() {
                   <div>
                     <h3 className="text-white font-bold mb-1">{item.title}</h3>
                     <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ===== CASES ===== */}
-        <section className="py-20 px-4 bg-[#111111]/50">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-14">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Quem já faz</h2>
-              <p className="text-gray-400 text-lg">De zero presença a conteúdo que traz cliente.</p>
-            </div>
-            <div className="space-y-5">
-              {CASES.map((c, i) => (
-                <div key={i} className="bg-[#0a0a0a]/80 backdrop-blur-sm rounded-2xl border border-white/[0.06] overflow-hidden hover:border-orange-500/20 transition-all">
-                  <div className="p-6 sm:p-8">
-                    <div className="flex items-center gap-3 mb-4">
-                      <h3 className="text-white font-bold text-lg">{c.antes}</h3>
-                      <span className="text-orange-400 text-xs bg-orange-500/15 px-2 py-0.5 rounded-full font-semibold">{c.metric}</span>
-                    </div>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="bg-red-500/5 border border-red-500/10 rounded-xl p-4">
-                        <div className="text-red-400 text-xs font-bold uppercase tracking-wider mb-2">Antes</div>
-                        <p className="text-gray-400 text-sm">{c.antesDesc}</p>
-                      </div>
-                      <div className="bg-green-500/5 border border-green-500/10 rounded-xl p-4">
-                        <div className="text-green-400 text-xs font-bold uppercase tracking-wider mb-2">Depois</div>
-                        <p className="text-gray-300 text-sm">{c.depois}</p>
-                      </div>
-                    </div>
                   </div>
                 </div>
               ))}
