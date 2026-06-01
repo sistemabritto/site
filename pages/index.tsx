@@ -130,7 +130,7 @@ export default function Home() {
           </div>
         )}
 
-        {/* ===== HERO ===== */}
+        {/* ===== HERO — GANCHO + DOR + SOLUÇÃO ===== */}
         <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
           <div className="absolute inset-0 bg-gradient-to-b from-green-500/8 via-[#0a0a0a] to-[#0a0a0a]" />
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/5 rounded-full blur-[120px]" />
@@ -142,20 +142,32 @@ export default function Home() {
               <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Para donos de negócio digital</span>
             </div>
 
+            {/* GANCHO */}
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
               10% dos seus concorrentes<br />
               <span className="text-green-400">já operam com IA 24/7.</span><br />
               Sua empresa ainda faz tudo no braço?
             </h1>
 
-            <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto leading-relaxed">
-              WhatsApp que vende sozinho. Conteúdo infinito nas redes. Infra que não cai.<br />
-              Dezenas de agentes de IA trabalhando enquanto você dorme.
-            </p>
+            {/* DOR — twist the knife */}
+            <div className="max-w-2xl mx-auto mb-8 space-y-4">
+              <p className="text-xl text-gray-300 leading-relaxed">
+                Servidor cai e ninguém resolve até você acordar. Lead entra no WhatsApp e morre sem resposta. Postagem uma vez por semana — se der tempo. Enquanto isso, seu concorrente já tem <span className="text-white font-semibold">IA atendendo, vendendo e criando conteúdo</span> enquanto ele dorme.
+              </p>
+              <p className="text-lg text-gray-500 leading-relaxed">
+                Cada dia sem automação é um lead pro concorrente. Uma venda perdida. Uma hora que poderia ser estratégia — mas vira apagamento de incêndio.
+              </p>
+            </div>
 
-            <p className="text-lg text-gray-500 mb-10 max-w-2xl mx-auto">
-              Não é falta de esforço. <span className="text-green-400 font-semibold">É falta de braço.</span> A gente bota o braço de IA que sua empresa precisa.
-            </p>
+            {/* SOLUÇÃO */}
+            <div className="bg-[#111111]/80 border border-green-500/20 rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto mb-10 backdrop-blur-sm">
+              <p className="text-xl sm:text-2xl text-white font-semibold leading-relaxed">
+                A gente bota <span className="text-green-400">dezenas de agentes de IA</span> pra trabalhar 24/7 por você. WhatsApp que vende sozinho. Conteúdo infinito nas redes. Infra que não cai. <span className="text-green-400">Setup em 48h.</span>
+              </p>
+              <p className="text-gray-400 text-sm mt-3">
+                Não é falta de esforço. É falta de braço. E o braço chegou.
+              </p>
+            </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button 
@@ -171,13 +183,13 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ===== 3 CAMINHOS ===== */}
+        {/* ===== 3 CAMINHOS — com copy melhorada ===== */}
         <section className="py-24 px-4" id="solucoes">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">3 caminhos. Um sistema.</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Escolha o que sua empresa precisa agora</h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                Escolha o que sua empresa precisa agora. O sistema cresce com você.
+                O sistema cresce com você. Comece por um caminho e expanda quando quiser.
               </p>
             </div>
 
@@ -187,10 +199,10 @@ export default function Home() {
                 <div className="w-14 h-14 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center mb-5 group-hover:bg-green-500/20 transition-colors">
                   <span className="text-3xl">💬</span>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">WhatsApp IA</h3>
-                <p className="text-green-400 text-xs font-bold uppercase tracking-wider mb-3">Atende, qualifica e vende 24/7</p>
+                <h3 className="text-xl font-bold text-white mb-2">WhatsApp com IA</h3>
+                <p className="text-green-400 text-xs font-bold uppercase tracking-wider mb-3">Seu WhatsApp como central comercial</p>
                 <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                  Seu WhatsApp vira uma máquina de vendas. A IA qualifica leads, agenda reuniões e fecha negócios — sem você digitar uma palavra.
+                  Seu WhatsApp vira uma máquina de vendas. A IA qualifica leads, agenda reuniões, responde 24/7 e fecha negócios — sem você digitar uma palavra. Cada lead que entra é atendido na hora. Cada follow-up é feito no tempo certo. Zero lead perdido.
                 </p>
                 <a href="/quiz?source=whatsapp" className="inline-flex items-center gap-2 text-green-400 font-semibold text-sm hover:text-green-300 transition-colors">
                   Começar agora →
@@ -203,9 +215,9 @@ export default function Home() {
                   <span className="text-3xl">🔥</span>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">SocialJobs</h3>
-                <p className="text-orange-400 text-xs font-bold uppercase tracking-wider mb-3">Conteúdo infinito em 5 redes</p>
+                <p className="text-orange-400 text-xs font-bold uppercase tracking-wider mb-3">Sua marca em 5 redes, todo dia</p>
                 <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                  Dezenas de agentes criando posts diários em YouTube, TikTok, Instagram, LinkedIn e X. Sua marca em todo lugar, todo dia.
+                  Dezenas de agentes de IA criando posts diários em YouTube, TikTok, Instagram, LinkedIn e X. Conteúdo personalizado pro seu nicho, alinhado ao seu tom de voz, publicado automaticamente. Sua marca em todo lugar, todo dia — sem você abrir o Canva.
                 </p>
                 <a href="/socialjobs" className="inline-flex items-center gap-2 text-orange-400 font-semibold text-sm hover:text-orange-300 transition-colors">
                   Ver SocialJobs →
@@ -218,9 +230,9 @@ export default function Home() {
                   <span className="text-3xl">🏗️</span>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">Sistema Completo</h3>
-                <p className="text-[#D4AF37] text-xs font-bold uppercase tracking-wider mb-3">Infra própria + Orquestração</p>
+                <p className="text-[#D4AF37] text-xs font-bold uppercase tracking-wider mb-3">Seu negócio no piloto automático</p>
                 <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                  WhatsApp IA, SocialJobs, infra própria e dezenas de agentes coordenados por Kanban. Seu domínio. Seu código. White-label.
+                  WhatsApp IA + SocialJobs + infra própria + orquestração completa. Dezenas de agentes coordenados por Kanban, servidores que não caem, deploys automatizados. Seu domínio. Seu código. White-label. O sistema inteiro trabalhando por você.
                 </p>
                 <a href="/sistema" className="inline-flex items-center gap-2 text-[#D4AF37] font-semibold text-sm hover:text-[#C5A028] transition-colors">
                   Ver Sistema →
@@ -252,21 +264,18 @@ export default function Home() {
                   before: '400 leads/mês perdendo 60% por falta de follow-up. 1 recepcionista sobrecarregada.',
                   after: 'IA qualifica, agenda e reconfirma 24/7.',
                   result: '3x mais consultas. Zero lead perdido.',
-                  color: '#22C55E',
                 },
                 { 
                   name: 'Estúdio de Pilates', 
                   before: '3h/dia no WhatsApp marcando e remarcando aulas. Instrutor virava atendente.',
                   after: 'IA faz tudo sozinha. Aluno marca, remarca, cancela sem interação humana.',
                   result: '20h/semana economizadas.',
-                  color: '#22C55E',
                 },
                 { 
                   name: 'Delivery', 
                   before: 'Pedidos chegavam no WhatsApp e sumiam. Cliente ligava reclamando.',
                   after: 'Do pedido ao delivery, tudo automático via IA.',
                   result: '3x mais pedidos. Mesma equipe.',
-                  color: '#22C55E',
                 },
               ].map((c, i) => (
                 <div key={i} className="group bg-[#111111]/80 backdrop-blur-sm rounded-2xl border border-white/[0.06] hover:border-green-500/30 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
