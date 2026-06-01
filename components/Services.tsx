@@ -2,67 +2,65 @@ import React from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const products = [
-  {
-    id: 'whatsapp',
-    name: 'WhatsApp',
-    icon: '💬',
-    gradient: 'from-green-500/20 to-emerald-600/20',
-    border: 'border-green-500/30',
-    badge: 'Comercial',
-    title: 'Seu WhatsApp como central comercial',
-    problem: 'Chega de lead perdido no WhatsApp. Chega de digitação manual no CRM.',
-    solution: 'IA que qualifica, agenda, vende e reativa — 24/7, sem folga.',
-    features: [
-      'Qualifica leads 24/7 com IA',
-      'Agenda automático de consultas',
-      'Funil completo no WhatsApp + CRM',
-      'Reativa leads dormentes',
-      'Multi-atendentes com IA assistida',
-    ],
-    cta: 'Ver WhatsApp com IA',
-    href: '/whatsapp',
-  },
-  {
-    id: 'evonexus',
-    name: 'EvoNexus',
-    icon: '🏢',
-    gradient: 'from-blue-500/20 to-cyan-600/20',
-    border: 'border-blue-500/30',
-    badge: 'Empresa Completa',
-    title: 'Seu time de IA que nunca dorme',
-    problem: 'Chega de trocar de ferramenta o tempo todo. Chega de dashboard que não conversa.',
-    solution: 'EvoNexus + OpenClaude: 6 backends, tokens free, sem vendor lock-in.',
-    features: [
-      'Finanças, Projetos, Vendas, RH, Jurídico, Marketing',
-      'Claude Code: code review, debug, deploy multi-agente',
-      'OpenClaude: OpenRouter, OpenAI, Gemini, AWS, Vertex, Codex',
-      'Rotinas agendadas (diárias, semanais, mensais)',
-      'Dashboard web + memória persistente',
-    ],
-    cta: 'Ver EvoNexus',
-    href: '/evonexus',
-  },
-  {
-    id: 'hermes',
-    name: 'Hermes',
-    icon: '⚡',
-    gradient: 'from-orange-500/20 to-amber-600/20',
-    border: 'border-orange-500/30',
-    badge: 'Framework Aberto',
-    title: 'Liberdade total de provider',
-    problem: 'Chega de limite de tokens da Anthropic. Chega de vendor lock-in.',
-    solution: 'Hermes: multi-provider REAL. NVIDIA, OpenAI, Anthropic, Google, Ollama — por task.',
-    features: [
-      'NVIDIA NIM, OpenAI, Anthropic, Google, Ollama — escolha por task',
-      'Kanban nativo: cada task é um agente',
-      'Auto-aprendizado: skills da experiência, melhora durante uso',
-      'Delega e paraleliza: subagents isolados via RPC',
-      'Automações agendadas: cron built-in, reports diários',
-      'Runs anywhere: local, Docker, Vercel, GPU cluster',
-    ],
-    cta: 'Ver Hermes',
-    href: '/hermes',
-  },
+ {
+ id: 'whatsapp',
+ name: 'WhatsApp',
+ icon: '💬',
+ gradient: 'from-green-500/20 to-emerald-600/20',
+ border: 'border-green-500/30',
+ badge: 'Comercial',
+ title: 'Seu WhatsApp como central comercial',
+ problem: 'Chega de lead perdido no WhatsApp. Chega de digitação manual no CRM.',
+ solution: 'IA que qualifica, agenda, vende e reativa — 24/7, sem folga.',
+ features: [
+ 'Qualifica leads 24/7 com IA',
+ 'Agenda automático de consultas',
+ 'Funil completo no WhatsApp + CRM',
+ 'Reativa leads dormentes',
+ 'Multi-atendentes com IA assistida',
+ ],
+ cta: 'Ver WhatsApp com IA',
+ href: '/whatsapp',
+ },
+ {
+ id: 'socialjobs',
+ name: 'SocialJobs',
+ icon: '🔥',
+ gradient: 'from-orange-500/20 to-amber-600/20',
+ border: 'border-orange-500/30',
+ badge: 'Conteúdo Infinito',
+ title: 'Sua marca em 5 redes, todo dia',
+ problem: 'Chega de postar 1 vez por semana. Chega de conteúdo genérico que ninguém vê.',
+ solution: 'Dezenas de agentes criando posts, reels e shorts personalizados — publicação diária automática.',
+ features: [
+ 'Conteúdo diário em YouTube, TikTok, Instagram, LinkedIn e X',
+ 'Dezenas de agentes especialistas por domínio',
+ 'Calendário editorial automático',
+ 'Copy otimizada pra engajamento',
+ 'Aprova ou deixa no automático',
+ ],
+ cta: 'Ver SocialJobs',
+ href: '/socialjobs',
+ },
+ {
+ id: 'sistema',
+ name: 'Sistema',
+ icon: '⚡',
+ gradient: 'from-[#D4AF37]/20 to-amber-700/20',
+ border: 'border-[#D4AF37]/30',
+ badge: 'Workforce Completa',
+ title: 'Seu negócio no piloto automático',
+ problem: 'Chega de ferramenta pra cada coisa. Chega de IA que não conversa com a outra.',
+ solution: 'WhatsApp IA + SocialJobs + Infra & DevOps — dezenas de agentes operando tudo.',
+ features: [
+ 'WhatsApp que vende, redes que engajam, infra que não cai',
+ 'Agentes de Finanças, Projetos, RH, Jurídico, Marketing e mais',
+ 'Dashboard unificado com métricas reais',
+ 'Setup em 48h, sem contrato longo',
+ ],
+ cta: 'Ver Sistema Completo',
+ href: '/sistema',
+ },
 ];
 
 export default function Services() {
@@ -81,18 +79,18 @@ export default function Services() {
             Ecossistema Completo
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading text-white mb-6 leading-tight">
-            Workforce de IA<br />
-            <span className="gold-text">do zero ao deploy</span>
+          Workforce de IA<br />
+          <span className="gold-text">do atendimento ao deploy</span>
           </h2>
           <p className="text-white text-lg max-w-2xl mx-auto font-medium mt-4">
-            Chega de limites de tokens. Chega de vendor lock-in.
-            <br />
-            <span className="text-gray-200">Escolha seu caminho ou use os 4.</span>
+          Três caminhos. Uma workforce.
+          <br />
+          <span className="text-gray-200">Escolha um ou use tudo.</span>
           </p>
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {products.map((product) => (
             <a
               key={product.id}
@@ -156,17 +154,15 @@ export default function Services() {
 
         {/* Bottom CTA */}
         <div className="mt-16 text-center">
-          <p className="text-gray-400 text-sm mb-6">
-            Não sabe por onde começar?
-          </p>
-          <a
-            href="https://wa.me/5511914088571?text=Olá!%20Quero%20ajuda%20para%20escolher%20a%20workforce%20ideal"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-600 text-surface-900 px-8 py-4 rounded-full font-bold text-base transition-all duration-300 shadow-lg shadow-gold-500/25 hover:shadow-gold-500/40 hover:-translate-y-1"
-          >
-            Falar com especialista →
-          </a>
+        <p className="text-gray-400 text-sm mb-6">
+        Não sabe por onde começar?
+        </p>
+        <a
+        href="/quiz"
+        className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-600 text-surface-900 px-8 py-4 rounded-full font-bold text-base transition-all duration-300 shadow-lg shadow-gold-500/25 hover:shadow-gold-500/40 hover:-translate-y-1"
+        >
+        DESCUBRA MINHA SOLUÇÃO →
+        </a>
         </div>
       </div>
     </section>

@@ -2,14 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 
 const footerLinks = [
-  { label: 'WhatsApp', href: '/whatsapp' },
-  { label: 'SocialForce', href: '/socialforce' },
-  { label: 'EvoNexus', href: '/evonexus' },
-  { label: 'Hermes', href: '/hermes' },
-  { label: 'VPS', href: '/vps' },
-  { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
-  { label: 'Política de Privacidade', href: '/politicas-de-privacidade' },
-  { label: 'Termos de Uso', href: '/termos-de-uso' },
+ { label: 'WhatsApp', href: '/whatsapp' },
+ { label: 'SocialJobs', href: '/socialjobs' },
+ { label: 'Sistema', href: '/sistema' },
+ { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
+ { label: 'Política de Privacidade', href: '/politicas-de-privacidade' },
+ { label: 'Termos de Uso', href: '/termos-de-uso' },
 ];
 
 export default function Footer() {

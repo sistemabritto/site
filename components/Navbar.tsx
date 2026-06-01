@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import PhoneInput from './PhoneInput';
 
 const navLinks = [
-  { label: 'WhatsApp', href: '/whatsapp' },
-  { label: 'SocialForce', href: '/socialforce' },
-  { label: 'EvoNexus', href: '/evonexus' },
-  { label: 'Hermes', href: '/hermes' },
-  { label: 'VPS', href: '/vps' },
-  { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
+ { label: 'WhatsApp', href: '/whatsapp' },
+ { label: 'SocialJobs', href: '/socialjobs' },
+ { label: 'Sistema', href: '/sistema' },
+ { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
 ];
 
 export default function Navbar() {

@@ -76,8 +76,12 @@ export default function Quiz() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const utm: Record<string, string> = {};
+    const params = new URLSearchParams(window.location.search);
+    // Capture source param and persist it across steps
+    const source = params.get('source');
+    if (source) sessionStorage.setItem('quiz_source', source);
+
+    const utm: Record<string, string> = {};
       ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'fbclid', 'gclid'].forEach(key => {
         const val = params.get(key);
         if (val) utm[key] = val;
@@ -163,19 +167,35 @@ export default function Quiz() {
 
     const outcome = calculateOutcome(finalAnswers);
 
-    setTimeout(() => {
-      if (outcome === 'crm') {
-        window.location.href = '/resultado';
-      } else if (outcome === 'social') {
-        window.location.href = '/socialforce';
-      } else {
-        // Custom → WhatsApp do Felipe com contexto
-        const msg = encodeURIComponent(
-          `Fala, Felipe. Fiz a qualificação e preciso de algo SOB ENCOMENDA.\n\nDesafio: ${finalAnswers['q2']}\nOrçamento: ${finalAnswers['q3']}\nPrazo: ${finalAnswers['q4']}\n\nNome: ${name}\nEmail: ${email}\nWhatsApp: ${whatsapp}`
-        );
-        window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
-      }
-    }, 800);
+     setTimeout(() => {
+       // Source-based routing overrides quiz outcome
+       const savedSource = typeof window !== 'undefined' ? sessionStorage.getItem('quiz_source') : null;
+       if (savedSource === 'socialjobs') {
+         window.location.href = '/socialjobs';
+         return;
+       }
+       if (savedSource === 'sistema') {
+         window.location.href = '/sistema';
+         return;
+       }
+       if (savedSource === 'whatsapp') {
+         window.location.href = '/resultado';
+         return;
+       }
+
+       // Organic (no source): route by quiz outcome
+       if (outcome === 'crm') {
+         window.location.href = '/resultado';
+       } else if (outcome === 'social') {
+         window.location.href = '/socialjobs';
+       } else {
+         // Custom → WhatsApp do Felipe com contexto
+         const msg = encodeURIComponent(
+           `Fala, Felipe. Fiz a qualificação e preciso de algo SOB ENCOMENDA.\n\nDesafio: ${finalAnswers['q2']}\nOrçamento: ${finalAnswers['q3']}\nPrazo: ${finalAnswers['q4']}\n\nNome: ${name}\nEmail: ${email}\nWhatsApp: ${whatsapp}`
+         );
+         window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+       }
+     }, 800);
   };
 
   // === TELA DE CAPTURA ===
