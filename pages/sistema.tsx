@@ -114,8 +114,14 @@ export default function Sistema() {
     setSubmitted(true);
 
     setTimeout(() => {
-      window.location.href = '/quiz?source=sistema';
-    }, 800);
+     const qs = new URLSearchParams({
+     source: 'sistema',
+     name: customer.name || '',
+     email: customer.email || '',
+     whatsapp: customer.whatsapp || '',
+     }).toString();
+     window.location.href = `/quiz?${qs}`;
+     }, 800);
   };
 
   return (

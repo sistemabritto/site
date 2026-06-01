@@ -81,8 +81,14 @@ export default function SocialJobs() {
     setSubmitted(true);
 
     setTimeout(() => {
-      window.location.href = '/quiz?source=socialjobs';
-    }, 800);
+     const qs = new URLSearchParams({
+     source: 'socialjobs',
+     name: customer.name || '',
+     email: customer.email || '',
+     whatsapp: customer.whatsapp || '',
+     }).toString();
+     window.location.href = `/quiz?${qs}`;
+     }, 800);
   };
 
   return (

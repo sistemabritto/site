@@ -136,23 +136,97 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const rate = pageviews > 0 ? parseFloat(((clicks / pageviews) * 100).toFixed(2)) : 0;
         return { path, pageviews, clicks, rate };
       })
-      .filter(p => p.pageviews >= 3) // filter noise: at least 3 pageviews
-      .filter(p => p.rate > 0 || p.clicks > 0) // only pages with activity
+      .filter(p => p.pageviews >= 3)
+      .filter(p => p.rate > 0 || p.clicks > 0)
       .slice(0, 15);
 
+    // 11. Quiz funnel analytics — stage completion rates
+    let quizFunnel: any = null;
+    try {
+      const { data: quizData } = await supabase
+        .from('quiz_funnel')
+        .select('session_id, stage, quiz_source, created_at')
+        .gte('created_at', since);
+
+      if (quizData && quizData.length > 0) {
+        // Get unique sessions that started the quiz
+        const quizSessions = new Set(quizData.map((r: any) => r.session_id));
+        const totalQuizStarts = quizSessions.size;
+
+        // Count sessions that reached each stage
+        const stageSessions: Record<string, Set<string>> = {};
+        for (const row of quizData) {
+          if (!stageSessions[row.stage]) stageSessions[row.stage] = new Set();
+          stageSessions[row.stage].add(row.session_id);
+        }
+
+        // Define the funnel order
+        const funnelStages = [
+          'quiz-visited',
+          'email-captured',
+          'email-skipped',
+          'answered-q1',
+          'answered-q2',
+          'answered-q3',
+          'answered-q4',
+          'quiz-completed',
+        ];
+
+        quizFunnel = funnelStages
+          .filter(stage => stageSessions[stage])
+          .map(stage => ({
+            stage,
+            sessions: stageSessions[stage].size,
+            rate: totalQuizStarts > 0 ? parseFloat(((stageSessions[stage].size / totalQuizStarts) * 100).toFixed(1)) : 0,
+          }));
+
+        // Calculate drop-off between stages
+        for (let i = 1; i < quizFunnel.length; i++) {
+          const prev = quizFunnel[i - 1].sessions;
+          const curr = quizFunnel[i].sessions;
+          quizFunnel[i].dropoff = prev > 0 ? parseFloat((((prev - curr) / prev) * 100).toFixed(1)) : 0;
+        }
+
+        // Quiz completion by source
+        const sourceSessions: Record<string, Set<string>> = {};
+        const sourceCompleted: Record<string, Set<string>> = {};
+        for (const row of quizData) {
+          const src = row.quiz_source || 'organic';
+          if (!sourceSessions[src]) sourceSessions[src] = new Set();
+          sourceSessions[src].add(row.session_id);
+          if (row.stage === 'quiz-completed') {
+            if (!sourceCompleted[src]) sourceCompleted[src] = new Set();
+            sourceCompleted[src].add(row.session_id);
+          }
+        }
+
+        const quizBySource = Object.entries(sourceSessions).map(([source, sessions]) => ({
+          source,
+          starts: sessions.size,
+          completed: sourceCompleted[source]?.size || 0,
+          rate: sessions.size > 0 ? parseFloat((((sourceCompleted[source]?.size || 0) / sessions.size) * 100).toFixed(1)) : 0,
+        }));
+
+        quizFunnel = { stages: quizFunnel, bySource: quizBySource, totalStarts: totalQuizStarts };
+      }
+    } catch (err) {
+      console.error('quiz funnel analytics error (table may not exist yet):', err);
+    }
+
     return res.status(200).json({
-      totalPageviews: totalPageviews || 0,
-      uniqueVisitors: uniqueSessions,
-      onlineNow,
-      totalCtaClicks,
-      conversionRate: parseFloat(conversionRate),
-      topPages,
-      trafficBySource,
-      dailyViews,
-      ctaClicks,
-      conversionByPage,
-      range,
-      days,
+    totalPageviews: totalPageviews || 0,
+    uniqueVisitors: uniqueSessions,
+    onlineNow,
+    totalCtaClicks,
+    conversionRate: parseFloat(conversionRate),
+    topPages,
+    trafficBySource,
+    dailyViews,
+    ctaClicks,
+    conversionByPage,
+    quizFunnel,
+    range,
+    days,
     });
   } catch (err) {
     console.error('analytics error:', err);
