@@ -44,7 +44,7 @@ export default function Navbar() {
     setSubmitted(true);
 
     setTimeout(() => {
-      window.location.href = '/quiz-infra';
+    window.location.href = '/quiz';
     }, 800);
   };
 

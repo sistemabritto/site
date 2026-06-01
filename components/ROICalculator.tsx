@@ -89,7 +89,7 @@ export default function ROICalculator() {
           </div>
 
           <a
-            href="/whatsapp"
+            href="/quiz"
             className="block w-full bg-[#D4AF37] hover:bg-[#C5A028] text-black text-center py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-[#D4AF37]/25"
           >
             Quero esses resultados →

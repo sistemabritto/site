@@ -51,10 +51,10 @@ export default function Workforce() {
               Finanças, projetos, marketing, vendas, RH, jurídico — cada área com agentes especializados que executam, geram relatórios e tomam decisões. Tudo orquestrado. Tudo rodando.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="/qualificar-workforce" className="inline-flex items-center gap-3 bg-purple-500 hover:bg-purple-600 text-white px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-purple-500/25">
+              <a href="/quiz" className="inline-flex items-center gap-3 bg-purple-500 hover:bg-purple-600 text-white px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-purple-500/25">
                 QUERO MEU BRAÇO →
               </a>
-              <a href="/qualificar-infra" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-5 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
+              <a href="/quiz" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-5 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
                 AINDA NÃO SEI O QUE PRECISO →
               </a>
             </div>
@@ -168,10 +168,10 @@ export default function Workforce() {
             <h2 className="text-3xl font-bold text-white mb-6">Chega de fazer tudo no braço.</h2>
             <p className="text-gray-300 text-lg mb-8">Dezenas de agentes. Setup em 48h. Resultado em 7 dias.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="/qualificar-workforce" className="inline-flex items-center gap-3 bg-purple-500 hover:bg-purple-600 text-white px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-purple-500/25">
+              <a href="/quiz" className="inline-flex items-center gap-3 bg-purple-500 hover:bg-purple-600 text-white px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-purple-500/25">
                 QUERO MEU BRAÇO →
               </a>
-              <a href="/qualificar-infra" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-5 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
+              <a href="/quiz" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-5 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
                 AINDA NÃO SEI O QUE PRECISO →
               </a>
             </div>

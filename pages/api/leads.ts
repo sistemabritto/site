@@ -1,118 +1,126 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
-const supabaseKey = process.env.SUPABASE_SERVICE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-const EVOCRM_API_URL = 'https://evoapi.workflowapi.com.br/public/api/v1';
-const EVOCRM_TOKEN='3e21328779b31ad40f791f18126b86ffd41cb9739b7a9c3fde42bc296f20f20a';
+// ─── Config ──────────────────────────────────────────────────────
+const EVOCRM_BASE_URL = 'https://evoapi.workflowapi.com.br';
+const EVOCRM_API_TOKEN = '3e21328779b31ad40f791f18126b86ffd41cb9739b7a9c3fde42bc296f20f20a'; // token escopo completo
+const PIPELINE_ID = 'eb72af5c-28f7-4948-ae50-9c81922d161e'; // pipeline "Leads do Site"
+const DEFAULT_STAGE_ID = '0e31e649-af37-4a6f-87fb-cd25d52225e5'; // "Novo Lead"
 
-const DEFAULT_PIPELINE_ID = 'eb72af5c-28f7-4948-ae50-9c81922d161e';
-const DEFAULT_STAGE_ID = '0e31e649-af37-4a6f-87fb-cd25d52225e5';
+// ─── Suporte Supabase ─────────────────────────────────────────────
+let supabaseClient: any = null;
+async function getSupabaseClient() {
+  if (supabaseClient) return supabaseClient;
+  try {
+    const { createClient } = await import('@supabase/supabase-js');
+    supabaseClient = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+      process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+    );
+  } catch {
+    return null;
+  }
+  return supabaseClient;
+}
 
+// ─── Helpers ──────────────────────────────────────────────────────
+function normalizePhone(phone: string): string {
+  if (!phone) return '';
+  // Remove tudo que não é dígito ou +
+  let cleaned = phone.replace(/[^\d+]/g, '');
+  // Se não tem +55, adiciona
+  if (!cleaned.startsWith('+')) {
+    cleaned = '+55' + cleaned.replace(/^55/, '');
+  }
+  return cleaned;
+}
+
+// ─── API Handler ──────────────────────────────────────────────────
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { name, email, whatsapp, phone, source, utm_source, utm_medium, utm_campaign, utm_content, answers, order_bump, value } = req.body;
+  const { name, email, whatsapp, source, answers, utm, utm_source, utm_medium, utm_campaign } = req.body;
 
-  if (!email) {
-    return res.status(400).json({ error: 'email is required' });
+  // Validação mínima
+  if (!email && !whatsapp) {
+    return res.status(400).json({ error: 'Email ou WhatsApp obrigatório' });
   }
 
-  const phone_number = whatsapp || phone || '';
-  const now = new Date().toISOString();
+  const phoneNumber = normalizePhone(whatsapp || '');
+  const results: { supabase?: boolean; evocrm?: boolean } = {};
 
-  let supabaseOk = false;
-  let supabaseError = '';
-  let evocrmOk = false;
-  let evocrmError = '';
-
-  // 1) Save to Supabase
-  if (supabaseKey) {
-    try {
-      const supabase = createClient(supabaseUrl, supabaseKey, {
-        auth: { persistSession: false },
-      });
-      const { error, status } = await supabase.from('leads').insert({
+  // ── 1. Salvar Supabase (best effort) ────────────────────────────
+  try {
+    const supabase = await getSupabaseClient();
+    if (supabase) {
+      const { error } = await supabase.from('leads').insert({
         name: name || '',
-        email,
-        phone: phone_number,
-        source: source || 'direct',
+        email: email || '',
+        whatsapp: phoneNumber,
+        source: source || 'site',
+        answers: answers ? JSON.stringify(answers) : null,
         utm_source: utm_source || '',
         utm_medium: utm_medium || '',
         utm_campaign: utm_campaign || '',
-        utm_content: utm_content || '',
-        answers: answers ? JSON.stringify(answers) : null,
-        order_bump: order_bump || false,
-        value: value || 0,
-        created_at: now,
+        created_at: new Date().toISOString(),
       });
-      if (!error) {
-        supabaseOk = true;
-      } else {
-        supabaseError = `${error.code}: ${error.message}${error.details ? ' — ' + error.details : ''}`;
-        console.error('Supabase insert error:', error.code, error.message, error.details);
-      }
-    } catch (err: any) {
-      supabaseError = `catch: ${err?.message || String(err)}`;
-      console.error('Supabase exception:', supabaseError);
+      if (!error) results.supabase = true;
     }
-  } else {
-    supabaseError = 'no key configured';
+  } catch (err) {
+    console.error('[Supabase] lead save failed:', err);
   }
 
-  // 2) Create lead in EvoCRM
+  // ── 2. Criar lead no EvoCRM ────────────────────────────────────
   try {
-    const leadPayload: any = {
+    const dealName = `${name || 'Lead'} — ${source || 'site'}`;
+    const payload: any = {
       contact: {
-        name: name || email.split('@')[0],
-        email,
-        phone_number: phone_number ? (phone_number.startsWith('+') ? phone_number : `+55${phone_number.replace(/\D/g, '')}`) : '',
+        name: name || 'Lead sem nome',
       },
       deal: {
-        pipeline_id: DEFAULT_PIPELINE_ID,
+        pipeline_id: PIPELINE_ID,
         stage_id: DEFAULT_STAGE_ID,
-        name: `${name || email.split('@')[0]} — ${source || 'site'}`,
+        name: dealName,
       },
       custom_fields: {
-        source: source || 'direct',
+        source: source || 'site',
         lead_source: 'public_api',
-        order_bump: order_bump || false,
-        value: value || 0,
-        lead_metadata: {
-          utm_source: utm_source || 'direct',
-          utm_medium: utm_medium || '',
-          utm_campaign: utm_campaign || '',
-          utm_content: utm_content || '',
-          captured_at: now,
-          ...(answers ? { answers } : {}),
-        },
       },
     };
 
-    const evoResp = await fetch(`${EVOCRM_API_URL}/leads`, {
+    if (email) payload.contact.email = email;
+    if (phoneNumber) payload.contact.phone_number = phoneNumber;
+
+    // UTM fields
+    if (utm_source) payload.custom_fields.utm_source = utm_source;
+    if (utm_medium) payload.custom_fields.utm_medium = utm_medium;
+    if (utm_campaign) payload.custom_fields.utm_campaign = utm_campaign;
+
+    const response = await fetch(`${EVOCRM_BASE_URL}/public/api/v1/leads`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'api_access_token': EVOCRM_TOKEN,
+        'api_access_token': EVOCRM_API_TOKEN,
       },
-      body: JSON.stringify(leadPayload),
+      body: JSON.stringify(payload),
     });
 
-    if (evoResp.ok) {
-      evocrmOk = true;
+    if (response.ok || response.status === 422) {
+      // 201 = created, 422 = duplicate (lead already exists) — both are success
+      results.evocrm = true;
     } else {
-      const errBody = await evoResp.text();
-      evocrmError = errBody.slice(0, 200);
+      const body = await response.text();
+      console.error('[EvoCRM] lead create failed:', response.status, body);
     }
-  } catch (err: any) {
-    evocrmError = err?.message || 'fetch failed';
+  } catch (err) {
+    console.error('[EvoCRM] network error:', err);
   }
 
-  return res.status(200).json({
-    ok: supabaseOk || evocrmOk,
-    supabase: supabaseOk,
-    evocrm: evocrmOk,
+  // ── Sucesso se pelo menos um salvou ─────────────────────────────
+  const saved = results.supabase || results.evocrm;
+  return res.status(saved ? 200 : 500).json({
+    success: saved,
+    results,
   });
 }

@@ -38,8 +38,8 @@ export default function Home() {
 setSubmitted(true);
     
     setTimeout(() => {
-      sessionStorage.setItem('qualificacao_customer', JSON.stringify(formData));
-      window.location.href = '/qualificacao-digital';
+    sessionStorage.setItem('qualificacao_customer', JSON.stringify(formData));
+    window.location.href = '/quiz';
     }, 1000);
   };
 
@@ -155,16 +155,16 @@ setSubmitted(true);
 </p>
 
  <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button 
-                onClick={() => setShowModal(true)}
-                className="inline-flex items-center gap-3 bg-primary-500 hover:bg-primary-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-primary-500/25"
-              >
-                QUERO MEU BRAÇO →
-              </button>
-              <a href="/quiz-infra" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-5 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
-                PRECISO DE BRAÇO →
-              </a>
-</div>
+ <button 
+ onClick={() => setShowModal(true)}
+ className="inline-flex items-center gap-3 bg-primary-500 hover:bg-primary-600 text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-primary-500/25"
+ >
+ QUERO MEU BRAÇO →
+ </button>
+ <a href="/quiz" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-5 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
+ DESCUBRA MINHA SOLUÇÃO →
+ </a>
+ </div>
           </div>
         </section>
 
@@ -235,8 +235,8 @@ Do WhatsApp ao SaaS. A gente dá braço pra sua operação.
               >
                 QUERO MEU BRAÇO →
               </button>
-              <a href="/whatsapp" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-5 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
-                WHATSAPP + IA →
+              <a href="/quiz" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-5 rounded-full font-semibold text-lg transition-all duration-200 hover:bg-white/20 border border-white/20">
+                DESCUBRA MINHA SOLUÇÃO →
               </a>
             </div>
           </div>

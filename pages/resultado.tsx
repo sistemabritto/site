@@ -3,202 +3,81 @@ import Meta from '../components/Meta';
 import PhoneInput from '../components/PhoneInput';
 import { useRouter } from 'next/router';
 
-interface PlanResult {
-  id: string;
+const PHONE = '5511914088571';
+const CHECKOUT_URL = 'https://pay.abacatepay.com/checkout/D3c0yX8Tg';
+
+interface CustomerData {
   name: string;
-  price: number;
-  tag: string;
-  tagColor: string;
-  features: string[];
-  productId: string;
-}
-
-const PLANS: Record<string, PlanResult> = {
-  essencial: {
-    id: 'essencial',
-    name: 'Essencial',
-    price: 297,
-    tag: 'Recomendado para você',
-    tagColor: 'bg-white text-black',
-    features: [
-      'Atendente de IA 24/7 no WhatsApp',
-      'Qualificação automática de leads',
-      'Agendamento inteligente de consultas',
-      'CRM básico com funil comercial',
-      'Follow-up automático',
-      'Suporte via WhatsApp',
-    ],
-    productId: 'whatsapp-ia-basico',
-  },
-  completo: {
-    id: 'completo',
-    name: 'Completo',
-    price: 750,
-    tag: 'Mais Popular',
-    tagColor: 'bg-primary-500 text-black',
-    features: [
-      'Tudo do Essencial',
-      'CRM completo com funil avançado',
-      'Reativação de leads dormentes',
-      'Multi-atendentes com IA assistida',
-      'Integração Pipedrive/Sticky',
-      'Relatórios de ROI',
-      'Suporte prioritário',
-    ],
-    productId: 'crm-ia-completo',
-  },
-  premium: {
-    id: 'premium',
-    name: 'Premium',
-    price: 2500,
-    tag: 'Empresarial',
-    tagColor: 'bg-[#D4AF37] text-black',
-    features: [
-      'Tudo do Completo',
-      'Dezenas de agentes especializados',
-      'Finanças, Projetos, Marketing, Jurídico',
-      'Engineering agents (Code, Review, Debug)',
-      'Dashboard web completo',
-      'Onboarding dedicado',
-      'Suporte prioritário 24h',
-    ],
-    productId: 'evonexus-premium',
-  },
-};
-
-// Combos com order bump
-const COMBOS: Record<string, { productId: string; price: number }> = {
-  essencial: { productId: 'whatsapp-ia-combo-consultoria', price: 547 },
-  completo: { productId: 'crm-ia-completo-combo-consultoria', price: 1000 },
-  premium: { productId: 'evonexus-premium-combo-consultoria', price: 2750 },
-};
-
-function calculatePlan(answers: Record<string, string>): string {
-  const automationLevel = answers['p4'] || '';
-
-  // Se escolheu nível direto na P4, usa isso
-  if (automationLevel === 'basico') return 'essencial';
-  if (automationLevel === 'completo') return 'completo';
-  if (automationLevel === 'premium') return 'premium';
-  
-  // Fallback: se não tiver P4, usa essencial
-  return 'essencial';
+  email: string;
+  whatsapp: string;
 }
 
 export default function Resultado() {
   const router = useRouter();
-  const [plan, setPlan] = useState<PlanResult | null>(null);
+  const [customerData, setCustomerData] = useState<CustomerData>({ name: '', email: '', whatsapp: '' });
   const [loading, setLoading] = useState(true);
-  const [customerData, setCustomerData] = useState({ name: '', email: '', whatsapp: '' });
-  const [orderBump, setOrderBump] = useState(false);
   const [showDataModal, setShowDataModal] = useState(false);
   const [pendingCheckout, setPendingCheckout] = useState(false);
 
+  const [orderBump, setOrderBump] = useState(false);
+  const basePrice = 297;
+  const bumpPrice = 250;
+  const finalPrice = orderBump ? basePrice + bumpPrice : basePrice;
+
   useEffect(() => {
-    const answersParam = router.query.answers as string;
-    let answers: Record<string, string> = {};
-
-    if (answersParam) {
-      try {
-        answers = JSON.parse(decodeURIComponent(answersParam));
-      } catch {
-        // ignore
-      }
-    } else if (typeof window !== 'undefined') {
-      const stored = sessionStorage.getItem('qualificacao_answers');
-      if (stored) {
-        try {
-          answers = JSON.parse(stored);
-        } catch {
-          // ignore
-        }
-      }
-    }
-
-    // Recuperar dados do cliente do sessionStorage
     if (typeof window !== 'undefined') {
       const storedCustomer = sessionStorage.getItem('qualificacao_customer');
       if (storedCustomer) {
-        try {
-          setCustomerData(JSON.parse(storedCustomer));
-        } catch {
-          // ignore
-        }
+        try { setCustomerData(JSON.parse(storedCustomer)); } catch {}
       }
     }
-
-    const planId = calculatePlan(answers);
-    setPlan(PLANS[planId] || PLANS.essencial);
     setLoading(false);
-  }, [router.query]);
+  }, []);
 
-  const handleCheckout = async () => {
-    // Se não tiver dados do cliente, pedir antes
+  const handleCheckout = () => {
     if (!customerData.email || !customerData.whatsapp) {
       setPendingCheckout(true);
       setShowDataModal(true);
       return;
     }
-    
-    await doCheckout();
+    doCheckout();
   };
 
-  const handleDataSubmit = async (e: React.FormEvent) => {
+  const handleDataSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!customerData.email || !customerData.whatsapp) return;
-    
-    // Salvar no sessionStorage
+
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('qualificacao_customer', JSON.stringify(customerData));
     }
-    
+
     setShowDataModal(false);
-    await doCheckout();
+    doCheckout();
   };
 
-  const doCheckout = async () => {
-    if (!plan) return;
-    
-    // Premium → WhatsApp direto (high ticket)
-    if (plan.id === 'premium') {
-      // Mensagem sem preço, conforme regra de copy
-      const msg = encodeURIComponent(`Olá! Fiz a qualificação e quero conhecer o plano Premium. Nome: ${customerData.name}, Email: ${customerData.email}`);
-      window.location.href = `https://wa.me/5511914088571?text=${msg}`;
-      return;
-    }
+  const doCheckout = () => {
+    const name = customerData.name || '';
+    const email = customerData.email || '';
+    const whatsapp = customerData.whatsapp || '';
 
-    // Essencial e Completo → Checkout AbacatePay
-    try {
-      const productId = orderBump ? COMBOS[plan.id]?.productId : plan.productId;
-      
-      const res = await fetch('/api/abacatepay/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          productId,
-          orderBump,
-          customer: customerData.email ? {
-            email: customerData.email,
-            name: customerData.name,
-            cellphone: customerData.whatsapp,
-          } : undefined,
-        }),
-      });
-      const data = await res.json();
-      console.log('[Checkout Response]', data);
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error('No checkout URL');
-      }
-    } catch (err) {
-      console.error('[Checkout Error]', err);
-      const msg = encodeURIComponent(`Olá! Quero o plano ${plan.name} (R$${plan.price}/mês). Nome: ${customerData.name}, Email: ${customerData.email}`);
-      window.location.href = `https://wa.me/5511914088571?text=${msg}`;
-    }
+    const url = new URL(CHECKOUT_URL);
+    url.searchParams.set('customer', JSON.stringify({
+      name,
+      email,
+      cellphone: whatsapp,
+    }));
+
+    window.location.href = url.toString();
   };
 
-  if (loading || !plan) {
+  const handleWhatsAppFallback = () => {
+    const msg = encodeURIComponent(
+      `Fala, Felipe. Quero o CRM WhatsApp IA (R$ ${finalPrice}/mês). Nome: ${customerData.name}, Email: ${customerData.email}, WhatsApp: ${customerData.whatsapp}`
+    );
+    window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+  };
+
+  if (loading) {
     return (
       <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
         <div className="text-center">
@@ -209,17 +88,15 @@ export default function Resultado() {
     );
   }
 
-  const finalPrice = orderBump ? (COMBOS[plan.id]?.price || plan.price) : plan.price;
-
   return (
     <>
       <Meta 
-        title={`Plano ${plan.name} recomendado — Sistema Britto`}
-        description="Veja o plano ideal para sua empresa baseado nas suas respostas."
+        title="CRM WhatsApp + IA — Sistema Britto"
+        description="Automação de WhatsApp com IA. CRM inteligente que vende 24/7. A partir de R$ 297/mês."
         path="/resultado"
       />
 
-      {/* ===== MODAL CAPTURA DADOS (se não tiver) ===== */}
+      {/* ===== MODAL CAPTURA (se faltar dados) ===== */}
       {showDataModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0,0,0,0.9)' }}>
           <div className="bg-[#111111] rounded-3xl p-8 max-w-md w-full border border-green-500/30 relative">
@@ -273,7 +150,9 @@ export default function Resultado() {
                 CONTINUAR →
               </button>
               
-              <p className="text-gray-500 text-xs text-center">Ao continuar, você concorda com nossos <a href="/termos-de-uso" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">termos</a> e <a href="/politicas-de-privacidade" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">políticas de privacidade</a>. Somente assuntos do seu interesse.</p>
+              <p className="text-gray-500 text-xs text-center">
+                Ao continuar, você concorda com nossos <a href="/termos-de-uso" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">termos</a> e <a href="/politicas-de-privacidade" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">políticas de privacidade</a>. Somente assuntos do seu interesse.
+              </p>
             </form>
           </div>
         </div>
@@ -290,27 +169,36 @@ export default function Resultado() {
               </svg>
             </div>
             <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Plano recomendado para você:
+              Seu plano ideal:
             </h1>
           </div>
 
-          {/* Plan Card */}
+          {/* Plan Card — Plano Único */}
           <div className="bg-[#111111] rounded-3xl p-8 sm:p-10 border border-green-500/30 mb-8">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-bold text-white">{plan.name}</h2>
-              <span className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase ${plan.tagColor}`}>
-                {plan.tag}
+              <h2 className="text-3xl font-bold text-white">CRM WhatsApp + IA</h2>
+              <span className="px-4 py-1.5 rounded-full text-xs font-bold uppercase bg-primary-500 text-black">
+                Plano Único
               </span>
             </div>
 
-            <div className="flex items-baseline gap-1 mb-8">
+            <div className="flex items-baseline gap-1 mb-2">
               <span className="text-white text-lg">R$</span>
               <span className="text-6xl font-bold text-white">{finalPrice.toLocaleString('pt-BR')}</span>
               <span className="text-gray-400 text-xl">/mês</span>
             </div>
+            <p className="text-gray-500 text-sm mb-8">Cancele quando quiser. Sem fidelidade.</p>
 
             <ul className="space-y-4 mb-8">
-              {plan.features.map((feature, i) => (
+              {[
+                'Atendente de IA 24/7 no WhatsApp',
+                'Qualificação automática de leads',
+                'Agendamento inteligente',
+                'CRM integrado com funil comercial',
+                'Follow-up automático',
+                'Setup em até 48h',
+                'Suporte via WhatsApp',
+              ].map((feature, i) => (
                 <li key={i} className="flex items-start gap-3 text-gray-300">
                   <span className="text-green-400 text-xl mt-0.5">✓</span>
                   <span>{feature}</span>
@@ -337,24 +225,24 @@ export default function Resultado() {
                     {orderBump && <span className="text-black font-bold text-xs">✓</span>}
                   </div>
                 </div>
- <div className="flex-1">
-          <div className="flex items-center justify-between">
-            <span className="text-white font-bold text-sm">+ Especialista Técnico no WhatsApp</span>
-            <span className="text-[#D4AF37] font-bold text-sm">R$ 250/mês</span>
-          </div>
-          <p className="text-gray-300 text-xs mt-1 leading-relaxed">
-            Não configure IA sozinho. Tenha um especialista pra garantir que seu Docker não quebre e 
-            sua API não saia do ar. <strong className="text-white">SLA 24h</strong>.
-          </p>
-          <div className="mt-2 flex items-center gap-2">
-            <span className="bg-[#D4AF37]/20 text-[#D4AF37] text-xs px-2 py-0.5 rounded-full font-semibold">
-              ⚡ Recomendado
-            </span>
-            <span className="text-gray-400 text-xs">
-              Quem tem IA precisa de suporte humano pra configurar
-            </span>
-          </div>
-        </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-white font-bold text-sm">+ Especialista Técnico no WhatsApp</span>
+                    <span className="text-[#D4AF37] font-bold text-sm">R$ 250/mês</span>
+                  </div>
+                  <p className="text-gray-300 text-xs mt-1 leading-relaxed">
+                    Não configure IA sozinho. Tenha um especialista pra garantir que tudo funcione.
+                    <strong className="text-white"> SLA 24h</strong>.
+                  </p>
+                  <div className="mt-2 flex items-center gap-2">
+                    <span className="bg-[#D4AF37]/20 text-[#D4AF37] text-xs px-2 py-0.5 rounded-full font-semibold">
+                      ⚡ Recomendado
+                    </span>
+                    <span className="text-gray-400 text-xs">
+                      Quem tem IA precisa de suporte humano pra configurar
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -371,18 +259,20 @@ export default function Resultado() {
           </div>
 
           {/* Garantia */}
-          <div className="bg-[#111111] rounded-2xl p-6 border border-white/10 text-center">
+          <div className="bg-[#111111] rounded-2xl p-6 border border-white/10 text-center mb-8">
             <div className="text-4xl mb-3">🛡️</div>
             <h3 className="text-lg font-bold text-white mb-2">7 dias de garantia incondicional</h3>
             <p className="text-gray-400 text-sm">Se não gostar, devolvemos seu dinheiro. Sem perguntas.</p>
           </div>
 
-          {/* Outros planos */}
-          <div className="mt-12 text-center">
-            <p className="text-gray-500 text-sm mb-4">Quer ver outros planos?</p>
-            <a href="/workforce#plano" className="text-green-400 hover:text-green-300 font-semibold">
-              Ver todos os planos →
-            </a>
+          {/* Fallback WhatsApp */}
+          <div className="text-center">
+            <button
+              onClick={handleWhatsAppFallback}
+              className="text-gray-500 hover:text-green-400 text-sm underline transition-colors"
+            >
+              Prefere falar com a gente primeiro? Chama no WhatsApp →
+            </button>
           </div>
 
         </div>

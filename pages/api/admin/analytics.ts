@@ -124,6 +124,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // 9. Conversion rate (CTA clicks / pageviews)
     const conversionRate = totalPageviews ? ((totalCtaClicks / totalPageviews) * 100).toFixed(2) : '0.00';
 
+    // 10. Conversion rate per page: for each page, pageviews and CTA clicks
+    const ctaByPage: Record<string, number> = {};
+    for (const row of ctaData || []) {
+      ctaByPage[row.page] = (ctaByPage[row.page] || 0) + 1;
+    }
+    const conversionByPage = Object.entries(pagesMap)
+      .sort((a, b) => b[1] - a[1])
+      .map(([path, pageviews]) => {
+        const clicks = ctaByPage[path] || 0;
+        const rate = pageviews > 0 ? parseFloat(((clicks / pageviews) * 100).toFixed(2)) : 0;
+        return { path, pageviews, clicks, rate };
+      })
+      .filter(p => p.pageviews >= 3) // filter noise: at least 3 pageviews
+      .filter(p => p.rate > 0 || p.clicks > 0) // only pages with activity
+      .slice(0, 15);
+
     return res.status(200).json({
       totalPageviews: totalPageviews || 0,
       uniqueVisitors: uniqueSessions,
@@ -134,6 +150,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       trafficBySource,
       dailyViews,
       ctaClicks,
+      conversionByPage,
       range,
       days,
     });

@@ -16,8 +16,6 @@ Allow: /workforce
 Allow: /whatsapp
 Allow: /vps
 Allow: /consultoria-devops
-Allow: /qualificar-workforce
-Allow: /qualificar-infra
 
 # ── Rotas Técnicas & Educativas ──────────────────────────────
 Allow: /evonexus
