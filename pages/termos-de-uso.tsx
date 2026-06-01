@@ -1,4 +1,6 @@
 import Meta from '../components/Meta';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -9,14 +11,15 @@ import Link from 'next/link';
 
 export default function TermosDeUso() {
   return (
-    <>
-<Meta 
-        title="Termos de Uso | Sistema Britto"
-        description="Termos e condições de uso dos serviços da Sistema Britto."
-        path="/termos-de-uso"
-      />
+  <>
+  <Meta 
+  title="Termos de Uso | Sistema Britto"
+  description="Termos e condições de uso dos serviços da Sistema Britto."
+  path="/termos-de-uso"
+  />
+  <Navbar />
 
-      <div className="min-h-screen bg-surface-950">
+  <div className="min-h-screen bg-surface-950 pt-20">
         {/* Header */}
         <div className="aurora-bg">
           <div className="bg-surface-950/90">
@@ -189,12 +192,13 @@ export default function TermosDeUso() {
 
           {/* Back link */}
           <div className="mt-16 pt-8 border-t border-white/10">
-            <Link href="/" className="text-primary-400 hover:text-primary-300 text-sm font-medium transition-colors">
-              ← Voltar ao site
-            </Link>
+          <Link href="/" className="text-primary-400 hover:text-primary-300 text-sm font-medium transition-colors">
+          ← Voltar ao site
+          </Link>
           </div>
-        </div>
-      </div>
-    </>
+          </div>
+          </div>
+          <Footer />
+          </>
   );
 }

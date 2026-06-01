@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import PhoneInput from './PhoneInput';
 
 const navLinks = [
-  { label: 'Workforce', href: '/workforce' },
   { label: 'WhatsApp', href: '/whatsapp' },
+  { label: 'SocialForce', href: '/socialforce' },
+  { label: 'EvoNexus', href: '/evonexus' },
+  { label: 'Hermes', href: '/hermes' },
   { label: 'VPS', href: '/vps' },
   { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
 ];

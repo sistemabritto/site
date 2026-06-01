@@ -1,4 +1,6 @@
 import Meta from '../components/Meta';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -9,14 +11,15 @@ import Link from 'next/link';
 
 export default function PoliticasDePrivacidade() {
   return (
-    <>
-<Meta 
-        title="Política de Privacidade | Sistema Britto"
-        description="Política de privacidade e tratamento de dados pessoais conforme LGPD."
-        path="/politicas-de-privacidade"
-      />
+  <>
+  <Meta 
+  title="Política de Privacidade | Sistema Britto"
+  description="Política de privacidade e tratamento de dados pessoais conforme LGPD."
+  path="/politicas-de-privacidade"
+  />
+  <Navbar />
 
-      <div className="min-h-screen bg-surface-950">
+  <div className="min-h-screen bg-surface-950 pt-20">
         {/* Header */}
         <div className="aurora-bg">
           <div className="bg-surface-950/90">
@@ -181,12 +184,13 @@ export default function PoliticasDePrivacidade() {
 
           {/* Back link */}
           <div className="mt-16 pt-8 border-t border-white/10">
-            <Link href="/" className="text-primary-400 hover:text-primary-300 text-sm font-medium transition-colors">
-              ← Voltar ao site
-            </Link>
+          <Link href="/" className="text-primary-400 hover:text-primary-300 text-sm font-medium transition-colors">
+          ← Voltar ao site
+          </Link>
           </div>
-        </div>
-      </div>
-    </>
+          </div>
+          </div>
+          <Footer />
+          </>
   );
 }
