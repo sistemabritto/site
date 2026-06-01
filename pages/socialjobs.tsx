@@ -5,38 +5,57 @@ import Footer from '../components/Footer';
 import PhoneInput from '../components/PhoneInput';
 
 const NETWORKS = [
-  { icon: '📺', name: 'YouTube', desc: 'Shorts e vídeos que ranqueiam sozinhos' },
-  { icon: '🎵', name: 'TikTok', desc: 'Reels virais com trending audio' },
-  { icon: '📸', name: 'Instagram', desc: 'Posts, reels e stories diários' },
-  { icon: '💼', name: 'LinkedIn', desc: 'Autoridade + prospecção B2B' },
-  { icon: '✖️', name: 'X (Twitter)', desc: 'Threads e opinião que engaja' },
+  { icon: '📺', name: 'YouTube', desc: 'Shorts que ranqueiam sozinhos. Vídeos longos com script gerado por IA.', metric: 'Shorts + Longos' },
+  { icon: '🎵', name: 'TikTok', desc: 'Reels virais com trending audio. Hook nos primeiros 2 segundos.', metric: 'Reels Virais' },
+  { icon: '📸', name: 'Instagram', desc: 'Feed curado, reels diários e stories que convertem.', metric: 'Feed + Reels + Stories' },
+  { icon: '💼', name: 'LinkedIn', desc: 'Autoridade + prospecção B2B. Posts que colocam você como referência.', metric: 'Autoridade B2B' },
+  { icon: '✖️', name: 'X (Twitter)', desc: 'Threads que explodem. Opinião que vira debate e atrai seguidores.', metric: 'Threads + Opinião' },
 ];
 
 const AGENTS = [
-  { name: 'Pixel', domain: 'Conteúdo', desc: 'Cria posts, legendas e calendário editorial' },
-  { name: 'Mako', domain: 'Marketing', desc: 'Campanhas, SEO, marca e copy estratégica' },
-  { name: 'Nova', domain: 'Produto', desc: 'Posicionamento e narrativa de lançamento' },
-  { name: 'Pulse', domain: 'Comunidade', desc: 'Engajamento, DMs e sentimento do público' },
+  { name: 'Pixel', domain: 'Conteúdo', desc: 'Cria posts, legendas e calendário editorial. Sabe seu tom de voz de cor.', detail: 'Memória persistente do seu estilo. Nunca repete formato. Aprende o que engaja e replica.' },
+  { name: 'Mako', domain: 'Marketing', desc: 'Campanhas, SEO, marca e copy estratégica.', detail: 'Analisa concorrentes, sugere ângulos, posiciona sua marca no ponto certo.' },
+  { name: 'Nova', domain: 'Produto', desc: 'Posicionamento e narrativa de lançamento.', detail: 'Transforma feature em benefício. Sabe vender sem parecer vendedor.' },
+  { name: 'Pulse', domain: 'Comunidade', desc: 'Engajamento, DMs e sentimento do público.', detail: 'Responde comentários, qualifica DMs e identifica quando alguém tá pronto pra comprar.' },
 ];
 
-const INTEGRATIONS = ['Instagram', 'YouTube', 'LinkedIn', 'TikTok', 'X (Twitter)', 'Notion', 'Google Workspace', 'Discord', 'Telegram', 'Canva'];
+const INTEGRATIONS = ['Instagram', 'YouTube', 'LinkedIn', 'TikTok', 'X (Twitter)', 'Notion', 'Google Workspace', 'Discord', 'Telegram', 'Canva', 'ChatGPT', 'Figma'];
 
 const CASES = [
   {
     antes: 'Escritório de Advocacia',
     antesDesc: 'Zero presença digital. Ninguém conhecia o escritório fora da cidade.',
-    depois: 'Meses depois: dezenas de novos clientes vieram pelo LinkedIn. Autoridade construída sem esforço manual.',
+    depois: 'Dezenas de novos clientes vieram pelo LinkedIn. Autoridade construída sem esforço manual.',
+    metric: 'LinkedIn como canhal de aquisição',
   },
   {
     antes: 'Clínica Estética',
     antesDesc: 'Postava 1 vez por semana. Sem reels. Zero alcance orgânico.',
     depois: 'Conteúdo diário em 5 redes. Reels com dezenas de milhares de views. Agenda lotou.',
+    metric: 'Agenda lotada orgânico',
   },
   {
     antes: 'SaaS de Produtividade',
     antesDesc: 'Blog morto. Sem social. Usuários só vinham de ads pagos.',
     depois: 'YouTube + X como canais de aquisição. CAC caiu significativamente com conteúdo orgânico.',
+    metric: 'CAC reduzido com orgânico',
   },
+];
+
+const BENEFITS = [
+  { icon: '🎬', title: 'Conteúdo todo dia sem você pensar', desc: 'YouTube Shorts, TikTok, Instagram Reels, LinkedIn, X — a IA cria, edita e agenda. Você aprova ou deixa no automático.' },
+  { icon: '🤖', title: 'Dezenas de agentes, cada um especialista', desc: 'Não é um chatbot genérico. É uma workforce com agentes de copy, vídeo, SEO, comunicação e marca.' },
+  { icon: '📅', title: 'Calendário editorial que se ajusta sozinho', desc: 'A IA planeja a semana inteira. Se um reel bomba, ela replica o formato. Se um horário não funciona, ela muda.' },
+  { icon: '🎯', title: 'Copy que vende sem parecer vendedor', desc: 'Legendas que convertem. Hooks que param o scroll. CTAs que levam pro seu WhatsApp ou site.' },
+  { icon: '📊', title: 'O que funciona escala. O que não funciona, corta.', desc: 'Métricas semanais. A IA identifica o que tá engajando, qual rede priorizar e onde investir mais.' },
+  { icon: '🛡️', title: '7 dias pra testar. Sem risco.', desc: 'Se o conteúdo não te convencer nos primeiros 7 dias, devolvemos seu investimento. Zero burocracia.' },
+];
+
+const STEPS = [
+  { num: '01', title: 'Conectamos', desc: '5 redes linkadas ao sistema em 48h. Sua conta, sua audiência, seus dados.' },
+  { num: '02', title: 'IA cria', desc: 'Dezenas de agentes geram posts, reels, shorts e threads alinhados ao seu tom de voz.' },
+  { num: '03', title: 'Você aprova', desc: 'Todo conteúdo passa por você antes de publicar. Ou deixa no piloto automático.' },
+  { num: '04', title: 'Publica e aprende', desc: 'Conteúdo vai pro ar todo dia. A IA mediu o que engajou e ajusta a próxima semana.' },
 ];
 
 export default function SocialJobs() {
@@ -44,6 +63,7 @@ export default function SocialJobs() {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [hoveredAgent, setHoveredAgent] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -81,14 +101,14 @@ export default function SocialJobs() {
     setSubmitted(true);
 
     setTimeout(() => {
-     const qs = new URLSearchParams({
-     source: 'socialjobs',
-     name: customer.name || '',
-     email: customer.email || '',
-     whatsapp: customer.whatsapp || '',
-     }).toString();
-     window.location.href = `/quiz?${qs}`;
-     }, 800);
+      const qs = new URLSearchParams({
+        source: 'socialjobs',
+        name: customer.name || '',
+        email: customer.email || '',
+        whatsapp: customer.whatsapp || '',
+      }).toString();
+      window.location.href = `/quiz?${qs}`;
+    }, 800);
   };
 
   return (
@@ -103,31 +123,34 @@ export default function SocialJobs() {
 
         {/* ===== MODAL DE CAPTURA ===== */}
         {showModal && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0,0,0,0.9)' }}>
-            <div className="bg-[#111111] rounded-3xl p-8 max-w-md w-full border border-orange-500/30 relative">
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-sm" style={{ backgroundColor: 'rgba(0,0,0,0.85)' }}>
+            <div className="bg-[#111111] rounded-3xl p-8 max-w-md w-full border border-orange-500/30 relative shadow-2xl shadow-orange-500/10">
               {!submitted ? (
                 <>
-                  <button onClick={() => setShowModal(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+                  <button onClick={() => setShowModal(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl transition-colors">&times;</button>
                   <div className="text-center mb-6">
-                    <div className="text-4xl mb-3">🔥</div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Quer conteúdo todo dia nas redes?</h3>
-                    <p className="text-gray-300 text-sm">Seus dados preenchem o quiz automático. Sem repetir nada.</p>
+                    <div className="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 rounded-full px-3 py-1.5 mb-4">
+                      <span className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-pulse" />
+                      <span className="text-orange-400 text-xs font-bold uppercase tracking-wider">SocialJobs</span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-2">Seu conteúdo nunca mais para</h3>
+                    <p className="text-gray-400 text-sm">Seus dados preenchem o quiz automático. Sem repetir nada.</p>
                   </div>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                       <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
-                      <input type="text" placeholder="Seu nome" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none" />
+                      <input type="text" placeholder="Seu nome" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none backdrop-blur-sm transition-colors" />
                     </div>
                     <div>
                       <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
-                      <input type="email" placeholder="seu@email.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none" required />
+                      <input type="email" placeholder="seu@email.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none backdrop-blur-sm transition-colors" required />
                     </div>
                     <PhoneInput
                       value={formData.whatsapp}
                       onChange={(v) => setFormData({...formData, whatsapp: v})}
                       accentColor="#F97316"
                     />
-                    <button type="submit" className="w-full bg-orange-500 hover:bg-orange-600 text-black py-4 rounded-full font-bold text-lg transition-all">
+                    <button type="submit" className="w-full bg-orange-500 hover:bg-orange-600 text-black py-4 rounded-full font-bold text-lg transition-all shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98]">
                       QUERO CONTEÚDO TODO DIA →
                     </button>
                     <p className="text-gray-500 text-xs text-center">Ao continuar, você concorda com nossos <a href="/termos-de-uso" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">termos</a> e <a href="/politicas-de-privacidade" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">políticas de privacidade</a>.</p>
@@ -135,8 +158,8 @@ export default function SocialJobs() {
                 </>
               ) : (
                 <div className="text-center py-8">
-                  <div className="text-5xl mb-4">✅</div>
-                  <h3 className="text-xl font-bold text-white mb-2">Recebido!</h3>
+                  <div className="text-5xl mb-4">🔥</div>
+                  <h3 className="text-xl font-bold text-white mb-2">Bora criar conteúdo!</h3>
                   <p className="text-gray-300 text-sm">Redirecionando pro quiz de qualificação…</p>
                   <div className="w-full bg-white/10 rounded-full h-1.5 mt-4 overflow-hidden">
                     <div className="bg-orange-500 h-full rounded-full animate-pulse" style={{ width: '60%' }}></div>
@@ -148,57 +171,61 @@ export default function SocialJobs() {
         )}
 
         {/* ===== HERO ===== */}
-        <section className="relative pt-32 pb-20 px-4 text-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-[#0a0a0a] to-[#0a0a0a]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-3xl" />
-          <div className="relative z-10 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 rounded-full px-4 py-2 mb-8">
+        <section className="relative pt-32 pb-24 px-4 text-center overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-orange-500/8 via-[#0a0a0a] to-[#0a0a0a]" />
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-500/8 rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange-500/20 to-transparent" />
+          <div className="relative z-10 max-w-4xl mx-auto">
+            <div className="inline-flex items-center gap-2 bg-orange-500/15 border border-orange-500/25 rounded-full px-4 py-2 mb-8">
               <span className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
               <span className="text-orange-400 text-xs font-bold uppercase tracking-wider">SocialJobs</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6 leading-tight">
-              Sua marca em <span className="text-orange-400">5 redes</span>.<br />
-              Todo dia. Sem você postar nada.
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
+              Seu concorrente posta todo dia.<br />
+              <span className="text-orange-400">Você ainda depende de freela.</span>
             </h1>
 
-            <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-300 mb-3 max-w-2xl mx-auto leading-relaxed">
               Dezenas de agentes de IA criando posts, reels, shorts e threads diários — personalizados pro seu negócio.
             </p>
-            <p className="text-gray-400 mb-10 max-w-2xl mx-auto">
+            <p className="text-gray-500 mb-10 max-w-2xl mx-auto">
               YouTube, TikTok, Instagram, LinkedIn e X — conteúdo infinito, publicado automaticamente, 7 dias por semana.
             </p>
 
             <button
               onClick={() => setShowModal(true)}
-              className="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-black px-12 py-6 rounded-full font-bold text-2xl transition-all duration-300 shadow-2xl shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-105"
+              className="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl sm:text-2xl transition-all duration-300 shadow-2xl shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-105 active:scale-[0.98]"
             >
               QUERO CONTEÚDO TODO DIA →
             </button>
 
             <p className="text-gray-500 text-sm mt-4">
-              Resposta em 2 minutos. Sem compromisso.
+              Quiz rápido. Sem compromisso. Resposta em 2 minutos.
             </p>
           </div>
         </section>
 
         {/* ===== 5 REDES ===== */}
-        <section className="py-20 px-4 bg-[#111111]">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-4 text-center">5 redes. Post diário em cada uma.</h2>
-            <p className="text-gray-400 text-center mb-12 text-lg">
-              A IA cria, edita e publica. Você aprova ou deixa no automático.
-            </p>
+        <section className="py-20 px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-14">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">5 redes. Post diário em cada uma.</h2>
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+                A IA cria, edita e publica. Você aprova ou deixa no automático.
+              </p>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
               {NETWORKS.map((net, i) => (
                 <div
                   key={i}
-                  className="bg-[#0a0a0a] rounded-2xl p-6 border border-orange-500/20 hover:border-orange-500/50 transition-all text-center"
+                  className="group bg-[#111111]/80 backdrop-blur-sm rounded-2xl p-6 border border-white/[0.06] hover:border-orange-500/40 transition-all duration-300 hover:-translate-y-1 text-center"
                 >
-                  <div className="text-4xl mb-3">{net.icon}</div>
-                  <h3 className="text-white font-bold text-lg mb-2">{net.name}</h3>
-                  <p className="text-gray-400 text-sm">{net.desc}</p>
+                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">{net.icon}</div>
+                  <h3 className="text-white font-bold text-lg mb-1">{net.name}</h3>
+                  <p className="text-orange-400 text-xs font-bold uppercase tracking-wider mb-2">{net.metric}</p>
+                  <p className="text-gray-400 text-sm leading-relaxed">{net.desc}</p>
                 </div>
               ))}
             </div>
@@ -206,20 +233,22 @@ export default function SocialJobs() {
         </section>
 
         {/* ===== COMO FUNCIONA ===== */}
-        <section className="py-20 px-4 bg-[#0a0a0a]">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-12 text-center">Como funciona</h2>
-            <div className="grid md:grid-cols-4 gap-6">
-              {[
-                { step: '01', title: 'Conectamos', desc: '5 redes sociais linkadas ao sistema em 48h.' },
-                { step: '02', title: 'IA cria', desc: 'Dezenas de agentes geram posts, reels, shorts e threads alinhados à sua marca.' },
-                { step: '03', title: 'Você aprova', desc: 'Todo conteúdo passa por você antes de publicar. Ou deixa no automático.' },
-                { step: '04', title: 'Publica', desc: 'Conteúdo vai pro ar todo dia. Consistência que o algoritmo ama.' },
-              ].map((item, i) => (
-                <div key={i} className="text-center">
-                  <div className="text-4xl font-bold text-orange-500/30 font-mono mb-4">{item.step}</div>
+        <section className="py-20 px-4 bg-[#111111]/50">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-14">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Como funciona</h2>
+              <p className="text-gray-400 text-lg">Do zero ao post publicado em 4 passos.</p>
+            </div>
+            <div className="grid md:grid-cols-4 gap-6 relative">
+              {/* Connecting line */}
+              <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-orange-500/0 via-orange-500/30 to-orange-500/0" />
+              {STEPS.map((item, i) => (
+                <div key={i} className="text-center relative">
+                  <div className="w-24 h-24 mx-auto mb-6 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center">
+                    <span className="text-3xl font-bold text-orange-500/60 font-mono">{item.num}</span>
+                  </div>
                   <h3 className="text-white font-bold text-lg mb-2">{item.title}</h3>
-                  <p className="text-gray-400 text-sm">{item.desc}</p>
+                  <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -227,25 +256,39 @@ export default function SocialJobs() {
         </section>
 
         {/* ===== AGENTES POR TRÁS ===== */}
-        <section className="py-20 px-4 bg-[#111111]">
+        <section className="py-20 px-4">
           <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="inline-block text-orange-400 text-xs font-bold uppercase tracking-wider mb-4 border border-orange-500/30 px-4 py-2 rounded-full bg-orange-500/10">
-                Workforce
+            <div className="text-center mb-14">
+              <span className="inline-flex items-center gap-2 bg-orange-500/15 border border-orange-500/25 rounded-full px-4 py-2 mb-6">
+                <span className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
+                <span className="text-orange-400 text-xs font-bold uppercase tracking-wider">Workforce</span>
               </span>
-              <h2 className="text-3xl font-bold text-white mb-4">Agentes especializados por trás de cada post</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Agentes especializados por trás de cada post</h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                Não é um chatbot gerando texto. É uma workforce de IA com agentes especialistas — cada um com memória persistente e skills do domínio.
+                Não é um chatbot gerando texto. É uma workforce com agentes especialistas — cada um com memória persistente e skills do domínio.
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {AGENTS.map((agent) => (
-                <div key={agent.name} className="bg-[#0a0a0a] rounded-xl p-5 border border-orange-500/20 hover:border-orange-500/50 transition-all">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-orange-400 font-bold text-lg">{agent.name}</span>
-                    <span className="text-xs bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded-full font-semibold">{agent.domain}</span>
+                <div
+                  key={agent.name}
+                  className="group bg-[#111111]/80 backdrop-blur-sm rounded-2xl p-6 border border-white/[0.06] hover:border-orange-500/40 transition-all duration-300 hover:-translate-y-0.5"
+                  onMouseEnter={() => setHoveredAgent(agent.name)}
+                  onMouseLeave={() => setHoveredAgent(null)}
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-orange-500/15 border border-orange-500/20 flex items-center justify-center">
+                      <span className="text-orange-400 font-bold text-sm">{agent.name[0]}</span>
+                    </div>
+                    <div>
+                      <span className="text-white font-bold text-lg">{agent.name}</span>
+                      <span className="ml-2 text-xs bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded-full font-semibold">{agent.domain}</span>
+                    </div>
                   </div>
-                  <p className="text-gray-400 text-sm">{agent.desc}</p>
+                  <p className="text-gray-300 text-sm mb-2">{agent.desc}</p>
+                  <p className={`text-gray-500 text-xs leading-relaxed transition-all duration-300 ${hoveredAgent === agent.name ? 'opacity-100 max-h-20' : 'opacity-0 max-h-0 overflow-hidden'}`}>
+                    {agent.detail}
+                  </p>
                 </div>
               ))}
             </div>
@@ -253,18 +296,19 @@ export default function SocialJobs() {
         </section>
 
         {/* ===== STACK ===== */}
-        <section className="py-20 px-4 bg-[#0a0a0a]">
+        <section className="py-20 px-4 bg-[#111111]/50">
           <div className="max-w-5xl mx-auto text-center">
-            <span className="inline-block text-orange-400 text-xs font-bold uppercase tracking-wider mb-4 border border-orange-500/30 px-4 py-2 rounded-full bg-orange-500/10">
-              Stack
+            <span className="inline-flex items-center gap-2 bg-orange-500/15 border border-orange-500/25 rounded-full px-4 py-2 mb-6">
+              <span className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
+              <span className="text-orange-400 text-xs font-bold uppercase tracking-wider">Stack</span>
             </span>
-            <h2 className="text-3xl font-bold text-white mb-4">Integrado com o que você já usa</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Integrado com o que você já usa</h2>
             <p className="text-gray-400 text-lg mb-10 max-w-2xl mx-auto">
               Conectado nativamente com as redes e ferramentas do seu dia a dia.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               {INTEGRATIONS.map((name) => (
-                <span key={name} className="bg-[#111111] px-4 py-2 rounded-full text-gray-200 text-sm font-medium border border-white/10 hover:border-orange-500/30 transition-colors">
+                <span key={name} className="bg-[#0a0a0a]/80 backdrop-blur-sm px-4 py-2.5 rounded-full text-gray-200 text-sm font-medium border border-white/[0.06] hover:border-orange-500/30 hover:text-orange-300 transition-all duration-200">
                   {name}
                 </span>
               ))}
@@ -273,23 +317,21 @@ export default function SocialJobs() {
         </section>
 
         {/* ===== O QUE VOCÊ LEVA ===== */}
-        <section className="py-20 px-4 bg-[#111111]">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-12 text-center">O que você leva</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {[
-                { icon: '🎬', title: 'Conteúdo diário em 5 redes', desc: 'YouTube Shorts, TikTok, Instagram Reels + Feed, LinkedIn, X — todo dia.' },
-                { icon: '🤖', title: 'Dezenas de agentes de IA', desc: 'Cada agente especialista — copy, design, vídeo, legendas, hashtags.' },
-                { icon: '📅', title: 'Calendário editorial automático', desc: 'IA planeja a semana inteira. Você só aprova.' },
-                { icon: '🎯', title: 'Copy otimizada pra engajamento', desc: 'Legendas que convertem. CTAs que levam pro seu WhatsApp ou site.' },
-                { icon: '📊', title: 'Métricas e ajuste semanal', desc: 'O que tá funcionando, o que melhorar, qual rede priorizar.' },
-                { icon: '🛡️', title: '7 dias de garantia', desc: 'Se não gostar do conteúdo nos primeiros 7 dias, devolvemos seu dinheiro.' },
-              ].map((item, i) => (
-                <div key={i} className="bg-[#0a0a0a] rounded-2xl p-6 border border-white/10 flex items-start gap-4">
-                  <span className="text-3xl">{item.icon}</span>
+        <section className="py-20 px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-14">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">O que você leva</h2>
+              <p className="text-gray-400 text-lg">Resultados concretos, não promessas vagas.</p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-5">
+              {BENEFITS.map((item, i) => (
+                <div key={i} className="group bg-[#111111]/80 backdrop-blur-sm rounded-2xl p-6 border border-white/[0.06] hover:border-orange-500/30 transition-all duration-300 flex items-start gap-4 hover:-translate-y-0.5">
+                  <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500/20 transition-colors">
+                    <span className="text-2xl">{item.icon}</span>
+                  </div>
                   <div>
                     <h3 className="text-white font-bold mb-1">{item.title}</h3>
-                    <p className="text-gray-400 text-sm">{item.desc}</p>
+                    <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -298,21 +340,29 @@ export default function SocialJobs() {
         </section>
 
         {/* ===== CASES ===== */}
-        <section className="py-20 px-4 bg-[#0a0a0a]">
+        <section className="py-20 px-4 bg-[#111111]/50">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-12 text-center">Quem já faz</h2>
-            <div className="space-y-6">
+            <div className="text-center mb-14">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Quem já faz</h2>
+              <p className="text-gray-400 text-lg">De zero presença a conteúdo que traz cliente.</p>
+            </div>
+            <div className="space-y-5">
               {CASES.map((c, i) => (
-                <div key={i} className="bg-[#111111] rounded-2xl p-8 border border-white/10">
-                  <h3 className="text-white font-bold text-lg mb-4">{c.antes}</h3>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <div className="text-red-400 text-xs font-bold uppercase tracking-wider mb-2">Antes</div>
-                      <p className="text-gray-400 text-sm">{c.antesDesc}</p>
+                <div key={i} className="bg-[#0a0a0a]/80 backdrop-blur-sm rounded-2xl border border-white/[0.06] overflow-hidden hover:border-orange-500/20 transition-all">
+                  <div className="p-6 sm:p-8">
+                    <div className="flex items-center gap-3 mb-4">
+                      <h3 className="text-white font-bold text-lg">{c.antes}</h3>
+                      <span className="text-orange-400 text-xs bg-orange-500/15 px-2 py-0.5 rounded-full font-semibold">{c.metric}</span>
                     </div>
-                    <div>
-                      <div className="text-green-400 text-xs font-bold uppercase tracking-wider mb-2">Depois</div>
-                      <p className="text-gray-300 text-sm">{c.depois}</p>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="bg-red-500/5 border border-red-500/10 rounded-xl p-4">
+                        <div className="text-red-400 text-xs font-bold uppercase tracking-wider mb-2">Antes</div>
+                        <p className="text-gray-400 text-sm">{c.antesDesc}</p>
+                      </div>
+                      <div className="bg-green-500/5 border border-green-500/10 rounded-xl p-4">
+                        <div className="text-green-400 text-xs font-bold uppercase tracking-wider mb-2">Depois</div>
+                        <p className="text-gray-300 text-sm">{c.depois}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -322,25 +372,27 @@ export default function SocialJobs() {
         </section>
 
         {/* ===== CTA FINAL ===== */}
-        <section className="py-20 px-4 bg-[#111111]">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Cada dia sem presença digital<br />
-              <span className="text-orange-400">é dinheiro indo embora.</span>
+        <section className="py-24 px-4 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-t from-orange-500/5 via-transparent to-transparent" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-orange-500/8 rounded-full blur-[100px]" />
+          <div className="relative z-10 max-w-2xl mx-auto text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
+              Cada dia sem postar<br />
+              <span className="text-orange-400">é dinheiro que seu concorrente leva.</span>
             </h2>
             <p className="text-gray-300 text-lg mb-8">
-              Seus concorrentes já postam todo dia. E você?
+              Seus concorrentes já automatizaram conteúdo. E você?
             </p>
 
             <button
               onClick={() => setShowModal(true)}
-              className="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-black px-12 py-6 rounded-full font-bold text-2xl transition-all duration-300 shadow-2xl shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-105"
+              className="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl sm:text-2xl transition-all duration-300 shadow-2xl shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-105 active:scale-[0.98]"
             >
               QUERO CONTEÚDO TODO DIA →
             </button>
 
             <p className="text-gray-500 text-sm mt-4">
-              Sem compromisso. Quiz rápido e recomendação personalizada.
+              Quiz rápido. Sem compromisso. Sem contrato longo.
             </p>
           </div>
         </section>
