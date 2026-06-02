@@ -64,7 +64,7 @@ export default function Meta({ title, description, path = '', ogImage = '/og-ima
               "name": "Sistema Britto",
               "url": "https://www.sistemabritto.com.br",
               "logo": "https://www.sistemabritto.com.br/images/logo-sistema-britto.png",
-              "description": "Empresa brasileira que implementa workforces de IA para empresas. WhatsApp com IA, EvoNexus, Hermes Agent, Claude Code.",
+              "description": "Empresa brasileira que implementa automação com IA, infraestrutura DevOps e sistemas sob medida. WhatsApp com IA, SocialJobs, Sistema Sob Medida, VPS Estruturada.",
               "foundingDate": "2024",
               "contactPoint": {
                 "@type": "ContactPoint",
@@ -95,47 +95,76 @@ export default function Meta({ title, description, path = '', ogImage = '/og-ima
               }
             },
             {
-              "@type": "Service",
-              "@id": "https://www.sistemabritto.com.br/evonexus#service",
-              "name": "EvoNexus — Workforce de IA para Negócios",
-              "url": "https://www.sistemabritto.com.br/evonexus",
-              "provider": { "@id": "https://www.sistemabritto.com.br/#organization" },
-              "description": "Workforce completa de IA com dezenas de agentes especializados em negócios e engenharia. Multi-provider, dashboard web, memória persistente."
+            "@type": "Service",
+            "@id": "https://www.sistemabritto.com.br/sistema#service",
+            "name": "Sistema Sob Medida",
+            "url": "https://www.sistemabritto.com.br/sistema",
+            "provider": { "@id": "https://www.sistemabritto.com.br/#organization" },
+            "description": "Sistemas web sob encomenda: SaaS, apps, infraestrutura, funis, integrações e white-label. Stack: Claude Code, Hermes Agent, EvoNexus, n8n, Supabase, Next.js.",
+            "category": "Custom Software Development",
+            "offers": {
+            "@type": "Offer",
+            "price": "1500",
+            "priceCurrency": "BRL",
+            "availability": "https://schema.org/InStock"
+            }
             },
             {
-              "@type": "Service",
-              "@id": "https://www.sistemabritto.com.br/hermes#service",
-              "name": "Hermes Agent — Framework Aberto de IA",
-              "url": "https://www.sistemabritto.com.br/hermes",
-              "provider": { "@id": "https://www.sistemabritto.com.br/#organization" },
-              "description": "Framework open-source de agentes de IA com Kanban nativo, multi-provider real, skills em markdown."
+            "@type": "Service",
+            "@id": "https://www.sistemabritto.com.br/socialjobs#service",
+            "name": "SocialJobs — Conteúdo Infinito em 5 Redes com IA",
+            "url": "https://www.sistemabritto.com.br/socialjobs",
+            "provider": { "@id": "https://www.sistemabritto.com.br/#organization" },
+            "description": "Dezenas de agentes de IA criando posts diários em YouTube, TikTok, Instagram, LinkedIn e X automaticamente.",
+            "category": "AI Content Automation",
+            "offers": {
+            "@type": "Offer",
+            "price": "500",
+            "priceCurrency": "BRL",
+            "availability": "https://schema.org/InStock"
+            }
+            },
+            {
+            "@type": "Service",
+            "@id": "https://www.sistemabritto.com.br/vps#service",
+            "name": "VPS Estruturada",
+            "url": "https://www.sistemabritto.com.br/vps",
+            "provider": { "@id": "https://www.sistemabritto.com.br/#organization" },
+            "description": "Infraestrutura pronta com Docker, SSL automático, backups diários e monitoramento. Setup em 24h.",
+            "category": "Managed Infrastructure",
+            "offers": {
+            "@type": "Offer",
+            "price": "297",
+            "priceCurrency": "BRL",
+            "availability": "https://schema.org/InStock"
+            }
             },
             {
               "@type": "FAQPage",
               "@id": "https://www.sistemabritto.com.br/#faq",
               "mainEntity": [
                 {
-                  "@type": "Question",
-                  "name": "O que é o Sistema Britto?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Empresa brasileira que implementa workforces de IA para empresas. Serviços: WhatsApp com IA, EvoNexus (dezenas de agentes), Hermes Agent (framework aberto), Claude Code (engenharia de software com IA)."
-                  }
+                "@type": "Question",
+                "name": "O que é o Sistema Britto?",
+                "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Empresa brasileira que implementa automação com IA, infraestrutura DevOps e sistemas sob medida. Serviços: WhatsApp com IA, SocialJobs (conteúdo automático em 5 redes), Sistema Sob Medida (SaaS, apps, infra) e VPS Estruturada."
+                }
                 },
                 {
-                  "@type": "Question",
-                  "name": "Quanto custa o WhatsApp com IA?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "A partir de R$ 297/mês para WhatsApp com IA. Planos de workforce (EvoNexus) sob consulta. Sem fidelidade, cancela quando quiser."
-                  }
+                "@type": "Question",
+                "name": "Quanto custa?",
+                "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "WhatsApp com IA a partir de R$ 297/mês. SocialJobs a partir de R$ 500/mês. Sistema Sob Medida a partir de R$ 1500. VPS Estruturada a partir de R$ 297/mês. Sem fidelidade, cancela quando quiser."
+                }
                 },
                 {
                   "@type": "Question",
                   "name": "Em quanto tempo fica pronto?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "WhatsApp com IA em 48 horas. Workforce completa (EvoNexus) em até 30 dias. DevOps e SaaS sob consulta."
+                    "text": "WhatsApp com IA em 48 horas. SocialJobs em até 7 dias. Sistema Sob Medida e VPS Estruturada sob consulta — depende da complexidade."
                   }
                 },
                 {

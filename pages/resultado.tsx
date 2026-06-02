@@ -98,9 +98,10 @@ export default function Resultado() {
   return (
     <>
       <Meta 
-        title="CRM WhatsApp + IA — Sistema Britto"
-        description="Automação de WhatsApp com IA. CRM inteligente que vende 24/7. A partir de R$ 297/mês."
-        path="/resultado"
+      title="CRM WhatsApp + IA — Sistema Britto"
+      description="Automação de WhatsApp com IA. CRM inteligente que vende 24/7. A partir de R$ 297/mês."
+      path="/resultado"
+      noIndex={true}
       />
 
       {/* ===== MODAL CAPTURA (se faltar dados) ===== */}

@@ -49,9 +49,10 @@ export default function ResultadoDigital() {
   return (
     <>
       <Meta 
-        title="Soluções Sob Encomenda — Sistema Britto"
-        description="Infraestrutura, DevOps ou SaaS. Sua solução digital sob medida."
-        path="/resultado-digital"
+      title="Soluções Sob Encomenda — Sistema Britto"
+      description="Infraestrutura, DevOps ou SaaS. Sua solução digital sob medida."
+      path="/resultado-digital"
+      noIndex={true}
       />
       <Navbar />
       <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>

@@ -46,9 +46,10 @@ export default function Obrigado() {
   return (
     <>
       <Meta 
-        title="Obrigado! — Sistema Britto"
-        description="Seu pedido foi recebido com sucesso!"
-        path="/obrigado"
+      title="Obrigado! — Sistema Britto"
+      description="Seu pedido foi recebido com sucesso!"
+      path="/obrigado"
+      noIndex={true}
       />
       
       <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>

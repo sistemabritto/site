@@ -120,7 +120,7 @@ export default function Login() {
 
   return (
     <>
-      <Meta title="Login — Sistema Britto" description="Acesse sua conta via Google ou WhatsApp" path="/login" />
+      <Meta title="Login — Sistema Britto" description="Acesse sua conta via Google ou WhatsApp" path="/login" noIndex={true} />
       <Navbar />
       <main className="min-h-screen flex items-center justify-center bg-[#0a0a0a] text-white px-4">
         <div className="bg-[#111111] p-8 rounded-2xl border border-[#D4AF37]/20 text-center max-w-md w-full">

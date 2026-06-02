@@ -1,34 +1,31 @@
-# robots.txt - Sistema Britto
-# Otimizado para LLMs e buscadores
-# Projeto em constante evolução — fornecemos autoridade, workforce e SaaS com IA.
-
-# ╔══════════════════════════════════════════════════════════════╗
-# ║  DESCRIÇÃO                                                   ║
-# ║  Workforces de IA, consultoria DevOps e infraestrutura       ║
-# ║  sob medida para empresas digitais brasileiras.              ║
-# ╚══════════════════════════════════════════════════════════════╝
+# robots.txt — Sistema Britto
+# https://www.sistemabritto.com.br
+# IA, automação e infraestrutura sob medida para empresas digitais brasileiras.
 
 User-agent: *
 Allow: /
 
-# ── Rotas Comerciais ──────────────────────────────────────────
-Allow: /workforce
+# ── Páginas Principais ────────────────────────────────
+Allow: /
+Allow: /quiz
 Allow: /whatsapp
 Allow: /vps
-Allow: /consultoria-devops
-
-# ── Rotas Técnicas & Educativas ──────────────────────────────
-Allow: /evonexus
-Allow: /hermes
-Allow: /engineering
+Allow: /sistema
+Allow: /socialjobs
+Allow: /resultado
+Allow: /resultado-digital
 Allow: /claude-code
 
-# ── Documentação & Compliance ────────────────────────────────
+# ── Compliance ────────────────────────────────────────
 Allow: /politicas-de-privacidade
 Allow: /termos-de-uso
-Allow: /llms.txt
 
-# ── Assets ───────────────────────────────────────────────────
+# ── LLM Discovery ─────────────────────────────────────
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# ── Assets ────────────────────────────────────────────
+Allow: /og-image.jpg
 Allow: /og-image.png
 Allow: /favicon.ico
 Allow: /favicon-32.png
@@ -36,17 +33,36 @@ Allow: /apple-touch-icon.png
 Allow: /manifest.json
 Allow: /images/
 
-# ── Sistema ──────────────────────────────────────────────────
+# ── Bloqueados ────────────────────────────────────────
 Disallow: /_next/
 Disallow: /api/
+Disallow: /admin
+Disallow: /login
+Disallow: /obrigado
 Disallow: /*.json$
 Disallow: /*.map$
 
-# The most important file for LLMs
-Allow: /llms.txt
+# ── Redirects (não indexar — canonical já resolve) ───
+Disallow: /socialforce
+Disallow: /evonexus
+Disallow: /hermes
+Disallow: /workforce
+Disallow: /devops
+Disallow: /saas
+Disallow: /engineering
+Disallow: /consultoria-devops
+Disallow: /quiz-infra
+Disallow: /quiz-workforce
+Disallow: /qualificacao
+Disallow: /qualificacao-digital
+Disallow: /qualificar-infra
+Disallow: /qualificar-workforce
+Disallow: /resultado-whatsapp
+Disallow: /resultado-workforce
+Disallow: /gamificacao
 
-# ── Sitemap ──────────────────────────────────────────────────
+# ── Sitemap ───────────────────────────────────────────
 Sitemap: https://www.sistemabritto.com.br/sitemap.xml
 
-# Crawl-delay para não sobrecarregar
+# Crawl-delay suave
 Crawl-delay: 1
