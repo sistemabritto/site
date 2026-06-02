@@ -8,7 +8,7 @@ const plans = [
     description: 'Para quem quer começar a automatizar o atendimento no WhatsApp',
     features: [
       'Qualificação automática de leads via IA',
-      'Follow-up inteligente 24/7',
+      'Follow-up inteligente 24h',
       'Agendamento automático de consultas',
       '1 número de WhatsApp',
       'Relatórios básicos de conversão',
@@ -37,7 +37,7 @@ const plans = [
   {
     name: 'EvoNexus Premium',
     price: 2500,
-    description: 'Empresa completa com dezenas de agentes especializados operando 24/7',
+    description: 'Empresa completa com dezenas de agentes especializados operando 24h',
     features: [
       'Dezenas de agentes especializados',
       'Módulos: Fin, Projetos, Vendas, RH, Marketing, Jurídico',

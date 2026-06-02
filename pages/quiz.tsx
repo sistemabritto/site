@@ -9,7 +9,7 @@ const QUESTIONS = [
  id: 'q1',
  question: 'O que você mais precisa agora?',
  options: [
- { label: 'Atender e vender no WhatsApp com IA 24/7', value: 'crm', icon: '' },
+ { label: 'Atender e vender no WhatsApp com IA 24h', value: 'crm', icon: '' },
  { label: 'Conteúdo infinito nas redes sociais — posts automáticos e virais', value: 'social', icon: '' },
  { label: 'Algo sob encomenda — app, site, infra, SaaS', value: 'custom', icon: '' },
  ],

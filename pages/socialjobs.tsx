@@ -296,7 +296,7 @@ export default function SocialJobs() {
                 Agora imagine <span className="text-orange-400">dezenas de agentes de IA</span> que criam, editam e publicam por você — em YouTube, TikTok, Instagram, LinkedIn e X — <span className="text-orange-400">todo dia, sem parar</span>.
               </p>
               <p className="text-gray-400 text-sm mt-3">
-                Não é um chatbot. É uma workforce inteira de especialistas trabalhando 24/7 pro seu negócio.
+                Não é um chatbot. É uma workforce inteira de especialistas trabalhando 24h pro seu negócio.
               </p>
             </div>
 
@@ -332,7 +332,7 @@ export default function SocialJobs() {
                 Não é uma ferramenta de agendamento. Não é um gerador de legenda. É uma <span className="text-white font-semibold">workforce de dezenas de agentes de IA</span> — cada um especialista no seu domínio — que trabalham em conjunto pra criar conteúdo de qualidade, alinhado ao seu tom de voz, e publicar automaticamente todos os dias.
               </p>
               <p>
-                Um agente cria a legenda. Outro revisa o copy. Outro escolhe o melhor horário. Outro monitora o engajamento. Outro responde comentários. Eles colaboram entre si, revisam o trabalho um do outro e entregam conteúdo que parece feito por uma equipe inteira de social media — só que trabalha 24/7, nunca atrasa e nunca pede aumento.
+                Um agente cria a legenda. Outro revisa o copy. Outro escolhe o melhor horário. Outro monitora o engajamento. Outro responde comentários. Eles colaboram entre si, revisam o trabalho um do outro e entregam conteúdo que parece feito por uma equipe inteira de social media — só que trabalha 24h, nunca atrasa e nunca pede aumento.
               </p>
               <p>
                 Você conecta suas redes, define seu tom de voz e aprova os posts. Ou deixa no piloto automático. <span className="text-white font-semibold">O SocialJobs faz o resto.</span>
@@ -342,7 +342,7 @@ export default function SocialJobs() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12">
               {[
                 { value: '5', label: 'Redes Sociais' },
-                { value: '24/7', label: 'Funcionando' },
+                { value: '24h', label: 'Funcionando' },
                 { value: '∞', label: 'Conteúdo Gerado' },
                 { value: '7 dias', label: 'Garantia' },
               ].map((stat, i) => (

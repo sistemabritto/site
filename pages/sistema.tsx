@@ -27,7 +27,7 @@ const PROJETOS = [
     icon: '🤖',
     name: 'Assistente de IA',
     tag: 'Automação inteligente',
-    desc: 'Agente de IA com memória, ferramentas e personalidade configurada. Atende cliente, qualifica lead, responde suporte — 24/7, no WhatsApp ou web.',
+    desc: 'Agente de IA com memória, ferramentas e personalidade configurada. Atende cliente, qualifica lead, responde suporte — 24h, no WhatsApp ou web.',
     exemplos: ['Atendente de WhatsApp', 'Assistente de vendas', 'Suporte técnico automatizado', 'Onboarding de clientes'],
   },
   {
@@ -217,7 +217,7 @@ export default function Sistema() {
                 SaaS, loja virtual, assistente de IA, funil de vendas, integração custom — <span className="text-white font-semibold">sob medida, com a sua marca, no seu domínio.</span>
               </p>
               <p className="text-lg text-gray-400 leading-relaxed">
-                Não é template. Não é "assine e reze". É código seu, infra sua, rodando 24/7. Se quiser revender, é white-label. Se quiser usar, é seu assistente. Você decide.
+                Não é template. Não é "assine e reze". É código seu, infra sua, rodando 24h. Se quiser revender, é white-label. Se quiser usar, é seu assistente. Você decide.
               </p>
             </div>
 

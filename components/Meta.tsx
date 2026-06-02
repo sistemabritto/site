@@ -84,7 +84,7 @@ export default function Meta({ title, description, path = '', ogImage = '/og-ima
               "name": "WhatsApp com IA (Evolution API)",
               "url": "https://www.sistemabritto.com.br/whatsapp",
               "provider": { "@id": "https://www.sistemabritto.com.br/#organization" },
-              "description": "Implementação de IA no WhatsApp Business. Qualificação automática de leads, agendamento 24/7, CRM integrado.",
+              "description": "Implementação de IA no WhatsApp Business. Qualificação automática de leads, agendamento 24h, CRM integrado.",
               "category": "AI Automation",
               "offers": {
                 "@type": "Offer",

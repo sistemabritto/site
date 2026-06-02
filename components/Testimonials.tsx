@@ -41,7 +41,7 @@ const testimonials = [
     name: 'Patricia O.',
     business: 'Consultório Dermatologia',
     rating: 5,
-    text: 'Agendamento 24/7 sem erro humano. Paciente elogia, equipe respira. Melhor investimento do ano.',
+    text: 'Agendamento 24h sem erro humano. Paciente elogia, equipe respira. Melhor investimento do ano.',
     date: 'há 1 mês',
   },
 ];

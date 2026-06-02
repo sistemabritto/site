@@ -11,9 +11,9 @@ const products = [
  badge: 'Comercial',
  title: 'Seu WhatsApp como central comercial',
  problem: 'Chega de lead perdido no WhatsApp. Chega de digitação manual no CRM.',
- solution: 'IA que qualifica, agenda, vende e reativa — 24/7, sem folga.',
+ solution: 'IA que qualifica, agenda, vende e reativa — 24h, sem folga.',
  features: [
- 'Qualifica leads 24/7 com IA',
+ 'Qualifica leads 24h com IA',
  'Agenda automático de consultas',
  'Funil completo no WhatsApp + CRM',
  'Reativa leads dormentes',

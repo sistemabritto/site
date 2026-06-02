@@ -166,7 +166,7 @@ export default function VPS() {
             <ul className="text-left space-y-3 mb-6">
               {[
                 'Docker + Docker Compose configurado',
-                'Monitoramento 24/7 com alerta no WhatsApp',
+                'Monitoramento 24h com alerta no WhatsApp',
                 'Backup automático diário',
                 'SSL automático + firewall',
                 'Rollback em 1 comando',

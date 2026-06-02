@@ -52,9 +52,9 @@ export default function Home() {
       badge: 'Vendas & Atendimento',
       title: 'Seu WhatsApp como central comercial',
       problem: 'Lead entra e morre sem resposta. Cliente espera, desiste e vai pro concorrente.',
-      solution: 'IA que qualifica, agenda, vende e reativa — 24/7, sem folga.',
+      solution: 'IA que qualifica, agenda, vende e reativa — 24h, sem folga.',
       features: [
-        'Qualifica leads 24/7 com IA',
+        'Qualifica leads 24h com IA',
         'Agenda automático de consultas',
         'Funil completo no WhatsApp + CRM',
         'Reativa leads dormentes',
@@ -138,7 +138,7 @@ export default function Home() {
       avatar: '👨‍⚕️',
       stars: 5,
       before: '400 leads/mês perdendo 60% por falta de follow-up. 1 recepcionista sobrecarregada.',
-      after: 'IA qualifica, agenda e reconfirma 24/7.',
+      after: 'IA qualifica, agenda e reconfirma 24h.',
       result: '3x mais consultas agendadas. Zero lead perdido.',
     },
     { 
@@ -228,7 +228,7 @@ export default function Home() {
                     type="submit"
                     className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all shadow-lg shadow-green-500/25 hover:shadow-green-500/40 hover:scale-[1.02] active:scale-[0.98]"
                   >
-                    QUERO MEUS BRAÇOS →
+                    CONSTRUA SEUS ESPECIALISTAS →
                   </button>
                   
                   <p className="text-gray-500 text-xs text-center">Sem compromisso. Resposta em até 24h.</p>
@@ -263,7 +263,7 @@ export default function Home() {
           {/* GANCHO */}
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
             10% dos seus concorrentes<br />
-            <span className="text-green-400">já operam com IA 24/7.</span><br />
+            <span className="text-green-400">já operam com IA 24h.</span><br />
             Sua empresa ainda faz tudo no braço?
           </h1>
 
@@ -280,7 +280,7 @@ export default function Home() {
           {/* SOLUÇÃO */}
           <div className="bg-[#111111]/80 border border-green-500/20 rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto mb-10 backdrop-blur-sm">
             <p className="text-xl sm:text-2xl text-white font-semibold leading-relaxed">
-            Já pensou em ter <span className="text-green-400">dezenas de especialistas</span> trabalhando 24/7 por você. WhatsApp que vende sozinho. Conteúdo diário nas redes sociais. <span className="text-green-400">Pagando menos de um salário mínimo?</span>
+            Já pensou em ter <span className="text-green-400">dezenas de especialistas</span> trabalhando 24h por você. WhatsApp que vende sozinho. Conteúdo diário nas redes sociais. <span className="text-green-400">Pagando menos de um salário mínimo?</span>
             </p>
             <p className="text-gray-400 text-sm mt-3">
             Seu problema não é falta de esforço. É falta de braço. E os braços chegaram.
@@ -292,7 +292,7 @@ export default function Home() {
             onClick={() => setShowModal(true)}
             className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl transition-all duration-300 shadow-2xl shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
           >
-            QUERO MEUS BRAÇOS →
+            CONSTRUA SEUS ESPECIALISTAS →
           </button>
         </div>
       </section>
@@ -432,7 +432,7 @@ export default function Home() {
             onClick={() => setShowModal(true)}
             className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl transition-all duration-300 shadow-2xl shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
           >
-            QUERO MEUS BRAÇOS →
+            CONSTRUA SEUS ESPECIALISTAS →
           </button>
         </div>
       </section>

@@ -6,7 +6,7 @@ import PhoneInput from '../components/PhoneInput';
 
 const features = [
   { icon: '🎯', title: 'Qualificação automática de leads', desc: 'IA faz perguntas-chave, classifica por interesse e envia pro CRM já segmentado.' },
-  { icon: '📅', title: 'Agendamento 24/7', desc: 'Cliente marca, remarca e cancela sozinho. Sem erro humano, sem retrabalho.' },
+  { icon: '📅', title: 'Agendamento 24h', desc: 'Cliente marca, remarca e cancela sozinho. Sem erro humano, sem retrabalho.' },
   { icon: '🔄', title: 'Reativação de leads dormentes', desc: 'Recupera leads parados há semanas com mensagens personalizadas e ofertas certas.' },
   { icon: '📊', title: 'CRM integrado nativamente', desc: 'Pipedrive, Sticky, RD Station — tudo sincronizado em tempo real, sem digitação.' },
   { icon: '👥', title: 'Multi-atendentes com IA assistida', desc: 'Seu time humano assume quando precisa, com histórico completo e sugestões de resposta.' },
@@ -107,7 +107,7 @@ export default function WhatsApp() {
     <>
       <Meta 
         title="WhatsApp + IA — Sistema Britto"
-        description="Seu WhatsApp como central comercial. IA que qualifica, agenda, vende e reativa leads 24/7. R$ 297/mês. Sem fidelidade."
+        description="Seu WhatsApp como central comercial. IA que qualifica, agenda, vende e reativa leads 24h. R$ 297/mês. Sem fidelidade."
         path="/whatsapp"
       />
       
@@ -258,7 +258,7 @@ export default function WhatsApp() {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="bg-black/80 rounded-2xl p-6 text-center border border-green-500/20">
-                <div className="text-4xl font-bold text-green-400 mb-2">24/7</div>
+                <div className="text-4xl font-bold text-green-400 mb-2">24h</div>
                 <div className="text-gray-200 text-sm">Atendimento automático</div>
               </div>
               <div className="bg-black/80 rounded-2xl p-6 text-center border border-green-500/20">
@@ -369,7 +369,7 @@ export default function WhatsApp() {
             <div className="bg-gradient-to-br from-green-500/20 to-green-900/10 rounded-3xl p-8 border border-green-500/30 mb-8">
               <ul className="space-y-4 text-left mb-8">
                 {[
-                  'Atendente de IA 24/7 no WhatsApp',
+                  'Atendente de IA 24h no WhatsApp',
                   'Qualificação automática de leads',
                   'Agendamento inteligente de consultas',
                   'CRM básico com funil comercial',

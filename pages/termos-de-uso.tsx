@@ -123,7 +123,7 @@ export default function TermosDeUso() {
             <section>
               <h2 className="text-white font-heading font-bold text-xl mb-4">7. Disponibilidade e SLA</h2>
               <p>
-                A Empresa se esforça para manter os serviços disponíveis 24/7, mas não garante disponibilidade ininterrupta. Manutenções programadas, atualizações e falhas técnicas podem resultar em indisponibilidade temporária. A Empresa notificará o Usuário sobre manutenções programadas sempre que possível.
+                A Empresa se esforça para manter os serviços disponíveis 24h, mas não garante disponibilidade ininterrupta. Manutenções programadas, atualizações e falhas técnicas podem resultar em indisponibilidade temporária. A Empresa notificará o Usuário sobre manutenções programadas sempre que possível.
               </p>
             </section>
 

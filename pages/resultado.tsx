@@ -99,7 +99,7 @@ export default function Resultado() {
     <>
       <Meta 
       title="CRM WhatsApp + IA — Sistema Britto"
-      description="Automação de WhatsApp com IA. CRM inteligente que vende 24/7. A partir de R$ 297/mês."
+      description="Automação de WhatsApp com IA. CRM inteligente que vende 24h. A partir de R$ 297/mês."
       path="/resultado"
       noIndex={true}
       />
@@ -199,7 +199,7 @@ export default function Resultado() {
 
             <ul className="space-y-4 mb-8">
               {[
-                'Atendente de IA 24/7 no WhatsApp',
+                'Atendente de IA 24h no WhatsApp',
                 'Qualificação automática de leads',
                 'Agendamento inteligente',
                 'CRM integrado com funil comercial',
