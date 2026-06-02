@@ -11,6 +11,34 @@ interface PlanCardProps {
   ctaLabel?: string;
 }
 
+function getCustomerFromSession(): { name: string; email: string; cellphone: string } | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = sessionStorage.getItem('qualificacao_customer');
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    if (!data.email) return null;
+    return {
+      name: data.name || data.email.split('@')[0],
+      email: data.email,
+      cellphone: data.whatsapp || '',
+    };
+  } catch {
+    return null;
+  }
+}
+
+function getUtmsFromUrl(): Record<string, string> {
+  if (typeof window === 'undefined') return {};
+  const params = new URLSearchParams(window.location.search);
+  const utm: Record<string, string> = {};
+  for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']) {
+    const val = params.get(key);
+    if (val) utm[key] = val;
+  }
+  return utm;
+}
+
 export default function PlanCard({ 
   name, 
   price, 
@@ -22,11 +50,20 @@ export default function PlanCard({
   ctaLabel = 'Assinar'
 }: PlanCardProps) {
   const handleSubscribe = () => {
-    // Criar checkout na AbacatePay
+    const customer = getCustomerFromSession();
+    const utms = getUtmsFromUrl();
+
     fetch('/api/abacatepay/checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ productId }),
+      body: JSON.stringify({ 
+        productId,
+        customer: customer || undefined,
+        metadata: {
+          ...utms,
+          page: window.location.pathname,
+        },
+      }),
     })
       .then(res => res.json())
       .then(data => {

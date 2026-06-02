@@ -162,15 +162,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           stage_id: stageId,
         },
         custom_fields: {
-          source: event === 'lead_captured' ? 'qualificacao-capture' : 'qualificacao-quiz',
-          result: result || 'unknown',
-          qualification_answers: answers ? JSON.stringify(answers) : undefined,
+        source: event === 'lead_captured' ? 'qualificacao-capture' : 'qualificacao-quiz',
+        result: result || 'unknown',
+        qualification_answers: answers ? JSON.stringify(answers) : undefined,
+        // ✅ UTMs nos custom_fields — visíveis e filtráveis no CRM
+        utm_source: utm?.utm_source || 'direct',
+        utm_medium: utm?.utm_medium || '',
+        utm_campaign: utm?.utm_campaign || '',
+        utm_content: utm?.utm_content || '',
+        utm_term: utm?.utm_term || '',
         },
         metadata: {
-          utm_source: utm?.utm_source || 'direct',
-          utm_medium: utm?.utm_medium || 'none',
-          utm_campaign: utm?.utm_campaign || 'none',
-          captured_at: new Date().toISOString(),
+        captured_at: new Date().toISOString(),
         },
       };
 

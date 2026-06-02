@@ -80,9 +80,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { productId, customer: customerData, returnUrl } = req.body;
+    const { productId, customer: customerData, returnUrl, metadata } = req.body;
     const abacateProductId = PRODUCTS[productId] || productId;
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.sistemabritto.com.br';
+
+    // Metadata = UTMs + source page — salva no Supabase pra webhook usar depois
+    if (metadata && customerData?.email) {
+    try {
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    await supabase.from('checkout_metadata').upsert({
+    email: customerData.email,
+    product_id: productId,
+    ...metadata,
+    }, { onConflict: 'email' });
+    console.log('[Metadata Saved]', customerData.email, metadata);
+    } catch (e) {
+    console.error('[Metadata Save Error]', e);
+    }
+    }
 
     let customerId: string | null = null;
 

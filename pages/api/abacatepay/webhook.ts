@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { createHash } from 'crypto';
+import { createHash, createHmac } from 'crypto';
+import { createClient } from '@supabase/supabase-js';
 
 // EvoCRM config
 const EVOCRM_API_URL = process.env.EVOCRM_API_URL || 'https://evoapi.workflowapi.com.br';
@@ -8,11 +9,18 @@ const PIPELINE_ID = 'eb72af5c-28f7-4948-ae50-9c81922d161e';
 const STAGE_PROPOSTA = '3f77b2f1-3e95-4a9d-a5bc-0dfce1aff4a5';
 const STAGE_FECHADO = 'f6229e34-46c2-4a10-890b-df5969489033';
 
-// Evolution API config (endpoint CORRETO: /send/text NÃO /message/sendText)
+// Evolution API config
 const EVO_API_URL = process.env.EVO_API_URL || 'https://go.workflowapi.com.br';
 const EVO_INSTANCE = process.env.EVO_INSTANCE || 'sistema-britto-business';
 const EVO_TOKEN = process.env.EVO_TOKEN || 'ed260550-affc-42f1-92e3-45affea89e05';
 const SDR_PHONE = '5511914088571';
+
+// AbacatePay webhook secret (configurar no .env)
+const ABACATEPAY_WEBHOOK_SECRET = process.env.ABACATEPAY_WEBHOOK_SECRET || '';
+
+// Supabase
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
+const supabaseKey = process.env.SUPABASE_SERVICE_KEY || '';
 
 function formatPhoneE164(phone: string): string {
   if (!phone) return '';
@@ -23,7 +31,6 @@ function formatPhoneE164(phone: string): string {
   return `+55${digits}`;
 }
 
-// Evolution API: endpoint correto é /send/text/:instance (NÃO /message/sendText/:instance)
 async function sendWhatsApp(number: string, text: string) {
   try {
     const response = await fetch(`${EVO_API_URL}/send/text/${EVO_INSTANCE}`, {
@@ -41,15 +48,65 @@ async function sendWhatsApp(number: string, text: string) {
   }
 }
 
-// Webhook da AbacatePay para notificar pagamentos
+// Busca UTMs salvos no checkout_metadata pelo email
+async function getUtmsForCustomer(email: string): Promise<Record<string, string>> {
+  if (!email || !supabaseKey) return {};
+  try {
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    const { data } = await supabase
+      .from('checkout_metadata')
+      .select('utm_source, utm_medium, utm_campaign, utm_content, utm_term, page, product_id')
+      .eq('email', email)
+      .single();
+    
+    if (data) {
+      const utms: Record<string, string> = {};
+      if (data.utm_source) utms.utm_source = data.utm_source;
+      if (data.utm_medium) utms.utm_medium = data.utm_medium;
+      if (data.utm_campaign) utms.utm_campaign = data.utm_campaign;
+      if (data.utm_content) utms.utm_content = data.utm_content;
+      if (data.utm_term) utms.utm_term = data.utm_term;
+      if (data.page) utms.page = data.page;
+      return utms;
+    }
+  } catch (e) {
+    console.error('[Get UTMs Error]', e);
+  }
+  return {};
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const body = req.body;
+    // ✅ Validação de assinatura HMAC da AbacatePay
+    if (ABACATEPAY_WEBHOOK_SECRET) {
+      const signature = req.headers['abacatepay-signature'] as string || 
+                        req.headers['x-abacatepay-signature'] as string || '';
+      
+      if (!signature) {
+        console.error('[Webhook] Missing signature header');
+        return res.status(401).json({ error: 'Missing signature' });
+      }
 
+      const rawBody = JSON.stringify(req.body);
+      const expectedSig = createHmac('sha256', ABACATEPAY_WEBHOOK_SECRET)
+        .update(rawBody)
+        .digest('hex');
+
+      if (signature !== expectedSig && `sha256=${expectedSig}` !== signature) {
+        console.error('[Webhook] Invalid signature', { expected: expectedSig, got: signature });
+        return res.status(401).json({ error: 'Invalid signature' });
+      }
+      
+      console.log('[Webhook] Signature validated ✅');
+    } else {
+      console.warn('[Webhook] ⚠️ No ABACATEPAY_WEBHOOK_SECRET set — skipping validation');
+    }
+
+    const body = req.body;
     const { event, data } = body;
 
     console.log('[AbacatePay Webhook]', event, data);
@@ -80,7 +137,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 }
 
-// Notificar CRM quando pagamento for aprovado
 async function notifyCRM(data: any) {
   try {
     const { customer, items, externalId } = data;
@@ -100,7 +156,11 @@ async function notifyCRM(data: any) {
     const customerEmail = customer?.email || 'Não informado';
     const customerPhone = customer?.cellphone || '';
 
-    // 1. Criar/atualizar lead no EvoCRM (stage Fechado = pagamento aprovado)
+    // ✅ Busca UTMs do checkout_metadata (salvo quando o cliente clicou no CTA)
+    const utms = await getUtmsForCustomer(customerEmail);
+    console.log('[UTMs for customer]', customerEmail, utms);
+
+    // 1. Criar/atualizar lead no EvoCRM — stage Fechado + UTMs em custom_fields
     try {
       const evoPayload: any = {
         contact: {
@@ -114,9 +174,15 @@ async function notifyCRM(data: any) {
           stage_id: STAGE_FECHADO,
         },
         custom_fields: {
-          source: 'abacatepay',
+          source: utms.utm_source || 'abacatepay',
           product: productName,
           external_id: externalId || '',
+          // ✅ UTMs em custom_fields do CRM
+          ...(utms.utm_medium ? { utm_medium: utms.utm_medium } : {}),
+          ...(utms.utm_campaign ? { utm_campaign: utms.utm_campaign } : {}),
+          ...(utms.utm_content ? { utm_content: utms.utm_content } : {}),
+          ...(utms.utm_term ? { utm_term: utms.utm_term } : {}),
+          ...(utms.page ? { landing_page: utms.page } : {}),
         },
         metadata: {
           event: 'payment_approved',
@@ -144,8 +210,8 @@ async function notifyCRM(data: any) {
       console.error('[EvoCRM Create Lead Error]', e);
     }
 
-    // 2. Notificar SDR via Evolution API (WhatsApp) — endpoint /send/text
-    const sdrMessage = `🎉 *NOVO PAGAMENTO APROVADO!*\n\n*Produto:* ${productName}\n*Cliente:* ${customerName}\n*Email:* ${customerEmail}\n*Telefone:* ${customerPhone || 'Não informado'}\n\n⚠️ Entrar em contato para onboarding!`;
+    // 2. Notificar SDR via Evolution API (WhatsApp)
+    const sdrMessage = `🎉 *NOVO PAGAMENTO APROVADO!*\n\n*Produto:* ${productName}\n*Cliente:* ${customerName}\n*Email:* ${customerEmail}\n*Telefone:* ${customerPhone || 'Não informado'}${utms.utm_source ? `\n*UTM:* ${utms.utm_source} / ${utms.utm_medium || '-'} / ${utms.utm_campaign || '-'}` : ''}\n\n⚠️ Entrar em contato para onboarding!`;
 
     await sendWhatsApp(SDR_PHONE, sdrMessage);
 

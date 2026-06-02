@@ -20,23 +20,44 @@ export default function Obrigado() {
   }, [router]);
 
   const handleUpsell = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch('/api/abacatepay/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          productId: UPSELL_PRODUCT,
-        }),
-      });
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      }
-    } catch (e) {
-      console.error('Upsell error:', e);
-    }
-    setLoading(false);
+  setLoading(true);
+ 
+  // Recupera customer do sessionStorage (salvo no quiz/resultado)
+  let customer = undefined;
+  if (typeof window !== 'undefined') {
+  try {
+  const raw = sessionStorage.getItem('qualificacao_customer');
+  if (raw) {
+  const data = JSON.parse(raw);
+  if (data.email) {
+  customer = {
+  email: data.email,
+  name: data.name || data.email.split('@')[0],
+  cellphone: data.whatsapp || '',
+  };
+  }
+  }
+  } catch {}
+  }
+
+  try {
+  const res = await fetch('/api/abacatepay/checkout', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ 
+  productId: UPSELL_PRODUCT,
+  customer,
+  metadata: { page: '/obrigado', upsell: 'true' },
+  }),
+  });
+  const data = await res.json();
+  if (data.url) {
+  window.location.href = data.url;
+  }
+  } catch (e) {
+  console.error('Upsell error:', e);
+  }
+  setLoading(false);
   };
 
   const skipUpsell = () => {

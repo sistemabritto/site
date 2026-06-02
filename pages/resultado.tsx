@@ -4,7 +4,6 @@ import PhoneInput from '../components/PhoneInput';
 import { useRouter } from 'next/router';
 
 const PHONE = '5511914088571';
-const CHECKOUT_URL = 'https://pay.abacatepay.com/checkout/D3c0yX8Tg';
 
 interface CustomerData {
   name: string;
@@ -55,19 +54,39 @@ export default function Resultado() {
     doCheckout();
   };
 
-  const doCheckout = () => {
-    const name = customerData.name || '';
-    const email = customerData.email || '';
-    const whatsapp = customerData.whatsapp || '';
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
 
-    const url = new URL(CHECKOUT_URL);
-    url.searchParams.set('customer', JSON.stringify({
-      name,
-      email,
-      cellphone: whatsapp,
-    }));
+  const doCheckout = async () => {
+  const name = customerData.name || '';
+  const email = customerData.email || '';
+  const whatsapp = customerData.whatsapp || '';
+  const productId = orderBump ? 'whatsapp-ia-combo-consultoria' : 'whatsapp-ia-basico';
 
-    window.location.href = url.toString();
+  setCheckoutLoading(true);
+  try {
+  const res = await fetch('/api/abacatepay/checkout', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+  productId,
+  customer: {
+  email,
+  name: name || email.split('@')[0],
+  cellphone: whatsapp,
+  },
+  }),
+  });
+  const data = await res.json();
+  if (data.url) {
+  window.location.href = data.url;
+  } else {
+  throw new Error('No checkout URL');
+  }
+  } catch (err) {
+  console.error('[Checkout Error]', err);
+  // Fallback: WhatsApp
+  handleWhatsAppFallback();
+  }
   };
 
   const handleWhatsAppFallback = () => {
