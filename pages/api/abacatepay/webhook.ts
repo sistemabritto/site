@@ -140,22 +140,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log('[AbacatePay Webhook]', event, JSON.stringify(data).slice(0, 500));
 
     switch (event) {
-      case 'checkout.completed':
-      case 'subscription.completed':
-        await notifyCRM(data);
-        break;
+    case 'checkout.completed':
+    case 'subscription.completed':
+    case 'transparent.completed':
+      await notifyCRM(data);
+      break;
 
-      case 'subscription.cancelled':
-        await handleCancellation(data);
-        break;
+    case 'subscription.cancelled':
+      await handleCancellation(data);
+      break;
 
-      case 'checkout.refunded':
-      case 'subscription.refunded':
-        await handleRefund(data);
-        break;
+    case 'checkout.refunded':
+    case 'subscription.refunded':
+    case 'transparent.refunded':
+      await handleRefund(data);
+      break;
 
-      default:
-        console.log(`[AbacatePay] Evento não tratado: ${event}`);
+    case 'checkout.disputed':
+    case 'checkout.lost':
+    case 'transparent.disputed':
+    case 'transparent.lost':
+      console.log(`[AbacatePay] Dispute/lost event: ${event}`, JSON.stringify(data).slice(0, 300));
+      // TODO: notificar SDR sobre disputa
+      break;
+
+    default:
+      console.log(`[AbacatePay] Evento não tratado: ${event}`);
     }
 
     res.status(200).json({ received: true });
@@ -168,15 +178,36 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 // ── CRM Notification ────────────────────────────────────────
 async function notifyCRM(data: any) {
   try {
-    // Payload do webhook AbacatePay: { checkout, customer, payerInformation }
-    const checkout = data.checkout || data;
+    // Payload do webhook AbacatePay: { checkout|transparent, customer, payerInformation }
+    // checkout.completed → data.checkout
+    // transparent.completed → data.transparent
+    const checkout = data.transparent || data.checkout || data;
     const customer = data.customer || {};
+    const payerInfo = data.payerInformation || {};
 
     // externalId do checkout é o ID do produto no nosso sistema
-    const externalId = checkout.externalId || checkout.items?.[0]?.id || '';
+    const externalId = checkout.externalId || checkout.items?.[0]?.id || checkout.metadata?.externalId || '';
     const checkoutId = checkout.id || '';
-    const amount = checkout.amount || 0;
+    const amount = checkout.amount || checkout.paidAmount || 0;
     const status = checkout.status || 'PAID';
+
+    // Para transparent checkout, UTMs podem vir no metadata do objeto transparent
+    const transparentUtms: Record<string, string> = {};
+    if (checkout.metadata) {
+      for (const [k, v] of Object.entries(checkout.metadata)) {
+        if (k.startsWith('utm_') && typeof v === 'string') transparentUtms[k] = v;
+        if (k === 'page' && typeof v === 'string') transparentUtms.page = v;
+      }
+    }
+    // Para transparent checkout v2, UTMs podem vir no objeto utm separado
+    if (checkout.utm) {
+      const utmObj = checkout.utm as Record<string, string>;
+      if (utmObj.source) transparentUtms.utm_source = utmObj.source;
+      if (utmObj.medium) transparentUtms.utm_medium = utmObj.medium;
+      if (utmObj.campaign) transparentUtms.utm_campaign = utmObj.campaign;
+      if (utmObj.content) transparentUtms.utm_content = utmObj.content;
+      if (utmObj.term) transparentUtms.utm_term = utmObj.term;
+    }
 
     // Mapa de externalId → nome legível
     const productNames: Record<string, string> = {
@@ -192,13 +223,15 @@ async function notifyCRM(data: any) {
     };
 
     const productName = productNames[externalId] || externalId || 'Produto';
-    const customerName = customer.name || 'Cliente';
+    const customerName = customer.name || payerInfo?.PIX?.name || 'Cliente';
     const customerEmail = customer.email || '';
-    const customerPhone = customer.cellphone || customer.phone || '';
+    const customerPhone = customer.cellphone || customer.phone || payerInfo?.PIX?.phone || '';
 
     // Busca UTMs do checkout_metadata (salvo quando o cliente clicou no CTA)
-    const utms = await getUtmsForCustomer(customerEmail);
-    console.log('[UTMs for customer]', customerEmail, utms);
+    const dbUtms = await getUtmsForCustomer(customerEmail);
+    // Merge: transparent UTMs (do payload) sobrepõem DB UTMs
+    const utms = { ...dbUtms, ...transparentUtms };
+    console.log('[UTMs for customer]', customerEmail, { db: dbUtms, transparent: transparentUtms, merged: utms });
 
     // 1. Criar/atualizar lead no EvoCRM — stage Fechado + UTMs em custom_fields
     try {
