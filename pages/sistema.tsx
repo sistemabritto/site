@@ -4,84 +4,80 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PhoneInput from '../components/PhoneInput';
 
-const ARQUITETURA = [
+/* ─── Tipos de projeto que a gente faz ─── */
+const PROJETOS = [
   {
-    id: 'hermes',
-    icon: '⚡',
-    name: 'Hermes',
-    color: '#22C55E',
-    border: 'border-green-500/30',
-    bg: 'bg-green-500/10',
-    text: 'text-green-400',
-    tag: 'O cérebro que orquestra',
-    desc: 'O agente mestre. Ele coordena a workforce inteira: Kanban, webhooks, memória persistente. NVIDIA NIM, Claude Code, OpenRouter — rodando direto no seu servidor.',
-    detail: 'É o Hermes que decide quem faz o quê. Lead entra no WhatsApp? Ele dispara o agente de vendas. Tarefa vence? Ele escala. Métrica cai? Ele gera alerta. Tudo via Kanban automatizado — você vê o quadro se movendo sozinho.',
-    features: [
-      'Workforce multi-agente com Kanban automatizado',
-      'Memória de contexto persistente entre sessões',
-      'Webhooks pra disparar fluxos em tempo real',
-      'NVIDIA NIM + Claude Code + OpenRouter',
-    ],
+    id: 'saas',
+    icon: '🚀',
+    name: 'SaaS',
+    tag: 'Produto digital recorrente',
+    desc: 'Plataforma com assinatura, onboarding, dashboard e billing. Do MVP ao lançamento — com IA integrada ou não. Você define as features, a gente constrói.',
+    exemplos: ['Plataforma de agendamento', 'CRM simples', 'Gestão de cursos online', 'Marketplace de serviços'],
   },
   {
-    id: 'evonexus',
+    id: 'ecommerce',
+    icon: '🛒',
+    name: 'Loja Virtual',
+    tag: 'E-commerce que converte',
+    desc: 'Catálogo, carrinho, checkout, pagamento e gestão de pedidos. Integrado com gateway de pagamento brasileiro. Sem Shopify — é seu código, sua margem.',
+    exemplos: ['Loja de produtos físicos', 'Infoprodutos + upsell', 'Assinatura de caixinha', 'Marketplace próprio'],
+  },
+  {
+    id: 'assistente',
     icon: '🤖',
-    name: 'EvoNexus',
-    color: '#7C3AED',
-    border: 'border-purple-500/30',
-    bg: 'bg-purple-500/10',
-    text: 'text-purple-400',
-    tag: 'Onde os agentes vivem',
-    desc: 'Plataforma de execução. Claude Code e OpenCode rodam em containers isolados, cada agente com seu próprio ambiente, memória e tools.',
-    detail: 'Imagina 12 devs seniores trabalhando ao mesmo tempo — só que em segundos. Cada um com seu contexto, suas ferramentas, sua especialidade. Eles abrem PR, revisam código, fazem deploy. O EvoNexus garante que um não pisa no trabalho do outro.',
-    features: [
-      'Sandbox por agente — containers isolados',
-      'Claude Code + OpenCode em paralelo',
-      'Memória individual + compartilhada entre agentes',
-      'Logs, métricas e feedback loop automático',
-    ],
+    name: 'Assistente de IA',
+    tag: 'Automação inteligente',
+    desc: 'Agente de IA com memória, ferramentas e personalidade configurada. Atende cliente, qualifica lead, responde suporte — 24/7, no WhatsApp ou web.',
+    exemplos: ['Atendente de WhatsApp', 'Assistente de vendas', 'Suporte técnico automatizado', 'Onboarding de clientes'],
   },
   {
-    id: 'infra',
-    icon: '🏗️',
-    name: 'Infra Própria',
-    color: '#D4AF37',
-    border: 'border-[#D4AF37]/30',
-    bg: 'bg-[#D4AF37]/10',
-    text: 'text-[#D4AF37]',
-    tag: 'Você é dono do código',
-    desc: 'VPS dedicado. Docker Swarm. Traefik com SSL automático. Supabase com PostgreSQL, Auth e Storage. Domínio próprio. Sem lock-in de plataforma.',
-    detail: 'Nada de SaaS que muda o preço do nada. Nada de vendor lock-in. O código é seu, roda no seu servidor, com seu domínio. Se quiser migrar amanhã, migra. Se quiser white-label, é só trocar a logo.',
-    features: [
-      'VPS dedicado com Docker Swarm e Traefik',
-      'Supabase: PostgreSQL, Auth, Storage, Realtime',
-      'Domínio próprio + SSL via Cloudflare',
-      'Backup diário em GlusterFS + monitoramento 24/7',
-    ],
+    id: 'funil',
+    icon: '🎯',
+    name: 'Funil de Vendas',
+    tag: 'LP + Quiz + Checkout',
+    desc: 'Landing page que converte, quiz de qualificação e checkout integrado. Pixel do Facebook, UTM tracking, redirecionamento condicional. Funil completo — não só a landing.',
+    exemplos: ['LP de qualificação com quiz', 'Página de vendas VSL', 'Funil de alta conversão', 'Webinar funnel + replay'],
+  },
+  {
+    id: 'integracao',
+    icon: '🔗',
+    name: 'Integração Custom',
+    tag: 'Conecta tudo que você usa',
+    desc: 'APIs que não conversam, sistemas que não se integram, processos manuais que podiam ser automáticos. A gente constrói a ponte — e bota IA pra operar.',
+    exemplos: ['ERP ↔ WhatsApp', 'CRM ↔ n8n', 'Planilha → Dashboard automático', 'Webhook de pagamento → ativação'],
+  },
+  {
+    id: 'whitelabel',
+    icon: '🏷️',
+    name: 'White-Label',
+    tag: 'Sua marca, seu produto',
+    desc: 'Sistema completo com sua logo, seu domínio, sua identidade. Você revende pra seus clientes como se fosse seu. Sem menção ao Sistema Britto em lugar nenhum.',
+    exemplos: ['Plataforma de automação pra agências', 'SaaS revendável', 'Painel de gestão pra franquias', 'App de atendimento multi-cliente'],
   },
 ];
 
-const O_QUE_EU_FACO = [
+/* ─── Como funciona ─── */
+const ETAPAS = [
   {
     icon: '🔍',
     step: '01',
-    title: 'Entendo seu negócio',
-    desc: 'Agendamos uma call de 30 min. Você me conta onde dói. Eu mapeio os processos que a IA vai assumir. Sem blá-blá-blá — a gente sai da call com um plano.',
-    detail: 'Não é formulário de 50 perguntas. É conversa de negócio. Eu entendo seu funil, seu time, suas ferramentas. O que já funciona, o que tá travado, o que você quer escalar. Com isso, eu desenho a arquitetura dos agentes.',
+    title: 'Você me conta o que precisa',
+    desc: 'Call de 30 min. Sem formulário de 50 perguntas. Você fala, eu ouço. No final, a gente sai com o escopo claro e o prazo definido.',
+    detail: 'Pode ser "quero um SaaS de agendamento" ou "meu ERP não fala com meu WhatsApp". Pode ser "quero revender automação pra agências" ou "preciso de uma LP que converta". Não importa o tamanho — importa a clareza. Quanto mais específico você for, mais rápido a gente entrega.',
   },
   {
     icon: '🏗️',
     step: '02',
-    title: 'Monto o sistema pra você',
-    desc: 'Hermes configurado no seu domínio. Agentes criados sob medida pros seus processos. Kanban, webhooks, memória — tudo rodando em 48h.',
-    detail: 'Você não recebe um template. Você recebe um sistema feito pro seu negócio. O agente de vendas sabe seu script. O de conteúdo conhece seu tom. O de finanças entende seu ERP. Cada agente é configurado com seu contexto, suas regras, suas ferramentas.',
+    title: 'Eu construo sob medida',
+    desc: 'Design, código, infra, integrações — tudo feito pro seu negócio. Roda no seu domínio, com a sua marca. Código limpo, documentado, que você pode escalar.',
+    detail: 'Não é template. Não é fork de projeto open source. É código escrito do zero, configurado pros seus processos. O assistente de IA sabe seu script de vendas. A loja tem suas categorias e meios de pagamento. O funil segue sua copy. Cada detalhe é seu.',
   },
   {
     icon: '🚀',
     step: '03',
-    title: 'Ativo, testo e te entrego',
-    desc: 'Sistema rodando. Agentes executando. Você vê o Kanban se mover sozinho. Suporte nos primeiros 7 dias pra ajustar o que precisar.',
-    detail: 'Não entrego e sumo. Primeira semana a gente afina junto. O agente de vendas tá respondendo certo? O Kanban tá priorizando bem? A memória tá retendo o que importa? Ajusto, testo de novo e só saio quando você falar "tá rodando liso".',
+    title: 'Entrego, testo e ajusto',
+    desc: 'Sistema no ar. Você testa. O que não tá redondo, eu ajusto. Suporte nos primeiros 7 dias incluso — sem cobrar extra pra afinar.',
+    detail: 'Não entrego e sumo. A primeira semana é de calibração. O checkout tá fluindo? O funil tá rastreando os UTMs? A IA tá respondendo no tom certo? Eu fico até você falar "tá rodando liso". Depois disso, suporte contínuo via WhatsApp.',
   },
 ];
 
@@ -141,8 +137,8 @@ export default function Sistema() {
   return (
     <>
       <Meta
-        title="Sistema Sob Encomenda — Hermes + EvoNexus + Infra Própria — Sistema Britto"
-        description="Eu monto um sistema de IA completo rodando no seu servidor. Hermes orquestrando dezenas de agentes, EvoNexus executando, infra que é sua. Setup em 48h."
+        title="Soluções Web Sob Encomenda — SaaS, Loja, IA, Funil, Integrações — Sistema Britto"
+        description="Eu construo soluções web sob medida pro seu negócio. SaaS, loja virtual, assistente de IA, funil de vendas, integração custom, white-label. Código seu, domínio seu, marca sua."
         path="/sistema"
       />
       <Navbar />
@@ -158,9 +154,9 @@ export default function Sistema() {
                   <div className="text-center mb-6">
                     <div className="inline-flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-full px-3 py-1.5 mb-4">
                       <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-                      <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Sistema Sob Encomenda</span>
+                      <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Soluções Web</span>
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Vamos montar seu sistema</h3>
+                    <h3 className="text-2xl font-bold text-white mb-2">Vamos construir seu projeto</h3>
                     <p className="text-gray-400 text-sm">Preencha abaixo e eu entro em contato em até 24h.</p>
                   </div>
                   <form onSubmit={handleSubmit} className="space-y-4">
@@ -178,7 +174,7 @@ export default function Sistema() {
                       accentColor="#22C55E"
                     />
                     <button type="submit" className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all shadow-lg shadow-green-500/25 hover:shadow-green-500/40 hover:scale-[1.02] active:scale-[0.98]">
-                      QUERO MEU SISTEMA →
+                      QUERO MEU PROJETO →
                     </button>
                     <p className="text-gray-500 text-xs text-center">Ao continuar, você concorda com nossos <a href="/termos-de-uso" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">termos</a> e <a href="/politicas-de-privacidade" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">políticas de privacidade</a>.</p>
                   </form>
@@ -206,29 +202,29 @@ export default function Sistema() {
           <div className="relative z-10 max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 bg-green-500/15 border border-green-500/25 rounded-full px-4 py-2 mb-8">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Sob Encomenda</span>
+              <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Soluções Web Sob Encomenda</span>
             </div>
 
             {/* GANCHO */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
-              Eu monto um sistema de IA<br />
-              <span className="text-green-400">pro seu negócio.</span>
+              Eu construo a solução web<br />
+              <span className="text-green-400">que seu negócio precisa.</span>
             </h1>
 
             {/* DOR */}
             <div className="max-w-2xl mx-auto mb-6 space-y-3">
               <p className="text-xl text-gray-300 leading-relaxed">
-                Não é template. Não é SaaS. Não é "assine e reze pra funcionar".
+                SaaS, loja virtual, assistente de IA, funil de vendas, integração custom — <span className="text-white font-semibold">sob medida, com a sua marca, no seu domínio.</span>
               </p>
               <p className="text-lg text-gray-400 leading-relaxed">
-                É um sistema montado sob medida — com agentes de IA rodando direto no seu servidor. Hermes orquestrando. EvoNexus executando. Infra que é sua. <span className="text-white font-semibold">Você é dono do código.</span>
+                Não é template. Não é "assine e reze". É código seu, infra sua, rodando 24/7. Se quiser revender, é white-label. Se quiser usar, é seu assistente. Você decide.
               </p>
             </div>
 
             {/* SOLUÇÃO */}
             <div className="bg-[#111111]/80 border border-green-500/20 rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto mb-10 backdrop-blur-sm">
               <p className="text-xl sm:text-2xl text-white font-semibold leading-relaxed">
-                Em <span className="text-green-400">48 horas</span> seu sistema tá no ar. Agentes configurados pro seu negócio. Kanban rodando. Webhooks ativos. <span className="text-green-400">Setup completo, do zero ao deploy.</span>
+                Call de 30 min. Você me conta o problema. Eu monto a solução. <span className="text-green-400">Entrego em dias, não meses.</span>
               </p>
             </div>
 
@@ -236,7 +232,7 @@ export default function Sistema() {
               onClick={() => setShowModal(true)}
               className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl sm:text-2xl transition-all duration-300 shadow-2xl shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
             >
-              QUERO MEU SISTEMA →
+              QUERO MEU PROJETO →
             </button>
 
             <p className="text-gray-500 text-sm mt-4">
@@ -245,25 +241,83 @@ export default function Sistema() {
           </div>
         </section>
 
-        {/* ===== O QUE EU FAÇO (COMO FUNCIONA) ===== */}
+        {/* ===== TIPOS DE PROJETO ===== */}
         <section className="py-24 px-4 bg-[#111111]/50">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">O que a gente constrói</h2>
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+                Cada projeto é único. Mas aqui estão os tipos que mais aparecem. O seu pode ser um desses — ou uma combinação de vários.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {PROJETOS.map((p) => (
+                <div
+                  key={p.id}
+                  className={`group bg-[#0a0a0a]/80 backdrop-blur-sm rounded-2xl p-6 border transition-all duration-300 cursor-pointer hover:-translate-y-1 ${
+                    activeCard === p.id
+                      ? 'border-green-500/40 shadow-lg shadow-green-500/5'
+                      : 'border-white/[0.06] hover:border-green-500/20'
+                  }`}
+                  onClick={() => setActiveCard(activeCard === p.id ? null : p.id)}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-green-500/20 transition-colors">
+                      <span className="text-2xl">{p.icon}</span>
+                    </div>
+                    <div>
+                      <h3 className="text-white font-bold text-lg">{p.name}</h3>
+                      <span className="text-green-400 text-xs font-bold uppercase tracking-wider">{p.tag}</span>
+                    </div>
+                  </div>
+
+                  <p className="text-gray-300 text-sm leading-relaxed mb-4">{p.desc}</p>
+
+                  {/* Exemplos — sempre visível */}
+                  <div className="bg-[#111111]/60 rounded-xl p-3 border border-white/[0.04]">
+                    <div className="text-gray-500 text-[10px] uppercase tracking-wider font-bold mb-2">Exemplos</div>
+                    <ul className="space-y-1">
+                      {p.exemplos.map((ex, i) => (
+                        <li key={i} className="flex items-start gap-2 text-gray-400 text-xs">
+                          <span className="text-green-400 mt-0.5 flex-shrink-0">→</span>
+                          <span>{ex}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Rodapé da seção */}
+            <div className="mt-10 text-center">
+              <p className="text-gray-500 text-sm">
+                Não encontrou o que precisa? <span className="text-green-400">Fala comigo.</span> Se é solução web, a gente faz.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== COMO FUNCIONA ===== */}
+        <section className="py-24 px-4">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
               <span className="inline-flex items-center gap-2 bg-green-500/15 border border-green-500/25 rounded-full px-4 py-2 mb-6">
                 <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                 <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Como funciona</span>
               </span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Sistema sob encomenda, não produto de prateleira</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Do problema à solução em 3 etapas</h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                Em 3 etapas, eu transformo seu negócio num sistema de IA rodando 24/7. Sem template. Sem fórmula pronta.
+                Sem proposta de 40 páginas. Sem sprints de 3 meses. Call → build → entrega.
               </p>
             </div>
 
             <div className="space-y-6">
-              {O_QUE_EU_FACO.map((item, i) => (
+              {ETAPAS.map((item) => (
                 <div
                   key={item.step}
-                  className={`group bg-[#0a0a0a]/80 backdrop-blur-sm rounded-2xl border transition-all duration-300 cursor-pointer ${
+                  className={`group bg-[#111111]/80 backdrop-blur-sm rounded-2xl border transition-all duration-300 cursor-pointer ${
                     activeCard === item.step
                       ? 'border-green-500/40 shadow-lg shadow-green-500/5'
                       : 'border-white/[0.06] hover:border-green-500/20'
@@ -293,96 +347,40 @@ export default function Sistema() {
               ))}
             </div>
 
-            {/* Mini CTA entre as etapas */}
             <div className="mt-10 text-center">
-              <p className="text-gray-500 text-sm mb-4">Não tem etapa 4. É isso. Sistema montado, rodando, no ar.</p>
+              <p className="text-gray-500 text-sm">Não tem etapa 4. É isso. Problema → solução → no ar.</p>
             </div>
           </div>
         </section>
 
-        {/* ===== ARQUITETURA (HERMES + EVONEXUS + INFRA) ===== */}
-        <section className="py-24 px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 bg-purple-500/15 border border-purple-500/25 rounded-full px-4 py-2 mb-6">
-                <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
-                <span className="text-purple-400 text-xs font-bold uppercase tracking-wider">Arquitetura</span>
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">O que roda no seu servidor</h2>
-              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                Três camadas. Um sistema. Cada uma com seu papel — e todas conversando entre si.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-5">
-              {ARQUITETURA.map((c) => (
-                <div
-                  key={c.id}
-                  className={`group bg-[#111111]/80 backdrop-blur-sm rounded-2xl p-7 border ${c.border} transition-all duration-300 hover:-translate-y-1 cursor-pointer ${
-                    activeCard === c.id ? 'ring-1 ring-offset-1 ring-offset-[#0a0a0a]' : ''
-                  }`}
-                  style={{ ...(activeCard === c.id ? { borderColor: c.color } : {}) }}
-                  onClick={() => setActiveCard(activeCard === c.id ? null : c.id)}
-                >
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-3xl">{c.icon}</span>
-                    <div>
-                      <h3 className={`${c.text} font-bold text-xl`}>{c.name}</h3>
-                      <span className={`text-xs ${c.text} opacity-70`}>{c.tag}</span>
-                    </div>
-                  </div>
-                  <p className="text-gray-300 text-sm mb-5 leading-relaxed">{c.desc}</p>
-                  <ul className="space-y-2.5">
-                    {c.features.map((f, i) => (
-                      <li key={i} className="flex items-start gap-2 text-gray-400 text-sm">
-                        <span className={`${c.text} mt-0.5 flex-shrink-0 text-xs`}>✓</span>
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  {/* Detail expand */}
-                  <div className={`mt-4 pt-4 border-t border-white/[0.06] transition-all duration-300 ${
-                    activeCard === c.id ? 'opacity-100 max-h-60' : 'opacity-0 max-h-0 overflow-hidden border-transparent'
-                  }`}>
-                    <p className="text-gray-500 text-xs leading-relaxed">{c.detail}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ===== INFRA PRÓPRIA ===== */}
+        {/* ===== WHITE-LABEL (DESTAQUE) ===== */}
         <section className="py-24 px-4 bg-[#111111]/50">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 bg-[#D4AF37]/15 border border-[#D4AF37]/25 rounded-full px-4 py-2 mb-6">
                 <span className="w-2 h-2 bg-[#D4AF37] rounded-full animate-pulse" />
-                <span className="text-[#D4AF37] text-xs font-bold uppercase tracking-wider">Infraestrutura</span>
+                <span className="text-[#D4AF37] text-xs font-bold uppercase tracking-wider">White-Label</span>
               </span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Você é dono. Sempre.</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Sua marca. Seu domínio. Seu produto.</h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                Nada de plataforma que muda o preço do nada. Nada de vendor lock-in. O código é seu. O servidor é seu.
+                Todo sistema que a gente constrói pode ser white-label. Zero menção ao Sistema Britto. Você revende como se fosse seu — porque é seu.
               </p>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+            <div className="grid md:grid-cols-2 gap-5">
               {[
-                { icon: '🐳', title: 'Docker Swarm', desc: 'Containers orquestrados. Deploy sem downtime. Rollback se algo quebrar.' },
-                { icon: '🌐', title: 'Traefik + Cloudflare', desc: 'SSL automático. CDN global. DNS gerenciado.' },
-                { icon: '💾', title: 'Supabase + PostgreSQL', desc: 'Auth, storage, realtime. Banco relacional com RLS.' },
-                { icon: '📡', title: 'Redis + MinIO', desc: 'Cache instantâneo. Object storage pra arquivos e backups.' },
-                { icon: '🔄', title: 'n8n + Evolution API', desc: 'Automação de fluxos. WhatsApp Business API nativo.' },
-                { icon: '🛡️', title: 'Backup + Monitoramento', desc: 'Snapshot diário. Alerta no WhatsApp se der ruim.' },
+                { icon: '🏷️', title: 'Marca 100% sua', desc: 'Logo, cores, domínio, email — tudo com a identidade da sua empresa. O cliente final nunca sabe que foi a gente quem construiu.' },
+                { icon: '💰', title: 'Revenda pra quem quiser', desc: 'Agências vendem automação pra clientes. Consultores vendem assistentes de IA. Empresas revendem SaaS pra franquias. A margem é sua.' },
+                { icon: '🏗️', title: 'Código e infra são seus', desc: 'Roda no seu VPS, com seu domínio, seu banco de dados. Sem lock-in. Se quiser migrar amanhã, migra. Se quiser escalar, escala.' },
+                { icon: '🤝', title: 'Suporte contínuo opcional', desc: 'A gente entrega e você assume. Ou fecha suporte mensal pra manutenção, atualizações e novos features. Você escolhe.' },
               ].map((item, i) => (
-                <div key={i} className="group bg-[#0a0a0a]/80 backdrop-blur-sm rounded-2xl p-5 border border-white/[0.06] hover:border-[#D4AF37]/30 transition-all duration-300 hover:-translate-y-0.5">
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/20 flex items-center justify-center flex-shrink-0">
-                      <span className="text-xl">{item.icon}</span>
-                    </div>
-                    <div>
-                      <h3 className="text-white font-bold mb-1 text-sm">{item.title}</h3>
-                      <p className="text-gray-400 text-xs leading-relaxed">{item.desc}</p>
-                    </div>
+                <div key={i} className="group bg-[#0a0a0a]/80 backdrop-blur-sm rounded-2xl p-6 border border-white/[0.06] hover:border-[#D4AF37]/30 transition-all duration-300 flex items-start gap-4 hover:-translate-y-0.5">
+                  <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/20 flex items-center justify-center flex-shrink-0 group-hover:bg-[#D4AF37]/20 transition-colors">
+                    <span className="text-2xl">{item.icon}</span>
+                  </div>
+                  <div>
+                    <h3 className="text-white font-bold mb-1">{item.title}</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -390,50 +388,96 @@ export default function Sistema() {
           </div>
         </section>
 
-        {/* ===== STACK TECNOLÓGICA ===== */}
+        {/* ===== O QUE RODA POR BAIXO (arquitetura) ===== */}
         <section className="py-24 px-4">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <div className="text-center mb-14">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Stack que roda no seu sistema</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">O que roda por baixo</h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                Cada peça dessa stack é instalada, configurada e integrada no seu servidor. Você recebe acesso a tudo.
+                Cada projeto usa a stack certa pro problema. Mas quando o projeto precisa de IA, orquestração e automação, a engine é essa:
               </p>
             </div>
 
-            {/* Stack visual */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+            <div className="grid md:grid-cols-3 gap-5 mb-10">
               {[
-                { name: 'Hermes', color: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20' },
-                { name: 'EvoNexus', color: 'text-purple-400', bg: 'bg-purple-500/10', border: 'border-purple-500/20' },
-                { name: 'Claude Code', color: 'text-orange-400', bg: 'bg-orange-500/10', border: 'border-orange-500/20' },
-                { name: 'OpenCode', color: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-blue-500/20' },
-                { name: 'NVIDIA NIM', color: 'text-green-300', bg: 'bg-green-600/10', border: 'border-green-600/20' },
-                { name: 'OpenRouter', color: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20' },
-                { name: 'Docker Swarm', color: 'text-sky-400', bg: 'bg-sky-500/10', border: 'border-sky-500/20' },
-                { name: 'Traefik', color: 'text-cyan-400', bg: 'bg-cyan-500/10', border: 'border-cyan-500/20' },
-                { name: 'Supabase', color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20' },
-                { name: 'PostgreSQL', color: 'text-indigo-400', bg: 'bg-indigo-500/10', border: 'border-indigo-500/20' },
-                { name: 'Redis', color: 'text-red-400', bg: 'bg-red-500/10', border: 'border-red-500/20' },
-                { name: 'MinIO', color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20' },
-                { name: 'n8n', color: 'text-red-300', bg: 'bg-red-600/10', border: 'border-red-600/20' },
-                { name: 'Evolution API', color: 'text-lime-400', bg: 'bg-lime-500/10', border: 'border-lime-500/20' },
-                { name: 'Cloudflare', color: 'text-orange-300', bg: 'bg-orange-600/10', border: 'border-orange-600/20' },
-                { name: 'GlusterFS', color: 'text-teal-400', bg: 'bg-teal-500/10', border: 'border-teal-500/20' },
-                { name: 'Portainer', color: 'text-blue-300', bg: 'bg-blue-600/10', border: 'border-blue-600/20' },
-              ].map((tech) => (
-                <div
-                  key={tech.name}
-                  className={`${tech.bg} border ${tech.border} rounded-xl p-4 text-center hover:-translate-y-0.5 transition-all duration-200 backdrop-blur-sm`}
-                >
-                  <span className={`${tech.color} font-bold text-sm`}>{tech.name}</span>
+                {
+                  icon: '⚡',
+                  name: 'Hermes',
+                  tag: 'Orquestração de IA',
+                  desc: 'Agente mestre que coordena a workforce inteira: Kanban, webhooks, memória persistente. Roda direto no seu servidor.',
+                  color: 'text-green-400',
+                  border: 'border-green-500/20',
+                  bg: 'bg-green-500/5',
+                },
+                {
+                  icon: '🤖',
+                  name: 'EvoNexus',
+                  tag: 'Execução de agentes',
+                  desc: 'Claude Code e OpenCode rodam em containers isolados. Cada agente com seu ambiente, memória e ferramentas.',
+                  color: 'text-purple-400',
+                  border: 'border-purple-500/20',
+                  bg: 'bg-purple-500/5',
+                },
+                {
+                  icon: '🏗️',
+                  name: 'Infra Própria',
+                  tag: 'VPS + Docker + SSL',
+                  desc: 'Docker Swarm, Traefik, Supabase, Cloudflare. Domínio seu, SSL automático, backup diário. Sem lock-in.',
+                  color: 'text-[#D4AF37]',
+                  border: 'border-[#D4AF37]/20',
+                  bg: 'bg-[#D4AF37]/5',
+                },
+              ].map((c) => (
+                <div key={c.name} className={`${c.bg} rounded-2xl p-6 border ${c.border}`}>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-2xl">{c.icon}</span>
+                    <div>
+                      <h3 className={`${c.color} font-bold text-lg`}>{c.name}</h3>
+                      <span className={`${c.color} text-xs opacity-70`}>{c.tag}</span>
+                    </div>
+                  </div>
+                  <p className="text-gray-400 text-sm leading-relaxed">{c.desc}</p>
                 </div>
+              ))}
+            </div>
+
+            <p className="text-gray-500 text-sm text-center">
+              Nem todo projeto precisa de IA — e tudo bem. Se precisar de um site, uma LP ou uma loja, a gente constrói sem isso. Se precisar, a engine tá pronta.
+            </p>
+          </div>
+        </section>
+
+        {/* ===== STACK VISUAL ===== */}
+        <section className="py-16 px-4 bg-[#111111]/50">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-10">
+              <h3 className="text-xl font-bold text-white mb-2">Stack disponível</h3>
+              <p className="text-gray-500 text-sm">A gente usa o que faz sentido pro seu projeto. Nem tudo entra em todo projeto.</p>
+            </div>
+
+            <div className="flex flex-wrap gap-2 justify-center">
+              {[
+                'Next.js', 'React', 'Node.js', 'TypeScript', 'Tailwind CSS',
+                'PostgreSQL', 'Supabase', 'Redis', 'MinIO',
+                'Docker', 'Traefik', 'Cloudflare', 'GlusterFS',
+                'Hermes', 'EvoNexus', 'Claude Code', 'OpenCode',
+                'NVIDIA NIM', 'OpenRouter', 'n8n', 'Evolution API',
+                'AbacatePay', 'Stripe', 'Asaas', 'Omie',
+                'Vercel', 'Portainer',
+              ].map((tech) => (
+                <span
+                  key={tech}
+                  className="bg-[#0a0a0a]/80 px-3.5 py-2 rounded-full text-gray-300 text-xs font-medium border border-white/[0.06] hover:border-green-500/30 hover:text-green-400 transition-all duration-200"
+                >
+                  {tech}
+                </span>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ===== O QUE VOCÊ LEVA ===== */}
-        <section className="py-24 px-4 bg-[#111111]/50">
+        {/* ===== O QUE VOCÊ RECEBE ===== */}
+        <section className="py-24 px-4">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-14">
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">O que você recebe</h2>
@@ -441,14 +485,14 @@ export default function Sistema() {
             </div>
             <div className="grid md:grid-cols-2 gap-5">
               {[
-                { icon: '⚡', title: 'Hermes configurado no seu domínio', desc: 'O agente mestre orquestrando Kanban, webhooks e memória. NVIDIA NIM, Claude Code e OpenRouter integrados. Tudo rodando no seu servidor — você tem acesso root.' },
-                { icon: '🤖', title: 'EvoNexus com agents sob medida', desc: 'Agentes configurados pros seus processos. Vendas, marketing, finanças, suporte — cada um com memória e tools específicas pro seu negócio. Não é template genérico.' },
-                { icon: '🏗️', title: 'Infra completa. Sua.', desc: 'VPS dedicado, Docker Swarm, Traefik, Supabase, Redis, MinIO, n8n, Evolution API. Domínio próprio com SSL. Backup diário. Monitoramento 24/7.' },
-                { icon: '🔗', title: 'Webhooks e automações ativos', desc: 'Lead entra no WhatsApp? Dispara qualificação. Tarefa vence no Kanban? Escala pro agente. Métrica cai? Gera alerta. Tudo conectado em tempo real.' },
-                { icon: '📊', title: 'Dashboard unificado', desc: 'Leads, conteúdo, infra, projetos, receita — um só lugar. Dados que os agentes usam pra tomar decisão e você usa pra acompanhar tudo.' },
-                { icon: '📅', title: 'Setup em 48h + 7 dias de suporte', desc: 'Sistema no ar em 48 horas. Primeira semana com ajustes finos inclusos. Depois, suporte via WhatsApp. Sem contrato longo — cancele quando quiser.' },
+                { icon: '💻', title: 'Código seu, documentado', desc: 'Repositório no seu GitHub. Código limpo, tipado, documentado. Sem dívida técnica. Sem dependência de alguém que "sabe como funciona".' },
+                { icon: '🌐', title: 'No seu domínio, com a sua marca', desc: 'Domínio que você escolhe. SSL automático. Identidade visual sua. White-label se quiser revender — zero menção ao Sistema Britto.' },
+                { icon: '🔗', title: 'Integrações prontas', desc: 'WhatsApp, pagamento, ERP, CRM — o que seu negócio precisa pra funcionar. Cada integração é construída e testada pro seu caso.' },
+                { icon: '📊', title: 'Dashboard e métricas', desc: 'Se o projeto precisa de painel, a gente constrói. Leads, vendas, conteúdo, infra — dados que você usa pra decidir.' },
+                { icon: '🛡️', title: 'Infra que não cai', desc: 'VPS dedicado, Docker, backup diário, monitoramento. Se der problema, você sabe em 30 segundos — e a gente resolve.' },
+                { icon: '📅', title: 'Entrega rápida + suporte', desc: 'Prazo definido na call. Sem surpresa. Primeiros 7 dias de suporte incluso. Depois, suporte mensal opcional via WhatsApp.' },
               ].map((item, i) => (
-                <div key={i} className="group bg-[#0a0a0a]/80 backdrop-blur-sm rounded-2xl p-6 border border-white/[0.06] hover:border-green-500/30 transition-all duration-300 flex items-start gap-4 hover:-translate-y-0.5">
+                <div key={i} className="group bg-[#111111]/80 backdrop-blur-sm rounded-2xl p-6 border border-white/[0.06] hover:border-green-500/30 transition-all duration-300 flex items-start gap-4 hover:-translate-y-0.5">
                   <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-green-500/20 transition-colors">
                     <span className="text-2xl">{item.icon}</span>
                   </div>
@@ -463,23 +507,23 @@ export default function Sistema() {
         </section>
 
         {/* ===== CTA FINAL ===== */}
-        <section className="py-24 px-4 relative overflow-hidden">
+        <section className="py-24 px-4 relative overflow-hidden bg-[#111111]/50">
           <div className="absolute inset-0 bg-gradient-to-t from-green-500/5 via-purple-500/3 to-transparent" />
           <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-green-500/6 rounded-full blur-[100px]" />
           <div className="absolute top-1/2 right-1/3 w-[300px] h-[300px] bg-purple-500/6 rounded-full blur-[100px]" />
           <div className="relative z-10 max-w-2xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
-              Vamos montar seu sistema?
+              Tem um projeto em mente?
             </h2>
             <p className="text-gray-300 text-lg mb-8">
-              Call de 30 min. Eu entendo seu negócio, você entende o sistema. Sem compromisso.
+              Call de 30 min. Você fala, eu ouço. A gente sai com escopo e prazo. Sem compromisso.
             </p>
 
             <button
               onClick={() => setShowModal(true)}
               className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl sm:text-2xl transition-all duration-300 shadow-2xl shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
             >
-              QUERO MEU SISTEMA →
+              QUERO MEU PROJETO →
             </button>
 
             <p className="text-gray-500 text-sm mt-4">
