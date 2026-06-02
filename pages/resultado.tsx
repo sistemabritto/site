@@ -73,9 +73,9 @@ export default function Resultado() {
   const handleWhatsAppFallback = () => {
   const NL = '%0A';
   const msg = encodeURIComponent(
-  `🟢 *Lead CRM WhatsApp + IA*${NL}${NL}` +
+  `🟢 *Quero o WhatsApp + IA*${NL}${NL}` +
   `*Plano:* R$ ${finalPrice}/mês${NL}` +
-  `*Order bump:* ${orderBump ? 'Sim (+Especialista)' : 'Não'}${NL}${NL}` +
+  `*Especialista:* ${orderBump ? 'Sim' : 'Não'}${NL}${NL}` +
   `———${NL}` +
   `👤 ${customerData.name || '—'}${NL}` +
   `📧 ${customerData.email || '—'}${NL}` +

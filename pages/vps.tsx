@@ -52,7 +52,7 @@ export default function VPS() {
       } else {
       const NL = '%0A';
       const msg = encodeURIComponent(
-      `🖥️ *Lead VPS Estruturada*${orderBump ? ' + Suporte' : ''}${NL}${NL}` +
+      `🖥️ *Quero a VPS Estruturada*${orderBump ? ' + Suporte' : ''}${NL}${NL}` +
       `———${NL}` +
       `👤 ${customerData.name || '—'}${NL}` +
       `📧 ${customerData.email || '—'}${NL}` +
@@ -63,7 +63,7 @@ export default function VPS() {
       } catch {
       const NL = '%0A';
       const msg = encodeURIComponent(
-      `🖥️ *Lead VPS Estruturada*${orderBump ? ' + Suporte' : ''}${NL}${NL}` +
+      `🖥️ *Quero a VPS Estruturada*${orderBump ? ' + Suporte' : ''}${NL}${NL}` +
       `———${NL}` +
       `👤 ${customerData.name || '—'}${NL}` +
       `📧 ${customerData.email || '—'}${NL}` +

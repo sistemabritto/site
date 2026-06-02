@@ -91,10 +91,11 @@ function trackStage(stage: string, extra: Record<string, string> = {}) {
 }
 
 export default function Quiz() {
-  const [step, setStep] = useState<'email' | 'quiz'>('quiz'); // <-- começa no quiz por padrão
+  const [step, setStep] = useState<'email' | 'quiz' | 'budget'>('quiz'); // <-- começa no quiz por padrão
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [quizOutcome, setQuizOutcome] = useState<Outcome | null>(null);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
@@ -233,107 +234,88 @@ export default function Quiz() {
     }
 
     const outcome = calculateOutcome(finalAnswers);
+    setQuizOutcome(outcome);
 
-    setTimeout(() => {
-    // Source-based routing
-    const savedSource = typeof window !== 'undefined' ? sessionStorage.getItem('quiz_source') : null;
-
-    // Labels amigáveis pros valores internos do quiz
-    const labels: Record<string, string> = {
-    crm: 'WhatsApp + IA',
-    social: 'SocialJobs',
-    custom: 'Sob encomenda',
-    'leads-perdidos': 'Perco leads por demora',
-    'sem-presenca': 'Sem presença nas redes',
-    'nao-existe': 'Preciso de algo que não existe',
-    'cresceu': 'Operação não acompanha o crescimento',
-    'nada': 'Primeira vez',
-    'freelas': 'Já gastei com freelas',
-    'ferramentas': 'Já pago ferramentas',
-    'pesado': 'Invisto pesado',
-    'urgente': 'Essa semana',
-    'rapido': 'Até 15 dias',
-    'tranquilo': 'Até 30 dias',
-    'planejando': '2 a 3 meses',
+    if (outcome === 'crm') {
+    // CRM vai direto pra página de resultado
+    window.location.href = '/resultado';
+    } else {
+    // Social ou Custom → fita de validação de preço
+    setIsSubmitting(false);
+    setStep('budget');
+    }
     };
 
-    const L = (key: string) => labels[key] || key;
-    const NL = '%0A'; // quebra de linha garantida no WhatsApp
+  // === HELPERS: WhatsApp message builder ===
+  const labels: Record<string, string> = {
+  crm: 'WhatsApp + IA',
+  social: 'SocialJobs',
+  custom: 'Sob encomenda',
+  'leads-perdidos': 'Perco leads por demora',
+  'sem-presenca': 'Sem presença nas redes',
+  'nao-existe': 'Preciso de algo que não existe',
+  'cresceu': 'Operação não acompanha o crescimento',
+  'nada': 'Primeira vez',
+  'freelas': 'Já gastei com freelas',
+  'ferramentas': 'Já pago ferramentas',
+  'pesado': 'Invosto pesado',
+  'urgente': 'Essa semana',
+  'rapido': 'Até 15 dias',
+  'tranquilo': 'Até 30 dias',
+  'planejando': '2 a 3 meses',
+  };
 
-    if (savedSource === 'socialjobs') {
-    const msg = encodeURIComponent(
-    `🟠 *Lead SocialJobs*${NL}${NL}` +
-    `*Interesse:* ${L(outcome)}${NL}` +
-    `*Gargalo:* ${L(finalAnswers['q2'])}${NL}` +
-    `*Investiu antes:* ${L(finalAnswers['q3'])}${NL}` +
-    `*Prazo:* ${L(finalAnswers['q4'])}${NL}${NL}` +
-    `———${NL}` +
-    `👤 ${name || '—'}${NL}` +
-    `📧 ${email || '—'}${NL}` +
-    `📱 ${whatsapp || '—'}`
-    );
-    window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
-    return;
-    }
+  const L = (key: string) => labels[key] || key;
+  const NL = '%0A';
 
-    if (savedSource === 'sistema') {
-    const msg = encodeURIComponent(
-    `🔵 *Lead Sistema Sob Medida*${NL}${NL}` +
-    `*Interesse:* ${L(outcome)}${NL}` +
-    `*Gargalo:* ${L(finalAnswers['q2'])}${NL}` +
-    `*Investiu antes:* ${L(finalAnswers['q3'])}${NL}` +
-    `*Prazo:* ${L(finalAnswers['q4'])}${NL}${NL}` +
-    `———${NL}` +
-    `👤 ${name || '—'}${NL}` +
-    `📧 ${email || '—'}${NL}` +
-    `📱 ${whatsapp || '—'}`
-    );
-    window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
-    return;
-    }
+  const buildWhatsAppMsg = (type: 'socialjobs' | 'sistema' | 'custom') => {
+  const headerEmoji = type === 'socialjobs' ? '🟠' : type === 'sistema' ? '🔵' : '🟣';
+  const headerText = type === 'socialjobs'
+  ? 'Quero o SocialJobs'
+  : type === 'sistema'
+  ? 'Quero o Sistema Sob Medida'
+  : 'Preciso de algo sob encomenda';
 
-    if (savedSource === 'whatsapp') {
-    window.location.href = '/resultado';
-    return;
-    }
+  const msg = encodeURIComponent(
+  `${headerEmoji} *${headerText}*${NL}${NL}` +
+  `*Interesse:* ${L(quizOutcome || '')}${NL}` +
+  `*Gargalo:* ${L(answers['q2'])}${NL}` +
+  `*Investiu antes:* ${L(answers['q3'])}${NL}` +
+  `*Prazo:* ${L(answers['q4'])}${NL}${NL}` +
+  `———${NL}` +
+  `👤 ${name || '—'}${NL}` +
+  `📧 ${email || '—'}${NL}` +
+  `📱 ${whatsapp || '—'}`
+  );
+  return msg;
+  };
 
-    // Organic (no source): route by quiz outcome
-    if (outcome === 'crm') {
-    window.location.href = '/resultado';
-    } else if (outcome === 'social') {
-    const msg = encodeURIComponent(
-    `🟠 *Lead SocialJobs (orgânico)*${NL}${NL}` +
-    `*Interesse:* ${L(outcome)}${NL}` +
-    `*Gargalo:* ${L(finalAnswers['q2'])}${NL}` +
-    `*Investiu antes:* ${L(finalAnswers['q3'])}${NL}` +
-    `*Prazo:* ${L(finalAnswers['q4'])}${NL}${NL}` +
-    `———${NL}` +
-    `👤 ${name || '—'}${NL}` +
-    `📧 ${email || '—'}${NL}` +
-    `📱 ${whatsapp || '—'}`
-    );
-    window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
-    } else {
-    const msg = encodeURIComponent(
-    `🟣 *Lead Sob Encomenda*${NL}${NL}` +
-    `*Interesse:* ${L(outcome)}${NL}` +
-    `*Gargalo:* ${L(finalAnswers['q2'])}${NL}` +
-    `*Investiu antes:* ${L(finalAnswers['q3'])}${NL}` +
-    `*Prazo:* ${L(finalAnswers['q4'])}${NL}${NL}` +
-    `———${NL}` +
-    `👤 ${name || '—'}${NL}` +
-    `📧 ${email || '—'}${NL}` +
-    `📱 ${whatsapp || '—'}`
-    );
-    window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
-    }
-    }, 800);
+  const handleBudgetYes = () => {
+  trackStage('budget-yes');
+  const savedSource = typeof window !== 'undefined' ? sessionStorage.getItem('quiz_source') : null;
+  let msgType: 'socialjobs' | 'sistema' | 'custom';
+
+  if (quizOutcome === 'social') {
+  msgType = savedSource === 'sistema' ? 'sistema' : 'socialjobs';
+  } else {
+  msgType = 'custom';
+  }
+
+  const msg = buildWhatsAppMsg(msgType);
+  window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+  };
+
+  const handleBudgetNo = () => {
+  trackStage('budget-no');
+  // Downsell VPS
+  sessionStorage.setItem('vps_downsell_source', quizOutcome === 'social' ? 'socialjobs' : 'sistema');
+  window.location.href = '/vps';
   };
 
   const handleSkipEmail = () => {
-    // Skip email and go straight to quiz
-    setStep('quiz');
-    trackStage('email-skipped');
+  // Skip email and go straight to quiz
+  setStep('quiz');
+  trackStage('email-skipped');
   };
 
   if (loading) {
@@ -344,7 +326,61 @@ export default function Quiz() {
     );
   }
 
-  // === TELA DE CAPTURA ===
+  // === TELA DE VALIDAÇÃO DE ORÇAMENTO ===
+ if (step === 'budget' && quizOutcome) {
+ const isSocial = quizOutcome === 'social';
+ const budgetText = isSocial
+ ? 'O investimento para postar todo dia no automático em 5 redes sociais diferentes é a partir de R$500 por mês. Você tem capacidade financeira de investir esse valor no seu negócio agora?'
+ : 'O investimento para colocar o seu sistema sob medida no ar varia bastante de acordo com a sua necessidade. Então, neste momento, você tem capacidade financeira de investir a partir de R$1.500 para viabilizar esse seu projeto agora?';
+ const emoji = isSocial ? '🟠' : '🟣';
+ const title = isSocial ? 'SocialJobs' : 'Sistema Sob Medida';
+
+ return (
+ <>
+ <Meta
+ title={`${title} — Sistema Britto`}
+ description="Próximo passo."
+ path="/quiz"
+ />
+ <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 py-20">
+ <div className="w-full max-w-lg">
+ <div className="text-center mb-8">
+ <span className="text-5xl mb-4 block">{emoji}</span>
+ <h1 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+ {title}
+ </h1>
+ </div>
+
+ <div className="bg-[#111111] rounded-3xl p-8 sm:p-10 border border-white/10">
+ <p className="text-gray-300 text-lg leading-relaxed mb-10 text-center">
+ {budgetText}
+ </p>
+ <div className="space-y-4">
+ <button
+ onClick={handleBudgetYes}
+ className="w-full bg-primary-500 hover:bg-primary-600 text-black py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-primary-500/25"
+ >
+ SIM, QUERO INVESTIR
+ </button>
+ <button
+ onClick={handleBudgetNo}
+ className="w-full bg-transparent border border-white/20 hover:border-white/40 text-gray-300 hover:text-white py-4 rounded-full font-medium text-base transition-all duration-300"
+ >
+ AINDA NÃO
+ </button>
+ </div>
+ </div>
+
+ <div className="mt-8 text-center">
+ <p className="text-gray-500 text-sm">Seus dados são protegidos conforme LGPD.</p>
+ </div>
+ </div>
+ </main>
+ </>
+ );
+ }
+
+ // === TELA DE CAPTURA ===
   if (step === 'email') {
     return (
       <>

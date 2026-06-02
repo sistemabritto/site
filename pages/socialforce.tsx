@@ -46,7 +46,7 @@ export default function SocialForce() {
   const handleSDR = () => {
   const NL = '%0A';
   const msg = encodeURIComponent(
-  `🟠 *Lead SocialJobs*${NL}${NL}` +
+  `🟠 *Quero o SocialJobs*${NL}${NL}` +
   `———${NL}` +
   `👤 ${customerData.name || '—'}${NL}` +
   `📧 ${customerData.email || '—'}${NL}` +

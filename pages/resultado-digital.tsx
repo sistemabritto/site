@@ -28,7 +28,7 @@ export default function ResultadoDigital() {
   };
   const label = serviceLabels[servico] || servico;
   const message =
-  `🟣 *Lead Sob Encomenda*${NL}${NL}` +
+  `🟣 *Preciso de algo sob encomenda*${NL}${NL}` +
   `*Serviço:* ${label}${NL}${NL}` +
   `———${NL}` +
   `👤 ${customerData.name || '—'}${NL}` +

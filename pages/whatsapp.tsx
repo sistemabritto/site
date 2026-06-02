@@ -91,7 +91,7 @@ export default function WhatsApp() {
       console.error('[Checkout Error]', err);
       const NL = '%0A';
       const msg = encodeURIComponent(
-      `🟢 *Lead WhatsApp + IA (fallback)*${NL}${NL}` +
+      `🟢 *Quero o WhatsApp + IA*${NL}${NL}` +
       `———${NL}` +
       `📧 ${email || '—'}`
       );
