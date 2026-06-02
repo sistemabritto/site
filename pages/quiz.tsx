@@ -46,6 +46,26 @@ const QUESTIONS = [
  },
 ];
 
+// Pergunta condicional de orçamento (adicionada dinamicamente após q4 pra social/custom)
+const BUDGET_QUESTIONS: Record<string, { id: string; question: string; options: { label: string; value: string; icon: string }[] }> = {
+ social: {
+ id: 'q5',
+ question: 'O investimento para postar todo dia no automático em 5 redes sociais diferentes é a partir de R$500 por mês. Você tem capacidade financeira de investir esse valor no seu negócio agora?',
+ options: [
+ { label: 'Sim, quero investir', value: 'budget-yes', icon: '' },
+ { label: 'Ainda não', value: 'budget-no', icon: '' },
+ ],
+ },
+ custom: {
+ id: 'q5',
+ question: 'O investimento para colocar o seu sistema sob medida no ar varia bastante de acordo com a sua necessidade. Então, neste momento, você tem capacidade financeira de investir a partir de R$1.500 para viabilizar esse seu projeto agora?',
+ options: [
+ { label: 'Sim, quero investir', value: 'budget-yes', icon: '' },
+ { label: 'Ainda não', value: 'budget-no', icon: '' },
+ ],
+ },
+};
+
 type Outcome = 'crm' | 'social' | 'custom';
 
 function calculateOutcome(answers: Record<string, string>): Outcome {
@@ -91,7 +111,7 @@ function trackStage(stage: string, extra: Record<string, string> = {}) {
 }
 
 export default function Quiz() {
-  const [step, setStep] = useState<'email' | 'quiz' | 'budget'>('quiz'); // <-- começa no quiz por padrão
+  const [step, setStep] = useState<'email' | 'quiz'>('quiz'); // <-- começa no quiz por padrão
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -190,61 +210,91 @@ export default function Quiz() {
   };
 
   const handleAnswer = (value: string) => {
-    if (!QUESTIONS[currentStep]) return;
-    const qId = QUESTIONS[currentStep].id;
-    const newAnswers = { ...answers, [qId]: value };
-    setAnswers(newAnswers);
+  const currentQ = allQuestions[currentStep];
+  if (!currentQ) return;
+  const qId = currentQ.id;
+  const newAnswers = { ...answers, [qId]: value };
+  setAnswers(newAnswers);
 
-    // Track each answer
-    trackStage(`answered-${qId}`);
+  // Track each answer
+  trackStage(`answered-${qId}`);
 
-    if (currentStep < QUESTIONS.length - 1) {
-      setCurrentStep(currentStep + 1);
-    } else {
-      processQuiz(newAnswers);
-    }
+  if (currentStep < allQuestions.length - 1) {
+  setCurrentStep(currentStep + 1);
+  } else {
+  // Última pergunta respondida — processar resultado
+  processQuiz(newAnswers);
+  }
   };
 
+  // Calcula outcome parcial (após q4) pra montar pergunta condicional
+  const partialOutcome = calculateOutcome(answers);
+
+  // Monta lista de perguntas dinâmica: 4 base + 1 condicional (se social/custom)
+  const allQuestions = (() => {
+  const base = [...QUESTIONS];
+  if (partialOutcome && partialOutcome !== 'crm' && BUDGET_QUESTIONS[partialOutcome]) {
+  base.push(BUDGET_QUESTIONS[partialOutcome]);
+  }
+  return base;
+  })();
+
   const processQuiz = async (finalAnswers: Record<string, string>) => {
-    setIsSubmitting(true);
+  setIsSubmitting(true);
 
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem('qualificacao_customer', JSON.stringify({ name, email, whatsapp }));
-      sessionStorage.setItem('qualificacao_answers', JSON.stringify(finalAnswers));
-    }
+  if (typeof window !== 'undefined') {
+  sessionStorage.setItem('qualificacao_customer', JSON.stringify({ name, email, whatsapp }));
+  sessionStorage.setItem('qualificacao_answers', JSON.stringify(finalAnswers));
+  }
 
-    trackStage('quiz-completed');
+  trackStage('quiz-completed');
 
-    try {
-      await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name, email, whatsapp,
-          source: 'quiz-completed',
-          answers: finalAnswers,
-          utm: utmParams,
-          stages: stageTimestamps,
-          quiz_source: quizSource,
-          timestamp: new Date().toISOString(),
-        }),
-      });
-    } catch (err) {
-      console.error('[Lead Save Error]', err);
-    }
+  try {
+  await fetch('/api/leads', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+  name, email, whatsapp,
+  source: 'quiz-completed',
+  answers: finalAnswers,
+  utm: utmParams,
+  stages: stageTimestamps,
+  quiz_source: quizSource,
+  timestamp: new Date().toISOString(),
+  }),
+  });
+  } catch (err) {
+  console.error('[Lead Save Error]', err);
+  }
 
-    const outcome = calculateOutcome(finalAnswers);
-    setQuizOutcome(outcome);
+  const outcome = calculateOutcome(finalAnswers);
+  setQuizOutcome(outcome);
 
-    if (outcome === 'crm') {
-    // CRM vai direto pra página de resultado
-    window.location.href = '/resultado';
-    } else {
-    // Social ou Custom → fita de validação de preço
-    setIsSubmitting(false);
-    setStep('budget');
-    }
-    };
+  // Resposta da pergunta de orçamento (se existir)
+  const budgetAnswer = finalAnswers['q5'];
+
+  if (outcome === 'crm') {
+  // CRM vai direto pra página de resultado
+  window.location.href = '/resultado';
+  } else if (budgetAnswer === 'budget-no') {
+  // Não tem fit de orçamento → downsell VPS
+  trackStage('budget-no');
+  sessionStorage.setItem('vps_downsell_source', outcome === 'social' ? 'socialjobs' : 'sistema');
+  window.location.href = '/vps';
+  } else {
+  // Tem fit (budget-yes) → WhatsApp SDR
+  trackStage('budget-yes');
+  const savedSource = typeof window !== 'undefined' ? sessionStorage.getItem('quiz_source') : null;
+  let msgType: 'socialjobs' | 'sistema' | 'custom';
+  if (outcome === 'social') {
+  msgType = savedSource === 'sistema' ? 'sistema' : 'socialjobs';
+  } else {
+  msgType = 'custom';
+  }
+  const msg = buildWhatsAppMsg(msgType, outcome, finalAnswers);
+  window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+  }
+  };
 
   // === HELPERS: WhatsApp message builder ===
   const labels: Record<string, string> = {
@@ -268,7 +318,7 @@ export default function Quiz() {
   const L = (key: string) => labels[key] || key;
   const NL = '%0A';
 
-  const buildWhatsAppMsg = (type: 'socialjobs' | 'sistema' | 'custom') => {
+  const buildWhatsAppMsg = (type: 'socialjobs' | 'sistema' | 'custom', outcome: Outcome, finalAnswers: Record<string, string>) => {
   const headerEmoji = type === 'socialjobs' ? '🟠' : type === 'sistema' ? '🔵' : '🟣';
   const headerText = type === 'socialjobs'
   ? 'Quero o SocialJobs'
@@ -278,38 +328,16 @@ export default function Quiz() {
 
   const msg = encodeURIComponent(
   `${headerEmoji} *${headerText}*${NL}${NL}` +
-  `*Interesse:* ${L(quizOutcome || '')}${NL}` +
-  `*Gargalo:* ${L(answers['q2'])}${NL}` +
-  `*Investiu antes:* ${L(answers['q3'])}${NL}` +
-  `*Prazo:* ${L(answers['q4'])}${NL}${NL}` +
+  `*Interesse:* ${L(outcome)}${NL}` +
+  `*Gargalo:* ${L(finalAnswers['q2'])}${NL}` +
+  `*Investiu antes:* ${L(finalAnswers['q3'])}${NL}` +
+  `*Prazo:* ${L(finalAnswers['q4'])}${NL}${NL}` +
   `———${NL}` +
   `👤 ${name || '—'}${NL}` +
   `📧 ${email || '—'}${NL}` +
   `📱 ${whatsapp || '—'}`
   );
   return msg;
-  };
-
-  const handleBudgetYes = () => {
-  trackStage('budget-yes');
-  const savedSource = typeof window !== 'undefined' ? sessionStorage.getItem('quiz_source') : null;
-  let msgType: 'socialjobs' | 'sistema' | 'custom';
-
-  if (quizOutcome === 'social') {
-  msgType = savedSource === 'sistema' ? 'sistema' : 'socialjobs';
-  } else {
-  msgType = 'custom';
-  }
-
-  const msg = buildWhatsAppMsg(msgType);
-  window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
-  };
-
-  const handleBudgetNo = () => {
-  trackStage('budget-no');
-  // Downsell VPS
-  sessionStorage.setItem('vps_downsell_source', quizOutcome === 'social' ? 'socialjobs' : 'sistema');
-  window.location.href = '/vps';
   };
 
   const handleSkipEmail = () => {
@@ -326,61 +354,7 @@ export default function Quiz() {
     );
   }
 
-  // === TELA DE VALIDAÇÃO DE ORÇAMENTO ===
- if (step === 'budget' && quizOutcome) {
- const isSocial = quizOutcome === 'social';
- const budgetText = isSocial
- ? 'O investimento para postar todo dia no automático em 5 redes sociais diferentes é a partir de R$500 por mês. Você tem capacidade financeira de investir esse valor no seu negócio agora?'
- : 'O investimento para colocar o seu sistema sob medida no ar varia bastante de acordo com a sua necessidade. Então, neste momento, você tem capacidade financeira de investir a partir de R$1.500 para viabilizar esse seu projeto agora?';
- const emoji = isSocial ? '🟠' : '🟣';
- const title = isSocial ? 'SocialJobs' : 'Sistema Sob Medida';
-
- return (
- <>
- <Meta
- title={`${title} — Sistema Britto`}
- description="Próximo passo."
- path="/quiz"
- />
- <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 py-20">
- <div className="w-full max-w-lg">
- <div className="text-center mb-8">
- <span className="text-5xl mb-4 block">{emoji}</span>
- <h1 className="text-2xl sm:text-3xl font-bold text-white mb-4">
- {title}
- </h1>
- </div>
-
- <div className="bg-[#111111] rounded-3xl p-8 sm:p-10 border border-white/10">
- <p className="text-gray-300 text-lg leading-relaxed mb-10 text-center">
- {budgetText}
- </p>
- <div className="space-y-4">
- <button
- onClick={handleBudgetYes}
- className="w-full bg-primary-500 hover:bg-primary-600 text-black py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-primary-500/25"
- >
- SIM, QUERO INVESTIR
- </button>
- <button
- onClick={handleBudgetNo}
- className="w-full bg-transparent border border-white/20 hover:border-white/40 text-gray-300 hover:text-white py-4 rounded-full font-medium text-base transition-all duration-300"
- >
- AINDA NÃO
- </button>
- </div>
- </div>
-
- <div className="mt-8 text-center">
- <p className="text-gray-500 text-sm">Seus dados são protegidos conforme LGPD.</p>
- </div>
- </div>
- </main>
- </>
- );
- }
-
- // === TELA DE CAPTURA ===
+  // === TELA DE CAPTURA ===
   if (step === 'email') {
     return (
       <>
@@ -458,34 +432,34 @@ export default function Quiz() {
     );
   }
 
-  const currentQuestion = QUESTIONS[currentStep];
+  const currentQuestion = allQuestions[currentStep];
 
   if (!currentQuestion) {
-    return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto mb-4" />
-          <p className="text-white">Carregando...</p>
-        </div>
-      </div>
-    );
+  return (
+  <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
+  <div className="text-center">
+  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto mb-4" />
+  <p className="text-white">Carregando...</p>
+  </div>
+  </div>
+  );
   }
 
   // === TELA DO QUIZ ===
-  const progress = ((currentStep + 1) / QUESTIONS.length) * 100;
+  const progress = ((currentStep + 1) / allQuestions.length) * 100;
 
   return (
-    <>
-      <Meta
-        title="Qualificação — Sistema Britto"
-        description="Descubra a solução ideal pro seu negócio. Leva menos de 2 minutos."
-        path="/quiz"
-      />
-      <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 py-20">
-        <div className="w-full max-w-2xl">
-          <div className="mb-8">
-            <div className="flex justify-between text-sm text-gray-400 mb-2">
-              <span>Pergunta {currentStep + 1} de {QUESTIONS.length}</span>
+  <>
+  <Meta
+  title="Qualificação — Sistema Britto"
+  description="Descubra a solução ideal pro seu negócio. Leva menos de 2 minutos."
+  path="/quiz"
+  />
+  <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 py-20">
+  <div className="w-full max-w-2xl">
+  <div className="mb-8">
+  <div className="flex justify-between text-sm text-gray-400 mb-2">
+  <span>Pergunta {currentStep + 1} de {allQuestions.length}</span>
               <span>{Math.round(progress)}%</span>
             </div>
             <div className="w-full bg-[#111111] rounded-full h-2">
