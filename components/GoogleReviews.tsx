@@ -21,54 +21,33 @@ interface UnifiedReview {
 }
 
 const FALLBACK_REVIEWS: UnifiedReview[] = [
-  {
-    name: 'Ricardo M.',
-    business: 'Clínica OdontoLife',
-    rating: 5,
-    text: 'Em 2 semanas o atendimento no WhatsApp virou nosso maior fechador de consultas. O ROI veio no primeiro mês.',
-    date: 'há 3 dias',
-    source: 'google',
-  },
-  {
-    name: 'Amanda S.',
-    business: 'Studio Pilates',
-    rating: 5,
-    text: 'Antes eu levava 3h por dia no WhatsApp marcando e remarcando. Hoje a IA faz tudo sozinha. Liberou minha vida.',
-    date: 'há 1 semana',
-    source: 'google',
-  },
-  {
-    name: 'Carlos E.',
-    business: 'Delivery Pizzaria',
-    rating: 5,
-    text: 'Do pedido ao delivery, tudo automático. O cliente elogia a velocidade e a gente atende 3x mais sem aumentar equipe.',
-    date: 'há 2 semanas',
-    source: 'google',
-  },
-  {
-    name: 'Fernanda L.',
-    business: 'Escritório Contábil',
-    rating: 5,
-    text: 'Documentação, agendamento, lembretes — tudo no automático. Clientes mais satisfeitos e menos retrabalho.',
-    date: 'há 3 semanas',
-    source: 'google',
-  },
-  {
-    name: 'Roberto F.',
-    business: 'Auto Escola Aprova',
-    rating: 5,
-    text: 'Qualificação de leads virou piada. O agente já entrega o cliente pronto pra fechar. Economia de 20h/semana.',
-    date: 'há 1 mês',
-    source: 'google',
-  },
-  {
-    name: 'Patricia O.',
-    business: 'Consultório Dermatologia',
-    rating: 5,
-    text: 'Agendamento 24/7 sem erro humano. Paciente elogia, equipe respira. Melhor investimento do ano.',
-    date: 'há 1 mês',
-    source: 'google',
-  },
+	{
+		name: 'Waldemar Ramos',
+		business: 'Google',
+		rating: 5,
+		text: 'Profissional Top. Entregou no prazo com um preço bem justo. Foi muito prestativo e sanou todas as minhas dúvidas. Recomendadíssimo!!!',
+		date: '9 meses atrás',
+		source: 'google',
+		photoUrl: 'https://lh3.googleusercontent.com/a-/ALV-UjXKNlCwle8oZ1TFwZL6nbY9AVcjbkKOVVEP_wRAwWQBCnwcgfGMrQ=s1920-c-rp-mo-br100',
+	},
+	{
+		name: 'João Fernandes Athayde',
+		business: 'Google',
+		rating: 5,
+		text: 'Comprometimento!! Muito bom...',
+		date: '1 ano atrás',
+		source: 'google',
+		photoUrl: 'https://lh3.googleusercontent.com/a-/ALV-UjWZaI9eKWU2eh2bZaL6s7WC1XlCPrbM4cQNR64I_4P5ZEg1fnE=s1920-c-rp-mo-br100',
+	},
+	{
+		name: 'Thiago Rathge',
+		business: 'Google',
+		rating: 5,
+		text: 'Meu amigo, o cara manda bem demais mesmo! Super engraçado e excelente profissional. Super recomendo a todos!',
+		date: '1 ano atrás',
+		source: 'google',
+		photoUrl: 'https://lh3.googleusercontent.com/a-/ALV-UjXSz0Ys7fdNq4auTuDoVTbNvunhaYwAwxrWPHQuU2EJlkZjkK19=s1920-c-rp-mo-br100',
+	},
 ];
 
 export default function GoogleReviews() {
@@ -135,7 +114,7 @@ export default function GoogleReviews() {
 
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
+            {[1, 2, 3].map((i) => (
               <div key={i} className="glass-strong rounded-2xl p-6 animate-pulse">
                 <div className="flex gap-1 mb-4">
                   {[1, 2, 3, 4, 5].map((s) => (
@@ -202,7 +181,7 @@ export default function GoogleReviews() {
 
         <div className="mt-12 text-center">
           <a
-            href="https://search.google.com/local/reviews?placeid=CAwSKRInCgNwdnESIE9oWXdlREE2TUhnelpXWm1aRE5sT0RZeFlUQTJObUl6GAo"
+            href="https://search.google.com/local/reviews?placeid=ChIJM_vnaijGTCYRs2agYejT_z4"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 glass-strong rounded-full px-5 py-3 border border-white/20 hover:border-gold-500/50 transition-colors"
@@ -213,7 +192,7 @@ export default function GoogleReviews() {
               <path d="M12.0098 20.4954C16.7098 20.4954 20.2298 17.8554 21.8698 14.8154L24.8698 17.8154C22.3298 22.4754 17.3698 25.4854 12.0098 25.4854C8.47981 25.4854 5.00981 24.1254 2.21981 21.5254C2.17981 21.4854 2.13981 21.4554 2.09981 21.4154L5.29981 18.2154C7.19981 19.6554 9.51981 20.4954 12.0098 20.4954Z" />
             </svg>
             <span className="text-white text-sm font-semibold">
-              Avaliado com 5.0 ★ no Google
+              Avaliado 5.0 ★ no Google
             </span>
             <span className="text-xs text-gray-300">→</span>
           </a>
