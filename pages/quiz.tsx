@@ -263,16 +263,19 @@ export default function Quiz() {
 
       // Organic (no source): route by quiz outcome
       if (outcome === 'crm') {
-        window.location.href = '/resultado';
+      window.location.href = '/resultado';
       } else if (outcome === 'social') {
-        // Organic social: go to /socialjobs landing
-        window.location.href = '/socialjobs';
+      // Organic social: vai direto pro WhatsApp do SDR com msg de SocialJobs (evita looping /socialjobs → quiz → /socialjobs)
+      const msg = encodeURIComponent(
+      `Fala, Felipe. Fiz a qualificação e quero o SocialJobs.\n\nMeu perfil: ${outcome}\nGargalo: ${finalAnswers['q2']}\nInvestimento anterior: ${finalAnswers['q3']}\nPrazo: ${finalAnswers['q4']}\n\nNome: ${name}\nEmail: ${email}\nWhatsApp: ${whatsapp}`
+      );
+      window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
       } else {
-        // Custom → WhatsApp
-        const msg = encodeURIComponent(
-          `Fala, Felipe. Fiz a qualificação e preciso de algo SOB ENCOMENDA.\n\nGargalo: ${finalAnswers['q2']}\nInvestimento anterior: ${finalAnswers['q3']}\nPrazo: ${finalAnswers['q4']}\n\nNome: ${name}\nEmail: ${email}\nWhatsApp: ${whatsapp}`
-        );
-        window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+      // Custom → WhatsApp
+      const msg = encodeURIComponent(
+      `Fala, Felipe. Fiz a qualificação e preciso de algo SOB ENCOMENDA.\n\nGargalo: ${finalAnswers['q2']}\nInvestimento anterior: ${finalAnswers['q3']}\nPrazo: ${finalAnswers['q4']}\n\nNome: ${name}\nEmail: ${email}\nWhatsApp: ${whatsapp}`
+      );
+      window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
       }
     }, 800);
   };
