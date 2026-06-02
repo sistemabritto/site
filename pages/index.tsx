@@ -204,7 +204,7 @@ export default function Home() {
                     type="submit"
                     className="w-full bg-green-500 hover:bg-green-600 text-black py-4 rounded-full font-bold text-lg transition-all shadow-lg shadow-green-500/25 hover:shadow-green-500/40 hover:scale-[1.02] active:scale-[0.98]"
                   >
-                    QUERO MEU BRAÇO →
+                    QUERO MEUS BRAÇOS →
                   </button>
                   
                   <p className="text-gray-500 text-xs text-center">Sem compromisso. Resposta em até 24h.</p>
@@ -256,10 +256,10 @@ export default function Home() {
           {/* SOLUÇÃO */}
           <div className="bg-[#111111]/80 border border-green-500/20 rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto mb-10 backdrop-blur-sm">
             <p className="text-xl sm:text-2xl text-white font-semibold leading-relaxed">
-              A gente bota <span className="text-green-400">dezenas de agentes de IA</span> pra trabalhar 24/7 por você. WhatsApp que vende sozinho. Conteúdo infinito nas redes. Infra que não cai. <span className="text-green-400">Setup em 48h.</span>
+            Já pensou em ter <span className="text-green-400">dezenas de especialistas</span> trabalhando 24/7 por você. WhatsApp que vende sozinho. Conteúdo diário nas redes sociais. <span className="text-green-400">Pagando menos de um salário mínimo?</span>
             </p>
             <p className="text-gray-400 text-sm mt-3">
-              Não é falta de esforço. É falta de braço. E o braço chegou.
+            Seu problema não é falta de esforço. É falta de braço. E os braços chegaram.
             </p>
           </div>
 
@@ -268,7 +268,7 @@ export default function Home() {
             onClick={() => setShowModal(true)}
             className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl transition-all duration-300 shadow-2xl shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
           >
-            QUERO MEU BRAÇO →
+            QUERO MEUS BRAÇOS →
           </button>
         </div>
       </section>
@@ -412,7 +412,7 @@ export default function Home() {
             onClick={() => setShowModal(true)}
             className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl transition-all duration-300 shadow-2xl shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
           >
-            QUERO MEU BRAÇO →
+            QUERO MEUS BRAÇOS →
           </button>
         </div>
       </section>

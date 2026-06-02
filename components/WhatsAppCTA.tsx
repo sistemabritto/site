@@ -63,7 +63,7 @@ export default function WhatsAppCTA() {
               rel="noopener noreferrer"
               className="block w-full bg-gold-500 hover:bg-gold-600 text-surface-900 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-gold-500/25 mb-5"
             >
-              QUERO MEU BRAÇO →
+              QUERO MEUS BRAÇOS →
             </a>
 
             <p className="text-gold-500 text-xs font-bold mt-5 animate-pulse text-center">
