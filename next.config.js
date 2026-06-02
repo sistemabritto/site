@@ -13,7 +13,7 @@ const nextConfig = {
     { source: '/qualificar-workforce', destination: '/quiz', permanent: true },
     // Resultado variants → canonical resultado
     { source: '/resultado-whatsapp', destination: '/resultado', permanent: true },
-    { source: '/resultado-workforce', destination: '/resultado-digital', permanent: true },
+    { source: '/resultado-workforce', destination: '/sistema', permanent: true },
     // Old product pages → new architecture
     { source: '/socialforce', destination: '/socialjobs', permanent: true },
     { source: '/evonexus', destination: '/sistema', permanent: true },

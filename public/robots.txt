@@ -12,9 +12,6 @@ Allow: /whatsapp
 Allow: /vps
 Allow: /sistema
 Allow: /socialjobs
-Allow: /resultado
-Allow: /resultado-digital
-Allow: /claude-code
 
 # ── Compliance ────────────────────────────────────────
 Allow: /politicas-de-privacidade
@@ -39,6 +36,8 @@ Disallow: /api/
 Disallow: /admin
 Disallow: /login
 Disallow: /obrigado
+Disallow: /resultado
+Disallow: /resultado-digital
 Disallow: /*.json$
 Disallow: /*.map$
 
