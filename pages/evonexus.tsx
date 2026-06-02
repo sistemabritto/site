@@ -40,7 +40,7 @@ export default function EvoNexusPage() {
         <section className="relative pt-32 pb-20 bg-surface-950 overflow-hidden">
           {/* Background gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-blue-900/10 via-surface-950 to-surface-950" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[800px] max-h-[800px] w-full h-full bg-blue-500/10 rounded-full blur-3xl" />
           
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Logo EVO_NEXUS */}

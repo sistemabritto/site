@@ -196,8 +196,8 @@ export default function Sistema() {
         {/* ===== HERO ===== */}
         <section className="relative pt-32 pb-24 px-4 text-center overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-green-500/8 via-purple-500/3 to-[#0a0a0a]" />
-          <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-green-500/6 rounded-full blur-[120px]" />
-          <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-purple-500/6 rounded-full blur-[120px]" />
+          <div className="absolute top-1/3 left-1/4 max-w-[500px] max-h-[500px] w-full h-full bg-green-500/6 rounded-full blur-[120px]" />
+          <div className="absolute top-1/3 right-1/4 max-w-[400px] max-h-[400px] w-full h-full bg-purple-500/6 rounded-full blur-[120px]" />
           <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-500/20 to-transparent" />
           <div className="relative z-10 max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 bg-green-500/15 border border-green-500/25 rounded-full px-4 py-2 mb-8">
@@ -450,8 +450,8 @@ export default function Sistema() {
         {/* ===== CTA FINAL ===== */}
         <section className="py-24 px-4 relative overflow-hidden bg-[#111111]/50">
           <div className="absolute inset-0 bg-gradient-to-t from-green-500/5 via-purple-500/3 to-transparent" />
-          <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-green-500/6 rounded-full blur-[100px]" />
-          <div className="absolute top-1/2 right-1/3 w-[300px] h-[300px] bg-purple-500/6 rounded-full blur-[100px]" />
+          <div className="absolute top-1/2 left-1/3 max-w-[400px] max-h-[400px] w-full h-full bg-green-500/6 rounded-full blur-[100px]" />
+          <div className="absolute top-1/2 right-1/3 max-w-[300px] max-h-[300px] w-full h-full bg-purple-500/6 rounded-full blur-[100px]" />
           <div className="relative z-10 max-w-2xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
               Tem um projeto em mente?

@@ -225,9 +225,9 @@ export default function Home() {
       )}
 
       {/* ===== HERO — GANCHO + DOR + SOLUÇÃO ===== */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
+      <section className="relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-green-500/8 via-[#0a0a0a] to-[#0a0a0a]" />
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/5 rounded-full blur-[120px]" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[600px] max-h-[600px] w-full h-full bg-green-500/5 rounded-full blur-[120px]" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-500/20 to-transparent" />
         
         <div className="relative z-10 max-w-4xl mx-auto text-center">
@@ -399,7 +399,7 @@ export default function Home() {
       {/* ===== CTA FINAL — único botão ===== */}
       <section className="py-24 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-green-500/5 via-transparent to-transparent" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-green-500/5 rounded-full blur-[100px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[400px] max-h-[400px] w-full h-full bg-green-500/5 rounded-full blur-[100px]" />
         <div className="relative z-10 max-w-2xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
             Cada dia sem automação<br />

@@ -266,7 +266,7 @@ export default function SocialJobs() {
         {/* ===== HERO — GANCHO ===== */}
         <section className="relative pt-32 pb-24 px-4 text-center overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-orange-500/8 via-[#0a0a0a] to-[#0a0a0a]" />
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-500/8 rounded-full blur-[120px]" />
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[500px] max-h-[500px] w-full h-full bg-orange-500/8 rounded-full blur-[120px]" />
           <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange-500/20 to-transparent" />
           <div className="relative z-10 max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 bg-orange-500/15 border border-orange-500/25 rounded-full px-4 py-2 mb-8">
@@ -537,7 +537,7 @@ export default function SocialJobs() {
         {/* ===== CTA FINAL ===== */}
         <section className="py-24 px-4 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-orange-500/5 via-transparent to-transparent" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-orange-500/8 rounded-full blur-[100px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[400px] max-h-[400px] w-full h-full bg-orange-500/8 rounded-full blur-[100px]" />
           <div className="relative z-10 max-w-2xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
               Cada dia sem postar<br />

@@ -70,7 +70,7 @@ export default function Services() {
     <section id="servicos" className="relative py-24 sm:py-32 bg-surface-950 overflow-hidden">
       {/* Background gradients */}
       <div className="absolute inset-0 bg-gradient-to-b from-surface-950 via-surface-900 to-surface-950" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold-500/5 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[800px] max-h-[800px] w-full h-full bg-gold-500/5 rounded-full blur-3xl" />
       
       <div ref={reveal} className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
         {/* Header */}
