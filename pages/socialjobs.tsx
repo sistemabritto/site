@@ -214,7 +214,7 @@ export default function SocialJobs() {
                       <span className="text-orange-400 text-xs font-bold uppercase tracking-wider">SocialJobs</span>
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-2">Seu conteúdo nunca mais para</h3>
-                    <p className="text-gray-400 text-sm">Seus dados preenchem o quiz automático. Sem repetir nada.</p>
+                    <p className="text-gray-400 text-sm">Seus dados preenchem automaticamente. Sem repetir nada.</p>
                   </div>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
@@ -240,7 +240,7 @@ export default function SocialJobs() {
                 <div className="text-center py-8">
                   <div className="text-5xl mb-4">🔥</div>
                   <h3 className="text-xl font-bold text-white mb-2">Bora criar conteúdo!</h3>
-                  <p className="text-gray-300 text-sm">Redirecionando pro quiz de qualificação…</p>
+                  <p className="text-gray-300 text-sm">Recebi. Já já eu entro em contato.</p>
                   <div className="w-full bg-white/10 rounded-full h-1.5 mt-4 overflow-hidden">
                     <div className="bg-orange-500 h-full rounded-full animate-pulse" style={{ width: '60%' }}></div>
                   </div>
@@ -308,7 +308,7 @@ export default function SocialJobs() {
             </button>
 
             <p className="text-gray-500 text-sm mt-4">
-              Quiz rápido. Sem compromisso. Resposta em 2 minutos.
+              Sem compromisso. A gente conversa e você decide.
             </p>
           </div>
         </section>
@@ -555,7 +555,7 @@ export default function SocialJobs() {
             </button>
 
             <p className="text-gray-500 text-sm mt-4">
-              Quiz rápido. Sem compromisso. Sem contrato longo.
+              Sem compromisso. Sem contrato longo.
             </p>
           </div>
         </section>

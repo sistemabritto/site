@@ -183,7 +183,7 @@ export default function Sistema() {
                 <div className="text-center py-8">
                   <div className="text-5xl mb-4">⚡</div>
                   <h3 className="text-xl font-bold text-white mb-2">Dados salvos!</h3>
-                  <p className="text-gray-300 text-sm">Redirecionando pro quiz…</p>
+                  <p className="text-gray-300 text-sm">Recebi. Já já eu entro em contato.</p>
                   <div className="w-full bg-white/10 rounded-full h-1.5 mt-4 overflow-hidden">
                     <div className="bg-green-400 h-full rounded-full animate-pulse" style={{ width: '60%' }}></div>
                   </div>
@@ -236,7 +236,7 @@ export default function Sistema() {
             </button>
 
             <p className="text-gray-500 text-sm mt-4">
-              Quiz rápido. Resposta personalizada em 2 minutos.
+              Call de 30 min. Sem compromisso.
             </p>
           </div>
         </section>
@@ -388,65 +388,6 @@ export default function Sistema() {
           </div>
         </section>
 
-        {/* ===== O QUE RODA POR BAIXO (arquitetura) ===== */}
-        <section className="py-24 px-4">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-14">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">O que roda por baixo</h2>
-              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                Cada projeto usa a stack certa pro problema. Mas quando o projeto precisa de IA, orquestração e automação, a engine é essa:
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-5 mb-10">
-              {[
-                {
-                  icon: '⚡',
-                  name: 'Hermes',
-                  tag: 'Orquestração de IA',
-                  desc: 'Agente mestre que coordena a workforce inteira: Kanban, webhooks, memória persistente. Roda direto no seu servidor.',
-                  color: 'text-green-400',
-                  border: 'border-green-500/20',
-                  bg: 'bg-green-500/5',
-                },
-                {
-                  icon: '🤖',
-                  name: 'EvoNexus',
-                  tag: 'Execução de agentes',
-                  desc: 'Claude Code e OpenCode rodam em containers isolados. Cada agente com seu ambiente, memória e ferramentas.',
-                  color: 'text-purple-400',
-                  border: 'border-purple-500/20',
-                  bg: 'bg-purple-500/5',
-                },
-                {
-                  icon: '🏗️',
-                  name: 'Infra Própria',
-                  tag: 'VPS + Docker + SSL',
-                  desc: 'Docker Swarm, Traefik, Supabase, Cloudflare. Domínio seu, SSL automático, backup diário. Sem lock-in.',
-                  color: 'text-[#D4AF37]',
-                  border: 'border-[#D4AF37]/20',
-                  bg: 'bg-[#D4AF37]/5',
-                },
-              ].map((c) => (
-                <div key={c.name} className={`${c.bg} rounded-2xl p-6 border ${c.border}`}>
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-2xl">{c.icon}</span>
-                    <div>
-                      <h3 className={`${c.color} font-bold text-lg`}>{c.name}</h3>
-                      <span className={`${c.color} text-xs opacity-70`}>{c.tag}</span>
-                    </div>
-                  </div>
-                  <p className="text-gray-400 text-sm leading-relaxed">{c.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            <p className="text-gray-500 text-sm text-center">
-              Nem todo projeto precisa de IA — e tudo bem. Se precisar de um site, uma LP ou uma loja, a gente constrói sem isso. Se precisar, a engine tá pronta.
-            </p>
-          </div>
-        </section>
-
         {/* ===== STACK VISUAL ===== */}
         <section className="py-16 px-4 bg-[#111111]/50">
           <div className="max-w-6xl mx-auto">
@@ -527,7 +468,7 @@ export default function Sistema() {
             </button>
 
             <p className="text-gray-500 text-sm mt-4">
-              Quiz de qualificação. Sem compromisso. Resposta em 2 minutos.
+              Sem compromisso. A gente conversa e você decide.
             </p>
           </div>
         </section>

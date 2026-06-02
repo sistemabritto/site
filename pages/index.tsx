@@ -73,7 +73,7 @@ export default function Home() {
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-2">Sua empresa ainda faz tudo no braço?</h3>
                     <p className="text-gray-400 text-sm">
-                      Seus dados preenchem o quiz automático. Sem repetir nada.
+                      Seus dados preenchem automaticamente. Sem repetir nada.
                     </p>
                   </div>
 
@@ -120,7 +120,7 @@ export default function Home() {
                 <div className="text-center py-8">
                   <div className="text-5xl mb-4">⚡</div>
                   <h3 className="text-xl font-bold text-white mb-2">Dados salvos!</h3>
-                  <p className="text-gray-300 text-sm">Redirecionando pro quiz de qualificação…</p>
+                  <p className="text-gray-300 text-sm">Recebi. Já já eu entro em contato.</p>
                   <div className="w-full bg-white/10 rounded-full h-1.5 mt-4 overflow-hidden">
                     <div className="bg-green-400 h-full rounded-full animate-pulse" style={{ width: '60%' }}></div>
                   </div>
