@@ -246,10 +246,10 @@ export default function Home() {
           {/* DOR — twist the knife */}
           <div className="max-w-2xl mx-auto mb-8 space-y-4">
             <p className="text-xl text-gray-300 leading-relaxed">
-              Lead entra no WhatsApp e morre sem resposta. Postagem uma vez por semana — se der tempo. Enquanto isso, seu concorrente já tem <span className="text-white font-semibold">IA atendendo, vendendo e criando conteúdo</span> enquanto ele dorme.
-            </p>
-            <p className="text-lg text-gray-500 leading-relaxed">
-              Cada dia sem automação é um lead pro concorrente. Uma venda perdida. Uma hora que poderia ser estratégia — mas vira apagamento de incêndio.
+              Postagem uma vez por semana, quando dá tempo. Quando chega alguém no WhatsApp, a conversa acaba em ghosting... Enquanto isso, seu concorrente já tem <span className="text-white font-semibold">IA atendendo, vendendo e criando conteúdo</span> enquanto ele dorme.
+              </p>
+              <p className="text-lg text-gray-500 leading-relaxed">
+              Cada dia sem IA é uma oportunidade pro seu concorrente. Uma oportunidade que podia ser sua. Uma hora recuperada que poderia virar lucro, mas vira apagamento de incêndio.
             </p>
           </div>
 
