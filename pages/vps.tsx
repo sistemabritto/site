@@ -2,19 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import PhoneInput from '../components/PhoneInput';
 
 const PHONE = '5511914088571';
 
-const VPS_PRODUCT_ID = 'prod_tZQyF6wjgnECwGAy203fPL0U';
-const VPS_COMBO_PRODUCT_ID = 'prod_DREjFsNq1ApYt31ggWssMJzL';
+const VPS_PRODUCT_SLUG = 'vps-gerenciada';
+const VPS_COMBO_PRODUCT_SLUG = 'vps-gerenciada-combo-suporte';
 
 export default function VPS() {
   const [customerData, setCustomerData] = useState({ name: '', email: '', whatsapp: '' });
-  const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '' });
-  const [submitted, setSubmitted] = useState(false);
   const [orderBump, setOrderBump] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -23,35 +20,15 @@ export default function VPS() {
         try {
           const data = JSON.parse(stored);
           setCustomerData(data);
-          setFormData(data);
         } catch {}
       }
     }
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.email) return;
+  const handleCheckout = async () => {
+    setLoading(true);
 
-    const customer = { name: formData.name, email: formData.email, whatsapp: formData.whatsapp };
-
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem('qualificacao_customer', JSON.stringify(customer));
-    }
-
-    try {
-      await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...customer, source: 'vps-landing' }),
-      });
-    } catch (err) {
-      console.error('Erro ao salvar lead:', err);
-    }
-
-    setSubmitted(true);
-
-    const productId = orderBump ? VPS_COMBO_PRODUCT_ID : VPS_PRODUCT_ID;
+    const productId = orderBump ? VPS_COMBO_PRODUCT_SLUG : VPS_PRODUCT_SLUG;
 
     try {
       const res = await fetch('/api/abacatepay/checkout', {
@@ -59,11 +36,11 @@ export default function VPS() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           productId,
-          customer: {
-            name: customer.name,
-            email: customer.email,
-            cellphone: customer.whatsapp || customer.email,
-          },
+          customer: customerData.email ? {
+            name: customerData.name,
+            email: customerData.email,
+            cellphone: customerData.whatsapp || customerData.email,
+          } : undefined,
           returnUrl: `${window.location.origin}/obrigado`,
         }),
       });
@@ -74,23 +51,16 @@ export default function VPS() {
         window.location.href = data.url;
       } else {
         const msg = encodeURIComponent(
-          `Fala, Felipe. Quero a VPS Estruturada${orderBump ? ' com Suporte Técnico' : ''}.\n\nNome: ${customer.name}\nEmail: ${customer.email}\nWhatsApp: ${customer.whatsapp}`
+          `Fala, Felipe. Quero a VPS Estruturada${orderBump ? ' com Suporte Técnico' : ''}.${customerData.name ? `\n\nNome: ${customerData.name}` : ''}${customerData.email ? `\nEmail: ${customerData.email}` : ''}${customerData.whatsapp ? `\nWhatsApp: ${customerData.whatsapp}` : ''}`
         );
         window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
       }
     } catch {
       const msg = encodeURIComponent(
-        `Fala, Felipe. Quero a VPS Estruturada${orderBump ? ' com Suporte Técnico' : ''}.\n\nNome: ${customer.name}\nEmail: ${customer.email}\nWhatsApp: ${customer.whatsapp}`
+        `Fala, Felipe. Quero a VPS Estruturada${orderBump ? ' com Suporte Técnico' : ''}.${customerData.name ? `\n\nNome: ${customerData.name}` : ''}${customerData.email ? `\nEmail: ${customerData.email}` : ''}${customerData.whatsapp ? `\nWhatsApp: ${customerData.whatsapp}` : ''}`
       );
       window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
     }
-  };
-
-  const handleWhatsApp = () => {
-    const msg = encodeURIComponent(
-      `Fala, Felipe. Quero saber mais sobre a VPS Estruturada. Pode me chamar?\n\nNome: ${customerData.name}\nEmail: ${customerData.email}\nWhatsApp: ${customerData.whatsapp}`
-    );
-    window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
   };
 
   return (
@@ -102,83 +72,6 @@ export default function VPS() {
     />
     <Navbar />
     <main className="min-h-screen bg-[#0a0a0a] overflow-x-hidden" style={{ color: '#ffffff' }}>
-
-      {/* MODAL DE CAPTURA */}
-      {showModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0,0,0,0.9)' }}>
-          <div className="bg-[#111111] rounded-3xl p-8 max-w-md w-full border border-[#D4AF37]/30 relative">
-            {!submitted ? (
-              <>
-                <button onClick={() => setShowModal(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
-                <div className="text-center mb-6">
-                  <div className="text-4xl mb-3">🔧</div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Quer estruturar sua VPS?</h3>
-                  <p className="text-gray-300 text-sm">Seu email já preenche o checkout automático.</p>
-                </div>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
-                    <input type="text" placeholder="Seu nome" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none" />
-                  </div>
-                  <div>
-                    <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
-                    <input type="email" placeholder="seu@email.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none" required />
-                  </div>
-                  <PhoneInput
-                    value={formData.whatsapp}
-                    onChange={(v) => setFormData({...formData, whatsapp: v})}
-                    accentColor="#D4AF37"
-                  />
-
-                  {/* ORDER BUMP — Suporte Técnico */}
-                  <label className="flex items-start gap-3 cursor-pointer bg-[#D4AF37]/10 rounded-xl p-4 border border-[#D4AF37]/30">
-                    <input
-                      type="checkbox"
-                      checked={orderBump}
-                      onChange={(e) => setOrderBump(e.target.checked)}
-                      className="mt-1 w-5 h-5 rounded border-white/20 bg-[#111111] text-[#D4AF37] focus:ring-[#D4AF37]"
-                    />
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-[#D4AF37] font-bold">+ Suporte Técnico</span>
-                        <span className="text-gray-400 text-xs">(recomendado)</span>
-                      </div>
-                      <p className="text-gray-300 text-sm">
-                        Especialista no WhatsApp com SLA 24h. Ajuda com deploy, backup, segurança e troubleshooting. Quem tem infra precisa de suporte humano pra configurar.
-                      </p>
-                      <div className="flex items-center gap-3 mt-1">
-                        <p className="text-gray-500 text-xs line-through">De R$ 547/mês</p>
-                        <p className="text-[#D4AF37] font-bold text-lg">R$ 250/mês</p>
-                      </div>
-                    </div>
-                  </label>
-
-                  <button type="submit" className="w-full bg-[#D4AF37] hover:bg-[#C5A028] text-black py-4 rounded-full font-bold text-lg transition-all">
-                    FINALIZAR COMPRA →
-                  </button>
-                  <p className="text-gray-500 text-xs text-center">Pagamento seguro via AbacatePay</p>
-                </form>
-              </>
-            ) : (
-              <div className="text-center py-8">
-                <div className="text-5xl mb-4">✅</div>
-                <h3 className="text-xl font-bold text-white mb-2">Redirecionando para o checkout…</h3>
-                <p className="text-gray-300 text-sm">Seus dados já foram preenchidos automaticamente.</p>
-                <p className="text-gray-500 text-xs mt-2">Aguarde, não feche esta janela.</p>
-                <div className="w-full bg-white/10 rounded-full h-1.5 mt-4 overflow-hidden">
-                  <div className="bg-[#D4AF37] h-full rounded-full" style={{ width: '100%', animation: 'progressBar 2s ease-in-out' }}></div>
-                </div>
-                <style jsx>{`
-                  @keyframes progressBar {
-                    from { width: 0%; }
-                    to { width: 100%; }
-                  }
-                `}</style>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
 
       {/* ===== HERO ===== */}
       <section className="relative pt-32 pb-20 overflow-hidden">
@@ -199,12 +92,13 @@ export default function VPS() {
             Setup em 24h. A gente estrutura. Você dirige.
           </p>
           <button
-            onClick={() => setShowModal(true)}
-            className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-[#D4AF37]/25"
+            onClick={handleCheckout}
+            disabled={loading}
+            className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-[#D4AF37]/25 disabled:opacity-60"
           >
-            QUERO MINHA VPS ESTRUTURADA →
+            {loading ? 'REDIRECIONANDO…' : 'QUERO MINHA VPS ESTRUTURADA →'}
           </button>
-          <p className="text-gray-500 text-sm mt-3">Setup em 24h. Cancele quando quiser.</p>
+          <p className="text-gray-500 text-sm mt-3">Checkout seguro • Setup em 24h</p>
         </div>
       </section>
 
@@ -254,12 +148,12 @@ export default function VPS() {
             ))}
           </div>
 
-          {/* Card de Preço */}
+          {/* CARD DE PREÇO + ORDER BUMP + CHECKOUT DIRETO */}
           <div className="bg-[#111111] rounded-3xl p-8 border border-[#D4AF37]/30 max-w-lg mx-auto">
             <div className="text-[#D4AF37] text-sm font-bold uppercase tracking-wider mb-2">VPS ESTRUTURADA</div>
             <div className="text-5xl font-bold text-white mb-2">R$ 297</div>
             <div className="text-gray-400 text-sm mb-6">por mês • setup em 24h • cancele quando quiser</div>
-            <ul className="text-left space-y-3 mb-8">
+            <ul className="text-left space-y-3 mb-6">
               {[
                 'Docker + Docker Compose configurado',
                 'Monitoramento 24/7 com alerta no WhatsApp',
@@ -275,13 +169,37 @@ export default function VPS() {
               ))}
             </ul>
 
+            {/* ORDER BUMP — Suporte Técnico */}
+            <label className="flex items-start gap-3 cursor-pointer bg-[#D4AF37]/10 rounded-xl p-4 border border-[#D4AF37]/30 mb-6">
+              <input
+                type="checkbox"
+                checked={orderBump}
+                onChange={(e) => setOrderBump(e.target.checked)}
+                className="mt-1 w-5 h-5 rounded border-white/20 bg-[#111111] text-[#D4AF37] focus:ring-[#D4AF37]"
+              />
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-[#D4AF37] font-bold">+ Suporte Técnico</span>
+                  <span className="text-gray-400 text-xs">(recomendado)</span>
+                </div>
+                <p className="text-gray-300 text-sm">
+                  Especialista no WhatsApp com SLA 24h. Ajuda com deploy, backup, segurança e troubleshooting.
+                </p>
+                <div className="flex items-center gap-3 mt-1">
+                  <p className="text-gray-500 text-xs line-through">De R$ 547/mês</p>
+                  <p className="text-[#D4AF37] font-bold text-lg">R$ 250/mês</p>
+                </div>
+              </div>
+            </label>
+
             <button
-              onClick={() => setShowModal(true)}
-              className="w-full bg-[#D4AF37] hover:bg-[#C5A028] text-black py-5 rounded-full font-bold text-xl transition-all shadow-lg shadow-[#D4AF37]/25"
+              onClick={handleCheckout}
+              disabled={loading}
+              className="w-full bg-[#D4AF37] hover:bg-[#C5A028] text-black py-5 rounded-full font-bold text-xl transition-all shadow-lg shadow-[#D4AF37]/25 disabled:opacity-60"
             >
-              QUERO MINHA VPS ESTRUTURADA →
+              {loading ? 'REDIRECIONANDO AO CHECKOUT…' : orderBump ? 'FINALIZAR R$ 547/mês →' : 'FINALIZAR R$ 297/mês →'}
             </button>
-            <p className="text-gray-500 text-sm mt-3">Pagamento seguro via AbacatePay</p>
+            <p className="text-gray-500 text-sm mt-3 text-center">Pagamento seguro via AbacatePay</p>
           </div>
         </div>
       </section>
@@ -348,12 +266,13 @@ export default function VPS() {
           <h2 className="text-3xl font-bold text-white mb-4">Pronto pra parar de configurar servidor?</h2>
           <p className="text-gray-300 mb-8">VPS estruturada, Docker pronto, SSL ativo. Você só faz deploy.</p>
           <button
-            onClick={() => setShowModal(true)}
-            className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-[#D4AF37]/25"
+            onClick={handleCheckout}
+            disabled={loading}
+            className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C5A028] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-[#D4AF37]/25 disabled:opacity-60"
           >
-            QUERO MINHA VPS ESTRUTURADA →
+            {loading ? 'REDIRECIONANDO…' : 'QUERO MINHA VPS ESTRUTURADA →'}
           </button>
-          <p className="text-gray-500 text-sm mt-3">Setup em 24h. Cancele quando quiser.</p>
+          <p className="text-gray-500 text-sm mt-3">Checkout seguro • Setup em 24h</p>
         </div>
       </section>
 
