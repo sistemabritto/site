@@ -279,8 +279,9 @@ export default function Quiz() {
   } else if (budgetAnswer === 'budget-no') {
   // Não tem fit de orçamento → downsell VPS
   trackStage('budget-no');
-  sessionStorage.setItem('vps_downsell_source', outcome === 'social' ? 'socialjobs' : 'sistema');
-  window.location.href = '/vps';
+  const downsellSource = outcome === 'social' ? 'socialjobs' : 'sistema';
+  sessionStorage.setItem('vps_downsell_source', downsellSource);
+  window.location.href = `/vps?from=${downsellSource}`;
   } else {
   // Tem fit (budget-yes) → WhatsApp SDR
   trackStage('budget-yes');
@@ -319,18 +320,20 @@ export default function Quiz() {
   const NL = '%0A';
 
   const buildWhatsAppMsg = (type: 'socialjobs' | 'sistema' | 'custom', outcome: Outcome, finalAnswers: Record<string, string>) => {
-  const headerEmoji = type === 'socialjobs' ? '🟠' : type === 'sistema' ? '🔵' : '🟣';
+  const headerEmoji = type === 'socialjobs' ? '🟠' : '🔵';
   const headerText = type === 'socialjobs'
   ? 'Quero o SocialJobs'
-  : type === 'sistema'
-  ? 'Quero o Sistema Sob Medida'
-  : 'Preciso de algo sob encomenda';
+  : 'Quero o Sistema Sob Medida';
+
+  const interestLabel = type === 'socialjobs'
+  ? 'Conteúdo automático em 5 redes'
+  : 'Sistema web sob encomenda';
 
   const msg = encodeURIComponent(
   `${headerEmoji} *${headerText}*${NL}${NL}` +
-  `*Interesse:* ${L(outcome)}${NL}` +
+  `*Interesse:* ${interestLabel}${NL}` +
   `*Gargalo:* ${L(finalAnswers['q2'])}${NL}` +
-  `*Investiu antes:* ${L(finalAnswers['q3'])}${NL}` +
+  `*Experiência:* ${L(finalAnswers['q3'])}${NL}` +
   `*Prazo:* ${L(finalAnswers['q4'])}${NL}${NL}` +
   `———${NL}` +
   `👤 ${name || '—'}${NL}` +
