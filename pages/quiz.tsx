@@ -235,48 +235,98 @@ export default function Quiz() {
     const outcome = calculateOutcome(finalAnswers);
 
     setTimeout(() => {
-      // Source-based routing
-      const savedSource = typeof window !== 'undefined' ? sessionStorage.getItem('quiz_source') : null;
+    // Source-based routing
+    const savedSource = typeof window !== 'undefined' ? sessionStorage.getItem('quiz_source') : null;
 
-      if (savedSource === 'socialjobs') {
-        // SocialJobs: vai pro WhatsApp do Felipe com contexto
-        const msg = encodeURIComponent(
-          `Fala, Felipe. Fiz a qualificação pro SocialJobs.\n\nMeu perfil: ${outcome}\nGargalo: ${finalAnswers['q2']}\nInvestimento anterior: ${finalAnswers['q3']}\nPrazo: ${finalAnswers['q4']}\n\nNome: ${name}\nEmail: ${email}\nWhatsApp: ${whatsapp}`
-        );
-        window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
-        return;
-      }
+    // Labels amigáveis pros valores internos do quiz
+    const labels: Record<string, string> = {
+    crm: 'WhatsApp + IA',
+    social: 'SocialJobs',
+    custom: 'Sob encomenda',
+    'leads-perdidos': 'Perco leads por demora',
+    'sem-presenca': 'Sem presença nas redes',
+    'nao-existe': 'Preciso de algo que não existe',
+    'cresceu': 'Operação não acompanha o crescimento',
+    'nada': 'Primeira vez',
+    'freelas': 'Já gastei com freelas',
+    'ferramentas': 'Já pago ferramentas',
+    'pesado': 'Invisto pesado',
+    'urgente': 'Essa semana',
+    'rapido': 'Até 15 dias',
+    'tranquilo': 'Até 30 dias',
+    'planejando': '2 a 3 meses',
+    };
 
-      if (savedSource === 'sistema') {
-        // Sistema: vai pro WhatsApp do Felipe com contexto
-        const msg = encodeURIComponent(
-          `Fala, Felipe. Fiz a qualificação pro Sistema Completo.\n\nMeu perfil: ${outcome}\nGargalo: ${finalAnswers['q2']}\nInvestimento anterior: ${finalAnswers['q3']}\nPrazo: ${finalAnswers['q4']}\n\nNome: ${name}\nEmail: ${email}\nWhatsApp: ${whatsapp}`
-        );
-        window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
-        return;
-      }
+    const L = (key: string) => labels[key] || key;
+    const NL = '%0A'; // quebra de linha garantida no WhatsApp
 
-      if (savedSource === 'whatsapp') {
-        window.location.href = '/resultado';
-        return;
-      }
+    if (savedSource === 'socialjobs') {
+    const msg = encodeURIComponent(
+    `🟠 *Lead SocialJobs*${NL}${NL}` +
+    `*Interesse:* ${L(outcome)}${NL}` +
+    `*Gargalo:* ${L(finalAnswers['q2'])}${NL}` +
+    `*Investiu antes:* ${L(finalAnswers['q3'])}${NL}` +
+    `*Prazo:* ${L(finalAnswers['q4'])}${NL}${NL}` +
+    `———${NL}` +
+    `👤 ${name || '—'}${NL}` +
+    `📧 ${email || '—'}${NL}` +
+    `📱 ${whatsapp || '—'}`
+    );
+    window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+    return;
+    }
 
-      // Organic (no source): route by quiz outcome
-      if (outcome === 'crm') {
-      window.location.href = '/resultado';
-      } else if (outcome === 'social') {
-      // Organic social: vai direto pro WhatsApp do SDR com msg de SocialJobs (evita looping /socialjobs → quiz → /socialjobs)
-      const msg = encodeURIComponent(
-      `Fala, Felipe. Fiz a qualificação e quero o SocialJobs.\n\nMeu perfil: ${outcome}\nGargalo: ${finalAnswers['q2']}\nInvestimento anterior: ${finalAnswers['q3']}\nPrazo: ${finalAnswers['q4']}\n\nNome: ${name}\nEmail: ${email}\nWhatsApp: ${whatsapp}`
-      );
-      window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
-      } else {
-      // Custom → WhatsApp
-      const msg = encodeURIComponent(
-      `Fala, Felipe. Fiz a qualificação e preciso de algo SOB ENCOMENDA.\n\nGargalo: ${finalAnswers['q2']}\nInvestimento anterior: ${finalAnswers['q3']}\nPrazo: ${finalAnswers['q4']}\n\nNome: ${name}\nEmail: ${email}\nWhatsApp: ${whatsapp}`
-      );
-      window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
-      }
+    if (savedSource === 'sistema') {
+    const msg = encodeURIComponent(
+    `🔵 *Lead Sistema Sob Medida*${NL}${NL}` +
+    `*Interesse:* ${L(outcome)}${NL}` +
+    `*Gargalo:* ${L(finalAnswers['q2'])}${NL}` +
+    `*Investiu antes:* ${L(finalAnswers['q3'])}${NL}` +
+    `*Prazo:* ${L(finalAnswers['q4'])}${NL}${NL}` +
+    `———${NL}` +
+    `👤 ${name || '—'}${NL}` +
+    `📧 ${email || '—'}${NL}` +
+    `📱 ${whatsapp || '—'}`
+    );
+    window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+    return;
+    }
+
+    if (savedSource === 'whatsapp') {
+    window.location.href = '/resultado';
+    return;
+    }
+
+    // Organic (no source): route by quiz outcome
+    if (outcome === 'crm') {
+    window.location.href = '/resultado';
+    } else if (outcome === 'social') {
+    const msg = encodeURIComponent(
+    `🟠 *Lead SocialJobs (orgânico)*${NL}${NL}` +
+    `*Interesse:* ${L(outcome)}${NL}` +
+    `*Gargalo:* ${L(finalAnswers['q2'])}${NL}` +
+    `*Investiu antes:* ${L(finalAnswers['q3'])}${NL}` +
+    `*Prazo:* ${L(finalAnswers['q4'])}${NL}${NL}` +
+    `———${NL}` +
+    `👤 ${name || '—'}${NL}` +
+    `📧 ${email || '—'}${NL}` +
+    `📱 ${whatsapp || '—'}`
+    );
+    window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+    } else {
+    const msg = encodeURIComponent(
+    `🟣 *Lead Sob Encomenda*${NL}${NL}` +
+    `*Interesse:* ${L(outcome)}${NL}` +
+    `*Gargalo:* ${L(finalAnswers['q2'])}${NL}` +
+    `*Investiu antes:* ${L(finalAnswers['q3'])}${NL}` +
+    `*Prazo:* ${L(finalAnswers['q4'])}${NL}${NL}` +
+    `———${NL}` +
+    `👤 ${name || '—'}${NL}` +
+    `📧 ${email || '—'}${NL}` +
+    `📱 ${whatsapp || '—'}`
+    );
+    window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+    }
     }, 800);
   };
 

@@ -71,10 +71,17 @@ export default function Resultado() {
   };
 
   const handleWhatsAppFallback = () => {
-    const msg = encodeURIComponent(
-      `Fala, Felipe. Quero o CRM WhatsApp IA (R$ ${finalPrice}/mês). Nome: ${customerData.name}, Email: ${customerData.email}, WhatsApp: ${customerData.whatsapp}`
-    );
-    window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+  const NL = '%0A';
+  const msg = encodeURIComponent(
+  `🟢 *Lead CRM WhatsApp + IA*${NL}${NL}` +
+  `*Plano:* R$ ${finalPrice}/mês${NL}` +
+  `*Order bump:* ${orderBump ? 'Sim (+Especialista)' : 'Não'}${NL}${NL}` +
+  `———${NL}` +
+  `👤 ${customerData.name || '—'}${NL}` +
+  `📧 ${customerData.email || '—'}${NL}` +
+  `📱 ${customerData.whatsapp || '—'}`
+  );
+  window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
   };
 
   if (loading) {

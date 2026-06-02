@@ -20,15 +20,21 @@ export default function ResultadoDigital() {
   }, []);
 
   const handleWhatsAppContact = (servico: string) => {
-    let message = '';
-    if (servico === 'infra') {
-      message = `Fala, Felipe. Tô precisando de braço técnico pra infraestrutura/DevOps. Bora conversar? Nome: ${customerData.name}, Email: ${customerData.email}, WhatsApp: ${customerData.whatsapp}`;
-    } else if (servico === 'saas') {
-      message = `Fala, Felipe. Quero criar um SaaS. Bora conversar? Nome: ${customerData.name}, Email: ${customerData.email}, WhatsApp: ${customerData.whatsapp}`;
-    } else {
-      message = `Fala, Felipe. Preciso de um orçamento sob medida. Bora conversar? Nome: ${customerData.name}, Email: ${customerData.email}, WhatsApp: ${customerData.whatsapp}`;
-    }
-    window.location.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(message)}`;
+  const NL = '%0A';
+  const serviceLabels: Record<string, string> = {
+  infra: 'Infraestrutura / DevOps',
+  saas: 'Criação de SaaS',
+  sobmedida: 'Orçamento sob medida',
+  };
+  const label = serviceLabels[servico] || servico;
+  const message =
+  `🟣 *Lead Sob Encomenda*${NL}${NL}` +
+  `*Serviço:* ${label}${NL}${NL}` +
+  `———${NL}` +
+  `👤 ${customerData.name || '—'}${NL}` +
+  `📧 ${customerData.email || '—'}${NL}` +
+  `📱 ${customerData.whatsapp || '—'}`;
+  window.location.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(message)}`;
   };
 
   if (loading) {

@@ -48,19 +48,29 @@ export default function VPS() {
       const data = await res.json();
 
       if (data.url) {
-        window.location.href = data.url;
+      window.location.href = data.url;
       } else {
-        const msg = encodeURIComponent(
-          `Fala, Felipe. Quero a VPS Estruturada${orderBump ? ' com Suporte Técnico' : ''}.${customerData.name ? `\n\nNome: ${customerData.name}` : ''}${customerData.email ? `\nEmail: ${customerData.email}` : ''}${customerData.whatsapp ? `\nWhatsApp: ${customerData.whatsapp}` : ''}`
-        );
-        window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
-      }
-    } catch {
+      const NL = '%0A';
       const msg = encodeURIComponent(
-        `Fala, Felipe. Quero a VPS Estruturada${orderBump ? ' com Suporte Técnico' : ''}.${customerData.name ? `\n\nNome: ${customerData.name}` : ''}${customerData.email ? `\nEmail: ${customerData.email}` : ''}${customerData.whatsapp ? `\nWhatsApp: ${customerData.whatsapp}` : ''}`
+      `🖥️ *Lead VPS Estruturada*${orderBump ? ' + Suporte' : ''}${NL}${NL}` +
+      `———${NL}` +
+      `👤 ${customerData.name || '—'}${NL}` +
+      `📧 ${customerData.email || '—'}${NL}` +
+      `📱 ${customerData.whatsapp || '—'}`
       );
       window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
-    }
+      }
+      } catch {
+      const NL = '%0A';
+      const msg = encodeURIComponent(
+      `🖥️ *Lead VPS Estruturada*${orderBump ? ' + Suporte' : ''}${NL}${NL}` +
+      `———${NL}` +
+      `👤 ${customerData.name || '—'}${NL}` +
+      `📧 ${customerData.email || '—'}${NL}` +
+      `📱 ${customerData.whatsapp || '—'}`
+      );
+      window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+      }
   };
 
   return (

@@ -89,7 +89,12 @@ export default function WhatsApp() {
       }
     } catch (err) {
       console.error('[Checkout Error]', err);
-      const msg = encodeURIComponent(`Olá! Quero ativar o WhatsApp IA. Email: ${email}`);
+      const NL = '%0A';
+      const msg = encodeURIComponent(
+      `🟢 *Lead WhatsApp + IA (fallback)*${NL}${NL}` +
+      `———${NL}` +
+      `📧 ${email || '—'}`
+      );
       window.location.href = `https://wa.me/5511914088571?text=${msg}`;
     }
   };

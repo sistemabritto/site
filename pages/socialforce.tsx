@@ -44,10 +44,15 @@ export default function SocialForce() {
   }, []);
 
   const handleSDR = () => {
-    const msg = encodeURIComponent(
-      `Fala! Vim pela página do Social Force e quero saber mais sobre conteúdo infinito nas redes.\n\nNome: ${customerData.name || 'Não informado'}\nEmail: ${customerData.email || 'Não informado'}\nWhatsApp: ${customerData.whatsapp || 'Este número'}`
-    );
-    window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+  const NL = '%0A';
+  const msg = encodeURIComponent(
+  `🟠 *Lead SocialJobs*${NL}${NL}` +
+  `———${NL}` +
+  `👤 ${customerData.name || '—'}${NL}` +
+  `📧 ${customerData.email || '—'}${NL}` +
+  `📱 ${customerData.whatsapp || '—'}`
+  );
+  window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
   };
 
   return (
