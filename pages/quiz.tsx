@@ -5,65 +5,66 @@ import PhoneInput from '../components/PhoneInput';
 const PHONE = '5511914088571';
 
 const QUESTIONS = [
- {
- id: 'q1',
- question: 'O que você mais precisa agora?',
- options: [
- { label: 'Atender e vender no WhatsApp com IA 24h', value: 'crm', icon: '' },
- { label: 'Conteúdo infinito nas redes sociais — posts automáticos e virais', value: 'social', icon: '' },
- { label: 'Algo sob encomenda — app, site, infra, SaaS', value: 'custom', icon: '' },
- ],
- },
- {
- id: 'q2',
- question: 'Qual seu maior gargalo hoje?',
- options: [
- { label: 'Perco leads porque não respondo rápido', value: 'leads-perdidos', icon: '' },
- { label: 'Não tenho presença nas redes — ninguém me conhece', value: 'sem-presenca', icon: '' },
- { label: 'Preciso de algo que não existe no mercado', value: 'nao-existe', icon: '' },
- { label: 'Meu negócio cresceu e a operação não acompanha', value: 'cresceu', icon: '' },
- ],
- },
- {
- id: 'q3',
- question: 'Quanto você já investiu em solução assim antes?',
- options: [
- { label: 'Nada ainda — é minha primeira vez', value: 'nada', icon: '' },
- { label: 'Já gastei com freelas mas não deu certo', value: 'freelas', icon: '' },
- { label: 'Já pago ferramentas mas quero consolidar', value: 'ferramentas', icon: '' },
- { label: 'Invisto pesado e quero otimizar', value: 'pesado', icon: '' },
- ],
- },
- {
- id: 'q4',
- question: 'Em quanto tempo você quer isso rodando?',
- options: [
- { label: 'Urgente — essa semana', value: 'urgente', icon: '' },
- { label: 'Rápido — até 15 dias', value: 'rapido', icon: '' },
- { label: 'Tranquilo — até 30 dias', value: 'tranquilo', icon: '' },
- { label: 'Estou planejando — 2 a 3 meses', value: 'planejando', icon: '' },
- ],
- },
+  {
+    id: 'q1',
+    question: 'O que você mais precisa agora?',
+    options: [
+      { label: 'Atender e vender no WhatsApp com IA 24h', value: 'crm', icon: '' },
+      { label: 'Conteúdo infinito nas redes sociais — posts automáticos e virais', value: 'social', icon: '' },
+      { label: 'Algo sob encomenda — app, site, infra, SaaS', value: 'custom', icon: '' },
+    ],
+  },
+  {
+    id: 'q2',
+    question: 'Qual seu maior gargalo hoje?',
+    options: [
+      { label: 'Perco leads porque não respondo rápido', value: 'leads-perdidos', icon: '' },
+      { label: 'Não tenho presença nas redes — ninguém me conhece', value: 'sem-presenca', icon: '' },
+      { label: 'Preciso de algo que não existe no mercado', value: 'nao-existe', icon: '' },
+      { label: 'Meu negócio cresceu e a operação não acompanha', value: 'cresceu', icon: '' },
+    ],
+  },
+  {
+    id: 'q3',
+    question: 'Quanto você já investiu em solução assim antes?',
+    options: [
+      { label: 'Nada ainda — é minha primeira vez', value: 'nada', icon: '' },
+      { label: 'Já gastei com freelas mas não deu certo', value: 'freelas', icon: '' },
+      { label: 'Já pago ferramentas mas quero consolidar', value: 'ferramentas', icon: '' },
+      { label: 'Invisto pesado e quero otimizar', value: 'pesado', icon: '' },
+    ],
+  },
+  {
+    id: 'q4',
+    question: 'Em quanto tempo você quer isso rodando?',
+    options: [
+      { label: 'Urgente — essa semana', value: 'urgente', icon: '' },
+      { label: 'Rápido — até 15 dias', value: 'rapido', icon: '' },
+      { label: 'Tranquilo — até 30 dias', value: 'tranquilo', icon: '' },
+      { label: 'Estou planejando — 2 a 3 meses', value: 'planejando', icon: '' },
+    ],
+  },
 ];
 
-// Pergunta condicional de orçamento (adicionada dinamicamente após q4 pra social/custom)
+// Pergunta condicional de orçamento — SÓ pra social e custom
+// CRM NÃO mostra valor no quiz — manda pra /resultado pra ver a solução antes
 const BUDGET_QUESTIONS: Record<string, { id: string; question: string; options: { label: string; value: string; icon: string }[] }> = {
- social: {
- id: 'q5',
- question: 'O investimento para postar todo dia no automático em 5 redes sociais diferentes é a partir de R$500 por mês. Você tem capacidade financeira de investir esse valor no seu negócio agora?',
- options: [
- { label: 'Sim, quero investir', value: 'budget-yes', icon: '' },
- { label: 'Ainda não', value: 'budget-no', icon: '' },
- ],
- },
- custom: {
- id: 'q5',
- question: 'O investimento para colocar o seu sistema sob medida no ar varia bastante de acordo com a sua necessidade. Então, neste momento, você tem capacidade financeira de investir a partir de R$1.500 para viabilizar esse seu projeto agora?',
- options: [
- { label: 'Sim, quero investir', value: 'budget-yes', icon: '' },
- { label: 'Ainda não', value: 'budget-no', icon: '' },
- ],
- },
+  social: {
+    id: 'q5',
+    question: 'Você tem capacidade financeira de investir a partir de R$500/mês pra resolver isso agora?',
+    options: [
+      { label: 'Sim, quero investir', value: 'budget-yes', icon: '' },
+      { label: 'Ainda não', value: 'budget-no', icon: '' },
+    ],
+  },
+  custom: {
+    id: 'q5',
+    question: 'Você tem capacidade financeira de investir a partir de R$1.500 pra viabilizar esse projeto agora?',
+    options: [
+      { label: 'Sim, quero investir', value: 'budget-yes', icon: '' },
+      { label: 'Ainda não', value: 'budget-no', icon: '' },
+    ],
+  },
 };
 
 type Outcome = 'crm' | 'social' | 'custom';
@@ -126,50 +127,50 @@ export default function Quiz() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-    const params = new URLSearchParams(window.location.search);
-    // Source param
-    const source = params.get('source');
-    if (source) {
-      setQuizSource(source);
-      sessionStorage.setItem('quiz_source', source);
-    }
+      const params = new URLSearchParams(window.location.search);
+      // Source param
+      const source = params.get('source');
+      if (source) {
+        setQuizSource(source);
+        sessionStorage.setItem('quiz_source', source);
+      }
 
-    // Read existing data from sessionStorage
-    const storedCustomer = sessionStorage.getItem('qualificacao_customer');
-    let hasCustomerData = false;
-    if (storedCustomer) {
-      try {
-        const customer = JSON.parse(storedCustomer);
-        if (customer.name) setName(customer.name);
-        if (customer.email) setEmail(customer.email);
-        if (customer.whatsapp) setWhatsapp(customer.whatsapp);
-        hasCustomerData = !!(customer.name && customer.email && customer.whatsapp);
-      } catch {}
-    }
+      // Read existing data from sessionStorage
+      const storedCustomer = sessionStorage.getItem('qualificacao_customer');
+      let hasCustomerData = false;
+      if (storedCustomer) {
+        try {
+          const customer = JSON.parse(storedCustomer);
+          if (customer.name) setName(customer.name);
+          if (customer.email) setEmail(customer.email);
+          if (customer.whatsapp) setWhatsapp(customer.whatsapp);
+          hasCustomerData = !!(customer.name && customer.email && customer.whatsapp);
+        } catch {}
+      }
 
-    // Read data from URL params (overrides sessionStorage)
-    const urlName = params.get('name');
-    const urlEmail = params.get('email');
-    const urlWhatsapp = params.get('whatsapp');
+      // Read data from URL params (overrides sessionStorage)
+      const urlName = params.get('name');
+      const urlEmail = params.get('email');
+      const urlWhatsapp = params.get('whatsapp');
 
-    if (urlName) setName(urlName);
-    if (urlEmail) setEmail(urlEmail);
-    if (urlWhatsapp) setWhatsapp(urlWhatsapp);
+      if (urlName) setName(urlName);
+      if (urlEmail) setEmail(urlEmail);
+      if (urlWhatsapp) setWhatsapp(urlWhatsapp);
 
-    // Determine if we should skip email capture
-    const hasEnoughData = !!(urlName && urlEmail && urlWhatsapp) || hasCustomerData;
-    setHasExistingData(hasEnoughData);
+      // Determine if we should skip email capture
+      const hasEnoughData = !!(urlName && urlEmail && urlWhatsapp) || hasCustomerData;
+      setHasExistingData(hasEnoughData);
 
-    // If data exists, go straight to quiz
-    if (hasEnoughData) {
-      setStep('quiz');
-    } else {
-      // Need email capture
-      setStep('email');
-    }
+      // If data exists, go straight to quiz
+      if (hasEnoughData) {
+        setStep('quiz');
+      } else {
+        // Need email capture
+        setStep('email');
+      }
 
-    // UTM
-    const utm: Record<string, string> = {};
+      // UTM
+      const utm: Record<string, string> = {};
       ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'fbclid', 'gclid'].forEach(key => {
         const val = params.get(key);
         if (val) utm[key] = val;
@@ -210,143 +211,145 @@ export default function Quiz() {
   };
 
   const handleAnswer = (value: string) => {
-  const currentQ = allQuestions[currentStep];
-  if (!currentQ) return;
-  const qId = currentQ.id;
-  const newAnswers = { ...answers, [qId]: value };
-  setAnswers(newAnswers);
+    const currentQ = allQuestions[currentStep];
+    if (!currentQ) return;
+    const qId = currentQ.id;
+    const newAnswers = { ...answers, [qId]: value };
+    setAnswers(newAnswers);
 
-  // Track each answer
-  trackStage(`answered-${qId}`);
+    // Track each answer
+    trackStage(`answered-${qId}`);
 
-  if (currentStep < allQuestions.length - 1) {
-  setCurrentStep(currentStep + 1);
-  } else {
-  // Última pergunta respondida — processar resultado
-  processQuiz(newAnswers);
-  }
+    if (currentStep < allQuestions.length - 1) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      // Última pergunta respondida — processar resultado
+      processQuiz(newAnswers);
+    }
   };
 
   // Calcula outcome parcial (após q4) pra montar pergunta condicional
   const partialOutcome = calculateOutcome(answers);
 
-  // Monta lista de perguntas dinâmica: 4 base + 1 condicional (se social/custom)
+  // Monta lista de perguntas dinâmica: 4 base + 1 condicional (SÓ social/custom)
+  // CRM não tem Q5 — vai direto pra /resultado ver a solução antes do checkout
   const allQuestions = (() => {
-  const base = [...QUESTIONS];
-  if (partialOutcome && partialOutcome !== 'crm' && BUDGET_QUESTIONS[partialOutcome]) {
-  base.push(BUDGET_QUESTIONS[partialOutcome]);
-  }
-  return base;
+    const base = [...QUESTIONS];
+    if (partialOutcome && partialOutcome !== 'crm' && BUDGET_QUESTIONS[partialOutcome]) {
+      base.push(BUDGET_QUESTIONS[partialOutcome]);
+    }
+    return base;
   })();
 
   const processQuiz = async (finalAnswers: Record<string, string>) => {
-  setIsSubmitting(true);
+    setIsSubmitting(true);
 
-  if (typeof window !== 'undefined') {
-  sessionStorage.setItem('qualificacao_customer', JSON.stringify({ name, email, whatsapp }));
-  sessionStorage.setItem('qualificacao_answers', JSON.stringify(finalAnswers));
-  }
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('qualificacao_customer', JSON.stringify({ name, email, whatsapp }));
+      sessionStorage.setItem('qualificacao_answers', JSON.stringify(finalAnswers));
+    }
 
-  trackStage('quiz-completed');
+    trackStage('quiz-completed');
 
-  try {
-  await fetch('/api/leads', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-  name, email, whatsapp,
-  source: 'quiz-completed',
-  answers: finalAnswers,
-  utm: utmParams,
-  stages: stageTimestamps,
-  quiz_source: quizSource,
-  timestamp: new Date().toISOString(),
-  }),
-  });
-  } catch (err) {
-  console.error('[Lead Save Error]', err);
-  }
+    try {
+      await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name, email, whatsapp,
+          source: 'quiz-completed',
+          answers: finalAnswers,
+          utm: utmParams,
+          stages: stageTimestamps,
+          quiz_source: quizSource,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+    } catch (err) {
+      console.error('[Lead Save Error]', err);
+    }
 
-  const outcome = calculateOutcome(finalAnswers);
-  setQuizOutcome(outcome);
+    const outcome = calculateOutcome(finalAnswers);
+    setQuizOutcome(outcome);
 
-  // Resposta da pergunta de orçamento (se existir)
-  const budgetAnswer = finalAnswers['q5'];
+    // Resposta da pergunta de orçamento (se existir)
+    const budgetAnswer = finalAnswers['q5'];
 
-  if (outcome === 'crm') {
-  // CRM vai direto pra página de resultado
-  window.location.href = '/resultado';
-  } else if (budgetAnswer === 'budget-no') {
-  // Não tem fit de orçamento → downsell VPS
-  trackStage('budget-no');
-  const downsellSource = outcome === 'social' ? 'socialjobs' : 'sistema';
-  sessionStorage.setItem('vps_downsell_source', downsellSource);
-  window.location.href = `/vps?from=${downsellSource}`;
-  } else {
-  // Tem fit (budget-yes) → WhatsApp SDR
-  trackStage('budget-yes');
-  const savedSource = typeof window !== 'undefined' ? sessionStorage.getItem('quiz_source') : null;
-  let msgType: 'socialjobs' | 'sistema' | 'custom';
-  if (outcome === 'social') {
-  msgType = savedSource === 'sistema' ? 'sistema' : 'socialjobs';
-  } else {
-  msgType = 'custom';
-  }
-  const msg = buildWhatsAppMsg(msgType, outcome, finalAnswers);
-  window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
-  }
+    if (outcome === 'crm') {
+      // CRM vai pra /resultado — vê a solução completa ANTES do checkout
+      // Sem valor no quiz — valor aparece só na página de resultado
+      window.location.href = '/resultado';
+    } else if (budgetAnswer === 'budget-no') {
+      // Não tem fit de orçamento → downsell VPS
+      trackStage('budget-no');
+      const downsellSource = outcome === 'social' ? 'socialjobs' : 'sistema';
+      sessionStorage.setItem('vps_downsell_source', downsellSource);
+      window.location.href = `/vps?from=${downsellSource}`;
+    } else {
+      // Tem fit (budget-yes) → WhatsApp SDR
+      trackStage('budget-yes');
+      const savedSource = typeof window !== 'undefined' ? sessionStorage.getItem('quiz_source') : null;
+      let msgType: 'socialjobs' | 'sistema' | 'custom';
+      if (outcome === 'social') {
+        msgType = savedSource === 'sistema' ? 'sistema' : 'socialjobs';
+      } else {
+        msgType = 'custom';
+      }
+      const msg = buildWhatsAppMsg(msgType, outcome, finalAnswers);
+      window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+    }
   };
 
   // === HELPERS: WhatsApp message builder ===
   const labels: Record<string, string> = {
-  crm: 'WhatsApp + IA',
-  social: 'SocialJobs',
-  custom: 'Sob encomenda',
-  'leads-perdidos': 'Perco leads por demora',
-  'sem-presenca': 'Sem presença nas redes',
-  'nao-existe': 'Preciso de algo que não existe',
-  'cresceu': 'Operação não acompanha o crescimento',
-  'nada': 'Primeira vez',
-  'freelas': 'Já gastei com freelas',
-  'ferramentas': 'Já pago ferramentas',
-  'pesado': 'Invosto pesado',
-  'urgente': 'Essa semana',
-  'rapido': 'Até 15 dias',
-  'tranquilo': 'Até 30 dias',
-  'planejando': '2 a 3 meses',
+    crm: 'WhatsApp + IA',
+    social: 'SocialJobs',
+    custom: 'Sob encomenda',
+    'leads-perdidos': 'Perco leads por demora',
+    'sem-presenca': 'Sem presença nas redes',
+    'nao-existe': 'Preciso de algo que não existe',
+    'cresceu': 'Operação não acompanha o crescimento',
+    'nada': 'Primeira vez',
+    'freelas': 'Já gastei com freelas',
+    'ferramentas': 'Já pago ferramentas',
+    'pesado': 'Invosto pesado',
+    'urgente': 'Essa semana',
+    'rapido': 'Até 15 dias',
+    'tranquilo': 'Até 30 dias',
+    'planejando': '2 a 3 meses',
   };
 
   const L = (key: string) => labels[key] || key;
   const NL = '%0A';
 
   const buildWhatsAppMsg = (type: 'socialjobs' | 'sistema' | 'custom', outcome: Outcome, finalAnswers: Record<string, string>) => {
-  const headerEmoji = type === 'socialjobs' ? '🟠' : '🔵';
-  const headerText = type === 'socialjobs'
-  ? 'Quero o SocialJobs'
-  : 'Quero o Sistema Sob Medida';
+    const headerEmoji = type === 'socialjobs' ? '🟠' : '🔵';
+    const headerText = type === 'socialjobs'
+      ? 'Quero o SocialJobs'
+      : 'Quero o Sistema Sob Medida';
 
-  const interestLabel = type === 'socialjobs'
-  ? 'Conteúdo automático em 5 redes'
-  : 'Sistema web sob encomenda';
+    const interestLabel = type === 'socialjobs'
+      ? 'Conteúdo automático em 5 redes'
+      : 'Sistema web sob encomenda';
 
-  const msg = encodeURIComponent(
-  `${headerEmoji} *${headerText}*${NL}${NL}` +
-  `*Interesse:* ${interestLabel}${NL}` +
-  `*Gargalo:* ${L(finalAnswers['q2'])}${NL}` +
-  `*Experiência:* ${L(finalAnswers['q3'])}${NL}` +
-  `*Prazo:* ${L(finalAnswers['q4'])}${NL}${NL}` +
-  `———${NL}` +
-  `👤 ${name || '—'}${NL}` +
-  `📧 ${email || '—'}${NL}` +
-  `📱 ${whatsapp || '—'}`
-  );
-  return msg;
+    const msg = encodeURIComponent(
+      `${headerEmoji} *${headerText}*${NL}${NL}` +
+      `*Interesse:* ${interestLabel}${NL}` +
+      `*Gargalo:* ${L(finalAnswers['q2'])}${NL}` +
+      `*Experiência:* ${L(finalAnswers['q3'])}${NL}` +
+      `*Prazo:* ${L(finalAnswers['q4'])}${NL}${NL}` +
+      `———${NL}` +
+      `👤 ${name || '—'}${NL}` +
+      `📧 ${email || '—'}${NL}` +
+      `📱 ${whatsapp || '—'}`
+    );
+    return msg;
   };
 
   const handleSkipEmail = () => {
-  // Skip email and go straight to quiz
-  setStep('quiz');
-  trackStage('email-skipped');
+    // Skip email and go straight to quiz
+    setStep('quiz');
+    trackStage('email-skipped');
   };
 
   if (loading) {
@@ -438,31 +441,31 @@ export default function Quiz() {
   const currentQuestion = allQuestions[currentStep];
 
   if (!currentQuestion) {
-  return (
-  <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
-  <div className="text-center">
-  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto mb-4" />
-  <p className="text-white">Carregando...</p>
-  </div>
-  </div>
-  );
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto mb-4" />
+          <p className="text-white">Carregando...</p>
+        </div>
+      </div>
+    );
   }
 
   // === TELA DO QUIZ ===
   const progress = ((currentStep + 1) / allQuestions.length) * 100;
 
   return (
-  <>
-  <Meta
-  title="Qualificação — Sistema Britto"
-  description="Descubra a solução ideal pro seu negócio. Leva menos de 2 minutos."
-  path="/quiz"
-  />
-  <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 py-20">
-  <div className="w-full max-w-2xl">
-  <div className="mb-8">
-  <div className="flex justify-between text-sm text-gray-400 mb-2">
-  <span>Pergunta {currentStep + 1} de {allQuestions.length}</span>
+    <>
+      <Meta
+        title="Qualificação — Sistema Britto"
+        description="Descubra a solução ideal pro seu negócio. Leva menos de 2 minutos."
+        path="/quiz"
+      />
+      <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 py-20">
+        <div className="w-full max-w-2xl">
+          <div className="mb-8">
+            <div className="flex justify-between text-sm text-gray-400 mb-2">
+              <span>Pergunta {currentStep + 1} de {allQuestions.length}</span>
               <span>{Math.round(progress)}%</span>
             </div>
             <div className="w-full bg-[#111111] rounded-full h-2">
