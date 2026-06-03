@@ -50,6 +50,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const phoneNumber = normalizePhone(whatsapp || '');
   const results: { supabase?: boolean; evocrm?: boolean } = {};
 
+  // Extrai UTM do objeto "utm" (formato do quiz) ou dos campos flat
+  const utmSource = utm_source || utm?.utm_source || '';
+  const utmMedium = utm_medium || utm?.utm_medium || '';
+  const utmCampaign = utm_campaign || utm?.utm_campaign || '';
+  const utmContent = utm?.utm_content || '';
+  const utmTerm = utm?.utm_term || '';
+
   // ── 1. Salvar Supabase (best effort) ────────────────────────────
   try {
     const supabase = await getSupabaseClient();
@@ -57,12 +64,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const { error } = await supabase.from('leads').insert({
         name: name || '',
         email: email || '',
-        whatsapp: phoneNumber,
+        phone: phoneNumber,  // coluna correta é "phone", não "whatsapp"
         source: source || 'site',
         answers: answers ? JSON.stringify(answers) : null,
-        utm_source: utm_source || '',
-        utm_medium: utm_medium || '',
-        utm_campaign: utm_campaign || '',
+        utm_source: utmSource,
+        utm_medium: utmMedium,
+        utm_campaign: utmCampaign,
+        utm_content: utmContent,
         created_at: new Date().toISOString(),
       });
       if (!error) results.supabase = true;
