@@ -320,7 +320,6 @@ export default function Quiz() {
   };
 
   const L = (key: string) => labels[key] || key;
-  const NL = '%0A';
 
   const buildWhatsAppMsg = (type: 'socialjobs' | 'sistema' | 'custom', outcome: Outcome, finalAnswers: Record<string, string>) => {
     const headerEmoji = type === 'socialjobs' ? '🟠' : '🔵';
@@ -332,18 +331,19 @@ export default function Quiz() {
       ? 'Conteúdo automático em 5 redes'
       : 'Sistema web sob encomenda';
 
-    const msg = encodeURIComponent(
-      `${headerEmoji} *${headerText}*${NL}${NL}` +
-      `*Interesse:* ${interestLabel}${NL}` +
-      `*Gargalo:* ${L(finalAnswers['q2'])}${NL}` +
-      `*Experiência:* ${L(finalAnswers['q3'])}${NL}` +
-      `*Prazo:* ${L(finalAnswers['q4'])}${NL}${NL}` +
-      `———${NL}` +
-      `👤 ${name || '—'}${NL}` +
-      `📧 ${email || '—'}${NL}` +
-      `📱 ${whatsapp || '—'}`
-    );
-    return msg;
+    // Monta msg com \n reais, depois encodeURIComponent codifica TUDO de uma vez
+    const raw =
+      `${headerEmoji} *${headerText}*\n\n` +
+      `*Interesse:* ${interestLabel}\n` +
+      `*Gargalo:* ${L(finalAnswers['q2'])}\n` +
+      `*Experiência:* ${L(finalAnswers['q3'])}\n` +
+      `*Prazo:* ${L(finalAnswers['q4'])}\n\n` +
+      `———\n` +
+      `👤 ${name || '—'}\n` +
+      `📧 ${email || '—'}\n` +
+      `📱 ${whatsapp || '—'}`;
+
+    return encodeURIComponent(raw);
   };
 
   const handleSkipEmail = () => {
