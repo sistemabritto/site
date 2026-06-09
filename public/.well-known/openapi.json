@@ -1,0 +1,81 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Sistema Britto — Serviços de IA e Automação",
+    "description": "API de informações sobre os serviços do Sistema Britto: WhatsApp com IA, SocialJobs, Sistema Sob Medida, VPS Estruturada.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Sistema Britto",
+      "url": "https://www.sistemabritto.com.br",
+      "email": "contato@sistemabritto.com.br"
+    }
+  },
+  "servers": [
+    { "url": "https://www.sistemabritto.com.br" }
+  ],
+  "paths": {
+    "/api/services": {
+      "get": {
+        "summary": "Lista todos os serviços disponíveis",
+        "operationId": "listServices",
+        "responses": {
+          "200": {
+            "description": "Lista de serviços",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Service" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/leads": {
+      "post": {
+        "summary": "Registra um novo lead qualificado",
+        "operationId": "createLead",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LeadInput" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Lead criado com sucesso" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Service": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "enum": ["whatsapp", "socialjobs", "sistema", "vps"] },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "price_from": { "type": "string" }
+        }
+      },
+      "LeadInput": {
+        "type": "object",
+        "required": ["name", "phone"],
+        "properties": {
+          "name": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
+          "phone": { "type": "string" },
+          "source": { "type": "string", "enum": ["whatsapp", "socialjobs", "sistema", "vps", "quiz", "organic"] },
+          "segment": { "type": "string" },
+          "urgency": { "type": "string", "enum": ["urgente", "moderado", "explorando"] },
+          "investment": { "type": "string", "enum": ["leve", "moderado", "pesado"] }
+        }
+      }
+    }
+  }
+}

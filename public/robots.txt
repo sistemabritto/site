@@ -20,6 +20,7 @@ Allow: /termos-de-uso
 # ── LLM Discovery ─────────────────────────────────────
 Allow: /llms.txt
 Allow: /llms-full.txt
+Allow: /.well-known/
 
 # ── Assets ────────────────────────────────────────────
 Allow: /og-image.jpg
@@ -59,9 +60,47 @@ Disallow: /qualificar-workforce
 Disallow: /resultado-whatsapp
 Disallow: /resultado-workforce
 Disallow: /gamificacao
+Disallow: /claude-code
+
+# ── LLM Crawlers (explícito) ──────────────────────────
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 1
+
+User-agent: ClaudeBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Google-Extended
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bytespider
+Allow: /
+Crawl-delay: 2
+
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Applebot-Extended
+Allow: /
+Crawl-delay: 1
+
+User-agent: anthropic-ai
+Allow: /
+Crawl-delay: 1
+
+User-agent: cohere-ai
+Allow: /
+Crawl-delay: 1
 
 # ── Sitemap ───────────────────────────────────────────
 Sitemap: https://www.sistemabritto.com.br/sitemap.xml
 
-# Crawl-delay suave
+# Crawl-delay geral
 Crawl-delay: 1

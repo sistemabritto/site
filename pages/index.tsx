@@ -2,12 +2,24 @@ import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PhoneInput from '../components/PhoneInput';
-import { useState } from 'react';
+import SDRPreview from '../components/SDRPreview';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
-  const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '' });
-  const [submitted, setSubmitted] = useState(false);
+const [showModal, setShowModal] = useState(false);
+const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '' });
+const [submitted, setSubmitted] = useState(false);
+const [heroVariant, setHeroVariant] = useState<'default' | 'whatsapp' | 'socialjobs' | 'sistema'>('default');
+
+// ── UTM Routing: reordena produtos e adapta hero por origem ──
+useEffect(() => {
+  if (typeof window === 'undefined') return;
+  const params = new URLSearchParams(window.location.search);
+  const source = params.get('utm_source') || params.get('source') || '';
+  if (source === 'whatsapp' || source === 'crm') setHeroVariant('whatsapp');
+  else if (source === 'socialjobs' || source === 'social') setHeroVariant('socialjobs');
+  else if (source === 'sistema' || source === 'custom') setHeroVariant('sistema');
+}, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -295,6 +307,24 @@ export default function Home() {
             CONSTRUA SEUS ESPECIALISTAS →
           </button>
         </div>
+      </section>
+
+      {/* ===== SDR PREVIEW — prova visual do agente ===== */}
+      <section className="py-20 px-4">
+      <div className="max-w-4xl mx-auto text-center">
+      <div className="text-center mb-10">
+      <span className="inline-block text-[#D4AF37] text-xs font-bold uppercase tracking-widest mb-4 border border-[#D4AF37]/30 px-4 py-2 rounded-full bg-[#D4AF37]/10">
+      Seu especialista 24h
+      </span>
+      <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
+      Assim que seu lead manda &quot;oi&quot;...
+      </h2>
+      <p className="text-gray-400 text-lg max-w-xl mx-auto">
+      A IA já qualifica, responde e avança o funil. Sem esperar, sem perder.
+      </p>
+      </div>
+      <SDRPreview />
+      </div>
       </section>
 
       {/* ===== 3 CAMINHOS — seção unificada ===== */}
