@@ -25,6 +25,10 @@ const nextConfig = {
     { source: '/consultoria-devops', destination: '/sistema', permanent: true },
     // Gamificacao redirect
     { source: '/gamificacao', destination: '/sistema', permanent: true },
+    // ZapCurso renamed to ZapClub
+    { source: '/zapcurso', destination: '/zapclub', permanent: true },
+    // ZapCurso API redirect
+    { source: '/api/abacatepay/checkout/zapcurso', destination: '/api/abacatepay/checkout/zapclub', permanent: true },
     ];
   },
 };

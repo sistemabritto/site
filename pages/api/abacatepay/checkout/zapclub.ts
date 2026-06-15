@@ -3,12 +3,12 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 const ABACATEPAY_API = 'https://api.abacatepay.com/v2';
 const ABACATEPAY_KEY = process.env.ABACATEPAY_API_KEY || 'abc_dev_6xbMgNHha22tetRbE0GUpuWZ';
 const PRODUCT_ID = 'prod_jRg20GUgAmEjhy3QCr45ZtKn'; // whatsapp-ia-basico
-const EXTERNAL_ID = 'zapcurso';
+const EXTERNAL_ID = 'zapclub';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.sistemabritto.com.br';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method not allowed. Use GET com ?productId=zapcurso&utm_source=...' });
+    return res.status(405).json({ error: 'Method not allowed. Use GET com ?productId=zapclub&utm_source=...' });
   }
 
   try {
@@ -39,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       returnUrl,
       completionUrl: returnUrl,
       metadata: {
-        source: 'zapcurso',
+        source: 'zapclub',
         ...utm,
       },
     };
@@ -52,7 +52,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       };
     }
 
-    console.log('[AbacatePay /zapcurso Request]', JSON.stringify(body));
+    console.log('[AbacatePay /zapclub Request]', JSON.stringify(body));
 
     const response = await fetch(`${ABACATEPAY_API}/subscriptions/create`, {
       method: 'POST',
@@ -64,16 +64,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     const data = await response.json();
-    console.log('[AbacatePay /zapcurso Response]', JSON.stringify(data));
+    console.log('[AbacatePay /zapclub Response]', JSON.stringify(data));
 
     if (data.success && data.data?.url) {
       return res.status(200).json({ url: data.data.url });
     }
 
-    console.error('[AbacatePay /zapcurso Error]', JSON.stringify(data));
+    console.error('[AbacatePay /zapclub Error]', JSON.stringify(data));
     return res.status(400).json({ error: data.error || 'Erro ao criar checkout' });
   } catch (error) {
-    console.error('[AbacatePay /zapcurso Exception]', error);
+    console.error('[AbacatePay /zapclub Exception]', error);
     return res.status(500).json({ error: 'Erro interno' });
   }
 }
