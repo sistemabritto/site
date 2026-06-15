@@ -27,7 +27,7 @@ export default function ZapClub() {
   </h1>
 
   <p className="text-neutral-200 text-lg max-w-2xl mx-auto font-medium mb-4">
-  O medo de implementar errado e perder dinheiro trava mais que a falta de informação. O ZapClub é uma comunidade mão na massa, com moderação ativa 24h, que te tira do muro e te coloca pra executar. Com orientação e o suporte do grupo.
+  O medo de implementar errado e perder dinheiro trava mais que a falta de informação. O ZapClub é uma comunidade mão na massa, com moderação ativa 24h, que te tira de cima do muro e te coloca pra executar. Com orientação e o suporte do grupo.
   </p>
   <p className="text-lg text-neutral-300 mb-8 max-w-xl mx-auto">
   Em vez de passar meses pesquisando, você passa minutos aplicando o que já funciona.
@@ -169,7 +169,7 @@ export default function ZapClub() {
   <div className="w-12 h-12 rounded-xl bg-[#F5D061]/10 border border-[#F5D061]/30 flex items-center justify-center mb-3">
   <span className="text-2xl">🥇</span>
   </div>
-  <h3 className="text-white text-sm font-bold mb-1">Conector de Ferramentas e MCPs</h3>
+  <h3 className="text-white text-sm font-bold mb-1">Manipulador de Ferramentas e Integrações</h3>
   <p className="text-neutral-400 text-xs leading-relaxed">
   Usa ferramentas que a IA não tem nativamente. Busca na web, executa código, conecta dados externos.
   </p>
@@ -186,7 +186,7 @@ export default function ZapClub() {
   <div className="w-12 h-12 rounded-xl bg-[#E0E0E0]/10 border border-[#E0E0E0]/30 flex items-center justify-center mb-3">
   <span className="text-2xl">💎</span>
   </div>
-  <h3 className="text-white text-sm font-bold mb-1">Criador de Atalhos Inteligentes</h3>
+  <h3 className="text-white text-sm font-bold mb-1">Desenvolvedor de Skills</h3>
   <p className="text-neutral-400 text-xs leading-relaxed">
   Cria prompts reutilizáveis, templates e fluxos customizados para o SEU negócio. Não depende mais de prompting genérico.
   </p>
@@ -203,7 +203,7 @@ export default function ZapClub() {
   <div className="w-12 h-12 rounded-xl bg-[#7DD3FC]/10 border border-[#7DD3FC]/30 flex items-center justify-center mb-3">
   <span className="text-2xl">👑</span>
   </div>
-  <h3 className="text-white text-sm font-bold mb-1">Dono da Automação</h3>
+  <h3 className="text-white text-sm font-bold mb-1">Maestro de Rotinas</h3>
   <p className="text-neutral-400 text-xs leading-relaxed">
   Monta workflows que rodam sozinhos. IA operando enquanto você dorme. O negócio que não precisa de você o tempo todo.
   </p>
@@ -421,8 +421,16 @@ export default function ZapClub() {
   <section className="py-20 px-4 bg-[#0a0a0a]">
   <div className="max-w-2xl mx-auto text-center">
   <div className="bg-gradient-to-br from-[#7C3AED]/20 to-[#7C3AED]/5 rounded-3xl p-8 border border-[#7C3AED]/30">
-  <p className="text-neutral-200 text-lg mb-10">
-  Cada dia que você espera é um dia que alguém avança. Moderação ativa 24h, comunidade que aplica de verdade, e um caminho claro. Entre agora com garantia de 7 dias.
+
+  <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">
+  Você leu até aqui. Falta pouco pra parar de fazer sozinho.
+  </h2>
+
+  <p className="text-neutral-200 text-lg mb-4">
+  R$ 50 por mês. Moderador 24h, grupo de empresários que aplicam IA de verdade, e um caminho claro pra não errar.
+  </p>
+  <p className="text-neutral-300 mb-10">
+  Sem enrolação. Se não gostar em 7 dias, devolvemos cada centavo.
   </p>
 
   <a
@@ -433,7 +441,7 @@ export default function ZapClub() {
   >
   QUERO FAZER PARTE
   </a>
-  <p className="text-neutral-400 text-sm mt-4">R$ 50/mês · 7 dias de garantia · Risco zero</p>
+  <p className="text-neutral-400 text-sm mt-4">7 dias de garantia · Risco zero</p>
   </div>
   </div>
   </section>
