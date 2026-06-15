@@ -27,7 +27,7 @@ export default function ZapClub() {
   </h1>
 
   <p className="text-neutral-200 text-lg max-w-2xl mx-auto font-medium mb-4">
-  O medo de implementar errado e perder dinheiro trava mais que a falta de informação. O ZapClub é uma comunidade mão na massa, com moderação ativa 24h, que te tira da zona de insegurança e te coloca pra executar. Com orientação e o suporte do grupo.
+  O medo de implementar errado e perder dinheiro trava mais que a falta de informação. O ZapClub é uma comunidade mão na massa, com moderação ativa 24h, que te tira do muro e te coloca pra executar. Com orientação e o suporte do grupo.
   </p>
   <p className="text-lg text-neutral-300 mb-8 max-w-xl mx-auto">
   Em vez de passar meses pesquisando, você passa minutos aplicando o que já funciona.
@@ -94,13 +94,13 @@ export default function ZapClub() {
   <div className="max-w-4xl mx-auto">
   <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center">Todo dia sem IA é um dia de vantagem pro concorrente</h2>
   <p className="text-neutral-300 text-lg text-center mb-12 max-w-3xl mx-auto">
-  Dado, não premissa. Cada dia que você espera, alguém avança.
+  É fato, não achismo. Cada dia que você espera, alguém avança.
   </p>
 
   <div className="grid md:grid-cols-3 gap-6 mb-12">
   {[
   { metric: '75%', label: 'das empresas que demorarem a adotar IA vão perder mercado até 2027. Fonte: analistas do setor.' },
-  { metric: 'R$ 1,4 tri', label: 'é o que o Brasil pode perder em produtividade até 2030 sem acelerar IA. Estudos do MIT e FGV.' },
+  { metric: 'R$ 1,4 tri', label: 'é quanto o Brasil pode perder em produtividade até 2030 se ficar pra trás em IA. Estudos do MIT e FGV.' },
   { metric: '60%', label: 'dos empresários temem mais implementar errado que o custo da ferramenta. Pesquisa Gartner.' },
   ].map((item, i) => (
   <div key={i} className="bg-[#111111] p-6 rounded-xl border border-[#7C3AED]/20">
@@ -121,9 +121,9 @@ export default function ZapClub() {
   Sistema de Progressão
   </span>
   </div>
-  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center">Um roadmap para ter clareza e segurança</h2>
+  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center">Um caminho claro pra ter controle e segurança</h2>
   <p className="text-neutral-300 text-lg text-center mb-14 max-w-3xl mx-auto">
-  Cada elo destrava o próximo. Você só avança quando entrega uma task com o seu negócio de verdade. O moderador valida. A comunidade acompanha.
+  Cada elo destrava o próximo. Você só avança quando faz na prática com o seu negócio de verdade. O moderador valida. A comunidade acompanha.
   </p>
 
   <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
@@ -169,7 +169,7 @@ export default function ZapClub() {
   <div className="w-12 h-12 rounded-xl bg-[#F5D061]/10 border border-[#F5D061]/30 flex items-center justify-center mb-3">
   <span className="text-2xl">🥇</span>
   </div>
-  <h3 className="text-white text-sm font-bold mb-1">Manipulador de Tools & MCPs</h3>
+  <h3 className="text-white text-sm font-bold mb-1">Conector de Ferramentas e MCPs</h3>
   <p className="text-neutral-400 text-xs leading-relaxed">
   Usa ferramentas que a IA não tem nativamente. Busca na web, executa código, conecta dados externos.
   </p>
@@ -186,7 +186,7 @@ export default function ZapClub() {
   <div className="w-12 h-12 rounded-xl bg-[#E0E0E0]/10 border border-[#E0E0E0]/30 flex items-center justify-center mb-3">
   <span className="text-2xl">💎</span>
   </div>
-  <h3 className="text-white text-sm font-bold mb-1">Desenvolvedor de Skills</h3>
+  <h3 className="text-white text-sm font-bold mb-1">Criador de Atalhos Inteligentes</h3>
   <p className="text-neutral-400 text-xs leading-relaxed">
   Cria prompts reutilizáveis, templates e fluxos customizados para o SEU negócio. Não depende mais de prompting genérico.
   </p>
@@ -203,7 +203,7 @@ export default function ZapClub() {
   <div className="w-12 h-12 rounded-xl bg-[#7DD3FC]/10 border border-[#7DD3FC]/30 flex items-center justify-center mb-3">
   <span className="text-2xl">👑</span>
   </div>
-  <h3 className="text-white text-sm font-bold mb-1">Maestro de Rotinas</h3>
+  <h3 className="text-white text-sm font-bold mb-1">Dono da Automação</h3>
   <p className="text-neutral-400 text-xs leading-relaxed">
   Monta workflows que rodam sozinhos. IA operando enquanto você dorme. O negócio que não precisa de você o tempo todo.
   </p>
@@ -422,7 +422,7 @@ export default function ZapClub() {
   <div className="max-w-2xl mx-auto text-center">
   <div className="bg-gradient-to-br from-[#7C3AED]/20 to-[#7C3AED]/5 rounded-3xl p-8 border border-[#7C3AED]/30">
   <p className="text-neutral-200 text-lg mb-10">
-  Cada dia que você espera é um dia que alguém avança. Moderação ativa 24h, comunidade que aplica de verdade, e um roadmap claro. Entre agora com garantia de 7 dias.
+  Cada dia que você espera é um dia que alguém avança. Moderação ativa 24h, comunidade que aplica de verdade, e um caminho claro. Entre agora com garantia de 7 dias.
   </p>
 
   <a
