@@ -75,15 +75,14 @@ async function getOrCreateCustomer(customer: { email: string; name?: string; cel
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
- // Aceita POST (body) e GET (query param) para suportar /api/abacatepay/checkout/zapcurso
- const body = req.method === 'GET' ? req.query : req.body;
-
  if (req.method !== 'POST' && req.method !== 'GET') {
   return res.status(405).json({ error: 'Method not allowed' });
  }
 
+ const inputBody = req.method === 'GET' ? req.query : req.body;
+
   try {
-    const { productId, customer: customerData, returnUrl, metadata } = body;
+    const { productId, customer: customerData, returnUrl, metadata } = inputBody;
     const abacateProductId = PRODUCTS[productId] || productId;
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.sistemabritto.com.br';
 
@@ -113,7 +112,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
     }
 
-    const body: Record<string, unknown> = {
+    const checkoutPayload: Record<string, unknown> = {
       items: [{ id: abacateProductId, quantity: 1 }],
       returnUrl: returnUrl || siteUrl + '/obrigado',
       completionUrl: returnUrl || siteUrl + '/obrigado',
@@ -121,7 +120,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Usa customerId se conseguiu criar
     if (customerId) {
-      body.customerId = customerId;
+      checkoutPayload.customerId = customerId;
       console.log('[AbacatePay Request with Customer]', customerId);
     } else {
       console.log('[AbacatePay Request without Customer]');
@@ -133,7 +132,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         'Authorization': `Bearer ${ABACATEPAY_KEY}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(checkoutPayload),
     });
 
     const data = await response.json();
