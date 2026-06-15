@@ -126,7 +126,7 @@ export default function ZapClub() {
   <div className="max-w-4xl mx-auto">
   <div className="text-center mb-12">
   <span className="inline-block text-[#A78BFA] text-xs font-bold uppercase tracking-widest mb-4 border border-[#7C3AED]/40 px-4 py-2 rounded-full bg-[#7C3AED]/10">
-  O fim da insegurança
+  O remédio pra insegurança
   </span>
   <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
   O ZapClub não é um curso.<br />É uma comunidade no Zap.
@@ -158,8 +158,92 @@ export default function ZapClub() {
   </div>
   </section>
 
+  {/* ===== SEU CAMINHO (ELOS) ===== */}
+  <section className="py-20 px-4 bg-[#0a0a0a]" id="caminho">
+  <div className="max-w-5xl mx-auto">
+  <div className="text-center mb-4">
+  <span className="inline-block text-[#A78BFA] text-xs font-bold uppercase tracking-widest mb-4 border border-[#7C3AED]/40 px-4 py-2 rounded-full bg-[#7C3AED]/10">
+  Sistema de Progressão
+  </span>
+  </div>
+  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center">Seu caminho de Cobre a Diamante</h2>
+  <p className="text-neutral-300 text-lg text-center mb-14 max-w-3xl mx-auto">
+  Cada elo destrava o próximo. Você só avança quando entrega uma task com o seu negócio de verdade. O moderador valida. A comunidade acompanha.
+  </p>
+
+  <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-12">
+  {/* COBRE */}
+
+  <div className="relative bg-[#111111] rounded-2xl p-5 border border-[#CD7F32]/40 hover:border-[#CD7F32] transition-all duration-300 hover:-translate-y-1 group">
+  <div className="absolute top-3 right-3">
+  <span className="text-xs font-bold px-2 py-1 rounded-full bg-[#CD7F32]/20 text-[#CD7F32] border border-[#CD7F32]/30">Cobre</span>
+  </div>
+  <div className="text-3xl mb-3">🔶</div>
+  <h3 className="text-white text-sm font-bold mb-1">Conquistador de Tokens</h3>
+  <p className="text-neutral-400 text-xs leading-relaxed">
+  Entende tokens, limites e quotas. Faz a IA funcionar na primeira tentativa sem gastar à toa.
+  </p>
+  </div>
+
+  {/* PRATA */}
+  <div className="relative bg-[#111111] rounded-2xl p-5 border border-[#A8B4C0]/40 hover:border-[#C0C0C0] transition-all duration-300 hover:-translate-y-1 group">
+  <div className="absolute top-3 right-3">
+  <span className="text-xs font-bold px-2 py-1 rounded-full bg-[#A8B4C0]/20 text-[#A8B4C0] border border-[#A8B4C0]/30">Prata</span>
+  </div>
+  <div className="text-3xl mb-3">🥈</div>
+  <h3 className="text-white text-sm font-bold mb-1">Triangulador de Modelos</h3>
+  <p className="text-neutral-400 text-xs leading-relaxed">
+  Sabe qual modelo usar para cada tarefa. Compara GPT, Claude, Gemini. Economiza custos, ganha resultado.
+  </p>
+  </div>
+
+  {/* OURO */}
+  <div className="relative bg-[#111111] rounded-2xl p-5 border border-[#F5D061]/40 hover:border-[#F5D061] transition-all duration-300 hover:-translate-y-1 group">
+  <div className="absolute top-3 right-3">
+  <span className="text-xs font-bold px-2 py-1 rounded-full bg-[#F5D061]/20 text-[#F5D061] border border-[#F5D061]/30">Ouro</span>
+  </div>
+  <div className="text-3xl mb-3">🥇</div>
+  <h3 className="text-white text-sm font-bold mb-1">Manipulador de Tools & MCPs</h3>
+  <p className="text-neutral-400 text-xs leading-relaxed">
+  Usa ferramentas que a IA não tem nativamente. Busca na web, executa código, conecta dados externos.
+  </p>
+  </div>
+
+  {/* PLATINA */}
+  <div className="relative bg-[#111111] rounded-2xl p-5 border border-[#E0E0E0]/40 hover:border-[#E0E0E0] transition-all duration-300 hover:-translate-y-1 group">
+  <div className="absolute top-3 right-3">
+  <span className="text-xs font-bold px-2 py-1 rounded-full bg-[#E0E0E0]/20 text-[#E0E0E0] border border-[#E0E0E0]/30">Platina</span>
+  </div>
+  <div className="text-3xl mb-3">💎</div>
+  <h3 className="text-white text-sm font-bold mb-1">Desenvolvedor de Skills</h3>
+  <p className="text-neutral-400 text-xs leading-relaxed">
+  Cria prompts reutilizáveis, templates e fluxos customizados para o SEU negócio. Não depende mais de prompting genérico.
+  </p>
+  </div>
+
+  {/* DIAMANTE */}
+  <div className="relative bg-gradient-to-b from-[#111111] to-[#0a0a0a] rounded-2xl p-5 border border-[#7DD3FC]/60 hover:border-[#7DD3FC] transition-all duration-300 hover:-translate-y-1 group">
+  <div className="absolute top-3 right-3">
+  <span className="text-xs font-bold px-2 py-1 rounded-full bg-[#7DD3FC]/20 text-[#7DD3FC] border border-[#7DD3FC]/30 animate-pulse">Diamante</span>
+  </div>
+  <div className="text-3xl mb-3">👑</div>
+  <h3 className="text-white text-sm font-bold mb-1">Maestro de Rotinas</h3>
+  <p className="text-neutral-400 text-xs leading-relaxed">
+  Monta workflows que rodam sozinhos. IA operando enquanto você dorme. O negócio que não precisa de você o tempo todo.
+  </p>
+  </div>
+  </div>
+
+  {/* Setas de progressão entre cards — visual only, rendered via flex on mobile */}
+
+  <p className="text-neutral-400 text-sm text-center">
+  Cada elo tem uma task prática com o seu negócio. O moderador aprova. Você avança. Sem vídeo gravado. Sem exercício fictício.
+  </p>
+  </div>
+  </section>
+
   {/* ===== PARA QUEM É ===== */}
-  <section className="py-20 px-4 bg-[#0a0a0a]">
+  <section className="py-20 px-4 bg-[#111111]">
   <div className="max-w-4xl mx-auto">
   <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 text-center">Pra quem é o ZapClub</h2>
   <p className="text-neutral-200 text-lg text-center mb-12 max-w-3xl mx-auto">
@@ -205,7 +289,7 @@ export default function ZapClub() {
   </section>
 
   {/* ===== RESULTADO ===== */}
-  <section className="py-20 px-4 bg-[#111111]">
+  <section className="py-20 px-4 bg-[#0a0a0a]">
   <div className="max-w-4xl mx-auto">
   <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 text-center">O que muda quando você para de fazer tudo sozinho</h2>
   <p className="text-neutral-200 text-lg text-center mb-12 max-w-3xl mx-auto">
@@ -219,7 +303,7 @@ export default function ZapClub() {
   { icon: '🛡️', text: 'Implementa IA sem medo de perder dinheiro. Porque não tá sozinho.' },
   { icon: '⚡', text: 'Para de dar conta de tudo no braço. Passa a operar com braço extra que trabalha 24h.' },
   ].map((item, i) => (
-  <div key={i} className="bg-[#0a0a0a] rounded-2xl p-6 border border-[#7C3AED]/20 hover:border-[#7C3AED]/50 transition-all duration-300 hover:-translate-y-1">
+  <div key={i} className="bg-[#111111] rounded-2xl p-6 border border-[#7C3AED]/20 hover:border-[#7C3AED]/50 transition-all duration-300 hover:-translate-y-1">
   <span className="text-3xl block mb-3">{item.icon}</span>
   <p className="text-neutral-200 font-medium">{item.text}</p>
   </div>
@@ -229,7 +313,7 @@ export default function ZapClub() {
   </section>
 
   {/* ===== AUTORIDADE ===== */}
-  <section className="py-20 px-4 bg-[#0a0a0a]">
+  <section className="py-20 px-4 bg-[#111111]">
   <div className="max-w-3xl mx-auto text-center">
   <span className="inline-block text-[#A78BFA] text-xs font-bold uppercase tracking-widest mb-4 border border-[#7C3AED]/40 px-4 py-2 rounded-full bg-[#7C3AED]/10">
   Quem conduz
@@ -248,7 +332,7 @@ export default function ZapClub() {
   'Founder de 2 SaaS no mercado',
   'Atende empresas que dominam com IA',
   ].map((item, i) => (
-  <span key={i} className="bg-[#111111] border border-[#7C3AED]/30 rounded-full px-4 py-2 text-sm text-neutral-200">
+  <span key={i} className="bg-[#0a0a0a] border border-[#7C3AED]/30 rounded-full px-4 py-2 text-sm text-neutral-200">
   {item}
   </span>
   ))}
@@ -261,11 +345,11 @@ export default function ZapClub() {
   </section>
 
   {/* ===== URGÊNCIA ===== */}
-  <section className="py-20 px-4 bg-[#111111]">
+  <section className="py-20 px-4 bg-[#0a0a0a]">
   <div className="max-w-3xl mx-auto text-center">
   <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Cada dia sem IA é um dia de vantagem pro concorrente</h2>
   <p className="text-neutral-200 text-lg leading-relaxed mb-6">
-  O empresário que implementa IA hoje não é o que tem mais dinheiro. É o que não aguenta mais dar conta de tudo sozinho. Ele entra porque a insegurança de esperar é maior que a de tentar. E tenta con guía. Sem método, não executa. Sem comunidade, desiste.
+  O empresário que implementa IA hoje não é o que tem mais dinheiro. É o que não aguenta mais dar conta de tudo sozinho. Ele entra porque a insegurança de esperar é maior que a de tentar. E tenta com guía. Sem método, não executa. Sem comunidade, desiste.
   </p>
   <p className="text-neutral-300 text-lg leading-relaxed mb-10">
   O ZapClub é a entrada. Sem risco de implementar errado. Com moderador 24h, com grupo, com respaldo.
@@ -282,9 +366,9 @@ export default function ZapClub() {
   </section>
 
   {/* ===== GARANTIA ===== */}
-  <section className="py-20 px-4 bg-[#0a0a0a]">
+  <section className="py-20 px-4 bg-[#111111]">
   <div className="max-w-md mx-auto text-center">
-  <div className="bg-[#111111] rounded-2xl p-8 border border-[#7C3AED]/30">
+  <div className="bg-[#0a0a0a] rounded-2xl p-8 border border-[#7C3AED]/30">
   <span className="text-5xl block mb-4">🛡️</span>
   <h3 className="text-white text-2xl font-bold mb-4">Garantia de 7 dias</h3>
   <p className="text-neutral-200 leading-relaxed">
@@ -295,7 +379,7 @@ export default function ZapClub() {
   </section>
 
   {/* ===== CTA FINAL ===== */}
-  <section className="py-20 px-4 bg-[#111111]">
+  <section className="py-20 px-4 bg-[#0a0a0a]">
   <div className="max-w-2xl mx-auto text-center">
   <div className="bg-gradient-to-br from-[#7C3AED]/20 to-[#7C3AED]/5 rounded-3xl p-8 border border-[#7C3AED]/30">
   <h2 className="text-3xl font-bold text-white mb-4">
