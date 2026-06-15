@@ -1,11 +1,8 @@
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { useState } from 'react';
-import CheckoutModal from '../components/CheckoutModal';
 
 export default function ZapCurso() {
- const [openCheckout, setOpenCheckout] = useState(false);
 
  return (
   <>
@@ -43,12 +40,14 @@ export default function ZapCurso() {
   </p>
 
   <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-  <button
-  onClick={() => setOpenCheckout(true)}
+  <a
+  href="https://app.abacatepay.com/pay/bill_Wq6RsHAAQ0dHCsrhnNhAc4xc"
+  target="_blank"
+  rel="noopener noreferrer"
   className="inline-flex items-center gap-3 bg-[#22C55E] hover:bg-[#16A34A] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
   >
   QUERO COMEÇAR AGORA →
-  </button>
+  </a>
   </div>
 
   <p className="text-neutral-400 text-sm mt-4">R$ 50 · Pagamento único · 7 dias de garantia incondicional</p>
@@ -237,12 +236,14 @@ export default function ZapCurso() {
   <p className="text-neutral-200 text-lg leading-relaxed mb-10">
   Cada semana sem IA no seu negócio é uma semana que seu concorrente usa para ficar mais rápido, mais barato e mais eficiente. Quando você decidir começar, pode ser tarde para aprender do zero enquanto o mercado já mudou. O ZapCurso é o ponto de entrada.
   </p>
-  <button
-  onClick={() => setOpenCheckout(true)}
+  <a
+  href="https://app.abacatepay.com/pay/bill_Wq6RsHAAQ0dHCsrhnNhAc4xc"
+  target="_blank"
+  rel="noopener noreferrer"
   className="inline-flex items-center gap-3 bg-[#22C55E] hover:bg-[#16A34A] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
   >
   QUERO COMEÇAR AGORA →
-  </button>
+  </a>
   </div>
   </section>
 
@@ -291,12 +292,14 @@ export default function ZapCurso() {
   <span className="text-neutral-300 text-lg">pagamento único</span>
   </div>
 
-  <button
-  onClick={() => setOpenCheckout(true)}
+  <a
+  href="https://app.abacatepay.com/pay/bill_Wq6RsHAAQ0dHCsrhnNhAc4xc"
+  target="_blank"
+  rel="noopener noreferrer"
   className="inline-flex items-center gap-3 bg-[#22C55E] hover:bg-[#16A34A] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25 w-full justify-center"
   >
   QUERO COMEÇAR AGORA →
-  </button>
+  </a>
   </div>
 
   <p className="text-neutral-400 text-sm mt-4">7 dias de garantia incondicional · Risco zero</p>
@@ -304,16 +307,9 @@ export default function ZapCurso() {
   </div>
   </section>
 
-  <CheckoutModal
-  open={openCheckout}
-  onClose={() => setOpenCheckout(false)}
-  source="zapcurso"
-  productName="ZapCurso IA para Negócios"
-  productId="zapcurso-ia-negocios"
-  />
-
   <Footer />
   </main>
   </>
  );
 }
+
