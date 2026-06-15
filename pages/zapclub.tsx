@@ -23,7 +23,7 @@ export default function ZapClub() {
   <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
   {/* Logo horizontal */}
   <div className="mb-8">
-   <img src="/zapclub-logo.jpg" alt="ZapClub" className="h-12 sm:h-14 mx-auto" loading="eager" />
+   <img src="/zapclub-logo.png" alt="ZapClub" className="h-12 sm:h-14 mx-auto" loading="eager" />
   </div>
 
   <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
@@ -420,7 +420,7 @@ export default function ZapClub() {
   <div className="bg-gradient-to-br from-[#7C3AED]/20 to-[#7C3AED]/5 rounded-3xl p-8 border border-[#7C3AED]/30">
   {/* Logo horizontal */}
   <div className="mb-6">
-  <img src="/zapclub-logo.jpg" alt="ZapClub" className="h-10 mx-auto" loading="lazy" />
+  <img src="/zapclub-logo.png" alt="ZapClub" className="h-10 mx-auto" loading="lazy" />
   </div>
 
   <p className="text-neutral-200 text-lg mb-6">
