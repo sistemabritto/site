@@ -5,6 +5,7 @@ const navLinks = [
  { label: 'WhatsApp', href: '/whatsapp' },
  { label: 'SocialJobs', href: '/socialjobs' },
  { label: 'Sistema', href: '/sistema' },
+ { label: 'ZapClub', href: '/zapclub' },
  { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
 ];
 

@@ -423,11 +423,11 @@ export default function ZapClub() {
   <div className="bg-gradient-to-br from-[#7C3AED]/20 to-[#7C3AED]/5 rounded-3xl p-8 border border-[#7C3AED]/30">
 
   <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">
-  Você leu até aqui. Falta pouco pra parar de fazer sozinho.
+  Você leu até aqui. Falta pouco pra destravar.
   </h2>
 
   <p className="text-neutral-200 text-lg mb-4">
-  R$ 50 por mês. Moderador 24h, grupo de empresários que aplicam IA de verdade, e um caminho claro pra não errar.
+  50 conto, suporte 24h, acesso a um grupo de empresários que aplicam IA de verdade e clareza pra não perder tempo e dinheiro com tentativa e erro.
   </p>
   <p className="text-neutral-300 mb-10">
   Sem enrolação. Se não gostar em 7 dias, devolvemos cada centavo.
