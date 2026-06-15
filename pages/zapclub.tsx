@@ -21,11 +21,6 @@ export default function ZapClub() {
   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[600px] max-h-[600px] w-full h-full bg-[#7C3AED]/8 rounded-full blur-3xl" />
 
   <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-  {/* Logo horizontal */}
-  <div className="mb-8">
-   <img src="/zapclub-logo.png" alt="ZapClub" className="h-12 sm:h-14 mx-auto" loading="eager" />
-  </div>
-
   <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
   10% dos seus concorrentes<br />
   <span className="bg-gradient-to-r from-[#A78BFA] to-[#7C3AED] bg-clip-text text-transparent">ja operam com IA 24h. E voce ainda nao sabe por onde comecar?</span>
@@ -129,9 +124,24 @@ export default function ZapClub() {
   O remedio pra inseguranca
   </span>
   <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-  O ZapClub nao e um curso.<br />E uma comunidade no Zap.
+  O ZapClub nao e um curso
   </h2>
   </div>
+
+  {/* Foto da comunidade — circular com borda roxa */}
+  <div className="flex justify-center mb-8">
+  <div className="relative">
+  <div className="absolute -inset-3 rounded-full bg-[#7C3AED]/15 blur-xl" />
+  <img
+   src="/zapclub-community.webp"
+   alt="Comunidade ZapClub"
+   className="relative w-72 h-72 sm:w-80 sm:h-80 rounded-full object-cover border-2 border-[#7C3AED]/50"
+   loading="lazy"
+  />
+  </div>
+  </div>
+
+  <p className="text-[#A78BFA] text-xl font-bold text-center mb-6">E uma comunidade no Zap.</p>
 
   <p className="text-neutral-200 text-lg leading-relaxed mb-10">
   E um grupo no WhatsApp com outros empresarios aplicando IA nos negocios deles, e um moderador de IA disponivel 24h. Ele guia passo a passo, responde na hora, adapta ao seu contexto. Nao deixa voce errar sozinho.
@@ -173,9 +183,9 @@ export default function ZapClub() {
 
   <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-12">
   {/* COBRE */}
-  <div className="relative bg-[#111111] rounded-2xl p-5 border-2 border-[#CD7F32]/50 hover:border-[#CD7F32] transition-all duration-300 hover:-translate-y-2 group">
+  <div className="relative bg-[#111111] rounded-2xl p-5 border-2 border-[#CD7F32]/50 hover:border-[#CD7F32] transition-all duration-300 hover:-translate-y-2">
   <div className="absolute -top-3 -right-3">
-  <span className="text-xs font-bold px-2 py-1 rounded-full bg-[#CD7F32] text-black border-2 border-[#CD7F32]">Cobre</span>
+  <span className="text-xs font-bold px-2 py-1 rounded-full bg-[#CD7F32] text-black">Cobre</span>
   </div>
   <div className="w-12 h-12 rounded-xl bg-[#CD7F32]/10 border border-[#CD7F32]/30 flex items-center justify-center mb-3">
   <span className="text-2xl">🔶</span>
@@ -190,9 +200,9 @@ export default function ZapClub() {
   </div>
 
   {/* PRATA */}
-  <div className="relative bg-[#111111] rounded-2xl p-5 border-2 border-[#A8B4C0]/50 hover:border-[#C0C0C0] transition-all duration-300 hover:-translate-y-2 group">
+  <div className="relative bg-[#111111] rounded-2xl p-5 border-2 border-[#A8B4C0]/50 hover:border-[#C0C0C0] transition-all duration-300 hover:-translate-y-2">
   <div className="absolute -top-3 -right-3">
-  <span className="text-xs font-bold px-2 py-1 rounded-full bg-[#C0C0C0] text-black border-2 border-[#C0C0C0]">Prata</span>
+  <span className="text-xs font-bold px-2 py-1 rounded-full bg-[#C0C0C0] text-black">Prata</span>
   </div>
   <div className="w-12 h-12 rounded-xl bg-[#C0C0C0]/10 border border-[#C0C0C0]/30 flex items-center justify-center mb-3">
   <span className="text-2xl">🥈</span>
@@ -207,9 +217,9 @@ export default function ZapClub() {
   </div>
 
   {/* OURO */}
-  <div className="relative bg-[#111111] rounded-2xl p-5 border-2 border-[#F5D061]/50 hover:border-[#F5D061] transition-all duration-300 hover:-translate-y-2 group">
+  <div className="relative bg-[#111111] rounded-2xl p-5 border-2 border-[#F5D061]/50 hover:border-[#F5D061] transition-all duration-300 hover:-translate-y-2">
   <div className="absolute -top-3 -right-3">
-  <span className="text-xs font-bold px-2 py-1 rounded-full bg-[#F5D061] text-black border-2 border-[#F5D061]">Ouro</span>
+  <span className="text-xs font-bold px-2 py-1 rounded-full bg-[#F5D061] text-black">Ouro</span>
   </div>
   <div className="w-12 h-12 rounded-xl bg-[#F5D061]/10 border border-[#F5D061]/30 flex items-center justify-center mb-3">
   <span className="text-2xl">🥇</span>
@@ -224,9 +234,9 @@ export default function ZapClub() {
   </div>
 
   {/* PLATINA */}
-  <div className="relative bg-[#111111] rounded-2xl p-5 border-2 border-[#E0E0E0]/50 hover:border-[#E0E0E0] transition-all duration-300 hover:-translate-y-2 group">
+  <div className="relative bg-[#111111] rounded-2xl p-5 border-2 border-[#E0E0E0]/50 hover:border-[#E0E0E0] transition-all duration-300 hover:-translate-y-2">
   <div className="absolute -top-3 -right-3">
-  <span className="text-xs font-bold px-2 py-1 rounded-full bg-[#E0E0E0] text-black border-2 border-[#E0E0E0]">Platina</span>
+  <span className="text-xs font-bold px-2 py-1 rounded-full bg-[#E0E0E0] text-black">Platina</span>
   </div>
   <div className="w-12 h-12 rounded-xl bg-[#E0E0E0]/10 border border-[#E0E0E0]/30 flex items-center justify-center mb-3">
   <span className="text-2xl">💎</span>
@@ -241,9 +251,9 @@ export default function ZapClub() {
   </div>
 
   {/* DIAMANTE */}
-  <div className="relative bg-gradient-to-b from-[#111111] to-[#7C3AED]/10 rounded-2xl p-5 border-2 border-[#7DD3FC]/60 hover:border-[#7DD3FC] transition-all duration-300 hover:-translate-y-2 group">
+  <div className="relative bg-gradient-to-b from-[#111111] to-[#7C3AED]/10 rounded-2xl p-5 border-2 border-[#7DD3FC]/60 hover:border-[#7DD3FC] transition-all duration-300 hover:-translate-y-2">
   <div className="absolute -top-3 -right-3">
-  <span className="text-xs font-bold px-2 py-1 rounded-full bg-[#7DD3FC] text-black border-2 border-[#7DD3FC] animate-pulse">Diamante</span>
+  <span className="text-xs font-bold px-2 py-1 rounded-full bg-[#7DD3FC] text-black animate-pulse">Diamante</span>
   </div>
   <div className="w-12 h-12 rounded-xl bg-[#7DD3FC]/10 border border-[#7DD3FC]/30 flex items-center justify-center mb-3">
   <span className="text-2xl">👑</span>
@@ -338,26 +348,28 @@ export default function ZapClub() {
   <section className="py-20 px-4 bg-[#111111]">
   <div className="max-w-3xl mx-auto">
   <div className="flex flex-col items-center">
-  {/* Foto com fade-to-black */}
+  {/* Foto circular com glow roxo */}
   <div className="relative w-40 h-40 mb-6">
+  <div className="absolute -inset-2 rounded-full bg-[#7C3AED]/20 blur-xl" />
   <img
-   src="/felipe-britto.webp"
+   src="/felipe-britto-v2.webp"
    alt="Felipe Britto"
-   className="w-full h-full rounded-full object-cover"
-   style={{ maskImage: 'radial-gradient(circle, black 60%, transparent 100%)', WebkitMaskImage: 'radial-gradient(circle, black 60%, transparent 100%)' }}
+   className="relative w-full h-full rounded-full object-cover border-2 border-[#7C3AED]/40"
    loading="lazy"
   />
-  <div className="absolute inset-0 rounded-full bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-60" />
   </div>
 
   <span className="inline-block text-[#A78BFA] text-xs font-bold uppercase tracking-widest mb-4 border border-[#7C3AED]/40 px-4 py-2 rounded-full bg-[#7C3AED]/10">
   Quem conduz
   </span>
   <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">Felipe Britto</h2>
-  <p className="text-neutral-300 mb-8">Empreendedor digital. Desenvolvedor de ofertas.</p>
+  <p className="text-[#A78BFA] text-lg font-medium mb-8">IA aplicada a negocios reais, sem complicar o que precisa funcionar.</p>
 
   <p className="text-neutral-200 text-lg leading-relaxed mb-10 text-center">
-  Ja comprou ferramenta sem saber usar. Tentou implementar sozinho, quebrou. Passou semanas tentando ensinar o time sem resultado. Tambem viveu o acerto: 3 anos aplicando IA em negocios reais, 20 anos em robotica e tecnologia, founder de 2 SaaS no mercado, atendendo empresas que usam IA pra dominar os mercados delas.
+  Eu criei o ZapClub para reunir empresarios que querem usar IA na pratica, mas nao tem tempo para ficar perdidos entre ferramentas, promessas e tutoriais soltos. Aqui, o foco e simples: entender onde a IA pode economizar tempo, melhorar atendimento, organizar processos e gerar mais folego para o negocio crescer.
+  </p>
+  <p className="text-neutral-200 text-lg leading-relaxed mb-10 text-center">
+  Minha experiencia vem da operacao: testando ferramentas, criando automacoes, estruturando sistemas e traduzindo tecnologia em solucoes que pequenos negocios conseguem usar de verdade.
   </p>
 
   <div className="flex flex-wrap justify-center gap-3 mb-8">
@@ -418,11 +430,6 @@ export default function ZapClub() {
   <section className="py-20 px-4 bg-[#0a0a0a]">
   <div className="max-w-2xl mx-auto text-center">
   <div className="bg-gradient-to-br from-[#7C3AED]/20 to-[#7C3AED]/5 rounded-3xl p-8 border border-[#7C3AED]/30">
-  {/* Logo horizontal */}
-  <div className="mb-6">
-  <img src="/zapclub-logo.png" alt="ZapClub" className="h-10 mx-auto" loading="lazy" />
-  </div>
-
   <p className="text-neutral-200 text-lg mb-6">
   Chega de tentar sozinho. Moderacao ativa 24h, grupo de empresarios que aplicam IA de verdade, e um roadmap pra voce saber exatamente o que fazer. Sem pergunta sem resposta. Sem passo em falso.
   </p>
