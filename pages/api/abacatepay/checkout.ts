@@ -75,12 +75,15 @@ async function getOrCreateCustomer(customer: { email: string; name?: string; cel
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+ // Aceita POST (body) e GET (query param) para suportar /api/abacatepay/checkout/zapcurso
+ const body = req.method === 'GET' ? req.query : req.body;
+
+ if (req.method !== 'POST' && req.method !== 'GET') {
+  return res.status(405).json({ error: 'Method not allowed' });
+ }
 
   try {
-    const { productId, customer: customerData, returnUrl, metadata } = req.body;
+    const { productId, customer: customerData, returnUrl, metadata } = body;
     const abacateProductId = PRODUCTS[productId] || productId;
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.sistemabritto.com.br';
 
