@@ -6,8 +6,8 @@ export default function ZapCurso() {
  return (
   <>
   <Meta
-   title="ZapCurso IA para Negócios — Aprenda IA pelo WhatsApp | Sistema Britto"
-   description="Tutor de IA no seu WhatsApp. Aprenda na prática, no seu ritmo, com respostas em tempo real. R$ 50. Garantia de 7 dias."
+   title="ZapCurso — Comunidade de IA para Negócios no WhatsApp | Sistema Britto"
+   description="Comunidade no WhatsApp gerida por um agente de IA. Deixe de fazer tudo sozinho. R$ 50, 30 dias de acesso, garantia de 7 dias."
    path="/zapcurso"
   />
 
@@ -23,16 +23,16 @@ export default function ZapCurso() {
   <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
   <div className="inline-flex items-center gap-2 bg-[#7C3AED]/20 border border-[#7C3AED]/40 rounded-full px-4 py-2 mb-6">
   <span className="w-2 h-2 bg-[#7C3AED] rounded-full animate-pulse" />
-  <span className="text-[#A78BFA] text-xs font-bold uppercase tracking-wider">Clube de IA para Negócios</span>
+  <span className="text-[#A78BFA] text-xs font-bold uppercase tracking-wider">Comunidade de IA para Negócios</span>
   </div>
 
   <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-  Seu concorrente já está usando IA.<br />
-  <span className="bg-gradient-to-r from-[#A78BFA] to-[#7C3AED] bg-clip-text text-transparent">Você ainda não sabe por onde começar — ou tem medo de perder dinheiro implementando errado.</span>
+  Você tá fazendo tudo sozinho.<br />
+  <span className="bg-gradient-to-r from-[#A78BFA] to-[#7C3AED] bg-clip-text text-transparent">E todo dia sem IA é um dia de vantagem pro concorrente.</span>
   </h1>
 
   <p className="text-neutral-200 text-lg max-w-2xl mx-auto font-medium mb-4">
-  A paralisia não é falta de informação. É medo de errar e jogar dinheiro fora. O ZapCurso tira você da teoria e coloca um tutor de IA no seu WhatsApp para executar sem medo — no seu ritmo, com orientação em tempo real.
+  A insegurança de implementar errado e perder dinheiro trava mais do que a falta de informação. O ZapCurso é uma comunidade no WhatsApp, gerida por um agente de IA, que te tira da insegurança e coloca pra executar — com guía, com grupo, sem ficar sozinho.
   </p>
   <p className="text-lg text-neutral-300 mb-8 max-w-xl mx-auto">
   Em vez de passar meses pesquisando, você passa horas executando.
@@ -45,7 +45,7 @@ export default function ZapCurso() {
   rel="noopener noreferrer"
   className="inline-flex items-center gap-3 bg-[#22C55E] hover:bg-[#16A34A] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
   >
-  QUERO COMEÇAR AGORA →
+  QUERO FAZER PARTE →
   </a>
   </div>
 
@@ -53,18 +53,62 @@ export default function ZapCurso() {
   </div>
   </section>
 
-  {/* ===== O CUSTO DE ESPERAR (estatísticas) ===== */}
-  <section className="py-16 px-4 bg-[#111111]">
+  {/* ===== A DOR CENTRAL ===== */}
+  <section className="py-20 px-4 bg-[#111111]">
   <div className="max-w-4xl mx-auto">
-  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-12 text-center">O custo de esperar não é só tempo. É dinheiro.</h2>
+  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-12 text-center">Você conhece essa sensação</h2>
+
+  <div className="space-y-8">
+  <div className="flex items-start gap-4">
+  <span className="text-2xl mt-1">😰</span>
+  <div>
+  <h3 className="text-white text-lg font-bold mb-1">Insegurança de fazer tudo sozinho</h3>
+  <p className="text-neutral-200">Você é o dono, o gestor, o operador, o financeiro — e ainda tem que entender IA? Não tem braço, não tem tempo, e o medo de errar trava qualquer tentativa.</p>
+  </div>
+  </div>
+
+  <div className="flex items-start gap-4">
+  <span className="text-2xl mt-1">🧊</span>
+  <div>
+  <h3 className="text-white text-lg font-bold mb-1">Paralisia por medo de implementar errado</h3>
+  <p className="text-neutral-200">Sabe que IA existe, sabe que precisa, mas não sabe por onde começar. E se implementar errado? E se jogar dinheiro fora? E enquanto pensa, o concorrente já atende cliente com IA.</p>
+  </div>
+  </div>
+
+  <div className="flex items-start gap-4">
+  <span className="text-2xl mt-1">📼</span>
+  <div>
+  <h3 className="text-white text-lg font-bold mb-1">Curso gravado que não gera execução</h3>
+  <p className="text-neutral-200">Assiste 10h de vídeo, anota tudo, e na segunda-feira não aplica nada. Conteúdo passivo não substitui acompanhamento. Nem comunidade.</p>
+  </div>
+  </div>
+
+  <div className="flex items-start gap-4">
+  <span className="text-2xl mt-1">🗑️</span>
+  <div>
+  <h3 className="text-white text-lg font-bold mb-1">Ferramenta que ninguém usa</h3>
+  <p className="text-neutral-200">Paga por IA, deixa largada porque ninguém na equipe entende como usar. Todo mês, dinheiro no lixo — e a insegurança só aumenta.</p>
+  </div>
+  </div>
+  </div>
+  </div>
+  </section>
+
+  {/* ===== O CUSTO DE ESPERAR ===== */}
+  <section className="py-16 px-4 bg-[#0a0a0a]">
+  <div className="max-w-4xl mx-auto">
+  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center">Todo dia sem IA é um dia de vantagem pro concorrente</h2>
+  <p className="text-neutral-300 text-lg text-center mb-12 max-w-3xl mx-auto">
+  Não é premissa. É dado. Cada dia que você espera, alguém avança.
+  </p>
 
   <div className="grid md:grid-cols-3 gap-6 mb-12">
   {[
-  { metric: '75%', label: 'das empresas que demorarem a adotar IA perderão participação de mercado até 2027, segundo analistas do setor.' },
-  { metric: 'R$ 1,4 tri', label: 'é o quanto o Brasil pode perder em produtividade até 2030 se não acelerar a adoção de IA, apontam estudos econômicos.' },
-  { metric: '60%', label: 'dos empresários temem mais o risco de implementação errada do que o custo da própria ferramenta, revelam pesquisas do mercado.' },
+  { metric: '75%', label: 'das empresas que demorarem a adotar IA perderão participação de mercado até 2027 — segundo analistas do setor.' },
+  { metric: 'R$ 1,4 tri', label: 'é o quanto o Brasil pode perder em produtividade até 2030 se não acelerar a adoção de IA, apontam estudos econômicos do MIT e FGV.' },
+  { metric: '60%', label: 'dos empresários temem mais o risco de implementar errado do que o custo da ferramenta — revela pesquisa da Gartner.' },
   ].map((item, i) => (
-  <div key={i} className="bg-[#0a0a0a] p-6 rounded-xl border border-[#7C3AED]/20">
+  <div key={i} className="bg-[#111111] p-6 rounded-xl border border-[#7C3AED]/20">
    <p className="text-4xl font-bold text-[#A78BFA] mb-2">{item.metric}</p>
    <p className="text-neutral-300 text-sm leading-relaxed">{item.label}</p>
   </div>
@@ -72,49 +116,8 @@ export default function ZapCurso() {
   </div>
 
   <p className="text-neutral-200 text-lg text-center max-w-3xl mx-auto">
-  Cada semana sem IA no seu negócio é um dia que o concorrente usa para ficar mais rápido, mais barato e mais eficiente. Quando você decidir começar, pode ser tarde para recuperar a dianteira.
+  A IA não é mais um luxo pra grande empresa. É o fôlego financeiro que o pequeno empresário precisa pra escalar com menos custo e mais velocidade. Quem não entra agora, paga depois — em margem, em cliente, em posição de mercado.
   </p>
-  </div>
-  </section>
-
-  {/* ===== CHEGA DE ===== */}
-  <section className="py-20 px-4 bg-[#0a0a0a]">
-  <div className="max-w-4xl mx-auto">
-  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-12 text-center">Chega de…</h2>
-
-  <div className="space-y-8">
-  <div className="flex items-start gap-4">
-  <span className="text-2xl mt-1">🧊</span>
-  <div>
-  <h3 className="text-white text-lg font-bold mb-1">Paralisia</h3>
-  <p className="text-neutral-200">Sabe que IA existe, sabe que precisa, mas não sabe por onde começar. E enquanto você pensa, alguém já está atendendo cliente com IA.</p>
-  </div>
-  </div>
-
-  <div className="flex items-start gap-4">
-  <span className="text-2xl mt-1">📼</span>
-  <div>
-  <h3 className="text-white text-lg font-bold mb-1">Curso gravado</h3>
-  <p className="text-neutral-200">Assiste 10h de vídeo, anota tudo, e na segunda-feira não aplica nada. Conteúdo passivo não gera execução.</p>
-  </div>
-  </div>
-
-  <div className="flex items-start gap-4">
-  <span className="text-2xl mt-1">🗑️</span>
-  <div>
-  <h3 className="text-white text-lg font-bold mb-1">Ferramenta abandonada</h3>
-  <p className="text-neutral-200">Paga por IA, deixa largada porque ninguém na equipe entende como usar. Dinheiro no lixo todo mês.</p>
-  </div>
-  </div>
-
-  <div className="flex items-start gap-4">
-  <span className="text-2xl mt-1">⏳</span>
-  <div>
-  <h3 className="text-white text-lg font-bold mb-1">Implementar errado</h3>
-  <p className="text-neutral-200">Tenta usar IA, implementa sozinho, quebra a execução e volta para o zero na próxima semana. O ciclo se repete — e o dinheiro some.</p>
-  </div>
-  </div>
-  </div>
   </div>
   </section>
 
@@ -123,26 +126,26 @@ export default function ZapCurso() {
   <div className="max-w-4xl mx-auto">
   <div className="text-center mb-12">
   <span className="inline-block text-[#A78BFA] text-xs font-bold uppercase tracking-widest mb-4 border border-[#7C3AED]/40 px-4 py-2 rounded-full bg-[#7C3AED]/10">
-  Como funciona
+  O remédio pra insegurança
   </span>
-  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">O ZapCurso não é um curso. É um clube.</h2>
+  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">O ZapCurso não é um curso. É uma comunidade com agente de IA.</h2>
   </div>
 
   <p className="text-neutral-200 text-lg leading-relaxed mb-10">
-  É um grupo de empresários que já estão aplicando IA em negócios reais — e um tutor no seu WhatsApp que te acompanha passo a passo, sem jargão, sem enrolação, sem deixar você errar sozinho.
+  É um grupo no WhatsApp com outros empresários que estão aplicando IA nos negócios deles — e um agente de IA que guia você passo a passo, responde na hora, adapta ao seu contexto e não deixa você errar sozinho.
   </p>
   <p className="text-neutral-200 text-lg leading-relaxed mb-10">
-  Você não fica assistindo vídeo gravado e torcendo para dar certo na segunda-feira. Você executa, testa, ajusta — e tem alguém para chamar se travar. Aprender IA para negócios não é estudar tecnologia. É aprender a operar com braço extra.
+  Você não assiste vídeo gravado e torce pra dar certo na segunda-feira. Você pergunta, testa, ajusta — e tem o agente e a comunidade pra te segurar se travar. A insegurança de fazer tudo sozinho acaba quando você entra num lugar onde todo mundo tá no mesmo caminho — e ninguém tá sozinho.
   </p>
 
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
   {[
-  { icon: '💬', label: 'Aprendizado guiado por IA no WhatsApp' },
-  { icon: '🎙️', label: 'Resposta em tempo real — mande áudio, receba orientação na hora' },
-  { icon: '🔧', label: 'Prática e feedback aplicado ao seu negócio' },
+  { icon: '🤖', label: 'Agente de IA no WhatsApp que guia, responde e acompanha' },
+  { icon: '🎙️', label: 'Mande áudio, receba orientação em tempo real' },
+  { icon: '🤝', label: 'Comunidade de empresários que já aplicam IA' },
+  { icon: '🔧', label: 'Prática aplicada ao seu negócio — não teoria genérica' },
   { icon: '📊', label: 'Avaliação por nível até você dominar o conteúdo' },
   { icon: '⏱️', label: 'Avança no seu ritmo, sem pressão de turma' },
-  { icon: '🤝', label: 'Acesso a comunidade de empresários que já aplicam IA' },
   ].map((item, i) => (
   <div key={i} className="flex items-center gap-3 bg-[#0a0a0a] rounded-xl p-4 border border-[#7C3AED]/20">
   <span className="text-2xl">{item.icon}</span>
@@ -158,17 +161,17 @@ export default function ZapCurso() {
   <div className="max-w-4xl mx-auto">
   <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 text-center">Para quem é o ZapCurso</h2>
   <p className="text-neutral-200 text-lg text-center mb-12 max-w-3xl mx-auto">
-  Se você é dono de pequena empresa, gestor ou operador e já percebeu que a IA não é coisa de futuro — é ferramenta de quem está no mercado agora — esse espaço é seu.
+  Se você dá conta de tudo sozinho, sente que falta braço, e sabe que IA é o caminho mas tem medo de errar — esse espaço é seu.
   </p>
 
   <div className="space-y-4 mb-16">
   {[
-  'Quer aplicar IA no negócio, mas tem medo de implementar errado e perder dinheiro',
-  'Já tentou usar IA, paralisou na implementação e deixou para lá — não por falta de esforço, mas por falta de método',
-  'Quer dominar a base para tomar decisões ou supervisionar sua equipe sem ser enganado',
-  'Não tem tempo para cursos longos, vídeos chatos e conteúdo teórico',
-  'Quer se destacar antes que o concorrente tome a dianteira',
-  'Sente que falta braço para tocar a operação com excelência — e não quer mais se desgastar fazendo tudo no braço',
+  'Tem medo de implementar IA errado e perder dinheiro',
+  'Dá conta de tudo sozinho — e sabe que não dá pra continuar assim',
+  'Já tentou usar IA, travou na implementação e deixou pra lá por insegurança',
+  'Falta braço pra tocar a operação com excelência e tranquilidade',
+  'Quer dominar a base pra tomar decisões sem ser enganado por agência ou dev',
+  'Sabe que cada dia sem IA é um dia que o concorrente ganha vantagem',
   ].map((item, i) => (
   <div key={i} className="flex items-center gap-3">
   <span className="text-[#22C55E] text-lg">✓</span>
@@ -186,8 +189,8 @@ export default function ZapCurso() {
   {[
   'Quem quer que a IA resolva tudo sozinha, sem entender o que está por trás',
   'Quem não está disposto a testar, errar e ajustar na prática',
-  'Quem acha que curso gravado substitui acompanhamento personalizado',
-  'Quem acha que "não precisa de IA" e vai esperar o mercado virar — e aí já vai estar atrasado',
+  'Quem acha que vídeo gravado substitui acompanhamento e comunidade',
+  'Quem acha que "não precisa de IA" e vai esperar o mercado virar — aí já vai estar atrasado',
   ].map((item, i) => (
   <div key={i} className="flex items-center gap-3">
   <span className="text-red-400 text-lg">✗</span>
@@ -202,17 +205,17 @@ export default function ZapCurso() {
   {/* ===== RESULTADO ===== */}
   <section className="py-20 px-4 bg-[#111111]">
   <div className="max-w-4xl mx-auto">
-  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 text-center">O que muda quando você deixa de ter medo e passa a operar</h2>
+  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 text-center">O que muda quando você para de fazer tudo sozinho</h2>
   <p className="text-neutral-200 text-lg text-center mb-12 max-w-3xl mx-auto">
-  Depois do ZapCurso, você não vira um expert em tecnologia. Você vira um empresário que entende o que a IA pode e não pode fazer pela sua empresa — e usa isso como vantagem competitiva. E com isso:
+  Depois do ZapCurso, você não vira um expert em tecnologia. Vira um empresário que sabe o que a IA pode fazer pela sua empresa — e usa isso como vantagem competitiva. Sem insegurança. Sem ficar sozinho.
   </p>
 
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
   {[
-  { icon: '🗣️', text: 'Conversa com desenvolvedores e agências sem ser enganado — sabe exatamente o que pedir e o que esperar' },
-  { icon: '🔍', text: 'Identifica gaps e oportunidades de automação antes do concorrente — e não depois' },
-  { icon: '🛡️', text: 'Implementa ou supervisiona soluções de IA com segurança — sem medo de perder dinheiro' },
-  { icon: '⚡', text: 'Deixa de assistir o mercado e passa a operar com ele — com um braço extra trabalhando 24h' },
+  { icon: '🗣️', text: 'Conversa com desenvolvedores e agências sem ser enganado — sabe exatamente o que pedir' },
+  { icon: '🔍', text: 'Identifica oportunidades de automação antes do concorrente — e não depois' },
+  { icon: '🛡️', text: 'Implementa IA com segurança — sem medo de perder dinheiro, porque não tá sozinho' },
+  { icon: '⚡', text: 'Deixa de dar conta de tudo no braço — e passa a operar com um braço extra que trabalha 24h' },
   ].map((item, i) => (
   <div key={i} className="bg-[#0a0a0a] rounded-2xl p-6 border border-[#7C3AED]/20 hover:border-[#7C3AED]/50 transition-all duration-300 hover:-translate-y-1">
   <span className="text-3xl block mb-3">{item.icon}</span>
@@ -255,15 +258,15 @@ export default function ZapCurso() {
   </div>
   </section>
 
-  {/* ===== URGÊNCIA / CUSTO DE OPORTUNIDADE ===== */}
+  {/* ===== CUSTO DE OPORTUNIDADE / URGÊNCIA ===== */}
   <section className="py-20 px-4 bg-[#111111]">
   <div className="max-w-3xl mx-auto text-center">
-  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">O custo de esperar</h2>
+  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Cada dia sem IA é um dia de vantagem pro concorrente</h2>
   <p className="text-neutral-200 text-lg leading-relaxed mb-6">
-  Cada semana sem IA no seu negócio é uma semana que seu concorrente usa para ficar mais rápido, mais barato e mais eficiente. Quando você decidir começar, pode ser tarde para aprender do zero enquanto o mercado já mudou.
+  O empresário que implementing IA hoje não é o que tem mais dinheiro — é o que não aguenta mais dar conta de tudo sozinho. Ele entra porque a insegurança de esperar é maior que a de tentar. E ele tenta com guía. Sem método, não executa. Sem comunidade, desiste.
   </p>
   <p className="text-neutral-300 text-lg leading-relaxed mb-10">
-  O ZapCurso é o ponto de entrada. Sem risco de implementar errado. Com orientação em tempo real.
+  O ZapCurso é a entrada. Sem risco de implementar errado. Com agente, com grupo, com respaldo.
   </p>
   <a
   href="https://app.abacatepay.com/pay/bill_Wq6RsHAAQ0dHCsrhnNhAc4xc"
@@ -271,7 +274,7 @@ export default function ZapCurso() {
   rel="noopener noreferrer"
   className="inline-flex items-center gap-3 bg-[#22C55E] hover:bg-[#16A34A] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
   >
-  QUERO COMEÇAR AGORA →
+  QUERO FAZER PARTE →
   </a>
   </div>
   </section>
@@ -294,20 +297,19 @@ export default function ZapCurso() {
   <div className="max-w-2xl mx-auto text-center">
   <div className="bg-gradient-to-br from-[#7C3AED]/20 to-[#7C3AED]/5 rounded-3xl p-8 border border-[#7C3AED]/30">
   <h2 className="text-3xl font-bold text-white mb-4">
-  Tutor de IA no seu WhatsApp
+  Comunidade de IA no WhatsApp
   </h2>
   <p className="text-neutral-300 text-lg mb-6">
-  Aprenda na prática. No seu ritmo. Com respostas em tempo real. Sem medo de errar.
+  Deixe de fazer tudo sozinho. Agente de IA + comunidade de empresários. Sem insegurança, sem medo de errar.
   </p>
 
   <ul className="space-y-3 text-left mb-8">
   {[
-  'Aprendizado guiado por IA no WhatsApp',
-  'Envie áudio, receba orientação na hora',
-  'Prática aplicada ao seu negócio',
+  'Agente de IA no WhatsApp que guia e responde em tempo real',
+  'Comunidade de empresários que já aplicam IA nos negócios',
+  'Prática aplicada ao seu negócio — não teoria genérica',
   'Avaliação por nível até dominar o conteúdo',
-  'Avança no seu ritmo',
-  'Acesso a comunidade de empresários que já aplicam IA',
+  'Avança no seu ritmo, sem pressão',
   ].map((item, i) => (
   <li key={i} className="flex items-center gap-3 text-neutral-200">
   <span className="text-[#22C55E] text-xl">✓</span>
@@ -328,7 +330,7 @@ export default function ZapCurso() {
   rel="noopener noreferrer"
   className="inline-flex items-center gap-3 bg-[#22C55E] hover:bg-[#16A34A] text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-green-500/25 w-full justify-center"
   >
-  QUERO COMEÇAR AGORA →
+  QUERO FAZER PARTE →
   </a>
   </div>
 
