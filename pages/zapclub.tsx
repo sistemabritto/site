@@ -89,12 +89,12 @@ export default function ZapClub() {
               <span className="text-[#A78BFA] text-[10px] font-bold uppercase tracking-widest mb-2 block">O remédio pra insegurança</span>
               <h2 className="text-xl sm:text-2xl font-bold text-white mb-3 leading-tight">
                 O ZapClub não é um curso.<br />
-                <span className="text-[#A78BFA]">É uma comunidade no WhatsApp.</span>
+                <span className="text-[#A78BFA]">É um grupo de Implementação.</span>
               </h2>
             </div>
 
             <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-4 max-w-2xl mx-auto">
-              Um grupo com outros empresários aplicando IA nos negócios deles, e um moderador de IA disponível 24h. Ele guia passo a passo, responde na hora, adapta ao seu contexto. Não deixa você errar sozinho.
+              Um espaço com outros empresários aplicando IA nos negócios deles, com suporte disponível 24h. Para te guiar passo a passo, responde na hora, adapta ao seu contexto. Não deixa você errar sozinho.
             </p>
             <p className="text-neutral-400 text-sm mb-5 max-w-2xl mx-auto">
               Você não assiste vídeo e torce pra dar certo na segunda. Você pergunta, testa, ajusta. Se travar, tem o moderador e a comunidade pra segurar.
@@ -256,15 +256,14 @@ export default function ZapClub() {
         <section className="py-10 sm:py-14 px-4">
           <div className="max-w-2xl mx-auto text-center">
             <div className="relative inline-block mb-6">
-              <div className="absolute -inset-3 rounded-full bg-[#7C3AED]/25 blur-xl" />
-              <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-[#7C3AED]/40 to-[#0891B2]/40" />
-              <img
-                src="/felipe-britto-v2.webp"
-                alt="Felipe Britto"
-                className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full object-cover"
-                loading="lazy"
-              />
-            </div>
+                <div className="absolute -inset-4 rounded-full bg-[#7C3AED]/20 blur-xl" />
+                <img
+                  src="/felipe-autoridade.webp"
+                  alt="Felipe Britto"
+                  className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full object-cover"
+                  loading="lazy"
+                />
+              </div>
 
             <span className="text-[#A78BFA] text-[10px] font-bold uppercase tracking-widest mb-2 block">Quem conduz</span>
             <h2 className="text-xl sm:text-2xl font-bold text-white mb-1">Felipe Britto</h2>
@@ -299,8 +298,12 @@ export default function ZapClub() {
           <div className="max-w-md mx-auto">
             <div className="rounded-2xl p-6 sm:p-8 border border-[#7C3AED]/20 bg-white/[0.01]">
               <div className="text-center mb-6">
-                <span className="text-3xl block mb-2">🛡️</span>
-                <h3 className="text-lg font-bold text-white mb-1">Garantia de 7 dias</h3>
+                  <img
+                    src="/garantia-selo.webp"
+                    alt="Garantia de 7 dias"
+                    className="w-20 h-20 mx-auto mb-3 object-contain"
+                    loading="lazy"
+                  />
                 <p className="text-neutral-400 text-sm leading-relaxed">
                   Se em até 7 dias você achar que o ZapClub não é pra você, devolvemos cada centavo. Sem perguntas, sem burocracia. O risco é todo nosso.
                 </p>
