@@ -59,13 +59,13 @@ export default function ZapClub() {
         <section className="py-8 sm:py-10 px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-xl sm:text-2xl font-bold text-white mb-1 leading-tight">Todo dia sem IA é um dia de vantagem pro concorrente</h2>
-            <p className="text-neutral-400 text-sm mb-8">Cada dia que você espera, alguém avança.</p>
+            <p className="text-neutral-400 text-sm mb-8">80% das empresas no mundo já usam IA no dia a dia. E no Brasil, apenas 22% fazem de forma estruturada.</p>
 
             <div className="grid sm:grid-cols-3 gap-3 mb-8">
               {[
                 { metric: '22%', desc: 'das PMEs brasileiras usam IA de forma estruturada. O resto improvisa.', source: 'Sebrae / SEGS, 2025' },
-                { metric: 'R$ 1,4 tri', desc: 'é quanto o Brasil pode perder em produtividade até 2030 se ficar pra trás em IA.', source: 'FGV / MIT, 2024' },
-                { metric: '44% → 10%', desc: '"usam IA", mas só 10% saíram do básico. Metade ainda improvisa.', source: 'PEGN, 2025' },
+                { metric: 'R$ 1,4 tri', desc: 'é quanto as empresas brasileiras podem deixar na mesa até 2030 caso não se adaptem à realidade da IA.', source: 'FGV / MIT, 2024' },
+                { metric: '50%', desc: 'das empresas que "usam IA" nunca saíram do básico e ainda operam no improviso.', source: 'PEGN, 2025' },
               ].map((item, i) => (
                 <div key={`stat-${i}`} className="bg-white/[0.03] rounded-xl p-4 border border-green-500/15">
                   <p className="text-2xl sm:text-3xl font-bold text-green-400 mb-1">{item.metric}</p>
@@ -76,7 +76,7 @@ export default function ZapClub() {
             </div>
 
             <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
-              80% das empresas no mundo já usam IA no dia a dia. No Brasil, 22% fazem de forma estruturada — e metade dos que "usam IA" ainda improvisa. O gap não é tecnologia. É execução. Quem entra agora, entra na frente.
+              80% das empresas no mundo já usam IA no dia a dia. No Brasil, só 22% fazem de forma estruturada — e metade dos que "usam IA" nunca saiu do básico. O gap não é tecnologia. É execução.
             </p>
           </div>
         </section>
