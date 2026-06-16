@@ -2,6 +2,19 @@ import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
+/* ============================================================
+ * Design System: Sistema Britto AI‑Native UI
+ * Badge: rounded-full, border border-[#7C3AED]/30, px-3 py-1, bg-[#7C3AED]/10, text-[#A78BFA]
+ * Section bg alternates: [transparent] / bg-[#0a0a0a] / [transparent] / bg-[#0a0a0a]
+ * CTA: bg-[#22C55E] hover:bg-[#16A34A] text-black px-8 py-4 rounded-full font-bold text-lg
+ * ============================================================ */
+
+const badge = (text: string, extra = '') => (
+  <span className={`inline-block text-[#A78BFA] text-[10px] font-bold uppercase tracking-widest border border-[#7C3AED]/30 px-3 py-1 rounded-full bg-[#7C3AED]/10 ${extra}`}>
+    {text}
+  </span>
+);
+
 export default function ZapClub() {
   return (
     <>
@@ -15,11 +28,12 @@ export default function ZapClub() {
 
       <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>
 
-        {/* ===== HERO (sem CTA — só impacto, zero peso visual) ===== */}
+        {/* ===== HERO ===== */}
         <section className="relative pt-20 sm:pt-24 pb-12 sm:pb-16 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-[#7C3AED]/10 via-[#0a0a0a] to-[#0a0a0a]" />
           <img src="/felipe-britto-v2.webp" alt="" className="absolute inset-0 w-full h-full object-cover opacity-[0.03] mix-blend-overlay" loading="eager" />
           <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
+            {badge('✦ Loja Mágica no Zap · Lançamento 2026', 'mb-4')}
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight tracking-tight">
               10% dos seus concorrentes<br />
               <span className="bg-gradient-to-r from-[#A78BFA] via-[#7C3AED] to-[#0891B2] bg-clip-text text-transparent">
@@ -34,16 +48,16 @@ export default function ZapClub() {
           </div>
         </section>
 
-        {/* ===== O CUSTO DE ESPERAR (logo após hero) ===== */}
-        <section className="py-10 sm:py-14 px-4">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-2 text-center leading-tight">Todo dia sem IA é um dia de vantagem pro concorrente</h2>
-            <p className="text-neutral-400 text-sm sm:text-base text-center mb-8">É fato, não achismo. Cada dia que você espera, alguém avança.</p>
+        {/* ===== O CUSTO DE ESPERAR ===== */}
+        <section className="py-8 sm:py-10 px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-1 leading-tight">Todo dia sem IA é um dia de vantagem pro concorrente</h2>
+            <p className="text-neutral-400 text-sm mb-8">É fato, não achismo. Cada dia que você espera, alguém avança.</p>
 
             <div className="grid sm:grid-cols-3 gap-3 mb-8">
               {[
                 { metric: '75%', desc: 'das empresas que demorarem a adotar IA vão perder mercado até 2027' },
-                { metric: 'R$ 1,4 tri', desc: 'é quanto o Brasil pode perder em produtividade até 2030 se ficar pra trás em IA' },
+                { metric: 'R$ 1,4 tri', desc: 'é quanto o Brasil pode perder em produtividade até 2030 se ficar pra trás' },
                 { metric: '60%', desc: 'dos empresários temem mais implementar errado que o custo da ferramenta' },
               ].map((item, i) => (
                 <div key={`stat-${i}`} className="bg-white/[0.03] rounded-xl p-4 border border-[#7C3AED]/15">
@@ -53,22 +67,22 @@ export default function ZapClub() {
               ))}
             </div>
 
-            <p className="text-neutral-300 text-sm sm:text-base text-center leading-relaxed">
+            <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
               IA não é mais luxo de grande empresa. É o fôlego que o empresário pequeno precisa pra escalar pagando menos e indo mais longe. Quem não entra agora, paga depois. Em margem, em cliente, em posição.
             </p>
           </div>
         </section>
 
         {/* ===== A DOR ===== */}
-        <section className="py-10 sm:py-14 px-4 bg-[#0a0a0a]">
+        <section className="py-8 sm:py-10 px-4 bg-[#0a0a0a]">
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-8 text-center">Você conhece essa sensação</h2>
+            {badge('Você conhece essa sensação', 'mb-6 block text-center mx-auto w-fit')}
             <div className="space-y-3">
               {[
                 { icon: '😰', title: 'Você faz tudo sozinho', text: 'Dono, gestor, operador, financeiro. E agora tem que entender IA também? Não tem braço, não tem tempo, e o medo de errar trava tudo.' },
-                { icon: '🧊', title: 'Paralisia por medo de errar', text: 'Sabe que IA existe. Sabe que precisa. Mas não sabe por onde começar. E se implementar errado? Enquanto isso, o concorrente já atende com IA.' },
+                { icon: '🧊', title: 'Paralisia por medo de errar', text: 'Sabe que IA existe. Sabe que precisa. Mas não sabe por onde começar. Enquanto isso, o concorrente já atende com IA.' },
                 { icon: '📼', title: 'Curso gravado que não vira ação', text: 'Assiste 10h de vídeo, anota tudo, e na segunda-feira não aplica nada.' },
-                { icon: '🗑️', title: 'Ferramenta que ninguém usa', text: 'Paga por IA, deixa largada porque ninguém sabe usar. Todo mês, dinheiro no lixo. E a insegurança só cresce.' },
+                { icon: '🗑️', title: 'Ferramenta que ninguém usa', text: 'Paga por IA, deixa largada porque ninguém sabe usar. Todo mês, dinheiro no lixo.' },
               ].map((item, i) => (
                 <div key={`dor-${i}`} className="flex items-start gap-3 bg-white/[0.02] rounded-xl p-4 border border-white/[0.06]">
                   <span className="text-2xl flex-shrink-0">{item.icon}</span>
@@ -85,9 +99,9 @@ export default function ZapClub() {
         {/* ===== O QUE É ===== */}
         <section className="py-8 sm:py-10 px-4">
           <div className="max-w-3xl mx-auto">
-            <div className="text-center">
-              <span className="text-[#A78BFA] text-[10px] font-bold uppercase tracking-widest mb-2 block">O remédio pra insegurança</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-white mb-3 leading-tight">
+            <div className="text-center mb-5">
+              {badge('O remédio pra insegurança', 'mb-3')}
+              <h2 className="text-xl sm:text-2xl font-bold text-white leading-tight">
                 O ZapClub não é um curso.<br />
                 <span className="text-[#A78BFA]">É um grupo de Implementação.</span>
               </h2>
@@ -106,7 +120,7 @@ export default function ZapClub() {
             <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-4 max-w-2xl mx-auto">
               Um espaço com outros empresários aplicando IA nos negócios deles, com suporte disponível 24h. Para te guiar passo a passo, responde na hora, adapta ao seu contexto. Não deixa você errar sozinho.
             </p>
-            <p className="text-neutral-400 text-sm mb-5 max-w-2xl mx-auto">
+            <p className="text-neutral-400 text-sm mb-6 max-w-2xl mx-auto">
               Você não assiste vídeo e torce pra dar certo na segunda. Você pergunta, testa, ajusta. Se travar, tem o moderador e a comunidade pra segurar.
             </p>
 
@@ -129,9 +143,9 @@ export default function ZapClub() {
         </section>
 
         {/* ===== PRA QUEM É ===== */}
-        <section className="py-10 sm:py-14 px-4 bg-[#0a0a0a]">
+        <section className="py-8 sm:py-10 px-4 bg-[#0a0a0a]">
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-2 text-center">Pra quem é o ZapClub</h2>
+            {badge('Pra quem é o ZapClub', 'mb-4 block text-center mx-auto w-fit')}
             <p className="text-neutral-400 text-sm text-center mb-6">Se você dá conta de tudo sozinho, sente que falta braço, e sabe que IA é o caminho mas tem medo de errar — esse espaço é seu.</p>
 
             <div className="space-y-2 mb-6">
@@ -171,13 +185,11 @@ export default function ZapClub() {
         </section>
 
         {/* ===== SISTEMA DE PROGRESSÃO (ELOS) + CTA DE IMPULSO ===== */}
-        <section className="py-10 sm:py-14 px-4">
+        <section className="py-8 sm:py-10 px-4">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-6">
-              <span className="inline-block text-[#A78BFA] text-[10px] font-bold uppercase tracking-widest mb-3 border border-[#7C3AED]/30 px-3 py-1 rounded-full bg-[#7C3AED]/10">
-                Sistema de Progressão
-              </span>
-              <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Um caminho claro pra ter controle e segurança</h2>
+              {badge('Sistema de Progressão', 'mb-3')}
+              <h2 className="text-xl sm:text-2xl font-bold text-white mb-1">Um caminho claro pra ter controle e segurança</h2>
               <p className="text-neutral-400 text-sm">Cada elo destrava o próximo. Você só avança quando faz na prática com o seu negócio.</p>
             </div>
 
@@ -216,9 +228,10 @@ export default function ZapClub() {
         </section>
 
         {/* ===== RESULTADOS + CTA DE EMOÇÃO ===== */}
-        <section className="py-10 sm:py-14 px-4 bg-[#0a0a0a]">
+        <section className="py-8 sm:py-10 px-4 bg-[#0a0a0a]">
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-8 text-center">O que muda quando você para de fazer tudo sozinho</h2>
+            {badge('Depois do ZapClub', 'mb-4 block text-center mx-auto w-fit')}
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-6 text-center">O que muda quando você para de fazer tudo sozinho</h2>
 
             <div className="space-y-3 mb-8">
               {[
@@ -253,26 +266,26 @@ export default function ZapClub() {
         </section>
 
         {/* ===== AUTORIDADE ===== */}
-        <section className="py-10 sm:py-14 px-4">
+        <section className="py-8 sm:py-10 px-4">
           <div className="max-w-2xl mx-auto text-center">
-            <div className="relative inline-block mb-6">
-                <div className="absolute -inset-4 rounded-full bg-[#7C3AED]/20 blur-xl" />
-                <img
-                  src="/felipe-autoridade.webp"
-                  alt="Felipe Britto"
-                  className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full object-cover"
-                  loading="lazy"
-                />
-              </div>
+            <div className="relative inline-block mb-5">
+              <div className="absolute -inset-4 rounded-full bg-[#7C3AED]/20 blur-xl" />
+              <img
+                src="/felipe-autoridade.webp"
+                alt="Felipe Britto"
+                className="relative w-32 h-32 sm:w-44 sm:h-44 rounded-full object-cover"
+                loading="lazy"
+              />
+            </div>
 
-            <span className="text-[#A78BFA] text-[10px] font-bold uppercase tracking-widest mb-2 block">Quem conduz</span>
+            {badge('Quem conduz', 'mb-2')}
             <h2 className="text-xl sm:text-2xl font-bold text-white mb-1">Felipe Britto</h2>
-            <p className="text-[#A78BFA] text-sm font-medium mb-6">IA aplicada a negócios reais, sem complicar o que precisa funcionar.</p>
+            <p className="text-[#A78BFA] text-sm font-medium mb-5">IA aplicada a negócios reais, sem complicar o que precisa funcionar.</p>
 
-            <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-5 max-w-xl mx-auto">
+            <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-4 max-w-xl mx-auto">
               Eu criei o ZapClub para reunir empresários que querem usar IA na prática, mas não têm tempo para ficar perdidos entre ferramentas, promessas e tutoriais soltos.
             </p>
-            <p className="text-neutral-400 text-sm mb-6 max-w-xl mx-auto">
+            <p className="text-neutral-400 text-sm mb-5 max-w-xl mx-auto">
               Minha experiência vem da operação: testando ferramentas, criando automações, estruturando sistemas e traduzindo tecnologia em soluções que pequenos negócios conseguem usar de verdade.
             </p>
 
@@ -294,16 +307,16 @@ export default function ZapClub() {
         </section>
 
         {/* ===== GARANTIA + CTA DE LÓGICA ===== */}
-        <section className="py-10 sm:py-14 px-4 bg-[#0a0a0a]">
+        <section className="py-8 sm:py-10 px-4 bg-[#0a0a0a]">
           <div className="max-w-md mx-auto">
             <div className="rounded-2xl p-6 sm:p-8 border border-[#7C3AED]/20 bg-white/[0.01]">
               <div className="text-center mb-6">
-                  <img
-                    src="/garantia-selo.webp"
-                    alt="Garantia de 7 dias"
-                    className="w-28 sm:w-32 h-auto mx-auto mb-3 object-contain"
-                    loading="lazy"
-                  />
+                <img
+                  src="/garantia-selo.webp"
+                  alt="Garantia de 7 dias"
+                  className="w-28 sm:w-32 h-auto mx-auto mb-3 object-contain"
+                  loading="lazy"
+                />
                 <p className="text-neutral-400 text-sm leading-relaxed">
                   Se em até 7 dias você achar que o ZapClub não é pra você, devolvemos cada centavo. Sem perguntas, sem burocracia. O risco é todo nosso.
                 </p>
