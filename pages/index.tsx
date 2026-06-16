@@ -274,9 +274,9 @@ useEffect(() => {
 
           {/* GANCHO */}
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-          78% das empresas no mundo<br />
-          <span className="text-green-400">já usam IA em produção.</span><br />
-          Sua empresa ainda improvisa?
+          22% dos seus concorrentes<br />
+          <span className="text-green-400">já operam com IA 24h.</span><br />
+          E você, já sabe por onde começar?
           </h1>
 
           {/* DOR — twist the knife */}
@@ -285,7 +285,7 @@ useEffect(() => {
           Postagem uma vez por semana, quando dá tempo. Quando chega alguém no WhatsApp, a conversa acaba em ghosting... Enquanto isso, seu concorrente já tem <span className="text-white font-semibold">IA atendendo, vendendo e criando conteúdo</span> enquanto ele dorme.
           </p>
           <p className="text-lg text-gray-500 leading-relaxed">
-          No Brasil, só 22% das PMEs usam IA de forma estruturada. O resto improvisa e paga caro por isso.
+          E mesmo os 44% que "usam IA" no Brasil? Só 10% saíram do básico. O resto improvisa e paga caro por isso.
           </p>
           </div>
 
