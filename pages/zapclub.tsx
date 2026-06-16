@@ -33,7 +33,7 @@ export default function ZapClub() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#7C3AED]/10 via-[#0a0a0a] to-[#0a0a0a]" />
           <img src="/felipe-britto-v2.webp" alt="" className="absolute inset-0 w-full h-full object-cover opacity-[0.03] mix-blend-overlay" loading="eager" />
           <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
-            {badge('✦ Loja Mágica no Zap · Lançamento 2026', 'mb-4')}
+            {badge('✦ IA para negócios · Desconto de 1° Lote', 'mb-4')}
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight tracking-tight">
               10% dos seus concorrentes<br />
               <span className="bg-gradient-to-r from-[#A78BFA] via-[#7C3AED] to-[#0891B2] bg-clip-text text-transparent">
@@ -76,7 +76,6 @@ export default function ZapClub() {
         {/* ===== A DOR ===== */}
         <section className="py-8 sm:py-10 px-4 bg-[#0a0a0a]">
           <div className="max-w-2xl mx-auto">
-            {badge('Você conhece essa sensação', 'mb-6 block text-center mx-auto w-fit')}
             <div className="space-y-3">
               {[
                 { icon: '😰', title: 'Você faz tudo sozinho', text: 'Dono, gestor, operador, financeiro. E agora tem que entender IA também? Não tem braço, não tem tempo, e o medo de errar trava tudo.' },
@@ -145,17 +144,19 @@ export default function ZapClub() {
         {/* ===== PRA QUEM É ===== */}
         <section className="py-8 sm:py-10 px-4 bg-[#0a0a0a]">
           <div className="max-w-2xl mx-auto">
-            {badge('Pra quem é o ZapClub', 'mb-4 block text-center mx-auto w-fit')}
-            <p className="text-neutral-400 text-sm text-center mb-6">Se você dá conta de tudo sozinho, sente que falta braço, e sabe que IA é o caminho mas tem medo de errar — esse espaço é seu.</p>
+            <div className="text-center mb-4">
+              {badge('Pra quem é o ZapClub', 'mb-2')}
+              <p className="text-neutral-400 text-sm mb-6">Se você dá conta de tudo sozinho, sente que falta braço, e sabe que IA é o caminho mas tem medo de errar — esse espaço é seu.</p>
+            </div>
 
             <div className="space-y-2 mb-6">
               {[
-                'Tem medo de implementar IA errado e perder dinheiro',
-                'Dá conta de tudo sozinho e sabe que não dá pra continuar assim',
-                'Já tentou usar IA, travou e deixou pra lá',
-                'Falta braço pra tocar a operação',
-                'Quer dominar a base pra não ser enganado',
-                'Sabe que cada dia sem IA é um dia que o concorrente ganha',
+                'Tem medo de implementar IA errado',
+                'Dá conta de tudo sozinho',
+                'Já tentou IA, travou e deixou pra lá',
+                'Falta braço pra tocar operação',
+                'Quer dominar base pra não ser enganado',
+                'Sabe que cada dia sem IA o concorrente ganha',
               ].map((item, i) => (
                 <div key={`sim-${i}`} className="flex items-center gap-2 py-2">
                   <span className="text-[#22C55E] flex-shrink-0">✓</span>
@@ -165,15 +166,17 @@ export default function ZapClub() {
             </div>
 
             <div className="border-t border-white/[0.06] pt-4 mt-4">
-              <h3 className="text-red-400 text-sm font-bold mb-2">Pra quem não é</h3>
-              <p className="text-neutral-500 text-xs mb-3">Esse não é um mapa da mina. Se você busca atalho sem esforço, esse lugar não é pra você.</p>
+              <div className="text-center mb-4">
+                <h3 className="text-red-400 text-sm font-bold mb-1">Pra quem não é</h3>
+                <p className="text-neutral-500 text-xs">Se você busca atalho sem esforço, esse não é o lugar.</p>
+              </div>
               <div className="space-y-1.5">
                 {[
-                  'Quem quer que a IA resolva tudo sozinha',
-                  'Quem não tá disposto a testar, errar e ajustar',
-                  'Quem acha que vídeo gravado substitui acompanhamento',
-                  'Quem acha que "não precisa de IA"',
-                ].map((item, i) => (
+                    'Quer que IA resolva tudo sozinha',
+                    'Não disposto a testar, errar e ajustar',
+                    'Acha que vídeo gravado substitui acompanhamento',
+                    'Acha que não precisa de IA',
+                    ].map((item, i) => (
                   <div key={`nao-${i}`} className="flex items-center gap-2">
                     <span className="text-red-500/60 flex-shrink-0">✗</span>
                     <span className="text-neutral-500 text-xs">{item}</span>
@@ -278,9 +281,10 @@ export default function ZapClub() {
               />
             </div>
 
-            {badge('Quem conduz', 'mb-2')}
             <h2 className="text-xl sm:text-2xl font-bold text-white mb-1">Felipe Britto</h2>
             <p className="text-[#A78BFA] text-sm font-medium mb-5">IA aplicada a negócios reais, sem complicar o que precisa funcionar.</p>
+
+            {badge('Quem conduz', 'mb-5')}
 
             <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-4 max-w-xl mx-auto">
               Eu criei o ZapClub para reunir empresários que querem usar IA na prática, mas não têm tempo para ficar perdidos entre ferramentas, promessas e tutoriais soltos.
