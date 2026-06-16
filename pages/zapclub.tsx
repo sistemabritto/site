@@ -57,28 +57,28 @@ export default function ZapClub() {
 
         {/* ===== O CUSTO DE ESPERAR ===== */}
         <section className="py-8 sm:py-10 px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-1 leading-tight">Todo dia sem IA é um dia de vantagem pro concorrente</h2>
-            <p className="text-neutral-400 text-sm mb-8">É fato, não achismo. Cada dia que você espera, alguém avança.</p>
+        <div className="max-w-3xl mx-auto text-center">
+        <h2 className="text-xl sm:text-2xl font-bold text-white mb-1 leading-tight">Todo dia sem IA é um dia de vantagem pro concorrente</h2>
+        <p className="text-neutral-400 text-sm mb-8">Cada dia que você espera, alguém avança.</p>
 
-            <div className="grid sm:grid-cols-3 gap-3 mb-8">
-              {[
-                { metric: '78%', desc: 'das empresas no mundo já usam IA. O padrão global é esse.', source: 'McKinsey, 2025' },
-                { metric: '22%', desc: 'é quanto sobrou das PMEs brasileiras que usam IA de forma estruturada.', source: 'Sebrae / SEGS, 2025' },
-                { metric: '44%', desc: '"usam IA", mas só 10% saíram do básico. O resto é IA de faz de conta.', source: 'PEGN, 2025' },
-              ].map((item, i) => (
-                <div key={`stat-${i}`} className="bg-white/[0.03] rounded-xl p-4 border border-green-500/15">
-                  <p className="text-2xl sm:text-3xl font-bold text-green-400 mb-1">{item.metric}</p>
-                  <p className="text-neutral-400 text-xs leading-relaxed">{item.desc}</p>
-                  <p className="text-neutral-600 text-[10px] mt-1.5 tracking-wide">{item.source}</p>
-                </div>
-              ))}
-            </div>
+        <div className="grid sm:grid-cols-3 gap-3 mb-8">
+        {[
+        { metric: '78%', desc: 'das empresas no mundo já usam IA em pelo menos uma função. O mercado mudou.', source: 'McKinsey, 2025' },
+        { metric: '22%', desc: 'é quanto sobrou das PMEs brasileiras que usam IA de forma estruturada. O resto improvisa.', source: 'Sebrae / SEGS, 2025' },
+        { metric: '44% → 10%', desc: '"usam IA", mas só 10% saíram do básico. O resto é IA de faz de conta.', source: 'PEGN, 2025' },
+        ].map((item, i) => (
+        <div key={`stat-${i}`} className="bg-white/[0.03] rounded-xl p-4 border border-green-500/15">
+        <p className="text-2xl sm:text-3xl font-bold text-green-400 mb-1">{item.metric}</p>
+        <p className="text-neutral-400 text-xs leading-relaxed">{item.desc}</p>
+        <p className="text-neutral-600 text-[10px] mt-1.5 tracking-wide">{item.source}</p>
+        </div>
+        ))}
+        </div>
 
-            <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
-              IA não é mais luxo de grande empresa. É o fôlego que o empresário pequeno precisa pra escalar pagando menos e indo mais longe. Quem não entra agora, paga depois. Em margem, em cliente, em posição.
-            </p>
-          </div>
+        <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+        O gap não é tecnologia. É execução. Quem não entra agora, paga depois. Em margem, em cliente, em posição.
+        </p>
+        </div>
         </section>
 
         {/* ===== A DOR ===== */}
