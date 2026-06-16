@@ -5,15 +5,14 @@ import Image from 'next/image';
 
 /* ============================================================
  * Design System: Sistema Britto AI‑Native UI
- * Badge: rounded-full, border border-[#7C3AED]/30, px-3 py-1, bg-[#7C3AED]/10, text-[#A78BFA]
+ * Badge: rounded-full, border border-green-500/30, px-3 py-1, bg-green-500/10, text-green-400
  * Section bg alternates: [transparent] / bg-[#0a0a0a] / [transparent] / bg-[#0a0a0a]
- * CTA: bg-[#22C55E] hover:bg-[#16A34A] text-black px-8 py-4 rounded-full font-bold text-lg
+ * CTA: bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-full font-bold text-lg
  * ============================================================ */
 
-const badge = (text: string, extra = '', color: 'purple' | 'green' | 'red' = 'purple') => {
+const badge = (text: string, extra = '', color: 'green' | 'red' = 'green') => {
   const colors = {
-    purple: 'text-[#A78BFA] border-[#7C3AED]/30 bg-[#7C3AED]/10',
-    green: 'text-[#22C55E] border-[#22C55E]/30 bg-[#22C55E]/10',
+    green: 'text-green-400 border-green-500/30 bg-green-500/10',
     red: 'text-red-400 border-red-500/30 bg-red-500/10',
   };
   return (
@@ -38,13 +37,13 @@ export default function ZapClub() {
 
         {/* ===== HERO ===== */}
         <section className="relative pt-20 sm:pt-24 pb-12 sm:pb-16 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#7C3AED]/10 via-[#0a0a0a] to-[#0a0a0a]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-green-500/10 via-[#0a0a0a] to-[#0a0a0a]" />
           <Image src="/felipe-britto-v2.webp" alt="" fill className="absolute inset-0 object-cover opacity-[0.03] mix-blend-overlay" priority />
           <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
             {badge('✦ IA para negócios · Desconto de 1° Lote', 'mb-4')}
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight tracking-tight">
               10% dos seus concorrentes<br />
-              <span className="bg-gradient-to-r from-[#A78BFA] via-[#7C3AED] to-[#0891B2] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-green-400 via-green-500 to-green-600 bg-clip-text text-transparent">
                 já operam com IA 24h.
               </span>
               <br />
@@ -68,8 +67,8 @@ export default function ZapClub() {
                 { metric: 'R$ 1,4 tri', desc: 'é quanto o Brasil pode perder em produtividade até 2030 se ficar pra trás' },
                 { metric: '60%', desc: 'dos empresários temem mais implementar errado que o custo da ferramenta' },
               ].map((item, i) => (
-                <div key={`stat-${i}`} className="bg-white/[0.03] rounded-xl p-4 border border-[#7C3AED]/15">
-                  <p className="text-2xl sm:text-3xl font-bold text-[#A78BFA] mb-1">{item.metric}</p>
+                <div key={`stat-${i}`} className="bg-white/[0.03] rounded-xl p-4 border border-green-500/15">
+                  <p className="text-2xl sm:text-3xl font-bold text-green-400 mb-1">{item.metric}</p>
                   <p className="text-neutral-400 text-xs leading-relaxed">{item.desc}</p>
                 </div>
               ))}
@@ -110,7 +109,7 @@ export default function ZapClub() {
               {badge('O remédio pra insegurança', 'mb-3')}
               <h2 className="text-xl sm:text-2xl font-bold text-white leading-tight">
                 O ZapClub não é um curso.<br />
-                <span className="text-[#A78BFA]">É um grupo de Implementação.</span>
+                <span className="text-green-400">É um grupo de Implementação.</span>
               </h2>
             </div>
 
@@ -283,7 +282,7 @@ export default function ZapClub() {
         <section className="py-8 sm:py-10 px-4">
           <div className="max-w-2xl mx-auto text-center">
             <div className="relative inline-block mb-5">
-              <div className="absolute -inset-4 rounded-full bg-[#7C3AED]/20 blur-xl" />
+              <div className="absolute -inset-4 rounded-full bg-green-500/20 blur-xl" />
               <Image
                 src="/felipe-autoridade.webp"
                 alt="Felipe Britto"
@@ -294,7 +293,7 @@ export default function ZapClub() {
             </div>
 
             <h2 className="text-xl sm:text-2xl font-bold text-white mb-1">Felipe Britto</h2>
-            <p className="text-[#A78BFA] text-sm font-medium mb-5">IA aplicada a negócios reais, sem complicar o que precisa funcionar.</p>
+            <p className="text-green-400 text-sm font-medium mb-5">IA aplicada a negócios reais, sem complicar o que precisa funcionar.</p>
 
             {badge('Quem conduz', 'mb-5')}
 
@@ -312,20 +311,20 @@ export default function ZapClub() {
                 'Founder de 2 SaaS',
                 'Atende empresas que dominam com IA',
               ].map((item, i) => (
-                <span key={`cred-${i}`} className="border border-[#7C3AED]/20 rounded-full px-3 py-1 text-[11px] text-neutral-400">
+                <span key={`cred-${i}`} className="border border-green-500/20 rounded-full px-3 py-1 text-[11px] text-neutral-400">
                   {item}
                 </span>
               ))}
             </div>
 
-            <p className="text-[#A78BFA] text-sm font-bold">Você aprende com quem opera. Não com quem só ensina teoria.</p>
+            <p className="text-green-400 text-sm font-bold">Você aprende com quem opera. Não com quem só ensina teoria.</p>
           </div>
         </section>
 
         {/* ===== GARANTIA + CTA DE LÓGICA ===== */}
         <section className="py-8 sm:py-10 px-4 bg-[#0a0a0a]">
           <div className="max-w-md mx-auto">
-            <div className="rounded-2xl p-6 sm:p-8 border border-[#7C3AED]/20 bg-white/[0.01]">
+            <div className="rounded-2xl p-6 sm:p-8 border border-green-500/20 bg-white/[0.01]">
               <div className="text-center mb-6">
                 <Image
                   src="/garantia-selo.webp"
