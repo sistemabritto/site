@@ -85,16 +85,6 @@ export default function ZapClub() {
         {/* ===== O QUE É ===== */}
         <section className="py-8 sm:py-10 px-4">
           <div className="max-w-3xl mx-auto">
-            {/* Foto do Felipe em banner horizontal */}
-            <div className="relative w-full rounded-2xl overflow-hidden mb-6 border border-white/[0.06]">
-              <img
-                src="/felipe-britto-v2.webp"
-                alt="Felipe Britto"
-                className="w-full h-40 sm:h-52 object-cover object-top"
-                loading="lazy"
-              />
-            </div>
-
             <div className="text-center">
               <span className="text-[#A78BFA] text-[10px] font-bold uppercase tracking-widest mb-2 block">O remédio pra insegurança</span>
               <h2 className="text-xl sm:text-2xl font-bold text-white mb-3 leading-tight">
@@ -106,9 +96,19 @@ export default function ZapClub() {
             <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-4 max-w-2xl mx-auto">
               Um grupo com outros empresários aplicando IA nos negócios deles, e um moderador de IA disponível 24h. Ele guia passo a passo, responde na hora, adapta ao seu contexto. Não deixa você errar sozinho.
             </p>
-            <p className="text-neutral-400 text-sm mb-6 max-w-2xl mx-auto">
+            <p className="text-neutral-400 text-sm mb-5 max-w-2xl mx-auto">
               Você não assiste vídeo e torce pra dar certo na segunda. Você pergunta, testa, ajusta. Se travar, tem o moderador e a comunidade pra segurar.
             </p>
+
+            {/* Foto da comunidade — sem Felipe, abaixo do texto */}
+            <div className="flex justify-center mb-6">
+              <img
+                src="/zapclub-community.webp"
+                alt="Comunidade ZapClub no WhatsApp"
+                className="w-full max-w-lg rounded-xl border border-white/[0.06]"
+                loading="lazy"
+              />
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {[
