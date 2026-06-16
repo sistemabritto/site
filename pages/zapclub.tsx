@@ -63,9 +63,9 @@ export default function ZapClub() {
 
             <div className="grid sm:grid-cols-3 gap-3 mb-8">
               {[
-                { metric: '72%', desc: 'das pequenas empresas brasileiras ainda não usam IA por falta de conhecimento', source: 'IBGE, 2023' },
-                { metric: 'R$ 1,4 tri', desc: 'é quanto o Brasil pode perder em produtividade até 2030 se ficar pra trás em IA', source: 'FGV / MIT, 2024' },
-                { metric: '65%', desc: 'das empresas mundialmente já adotam IA generativa — e o gap só cresce', source: 'McKinsey, 2024' },
+                { metric: '10%', desc: 'das PMEs brasileiras usam IA. O resto tá na mão do concorrente.', source: 'IBGE / Pnad, 2023' },
+                { metric: '68%', desc: 'é a média global de adoção. O Brasil tá 58 pontos atrás.', source: 'McKinsey, 2024' },
+                { metric: 'R$ 1,4 tri', desc: 'é quanto o Brasil perde em produtividade até 2030 se ficar pra trás', source: 'FGV / MIT, 2024' },
               ].map((item, i) => (
                 <div key={`stat-${i}`} className="bg-white/[0.03] rounded-xl p-4 border border-green-500/15">
                   <p className="text-2xl sm:text-3xl font-bold text-green-400 mb-1">{item.metric}</p>
