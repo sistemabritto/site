@@ -9,11 +9,18 @@ import Footer from '../components/Footer';
  * CTA: bg-[#22C55E] hover:bg-[#16A34A] text-black px-8 py-4 rounded-full font-bold text-lg
  * ============================================================ */
 
-const badge = (text: string, extra = '') => (
-  <span className={`inline-block text-[#A78BFA] text-[10px] font-bold uppercase tracking-widest border border-[#7C3AED]/30 px-3 py-1 rounded-full bg-[#7C3AED]/10 ${extra}`}>
-    {text}
-  </span>
-);
+const badge = (text: string, extra = '', color: 'purple' | 'green' | 'red' = 'purple') => {
+  const colors = {
+    purple: 'text-[#A78BFA] border-[#7C3AED]/30 bg-[#7C3AED]/10',
+    green: 'text-[#22C55E] border-[#22C55E]/30 bg-[#22C55E]/10',
+    red: 'text-red-400 border-red-500/30 bg-red-500/10',
+  };
+  return (
+    <span className={`inline-block text-[10px] font-bold uppercase tracking-widest ${colors[color]} px-3 py-1 rounded-full ${extra}`}>
+      {text}
+    </span>
+  );
+};
 
 export default function ZapClub() {
   return (
@@ -145,7 +152,7 @@ export default function ZapClub() {
         <section className="py-8 sm:py-10 px-4 bg-[#0a0a0a]">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-4">
-              {badge('Pra quem é o ZapClub', 'mb-2')}
+              {badge('Pra quem é o ZapClub', 'mb-2', 'green')}
               <p className="text-neutral-400 text-sm mb-6">Se você dá conta de tudo sozinho, sente que falta braço, e sabe que IA é o caminho mas tem medo de errar — esse espaço é seu.</p>
             </div>
 
@@ -167,6 +174,7 @@ export default function ZapClub() {
 
             <div className="border-t border-white/[0.06] pt-4 mt-4">
               <div className="text-center mb-4">
+                {badge('Pra quem não é', 'mb-2', 'red')}
                 <h3 className="text-red-400 text-sm font-bold mb-1">Pra quem não é</h3>
                 <p className="text-neutral-500 text-xs">Se você busca atalho sem esforço, esse não é o lugar.</p>
               </div>
@@ -233,8 +241,10 @@ export default function ZapClub() {
         {/* ===== RESULTADOS + CTA DE EMOÇÃO ===== */}
         <section className="py-8 sm:py-10 px-4 bg-[#0a0a0a]">
           <div className="max-w-2xl mx-auto">
-            {badge('Depois do ZapClub', 'mb-4 block text-center mx-auto w-fit')}
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-6 text-center">O que muda quando você para de fazer tudo sozinho</h2>
+            <div className="text-center">
+              {badge('Depois do ZapClub', 'mb-3')}
+              <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">O que muda quando você para de fazer tudo sozinho</h2>
+            </div>
 
             <div className="space-y-3 mb-8">
               {[
