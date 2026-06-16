@@ -63,7 +63,7 @@ export default function ZapClub() {
 
             <div className="grid sm:grid-cols-3 gap-3 mb-8">
               {[
-                { metric: '22%', desc: 'das PMEs brasileiras usam IA de forma estruturada. O resto improvisa.', source: 'Sebrae / SEGS, 2025' },
+                { metric: '22%', desc: 'das PMEs brasileiras usam IA de forma estruturada. O resto ainda não colocou em prática.', source: 'Sebrae / SEGS, 2025' },
                 { metric: 'R$ 1,4 tri', desc: 'é quanto as empresas brasileiras podem deixar na mesa até 2030 caso não se adaptem à realidade da IA.', source: 'FGV / MIT, 2024' },
                 { metric: '50%', desc: 'das empresas que "usam IA" nunca saíram do básico e ainda operam no improviso.', source: 'PEGN, 2025' },
               ].map((item, i) => (
@@ -76,7 +76,7 @@ export default function ZapClub() {
             </div>
 
             <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
-              80% das empresas no mundo já usam IA no dia a dia. No Brasil, só 22% fazem de forma estruturada — e metade dos que "usam IA" nunca saiu do básico. O gap não é tecnologia. É execução.
+              O gap não é tecnologia. É execução. Quem entra agora, entra na frente.
             </p>
           </div>
         </section>
