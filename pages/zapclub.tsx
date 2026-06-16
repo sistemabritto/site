@@ -301,7 +301,7 @@ export default function ZapClub() {
                   <img
                     src="/garantia-selo.webp"
                     alt="Garantia de 7 dias"
-                    className="w-20 h-20 mx-auto mb-3 object-contain"
+                    className="w-28 sm:w-32 h-auto mx-auto mb-3 object-contain"
                     loading="lazy"
                   />
                 <p className="text-neutral-400 text-sm leading-relaxed">

@@ -322,7 +322,7 @@ export default function Quiz() {
   const L = (key: string) => labels[key] || key;
 
   const buildWhatsAppMsg = (type: 'socialjobs' | 'sistema' | 'custom', outcome: Outcome, finalAnswers: Record<string, string>) => {
-    const headerEmoji = type === 'socialjobs' ? '🟠' : '🔵';
+    const headerEmoji = type === 'socialjobs' ? '\uD83D\uDFE0' : '\uD83D\uDD35';
     const headerText = type === 'socialjobs'
       ? 'Quero o SocialJobs'
       : 'Quero o Sistema Sob Medida';
@@ -331,17 +331,16 @@ export default function Quiz() {
       ? 'Conteúdo automático em 5 redes'
       : 'Sistema web sob encomenda';
 
-    // Monta msg com \n reais, depois encodeURIComponent codifica TUDO de uma vez
     const raw =
       `${headerEmoji} *${headerText}*\n\n` +
       `*Interesse:* ${interestLabel}\n` +
       `*Gargalo:* ${L(finalAnswers['q2'])}\n` +
       `*Experiência:* ${L(finalAnswers['q3'])}\n` +
       `*Prazo:* ${L(finalAnswers['q4'])}\n\n` +
-      `———\n` +
-      `👤 ${name || '—'}\n` +
-      `📧 ${email || '—'}\n` +
-      `📱 ${whatsapp || '—'}`;
+      `---\n` +
+      `Nome: ${name || '-'}\n` +
+      `Email: ${email || '-'}\n` +
+      `WhatsApp: ${whatsapp || '-'}`;
 
     return encodeURIComponent(raw);
   };
