@@ -1,6 +1,7 @@
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Image from 'next/image';
 
 /* ============================================================
  * Design System: Sistema Britto AI‑Native UI
@@ -38,7 +39,7 @@ export default function ZapClub() {
         {/* ===== HERO ===== */}
         <section className="relative pt-20 sm:pt-24 pb-12 sm:pb-16 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-[#7C3AED]/10 via-[#0a0a0a] to-[#0a0a0a]" />
-          <img src="/felipe-britto-v2.webp" alt="" className="absolute inset-0 w-full h-full object-cover opacity-[0.03] mix-blend-overlay" loading="eager" />
+          <Image src="/felipe-britto-v2.webp" alt="" fill className="absolute inset-0 object-cover opacity-[0.03] mix-blend-overlay" priority />
           <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
             {badge('✦ IA para negócios · Desconto de 1° Lote', 'mb-4')}
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight tracking-tight">
@@ -115,9 +116,10 @@ export default function ZapClub() {
 
             {/* Foto da comunidade */}
             <div className="flex justify-center mb-5">
-              <img
+              <Image
                 src="/zapclub-community.webp"
                 alt="Comunidade ZapClub no WhatsApp"
+                width={600} height={400}
                 className="w-full max-w-lg rounded-xl border border-white/[0.06]"
                 loading="lazy"
               />
@@ -174,8 +176,7 @@ export default function ZapClub() {
 
             <div className="border-t border-white/[0.06] pt-4 mt-4">
               <div className="text-center mb-4">
-                {badge('Pra quem não é', 'mb-2', 'red')}
-                <h3 className="text-red-400 text-sm font-bold mb-1">Pra quem não é</h3>
+                {badge('Pra quem não é', 'mb-4', 'red')}
                 <p className="text-neutral-500 text-xs">Se você busca atalho sem esforço, esse não é o lugar.</p>
               </div>
               <div className="space-y-1.5">
@@ -283,9 +284,10 @@ export default function ZapClub() {
           <div className="max-w-2xl mx-auto text-center">
             <div className="relative inline-block mb-5">
               <div className="absolute -inset-4 rounded-full bg-[#7C3AED]/20 blur-xl" />
-              <img
+              <Image
                 src="/felipe-autoridade.webp"
                 alt="Felipe Britto"
+                width={176} height={176}
                 className="relative w-32 h-32 sm:w-44 sm:h-44 rounded-full object-cover"
                 loading="lazy"
               />
@@ -325,9 +327,10 @@ export default function ZapClub() {
           <div className="max-w-md mx-auto">
             <div className="rounded-2xl p-6 sm:p-8 border border-[#7C3AED]/20 bg-white/[0.01]">
               <div className="text-center mb-6">
-                <img
+                <Image
                   src="/garantia-selo.webp"
                   alt="Garantia de 7 dias"
+                  width={120} height={120}
                   className="w-28 sm:w-32 h-auto mx-auto mb-3 object-contain"
                   loading="lazy"
                 />

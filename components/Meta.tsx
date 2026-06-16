@@ -52,6 +52,10 @@ export default function Meta({ title, description, path = '', ogImage = '/og-ima
       <link rel="icon" type="image/png" href="/icon-512.png" sizes="512x512" />
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       <link rel="manifest" href="/manifest.json" />
+
+      {/* Font Preconnect — LP Wizard: Carregamento < 1s */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       
       {/* Schema JSON-LD — Organization + Service + FAQ */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{
