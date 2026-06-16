@@ -274,19 +274,19 @@ useEffect(() => {
 
           {/* GANCHO */}
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            10% dos seus concorrentes<br />
-            <span className="text-green-400">já operam com IA 24h.</span><br />
-            Sua empresa ainda faz tudo no braço?
+          78% das empresas no mundo<br />
+          <span className="text-green-400">já usam IA em produção.</span><br />
+          Sua empresa ainda improvisa?
           </h1>
 
           {/* DOR — twist the knife */}
           <div className="max-w-2xl mx-auto mb-8 space-y-4">
-            <p className="text-xl text-gray-300 leading-relaxed">
-              Postagem uma vez por semana, quando dá tempo. Quando chega alguém no WhatsApp, a conversa acaba em ghosting... Enquanto isso, seu concorrente já tem <span className="text-white font-semibold">IA atendendo, vendendo e criando conteúdo</span> enquanto ele dorme.
-              </p>
-              <p className="text-lg text-gray-500 leading-relaxed">
-              Cada dia sem IA é uma oportunidade pro seu concorrente. Uma oportunidade que podia ser sua. Uma hora recuperada que poderia virar lucro, mas vira apagamento de incêndio.
-            </p>
+          <p className="text-xl text-gray-300 leading-relaxed">
+          Postagem uma vez por semana, quando dá tempo. Quando chega alguém no WhatsApp, a conversa acaba em ghosting... Enquanto isso, seu concorrente já tem <span className="text-white font-semibold">IA atendendo, vendendo e criando conteúdo</span> enquanto ele dorme.
+          </p>
+          <p className="text-lg text-gray-500 leading-relaxed">
+          No Brasil, só 22% das PMEs usam IA de forma estruturada. O resto improvisa e paga caro por isso.
+          </p>
           </div>
 
           {/* SOLUÇÃO */}
