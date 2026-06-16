@@ -83,24 +83,34 @@ export default function ZapClub() {
         </section>
 
         {/* ===== O QUE É ===== */}
-        <section className="py-10 sm:py-14 px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block text-[#A78BFA] text-[10px] font-bold uppercase tracking-widest mb-3 border border-[#7C3AED]/30 px-3 py-1 rounded-full bg-[#7C3AED]/10">
-              O remédio pra insegurança
-            </span>
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-6 leading-tight">
-              O ZapClub não é um curso.<br />
-              <span className="text-[#A78BFA]">É uma comunidade no WhatsApp.</span>
-            </h2>
+        <section className="py-8 sm:py-10 px-4">
+          <div className="max-w-3xl mx-auto">
+            {/* Foto do Felipe em banner horizontal */}
+            <div className="relative w-full rounded-2xl overflow-hidden mb-6 border border-white/[0.06]">
+              <img
+                src="/felipe-britto-v2.webp"
+                alt="Felipe Britto"
+                className="w-full h-40 sm:h-52 object-cover object-top"
+                loading="lazy"
+              />
+            </div>
 
-            <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-6 max-w-2xl mx-auto">
+            <div className="text-center">
+              <span className="text-[#A78BFA] text-[10px] font-bold uppercase tracking-widest mb-2 block">O remédio pra insegurança</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-white mb-3 leading-tight">
+                O ZapClub não é um curso.<br />
+                <span className="text-[#A78BFA]">É uma comunidade no WhatsApp.</span>
+              </h2>
+            </div>
+
+            <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-4 max-w-2xl mx-auto">
               Um grupo com outros empresários aplicando IA nos negócios deles, e um moderador de IA disponível 24h. Ele guia passo a passo, responde na hora, adapta ao seu contexto. Não deixa você errar sozinho.
             </p>
-            <p className="text-neutral-400 text-sm mb-8 max-w-2xl mx-auto">
+            <p className="text-neutral-400 text-sm mb-6 max-w-2xl mx-auto">
               Você não assiste vídeo e torce pra dar certo na segunda. Você pergunta, testa, ajusta. Se travar, tem o moderador e a comunidade pra segurar.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {[
                 { icon: '🤖', label: 'Moderador de IA 24h' },
                 { icon: '🎙️', label: 'Mande áudio, receba orientação na hora' },
