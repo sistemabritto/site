@@ -150,15 +150,18 @@ export default function ZapClub() {
           </div>
         </section>
 
-        {/* ===== PRA QUEM É ===== */}
-        <section className="py-8 sm:py-10 px-4 bg-[#0a0a0a]">
+        {/* ===== PRA QUEM É / NÃO É ===== */}
+        <section className="py-10 sm:py-12 px-4 bg-[#0a0a0a]">
           <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-4">
-              {badge('Pra quem é o ZapClub', 'mb-2', 'green')}
-              <p className="text-neutral-400 text-sm mb-6">Se você dá conta de tudo sozinho, sente que falta braço, e sabe que IA é o caminho mas tem medo de errar — esse espaço é seu.</p>
+            {/* PRA QUEM É */}
+            <div className="text-center mb-6">
+              {badge('Pra quem é o ZapClub', 'mb-3', 'green')}
+              <p className="text-neutral-400 text-sm leading-relaxed max-w-lg mx-auto">
+                Se você dá conta de tudo sozinho, sente que falta braço, e sabe que IA é o caminho mas tem medo de errar — esse espaço é seu.
+              </p>
             </div>
 
-            <div className="space-y-2 mb-6">
+            <div className="space-y-3 mb-8">
               {[
                 'Tem medo de implementar IA errado',
                 'Dá conta de tudo sozinho',
@@ -167,28 +170,31 @@ export default function ZapClub() {
                 'Quer dominar base pra não ser enganado',
                 'Sabe que cada dia sem IA o concorrente ganha',
               ].map((item, i) => (
-                <div key={`sim-${i}`} className="flex items-center gap-2 py-2">
-                  <span className="text-[#22C55E] flex-shrink-0">✓</span>
+                <div key={`sim-${i}`} className="flex items-center gap-3 bg-white/[0.02] rounded-lg px-4 py-3 border border-white/[0.06]">
+                  <span className="text-green-500 flex-shrink-0 text-sm">✓</span>
                   <span className="text-neutral-300 text-sm">{item}</span>
                 </div>
               ))}
             </div>
 
-            <div className="border-t border-white/[0.06] pt-4 mt-4">
-              <div className="text-center mb-4">
-                {badge('Pra quem não é', 'mb-4', 'red')}
-                <p className="text-neutral-500 text-xs">Se você busca atalho sem esforço, esse não é o lugar.</p>
+            {/* PRA QUEM NÃO É */}
+            <div className="border-t border-white/[0.06] pt-8">
+              <div className="text-center mb-6">
+                {badge('Pra quem não é', 'mb-3', 'red')}
+                <p className="text-neutral-500 text-sm leading-relaxed max-w-lg mx-auto">
+                  Se você busca atalho sem esforço, esse não é o lugar.
+                </p>
               </div>
-              <div className="space-y-1.5">
+              <div className="space-y-3">
                 {[
-                    'Quer que IA resolva tudo sozinha',
-                    'Não disposto a testar, errar e ajustar',
-                    'Acha que vídeo gravado substitui acompanhamento',
-                    'Acha que não precisa de IA',
-                    ].map((item, i) => (
-                  <div key={`nao-${i}`} className="flex items-center gap-2">
-                    <span className="text-red-500/60 flex-shrink-0">✗</span>
-                    <span className="text-neutral-500 text-xs">{item}</span>
+                  'Quer que IA resolva tudo sozinha',
+                  'Não disposto a testar, errar e ajustar',
+                  'Acha que vídeo gravado substitui acompanhamento',
+                  'Acha que não precisa de IA',
+                ].map((item, i) => (
+                  <div key={`nao-${i}`} className="flex items-center gap-3 bg-white/[0.02] rounded-lg px-4 py-3 border border-white/[0.06]">
+                    <span className="text-red-400 flex-shrink-0 text-sm">✗</span>
+                    <span className="text-neutral-400 text-sm">{item}</span>
                   </div>
                 ))}
               </div>
