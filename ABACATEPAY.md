@@ -1,7 +1,7 @@
 # AbacatePay Integration — Sistema Britto
 
 ## Configuração
-- **API Key:** `abc_dev_6xbMgNHha22tetRbE0GUpuWZ`
+- **API Key:** `abc_dev_stLP4GLSqfgnHygHA6uuCSKs`
 - **Base URL:** `https://api.abacatepay.com/v2`
 - **Valores:** Sempre em **centavos** (R$ 297 = 29700)
 - **Auth:** Header `Authorization: Bearer {API_KEY}`
@@ -26,7 +26,7 @@
 ### Checkout Hospedado (Recomendado)
 ```bash
 curl -X POST "https://api.abacatepay.com/v2/checkouts/create" \
-  -H "Authorization: Bearer abc_dev_6xbMgNHha22tetRbE0GUpuWZ" \
+  -H "Authorization: Bearer abc_dev_stLP4GLSqfgnHygHA6uuCSKs" \
   -H "Content-Type: application/json" \
   -d '{
     "items": [{"id": "prod_jRg20GUgAmEjhy3QCr45ZtKn", "quantity": 1}],

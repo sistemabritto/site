@@ -12,7 +12,7 @@ Allow: /whatsapp
 Allow: /vps
 Allow: /sistema
 Allow: /socialjobs
-
+Allow: /zapclub
 # ── Compliance ────────────────────────────────────────
 Allow: /politicas-de-privacidade
 Allow: /termos-de-uso

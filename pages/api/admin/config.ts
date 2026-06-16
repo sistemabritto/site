@@ -65,7 +65,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const results: Record<string, boolean> = {};
     for (const [key, value] of Object.entries(updates)) {
       // Only allow whitelisted config keys
-      const allowedKeys = ['meta_pixel_id', 'evocrm_api_status', 'site_name'];
+      const allowedKeys = ['meta_pixel_id', 'google_gtm_id', 'evocrm_api_status', 'site_name'];
       if (!allowedKeys.includes(key)) {
         results[key] = false;
         continue;

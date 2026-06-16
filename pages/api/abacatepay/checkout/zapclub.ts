@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const ABACATEPAY_API = 'https://api.abacatepay.com/v2';
-const ABACATEPAY_KEY = process.env.ABACATEPAY_API_KEY || 'abc_dev_6xbMgNHha22tetRbE0GUpuWZ';
+const ABACATEPAY_KEY = process.env.ABACATEPAY_API_KEY || 'abc_dev_stLP4GLSqfgnHygHA6uuCSKs';
 const PRODUCT_ID = 'prod_jRg20GUgAmEjhy3QCr45ZtKn'; // whatsapp-ia-basico
 const EXTERNAL_ID = 'zapclub';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.sistemabritto.com.br';

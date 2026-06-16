@@ -50,11 +50,14 @@ export default function Admin() {
   const [dataLoading, setDataLoading] = useState(false);
 
   // Config — now from Supabase, not localStorage
-  const [pixelId, setPixelId] = useState('');
-  const [pixelSaving, setPixelSaving] = useState(false);
-  const [pixelSaved, setPixelSaved] = useState(false);
-  const [siteName, setSiteName] = useState('');
-  const [evoApiStatus, setEvoApiStatus] = useState<'checking' | 'ok' | 'error'>('checking');
+   const [pixelId, setPixelId] = useState('');
+   const [pixelSaving, setPixelSaving] = useState(false);
+   const [pixelSaved, setPixelSaved] = useState(false);
+   const [gtmId, setGtmId] = useState('');
+   const [gtmSaving, setGtmSaving] = useState(false);
+   const [gtmSaved, setGtmSaved] = useState(false);
+   const [siteName, setSiteName] = useState('');
+   const [evoApiStatus, setEvoApiStatus] = useState<'checking' | 'ok' | 'error'>('checking');
 
   // Active tab
   const [activeTab, setActiveTab] = useState<'leads' | 'analytics' | 'config'>('leads');
@@ -151,6 +154,7 @@ export default function Admin() {
         const data = await res.json();
         if (data.config) {
           setPixelId(data.config.meta_pixel_id || '');
+          setGtmId(data.config.google_gtm_id || '');
           setSiteName(data.config.site_name || 'Sistema Britto');
         }
       }
@@ -651,6 +655,54 @@ export default function Admin() {
                 </button>
                 <p className="text-gray-500 text-xs mt-3">
                   Salvo no Supabase — persiste entre dispositivos e limpezas de cache. O pixel é injetado em todas as páginas automaticamente.
+                </p>
+              </div>
+
+              {/* Google Tag Manager */}
+              <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20 mb-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center text-xl">🏷️</div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white">Google Tag Manager</h3>
+                    <p className="text-gray-400 text-xs">Rastreamento de eventos, conversões e analytics avançado</p>
+                  </div>
+                </div>
+                <input
+                  type="text"
+                  value={gtmId}
+                  onChange={(e) => setGtmId(e.target.value)}
+                  placeholder="Ex: GTM-XXXXXXX"
+                  className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none text-sm mb-3"
+                />
+                <button
+                  onClick={async () => {
+                    setGtmSaving(true);
+                    try {
+                      const res = await fetch('/api/admin/config', {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json',
+                          Authorization: `Bearer ${adminToken}`,
+                        },
+                        body: JSON.stringify({ updates: { google_gtm_id: gtmId } }),
+                      });
+                      if (res.ok) {
+                        setGtmSaved(true);
+                        setTimeout(() => setGtmSaved(false), 2000);
+                      }
+                    } catch {
+                      // silently fail
+                    } finally {
+                      setGtmSaving(false);
+                    }
+                  }}
+                  disabled={gtmSaving}
+                  className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-full font-bold text-sm transition-all disabled:opacity-50"
+                >
+                  {gtmSaving ? 'Salvando...' : gtmSaved ? '✅ Salvo no Supabase!' : 'Salvar GTM ID'}
+                </button>
+                <p className="text-gray-500 text-xs mt-3">
+                  Ao salvar, o GTM é injetado em todas as páginas automaticamente — rastreia pageviews, cliques em CTAs e eventos customizados.
                 </p>
               </div>
 

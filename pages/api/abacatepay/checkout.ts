@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
 
 const ABACATEPAY_API = 'https://api.abacatepay.com/v2';
-const ABACATEPAY_KEY = process.env.ABACATEPAY_API_KEY || 'abc_dev_6xbMgNHha22tetRbE0GUpuWZ';
+const ABACATEPAY_KEY = process.env.ABACATEPAY_API_KEY || 'abc_dev_stLP4GLSqfgnHygHA6uuCSKs';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY || '';
 
