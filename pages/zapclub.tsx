@@ -93,15 +93,8 @@ export default function ZapClub() {
               </h2>
             </div>
 
-            <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-4 max-w-2xl mx-auto">
-              Um espaço com outros empresários aplicando IA nos negócios deles, com suporte disponível 24h. Para te guiar passo a passo, responde na hora, adapta ao seu contexto. Não deixa você errar sozinho.
-            </p>
-            <p className="text-neutral-400 text-sm mb-5 max-w-2xl mx-auto">
-              Você não assiste vídeo e torce pra dar certo na segunda. Você pergunta, testa, ajusta. Se travar, tem o moderador e a comunidade pra segurar.
-            </p>
-
-            {/* Foto da comunidade — sem Felipe, abaixo do texto */}
-            <div className="flex justify-center mb-6">
+            {/* Foto da comunidade */}
+            <div className="flex justify-center mb-5">
               <img
                 src="/zapclub-community.webp"
                 alt="Comunidade ZapClub no WhatsApp"
@@ -109,6 +102,13 @@ export default function ZapClub() {
                 loading="lazy"
               />
             </div>
+
+            <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-4 max-w-2xl mx-auto">
+              Um espaço com outros empresários aplicando IA nos negócios deles, com suporte disponível 24h. Para te guiar passo a passo, responde na hora, adapta ao seu contexto. Não deixa você errar sozinho.
+            </p>
+            <p className="text-neutral-400 text-sm mb-5 max-w-2xl mx-auto">
+              Você não assiste vídeo e torce pra dar certo na segunda. Você pergunta, testa, ajusta. Se travar, tem o moderador e a comunidade pra segurar.
+            </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {[
