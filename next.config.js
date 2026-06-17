@@ -29,6 +29,8 @@ const nextConfig = {
     { source: '/zapcurso', destination: '/zapclub', permanent: true },
     // ZapCurso API redirect
     { source: '/api/abacatepay/checkout/zapcurso', destination: '/api/abacatepay/checkout/zapclub', permanent: true },
+    // Data deletion canonical URL (Meta requirement)
+    { source: '/exclusao-de-dados', destination: '/exclusao-dos-dados', permanent: true },
     ];
   },
 };

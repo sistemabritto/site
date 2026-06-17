@@ -10,6 +10,7 @@ const footerLinks = [
  { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
  { label: 'Política de Privacidade', href: '/politicas-de-privacidade' },
  { label: 'Termos de Uso', href: '/termos-de-uso' },
+ { label: 'Exclusão de Dados', href: '/exclusao-dos-dados' },
 ];
 
 export default function Footer() {
@@ -96,7 +97,10 @@ export default function Footer() {
                 Privacidade
               </Link>
               <Link href="/termos-de-uso" className="text-xs text-gray-100 hover:text-white font-medium transition-colors">
-                Termos
+              Termos
+              </Link>
+              <Link href="/exclusao-dos-dados" className="text-xs text-gray-100 hover:text-white font-medium transition-colors">
+              Exclusão
               </Link>
             </div>
             

@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 /**
  * Exclusão de Dados do Usuário — Meta Data Deletion Policy
- * sistemasbritto.com.br/exclusao-dos-dados
+ * sistemabritto.com.br/exclusao-dos-dados
  * Data Deletion Request — Meta App Review compliance
  */
 
