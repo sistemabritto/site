@@ -276,7 +276,7 @@ useEffect(() => {
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
           22% dos seus concorrentes<br />
           <span className="text-green-400">já operam com IA 24h.</span><br />
-          E você, já sabe por onde começar?
+          E você, ainda faz tudo no braço?
           </h1>
 
           {/* DOR — twist the knife */}
