@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import PhoneInput from '../components/PhoneInput';
+
 
 /* ─── Network SVGs ─── */
 const YoutubeLogo = () => (
@@ -138,58 +138,8 @@ const NEXUS_IMAGES = [
 ];
 
 export default function SocialJobs() {
-  const [customerData, setCustomerData] = useState({ name: '', email: '', whatsapp: '' });
-  const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', whatsapp: '' });
-  const [submitted, setSubmitted] = useState(false);
   const [hoveredAgent, setHoveredAgent] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const stored = sessionStorage.getItem('qualificacao_customer');
-      if (stored) {
-        try {
-          const data = JSON.parse(stored);
-          setCustomerData(data);
-          setFormData(data);
-        } catch {}
-      }
-    }
-  }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.email) return;
-
-    const customer = { name: formData.name, email: formData.email, whatsapp: formData.whatsapp };
-
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem('qualificacao_customer', JSON.stringify(customer));
-    }
-
-    try {
-      await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...customer, source: 'socialjobs-landing' }),
-      });
-    } catch (err) {
-      console.error('Erro ao salvar lead:', err);
-    }
-
-    setSubmitted(true);
-
-    setTimeout(() => {
-      const qs = new URLSearchParams({
-        source: 'socialjobs',
-        name: customer.name || '',
-        email: customer.email || '',
-        whatsapp: customer.whatsapp || '',
-      }).toString();
-      window.location.href = `/quiz?${qs}`;
-    }, 800);
-  };
 
   return (
     <>
@@ -200,55 +150,6 @@ export default function SocialJobs() {
       />
       <Navbar />
       <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>
-
-        {/* ===== MODAL DE CAPTURA ===== */}
-        {showModal && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-sm" style={{ backgroundColor: 'rgba(0,0,0,0.85)' }}>
-            <div className="bg-[#111111] rounded-3xl p-8 max-w-md w-full border border-orange-500/30 relative shadow-2xl shadow-orange-500/10">
-              {!submitted ? (
-                <>
-                  <button onClick={() => setShowModal(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl transition-colors">&times;</button>
-                  <div className="text-center mb-6">
-                    <div className="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 rounded-full px-3 py-1.5 mb-4">
-                      <span className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-pulse" />
-                      <span className="text-orange-400 text-xs font-bold uppercase tracking-wider">SocialJobs</span>
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Seu conteúdo nunca mais para</h3>
-                    <p className="text-gray-400 text-sm">Seus dados preenchem automaticamente. Sem repetir nada.</p>
-                  </div>
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">Nome</label>
-                      <input type="text" placeholder="Seu nome" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none backdrop-blur-sm transition-colors" />
-                    </div>
-                    <div>
-                      <label className="text-gray-300 text-sm font-semibold block mb-1">Email *</label>
-                      <input type="email" placeholder="seu@email.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-gray-500 focus:border-orange-500 focus:outline-none backdrop-blur-sm transition-colors" required />
-                    </div>
-                    <PhoneInput
-                      value={formData.whatsapp}
-                      onChange={(v) => setFormData({...formData, whatsapp: v})}
-                      accentColor="#F97316"
-                    />
-                    <button type="submit" className="w-full bg-orange-500 hover:bg-orange-600 text-black py-4 rounded-full font-bold text-lg transition-all shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98]">
-                      QUERO CONTEÚDO TODO DIA →
-                    </button>
-                    <p className="text-gray-500 text-xs text-center">Ao continuar, você concorda com nossos <a href="/termos-de-uso" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">termos</a> e <a href="/politicas-de-privacidade" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">políticas de privacidade</a>.</p>
-                  </form>
-                </>
-              ) : (
-                <div className="text-center py-8">
-                  <div className="text-5xl mb-4">🔥</div>
-                  <h3 className="text-xl font-bold text-white mb-2">Bora criar conteúdo!</h3>
-                  <p className="text-gray-300 text-sm">Recebi. Já já eu entro em contato.</p>
-                  <div className="w-full bg-white/10 rounded-full h-1.5 mt-4 overflow-hidden">
-                    <div className="bg-orange-500 h-full rounded-full animate-pulse" style={{ width: '60%' }}></div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
 
         {/* ===== LIGHTBOX ===== */}
         {selectedImage !== null && (
@@ -300,12 +201,14 @@ export default function SocialJobs() {
               </p>
             </div>
 
-            <button
-              onClick={() => setShowModal(true)}
+            <a
+              href="https://wa.me/5511914088571?text=Olá!%20Quero%20o%20SocialJobs%20para%20criar%20conteúdo%20automático%20nas%20minhas%20redes"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl sm:text-2xl transition-all duration-300 shadow-2xl shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-105 active:scale-[0.98]"
             >
               QUERO CONTEÚDO TODO DIA →
-            </button>
+            </a>
 
             <p className="text-gray-500 text-sm mt-4">
               Sem compromisso. A gente conversa e você decide.
@@ -547,12 +450,14 @@ export default function SocialJobs() {
               Seus concorrentes já automatizaram conteúdo. E você?
             </p>
 
-            <button
-              onClick={() => setShowModal(true)}
+            <a
+              href="https://wa.me/5511914088571?text=Olá!%20Quero%20o%20SocialJobs%20para%20criar%20conteúdo%20automático%20nas%20minhas%20redes"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl sm:text-2xl transition-all duration-300 shadow-2xl shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-105 active:scale-[0.98]"
             >
               QUERO CONTEÚDO TODO DIA →
-            </button>
+            </a>
 
             <p className="text-gray-500 text-sm mt-4">
               Sem compromisso. Sem contrato longo.

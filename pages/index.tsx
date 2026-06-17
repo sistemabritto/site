@@ -202,10 +202,7 @@ useEffect(() => {
                     <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Sistema Britto</span>
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-2">Sua empresa ainda faz tudo no braço?</h3>
-                  <p className="text-gray-400 text-sm">
-                    Seus dados preenchem automaticamente. Sem repetir nada.
-                  </p>
-                </div>
+                  </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
@@ -285,7 +282,7 @@ useEffect(() => {
           Postagem uma vez por semana, quando dá tempo. Quando chega alguém no WhatsApp, a conversa acaba em ghosting... Enquanto isso, seu concorrente já tem <span className="text-white font-semibold">IA atendendo, vendendo e criando conteúdo</span> enquanto ele dorme.
           </p>
           <p className="text-lg text-gray-500 leading-relaxed">
-          E mesmo os 44% que "usam IA" no Brasil? Só 10% saíram do básico. O resto improvisa e paga caro por isso.
+          E ainda assim, só metade dos empresários que "usam IA" no Brasil saíram do básico. O resto improvisa e paga caro por isso.
           </p>
           </div>
 

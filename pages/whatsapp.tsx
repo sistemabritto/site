@@ -21,7 +21,21 @@ const WHATSAPP_NUMBER = '5511914088571';
 const WHATSAPP_LABEL = encodeURIComponent('Olá! Vi o site e gostaria de mais informações sobre o WhatsApp + IA');
 
 export default function WhatsApp() {
-  const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_LABEL}`;
+  const whatsappFallback = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_LABEL}`;
+
+  function handleCheckout() {
+    fetch('/api/abacatepay/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ productId: 'whatsapp-ia-basico' })
+    })
+      .then(r => r.json())
+      .then(data => {
+        if (data.url) window.location.href = data.url;
+        else window.location.href = whatsappFallback;
+      })
+      .catch(() => { window.location.href = whatsappFallback; });
+  }
 
   return (
     <>
@@ -59,14 +73,12 @@ export default function WhatsApp() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href={waHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-primary-500 hover:bg-primary-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-primary-500/25"
+              <button
+                onClick={handleCheckout}
+                className="inline-flex items-center gap-3 bg-primary-500 hover:bg-primary-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-primary-500/25 cursor-pointer"
               >
                 ATIVAR MEU WHATSAPP IA →
-              </a>
+              </button>
             </div>
 
             <p className="text-gray-400 text-sm mt-4">Sem fidelidade. Cancele quando quiser. 7 dias de garantia incondicional.</p>
@@ -209,14 +221,12 @@ export default function WhatsApp() {
                   <span className="text-gray-300 text-xl">/mês</span>
                 </div>
 
-                <a
-                  href={waHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 bg-primary-500 hover:bg-primary-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-primary-500/25 w-full justify-center"
+                <button
+                  onClick={handleCheckout}
+                  className="inline-flex items-center gap-3 bg-primary-500 hover:bg-primary-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-primary-500/25 w-full justify-center cursor-pointer"
                 >
                   ATIVAR MEU WHATSAPP IA →
-                </a>
+                </button>
               </div>
             </div>
           </div>
