@@ -134,10 +134,10 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-               href="/whatsapp"
-               className="bg-primary-500 hover:bg-primary-600 text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 hover:scale-105"
+              href="/quiz"
+              className="bg-primary-500 hover:bg-primary-600 text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 hover:scale-105"
               >
-               QUERO IA NO MEU WHATSAPP →
+              Quero otimizar vendas online →
               </a>
             </div>
 
@@ -172,11 +172,11 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-               href="/whatsapp"
-               className="block w-full text-center bg-primary-500 text-black px-6 py-3 rounded-full font-bold mt-4 shadow-lg shadow-primary-500/25 hover:bg-primary-600 transition-all duration-200"
-               onClick={() => setMobileOpen(false)}
+              href="/quiz"
+              className="block w-full text-center bg-primary-500 text-black px-6 py-3 rounded-full font-bold mt-4 shadow-lg shadow-primary-500/25 hover:bg-primary-600 transition-all duration-200"
+              onClick={() => setMobileOpen(false)}
               >
-               QUERO IA NO MEU WHATSAPP →
+              Quero otimizar vendas online →
               </a>
             </div>
           </div>
