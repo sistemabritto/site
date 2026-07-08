@@ -691,7 +691,6 @@ useEffect(() => {
       Quero minha operação de conteúdo →
       </a>
       </div>
-      </div>
       </section>
 
       {/* ===== DEPOIMENTOS REAIS — Google Reviews ===== */}
