@@ -299,7 +299,73 @@ export default function Sistema() {
           </div>
         </section>
 
-        {/* ===== COMO FUNCIONA ===== */}
+        {/* ===== PROJETOS QUE SAÍRAM DAQUI ===== */}
+ <section className="py-24 px-4 bg-[#111111]/50">
+ <div className="max-w-6xl mx-auto">
+ <div className="text-center mb-14">
+ <span className="inline-flex items-center gap-2 bg-green-500/15 border border-green-500/25 rounded-full px-4 py-2 mb-6">
+ <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+ <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Projetos reais</span>
+ </span>
+ <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Projetos que saíram daqui</h2>
+ <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+ A gente não fala de clientes por nome. Mas alguns projetos são públicos — e mostram o que a gente constrói.
+ </p>
+ </div>
+
+ <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+ {/* ZapMágico */}
+ <div className="group bg-[#0a0a0a]/80 backdrop-blur-sm rounded-2xl p-6 border border-white/[0.06] hover:border-green-500/30 transition-all duration-300 hover:-translate-y-1">
+ <div className="flex items-center gap-3 mb-4">
+ <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-green-500/20 transition-colors">
+ <span className="text-2xl">🎩</span>
+ </div>
+ <div>
+ <h3 className="text-white font-bold text-lg">ZapMágico</h3>
+ <a href="https://zapmagico.com.br" target="_blank" rel="noopener noreferrer" className="text-green-400 text-xs font-semibold hover:underline">zapmagico.com.br →</a>
+ </div>
+ </div>
+ <p className="text-gray-300 text-sm leading-relaxed mb-3">
+ Automação de WhatsApp para pequenos negócios. Interface white-label, fluxos pré-configurados e billing automático. O cliente assina e usa — sem precisar entender de infra.
+ </p>
+ <div className="flex flex-wrap gap-2">
+ {['White-label', 'WhatsApp', 'Assinatura', 'Multi-tenant'].map(tag => (
+ <span key={tag} className="bg-green-500/10 border border-green-500/20 text-green-400 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full">{tag}</span>
+ ))}
+ </div>
+ </div>
+
+ {/* VoiceDream */}
+ <div className="group bg-[#0a0a0a]/80 backdrop-blur-sm rounded-2xl p-6 border border-white/[0.06] hover:border-green-500/30 transition-all duration-300 hover:-translate-y-1">
+ <div className="flex items-center gap-3 mb-4">
+ <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-green-500/20 transition-colors">
+ <span className="text-2xl">🎙️</span>
+ </div>
+ <div>
+ <h3 className="text-white font-bold text-lg">VoiceDream</h3>
+ <a href="https://voicedream.com.br" target="_blank" rel="noopener noreferrer" className="text-green-400 text-xs font-semibold hover:underline">voicedream.com.br →</a>
+ </div>
+ </div>
+ <p className="text-gray-300 text-sm leading-relaxed mb-3">
+ SaaS de áudio com IA. Plataforma completa de gravação, edição e síntese de voz. Stack moderna, infra própria e interface limpa que o usuário final usa sem fricção.
+ </p>
+ <div className="flex flex-wrap gap-2">
+ {['SaaS', 'IA de Voz', 'Next.js', 'WebSocket', 'Upload de áudio'].map(tag => (
+ <span key={tag} className="bg-green-500/10 border border-green-500/20 text-green-400 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full">{tag}</span>
+ ))}
+ </div>
+ </div>
+ </div>
+
+ <div className="text-center mt-8">
+ <p className="text-gray-500 text-sm">
+ Esses são só dois exemplos. Cada projeto tem sua particularidade — e a gente adapta o stack, o prazo e a arquitetura pro seu caso.
+ </p>
+ </div>
+ </div>
+ </section>
+
+ {/* ===== COMO FUNCIONA ===== */}
         <section className="py-24 px-4">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
