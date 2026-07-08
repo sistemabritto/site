@@ -464,8 +464,302 @@ useEffect(() => {
         </div>
       </section>
 
+      {/* ===== JORNADA — ESCOLHA POR ONDE COMEÇAR ===== */}
+      <section className="py-24 px-4 bg-[#111111]/30">
+      <div className="max-w-6xl mx-auto">
+      <div className="text-center mb-14">
+      <span className="inline-block text-[#D4AF37] text-xs font-bold uppercase tracking-widest mb-4 border border-[#D4AF37]/30 px-4 py-2 rounded-full bg-[#D4AF37]/10">
+      Escolha por onde começar
+      </span>
+      <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+      Seu momento é único. Comece de onde dói mais.
+      </h2>
+      <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+      Cada caminho resolve um gargalo. Eles se combinam quando você quiser.
+      </p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {/* Card 1 — SocialJobs */}
+      <a
+      href="https://wa.me/5511914088571?text=Olá!%20Quero%20minha%20operação%20de%20conteúdo%20com%20IA"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group bg-[#0a0a0a]/80 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/40 transition-all duration-300 hover:-translate-y-1 flex flex-col"
+      >
+      <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center mb-4 group-hover:bg-orange-500/20 transition-colors">
+      <span className="text-2xl">🔥</span>
+      </div>
+      <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-400 transition-colors">
+      Quero atrair mais clientes
+      </h3>
+      <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
+      Conteúdo diário, calendário editorial, publicação em 5 redes. Consistência que alimenta tráfego orgânico e pago.
+      </p>
+      <div className="flex items-center gap-2 text-orange-400 font-bold text-sm group-hover:gap-3 transition-all duration-300">
+      Ver SocialJobs
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+      </div>
+      </a>
+
+      {/* Card 2 — WhatsApp IA */}
+      <a
+      href="https://wa.me/5511914088571?text=Olá!%20Quero%20ativar%20meu%20WhatsApp%20com%20inteligência%20artificial"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group bg-[#0a0a0a]/80 border border-green-500/20 rounded-2xl p-6 hover:border-green-500/40 transition-all duration-300 hover:-translate-y-1 flex flex-col"
+      >
+      <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center mb-4 group-hover:bg-green-500/20 transition-colors">
+      <span className="text-2xl">💬</span>
+      </div>
+      <h3 className="text-white font-bold text-lg mb-2 group-hover:text-green-400 transition-colors">
+      Quero responder leads mais rápido
+      </h3>
+      <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
+      IA que qualifica, agenda e vende 24h. Zero lead perdido por demora. CRM + WhatsApp integrado.
+      </p>
+      <div className="flex items-center gap-2 text-green-400 font-bold text-sm group-hover:gap-3 transition-all duration-300">
+      Ver WhatsApp com IA
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+      </div>
+      </a>
+
+      {/* Card 3 — Sistema Sob Medida */}
+      <a
+      href="https://wa.me/5511914088571?text=Olá!%20Quero%20construir%20um%20sistema%20web%20sob%20medida"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group bg-[#0a0a0a]/80 border border-[#D4AF37]/20 rounded-2xl p-6 hover:border-[#D4AF37]/40 transition-all duration-300 hover:-translate-y-1 flex flex-col"
+      >
+      <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/20 flex items-center justify-center mb-4 group-hover:bg-[#D4AF37]/20 transition-colors">
+      <span className="text-2xl">⚡</span>
+      </div>
+      <h3 className="text-white font-bold text-lg mb-2 group-hover:text-[#D4AF37] transition-colors">
+      Quero construir um sistema próprio
+      </h3>
+      <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
+      SaaS, funis, assistentes IA, integrações. Código do cliente, marca do cliente, sem vendor lock-in.
+      </p>
+      <div className="flex items-center gap-2 text-[#D4AF37] font-bold text-sm group-hover:gap-3 transition-all duration-300">
+      Ver Sistema Sob Medida
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+      </div>
+      </a>
+
+      {/* Card 4 — VPS */}
+      <a
+      href="https://wa.me/5511914088571?text=Olá!%20Quero%20hospedar%20minha%20operação%20em%20VPS%20estruturada"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group bg-[#0a0a0a]/80 border border-white/[0.08] rounded-2xl p-6 hover:border-white/20 transition-all duration-300 hover:-translate-y-1 flex flex-col"
+      >
+      <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:bg-white/10 transition-colors">
+      <span className="text-2xl">🖥️</span>
+      </div>
+      <h3 className="text-white font-bold text-lg mb-2 group-hover:text-white transition-colors">
+      Quero hospedar minha operação
+      </h3>
+      <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
+      VPS configurada, SSL automático, backup diário, monitoramento. Você dirige, a gente cuida da infra.
+      </p>
+      <div className="flex items-center gap-2 text-gray-300 font-bold text-sm group-hover:gap-3 group-hover:text-white transition-all duration-300">
+      Ver VPS Estruturada
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+      </div>
+      </a>
+
+      {/* Card 5 — ZapClub */}
+      <a
+      href="https://wa.me/5511914088571?text=Olá!%20Quero%20entrar%20no%20ZapClub%20para%20aprender%20IA%20com%20suporte"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group bg-[#0a0a0a]/80 border border-purple-500/20 rounded-2xl p-6 hover:border-purple-500/40 transition-all duration-300 hover:-translate-y-1 flex flex-col"
+      >
+      <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition-colors">
+      <span className="text-2xl">🎓</span>
+      </div>
+      <h3 className="text-white font-bold text-lg mb-2 group-hover:text-purple-400 transition-colors">
+      Quero aprender IA com suporte
+      </h3>
+      <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
+      Comunidade para aplicar IA na prática. Progressão por níveis, suporte direto e implementação guiada.
+      </p>
+      <div className="flex items-center gap-2 text-purple-400 font-bold text-sm group-hover:gap-3 transition-all duration-300">
+      Ver ZapClub
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+      </div>
+      </a>
+      </div>
+      </div>
+      </section>
+
+      {/* ===== HOME VITRINE — mini preview do SocialJobs em operação ===== */}
+      <section className="py-20 px-4">
+      <div className="max-w-6xl mx-auto">
+      <div className="text-center mb-14">
+      <span className="inline-flex items-center gap-2 bg-orange-500/15 border border-orange-500/25 rounded-full px-4 py-2 mb-6">
+      <span className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
+      <span className="text-orange-400 text-xs font-bold uppercase tracking-wider">SocialJobs em operação</span>
+      </span>
+      <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+      Este site é operado pelo mesmo sistema que vendemos
+      </h2>
+      <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+      A Sistema Britto é o primeiro cliente do SocialJobs. Todo conteúdo, posts e campanhas que você vê aqui saem da mesma plataforma que usamos para operar nossos clientes.
+      </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Mockup 1 — Calendário */}
+      <div className="bg-[#111111]/80 backdrop-blur-sm rounded-2xl p-5 border border-white/[0.06]">
+      <div className="text-gray-500 text-xs uppercase tracking-wider font-bold mb-4">Calendário editorial</div>
+      <div className="space-y-2">
+      {[
+      { day: 'Seg', status: '✓', title: 'Post LinkedIn: IA no atendimento' },
+      { day: 'Ter', status: '✓', title: 'Reel Instagram: 3 erros...' },
+      { day: 'Qua', status: '→', title: 'Carrossel: Como começar...' },
+      { day: 'Qui', status: '○', title: 'Thread X: O futuro do...' },
+      { day: 'Sex', status: '○', title: 'YouTube Short: Automatize...' },
+      ].map((item, i) => (
+      <div key={i} className="flex items-center gap-3 bg-[#0a0a0a]/60 rounded-lg p-2.5">
+      <span className={`text-xs font-bold w-8 ${
+      item.status === '✓' ? 'text-green-400' : item.status === '→' ? 'text-orange-400' : 'text-gray-600'
+      }`}>{item.status}</span>
+      <div className="flex-1 min-w-0">
+      <div className="text-white text-xs font-semibold truncate">{item.title}</div>
+      <div className="text-gray-600 text-[10px]">{item.day}</div>
+      </div>
+      </div>
+      ))}
+      </div>
+      </div>
+
+      {/* Mockup 2 — Métricas */}
+      <div className="bg-[#111111]/80 backdrop-blur-sm rounded-2xl p-5 border border-white/[0.06]">
+      <div className="text-gray-500 text-xs uppercase tracking-wider font-bold mb-4">Métricas da semana</div>
+      <div className="grid grid-cols-2 gap-3">
+      {[
+      { label: 'Posts publicados', value: '24', color: 'text-orange-400' },
+      { label: 'Redes ativas', value: '5', color: 'text-orange-400' },
+      { label: 'Alcance', value: '12%', color: 'text-green-400', suffix: '↑' },
+      { label: 'Engajamento', value: '4,2%', color: 'text-green-400', suffix: '↑' },
+      ].map((m, i) => (
+      <div key={i} className="bg-[#0a0a0a]/60 rounded-lg p-3">
+      <div className={`text-xl font-bold ${m.color}`}>{m.value}{m.suffix || ''}</div>
+      <div className="text-gray-500 text-[10px] uppercase tracking-wider mt-1">{m.label}</div>
+      </div>
+      ))}
+      </div>
+      </div>
+
+      {/* Mockup 3 — Pipeline visual */}
+      <div className="bg-[#111111]/80 backdrop-blur-sm rounded-2xl p-5 border border-white/[0.06]">
+      <div className="text-gray-500 text-xs uppercase tracking-wider font-bold mb-4">Pipeline de conteúdo</div>
+      <div className="space-y-2.5">
+      {[
+      { step: 'Ideia', active: false },
+      { step: 'Rascunho', active: false },
+      { step: 'Revisão', active: false },
+      { step: '✓ Aprovado', active: true },
+      { step: '→ Agendado', active: true },
+      ].map((s, i) => (
+      <div key={i} className="flex items-center gap-3">
+      <div className={`w-2 h-2 rounded-full flex-shrink-0 ${s.active ? 'bg-orange-400' : 'bg-gray-700'}`} />
+      <span className={`text-xs ${s.active ? 'text-white font-semibold' : 'text-gray-500'}`}>{s.step}</span>
+      </div>
+      ))}
+      </div>
+      <div className="mt-4 pt-3 border-t border-white/[0.06]">
+      <div className="text-[10px] text-gray-600 uppercase tracking-wider mb-1">Próximo a publicar</div>
+      <div className="text-white text-xs font-semibold truncate">Automação na prática: case real...</div>
+      <div className="text-gray-500 text-[10px]">YT · IG · TK · LI — amanhã 09h</div>
+      </div>
+      </div>
+      </div>
+      </div>
+
+      <div className="text-center mt-8">
+      <p className="text-gray-500 text-sm mb-4">
+      Não é demo. Não é GIF. É a operação real da Sistema Britto rodando no SocialJobs.
+      </p>
+      <a
+      href="https://wa.me/5511914088571?text=Olá!%20Quero%20minha%20operação%20de%20conteúdo%20com%20IA"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-black px-8 py-4 rounded-full font-bold transition-all duration-300 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 hover:scale-105"
+      >
+      Quero minha operação de conteúdo →
+      </a>
+      </div>
+      </div>
+      </section>
+
+      {/* ===== DEPOIMENTOS REAIS — Google Reviews ===== */}
+      <section className="py-24 px-4">
+      <div className="max-w-6xl mx-auto">
+      <div className="text-center mb-14">
+      <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Quem usa, <span className="text-green-400">recomenda</span></h2>
+      <p className="text-gray-400 text-lg">Avaliações reais do Google.</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {realReviews.map((r, i) => (
+      <div key={i} className="group bg-[#111111]/80 backdrop-blur-sm rounded-2xl border border-white/[0.06] hover:border-green-500/30 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+      <div className="p-6">
+      {/* Avatar + Nome + Estrelas */}
+      <div className="flex items-center gap-3 mb-4">
+      <img
+      src={r.photo}
+      alt={r.name}
+      className="w-10 h-10 rounded-full object-cover border border-white/10"
+      />
+      <div>
+      <h3 className="text-white font-bold text-sm">{r.name}</h3>
+      <p className="text-gray-500 text-xs">{r.date}</p>
+      </div>
+      </div>
+      <div className="flex gap-0.5 mb-4">
+      {Array.from({ length: r.stars }).map((_, s) => (
+      <span key={s} className="text-yellow-400 text-sm">★</span>
+      ))}
+      </div>
+      <p className="text-gray-300 text-sm leading-relaxed">&ldquo;{r.text}&rdquo;</p>
+      </div>
+      <div className="border-t border-green-500/20 px-6 py-3 bg-green-500/5">
+      <a href="https://www.google.com/maps/place/Workflow+API+Studio/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-green-400 text-xs font-semibold hover:underline">
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      Ver no Google
+      </a>
+      </div>
+      </div>
+      ))}
+      </div>
+      </div>
+      </section>
+
+      {/* ===== CTA FINAL — único botão ===== */}
+      <section className="py-24 px-4 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-t from-green-500/5 via-transparent to-transparent" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[400px] max-h-[400px] w-full h-full bg-green-500/5 rounded-full blur-[100px]" />
+      <div className="relative z-10 max-w-2xl mx-auto text-center">
+      <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
+      Cada dia sem automação<br />
+      <span className="text-green-400">é dinheiro indo embora.</span>
+      </h2>
+      <p className="text-gray-300 text-lg mb-8">
+      WhatsApp IA, conteúdo infinito nas redes ou sistema sob medida — a gente dá braço pra sua operação.
+      </p>
+      <button
+      onClick={() => setShowModal(true)}
+      className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl transition-all duration-300 shadow-2xl shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
+      >
+      CONSTRUA SEUS ESPECIALISTAS →
+      </button>
+      </div>
+      </section>
+
       <Footer />
-    </main>
-    </>
-  );
-}
+      </main>
+      </>
+      );
+      }
