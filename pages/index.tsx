@@ -253,12 +253,11 @@ useEffect(() => {
                 </div>
               </div>
             )}
-          )}
-          </div>
-          </div>
-          )}
+            </div>
+            </div>
+            )}
 
-          {/* ===== HERO — GANCHO + DOR + SOLUÇÃO ===== */}
+            {/* ===== HERO — GANCHO + DOR + SOLUÇÃO ===== */}
       <section className="relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-green-500/8 via-[#0a0a0a] to-[#0a0a0a]" />
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[600px] max-h-[600px] w-full h-full bg-green-500/5 rounded-full blur-[120px]" />
