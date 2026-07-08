@@ -25,13 +25,18 @@ const XLogo = () => (
  <svg viewBox="0 0 48 48" className="w-8 h-8"><rect width="48" height="48" rx="8" fill="#000"/><path fill="#fff" d="M27.3 13.5h5.5L22.7 26.7 34.5 35h-5.8l-6.7-6.8L15 35H9.5l10.8-14.2L9 13.5h6l6 6.4 6.3-6.4zm-1.9 19.3h2L14.5 15.2h-2.2l13.1 17.6z"/></svg>
 );
 
+const FacebookLogo = () => (
+ <svg viewBox="0 0 24 24" className="w-8 h-8"><path fill="#1877F2" d="M24 12a12 12 0 1 0-13.88 11.82v-8.38H7.08v-3.47h3.04V9.41c0-3 1.8-4.66 4.54-4.66 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.5 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.47h-2.8v8.38A12 12 0 0 0 24 12z"/></svg>
+);
+
 /* ─── Data ─── */
 const NETWORKS = [
- { name: 'YouTube', desc: 'Shorts que ranqueiam sozinhos. Vídeos longos com script gerado por IA, thumbnails que clicam, SEO otimizado em cada descrição.', metric: 'Shorts + Longos', logo: YoutubeLogo },
- { name: 'TikTok', desc: 'Reels virais com trending audio. Hook nos primeiros 2 segundos. Legenda que segura a atenção até o final. Conteúdo que o algoritmo entrega de graça.', metric: 'Reels Virais', logo: TiktokLogo },
- { name: 'Instagram', desc: 'Feed curado e visual, reels diários que bombam, stories que convertem e carrosséis que educam. Sua marca bonita e presente todo santo dia.', metric: 'Feed + Reels + Stories', logo: InstagramLogo },
- { name: 'LinkedIn', desc: 'Autoridade + prospecção B2B. Posts que colocam você como referência no nicho. Textos longos que geram oportunidades e conexões de valor.', metric: 'Autoridade B2B', logo: LinkedinLogo },
- { name: 'X (Twitter)', desc: 'Threads que explodem. Opinião que vira debate e atrai seguidores. Replies estratégicas em posts virais pra roubar atenção.', metric: 'Threads + Opinião', logo: XLogo },
+ { name: 'Instagram', desc: 'Feed curado, reels diários, stories que convertem e carrosséis que educam.', metric: 'Feed + Reels + Stories', logo: InstagramLogo, supported: true },
+ { name: 'LinkedIn', desc: 'Autoridade + prospecção B2B. Posts que geram oportunidades e conexões de valor.', metric: 'Autoridade B2B', logo: LinkedinLogo, supported: true },
+ { name: 'YouTube', desc: 'Shorts que ranqueiam sozinhos. Vídeos longos com script gerado por IA, SEO otimizado.', metric: 'Shorts + Longos', logo: YoutubeLogo, supported: true },
+ { name: 'TikTok', desc: 'Reels virais com trending audio. Hook nos primeiros 2 segundos. Conteúdo que o algoritmo entrega.', metric: 'Reels Virais', logo: TiktokLogo, supported: true },
+ { name: 'X (Twitter)', desc: 'Threads que explodem. Opinião que vira debate. Replies estratégicas em posts virais.', metric: 'Threads + Opinião', logo: XLogo, supported: true },
+ { name: 'Facebook', desc: 'Em breve — páginas, posts e anúncios integrados ao fluxo.', metric: 'Em breve', logo: FacebookLogo, supported: false },
 ];
 
 const AGENTS = [
@@ -124,6 +129,25 @@ const BENEFITS = [
  },
 ];
 
+const FEATURES = [
+ { icon: '📅', label: 'Calendário editorial' },
+ { icon: '💡', label: 'Geração de ideias' },
+ { icon: '📱', label: 'Posts para Instagram' },
+ { icon: '🎠', label: 'Carrosséis' },
+ { icon: '🧵', label: 'Threads para X/LinkedIn' },
+ { icon: '🎬', label: 'Scripts para Reels/Shorts/TikTok' },
+ { icon: '✍️', label: 'Legendas' },
+ { icon: '#️⃣', label: 'Hashtags' },
+ { icon: '🔀', label: 'Adaptação por rede' },
+ { icon: '✅', label: 'Aprovação humana' },
+ { icon: '⏰', label: 'Agendamento' },
+ { icon: '🚀', label: 'Publicação' },
+ { icon: '📊', label: 'Análise de performance' },
+ { icon: '♻️', label: 'Reaproveitamento de conteúdo' },
+ { icon: '📈', label: 'Relatórios' },
+ { icon: '🎯', label: 'Ajuste de estratégia com base nos resultados' },
+];
+
 const STEPS = [
  { num: '01', title: 'Conectamos', desc: '5 redes linkadas ao sistema em 48h. Sua conta, sua audiência, seus dados. Sem migrar nada, sem criar contas novas.' },
  { num: '02', title: 'IA cria', desc: 'Dezenas de agentes geram posts, reels, shorts e threads alinhados ao seu tom de voz. Cada um especialista no seu domínio.' },
@@ -143,9 +167,44 @@ const PIPELINE_STEPS = [
 
 const TRAFFIC_STEPS = [
  { num: '01', title: 'Pesquisa de ângulo', desc: 'IA identifica o que sua audiência quer ver — não o que você acha que deve postar.' },
- { num: '02', title: 'Post + CTA', desc: 'Conteúdo criado pra engajar EConverter. Cada post tem um objetivo: clique, DM, visita.' },
+ { num: '02', title: 'Post + CTA', desc: 'Conteúdo criado pra engajar e converter. Cada post tem um objetivo: clique, DM, visita.' },
  { num: '03', title: 'Tráfego qualificado', desc: 'Quem engaja chega no seu WhatsApp ou landing page já aquecido.' },
  { num: '04', title: 'Lead no CRM', desc: 'CRM captura, qualifica e nutre. Follow-up automático converte em cliente.' },
+];
+
+const EXAMPLES = [
+ {
+ segment: 'Clínica',
+ icon: '🦷',
+ title: 'Exemplo de operação para uma clínica',
+ before: '1 post por mês no Instagram. Paciente não sabe que existe tratamento novo.',
+ after: 'Carrosséis educativos + reels de casos + stories de depoimento. 3 posts/semana.',
+ result: 'Agenda cheia sem depender de indicação. Paciente chega já qualificado.',
+ },
+ {
+ segment: 'Consultor',
+ icon: '💼',
+ title: 'Exemplo de operação para um consultor',
+ before: 'LinkedIn abandonado. Nenhuma autoridade. Prospecção fria não converte.',
+ after: 'Posts de insight 3x/semana + threads B2B + newsletter automática.',
+ result: 'Convites para palestras e consultorias vindas do LinkedIn, sem cold call.',
+ },
+ {
+ segment: 'Agência',
+ icon: '🏢',
+ title: 'Exemplo de operação para uma agência',
+ before: 'Clientes pedem conteúdo e a agência não tem escala. Equipe sobrecarregada.',
+ after: 'White-label: SocialJobs entrega conteúdo aprovado pela agência, com marca do cliente.',
+ result: '5x mais clientes sem contratar equipe adicional. Marca da agência no ar todo dia.',
+ },
+ {
+ segment: 'SaaS',
+ icon: '☁️',
+ title: 'Exemplo de operação para um SaaS',
+ before: 'Produto bom, mas ninguém sabe. Concorrentes dominam o Google e o LinkedIn.',
+ after: 'Conteúdo de topo de funil (SEO) + conteúdo de conversão (cases) + nurturing.',
+ result: 'Tráfego orgânico cresce 200% em 4 meses. Trial aumenta sem gastar mais com ads.',
+ },
 ];
 
 export default function SocialJobs() {
@@ -206,16 +265,16 @@ export default function SocialJobs() {
 
  {/* CTA ÚNICO */}
  <a
- href="https://wa.me/5511914088571?text=Olá!%20Quero%20ver%20o%20SocialJobs%20funcionando%20na%20minha%20empresa"
+ href="https://wa.me/5511914088571?text=Olá!%20Quero%20minha%20operação%20de%20conteúdo%20com%20IA"
  target="_blank"
  rel="noopener noreferrer"
  className="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl sm:text-2xl transition-all duration-300 shadow-2xl shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-105 active:scale-[0.98]"
  >
- QUERO CONTEÚDO TODO DIA →
+ QUERO MINHA OPERAÇÃO DE CONTEÚDO →
  </a>
 
  <p className="text-gray-500 text-sm mt-4">
- Sem compromisso. A gente conversa e você decide.
+ Receba um diagnóstico da sua presença digital em até 24h.
  </p>
  </div>
  </section>
@@ -231,6 +290,14 @@ export default function SocialJobs() {
  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Veja o sistema em operação</h2>
  <p className="text-gray-400 text-lg max-w-2xl mx-auto">
  Não é demo. Não é GIF. É o sistema real funcionando — o mesmo que opera a presença digital da Sistema Britto.
+ </p>
+ </div>
+
+ {/* Prova institucional */}
+ <div className="bg-orange-500/8 border border-orange-500/20 rounded-2xl p-6 mb-8 max-w-3xl mx-auto">
+ <p className="text-orange-400 text-sm font-bold uppercase tracking-wider mb-2">A Sistema Britto é o primeiro cliente do SocialJobs</p>
+ <p className="text-gray-300 text-sm leading-relaxed">
+ Este site, nossos posts e nossa operação de aquisição são parte da vitrine do SocialJobs. Usamos internamente o mesmo sistema que vendemos — uma operação de IA que cria, agenda, publica, mede e melhora conteúdo para atrair clientes.
  </p>
  </div>
 
@@ -293,9 +360,6 @@ export default function SocialJobs() {
  <div className="text-white font-semibold text-sm">{step.label}</div>
  <div className="text-gray-500 text-xs">{step.desc}</div>
  </div>
- {i < PIPELINE_STEPS.length - 1 && (
- <div className="absolute left-5 top-10 w-px h-4 bg-white/10" style={{ marginLeft: '20px' }} />
- )}
  </div>
  ))}
  </div>
@@ -324,7 +388,32 @@ export default function SocialJobs() {
  </div>
  </section>
 
- {/* ===== 5 REDES ===== */}
+ {/* ===== FEATURES DO SOCIALJOBS ===== */}
+ <section className="py-20 px-4">
+ <div className="max-w-6xl mx-auto">
+ <div className="text-center mb-14">
+ <span className="inline-flex items-center gap-2 bg-orange-500/15 border border-orange-500/25 rounded-full px-4 py-2 mb-6">
+ <span className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
+ <span className="text-orange-400 text-xs font-bold uppercase tracking-wider">O que o SocialJobs faz por você</span>
+ </span>
+ <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Da ideia ao post publicado — sem você tocar em nada</h2>
+ <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+ Cada funcionalidade foi pensada pra transformar conteúdo em aquisição. Sem ferramentas separadas. Sem jornadas manuais. Um sistema.
+ </p>
+ </div>
+
+ <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+ {FEATURES.map((f, i) => (
+ <div key={i} className="bg-[#111111]/60 border border-white/[0.06] rounded-xl p-4 text-center hover:border-orange-500/30 transition-all duration-300">
+ <div className="text-2xl mb-2">{f.icon}</div>
+ <div className="text-white font-semibold text-sm">{f.label}</div>
+ </div>
+ ))}
+ </div>
+ </div>
+ </section>
+
+ {/* ===== REDES SOCIAIS SUPORTADAS ===== */}
  <section className="py-20 px-4 bg-[#111111]/50">
  <div className="max-w-6xl mx-auto">
  <div className="text-center mb-14">
@@ -344,7 +433,11 @@ export default function SocialJobs() {
  return (
  <div
  key={i}
- className="group bg-[#0a0a0a]/80 backdrop-blur-sm rounded-2xl p-6 border border-white/[0.06] hover:border-orange-500/40 transition-all duration-300 hover:-translate-y-1"
+ className={`group bg-[#0a0a0a]/80 backdrop-blur-sm rounded-2xl p-6 border transition-all duration-300 hover:-translate-y-1 ${
+ net.supported
+ ? 'border-white/[0.06] hover:border-orange-500/40'
+ : 'border-white/[0.04] opacity-60'
+ }`}
  >
  <div className="flex items-center gap-3 mb-4">
  <div className="w-12 h-12 rounded-xl bg-[#111111] border border-white/[0.06] flex items-center justify-center flex-shrink-0 group-hover:border-orange-500/30 transition-colors">
@@ -352,10 +445,17 @@ export default function SocialJobs() {
  </div>
  <div>
  <h3 className="text-white font-bold text-lg">{net.name}</h3>
- <span className="text-orange-400 text-xs font-bold uppercase tracking-wider">{net.metric}</span>
+ <span className={`text-xs font-bold uppercase tracking-wider ${
+ net.supported ? 'text-orange-400' : 'text-gray-500'
+ }`}>{net.metric}</span>
  </div>
  </div>
  <p className="text-gray-400 text-sm leading-relaxed">{net.desc}</p>
+ {!net.supported && (
+ <div className="mt-3 inline-block bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs text-gray-500">
+ Roadmap
+ </div>
+ )}
  </div>
  );
  })}
@@ -416,8 +516,52 @@ export default function SocialJobs() {
  </div>
  </section>
 
- {/* ===== AGENTES POR TRÁS ===== */}
+ {/* ===== EXEMPLOS DE OPERAÇÃO ===== */}
  <section className="py-20 px-4">
+ <div className="max-w-6xl mx-auto">
+ <div className="text-center mb-14">
+ <span className="inline-flex items-center gap-2 bg-orange-500/15 border border-orange-500/25 rounded-full px-4 py-2 mb-6">
+ <span className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
+ <span className="text-orange-400 text-xs font-bold uppercase tracking-wider">Exemplos de operação</span>
+ </span>
+ <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Veja como funciona na prática</h2>
+ <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+ Exemplos genéricos de operação — não são cases reais. Servem pra você visualizar como o SocialJobs se adapta ao seu segmento.
+ </p>
+ </div>
+
+ <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+ {EXAMPLES.map((ex, i) => (
+ <div key={i} className="bg-[#111111]/80 backdrop-blur-sm rounded-2xl p-6 border border-white/[0.06] hover:border-orange-500/30 transition-all duration-300">
+ <div className="flex items-center gap-3 mb-4">
+ <div className="text-3xl">{ex.icon}</div>
+ <div>
+ <div className="text-orange-400 text-xs font-bold uppercase tracking-wider mb-1">Exemplo</div>
+ <h3 className="text-white font-bold text-lg">{ex.title}</h3>
+ </div>
+ </div>
+ <div className="space-y-3">
+ <div>
+ <div className="text-gray-500 text-xs uppercase tracking-wider font-bold mb-1">Antes</div>
+ <p className="text-gray-300 text-sm">{ex.before}</p>
+ </div>
+ <div>
+ <div className="text-orange-400 text-xs uppercase tracking-wider font-bold mb-1">Depois</div>
+ <p className="text-gray-300 text-sm">{ex.after}</p>
+ </div>
+ <div className="pt-3 border-t border-white/[0.06]">
+ <div className="text-white font-bold text-sm">Resultado esperado</div>
+ <p className="text-orange-400 text-sm font-semibold">{ex.result}</p>
+ </div>
+ </div>
+ </div>
+ ))}
+ </div>
+ </div>
+ </section>
+
+ {/* ===== AGENTES POR TRÁS ===== */}
+ <section className="py-20 px-4 bg-[#111111]/50">
  <div className="max-w-6xl mx-auto">
  <div className="text-center mb-14">
  <span className="inline-flex items-center gap-2 bg-orange-500/15 border border-orange-500/25 rounded-full px-4 py-2 mb-6">
@@ -480,7 +624,7 @@ export default function SocialJobs() {
  </section>
 
  {/* ===== O QUE VOCÊ LEVA ===== */}
- <section className="py-20 px-4 bg-[#111111]/50">
+ <section className="py-20 px-4">
  <div className="max-w-5xl mx-auto">
  <div className="text-center mb-14">
  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">O que você leva</h2>
@@ -502,63 +646,6 @@ export default function SocialJobs() {
  </div>
  </section>
 
- {/* ===== CASES & MÉTRICAS ===== */}
- <section className="py-20 px-4">
- <div className="max-w-6xl mx-auto">
- <div className="text-center mb-14">
- <span className="inline-flex items-center gap-2 bg-orange-500/15 border border-orange-500/25 rounded-full px-4 py-2 mb-6">
- <span className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
- <span className="text-orange-400 text-xs font-bold uppercase tracking-wider">Resultados reais</span>
- </span>
- <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Quem usa, não volta pro braço</h2>
- <p className="text-gray-400 text-lg max-w-2xl mx-auto">
- Casos genéricos de negócios que automatizaram conteúdo e transformaram presença digital em receita.
- </p>
- </div>
-
- <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
- {[
- {
- segment: 'SaaS de Gestão',
- before: '1 post por semana no LinkedIn. Nenhum no Instagram. Ninguém sabia que existia.',
- after: 'Feed diário em 3 redes. Conteúdo gerando 200+ leads/mês.',
- result: 'De 0 a 2.400 seguidores em 6 meses.',
- },
- {
- segment: 'E-commerce de Moda',
- before: 'Freelancer atrasando entrega. 3 redes abandonadas. Vendas caindo.',
- after: 'Reels diários + stories automáticos. Catálogo sincronizado.',
- result: '3x mais engajamento. 40% das vendas vêm do Instagram.',
- },
- {
- segment: 'Infra para Escritórios',
- before: 'Nenhuma presença digital. Concorrentes dominando o LinkedIn.',
- after: 'Posts de autoridade 3x/semana. Cases e análises de mercado.',
- result: 'Top 3 no Google para palavras-chave do nicho.',
- },
- ].map((caseItem, i) => (
- <div key={i} className="bg-[#111111]/80 backdrop-blur-sm rounded-2xl p-6 border border-white/[0.06] hover:border-orange-500/30 transition-all duration-300">
- <div className="text-orange-400 text-xs font-bold uppercase tracking-wider mb-4">{caseItem.segment}</div>
- <div className="space-y-3">
- <div>
- <div className="text-gray-500 text-xs uppercase tracking-wider font-bold mb-1">Antes</div>
- <p className="text-gray-300 text-sm">{caseItem.before}</p>
- </div>
- <div>
- <div className="text-orange-400 text-xs uppercase tracking-wider font-bold mb-1">Depois</div>
- <p className="text-gray-300 text-sm">{caseItem.after}</p>
- </div>
- <div className="pt-3 border-t border-white/[0.06]">
- <div className="text-white font-bold text-sm">Resultado</div>
- <p className="text-orange-400 text-sm font-semibold">{caseItem.result}</p>
- </div>
- </div>
- </div>
- ))}
- </div>
- </div>
- </section>
-
  {/* ===== CTA FINAL ===== */}
  <section className="py-24 px-4 relative overflow-hidden">
  <div className="absolute inset-0 bg-gradient-to-t from-orange-500/5 via-transparent to-transparent" />
@@ -573,12 +660,12 @@ export default function SocialJobs() {
  </p>
 
  <a
- href="https://wa.me/5511914088571?text=Olá!%20Quero%20ver%20o%20SocialJobs%20funcionando%20na%20minha%20empresa"
+ href="https://wa.me/5511914088571?text=Olá!%20Quero%20minha%20operação%20de%20conteúdo%20com%20IA"
  target="_blank"
  rel="noopener noreferrer"
  className="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl sm:text-2xl transition-all duration-300 shadow-2xl shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-105 active:scale-[0.98]"
  >
- QUERO CONTEÚDO TODO DIA →
+ QUERO MINHA OPERAÇÃO DE CONTEÚDO →
  </a>
 
  <p className="text-gray-500 text-sm mt-4">
