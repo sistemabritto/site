@@ -10,7 +10,7 @@ const STAGE_FECHADO = 'f6229e34-46c2-4a10-890b-df5969489033';
 
 const EVO_API_URL = process.env.EVO_API_URL || 'https://go.workflowapi.com.br';
 const EVO_INSTANCE = process.env.EVO_INSTANCE || 'sistema-britto-business';
-const EVO_TOKEN = process.env.EVO_TOKEN || 'ed260550-affc-42f1-92e3-45affea89e05';
+const EVO_TOKEN = process.env.EVO_TOKEN || '';
 const SDR_PHONE = '5511914088571';
 
 // AbacatePay webhook secret (configurado no dashboard ao criar webhook)
@@ -18,7 +18,10 @@ const ABACATEPAY_WEBHOOK_SECRET = process.env.ABACATEPAY_WEBHOOK_SECRET || '';
 
 // AbacatePay PUBLIC KEY para validação HMAC
 // Fonte: https://docs.abacatepay.com/pages/webhooks/security
-const ABACATEPAY_PUBLIC_KEY = 't9dXRhHHo3yDEj5pVDYz0frf7q6bMKyMRmxxCPIPp3RCplBfXRxqlC6ZpiWmOqj4L63qEaeUOtrCI8P0VMUgo6iIga2ri9ogaHFs0WIIywSMg0q7RmBfybe1E5XJcfC4IW3alNqym0tXoAKkzvfEjZxV6bE0oG2zJrNNYmUCKZyV0KZ3JS8Votf9EAWWYdiDkMkpbMdPggfh1EqHlVkMiTady6jOR3hyzGEHrIz2Ret0xHKMbiqkr9HS1JhNHDX9';
+// Chave de verificação da assinatura do webhook. Apesar do nome, entra num
+// HMAC — que é simétrico —, então funciona como segredo compartilhado e não
+// pode viver num repositório público.
+const ABACATEPAY_PUBLIC_KEY = process.env.ABACATEPAY_PUBLIC_KEY || '';
 
 // Supabase
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';

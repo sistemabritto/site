@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 // Evolution API credentials
 const EVO_URL = 'https://go.workflowapi.com.br/send/text';
-const EVO_API_KEY = 'ed260550-affc-42f1-92e3-45affea89e05';
+const EVO_API_KEY = process.env.EVO_TOKEN || '';
 
 /**
  * POST /api/otp/send
