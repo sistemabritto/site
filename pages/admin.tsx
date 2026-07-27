@@ -32,6 +32,15 @@ interface AnalyticsData {
   dailyViews: { date: string; views: number }[];
   ctaClicks: { page: string; label: string; action: string; clicks: number }[];
   conversionByPage: { path: string; pageviews: number; clicks: number; rate: number }[];
+  // Atribuição: de onde veio quem clicou. A campanha é o slug do artigo, então
+  // byCampaign responde "qual post converteu" — a única pergunta que justifica
+  // publicar 21 artigos por semana.
+  attribution?: {
+    clicksAttributed: number;
+    clicksUnattributed: number;
+    bySource: { source: string; clicks: number; sessions: number; rate: number }[];
+    byCampaign: { campaign: string; clicks: number }[];
+  };
   range: string;
   days: number;
 }
@@ -500,6 +509,101 @@ export default function Admin() {
                       <div className="text-gray-500 text-xs mt-1">{analytics.totalCtaClicks} cliques CTA</div>
                     </div>
                   </div>
+
+                  {/* ── FUNIL ────────────────────────────────────────────────
+                      Números soltos não mostram gargalo. O funil mostra: cada
+                      etapa vem com a queda percentual ao lado, e o maior número
+                      vermelho é onde mexer muda o resultado.
+
+                      É a mesma leitura que a rotina de domingo faz sozinha
+                      (ADWs/routines/weekly_funnel_review.py no OmniNexus) para
+                      abrir ticket com hipótese. Aqui é para o humano ver. */}
+                  <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20 mb-6">
+                    <h3 className="text-lg font-bold text-white mb-1">🔻 Funil</h3>
+                    <p className="text-gray-500 text-sm mb-5">
+                      A maior queda é o gargalo. É por ela que se começa.
+                    </p>
+                    {(() => {
+                      const etapas = [
+                        { nome: 'Visitou o site', valor: analytics.uniqueVisitors },
+                        { nome: 'Clicou num CTA', valor: analytics.totalCtaClicks },
+                        { nome: 'Virou lead', valor: totalLeads },
+                        { nome: 'Fechou', valor: stages.find(s => s.name.toLowerCase() === 'fechado')?.count ?? 0 },
+                      ];
+                      const base = etapas[0].valor || 1;
+                      // A pior queda é destacada; sem ela o operador lê quatro
+                      // números e não sabe qual atacar primeiro.
+                      let piorIdx = -1, piorPerda = 0;
+                      etapas.forEach((e, i) => {
+                        if (i === 0) return;
+                        const perda = etapas[i - 1].valor - e.valor;
+                        if (etapas[i - 1].valor >= 20 && perda > piorPerda) { piorPerda = perda; piorIdx = i; }
+                      });
+                      return (
+                        <div className="space-y-2">
+                          {etapas.map((e, i) => {
+                            const anterior = i > 0 ? etapas[i - 1].valor : null;
+                            const queda = anterior && anterior > 0
+                              ? Math.round(100 * (anterior - e.valor) / anterior) : null;
+                            const largura = Math.max(4, Math.round(100 * e.valor / base));
+                            const critica = i === piorIdx;
+                            return (
+                              <div key={e.nome}>
+                                <div className="flex items-baseline justify-between gap-3 mb-1">
+                                  <span className="text-gray-300 text-sm">{e.nome}</span>
+                                  <span className="flex items-baseline gap-2">
+                                    <span className="text-white font-bold tabular-nums">{e.valor.toLocaleString('pt-BR')}</span>
+                                    {queda !== null && (
+                                      <span className={`text-xs tabular-nums ${critica ? 'text-red-400 font-bold' : 'text-gray-500'}`}>
+                                        −{queda}%
+                                      </span>
+                                    )}
+                                  </span>
+                                </div>
+                                <div className="h-2 rounded-full bg-white/[0.06] overflow-hidden">
+                                  <div
+                                    className={`h-full rounded-full transition-all ${critica ? 'bg-red-500/70' : 'bg-green-500/60'}`}
+                                    style={{ width: `${largura}%` }}
+                                  />
+                                </div>
+                              </div>
+                            );
+                          })}
+                          {piorIdx > 0 && (
+                            <p className="text-red-400/90 text-sm pt-3">
+                              Maior perda: <strong>{piorPerda.toLocaleString('pt-BR')} pessoas</strong> entre
+                              {' '}&quot;{etapas[piorIdx - 1].nome}&quot; e &quot;{etapas[piorIdx].nome}&quot;.
+                            </p>
+                          )}
+                        </div>
+                      );
+                    })()}
+                  </div>
+
+                  {/* ── ATRIBUIÇÃO ─────────────────────────────────────────── */}
+                  {analytics.attribution && analytics.attribution.byCampaign.length > 0 && (
+                    <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20 mb-6">
+                      <h3 className="text-lg font-bold text-white mb-1">🎯 Qual conteúdo gerou clique</h3>
+                      <p className="text-gray-500 text-sm mb-4">
+                        A campanha da UTM é o slug do artigo — é isto que separa
+                        um post que converte de vinte que não convertem.
+                      </p>
+                      <div className="space-y-2">
+                        {analytics.attribution.byCampaign.slice(0, 8).map(c => (
+                          <div key={c.campaign} className="flex items-baseline justify-between gap-3 text-sm">
+                            <span className="text-gray-300 truncate">{c.campaign}</span>
+                            <span className="text-green-400 font-bold tabular-nums shrink-0">{c.clicks}</span>
+                          </div>
+                        ))}
+                      </div>
+                      {analytics.attribution.clicksUnattributed > 0 && (
+                        <p className="text-gray-500 text-xs mt-4 pt-3 border-t border-white/[0.06]">
+                          {analytics.attribution.clicksUnattributed} clique(s) sem origem identificada —
+                          chegaram sem pageview na janela, ou sem UTM no link.
+                        </p>
+                      )}
+                    </div>
+                  )}
 
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                     {/* Daily views mini chart (CSS bars) */}
