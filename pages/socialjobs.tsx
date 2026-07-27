@@ -217,7 +217,7 @@ export default function SocialJobs() {
  <>
  <Meta
  title="A operação de conteúdo que roda sem você lembrar | SocialJobs"
- description="21 artigos por semana, três por dia, com pauta escolhida por volume de busca real, capa gerada e medição de qual artigo trouxe clique. É a mesma esteira que publica o nosso blog. Vá conferir."
+ description="LinkedIn que traz consultoria, YouTube que constrói autoridade, Instagram que vende. Os agentes pesquisam o tema por volume de busca real, publicam no blog e derivam o post de cada rede. Você aprova e sai."
  path="/socialjobs"
  />
 
@@ -264,11 +264,12 @@ export default function SocialJobs() {
  <span className="text-white font-semibold">não foi por falta de disciplina. Foi por falta de operação.</span>
  </p>
  <p className="text-lg text-gray-400 leading-relaxed">
- A nossa publica <span className="text-white font-semibold">21 artigos por semana</span>, três por dia,
- com pauta escolhida por volume de busca real, capa gerada e medição de qual
- artigo trouxe clique.{' '}
- <a href="https://blog.sistemabritto.com.br" target="_blank" rel="noopener" className="text-orange-400 underline underline-offset-2 hover:text-orange-300">Vá conferir o blog</a>
- {'. '}Tudo o que está lá saiu dessa esteira, sem ninguém escrevendo à mão.
+ A nossa enche <span className="text-white font-semibold">LinkedIn, YouTube e Instagram</span> todo
+ dia, com o tema escolhido por volume de busca real, não por palpite. O texto
+ longo vira{' '}
+ <a href="https://blog.sistemabritto.com.br" target="_blank" rel="noopener" className="text-orange-400 underline underline-offset-2 hover:text-orange-300">artigo no blog</a>
+ {', '}que é o motor da pauta, e cada rede recebe a sua versão. Você aprova
+ no celular e vai cuidar do resto.
  </p>
  </div>
 
@@ -288,6 +289,57 @@ export default function SocialJobs() {
  </p>
  </div>
  </section>
+
+ {/* ===== O PAPEL DE CADA REDE =====
+     O Felipe corrigiu a página em 27/07/2026: ela vendia a esteira do blog,
+     que é o meio, e não as redes, que é o que o cliente quer. O blog continua
+     no texto porque é ele quem escolhe a pauta por volume de busca, mas entra
+     como motor, não como produto. */}
+ <section className="py-20 px-4 border-t border-white/[0.06]">
+ <div className="max-w-5xl mx-auto">
+ <div className="text-center mb-12">
+ <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
+ Três redes, três trabalhos diferentes
+ </h2>
+ <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+ Postar a mesma coisa nas três é o erro que faz o perfil parecer ativo
+ e não trazer ninguém. Cada uma tem uma função, e o conteúdo é montado
+ para ela.
+ </p>
+ </div>
+
+ <div className="grid md:grid-cols-3 gap-5">
+ {[
+ { rede: 'LinkedIn', funcao: 'Traz consultoria',
+   desc: 'É onde está quem decide e quem tem orçamento. O post sai em formato de análise, com o raciocínio à mostra, porque ali ninguém contrata quem só afirma. Daqui vem conversa de projeto, não curtida.',
+   cor: 'text-sky-400', borda: 'hover:border-sky-500/30' },
+ { rede: 'YouTube', funcao: 'Constrói autoridade',
+   desc: 'Vídeo é o único formato em que a pessoa ouve você por dez minutos. É o que transforma "vi um post" em "conheço o cara". Roteiro, corte e publicação saem da mesma pauta do artigo.',
+   cor: 'text-red-400', borda: 'hover:border-red-500/30' },
+ { rede: 'Instagram', funcao: 'Vende',
+   desc: 'Alcance e DM. Reels e carrossel levam para a conversa, e a conversa leva para o orçamento. É a rede mais rápida do funil e a que mais castiga quem some por uma semana.',
+   cor: 'text-pink-400', borda: 'hover:border-pink-500/30' },
+ ].map((r) => (
+ <div key={r.rede} className={`bg-[#111111] border border-white/[0.06] ${r.borda} rounded-2xl p-6 transition-colors duration-300`}>
+ <div className={`${r.cor} font-bold text-lg mb-1`}>{r.rede}</div>
+ <div className="text-white font-semibold mb-3">{r.funcao}</div>
+ <p className="text-gray-400 text-sm leading-relaxed">{r.desc}</p>
+ </div>
+ ))}
+ </div>
+
+ <div className="mt-10 bg-[#111111]/60 border border-white/[0.06] rounded-2xl p-6 sm:p-8">
+ <p className="text-gray-300 leading-relaxed">
+ <span className="text-white font-semibold">De onde sai o assunto:</span> os
+ agentes pesquisam o que seu público realmente busca, com volume de busca
+ real, escrevem o artigo longo no blog e derivam dali o post de cada rede.
+ O blog não é o produto. Ele é o motor que garante que as três redes falem
+ de algo que alguém procura, em vez de mais uma frase motivacional.
+ </p>
+ </div>
+ </div>
+ </section>
+
 
  {/* ===== VEJA O SISTEMA EM OPERAÇÃO ===== */}
  <section className="py-20 px-4 bg-[#111111]/50">
