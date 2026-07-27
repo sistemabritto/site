@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { trackCta } from './_app';
 import Meta from '../components/Meta';
 import PhoneInput from '../components/PhoneInput';
 
@@ -296,6 +297,9 @@ export default function Quiz() {
         msgType = 'custom';
       }
       const msg = buildWhatsAppMsg(msgType, outcome, finalAnswers);
+      // A navegação sai da página; `track()` usa keepalive, então o registro
+      // sobrevive. Sem isto, a conversão do quiz nunca apareceria no funil.
+      trackCta('/quiz', 'CONCLUIR QUIZ NO WHATSAPP', msgType);
       window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
     }
   };

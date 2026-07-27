@@ -99,7 +99,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // 7. CTA clicks per page
     const { data: ctaData } = await supabase
       .from('cta_clicks')
-      .select('page, cta_label, cta_action')
+      .select('session_id, page, cta_label, cta_action')
       .gte('created_at', since);
 
     const ctaMap: Record<string, { label: string; action: string; clicks: number }> = {};
@@ -139,6 +139,72 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .filter(p => p.pageviews >= 3)
       .filter(p => p.rate > 0 || p.clicks > 0)
       .slice(0, 15);
+
+    // 10b. Atribuição: de onde veio quem clicou.
+    //
+    // `cta_clicks` não guarda UTM — e não precisa. O `session_id` é o mesmo
+    // que o pageview registrou com a utm_source/campaign de entrada, então a
+    // origem se recupera por junção. Sem isto o painel diz "houve 12 cliques"
+    // e não diz qual artigo do blog os trouxe, que é a única pergunta que
+    // justifica publicar 21 artigos por semana.
+    //
+    // A campanha é o slug do artigo (ver `utm.py` no Nexus), então `byCampaign`
+    // responde "qual post converteu" diretamente.
+    const sessionOrigin: Record<string, { source: string; campaign: string }> = {};
+    const { data: originData } = await supabase
+      .from('pageviews')
+      .select('session_id, utm_source, utm_campaign, created_at')
+      .gte('created_at', since)
+      .order('created_at', { ascending: true });
+
+    for (const row of originData || []) {
+      // O PRIMEIRO pageview da sessão é o que carrega a origem real; os
+      // seguintes são navegação interna e chegam sem UTM nenhuma.
+      if (!sessionOrigin[row.session_id]) {
+        sessionOrigin[row.session_id] = {
+          source: row.utm_source || 'direct',
+          campaign: row.utm_campaign || '',
+        };
+      }
+    }
+
+    const clicksBySource: Record<string, number> = {};
+    const clicksByCampaign: Record<string, number> = {};
+    let clicksAttributed = 0;
+    for (const row of ctaData || []) {
+      const origin = sessionOrigin[row.session_id];
+      if (!origin) continue;   // clique sem pageview na janela — não inventar origem
+      clicksAttributed++;
+      clicksBySource[origin.source] = (clicksBySource[origin.source] || 0) + 1;
+      if (origin.campaign) {
+        clicksByCampaign[origin.campaign] = (clicksByCampaign[origin.campaign] || 0) + 1;
+      }
+    }
+
+    const ordenar = (m: Record<string, number>, chave: string) =>
+      Object.entries(m)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 20)
+        .map(([k, clicks]) => ({ [chave]: k, clicks }));
+
+    // Taxa por origem: visitas daquela origem que viraram clique.
+    const viewsBySourceCount: Record<string, number> = {};
+    for (const sid of Object.keys(sessionOrigin)) {
+      const src = sessionOrigin[sid].source;
+      viewsBySourceCount[src] = (viewsBySourceCount[src] || 0) + 1;
+    }
+    const attribution = {
+      clicksAttributed,
+      clicksUnattributed: (ctaData || []).length - clicksAttributed,
+      bySource: ordenar(clicksBySource, 'source').map((r: any) => ({
+        ...r,
+        sessions: viewsBySourceCount[r.source] || 0,
+        rate: viewsBySourceCount[r.source]
+          ? parseFloat(((r.clicks / viewsBySourceCount[r.source]) * 100).toFixed(2))
+          : 0,
+      })),
+      byCampaign: ordenar(clicksByCampaign, 'campaign'),
+    };
 
     // 11. Quiz funnel analytics — stage completion rates
     let quizFunnel: any = null;
@@ -224,6 +290,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     dailyViews,
     ctaClicks,
     conversionByPage,
+    attribution,
     quizFunnel,
     range,
     days,

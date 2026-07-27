@@ -1,3 +1,4 @@
+import { trackCta } from './_app';
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -20,6 +21,7 @@ export default function Obrigado() {
   }, [router]);
 
   const handleUpsell = async () => {
+  trackCta('/obrigado', 'ACEITAR UPSELL', 'pos-compra');
   setLoading(true);
  
   // Recupera customer do sessionStorage (salvo no quiz/resultado)

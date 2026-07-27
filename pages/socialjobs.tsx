@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { trackCta } from './_app';
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -266,6 +267,7 @@ export default function SocialJobs() {
  {/* CTA ÚNICO */}
  <a
  href="https://wa.me/5511914088571?text=Olá!%20Quero%20minha%20operação%20de%20conteúdo%20com%20IA"
+ onClick={() => trackCta('/socialjobs', 'QUERO MINHA OPERAÇÃO DE CONTEÚDO', 'hero')}
  target="_blank"
  rel="noopener noreferrer"
  className="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl sm:text-2xl transition-all duration-300 shadow-2xl shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-105 active:scale-[0.98]"
@@ -661,6 +663,7 @@ export default function SocialJobs() {
 
  <a
  href="https://wa.me/5511914088571?text=Olá!%20Quero%20minha%20operação%20de%20conteúdo%20com%20IA"
+ onClick={() => trackCta('/socialjobs', 'QUERO MINHA OPERAÇÃO DE CONTEÚDO', 'final')}
  target="_blank"
  rel="noopener noreferrer"
  className="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl sm:text-2xl transition-all duration-300 shadow-2xl shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-105 active:scale-[0.98]"
