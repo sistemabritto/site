@@ -1,11 +1,26 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { verifyToken } from './auth';
 
 // EvoCRM API config
 const EVOCRM_API_URL = process.env.EVOCRM_API_URL || 'https://evoapi.workflowapi.com.br';
-const EVOCRM_API_TOKEN = process.env['EVOCRM' + '_API_TOKEN'] || '3e21328779b31ad40f791f18126b86ffd41cb9739b7a9c3fde42bc296f20f20a';
+const EVOCRM_API_TOKEN = process.env.EVOCRM_API_TOKEN || '';
 const PIPELINE_ID = 'eb72af5c-28f7-4948-ae50-9c81922d161e';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  // Auth check — mesmo padrão de analytics.ts e config.ts. Este era o único
+  // endpoint de /api/admin/ sem verificação: respondia 200 para qualquer um e
+  // devolvia o pipeline inteiro, com nome, e-mail e telefone de cada lead.
+  const authHeader = req.headers.authorization || '';
+  if (!verifyToken(authHeader.replace('Bearer ', ''))) {
+    return res.status(401).json({ error: 'Token invalido' });
+  }
+
+  if (!EVOCRM_API_TOKEN) {
+    // Falhar explícito é melhor que responder com uma lista vazia que parece
+    // "nenhum lead ainda" — foi assim que a métrica ficaria mentindo.
+    return res.status(500).json({ error: 'EVOCRM_API_TOKEN não configurado' });
+  }
+
   // Get pipeline items (leads) from EvoCRM
   try {
     const url = `${EVOCRM_API_URL}/api/v1/pipelines/${PIPELINE_ID}`;

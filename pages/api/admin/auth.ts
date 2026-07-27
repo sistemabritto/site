@@ -1,8 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import crypto from 'crypto';
 
-// Admin password — set ADMIN_PASSWORD in Vercel env vars
-const ADMIN_PASSWORD = process.env['ADMIN' + '_PASSWORD'] || 'britto2024';
+// Admin password — set ADMIN_PASSWORD in Vercel env vars.
+//
+// Sem fallback, e a concatenação de string saiu junto. Ela existia para
+// escapar de scanner de segredo, o que só escondia o problema: a senha estava
+// legível num repositório PÚBLICO, e qualquer falha na variável de ambiente
+// devolvia o painel inteiro a ela, em silêncio.
+// Sem ADMIN_PASSWORD configurada, ninguém entra — que é o comportamento certo.
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
 
 function hashPassword(password: string, salt: string): string {
   return crypto
@@ -18,6 +24,7 @@ function generateToken(): string {
 }
 
 export function verifyToken(token: string): boolean {
+  if (!ADMIN_PASSWORD) return false;   // sem senha configurada, nada é válido
   try {
     const [salt, hash] = token.split(':');
     if (!salt || !hash) return false;
@@ -31,6 +38,10 @@ export function verifyToken(token: string): boolean {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const { password } = req.body;
+    if (!ADMIN_PASSWORD) {
+      console.error('auth: ADMIN_PASSWORD não configurada');
+      return res.status(500).json({ error: 'Autenticação não configurada' });
+    }
     if (!password || password !== ADMIN_PASSWORD) {
       return res.status(401).json({ error: 'Senha incorreta' });
     }
