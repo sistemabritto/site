@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { trackCta } from './_app';
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -229,7 +230,7 @@ export default function Sistema() {
             </div>
 
             <button
-              onClick={() => setShowModal(true)}
+              onClick={() => { trackCta('/sistema', 'QUERO MEU PROJETO', 'hero'); setShowModal(true); }}
               className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl sm:text-2xl transition-all duration-300 shadow-2xl shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
             >
               QUERO MEU PROJETO →
@@ -527,7 +528,7 @@ export default function Sistema() {
             </p>
 
             <button
-              onClick={() => setShowModal(true)}
+              onClick={() => { trackCta('/sistema', 'QUERO MEU PROJETO', 'final'); setShowModal(true); }}
               className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl sm:text-2xl transition-all duration-300 shadow-2xl shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
             >
               QUERO MEU PROJETO →

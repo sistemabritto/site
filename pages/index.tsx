@@ -1,3 +1,4 @@
+import { trackCta } from './_app';
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -298,7 +299,7 @@ useEffect(() => {
 
           {/* CTA ÚNICO */}
           <button 
-            onClick={() => setShowModal(true)}
+            onClick={() => { trackCta('/', 'CONSTRUA SEUS ESPECIALISTAS', 'hero'); setShowModal(true); }}
             className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl transition-all duration-300 shadow-2xl shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
           >
             CONSTRUA SEUS ESPECIALISTAS →
@@ -456,7 +457,7 @@ useEffect(() => {
             WhatsApp IA, conteúdo infinito nas redes ou sistema sob medida — a gente dá braço pra sua operação.
           </p>
           <button 
-            onClick={() => setShowModal(true)}
+            onClick={() => { trackCta('/', 'CONSTRUA SEUS ESPECIALISTAS', 'meio'); setShowModal(true); }}
             className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl transition-all duration-300 shadow-2xl shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
           >
             CONSTRUA SEUS ESPECIALISTAS →
@@ -749,7 +750,7 @@ useEffect(() => {
       WhatsApp IA, conteúdo infinito nas redes ou sistema sob medida — a gente dá braço pra sua operação.
       </p>
       <button
-      onClick={() => setShowModal(true)}
+      onClick={() => { trackCta('/', 'CONSTRUA SEUS ESPECIALISTAS', 'final'); setShowModal(true); }}
       className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl transition-all duration-300 shadow-2xl shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
       >
       CONSTRUA SEUS ESPECIALISTAS →

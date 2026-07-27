@@ -1,3 +1,4 @@
+import { trackCta } from './_app';
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -23,7 +24,10 @@ const WHATSAPP_LABEL = encodeURIComponent('Olá! Vi o site e gostaria de mais in
 export default function WhatsApp() {
   const whatsappFallback = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_LABEL}`;
 
-  function handleCheckout() {
+  // `origem` distingue os dois botões da página. Sem isso o painel diria
+  // "houve um clique em /whatsapp" e não qual seção converteu.
+  function handleCheckout(origem: string) {
+    trackCta('/whatsapp', 'ATIVAR MEU WHATSAPP IA', origem);
     fetch('/api/abacatepay/checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -74,7 +78,7 @@ export default function WhatsApp() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
-                onClick={handleCheckout}
+                onClick={() => handleCheckout('hero')}
                 className="inline-flex items-center gap-3 bg-primary-500 hover:bg-primary-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-primary-500/25 cursor-pointer"
               >
                 ATIVAR MEU WHATSAPP IA →
@@ -222,7 +226,7 @@ export default function WhatsApp() {
                 </div>
 
                 <button
-                  onClick={handleCheckout}
+                  onClick={() => handleCheckout('preco')}
                   className="inline-flex items-center gap-3 bg-primary-500 hover:bg-primary-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-primary-500/25 w-full justify-center cursor-pointer"
                 >
                   ATIVAR MEU WHATSAPP IA →

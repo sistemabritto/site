@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { trackCta } from './_app';
 import Meta from '../components/Meta';
 import PhoneInput from '../components/PhoneInput';
 import { useRouter } from 'next/router';
@@ -34,6 +35,8 @@ export default function Resultado() {
   }, []);
 
   const handleCheckout = () => {
+    // Último passo antes do pagamento — o clique mais valioso do funil.
+    trackCta('/resultado', 'IR PARA O CHECKOUT', orderBump ? 'com-bump' : 'sem-bump');
     if (!customerData.email || !customerData.whatsapp) {
       setPendingCheckout(true);
       setShowDataModal(true);
@@ -90,6 +93,7 @@ export default function Resultado() {
   };
 
   const handleWhatsAppFallback = () => {
+    trackCta('/resultado', 'FALAR NO WHATSAPP', 'fallback');
   const NL = '%0A';
   const msg = encodeURIComponent(
   `🟢 *Quero o WhatsApp + IA*${NL}${NL}` +

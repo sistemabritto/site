@@ -605,7 +605,7 @@ export default function Admin() {
                     <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20">
                       <h3 className="text-lg font-bold text-white mb-4">👆 Cliques em CTAs</h3>
                       {analytics.ctaClicks.length === 0 ? (
-                        <p className="text-gray-500 text-sm">Sem cliques em CTAs registrados ainda. Adicione trackCta() nos botões do site.</p>
+                        <p className="text-gray-500 text-sm">Nenhum clique em CTA nesta janela. Os botões já registram — se a página teve visitas e nenhum clique, é dado, não falta de instrumentação.</p>
                       ) : (
                         <div className="space-y-2">
                           {analytics.ctaClicks.map((c, i) => (
