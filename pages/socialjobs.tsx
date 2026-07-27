@@ -216,8 +216,8 @@ export default function SocialJobs() {
  return (
  <>
  <Meta
- title="SocialJobs — Conteúdo Infinito em 5 Redes com IA — Sistema Britto"
- description="O mesmo sistema que usamos para atrair clientes para a Sistema Britto opera sua presença digital. Conteúdo diário, calendário editorial, aprovação e publicação multicanal."
+ title="A operação de conteúdo que roda sem você lembrar — SocialJobs"
+ description="21 artigos por semana, três por dia, com pauta escolhida por volume de busca real, capa gerada e medição de qual artigo trouxe clique. É a mesma esteira que publica o nosso blog — vá conferir."
  path="/socialjobs"
  />
 
@@ -245,22 +245,30 @@ export default function SocialJobs() {
  <div className="relative z-10 max-w-4xl mx-auto">
  <div className="inline-flex items-center gap-2 bg-orange-500/15 border border-orange-500/25 rounded-full px-4 py-2 mb-8">
  <span className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
- <span className="text-orange-400 text-xs font-bold uppercase tracking-wider">SocialJobs — vitrine viva</span>
+ <span className="text-orange-400 text-xs font-bold uppercase tracking-wider">Rodando agora, não em apresentação</span>
  </div>
 
- {/* HEADLINE — o produto é o próprio site */}
+ {/* HEADLINE — a dor de quem já tentou manter constância sozinho. */}
  <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
- Conteúdo que trabalha por você:<br />
- <span className="text-orange-400">cria, agenda, publica e melhora em várias redes.</span>
+ Você já sabe que precisa postar todo dia.<br />
+ <span className="text-orange-400">O problema nunca foi saber.</span>
  </h1>
 
- {/* SUBHEADLINE — prova social do produto */}
+ {/* PROVA VERIFICÁVEL — número específico que o leitor pode conferir sozinho.
+     "Dezenas de agentes de IA" é promessa genérica; "21 artigos por semana,
+     vá ver" é evidência. A diferença é que a segunda pode ser desmentida. */}
  <div className="max-w-2xl mx-auto mb-8 space-y-4">
  <p className="text-xl text-gray-300 leading-relaxed">
- O mesmo sistema que usamos para atrair clientes para a <span className="text-white font-semibold">Sistema Britto</span> pode operar a presença digital da sua empresa — com conteúdo diário, calendário editorial, aprovação e publicação multicanal.
+ Você senta para escrever, trava na primeira linha, deixa para amanhã. Três
+ semanas depois o perfil está parado — e{' '}
+ <span className="text-white font-semibold">não foi por falta de disciplina. Foi por falta de operação.</span>
  </p>
  <p className="text-lg text-gray-400 leading-relaxed">
- Nós não só vendemos SocialJobs. Nós usamos. Todo conteúdo que você vê aqui foi criado, agendado e publicado por dezenas de agentes de IA trabalhando em paralelo.
+ A nossa publica <span className="text-white font-semibold">21 artigos por semana</span>, três por dia,
+ com pauta escolhida por volume de busca real, capa gerada e medição de qual
+ artigo trouxe clique.{' '}
+ <a href="https://blog.sistemabritto.com.br" target="_blank" rel="noopener" className="text-orange-400 underline underline-offset-2 hover:text-orange-300">Vá conferir o blog</a>
+ {' '}— tudo o que está lá saiu dessa esteira, sem ninguém escrevendo à mão.
  </p>
  </div>
 
