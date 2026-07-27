@@ -138,8 +138,8 @@ export default function Sistema() {
   return (
     <>
       <Meta
-        title="Soluções Web Sob Encomenda — SaaS, Loja, IA, Funil, Integrações — Sistema Britto"
-        description="Eu construo soluções web sob medida pro seu negócio. SaaS, loja virtual, assistente de IA, funil de vendas, integração custom, white-label. Código seu, domínio seu, marca sua."
+        title="Seu projeto definido antes de orçado — Sistema Britto"
+        description="Uma hora de call e você sai com o PRD do seu projeto: o que entra, o que fica fora, prazo por etapa e o preço calculado sobre o escopo. R$ 147, abatidos do projeto se fecharmos. O documento é seu."
         path="/sistema"
       />
       <Navbar />
@@ -203,41 +203,54 @@ export default function Sistema() {
           <div className="relative z-10 max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 bg-green-500/15 border border-green-500/25 rounded-full px-4 py-2 mb-8">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Soluções Web Sob Encomenda</span>
+              <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Projeto definido antes de orçado</span>
             </div>
 
-            {/* GANCHO */}
+            {/* GANCHO — fala do que ele CHEGA querendo (um site), não do que
+                vendemos. A dor vem logo, sem revelar o mecanismo. */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
-              Eu construo a solução web<br />
-              <span className="text-green-400">que seu negócio precisa.</span>
+              Você pediu orçamento de site<br />
+              <span className="text-green-400">e recebeu três preços que não se comparam.</span>
             </h1>
 
-            {/* DOR */}
+            {/* DORES — situação concreta + consequência vivida. */}
             <div className="max-w-2xl mx-auto mb-6 space-y-3">
               <p className="text-xl text-gray-300 leading-relaxed">
-                SaaS, loja virtual, assistente de IA, funil de vendas, integração custom — <span className="text-white font-semibold">sob medida, com a sua marca, no seu domínio.</span>
+                Um cobra R$ 2 mil, outro R$ 18 mil, o terceiro sumiu.{' '}
+                <span className="text-white font-semibold">Nenhum dos três escreveu o que exatamente vai construir.</span>
               </p>
               <p className="text-lg text-gray-400 leading-relaxed">
-                Não é template. Não é "assine e reze". É código seu, infra sua, rodando 24h. Se quiser revender, é white-label. Se quiser usar, é seu assistente. Você decide.
+                Você não está comparando propostas. Está apostando em quem parece
+                mais confiante — e descobrindo o escopo real depois de assinar,
+                quando cada mudança vira "isso não estava combinado".
               </p>
             </div>
 
-            {/* SOLUÇÃO */}
-            <div className="bg-[#111111]/80 border border-green-500/20 rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto mb-10 backdrop-blur-sm">
-              <p className="text-xl sm:text-2xl text-white font-semibold leading-relaxed">
-                Call de 30 min. Você me conta o problema. Eu monto a solução. <span className="text-green-400">Entrego em dias, não meses.</span>
+            {/* MECANISMO — a call paga. O entregável é o documento, não o preço. */}
+            <div className="bg-[#111111]/80 border border-green-500/20 rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto mb-8 backdrop-blur-sm text-left">
+              <p className="text-xl sm:text-2xl text-white font-semibold leading-relaxed mb-4">
+                Uma hora comigo e você sai com o documento que define o projeto inteiro.
+              </p>
+              <ul className="space-y-2.5 text-gray-300">
+                <li className="flex gap-2.5"><span className="text-green-400 shrink-0">→</span><span>O que entra, o que fica de fora e o que vem depois</span></li>
+                <li className="flex gap-2.5"><span className="text-green-400 shrink-0">→</span><span>Prazo por etapa, não uma data solta no fim</span></li>
+                <li className="flex gap-2.5"><span className="text-green-400 shrink-0">→</span><span>O preço, calculado sobre o escopo — não chutado antes dele</span></li>
+              </ul>
+              <p className="text-green-400 font-semibold mt-5 leading-relaxed">
+                O documento é seu. Se preferir construir com outra pessoa,
+                leva e pede orçamento a quem quiser.
               </p>
             </div>
 
             <button
-              onClick={() => { trackCta('/sistema', 'QUERO MEU PROJETO', 'hero'); setShowModal(true); }}
+              onClick={() => { trackCta('/sistema', 'QUERO MEU PRD', 'hero'); setShowModal(true); }}
               className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl sm:text-2xl transition-all duration-300 shadow-2xl shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
             >
-              QUERO MEU PROJETO →
+              QUERO MEU PROJETO DEFINIDO →
             </button>
 
-            <p className="text-gray-500 text-sm mt-4">
-              Call de 30 min. Sem compromisso.
+            <p className="text-gray-400 text-sm mt-4">
+              R$ 147 pela call de 1h — <span className="text-white">abatidos do projeto</span> se fecharmos.
             </p>
           </div>
         </section>
@@ -520,22 +533,42 @@ export default function Sistema() {
           <div className="absolute top-1/2 left-1/3 max-w-[400px] max-h-[400px] w-full h-full bg-green-500/6 rounded-full blur-[100px]" />
           <div className="absolute top-1/2 right-1/3 max-w-[300px] max-h-[300px] w-full h-full bg-purple-500/6 rounded-full blur-[100px]" />
           <div className="relative z-10 max-w-2xl mx-auto text-center">
+            {/* CUSTO DA INAÇÃO — temporal e concreto, sem inventar número. */}
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
-              Tem um projeto em mente?
+              Daqui a três meses,<br />
+              <span className="text-green-400">ou o projeto está rodando, ou você ainda está pedindo orçamento.</span>
             </h2>
-            <p className="text-gray-300 text-lg mb-8">
-              Call de 30 min. Você fala, eu ouço. A gente sai com escopo e prazo. Sem compromisso.
+            <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+              A diferença entre os dois cenários costuma ser uma hora de conversa
+              em que alguém finalmente escreve o que precisa ser construído.
             </p>
 
+            {/* PREÇO E GARANTIA — o reptiliano precisa saber o risco antes de agir. */}
+            <div className="bg-[#111111]/80 border border-green-500/25 rounded-2xl p-6 sm:p-8 max-w-xl mx-auto mb-8 text-left">
+              <div className="flex items-baseline gap-2 mb-4">
+                <span className="text-white text-5xl font-bold">R$ 147</span>
+                <span className="text-gray-400">pela call de 1 hora</span>
+              </div>
+              <ul className="space-y-2.5 text-gray-300 mb-5">
+                <li className="flex gap-2.5"><span className="text-green-400 shrink-0">✓</span><span>PRD completo do seu projeto, escrito durante a call</span></li>
+                <li className="flex gap-2.5"><span className="text-green-400 shrink-0">✓</span><span>Orçamento fechado, calculado sobre o escopo definido</span></li>
+                <li className="flex gap-2.5"><span className="text-green-400 shrink-0">✓</span><span>O documento é seu, feche comigo ou não</span></li>
+              </ul>
+              <p className="text-green-400 font-semibold border-t border-green-500/20 pt-4">
+                Se fecharmos o projeto, os R$ 147 são abatidos do valor total.
+              </p>
+            </div>
+
             <button
-              onClick={() => { trackCta('/sistema', 'QUERO MEU PROJETO', 'final'); setShowModal(true); }}
+              onClick={() => { trackCta('/sistema', 'QUERO MEU PRD', 'final'); setShowModal(true); }}
               className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 sm:px-12 py-5 sm:py-6 rounded-full font-bold text-xl sm:text-2xl transition-all duration-300 shadow-2xl shadow-green-500/25 hover:shadow-green-500/40 hover:scale-105 active:scale-[0.98]"
             >
-              QUERO MEU PROJETO →
+              QUERO MEU PROJETO DEFINIDO →
             </button>
 
-            <p className="text-gray-500 text-sm mt-4">
-              Sem compromisso. A gente conversa e você decide.
+            <p className="text-gray-400 text-sm mt-4">
+              Você escolhe o horário. Se eu não conseguir definir seu projeto na
+              call, devolvo os R$ 147.
             </p>
           </div>
         </section>
