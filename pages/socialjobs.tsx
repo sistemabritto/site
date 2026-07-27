@@ -37,7 +37,7 @@ const NETWORKS = [
  { name: 'YouTube', desc: 'Shorts que ranqueiam sozinhos. Vídeos longos com script gerado por IA, SEO otimizado.', metric: 'Shorts + Longos', logo: YoutubeLogo, supported: true },
  { name: 'TikTok', desc: 'Reels virais com trending audio. Hook nos primeiros 2 segundos. Conteúdo que o algoritmo entrega.', metric: 'Reels Virais', logo: TiktokLogo, supported: true },
  { name: 'X (Twitter)', desc: 'Threads que explodem. Opinião que vira debate. Replies estratégicas em posts virais.', metric: 'Threads + Opinião', logo: XLogo, supported: true },
- { name: 'Facebook', desc: 'Em breve — páginas, posts e anúncios integrados ao fluxo.', metric: 'Em breve', logo: FacebookLogo, supported: false },
+ { name: 'Facebook', desc: 'Em breve: páginas, posts e anúncios integrados ao fluxo.', metric: 'Em breve', logo: FacebookLogo, supported: false },
 ];
 
 const AGENTS = [
@@ -46,7 +46,7 @@ const AGENTS = [
  domain: 'Conteúdo',
  emoji: '✍️',
  color: '#8B5CF6',
- desc: 'Cria posts, legendas e calendário editorial. Sabe seu tom de voz de cor — e quando quebrar as regras pra engajar mais.',
+ desc: 'Cria posts, legendas e calendário editorial. Sabe seu tom de voz de cor, e sabe quando quebrar as regras pra engajar mais.',
  detail: 'Memória persistente do seu estilo. Nunca repete formato. Aprende o que engaja e replica. Escreve como você, só que mais rápido e todo dia.',
  produces: 'Posts · Legendas · Carrosséis · Legendas de Reels',
  },
@@ -82,7 +82,7 @@ const AGENTS = [
  domain: 'Visual',
  emoji: '🎨',
  color: '#F97316',
- desc: 'Direção visual, paletas e identidade. Garante que cada post pareça sair do mesmo estúdio — o seu.',
+ desc: 'Direção visual, paletas e identidade. Garante que cada post pareça sair do mesmo estúdio: o seu.',
  detail: 'Cria thumbnails, define paletas, sugere referências visuais e mantém a coerência do feed. Trabalha junto com o Pixel pra cada post ter cara de marca.',
  produces: 'Thumbnails · Paletas · Referências · Identidade Visual',
  },
@@ -101,27 +101,27 @@ const BENEFITS = [
  {
  icon: '🎬',
  title: 'Conteúdo todo dia sem você pensar',
- desc: 'YouTube Shorts, TikTok, Instagram Reels, LinkedIn, X — a IA cria, edita e agenda. Você aprova ou deixa no automático. São dezenas de agentes trabalhando em paralelo, cada um especialista no que faz. Você não precisa abrir o Canva, nem pensar em legenda, nem escolher horário. Tudo chega pronto pra publicar — ou publica sozinho.',
+ desc: 'YouTube Shorts, TikTok, Instagram Reels, LinkedIn, X. A IA cria, edita e agenda. Você aprova ou deixa no automático. São dezenas de agentes trabalhando em paralelo, cada um especialista no que faz. Você não precisa abrir o Canva, nem pensar em legenda, nem escolher horário. Tudo chega pronto pra publicar, ou publica sozinho.',
  },
  {
  icon: '🤖',
  title: 'Dezenas de agentes, cada um especialista',
- desc: 'Não é um chatbot genérico. É uma workforce com agentes de copy, vídeo, SEO, comunicação e marca. Cada agente tem memória persistente — aprende seu tom de voz, seus melhores horários, os formatos que mais engajam. Eles colaboram entre si, revisam o trabalho um do outro e entregam conteúdo que parece feito por uma equipe inteira.',
+ desc: 'Não é um chatbot genérico. É uma workforce com agentes de copy, vídeo, SEO, comunicação e marca. Cada agente tem memória persistente e aprende seu tom de voz, seus melhores horários, os formatos que mais engajam. Eles colaboram entre si, revisam o trabalho um do outro e entregam conteúdo que parece feito por uma equipe inteira.',
  },
  {
  icon: '📅',
  title: 'Calendário editorial que se ajusta sozinho',
- desc: 'A IA planeja a semana inteira baseada em dados, não em achismo. Se um reel bomba, ela replica o formato. Se um horário não funciona, ela muda. O calendário evolui junto com seu público — sem você mexer em nada.',
+ desc: 'A IA planeja a semana inteira baseada em dados, não em achismo. Se um reel bomba, ela replica o formato. Se um horário não funciona, ela muda. O calendário evolui junto com seu público, sem você mexer em nada.',
  },
  {
  icon: '🎯',
  title: 'Copy que vende sem parecer vendedor',
- desc: 'Legendas que convertem. Hooks que param o scroll. CTAs que levam pro seu WhatsApp ou site. Nada de texto genérico de IA — cada legenda é construída com gatilhos mentais, narrativa e propósito. O resultado? Mais cliques, mais DMs, mais vendas — sem parecer pushy.',
+ desc: 'Legendas que convertem. Hooks que param o scroll. CTAs que levam pro seu WhatsApp ou site. Nada de texto genérico de IA: cada legenda é construída com gatilhos mentais, narrativa e propósito. O resultado? Mais cliques, mais DMs, mais vendas, sem parecer pushy.',
  },
  {
  icon: '📊',
  title: 'O que funciona escala. O que não funciona, corta.',
- desc: 'Métricas semanais. A IA identifica o que tá engajando, qual rede priorizar e onde investir mais. Ela não só mostra dados — ela age. Se um formato caiu, ela troca. Você recebe relatórios claros e ações automáticas, não planilhas confusas.',
+ desc: 'Métricas semanais. A IA identifica o que tá engajando, qual rede priorizar e onde investir mais. Ela não só mostra dados: ela age. Se um formato caiu, ela troca. Você recebe relatórios claros e ações automáticas, não planilhas confusas.',
  },
  {
  icon: '🛡️',
@@ -167,7 +167,7 @@ const PIPELINE_STEPS = [
 ];
 
 const TRAFFIC_STEPS = [
- { num: '01', title: 'Pesquisa de ângulo', desc: 'IA identifica o que sua audiência quer ver — não o que você acha que deve postar.' },
+ { num: '01', title: 'Pesquisa de ângulo', desc: 'IA identifica o que sua audiência quer ver, não o que você acha que deve postar.' },
  { num: '02', title: 'Post + CTA', desc: 'Conteúdo criado pra engajar e converter. Cada post tem um objetivo: clique, DM, visita.' },
  { num: '03', title: 'Tráfego qualificado', desc: 'Quem engaja chega no seu WhatsApp ou landing page já aquecido.' },
  { num: '04', title: 'Lead no CRM', desc: 'CRM captura, qualifica e nutre. Follow-up automático converte em cliente.' },
@@ -216,8 +216,8 @@ export default function SocialJobs() {
  return (
  <>
  <Meta
- title="A operação de conteúdo que roda sem você lembrar — SocialJobs"
- description="21 artigos por semana, três por dia, com pauta escolhida por volume de busca real, capa gerada e medição de qual artigo trouxe clique. É a mesma esteira que publica o nosso blog — vá conferir."
+ title="A operação de conteúdo que roda sem você lembrar | SocialJobs"
+ description="21 artigos por semana, três por dia, com pauta escolhida por volume de busca real, capa gerada e medição de qual artigo trouxe clique. É a mesma esteira que publica o nosso blog. Vá conferir."
  path="/socialjobs"
  />
 
@@ -230,7 +230,7 @@ export default function SocialJobs() {
  <button onClick={() => setSelectedImage(null)} className="absolute top-6 right-6 text-gray-400 hover:text-white text-3xl transition-colors z-10">&times;</button>
  <img
  src="https://openclaude.evolutionfoundation.com.br/assets/print-agents-B4xXbObQ.webp"
- alt="Painel Multi-Agentes — dezenas de agentes coordenados"
+ alt="Painel Multi-Agentes com dezenas de agentes coordenados"
  className="max-w-[90vw] max-h-[85vh] rounded-2xl shadow-2xl border border-white/10 cursor-zoom-in hover:scale-105 transition-transform duration-300"
  onClick={(e) => e.stopPropagation()}
  />
@@ -260,7 +260,7 @@ export default function SocialJobs() {
  <div className="max-w-2xl mx-auto mb-8 space-y-4">
  <p className="text-xl text-gray-300 leading-relaxed">
  Você senta para escrever, trava na primeira linha, deixa para amanhã. Três
- semanas depois o perfil está parado — e{' '}
+ semanas depois o perfil está parado, e{' '}
  <span className="text-white font-semibold">não foi por falta de disciplina. Foi por falta de operação.</span>
  </p>
  <p className="text-lg text-gray-400 leading-relaxed">
@@ -268,7 +268,7 @@ export default function SocialJobs() {
  com pauta escolhida por volume de busca real, capa gerada e medição de qual
  artigo trouxe clique.{' '}
  <a href="https://blog.sistemabritto.com.br" target="_blank" rel="noopener" className="text-orange-400 underline underline-offset-2 hover:text-orange-300">Vá conferir o blog</a>
- {' '}— tudo o que está lá saiu dessa esteira, sem ninguém escrevendo à mão.
+ {'. '}Tudo o que está lá saiu dessa esteira, sem ninguém escrevendo à mão.
  </p>
  </div>
 
@@ -299,7 +299,7 @@ export default function SocialJobs() {
  </span>
  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Veja o sistema em operação</h2>
  <p className="text-gray-400 text-lg max-w-2xl mx-auto">
- Não é demo. Não é GIF. É o sistema real funcionando — o mesmo que opera a presença digital da Sistema Britto.
+ Não é demo. Não é GIF. É o sistema real funcionando: o mesmo que opera a presença digital da Sistema Britto.
  </p>
  </div>
 
@@ -307,7 +307,7 @@ export default function SocialJobs() {
  <div className="bg-orange-500/8 border border-orange-500/20 rounded-2xl p-6 mb-8 max-w-3xl mx-auto">
  <p className="text-orange-400 text-sm font-bold uppercase tracking-wider mb-2">A Sistema Britto é o primeiro cliente do SocialJobs</p>
  <p className="text-gray-300 text-sm leading-relaxed">
- Este site, nossos posts e nossa operação de aquisição são parte da vitrine do SocialJobs. Usamos internamente o mesmo sistema que vendemos — uma operação de IA que cria, agenda, publica, mede e melhora conteúdo para atrair clientes.
+ Este site, nossos posts e nossa operação de aquisição são parte da vitrine do SocialJobs. Usamos internamente o mesmo sistema que vendemos: uma operação de IA que cria, agenda, publica, mede e melhora conteúdo para atrair clientes.
  </p>
  </div>
 
@@ -406,7 +406,7 @@ export default function SocialJobs() {
  <span className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
  <span className="text-orange-400 text-xs font-bold uppercase tracking-wider">O que o SocialJobs faz por você</span>
  </span>
- <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Da ideia ao post publicado — sem você tocar em nada</h2>
+ <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Da ideia ao post publicado, sem você tocar em nada</h2>
  <p className="text-gray-400 text-lg max-w-2xl mx-auto">
  Cada funcionalidade foi pensada pra transformar conteúdo em aquisição. Sem ferramentas separadas. Sem jornadas manuais. Um sistema.
  </p>
@@ -433,7 +433,7 @@ export default function SocialJobs() {
  </span>
  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">5 redes. Post diário em cada uma.</h2>
  <p className="text-gray-400 text-lg max-w-2xl mx-auto">
- A IA cria conteúdo específico pra cada plataforma — porque o que funciona no TikTok não funciona no LinkedIn. Cada rede tem seu formato, seu tom, seu horário. E o SocialJobs sabe disso.
+ A IA cria conteúdo específico pra cada plataforma, porque o que funciona no TikTok não funciona no LinkedIn. Cada rede tem seu formato, seu tom, seu horário. E o SocialJobs sabe disso.
  </p>
  </div>
 
@@ -502,6 +502,51 @@ export default function SocialJobs() {
  </div>
  </section>
 
+ {/* ===== CUSTO DA INAÇÃO + CTA DO MEIO =====
+     O framework pede o medo da perda antes do segundo CTA, e pede que ele
+     seja temporal e visual — amplificando o real, nunca inventando. Aqui o
+     real é aritmética simples: o perfil parado não fica parado, ele afunda,
+     porque o alcance de quem não posta cai sozinho. */}
+ <section className="py-20 px-4 bg-[#0a0a0a]">
+ <div className="max-w-3xl mx-auto text-center">
+ <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 leading-tight">
+ Seu perfil não fica parado.<br />
+ <span className="text-orange-400">Ele afunda.</span>
+ </h2>
+ <div className="space-y-5 text-gray-300 text-lg leading-relaxed text-left mb-8">
+ <p>
+ Rede social não guarda lugar para quem sumiu. Cada semana sem publicar,
+ menos gente vê o próximo post, e quando você volta, está começando
+ mais atrás do que parou.
+ </p>
+ <p>
+ Enquanto isso o concorrente que posta todo dia não está sendo mais
+ criativo que você.{' '}
+ <span className="text-white font-semibold">Ele só não parou.</span>{' '}
+ É a única vantagem dele, e é a que mais compõe.
+ </p>
+ <p>
+ Daqui a seis meses os dois perfis vão contar a mesma história: um
+ mostrando meio ano de presença, o outro mostrando o último post de
+ seis meses atrás.
+ </p>
+ </div>
+
+ <a
+ href="https://wa.me/5511914088571?text=Olá!%20Quero%20minha%20operação%20de%20conteúdo%20com%20IA"
+ onClick={() => trackCta('/socialjobs', 'QUERO MINHA OPERAÇÃO DE CONTEÚDO', 'meio')}
+ target="_blank"
+ rel="noopener noreferrer"
+ className="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-black px-10 sm:px-12 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-2xl shadow-orange-500/25 hover:scale-105 active:scale-[0.98]"
+ >
+ QUERO MINHA OPERAÇÃO RODANDO →
+ </a>
+ <p className="text-gray-400 text-sm mt-4">
+ A primeira semana de conteúdo sai em até 5 dias úteis.
+ </p>
+ </div>
+ </section>
+
  {/* ===== COMO FUNCIONA ===== */}
  <section className="py-20 px-4 bg-[#111111]/50">
  <div className="max-w-5xl mx-auto">
@@ -536,7 +581,7 @@ export default function SocialJobs() {
  </span>
  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Veja como funciona na prática</h2>
  <p className="text-gray-400 text-lg max-w-2xl mx-auto">
- Exemplos genéricos de operação — não são cases reais. Servem pra você visualizar como o SocialJobs se adapta ao seu segmento.
+ Exemplos genéricos de operação, não cases reais. Servem pra você visualizar como o SocialJobs se adapta ao seu segmento.
  </p>
  </div>
 
@@ -580,7 +625,7 @@ export default function SocialJobs() {
  </span>
  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Conheça os agentes por trás de cada post</h2>
  <p className="text-gray-400 text-lg max-w-2xl mx-auto">
- Não é um chatbot gerando texto. É uma workforce com dezenas de agentes especialistas — cada um com memória persistente, personalidade própria e skills do domínio. Eles colaboram entre si, revisam o trabalho um do outro e entregam conteúdo que parece feito por uma equipe inteira.
+ Não é um chatbot gerando texto. É uma workforce com dezenas de agentes especialistas, cada um com memória persistente, personalidade própria e skills do domínio. Eles colaboram entre si, revisam o trabalho um do outro e entregam conteúdo que parece feito por uma equipe inteira.
  </p>
  </div>
  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

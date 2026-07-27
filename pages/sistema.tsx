@@ -12,7 +12,7 @@ const PROJETOS = [
     icon: '🚀',
     name: 'SaaS',
     tag: 'Produto digital recorrente',
-    desc: 'Plataforma com assinatura, onboarding, dashboard e billing. Do MVP ao lançamento — com IA integrada ou não. Você define as features, a gente constrói.',
+    desc: 'Plataforma com assinatura, onboarding, dashboard e billing. Do MVP ao lançamento, com IA integrada ou não. Você define as features, a gente constrói.',
     exemplos: ['Plataforma de agendamento', 'CRM simples', 'Gestão de cursos online', 'Marketplace de serviços'],
   },
   {
@@ -20,7 +20,7 @@ const PROJETOS = [
     icon: '🛒',
     name: 'Loja Virtual',
     tag: 'E-commerce que converte',
-    desc: 'Catálogo, carrinho, checkout, pagamento e gestão de pedidos. Integrado com gateway de pagamento brasileiro. Sem Shopify — é seu código, sua margem.',
+    desc: 'Catálogo, carrinho, checkout, pagamento e gestão de pedidos. Integrado com gateway de pagamento brasileiro. Sem Shopify: é seu código, sua margem.',
     exemplos: ['Loja de produtos físicos', 'Infoprodutos + upsell', 'Assinatura de caixinha', 'Marketplace próprio'],
   },
   {
@@ -28,7 +28,7 @@ const PROJETOS = [
     icon: '🤖',
     name: 'Assistente de IA',
     tag: 'Automação inteligente',
-    desc: 'Agente de IA com memória, ferramentas e personalidade configurada. Atende cliente, qualifica lead, responde suporte — 24h, no WhatsApp ou web.',
+    desc: 'Agente de IA com memória, ferramentas e personalidade configurada. Atende cliente, qualifica lead, responde suporte. 24h, no WhatsApp ou web.',
     exemplos: ['Atendente de WhatsApp', 'Assistente de vendas', 'Suporte técnico automatizado', 'Onboarding de clientes'],
   },
   {
@@ -36,7 +36,7 @@ const PROJETOS = [
     icon: '🎯',
     name: 'Funil de Vendas',
     tag: 'LP + Quiz + Checkout',
-    desc: 'Landing page que converte, quiz de qualificação e checkout integrado. Pixel do Facebook, UTM tracking, redirecionamento condicional. Funil completo — não só a landing.',
+    desc: 'Landing page que converte, quiz de qualificação e checkout integrado. Pixel do Facebook, UTM tracking, redirecionamento condicional. Funil completo, não só a landing.',
     exemplos: ['LP de qualificação com quiz', 'Página de vendas VSL', 'Funil de alta conversão', 'Webinar funnel + replay'],
   },
   {
@@ -44,7 +44,7 @@ const PROJETOS = [
     icon: '🔗',
     name: 'Integração Custom',
     tag: 'Conecta tudo que você usa',
-    desc: 'APIs que não conversam, sistemas que não se integram, processos manuais que podiam ser automáticos. A gente constrói a ponte — e bota IA pra operar.',
+    desc: 'APIs que não conversam, sistemas que não se integram, processos manuais que podiam ser automáticos. A gente constrói a ponte e bota IA pra operar.',
     exemplos: ['ERP ↔ WhatsApp', 'CRM ↔ n8n', 'Planilha → Dashboard automático', 'Webhook de pagamento → ativação'],
   },
   {
@@ -64,20 +64,20 @@ const ETAPAS = [
     step: '01',
     title: 'Você me conta o que precisa',
     desc: 'Call de 30 min. Sem formulário de 50 perguntas. Você fala, eu ouço. No final, a gente sai com o escopo claro e o prazo definido.',
-    detail: 'Pode ser "quero um SaaS de agendamento" ou "meu ERP não fala com meu WhatsApp". Pode ser "quero revender automação pra agências" ou "preciso de uma LP que converta". Não importa o tamanho — importa a clareza. Quanto mais específico você for, mais rápido a gente entrega.',
+    detail: 'Pode ser "quero um SaaS de agendamento" ou "meu ERP não fala com meu WhatsApp". Pode ser "quero revender automação pra agências" ou "preciso de uma LP que converta". Não importa o tamanho, importa a clareza. Quanto mais específico você for, mais rápido a gente entrega.',
   },
   {
     icon: '🏗️',
     step: '02',
     title: 'Eu construo sob medida',
-    desc: 'Design, código, infra, integrações — tudo feito pro seu negócio. Roda no seu domínio, com a sua marca. Código limpo, documentado, que você pode escalar.',
+    desc: 'Design, código, infra, integrações: tudo feito pro seu negócio. Roda no seu domínio, com a sua marca. Código limpo, documentado, que você pode escalar.',
     detail: 'Não é template. Não é fork de projeto open source. É código escrito do zero, configurado pros seus processos. O assistente de IA sabe seu script de vendas. A loja tem suas categorias e meios de pagamento. O funil segue sua copy. Cada detalhe é seu.',
   },
   {
     icon: '🚀',
     step: '03',
     title: 'Entrego, testo e ajusto',
-    desc: 'Sistema no ar. Você testa. O que não tá redondo, eu ajusto. Suporte nos primeiros 7 dias incluso — sem cobrar extra pra afinar.',
+    desc: 'Sistema no ar. Você testa. O que não tá redondo, eu ajusto. Suporte nos primeiros 7 dias incluso, sem cobrar extra pra afinar.',
     detail: 'Não entrego e sumo. A primeira semana é de calibração. O checkout tá fluindo? O funil tá rastreando os UTMs? A IA tá respondendo no tom certo? Eu fico até você falar "tá rodando liso". Depois disso, suporte contínuo via WhatsApp.',
   },
 ];
@@ -138,7 +138,7 @@ export default function Sistema() {
   return (
     <>
       <Meta
-        title="Seu projeto definido antes de orçado — Sistema Britto"
+        title="Seu projeto definido antes de orçado | Sistema Britto"
         description="Uma hora de call e você sai com o PRD do seu projeto: o que entra, o que fica fora, prazo por etapa e o preço calculado sobre o escopo. R$ 147, abatidos do projeto se fecharmos. O documento é seu."
         path="/sistema"
       />
@@ -221,7 +221,7 @@ export default function Sistema() {
               </p>
               <p className="text-lg text-gray-400 leading-relaxed">
                 Você não está comparando propostas. Está apostando em quem parece
-                mais confiante — e descobrindo o escopo real depois de assinar,
+                mais confiante, e descobrindo o escopo real depois de assinar,
                 quando cada mudança vira "isso não estava combinado".
               </p>
             </div>
@@ -234,7 +234,7 @@ export default function Sistema() {
               <ul className="space-y-2.5 text-gray-300">
                 <li className="flex gap-2.5"><span className="text-green-400 shrink-0">→</span><span>O que entra, o que fica de fora e o que vem depois</span></li>
                 <li className="flex gap-2.5"><span className="text-green-400 shrink-0">→</span><span>Prazo por etapa, não uma data solta no fim</span></li>
-                <li className="flex gap-2.5"><span className="text-green-400 shrink-0">→</span><span>O preço, calculado sobre o escopo — não chutado antes dele</span></li>
+                <li className="flex gap-2.5"><span className="text-green-400 shrink-0">→</span><span>O preço, calculado sobre o escopo, não chutado antes dele</span></li>
               </ul>
               <p className="text-green-400 font-semibold mt-5 leading-relaxed">
                 O documento é seu. Se preferir construir com outra pessoa,
@@ -250,7 +250,36 @@ export default function Sistema() {
             </button>
 
             <p className="text-gray-400 text-sm mt-4">
-              R$ 147 pela call de 1h — <span className="text-white">abatidos do projeto</span> se fecharmos.
+              R$ 147 pela call de 1h, <span className="text-white">abatidos do projeto</span> se fecharmos.
+            </p>
+          </div>
+        </section>
+
+        {/* ===== CTA DO MEIO — argumento lógico =====
+            Hero apela para urgência, final para emoção; este é o da razão,
+            para quem já entendeu a oferta e quer conferir a conta. */}
+        <section className="py-16 px-4 bg-[#111111]/40">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5 leading-tight">
+              R$ 147 é caro para descobrir se vale a pena gastar R$ 15 mil?
+            </h2>
+            <p className="text-gray-300 text-lg leading-relaxed mb-3">
+              É o preço de um almoço de negócios. A diferença é que dele você sai
+              com um documento, e não com a sensação de que a conversa foi boa.
+            </p>
+            <p className="text-gray-400 mb-8">
+              E se não fecharmos, o documento continua seu, para levar a quem
+              você quiser.
+            </p>
+            <button
+              onClick={() => { trackCta('/sistema', 'QUERO MEU PRD', 'meio'); setShowModal(true); }}
+              className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-2xl shadow-green-500/25 hover:scale-105 active:scale-[0.98]"
+            >
+              QUERO AGENDAR MINHA CALL →
+            </button>
+            <p className="text-gray-400 text-sm mt-4">
+              Você escolhe o horário. Se eu não definir seu projeto na call,
+              devolvo os R$ 147.
             </p>
           </div>
         </section>
@@ -261,7 +290,7 @@ export default function Sistema() {
             <div className="text-center mb-16">
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">O que a gente constrói</h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                Cada projeto é único. Mas aqui estão os tipos que mais aparecem. O seu pode ser um desses — ou uma combinação de vários.
+                Cada projeto é único. Mas aqui estão os tipos que mais aparecem. O seu pode ser um desses, ou uma combinação de vários.
               </p>
             </div>
 
@@ -323,7 +352,7 @@ export default function Sistema() {
  </span>
  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Projetos que saíram daqui</h2>
  <p className="text-gray-400 text-lg max-w-2xl mx-auto">
- A gente não fala de clientes por nome. Mas alguns projetos são públicos — e mostram o que a gente constrói.
+ A gente não fala de clientes por nome. Mas alguns projetos são públicos, e mostram o que a gente constrói.
  </p>
  </div>
 
@@ -340,7 +369,7 @@ export default function Sistema() {
  </div>
  </div>
  <p className="text-gray-300 text-sm leading-relaxed mb-3">
- Automação de WhatsApp para pequenos negócios. Interface white-label, fluxos pré-configurados e billing automático. O cliente assina e usa — sem precisar entender de infra.
+ Automação de WhatsApp para pequenos negócios. Interface white-label, fluxos pré-configurados e billing automático. O cliente assina e usa, sem precisar entender de infra.
  </p>
  <div className="flex flex-wrap gap-2">
  {['White-label', 'WhatsApp', 'Assinatura', 'Multi-tenant'].map(tag => (
@@ -373,7 +402,7 @@ export default function Sistema() {
 
  <div className="text-center mt-8">
  <p className="text-gray-500 text-sm">
- Esses são só dois exemplos. Cada projeto tem sua particularidade — e a gente adapta o stack, o prazo e a arquitetura pro seu caso.
+ Esses são só dois exemplos. Cada projeto tem sua particularidade, e a gente adapta o stack, o prazo e a arquitetura pro seu caso.
  </p>
  </div>
  </div>
@@ -443,13 +472,13 @@ export default function Sistema() {
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Sua marca. Seu domínio. Seu produto.</h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                Todo sistema que a gente constrói pode ser white-label. Zero menção ao Sistema Britto. Você revende como se fosse seu — porque é seu.
+                Todo sistema que a gente constrói pode ser white-label. Zero menção ao Sistema Britto. Você revende como se fosse seu, porque é seu.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-5">
               {[
-                { icon: '🏷️', title: 'Marca 100% sua', desc: 'Logo, cores, domínio, email — tudo com a identidade da sua empresa. O cliente final nunca sabe que foi a gente quem construiu.' },
+                { icon: '🏷️', title: 'Marca 100% sua', desc: 'Logo, cores, domínio, email: tudo com a identidade da sua empresa. O cliente final nunca sabe que foi a gente quem construiu.' },
                 { icon: '💰', title: 'Revenda pra quem quiser', desc: 'Agências vendem automação pra clientes. Consultores vendem assistentes de IA. Empresas revendem SaaS pra franquias. A margem é sua.' },
                 { icon: '🏗️', title: 'Código e infra são seus', desc: 'Roda no seu VPS, com seu domínio, seu banco de dados. Sem lock-in. Se quiser migrar amanhã, migra. Se quiser escalar, escala.' },
                 { icon: '🤝', title: 'Suporte contínuo opcional', desc: 'A gente entrega e você assume. Ou fecha suporte mensal pra manutenção, atualizações e novos features. Você escolhe.' },
@@ -507,10 +536,10 @@ export default function Sistema() {
             <div className="grid md:grid-cols-2 gap-5">
               {[
                 { icon: '💻', title: 'Código seu, documentado', desc: 'Repositório no seu GitHub. Código limpo, tipado, documentado. Sem dívida técnica. Sem dependência de alguém que "sabe como funciona".' },
-                { icon: '🌐', title: 'No seu domínio, com a sua marca', desc: 'Domínio que você escolhe. SSL automático. Identidade visual sua. White-label se quiser revender — zero menção ao Sistema Britto.' },
-                { icon: '🔗', title: 'Integrações prontas', desc: 'WhatsApp, pagamento, ERP, CRM — o que seu negócio precisa pra funcionar. Cada integração é construída e testada pro seu caso.' },
-                { icon: '📊', title: 'Dashboard e métricas', desc: 'Se o projeto precisa de painel, a gente constrói. Leads, vendas, conteúdo, infra — dados que você usa pra decidir.' },
-                { icon: '🛡️', title: 'Infra que não cai', desc: 'VPS dedicado, Docker, backup diário, monitoramento. Se der problema, você sabe em 30 segundos — e a gente resolve.' },
+                { icon: '🌐', title: 'No seu domínio, com a sua marca', desc: 'Domínio que você escolhe. SSL automático. Identidade visual sua. White-label se quiser revender, com zero menção ao Sistema Britto.' },
+                { icon: '🔗', title: 'Integrações prontas', desc: 'WhatsApp, pagamento, ERP, CRM: o que seu negócio precisa pra funcionar. Cada integração é construída e testada pro seu caso.' },
+                { icon: '📊', title: 'Dashboard e métricas', desc: 'Se o projeto precisa de painel, a gente constrói. Leads, vendas, conteúdo, infra: dados que você usa pra decidir.' },
+                { icon: '🛡️', title: 'Infra que não cai', desc: 'VPS dedicado, Docker, backup diário, monitoramento. Se der problema, você sabe em 30 segundos, e a gente resolve.' },
                 { icon: '📅', title: 'Entrega rápida + suporte', desc: 'Prazo definido na call. Sem surpresa. Primeiros 7 dias de suporte incluso. Depois, suporte mensal opcional via WhatsApp.' },
               ].map((item, i) => (
                 <div key={i} className="group bg-[#111111]/80 backdrop-blur-sm rounded-2xl p-6 border border-white/[0.06] hover:border-green-500/30 transition-all duration-300 flex items-start gap-4 hover:-translate-y-0.5">
@@ -556,6 +585,11 @@ export default function Sistema() {
               </ul>
               <p className="text-green-400 font-semibold border-t border-green-500/20 pt-4">
                 Se fecharmos o projeto, os R$ 147 são abatidos do valor total.
+              </p>
+              <p className="text-gray-400 text-sm mt-4 pt-4 border-t border-white/[0.06]">
+                A call é comigo, não com um time comercial. Isso limita quantas
+                cabem na semana, e é por isso que a agenda abre com alguns dias
+                de antecedência, não para hoje.
               </p>
             </div>
 

@@ -7,7 +7,7 @@ const features = [
   { icon: '🎯', title: 'Qualificação automática de leads', desc: 'IA faz perguntas-chave, classifica por interesse e envia pro CRM já segmentado.' },
   { icon: '📅', title: 'Agendamento 24h', desc: 'Cliente marca, remarca e cancela sozinho. Sem erro humano, sem retrabalho.' },
   { icon: '🔄', title: 'Reativação de leads dormentes', desc: 'Recupera leads parados há semanas com mensagens personalizadas e ofertas certas.' },
-  { icon: '📊', title: 'CRM integrado nativamente', desc: 'Pipedrive, Sticky, RD Station — tudo sincronizado em tempo real, sem digitação.' },
+  { icon: '📊', title: 'CRM integrado nativamente', desc: 'Pipedrive, Sticky, RD Station: tudo sincronizado em tempo real, sem digitação.' },
   { icon: '👥', title: 'Multi-atendentes com IA assistida', desc: 'Seu time humano assume quando precisa, com histórico completo e sugestões de resposta.' },
   { icon: '⚡', title: 'Resposta em <1 segundo', desc: 'Lead não espera. Seu WhatsApp responde na hora, a qualquer horário.' },
 ];
@@ -44,7 +44,7 @@ export default function WhatsApp() {
   return (
     <>
       <Meta
-        title="Seu WhatsApp respondendo às 22h47 — Sistema Britto"
+        title="Seu WhatsApp respondendo às 22h47 | Sistema Britto"
         description="A mensagem que chega às 22h47 é respondida às 22h47. IA que qualifica, agenda e vende no seu WhatsApp enquanto você dorme. Sem fidelidade, com garantia de 7 dias."
         path="/whatsapp"
       />
@@ -73,7 +73,7 @@ export default function WhatsApp() {
 
             <p className="text-gray-200 text-lg max-w-2xl mx-auto font-medium mb-4">
               Dez horas depois. Nesse intervalo ele perguntou em outros três
-              lugares — e alguém respondeu antes.
+              lugares, e alguém respondeu antes.
             </p>
             {/* REFRAME — a culpa é externa, e o preço sai da primeira dobra.
                 Ancorar em preço antes de existir desejo é pedir para o
@@ -114,6 +114,72 @@ export default function WhatsApp() {
                 <div className="text-gray-200 text-sm">Mais conversões</div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ── INIMIGO COMUM ──────────────────────────────────────────
+            O framework pede um vilão externo e específico, nunca o leitor e
+            nunca um concorrente pelo nome. Aqui o vilão é a expectativa que o
+            WhatsApp criou: a régua de resposta do mercado inteiro mudou, e
+            ninguém avisou o dono do negócio. Sem inimigo não há tensão, e sem
+            tensão o leitor concorda com tudo e não faz nada. */}
+        <section className="py-20 px-4 bg-[#0a0a0a]">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 leading-tight text-center">
+              O problema não é você demorar.<br />
+              <span className="text-green-400">É o WhatsApp ter ensinado que ninguém demora.</span>
+            </h2>
+            <div className="space-y-5 text-gray-300 text-lg leading-relaxed">
+              <p>
+                Há dez anos, responder um e-mail em um dia era normal. O WhatsApp
+                mudou a régua sem consultar ninguém: hoje a pessoa manda mensagem
+                para uma empresa e espera resposta como espera de um amigo.
+              </p>
+              <p>
+                Quem responde em minutos não é mais organizado que você. Quase
+                sempre é uma empresa menor, com menos cliente e mais tempo. Ou
+                uma maior, que colocou alguém de plantão.{' '}
+                <span className="text-white font-semibold">
+                  Você está competindo com disponibilidade, não com qualidade.
+                </span>
+              </p>
+              <p>
+                E disponibilidade é a única coisa que não dá para conseguir
+                trabalhando mais. O dia continua com 24 horas depois que você
+                aumenta o esforço.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── CUSTO DA INAÇÃO + CTA DO MEIO ──────────────────────────
+            O framework pede três CTAs: hero (urgência), meio (lógica) e final
+            (emoção). A página tinha um só. Este é o do meio, e vem logo depois
+            do medo — que é onde o leitor está mais disposto a agir. */}
+        <section className="py-20 px-4 bg-[#111111]">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5 leading-tight">
+              Daqui a seis meses você vai ter respondido milhares de mensagens.
+            </h2>
+            <p className="text-gray-300 text-lg leading-relaxed mb-3">
+              A pergunta é se vai ter respondido de madrugada, no domingo, no
+              meio do almoço, ou se o seu WhatsApp vai ter feito isso enquanto
+              você cuidava do resto.
+            </p>
+            <p className="text-gray-400 mb-8">
+              Nenhum dos dois caminhos é de graça. Um custa mensalidade. O outro
+              custa as suas horas, e essas não voltam.
+            </p>
+
+            <button
+              onClick={() => handleCheckout('meio')}
+              className="inline-flex items-center gap-3 bg-primary-500 hover:bg-primary-600 text-black px-10 py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-primary-500/25 cursor-pointer"
+            >
+              QUERO PARAR DE RESPONDER DE MADRUGADA →
+            </button>
+            <p className="text-gray-400 text-sm mt-4">
+              Leva 2 minutos para ativar. Cancele quando quiser, sem multa.
+            </p>
           </div>
         </section>
 

@@ -65,7 +65,7 @@ useEffect(() => {
       badge: 'Vendas & Atendimento',
       title: 'Seu WhatsApp como central comercial',
       problem: 'Lead entra e morre sem resposta. Cliente espera, desiste e vai pro concorrente.',
-      solution: 'IA que qualifica, agenda, vende e reativa — 24h, sem folga.',
+      solution: 'IA que qualifica, agenda, vende e reativa. 24h, sem folga.',
       features: [
         'Qualifica leads 24h com IA',
         'Agenda automático de consultas',
@@ -85,8 +85,8 @@ useEffect(() => {
       borderHover: 'hover:border-orange-500/50',
       badge: 'Conteúdo Infinito',
       title: 'Sua marca em 5 redes, todo dia',
-      problem: 'Postagem uma vez por semana — se der tempo. Conteúdo genérico que ninguém vê.',
-      solution: 'Dezenas de agentes criando posts, reels e shorts personalizados — publicação diária automática.',
+      problem: 'Postagem uma vez por semana, se der tempo. Conteúdo genérico que ninguém vê.',
+      solution: 'Dezenas de agentes criando posts, reels e shorts personalizados, com publicação diária automática.',
       features: [
         'Conteúdo diário em YouTube, TikTok, Instagram, LinkedIn e X',
         'Dezenas de agentes especialistas por domínio',
@@ -106,7 +106,7 @@ useEffect(() => {
       borderHover: 'hover:border-[#D4AF37]/50',
       badge: 'Sob Medida',
       title: 'A solução web que seu negócio precisa',
-      problem: 'SaaS, loja virtual, assistente, funil — cada negócio precisa de algo diferente.',
+      problem: 'SaaS, loja virtual, assistente, funil: cada negócio precisa de algo diferente.',
       solution: 'Eu construo do zero com a marca do cliente, no domínio dele. White-label. Código próprio.',
       features: [
         'SaaS, loja virtual, assistente IA, funil de vendas',
@@ -147,7 +147,7 @@ useEffect(() => {
  const cases = [
     { 
       name: 'Dr. Ricardo', 
-      role: 'Clínica de Odontologia — SP',
+      role: 'Clínica de Odontologia, SP',
       avatar: '👨‍⚕️',
       stars: 5,
       before: '400 leads/mês perdendo 60% por falta de follow-up. 1 recepcionista sobrecarregada.',
@@ -156,7 +156,7 @@ useEffect(() => {
     },
     { 
       name: 'Ana Paula', 
-      role: 'Estúdio de Pilates — RJ',
+      role: 'Estúdio de Pilates, RJ',
       avatar: '🧘‍♀️',
       stars: 5,
       before: '3h/dia no WhatsApp marcando e remarcando aulas. Instrutor virava atendente.',
@@ -165,7 +165,7 @@ useEffect(() => {
     },
     { 
       name: 'Marcos', 
-      role: 'Delivery — MG',
+      role: 'Delivery, MG',
       avatar: '🛵',
       stars: 5,
       before: 'Pedidos chegavam no WhatsApp e sumiam. Cliente ligava reclamando.',
@@ -177,7 +177,7 @@ useEffect(() => {
   return (
     <>
     <Meta 
-      title="Sistema Britto — Automação de IA para seu negócio"
+      title="Sistema Britto | Automação de IA para seu negócio"
       description="WhatsApp com IA, conteúdo automático nas redes e sistemas web sob medida. Automatize vendas, atendimento e operações em 48 horas."
       path="/"
     />
@@ -454,7 +454,7 @@ useEffect(() => {
             <span className="text-green-400">é dinheiro indo embora.</span>
           </h2>
           <p className="text-gray-300 text-lg mb-8">
-            WhatsApp IA, conteúdo infinito nas redes ou sistema sob medida — a gente dá braço pra sua operação.
+            WhatsApp IA, conteúdo infinito nas redes ou sistema sob medida. A gente dá braço pra sua operação.
           </p>
           <button 
             onClick={() => { trackCta('/', 'CONSTRUA SEUS ESPECIALISTAS', 'meio'); setShowModal(true); }}
@@ -476,7 +476,7 @@ useEffect(() => {
       Não precisa saber o nome do que você precisa.
       </h2>
       <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-      A conversa começa pelo problema. O nome da solução a gente descobre junto —
+      A conversa começa pelo problema. O nome da solução a gente descobre junto,
       e escreve, para você não depender da minha memória nem da sua.
       </p>
       </div>
@@ -499,7 +499,7 @@ useEffect(() => {
       <span className="text-[#D4AF37] text-[11px] font-bold uppercase tracking-wider">O caminho mais comum</span>
       </div>
       <h3 className="text-white font-bold text-2xl sm:text-3xl mb-3 leading-tight group-hover:text-[#D4AF37] transition-colors">
-      Quero um site — ou descobrir o que eu realmente preciso
+      Quero um site (ou descobrir o que eu realmente preciso)
       </h3>
       <p className="text-gray-300 leading-relaxed mb-2">
       Quase todo mundo chega aqui pedindo um site. Numa hora de conversa a
@@ -518,6 +518,9 @@ useEffect(() => {
       </div>
       </a>
 
+      <p className="text-gray-400 text-sm text-center mb-2">
+      A call é comigo, não com um time comercial. A agenda abre com alguns dias de antecedência.
+      </p>
       <p className="text-gray-500 text-sm text-center mb-5">Ou, se você já sabe o que quer:</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -636,7 +639,7 @@ useEffect(() => {
       <div className="mt-4 pt-3 border-t border-white/[0.06]">
       <div className="text-[10px] text-gray-600 uppercase tracking-wider mb-1">Próximo a publicar</div>
       <div className="text-white text-xs font-semibold truncate">Automação na prática: case real...</div>
-      <div className="text-gray-500 text-[10px]">YT · IG · TK · LI — amanhã 09h</div>
+      <div className="text-gray-500 text-[10px]">YT · IG · TK · LI · amanhã 09h</div>
       </div>
       </div>
       </div>
@@ -710,7 +713,7 @@ useEffect(() => {
       <span className="text-green-400">é dinheiro indo embora.</span>
       </h2>
       <p className="text-gray-300 text-lg mb-8">
-      WhatsApp IA, conteúdo infinito nas redes ou sistema sob medida — a gente dá braço pra sua operação.
+      WhatsApp IA, conteúdo infinito nas redes ou sistema sob medida. A gente dá braço pra sua operação.
       </p>
       <button
       onClick={() => { trackCta('/', 'CONSTRUA SEUS ESPECIALISTAS', 'final'); setShowModal(true); }}
