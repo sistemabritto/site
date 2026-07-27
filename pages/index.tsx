@@ -470,125 +470,88 @@ useEffect(() => {
       <div className="max-w-6xl mx-auto">
       <div className="text-center mb-14">
       <span className="inline-block text-[#D4AF37] text-xs font-bold uppercase tracking-widest mb-4 border border-[#D4AF37]/30 px-4 py-2 rounded-full bg-[#D4AF37]/10">
-      Escolha por onde começar
+      Por onde a maioria começa
       </span>
       <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-      Seu momento é único. Comece de onde dói mais.
+      Não precisa saber o nome do que você precisa.
       </h2>
       <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-      Cada caminho resolve um gargalo. Eles se combinam quando você quiser.
+      A conversa começa pelo problema. O nome da solução a gente descobre junto —
+      e escreve, para você não depender da minha memória nem da sua.
       </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      {/* Card 1 — SocialJobs */}
+      {/* Um caminho principal e três secundários.
+          Antes eram cinco cards de peso idêntico, todos indo direto para o
+          WhatsApp. O funil real diz outra coisa: /sistema é o mais visitado
+          (41 sessões contra 26 do /whatsapp) e a origem de 21 dos 25 quizzes
+          identificados. Dar o mesmo peso a tudo é pedir para o visitante
+          decidir sozinho o que a gente já sabe. */}
       <a
-      href="https://wa.me/5511914088571?text=Olá!%20Quero%20minha%20operação%20de%20conteúdo%20com%20IA"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group bg-[#0a0a0a]/80 border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/40 transition-all duration-300 hover:-translate-y-1 flex flex-col"
+      href="/sistema"
+      onClick={() => trackCta('/', 'QUERO MEU PROJETO DEFINIDO', 'jornada-principal')}
+      className="group block bg-gradient-to-br from-[#D4AF37]/[0.09] to-transparent border-2 border-[#D4AF37]/35 rounded-2xl p-7 sm:p-9 mb-5 hover:border-[#D4AF37]/60 transition-all duration-300 hover:-translate-y-1"
       >
-      <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center mb-4 group-hover:bg-orange-500/20 transition-colors">
-      <span className="text-2xl">🔥</span>
+      <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+      <div className="flex-1">
+      <div className="inline-flex items-center gap-2 bg-[#D4AF37]/15 border border-[#D4AF37]/30 rounded-full px-3 py-1 mb-4">
+      <span className="w-1.5 h-1.5 bg-[#D4AF37] rounded-full" />
+      <span className="text-[#D4AF37] text-[11px] font-bold uppercase tracking-wider">O caminho mais comum</span>
       </div>
-      <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-400 transition-colors">
-      Quero atrair mais clientes
+      <h3 className="text-white font-bold text-2xl sm:text-3xl mb-3 leading-tight group-hover:text-[#D4AF37] transition-colors">
+      Quero um site — ou descobrir o que eu realmente preciso
       </h3>
-      <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
-      Conteúdo diário, calendário editorial, publicação em 5 redes. Consistência que alimenta tráfego orgânico e pago.
+      <p className="text-gray-300 leading-relaxed mb-2">
+      Quase todo mundo chega aqui pedindo um site. Numa hora de conversa a
+      gente define o projeto inteiro: o que entra, o que fica de fora, prazo
+      por etapa e o preço calculado sobre isso.
       </p>
-      <div className="flex items-center gap-2 text-orange-400 font-bold text-sm group-hover:gap-3 transition-all duration-300">
-      Ver SocialJobs
-      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+      <p className="text-gray-400 text-sm">
+      R$ 147 pela call, abatidos do projeto se fecharmos. O documento é seu de
+      qualquer forma.
+      </p>
+      </div>
+      <div className="flex items-center gap-2 text-[#D4AF37] font-bold shrink-0 group-hover:gap-3 transition-all duration-300">
+      Começar por aqui
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+      </div>
       </div>
       </a>
 
-      {/* Card 2 — WhatsApp IA */}
+      <p className="text-gray-500 text-sm text-center mb-5">Ou, se você já sabe o que quer:</p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
       <a
-      href="https://wa.me/5511914088571?text=Olá!%20Quero%20ativar%20meu%20WhatsApp%20com%20inteligência%20artificial"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group bg-[#0a0a0a]/80 border border-green-500/20 rounded-2xl p-6 hover:border-green-500/40 transition-all duration-300 hover:-translate-y-1 flex flex-col"
+      href="/socialjobs"
+      onClick={() => trackCta('/', 'VER SOCIALJOBS', 'jornada-secundaria')}
+      className="group bg-[#0a0a0a]/80 border border-orange-500/20 rounded-2xl p-5 hover:border-orange-500/40 transition-all duration-300 hover:-translate-y-1 flex flex-col"
       >
-      <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center mb-4 group-hover:bg-green-500/20 transition-colors">
-      <span className="text-2xl">💬</span>
-      </div>
-      <h3 className="text-white font-bold text-lg mb-2 group-hover:text-green-400 transition-colors">
-      Quero responder leads mais rápido
-      </h3>
-      <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
-      IA que qualifica, agenda e vende 24h. Zero lead perdido por demora. CRM + WhatsApp integrado.
-      </p>
-      <div className="flex items-center gap-2 text-green-400 font-bold text-sm group-hover:gap-3 transition-all duration-300">
-      Ver WhatsApp com IA
-      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-      </div>
+      <span className="text-xl mb-3">🔥</span>
+      <h3 className="text-white font-bold mb-1.5 group-hover:text-orange-400 transition-colors">Atrair mais clientes</h3>
+      <p className="text-gray-400 text-sm leading-relaxed flex-1">Conteúdo diário em várias redes, com calendário e publicação automática.</p>
+      <span className="text-orange-400 font-semibold text-sm mt-3">SocialJobs →</span>
       </a>
 
-      {/* Card 3 — Sistema Sob Medida */}
       <a
-      href="https://wa.me/5511914088571?text=Olá!%20Quero%20construir%20um%20sistema%20web%20sob%20medida"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group bg-[#0a0a0a]/80 border border-[#D4AF37]/20 rounded-2xl p-6 hover:border-[#D4AF37]/40 transition-all duration-300 hover:-translate-y-1 flex flex-col"
+      href="/whatsapp"
+      onClick={() => trackCta('/', 'VER WHATSAPP IA', 'jornada-secundaria')}
+      className="group bg-[#0a0a0a]/80 border border-green-500/20 rounded-2xl p-5 hover:border-green-500/40 transition-all duration-300 hover:-translate-y-1 flex flex-col"
       >
-      <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/20 flex items-center justify-center mb-4 group-hover:bg-[#D4AF37]/20 transition-colors">
-      <span className="text-2xl">⚡</span>
-      </div>
-      <h3 className="text-white font-bold text-lg mb-2 group-hover:text-[#D4AF37] transition-colors">
-      Quero construir um sistema próprio
-      </h3>
-      <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
-      SaaS, funis, assistentes IA, integrações. Código do cliente, marca do cliente, sem vendor lock-in.
-      </p>
-      <div className="flex items-center gap-2 text-[#D4AF37] font-bold text-sm group-hover:gap-3 transition-all duration-300">
-      Ver Sistema Sob Medida
-      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-      </div>
+      <span className="text-xl mb-3">💬</span>
+      <h3 className="text-white font-bold mb-1.5 group-hover:text-green-400 transition-colors">Responder leads mais rápido</h3>
+      <p className="text-gray-400 text-sm leading-relaxed flex-1">IA que qualifica, agenda e vende 24h, integrada ao seu WhatsApp.</p>
+      <span className="text-green-400 font-semibold text-sm mt-3">WhatsApp com IA →</span>
       </a>
 
-      {/* Card 4 — VPS */}
       <a
-      href="https://wa.me/5511914088571?text=Olá!%20Quero%20hospedar%20minha%20operação%20em%20VPS%20estruturada"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group bg-[#0a0a0a]/80 border border-white/[0.08] rounded-2xl p-6 hover:border-white/20 transition-all duration-300 hover:-translate-y-1 flex flex-col"
+      href="/zapclub"
+      onClick={() => trackCta('/', 'VER ZAPCLUB', 'jornada-secundaria')}
+      className="group bg-[#0a0a0a]/80 border border-purple-500/20 rounded-2xl p-5 hover:border-purple-500/40 transition-all duration-300 hover:-translate-y-1 flex flex-col"
       >
-      <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:bg-white/10 transition-colors">
-      <span className="text-2xl">🖥️</span>
-      </div>
-      <h3 className="text-white font-bold text-lg mb-2 group-hover:text-white transition-colors">
-      Quero hospedar minha operação
-      </h3>
-      <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
-      VPS configurada, SSL automático, backup diário, monitoramento. Você dirige, a gente cuida da infra.
-      </p>
-      <div className="flex items-center gap-2 text-gray-300 font-bold text-sm group-hover:gap-3 group-hover:text-white transition-all duration-300">
-      Ver VPS Estruturada
-      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-      </div>
-      </a>
-
-      {/* Card 5 — ZapClub */}
-      <a
-      href="https://wa.me/5511914088571?text=Olá!%20Quero%20entrar%20no%20ZapClub%20para%20aprender%20IA%20com%20suporte"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group bg-[#0a0a0a]/80 border border-purple-500/20 rounded-2xl p-6 hover:border-purple-500/40 transition-all duration-300 hover:-translate-y-1 flex flex-col"
-      >
-      <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition-colors">
-      <span className="text-2xl">🎓</span>
-      </div>
-      <h3 className="text-white font-bold text-lg mb-2 group-hover:text-purple-400 transition-colors">
-      Quero aprender IA com suporte
-      </h3>
-      <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
-      Comunidade para aplicar IA na prática. Progressão por níveis, suporte direto e implementação guiada.
-      </p>
-      <div className="flex items-center gap-2 text-purple-400 font-bold text-sm group-hover:gap-3 transition-all duration-300">
-      Ver ZapClub
-      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-      </div>
+      <span className="text-xl mb-3">🎓</span>
+      <h3 className="text-white font-bold mb-1.5 group-hover:text-purple-400 transition-colors">Aprender a fazer sozinho</h3>
+      <p className="text-gray-400 text-sm leading-relaxed flex-1">Comunidade com progressão por níveis e implementação guiada.</p>
+      <span className="text-purple-400 font-semibold text-sm mt-3">ZapClub →</span>
       </a>
       </div>
       </div>
