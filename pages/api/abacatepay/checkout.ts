@@ -2,7 +2,10 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
 
 const ABACATEPAY_API = 'https://api.abacatepay.com/v2';
-const ABACATEPAY_KEY = process.env.ABACATEPAY_API_KEY || 'abc_dev_stLP4GLSqfgnHygHA6uuCSKs';
+// Sem fallback. A chave que estava aqui tem prefixo `abc_dev_`: gera cobrança
+// em sandbox, que ninguém paga. Faltando a variável, o checkout falha alto —
+// muito melhor que emitir uma cobrança que parece real e não cobra nada.
+const ABACATEPAY_KEY = process.env.ABACATEPAY_API_KEY || '';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mnzpcilebqqgbqdgwtlw.supabase.co';
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY || '';
 

@@ -18,7 +18,9 @@ const STAGE_NOVO_LEAD = '0e31e649-af37-4a6f-87fb-cd25d52225e5';
 // Evolution API config (endpoint /send/text NÃO /message/sendText)
 const EVO_API_URL = getEnv('EVO_API_URL') || 'https://go.workflowapi.com.br';
 const EVO_INSTANCE = getEnv('EVO_INSTANCE') || 'sistema-britto-business';
-const EVO_TOKEN = getEnv('EVO_TO' + 'KEN') || 'ed260550-affc-42f1-92e3-45affea89e05';
+// A concatenação existia para driblar scanner de segredo — o token estava
+// legível do mesmo jeito, num repositório público.
+const EVO_TOKEN = getEnv('EVO_TOKEN') || '';
 const SDR_PHONE = '5511914088571';
 
 interface QualificacaoBody {
