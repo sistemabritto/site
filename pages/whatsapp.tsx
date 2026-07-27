@@ -44,8 +44,8 @@ export default function WhatsApp() {
   return (
     <>
       <Meta
-        title="WhatsApp + IA — Sistema Britto"
-        description="Seu WhatsApp como central comercial. IA que qualifica, agenda, vende e reativa leads 24h. R$ 297/mês. Sem fidelidade."
+        title="Seu WhatsApp respondendo às 22h47 — Sistema Britto"
+        description="A mensagem que chega às 22h47 é respondida às 22h47. IA que qualifica, agenda e vende no seu WhatsApp enquanto você dorme. Sem fidelidade, com garantia de 7 dias."
         path="/whatsapp"
       />
 
@@ -60,20 +60,28 @@ export default function WhatsApp() {
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="inline-flex items-center gap-2 bg-primary-500/20 border border-green-500/30 rounded-full px-4 py-2 mb-6">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Vagas Disponíveis</span>
+              <span className="text-green-400 text-xs font-bold uppercase tracking-wider">Atendimento que não dorme</span>
             </div>
 
+            {/* HEADLINE — a cena concreta, no horário em que ela acontece.
+                "Responde em 1 segundo" fala de velocidade, que é característica
+                do produto. A perda é o que dói: o lead chegou e ficou parado. */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              Seu concorrente responde<br />
-              <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">em 1 segundo.</span><br />
-              Você, em 1 hora.
+              A mensagem chegou às 22h47.<br />
+              <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">Você respondeu às 9h12.</span>
             </h1>
 
             <p className="text-gray-200 text-lg max-w-2xl mx-auto font-medium mb-4">
-              Enquanto você dorme, 47 leads mandaram mensagem no seu WhatsApp. Amanhã, 30 deles vão pro concorrente.
+              Dez horas depois. Nesse intervalo ele perguntou em outros três
+              lugares — e alguém respondeu antes.
             </p>
+            {/* REFRAME — a culpa é externa, e o preço sai da primeira dobra.
+                Ancorar em preço antes de existir desejo é pedir para o
+                visitante comparar número sem entender o que está comparando.
+                Ele aparece depois da prova, na seção de investimento. */}
             <p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
-              <strong>Não é falta de esforço. É falta de braço.</strong> A IA resolve isso por R$ 297/mês.
+              <strong>Não é falta de esforço. É falta de braço.</strong> Ninguém
+              consegue estar acordado quando o cliente decide comprar.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
