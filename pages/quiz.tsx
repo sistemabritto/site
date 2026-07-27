@@ -26,16 +26,6 @@ const QUESTIONS = [
     ],
   },
   {
-    id: 'q3',
-    question: 'Quanto você já investiu em solução assim antes?',
-    options: [
-      { label: 'Nada ainda — é minha primeira vez', value: 'nada', icon: '' },
-      { label: 'Já gastei com freelas mas não deu certo', value: 'freelas', icon: '' },
-      { label: 'Já pago ferramentas mas quero consolidar', value: 'ferramentas', icon: '' },
-      { label: 'Invisto pesado e quero otimizar', value: 'pesado', icon: '' },
-    ],
-  },
-  {
     id: 'q4',
     question: 'Em quanto tempo você quer isso rodando?',
     options: [
@@ -113,7 +103,11 @@ function trackStage(stage: string, extra: Record<string, string> = {}) {
 }
 
 export default function Quiz() {
-  const [step, setStep] = useState<'email' | 'quiz'>('quiz'); // <-- começa no quiz por padrão
+  const [step, setStep] = useState<'email' | 'quiz'>('quiz');
+  // Guarda as respostas enquanto a captura acontece: `answers` já está no
+  // estado, mas o React não garante que esteja atualizado quando o submit
+  // roda no mesmo ciclo.
+  const [answersFinais, setAnswersFinais] = useState<Record<string, string>>({});
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -162,13 +156,17 @@ export default function Quiz() {
       const hasEnoughData = !!(urlName && urlEmail && urlWhatsapp) || hasCustomerData;
       setHasExistingData(hasEnoughData);
 
-      // If data exists, go straight to quiz
-      if (hasEnoughData) {
-        setStep('quiz');
-      } else {
-        // Need email capture
-        setStep('email');
-      }
+      // O quiz SEMPRE começa pelas perguntas.
+      //
+      // Antes, quem não tinha dado salvo caía direto na tela de e-mail — e
+      // 84% das sessões morriam ali. O sinal estava no próprio funil:
+      // `answered-q1` (7 sessões) era MAIOR que `email-captured` (3), ou
+      // seja, mais gente respondia a primeira pergunta do que entregava o
+      // e-mail. Quem conseguia pular seguia adiante.
+      //
+      // Pedir dado antes de entregar valor inverte a ordem da troca. Agora a
+      // captura vem no fim, quando a pessoa já respondeu e quer o resultado.
+      setStep('quiz');
 
       // UTM
       const utm: Record<string, string> = {};
@@ -208,7 +206,12 @@ export default function Quiz() {
     }
 
     trackStage('email-captured');
-    setStep('quiz');
+    // Vindo do fim do quiz, entregar o resultado é o próximo passo.
+    if (Object.keys(answersFinais).length) {
+      processQuiz(answersFinais);
+    } else {
+      setStep('quiz');
+    }
   };
 
   const handleAnswer = (value: string) => {
@@ -223,8 +226,12 @@ export default function Quiz() {
 
     if (currentStep < allQuestions.length - 1) {
       setCurrentStep(currentStep + 1);
+    } else if (!email || !name) {
+      // Respondeu tudo e ainda não temos como falar com ele: a captura entra
+      // aqui, valendo o resultado que ele acabou de conquistar.
+      setAnswersFinais(newAnswers);
+      setStep('email');
     } else {
-      // Última pergunta respondida — processar resultado
       processQuiz(newAnswers);
     }
   };
@@ -339,7 +346,6 @@ export default function Quiz() {
       `${headerEmoji} *${headerText}*\n\n` +
       `*Interesse:* ${interestLabel}\n` +
       `*Gargalo:* ${L(finalAnswers['q2'])}\n` +
-      `*Experiência:* ${L(finalAnswers['q3'])}\n` +
       `*Prazo:* ${L(finalAnswers['q4'])}\n\n` +
       `---\n` +
       `Nome: ${name || '-'}\n` +
@@ -350,9 +356,14 @@ export default function Quiz() {
   };
 
   const handleSkipEmail = () => {
-    // Skip email and go straight to quiz
-    setStep('quiz');
     trackStage('email-skipped');
+    // Quem pula no fim não perde o resultado — perder seria punir quem não
+    // quis dar o dado, e ele ainda pode voltar.
+    if (Object.keys(answersFinais).length) {
+      processQuiz(answersFinais);
+    } else {
+      setStep('quiz');
+    }
   };
 
   if (loading) {
