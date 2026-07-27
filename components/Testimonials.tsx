@@ -27,7 +27,7 @@ const testimonials = [
     name: 'Fernanda L.',
     business: 'Escritório Contábil',
     rating: 5,
-    text: 'Documentação, agendamento, lembretes — tudo no automático. Clientes mais satisfeitos e menos retrabalho.',
+    text: 'Documentação, agendamento, lembretes: tudo no automático. Clientes mais satisfeitos e menos retrabalho.',
     date: 'há 3 semanas',
   },
   {

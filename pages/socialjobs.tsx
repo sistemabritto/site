@@ -556,7 +556,7 @@ export default function SocialJobs() {
 
  {/* ===== CUSTO DA INAÇÃO + CTA DO MEIO =====
      O framework pede o medo da perda antes do segundo CTA, e pede que ele
-     seja temporal e visual — amplificando o real, nunca inventando. Aqui o
+     seja temporal e visual, amplificando o real, nunca inventando. Aqui o
      real é aritmética simples: o perfil parado não fica parado, ele afunda,
      porque o alcance de quem não posta cai sozinho. */}
  <section className="py-20 px-4 bg-[#0a0a0a]">

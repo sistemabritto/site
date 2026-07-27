@@ -53,10 +53,10 @@ export default function VPS() {
       const NL = '%0A';
       const msg = encodeURIComponent(
       `🖥️ *Quero a VPS Estruturada*${orderBump ? ' + Suporte' : ''}${NL}${NL}` +
-      `———${NL}` +
-      `👤 ${customerData.name || '—'}${NL}` +
-      `📧 ${customerData.email || '—'}${NL}` +
-      `📱 ${customerData.whatsapp || '—'}`
+      `-----${NL}` +
+      `👤 ${customerData.name || 'n/d'}${NL}` +
+      `📧 ${customerData.email || 'n/d'}${NL}` +
+      `📱 ${customerData.whatsapp || 'n/d'}`
       );
       window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
       }
@@ -64,10 +64,10 @@ export default function VPS() {
       const NL = '%0A';
       const msg = encodeURIComponent(
       `🖥️ *Quero a VPS Estruturada*${orderBump ? ' + Suporte' : ''}${NL}${NL}` +
-      `———${NL}` +
-      `👤 ${customerData.name || '—'}${NL}` +
-      `📧 ${customerData.email || '—'}${NL}` +
-      `📱 ${customerData.whatsapp || '—'}`
+      `-----${NL}` +
+      `👤 ${customerData.name || 'n/d'}${NL}` +
+      `📧 ${customerData.email || 'n/d'}${NL}` +
+      `📱 ${customerData.whatsapp || 'n/d'}`
       );
       window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
       }
@@ -76,7 +76,7 @@ export default function VPS() {
   return (
     <>
     <Meta
-      title="VPS Estruturada — Servidor pronto. Você só faz deploy."
+      title="VPS Estruturada | Servidor pronto. Você só faz deploy."
       description="Docker configurado, SSL automático, backup diário, firewall. Setup em 24h. A partir de R$ 297/mês."
       path="/vps"
     />
@@ -96,7 +96,7 @@ export default function VPS() {
             <span className="text-[#D4AF37]">Configurada.</span> Pronta pra rodar.
           </h1>
           <p className="text-xl text-gray-300 mb-4 max-w-3xl mx-auto">
-            Docker, SSL, backup, firewall, monitoramento — tudo pronto. Você só faz deploy. Instala o que quiser, roda no seu domínio, se vira.
+            Docker, SSL, backup, firewall, monitoramento: tudo pronto. Você só faz deploy. Instala o que quiser, roda no seu domínio, se vira.
           </p>
           <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
             Setup em 24h. A gente estrutura. Você dirige.
@@ -224,14 +224,14 @@ export default function VPS() {
             {[
               {
                 name: 'Thiago M.',
-                role: 'SaaS de agendamento — MG',
+                role: 'SaaS de agendamento, MG',
                 avatar: '👨‍💻',
                 stars: 5,
                 text: 'Antes eu passava 3h configurando servidor. Agora faço deploy em 1 comando e vou dormir tranquilo. Backup automático já salvou minha pele uma vez.',
               },
               {
                 name: 'Carla R.',
-                role: 'E-commerce — PR',
+                role: 'E-commerce, PR',
                 avatar: '👩‍💼',
                 stars: 5,
                 text: 'SSL sempre renovando, firewall ligado, monitoramento no WhatsApp. Meu site não cai mais. E quando precisa, o suporte responde em minutos.',

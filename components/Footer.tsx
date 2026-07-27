@@ -27,7 +27,7 @@ export default function Footer() {
           />
         </div>
         <p className="text-white text-sm leading-relaxed font-medium">
-          Workforces de IA que operam seu negócio — do WhatsApp à engenharia de software.
+          Workforces de IA que operam seu negócio, do WhatsApp à engenharia de software.
         </p>
       </div>
 

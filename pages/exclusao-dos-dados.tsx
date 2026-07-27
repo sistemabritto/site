@@ -54,7 +54,7 @@ export default function ExclusaoDeDados() {
             <section>
               <h2 className="text-white font-heading font-bold text-xl mb-4">1. Solicitação de Exclusão de Dados</h2>
               <p>
-                Em conformidade com as políticas da <strong className="text-white">Meta</strong> (Facebook/Instagram) para aplicativos conectados à plataforma, e com a <strong className="text-white">Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018)</strong>, você pode solicitar a exclusão completa dos seus dados pessoais armazenados em nossos sistemas.
+                Em conformidade com as políticas da <strong className="text-white">Meta</strong> (Facebook/Instagram) para aplicativos conectados à plataforma, e com a <strong className="text-white">Lei Geral de Proteção de Dados (LGPD, Lei nº 13.709/2018)</strong>, você pode solicitar a exclusão completa dos seus dados pessoais armazenados em nossos sistemas.
               </p>
               <p className="mt-3">
                 Esta página atende aos requisitos da Meta para que desenvolvedores de aplicativos disponibilizem um mecanismo claro e acessível para que usuários solicitem a remoção de seus dados.
@@ -80,7 +80,7 @@ export default function ExclusaoDeDados() {
 
               <div className="mt-6 space-y-4">
                 <div className="bg-white/5 rounded-xl p-5 border border-white/10">
-                  <h3 className="text-white font-heading font-bold text-base mb-2">📧 Opção 1 — Envio de E-mail</h3>
+                  <h3 className="text-white font-heading font-bold text-base mb-2">📧 Opção 1: envio de e-mail</h3>
                   <p>Envie um e-mail para <a href="mailto:felipe@sistemabritto.com.br" className="text-primary-400 hover:text-primary-300 font-medium">felipe@sistemabritto.com.br</a> com o assunto <strong className="text-white">"Solicitação de Exclusão de Dados"</strong> e informe:</p>
                   <ul className="list-disc pl-5 mt-2 space-y-1 text-neutral-300">
                     <li>Seu nome completo</li>
@@ -91,12 +91,12 @@ export default function ExclusaoDeDados() {
                 </div>
 
                 <div className="bg-white/5 rounded-xl p-5 border border-white/10">
-                  <h3 className="text-white font-heading font-bold text-base mb-2">💬 Opção 2 — WhatsApp</h3>
+                  <h3 className="text-white font-heading font-bold text-base mb-2">💬 Opção 2: WhatsApp</h3>
                   <p>Envie uma mensagem pelo WhatsApp para <a href="https://wa.me/5511914088571?text=Olá!%20Gostaria%20de%20solicitar%20a%20EXCLUSÃO%20COMPLETA%20dos%20meus%20dados%20do%20sistema.%20Meu%20e-mail%20de%20cadastro%20é:" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300 font-medium">+55 11 91408-8571</a> solicitando a exclusão dos seus dados. Informe seu e-mail de cadastro na mensagem.</p>
                 </div>
 
                 <div className="bg-white/5 rounded-xl p-5 border border-white/10">
-                  <h3 className="text-white font-heading font-bold text-base mb-2">🌐 Opção 3 — Formulário Online</h3>
+                  <h3 className="text-white font-heading font-bold text-base mb-2">🌐 Opção 3: formulário online</h3>
                   <p>Acesse nosso <a href="https://wa.me/5511914088571?text=Olá!%20Quero%20solicitar%20a%20exclusão%20dos%20meus%20dados%20pessoais%20(conforme%20LGPD%20e%20políticas%20da%20Meta)" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300 font-medium">canal de atendimento</a> e solicite diretamente a remoção. Responderemos em até <strong className="text-white">5 dias úteis</strong> confirmando a exclusão.</p>
                 </div>
               </div>

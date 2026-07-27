@@ -155,7 +155,7 @@ export default function WhatsApp() {
         {/* ── CUSTO DA INAÇÃO + CTA DO MEIO ──────────────────────────
             O framework pede três CTAs: hero (urgência), meio (lógica) e final
             (emoção). A página tinha um só. Este é o do meio, e vem logo depois
-            do medo — que é onde o leitor está mais disposto a agir. */}
+            do medo, que é onde o leitor está mais disposto a agir. */}
         <section className="py-20 px-4 bg-[#111111]">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5 leading-tight">

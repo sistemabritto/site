@@ -15,7 +15,7 @@ export default function Mission() {
           <span className="gold-text"> empresas brasileiras</span>
         </h2>
         <p className="text-white text-lg max-w-2xl mx-auto leading-relaxed font-medium">
-          Acreditamos que todo negócio — do autônomo à clínica, da pizzaria ao SaaS — merece ter uma
+          Acreditamos que todo negócio, do autônomo à clínica e da pizzaria ao SaaS, merece ter uma
           workforce inteligente operando 24 horas. Sem contrato longo, sem curva de aprendizado, sem dor de cabeça.
         </p>
       </div>

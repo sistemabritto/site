@@ -99,10 +99,10 @@ export default function Resultado() {
   `🟢 *Quero o WhatsApp + IA*${NL}${NL}` +
   `*Plano:* R$ ${finalPrice}/mês${NL}` +
   `*Especialista:* ${orderBump ? 'Sim' : 'Não'}${NL}${NL}` +
-  `———${NL}` +
-  `👤 ${customerData.name || '—'}${NL}` +
-  `📧 ${customerData.email || '—'}${NL}` +
-  `📱 ${customerData.whatsapp || '—'}`
+  `-----${NL}` +
+  `👤 ${customerData.name || 'n/d'}${NL}` +
+  `📧 ${customerData.email || 'n/d'}${NL}` +
+  `📱 ${customerData.whatsapp || 'n/d'}`
   );
   window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
   };
@@ -121,7 +121,7 @@ export default function Resultado() {
   return (
     <>
       <Meta 
-      title="CRM WhatsApp + IA — Sistema Britto"
+      title="CRM WhatsApp + IA | Sistema Britto"
       description="Automação de WhatsApp com IA. CRM inteligente que vende 24h. A partir de R$ 297/mês."
       path="/resultado"
       noIndex={true}
@@ -281,7 +281,7 @@ export default function Resultado() {
               onClick={handleCheckout}
               className="w-full bg-primary-500 hover:bg-primary-600 text-black py-5 rounded-full font-bold text-xl transition-all duration-300 shadow-lg shadow-primary-500/25"
             >
-              {orderBump ? `ASSINAR COMBO — R$ ${finalPrice}/mês →` : `ASSINAR AGORA — R$ ${finalPrice}/mês →`}
+              {orderBump ? `ASSINAR COMBO por R$ ${finalPrice}/mês →` : `ASSINAR AGORA por R$ ${finalPrice}/mês →`}
             </button>
 
             <p className="text-gray-500 text-sm text-center mt-4">

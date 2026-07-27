@@ -231,7 +231,7 @@ export default function Admin() {
   if (!authenticated) {
     return (
       <>
-        <Meta title="Admin — Sistema Britto" description="" path="/admin" noIndex={true} />
+        <Meta title="Admin | Sistema Britto" description="" path="/admin" noIndex={true} />
         <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4">
           <div className="bg-[#111111] rounded-3xl p-8 max-w-md w-full border border-green-500/30">
             <div className="text-center mb-6">
@@ -274,7 +274,7 @@ export default function Admin() {
   // Admin dashboard
   return (
     <>
-      <Meta title="Painel Admin — Sistema Britto" description="" path="/admin" noIndex={true} />
+      <Meta title="Painel Admin | Sistema Britto" description="" path="/admin" noIndex={true} />
       <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>
         {/* Header */}
         <div className="bg-[#111111] border-b border-green-500/20 px-4 py-4">
@@ -389,11 +389,11 @@ export default function Admin() {
                           <tbody className="divide-y divide-white/5">
                             {leads.slice(0, 50).map((lead) => (
                               <tr key={lead.id} className="hover:bg-white/5 transition-colors">
-                                <td className="px-6 py-3 font-medium text-white">{lead.name || '—'}</td>
+                                <td className="px-6 py-3 font-medium text-white">{lead.name || 'n/d'}</td>
                                 <td className="px-6 py-3">
                                   {lead.email && <div className="text-gray-200">{lead.email}</div>}
                                   {lead.phone && <div className="text-gray-500 text-xs">{lead.phone}</div>}
-                                  {!lead.email && !lead.phone && <span className="text-gray-500">—</span>}
+                                  {!lead.email && !lead.phone && <span className="text-gray-500">n/d</span>}
                                 </td>
                                 <td className="px-6 py-3">
                                   <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-semibold ${
@@ -405,10 +405,10 @@ export default function Admin() {
                                     'bg-gray-500/20 text-gray-300'
                                   }`}>{lead.stage}</span>
                                 </td>
-                                <td className="px-6 py-3 text-gray-400">{lead.source || '—'}</td>
-                                <td className="px-6 py-3 text-gray-300">{lead.plan || '—'}</td>
+                                <td className="px-6 py-3 text-gray-400">{lead.source || 'n/d'}</td>
+                                <td className="px-6 py-3 text-gray-300">{lead.plan || 'n/d'}</td>
                                 <td className="px-6 py-3 text-gray-500 text-xs">
-                                  {lead.entered_at ? new Date(lead.entered_at).toLocaleDateString('pt-BR') : '—'}
+                                  {lead.entered_at ? new Date(lead.entered_at).toLocaleDateString('pt-BR') : 'n/d'}
                                 </td>
                               </tr>
                             ))}
@@ -585,7 +585,7 @@ export default function Admin() {
                     <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20 mb-6">
                       <h3 className="text-lg font-bold text-white mb-1">🎯 Qual conteúdo gerou clique</h3>
                       <p className="text-gray-500 text-sm mb-4">
-                        A campanha da UTM é o slug do artigo — é isto que separa
+                        A campanha da UTM é o slug do artigo, e é isto que separa
                         um post que converte de vinte que não convertem.
                       </p>
                       <div className="space-y-2">
@@ -598,7 +598,7 @@ export default function Admin() {
                       </div>
                       {analytics.attribution.clicksUnattributed > 0 && (
                         <p className="text-gray-500 text-xs mt-4 pt-3 border-t border-white/[0.06]">
-                          {analytics.attribution.clicksUnattributed} clique(s) sem origem identificada —
+                          {analytics.attribution.clicksUnattributed} clique(s) sem origem identificada.
                           chegaram sem pageview na janela, ou sem UTM no link.
                         </p>
                       )}
@@ -709,7 +709,7 @@ export default function Admin() {
                     <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20">
                       <h3 className="text-lg font-bold text-white mb-4">👆 Cliques em CTAs</h3>
                       {analytics.ctaClicks.length === 0 ? (
-                        <p className="text-gray-500 text-sm">Nenhum clique em CTA nesta janela. Os botões já registram — se a página teve visitas e nenhum clique, é dado, não falta de instrumentação.</p>
+                        <p className="text-gray-500 text-sm">Nenhum clique em CTA nesta janela. Os botões já registram. Se a página teve visitas e nenhum clique, é dado, não falta de instrumentação.</p>
                       ) : (
                         <div className="space-y-2">
                           {analytics.ctaClicks.map((c, i) => (
@@ -758,7 +758,7 @@ export default function Admin() {
                   {pixelSaving ? 'Salvando...' : pixelSaved ? '✅ Salvo no Supabase!' : 'Salvar Pixel ID'}
                 </button>
                 <p className="text-gray-500 text-xs mt-3">
-                  Salvo no Supabase — persiste entre dispositivos e limpezas de cache. O pixel é injetado em todas as páginas automaticamente.
+                  Salvo no Supabase, e persiste entre dispositivos e limpezas de cache. O pixel é injetado em todas as páginas automaticamente.
                 </p>
               </div>
 
@@ -806,7 +806,7 @@ export default function Admin() {
                   {gtmSaving ? 'Salvando...' : gtmSaved ? '✅ Salvo no Supabase!' : 'Salvar GTM ID'}
                 </button>
                 <p className="text-gray-500 text-xs mt-3">
-                  Ao salvar, o GTM é injetado em todas as páginas automaticamente — rastreia pageviews, cliques em CTAs e eventos customizados.
+                  Ao salvar, o GTM é injetado em todas as páginas automaticamente, e rastreia pageviews, cliques em CTAs e eventos customizados.
                 </p>
               </div>
 
@@ -865,7 +865,7 @@ export default function Admin() {
                   </div>
                   <hr className="border-white/10 my-2" />
                   <p className="text-gray-500 text-xs">
-                    Config já NÃO usa localStorage — tudo persistido no Supabase.
+                    Config já NÃO usa localStorage: tudo persistido no Supabase.
                   </p>
                 </div>
               </div>

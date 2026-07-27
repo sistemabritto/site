@@ -126,7 +126,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // ═══ Validação 2: Assinatura HMAC no header ═══
     const signature = (req.headers['x-webhook-signature'] as string) || '';
     if (!signature) {
-      console.warn('[Webhook] No X-Webhook-Signature header — skipping HMAC validation (dev mode?)');
+      console.warn('[Webhook] No X-Webhook-Signature header, skipping HMAC validation (dev mode?)');
     } else {
       const isValid = verifyAbacateSignature(rawBody, signature);
       if (!isValid) {
@@ -245,7 +245,7 @@ async function notifyCRM(data: any) {
           phone_number: customerPhone ? formatPhoneE164(customerPhone) : undefined,
         },
         deal: {
-          title: `PAGAMENTO — ${productName}`,
+          title: `PAGAMENTO · ${productName}`,
           pipeline_id: PIPELINE_ID,
           stage_id: STAGE_FECHADO,
         },

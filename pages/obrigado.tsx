@@ -69,7 +69,7 @@ export default function Obrigado() {
   return (
     <>
       <Meta 
-      title="Obrigado! — Sistema Britto"
+      title="Obrigado! | Sistema Britto"
       description="Seu pedido foi recebido com sucesso!"
       path="/obrigado"
       noIndex={true}
@@ -117,7 +117,7 @@ export default function Obrigado() {
                 </h2>
                 <p className="text-gray-300 mb-6">
                   Adicione suporte técnico humano especializado via WhatsApp com SLA de 24h.
-                  Configuração, integrações, troubleshooting — tudo incluso.
+                  Configuração, integrações, troubleshooting: tudo incluso.
                 </p>
                 
                 <div className="flex items-center justify-center gap-2 mb-6">

@@ -148,8 +148,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       const stageId = result === 'high-ticket' ? STAGE_QUALIFICACAO : STAGE_NOVO_LEAD;
       const dealTitle = result === 'high-ticket'
-        ? `Qualificação HIGH TICKET — ${name || email || 'lead'}`
-        : `Qualificação DOWNSELL — ${name || email || 'lead'}`;
+        ? `Qualificação HIGH TICKET · ${name || email || 'lead'}`
+        : `Qualificação DOWNSELL · ${name || email || 'lead'}`;
 
       const evoPayload: any = {
         contact: {

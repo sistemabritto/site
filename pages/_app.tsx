@@ -47,7 +47,7 @@ function track(type: 'pageview' | 'cta', payload: Record<string, string>) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ type, session_id, ...payload }),
     keepalive: true,
-  }).catch(() => {}); // silently fail — never block UX
+  }).catch(() => {}); // silently fail, never block UX
 }
 
 // Track a CTA click — import and call from any button onClick

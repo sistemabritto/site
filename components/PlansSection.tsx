@@ -54,7 +54,7 @@ const plans = [
   {
     name: 'Hermes Self-Hosted',
     price: 3500,
-    description: 'Framework completo na sua infraestrutura — autonomia total',
+    description: 'Framework completo na sua infraestrutura, com autonomia total',
     features: [
       'Framework Hermes multi-provider',
       'Kanban nativo com memória persistente',

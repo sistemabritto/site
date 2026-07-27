@@ -34,7 +34,7 @@ export default function Meta({ title, description, path = '', ogImage = '/og-ima
       <meta property="og:image" content={absoluteOgImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="Sistema Britto — Workforce de IA" />
+      <meta property="og:image:alt" content="Sistema Britto | Workforce de IA" />
       <meta property="og:locale" content="pt_BR" />
       <meta property="og:site_name" content="Sistema Britto" />
       
@@ -116,7 +116,7 @@ export default function Meta({ title, description, path = '', ogImage = '/og-ima
             {
             "@type": "Service",
             "@id": "https://www.sistemabritto.com.br/socialjobs#service",
-            "name": "SocialJobs — Conteúdo Infinito em 5 Redes com IA",
+            "name": "SocialJobs | Conteúdo Infinito em 5 Redes com IA",
             "url": "https://www.sistemabritto.com.br/socialjobs",
             "provider": { "@id": "https://www.sistemabritto.com.br/#organization" },
             "description": "Dezenas de agentes de IA criando posts diários em YouTube, TikTok, Instagram, LinkedIn e X automaticamente.",
@@ -168,7 +168,7 @@ export default function Meta({ title, description, path = '', ogImage = '/og-ima
                   "name": "Em quanto tempo fica pronto?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "WhatsApp com IA em 48 horas. SocialJobs em até 7 dias. Sistema Sob Medida e VPS Estruturada sob consulta — depende da complexidade."
+                    "text": "WhatsApp com IA em 48 horas. SocialJobs em até 7 dias. Sistema Sob Medida e VPS Estruturada sob consulta, conforme a complexidade."
                   }
                 },
                 {

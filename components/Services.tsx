@@ -11,7 +11,7 @@ const products = [
  badge: 'Comercial',
  title: 'Seu WhatsApp como central comercial',
  problem: 'Chega de lead perdido no WhatsApp. Chega de digitação manual no CRM.',
- solution: 'IA que qualifica, agenda, vende e reativa — 24h, sem folga.',
+ solution: 'IA que qualifica, agenda, vende e reativa. 24h, sem folga.',
  features: [
  'Qualifica leads 24h com IA',
  'Agenda automático de consultas',
@@ -31,7 +31,7 @@ const products = [
  badge: 'Conteúdo Infinito',
  title: 'Sua marca em 5 redes, todo dia',
  problem: 'Chega de postar 1 vez por semana. Chega de conteúdo genérico que ninguém vê.',
- solution: 'Dezenas de agentes criando posts, reels e shorts personalizados — publicação diária automática.',
+ solution: 'Dezenas de agentes criando posts, reels e shorts personalizados, com publicação diária automática.',
  features: [
  'Conteúdo diário em YouTube, TikTok, Instagram, LinkedIn e X',
  'Dezenas de agentes especialistas por domínio',
@@ -51,7 +51,7 @@ const products = [
  badge: 'Workforce Completa',
  title: 'Seu negócio no piloto automático',
  problem: 'Chega de ferramenta pra cada coisa. Chega de IA que não conversa com a outra.',
- solution: 'WhatsApp IA + SocialJobs + Infra & DevOps — dezenas de agentes operando tudo.',
+ solution: 'WhatsApp IA + SocialJobs + Infra & DevOps: dezenas de agentes operando tudo.',
  features: [
  'WhatsApp que vende, redes que engajam, infra que não cai',
  'Agentes de Finanças, Projetos, RH, Jurídico, Marketing e mais',

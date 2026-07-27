@@ -84,7 +84,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   // ── 2. Criar lead no EvoCRM ────────────────────────────────────
   try {
-    const dealName = `${name || 'Lead'} — ${source || 'site'}`;
+    const dealName = `${name || 'Lead'} · ${source || 'site'}`;
     const payload: any = {
       contact: {
         name: name || 'Lead sem nome',

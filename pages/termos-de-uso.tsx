@@ -92,7 +92,7 @@ export default function TermosDeUso() {
 
  <section>
  <h2 className="text-white font-heading font-bold text-xl mb-4">5. Propriedade Intelectual</h2>
- <p>Todo o conteúdo do site — textos, imagens, logotipos, marcas, software, código, design e demais elementos — pertence à Sistema Britto ou a seus licenciadores, sendo protegido pela legislação brasileira de propriedade intelectual.</p>
+ <p>Todo o conteúdo do site (textos, imagens, logotipos, marcas, software, código, design e demais elementos) pertence à Sistema Britto ou a seus licenciadores, sendo protegido pela legislação brasileira de propriedade intelectual.</p>
  <p className="mt-3">É vedada a reprodução, distribuição, modificação ou exploração de qualquer conteúdo sem autorização prévia e expressa por escrito.</p>
  </section>
 

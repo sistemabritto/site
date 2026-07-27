@@ -29,7 +29,7 @@ export default function WhatsAppCTA() {
             <div className="bg-gradient-to-r from-gold-600/20 to-surface-800/40 rounded-2xl p-6 border border-gold-500/30 mb-8">
               <p className="text-white text-base leading-relaxed font-medium">
                 Transforme seu WhatsApp em uma máquina de vendas. Qualificação automática, follow-ups inteligentes,
-                agendamento de consultas e um CRM completo rodando direto no celular — com IA que aprende o padrão do seu negócio.
+                agendamento de consultas e um CRM completo rodando direto no celular, com IA que aprende o padrão do seu negócio.
               </p>
             </div>
 
@@ -67,7 +67,7 @@ export default function WhatsAppCTA() {
             </a>
 
             <p className="text-gold-500 text-xs font-bold mt-5 animate-pulse text-center">
-              ⚡ Vagas limitadas — agenda disponível esta semana
+              ⚡ A agenda é minha, não de um time comercial. Abre com alguns dias
             </p>
           </div>
         </div>

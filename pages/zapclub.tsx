@@ -26,7 +26,7 @@ export default function ZapClub() {
   return (
     <>
       <Meta
-        title="ZapClub — Comunidade de IA para Negócios no WhatsApp | Sistema Britto"
+        title="ZapClub | Comunidade de IA para Negócios no WhatsApp | Sistema Britto"
         description="Comunidade no WhatsApp com moderador de IA 24h. Pare de fazer tudo sozinho. R$ 50/mês, 7 dias de garantia."
         path="/zapclub"
       />
@@ -157,7 +157,7 @@ export default function ZapClub() {
             <div className="text-center mb-6">
               {badge('Pra quem é o ZapClub', 'mb-3', 'green')}
               <p className="text-neutral-400 text-sm leading-relaxed max-w-lg mx-auto">
-                Se você dá conta de tudo sozinho, sente que falta braço, e sabe que IA é o caminho mas tem medo de errar — esse espaço é seu.
+                Se você dá conta de tudo sozinho, sente que falta braço, e sabe que IA é o caminho mas tem medo de errar, esse espaço é seu.
               </p>
             </div>
 

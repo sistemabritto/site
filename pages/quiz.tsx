@@ -11,8 +11,8 @@ const QUESTIONS = [
     question: 'O que você mais precisa agora?',
     options: [
       { label: 'Atender e vender no WhatsApp com IA 24h', value: 'crm', icon: '' },
-      { label: 'Conteúdo infinito nas redes sociais — posts automáticos e virais', value: 'social', icon: '' },
-      { label: 'Algo sob encomenda — app, site, infra, SaaS', value: 'custom', icon: '' },
+      { label: 'Conteúdo infinito nas redes sociais, com posts automáticos e virais', value: 'social', icon: '' },
+      { label: 'Algo sob encomenda: app, site, infra, SaaS', value: 'custom', icon: '' },
     ],
   },
   {
@@ -20,7 +20,7 @@ const QUESTIONS = [
     question: 'Qual seu maior gargalo hoje?',
     options: [
       { label: 'Perco leads porque não respondo rápido', value: 'leads-perdidos', icon: '' },
-      { label: 'Não tenho presença nas redes — ninguém me conhece', value: 'sem-presenca', icon: '' },
+      { label: 'Não tenho presença nas redes, ninguém me conhece', value: 'sem-presenca', icon: '' },
       { label: 'Preciso de algo que não existe no mercado', value: 'nao-existe', icon: '' },
       { label: 'Meu negócio cresceu e a operação não acompanha', value: 'cresceu', icon: '' },
     ],
@@ -29,10 +29,10 @@ const QUESTIONS = [
     id: 'q4',
     question: 'Em quanto tempo você quer isso rodando?',
     options: [
-      { label: 'Urgente — essa semana', value: 'urgente', icon: '' },
-      { label: 'Rápido — até 15 dias', value: 'rapido', icon: '' },
-      { label: 'Tranquilo — até 30 dias', value: 'tranquilo', icon: '' },
-      { label: 'Estou planejando — 2 a 3 meses', value: 'planejando', icon: '' },
+      { label: 'Urgente, essa semana', value: 'urgente', icon: '' },
+      { label: 'Rápido, até 15 dias', value: 'rapido', icon: '' },
+      { label: 'Tranquilo, até 30 dias', value: 'tranquilo', icon: '' },
+      { label: 'Estou planejando, 2 a 3 meses', value: 'planejando', icon: '' },
     ],
   },
 ];
@@ -379,7 +379,7 @@ export default function Quiz() {
     return (
       <>
         <Meta
-          title="Qualificação — Sistema Britto"
+          title="Qualificação | Sistema Britto"
           description="Descubra a solução ideal pro seu negócio. Leva menos de 2 minutos."
           path="/quiz"
         />
@@ -440,7 +440,7 @@ export default function Quiz() {
                 onClick={handleSkipEmail}
                 className="w-full mt-3 text-gray-400 hover:text-white text-sm transition-colors"
               >
-                Pular etapa — só quero o quiz
+                Pular etapa, só quero o quiz
               </button>
               <p className="text-gray-500 text-xs text-center mt-4">
                 Ao continuar, você concorda com nossos <a href="/termos-de-uso" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">termos</a> e <a href="/politicas-de-privacidade" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">políticas de privacidade</a>.
@@ -471,7 +471,7 @@ export default function Quiz() {
   return (
     <>
       <Meta
-        title="Qualificação — Sistema Britto"
+        title="Qualificação | Sistema Britto"
         description="Descubra a solução ideal pro seu negócio. Leva menos de 2 minutos."
         path="/quiz"
       />

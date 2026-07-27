@@ -173,7 +173,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     let clicksAttributed = 0;
     for (const row of ctaData || []) {
       const origin = sessionOrigin[row.session_id];
-      if (!origin) continue;   // clique sem pageview na janela — não inventar origem
+      if (!origin) continue;   // clique sem pageview na janela: não inventar origem
       clicksAttributed++;
       clicksBySource[origin.source] = (clicksBySource[origin.source] || 0) + 1;
       if (origin.campaign) {
