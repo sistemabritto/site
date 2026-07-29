@@ -35,14 +35,16 @@ async function setConfig(key: string, value: string): Promise<boolean> {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  // Verify admin auth for all methods
+  // Auth de admin pra QUALQUER método — a condição anterior
+  // (`req.method !== 'GET' || !token`) deixava passar um GET com token
+  // preenchido mas inválido sem nunca chamar verifyToken: `method === 'GET'`
+  // e `token` truthy zeravam os dois lados do OR, pulando a checagem inteira.
+  // Config aqui pode carregar segredo (ver meta-capi.ts), então isso não é
+  // um detalhe.
   const authHeader = req.headers.authorization || '';
   const token = authHeader.replace('Bearer ', '');
-
-  if (req.method !== 'GET' || !token) {
-    if (!verifyToken(token)) {
-      return res.status(401).json({ error: 'Token invalido' });
-    }
+  if (!verifyToken(token)) {
+    return res.status(401).json({ error: 'Token invalido' });
   }
 
   // GET — return all config
@@ -53,10 +55,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   // POST — update config keys
   if (req.method === 'POST') {
-    if (!verifyToken(token)) {
-      return res.status(401).json({ error: 'Token invalido' });
-    }
-
     const { updates } = req.body as { updates: Record<string, string> };
     if (!updates || typeof updates !== 'object') {
       return res.status(400).json({ error: 'updates object required' });
