@@ -60,28 +60,52 @@ export async function statusCapi(): Promise<{ pixel_id: string; configurado: boo
   };
 }
 
-/** Envia um evento de teste real pro Graph API — é a validação: token e
- * pixel errados voltam erro explícito da Meta, não um "parece ok" nosso. */
-export async function validarCapi(): Promise<{ ok: boolean; detalhe: string }> {
-  const [token, pixelId] = await Promise.all([lerTokenCapi(), lerPixelId()]);
-  if (!token) return { ok: false, detalhe: 'Nenhum token salvo ainda' };
-  if (!pixelId) return { ok: false, detalhe: 'meta_pixel_id não configurado (aba Config)' };
+function sha256(valor: string): string {
+  return crypto.createHash('sha256').update(valor.trim().toLowerCase()).digest('hex');
+}
 
-  const eventId = crypto.randomUUID();
+interface EventoCapi {
+  eventName: string;
+  /** Mesmo event_id usado no fbq() client-side dedupa os dois lados — sem
+   * isso, o mesmo InitiateCheckout contaria duas vezes (Pixel + CAPI). */
+  eventId: string;
+  sourceUrl: string;
+  value?: number;
+  currency?: string;
+  contentName?: string;
+  email?: string;
+  phone?: string;
+  clientIp?: string;
+  clientUserAgent?: string;
+}
+
+/** Envia um evento real (InitiateCheckout, Purchase, etc.) pro Graph API.
+ * Nunca lança — falha de tracking não pode derrubar um checkout ou webhook. */
+export async function enviarEvento(evento: EventoCapi): Promise<{ ok: boolean; detalhe: string }> {
+  const [token, pixelId] = await Promise.all([lerTokenCapi(), lerPixelId()]);
+  if (!token || !pixelId) return { ok: false, detalhe: 'CAPI não configurada (token ou pixel_id ausente)' };
+
+  const userData: Record<string, string> = {};
+  if (evento.email) userData.em = sha256(evento.email);
+  if (evento.phone) userData.ph = sha256(evento.phone.replace(/\D/g, ''));
+  if (evento.clientIp) userData.client_ip_address = evento.clientIp;
+  if (evento.clientUserAgent) userData.client_user_agent = evento.clientUserAgent;
+
+  const custom_data: Record<string, unknown> = {};
+  if (evento.value != null) custom_data.value = evento.value;
+  if (evento.currency) custom_data.currency = evento.currency;
+  if (evento.contentName) custom_data.content_name = evento.contentName;
+
   const body = {
     data: [{
-      event_name: 'PageView',
+      event_name: evento.eventName,
       event_time: Math.floor(Date.now() / 1000),
-      event_id: eventId,
+      event_id: evento.eventId,
       action_source: 'website',
-      event_source_url: 'https://www.sistemabritto.com.br',
-      user_data: {
-        // Hash exigido pelo Graph API mesmo em evento de validação sintético.
-        client_ip_address: '127.0.0.1',
-        client_user_agent: 'meta-capi-validation/1.0',
-      },
+      event_source_url: evento.sourceUrl,
+      user_data: userData,
+      custom_data,
     }],
-    test_event_code: undefined,
     access_token: token,
   };
 
@@ -94,10 +118,28 @@ export async function validarCapi(): Promise<{ ok: boolean; detalhe: string }> {
     const data = await res.json();
     if (!res.ok || data.error) {
       const msg = data?.error?.message || `Graph API respondeu ${res.status}`;
+      console.error(`[metaCapi] ${evento.eventName} falhou:`, msg);
       return { ok: false, detalhe: msg };
     }
-    return { ok: true, detalhe: `evento recebido (events_received: ${data.events_received ?? '?'}, fbtrace_id: ${data.fbtrace_id ?? '?'})` };
+    return { ok: true, detalhe: `events_received: ${data.events_received ?? '?'}` };
   } catch (err: any) {
+    console.error(`[metaCapi] ${evento.eventName} exception:`, err);
     return { ok: false, detalhe: err?.message || 'falha de rede ao chamar o Graph API' };
   }
+}
+
+/** Envia um evento de teste real pro Graph API — é a validação: token e
+ * pixel errados voltam erro explícito da Meta, não um "parece ok" nosso. */
+export async function validarCapi(): Promise<{ ok: boolean; detalhe: string }> {
+  const [token, pixelId] = await Promise.all([lerTokenCapi(), lerPixelId()]);
+  if (!token) return { ok: false, detalhe: 'Nenhum token salvo ainda' };
+  if (!pixelId) return { ok: false, detalhe: 'meta_pixel_id não configurado' };
+
+  return enviarEvento({
+    eventName: 'PageView',
+    eventId: crypto.randomUUID(),
+    sourceUrl: 'https://www.sistemabritto.com.br',
+    clientIp: '127.0.0.1',
+    clientUserAgent: 'meta-capi-validation/1.0',
+  });
 }

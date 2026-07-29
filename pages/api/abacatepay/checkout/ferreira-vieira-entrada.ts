@@ -1,4 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import crypto from 'crypto';
+import { enviarEvento } from '../../../../lib/metaCapi';
 
 // Checkout da ENTRADA (R$400 de R$800 parcelado) do pacote Ferreira Vieira —
 // a outra opção é pagar à vista com desconto (checkout/ferreira-vieira-
@@ -47,6 +49,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const data = await response.json();
 
     if (data.success && data.data?.url) {
+      void enviarEvento({
+        eventName: 'InitiateCheckout',
+        eventId: crypto.randomUUID(),
+        sourceUrl: `${SITE_URL}/api/abacatepay/checkout/ferreira-vieira-entrada`,
+        value: 400,
+        currency: 'BRL',
+        contentName: EXTERNAL_ID,
+        email: customer_email ? String(customer_email) : undefined,
+        phone: customer_cellphone ? String(customer_cellphone) : undefined,
+      }).catch((e) => console.error('[checkout/ferreira-vieira-entrada] CAPI InitiateCheckout falhou', e));
+
       if (req.method === 'GET') return res.redirect(302, data.data.url);
       return res.status(200).json({ url: data.data.url });
     }

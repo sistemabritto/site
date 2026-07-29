@@ -1,5 +1,21 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
+import crypto from 'crypto';
+import { enviarEvento } from '../../../lib/metaCapi';
+
+// Preço mensal de cada produto — só pra dar `value` ao InitiateCheckout;
+// a cobrança de verdade usa o productId (AbacatePay já sabe o preço real).
+const PRICE_BRL: Record<string, number> = {
+  'whatsapp-ia-basico': 297,
+  'crm-ia-completo': 750,
+  'evonexus-premium': 2500,
+  'hermes-selfhosted': 3500,
+  'whatsapp-ia-combo-consultoria': 547,
+  'crm-ia-completo-combo-consultoria': 1000,
+  'evonexus-premium-combo-consultoria': 2750,
+  'vps-gerenciada': 297,
+  'vps-gerenciada-combo-suporte': 547,
+};
 
 const ABACATEPAY_API = 'https://api.abacatepay.com/v2';
 // Sem fallback. A chave que estava aqui tem prefixo `abc_dev_`: gera cobrança
@@ -142,6 +158,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log('[AbacatePay Response]', data);
 
     if (data.success && data.data?.url) {
+      void enviarEvento({
+        eventName: 'InitiateCheckout',
+        eventId: crypto.randomUUID(),
+        sourceUrl: siteUrl,
+        value: PRICE_BRL[productId],
+        currency: 'BRL',
+        contentName: productId,
+        email: customerData?.email ? String(customerData.email) : undefined,
+        phone: customerData?.cellphone ? String(customerData.cellphone) : undefined,
+      }).catch((e) => console.error('[checkout] CAPI InitiateCheckout falhou', e));
+
       res.status(200).json({ url: data.data.url });
     } else {
       console.error('[AbacatePay Error]', data);

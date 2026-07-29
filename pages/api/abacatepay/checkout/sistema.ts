@@ -1,5 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
+import crypto from 'crypto';
+import { enviarEvento } from '../../../../lib/metaCapi';
 
 // Checkout avulso (não assinatura) para a call de PRD de R$147 — a oferta
 // principal de /sistema desde 27/07/2026. Diferente de checkout/zapclub.ts e
@@ -88,6 +90,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log('[checkout/sistema Response]', JSON.stringify(data));
 
     if (data.success && data.data?.url) {
+      // InitiateCheckout via CAPI — fire-and-forget, nunca atrasa o redirect.
+      // event_id gerado aqui mesmo (não há Pixel client-side gêmeo pra este
+      // evento ainda; se um dia entrar, precisa usar o mesmo id via query
+      // param pra deduplicar em vez de gerar um novo).
+      void enviarEvento({
+        eventName: 'InitiateCheckout',
+        eventId: crypto.randomUUID(),
+        sourceUrl: `${SITE_URL}/sistema`,
+        value: 147,
+        currency: 'BRL',
+        contentName: EXTERNAL_ID,
+        email: customer_email ? String(customer_email) : undefined,
+        phone: customer_cellphone ? String(customer_cellphone) : undefined,
+      }).catch((e) => console.error('[checkout/sistema] CAPI InitiateCheckout falhou', e));
+
       if (req.method === 'GET') {
         return res.redirect(302, data.data.url);
       }
