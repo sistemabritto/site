@@ -240,6 +240,7 @@ async function notifyCRM(data: any) {
       'vps-gerenciada-combo-suporte': 'VPS Gerenciada + Suporte (R$ 547/mês)',
       'call-prd-sistema': 'Call de PRD — Sistema (R$ 147, avulso)',
       'ferreira-vieira-etapa1': 'Ferreira Vieira — Site + Typebot, entrada (R$ 300 de R$ 600)',
+      'ferreira-vieira-etapa1-v2': 'Ferreira Vieira — Site + Chatbot, entrada (R$ 400 de R$ 800)',
     };
 
     const productName = productNames[externalId] || externalId || 'Produto';
