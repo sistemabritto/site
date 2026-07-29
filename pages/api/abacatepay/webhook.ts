@@ -1,9 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createHmac } from 'crypto';
 import { createClient } from '@supabase/supabase-js';
-import { enviarEvento } from '../../../lib/metaCapi';
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.sistemabritto.com.br';
 
 // ── Config ──────────────────────────────────────────────────
 const EVOCRM_API_URL = process.env.EVOCRM_API_URL || 'https://evoapi.workflowapi.com.br';
@@ -319,24 +316,13 @@ async function notifyCRM(data: any) {
 
     await sendWhatsApp(ADMIN_PHONE, sdrMessage);
 
-    // Purchase pro Meta Conversions API — fonte única (só aqui, no webhook,
-    // nunca client-side): é o único ponto que sabe que o pagamento foi
-    // CONFIRMADO de verdade. Sem gêmeo no Pixel pra este evento, então não
-    // existe risco de contar a mesma venda duas vezes — event_id = checkoutId
-    // só pra manter estável caso a AbacatePay reenvie o mesmo webhook.
-    if (checkoutId) {
-      const resultado = await enviarEvento({
-        eventName: 'Purchase',
-        eventId: checkoutId,
-        sourceUrl: utms.page ? `${SITE_URL}${utms.page}` : SITE_URL,
-        value: amount ? amount / 100 : undefined,
-        currency: 'BRL',
-        contentName: productName,
-        email: customerEmail || undefined,
-        phone: customerPhone || undefined,
-      });
-      console.log('[Meta CAPI Purchase]', resultado.ok ? 'ok' : `falhou: ${resultado.detalhe}`);
-    }
+    // Purchase pro Meta Conversions API: REMOVIDO em 29/07/2026. A própria
+    // AbacatePay já dispara esse evento (token configurado direto no painel
+    // deles, confirmado com evento de teste) — mandar daqui também duplicava
+    // a venda no Meta, sem event_id compartilhado entre as duas fontes pra
+    // deduplicar (o checkoutId aqui não é o mesmo id que a AbacatePay usa do
+    // lado dela). InitiateCheckout continua só aqui (ver checkout/*.ts) —
+    // isso a AbacatePay não dispara, é exclusivo nosso.
 
     // 3. Enviar mensagem de boas-vindas pro cliente
     if (customerPhone) {
