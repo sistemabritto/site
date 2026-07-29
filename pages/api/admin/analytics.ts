@@ -206,6 +206,52 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       byCampaign: ordenar(clicksByCampaign, 'campaign'),
     };
 
+    // 10c. Conversão cruzada: página × origem (utm_source) e página × campanha.
+    //
+    // `conversionByPage` (10) responde "essa URL converte?" e `attribution`
+    // (10b) responde "essa origem converte?" — nenhuma das duas responde "essa
+    // URL convertida por ESSA origem". É a pergunta que separa um clique do
+    // /socialjobs que veio de um Reel de um clique que veio de busca orgânica
+    // no mesmo dia, coisa que a média global do site não mostra.
+    //
+    // A atribuição usa o mesmo first-touch de `sessionOrigin` (10b): a origem
+    // de uma sessão é o utm_source do PRIMEIRO pageview dela, nunca o da
+    // página onde o clique aconteceu — navegação interna não carrega UTM.
+    const { data: pageSessionData } = await supabase
+      .from('pageviews')
+      .select('session_id, path')
+      .gte('created_at', since);
+
+    const pageviewsByPageSource: Record<string, number> = {};
+    for (const row of pageSessionData || []) {
+      const origin = sessionOrigin[row.session_id];
+      if (!origin) continue;
+      const key = `${row.path}|||${origin.source}`;
+      pageviewsByPageSource[key] = (pageviewsByPageSource[key] || 0) + 1;
+    }
+
+    const clicksByPageSource: Record<string, number> = {};
+    const campaignByPageSourceKey: Record<string, string> = {};
+    for (const row of ctaData || []) {
+      const origin = sessionOrigin[row.session_id];
+      if (!origin) continue;
+      const key = `${row.page}|||${origin.source}`;
+      clicksByPageSource[key] = (clicksByPageSource[key] || 0) + 1;
+      if (origin.campaign) campaignByPageSourceKey[key] = origin.campaign;
+    }
+
+    const conversionByPageAndSource = Object.entries(pageviewsByPageSource)
+      .map(([key, pageviews]) => {
+        const [path, source] = key.split('|||');
+        const clicks = clicksByPageSource[key] || 0;
+        const rate = pageviews > 0 ? parseFloat(((clicks / pageviews) * 100).toFixed(2)) : 0;
+        return { path, source, campaign: campaignByPageSourceKey[key] || '', pageviews, clicks, rate };
+      })
+      .filter(p => p.pageviews >= 2)
+      .filter(p => p.rate > 0 || p.clicks > 0)
+      .sort((a, b) => b.pageviews - a.pageviews)
+      .slice(0, 30);
+
     // 11. Quiz funnel analytics — stage completion rates
     let quizFunnel: any = null;
     try {
@@ -290,6 +336,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     dailyViews,
     ctaClicks,
     conversionByPage,
+    conversionByPageAndSource,
     attribution,
     quizFunnel,
     range,

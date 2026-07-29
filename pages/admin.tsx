@@ -32,6 +32,10 @@ interface AnalyticsData {
   dailyViews: { date: string; views: number }[];
   ctaClicks: { page: string; label: string; action: string; clicks: number }[];
   conversionByPage: { path: string; pageviews: number; clicks: number; rate: number }[];
+  // Cruzamento página × origem: responde "essa URL, vinda dessa origem,
+  // converte?" — o `conversionByPage` sozinho mistura todas as origens numa
+  // URL só, e a `attribution` sozinha mistura todas as URLs numa origem só.
+  conversionByPageAndSource: { path: string; source: string; campaign: string; pageviews: number; clicks: number; rate: number }[];
   // Atribuição: de onde veio quem clicou. A campanha é o slug do artigo, então
   // byCampaign responde "qual post converteu" — a única pergunta que justifica
   // publicar 21 artigos por semana.
@@ -696,6 +700,46 @@ export default function Admin() {
                                         style={{ width: `${Math.min(p.rate * 4, 100)}%` }}
                                       />
                                     </div>
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* 🎯 Conversion by page × source — a pergunta que a de cima não responde */}
+                    <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20 lg:col-span-2">
+                      <h3 className="text-lg font-bold text-white mb-2">🔀 Conversão por Página × Origem</h3>
+                      <p className="text-gray-500 text-xs mb-4">Mesma URL, origens diferentes — pra saber se foi o Reel ou a busca orgânica que converteu. Mínimo 2 visitas por combinação.</p>
+                      {analytics.conversionByPageAndSource.length === 0 ? (
+                        <p className="text-gray-500 text-sm">Aguardando dados suficientes (pelo menos 2 visitas por combinação página + origem com cliques).</p>
+                      ) : (
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-sm">
+                            <thead>
+                              <tr className="text-gray-400 text-xs uppercase tracking-wider border-b border-white/10">
+                                <th className="text-left py-2 pr-4">Página</th>
+                                <th className="text-left py-2 px-3">Origem</th>
+                                <th className="text-left py-2 px-3">Campanha</th>
+                                <th className="text-right py-2 px-3">Visitas</th>
+                                <th className="text-right py-2 px-3">Cliques</th>
+                                <th className="text-right py-2 pl-3">Conv. %</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {analytics.conversionByPageAndSource.map((p, i) => (
+                                <tr key={`${p.path}-${p.source}-${i}`} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                  <td className="py-2 pr-4 text-gray-200 font-mono text-xs">{p.path}</td>
+                                  <td className="py-2 px-3 text-gray-300">{p.source === 'direct' ? '🔍 Direto' : p.source}</td>
+                                  <td className="py-2 px-3 text-gray-500 text-xs">{p.campaign || '—'}</td>
+                                  <td className="py-2 px-3 text-right text-white font-semibold">{p.pageviews}</td>
+                                  <td className="py-2 px-3 text-right text-purple-300">{p.clicks}</td>
+                                  <td className="py-2 pl-3 text-right">
+                                    <span className={`font-bold ${p.rate >= 5 ? 'text-green-400' : p.rate >= 2 ? 'text-yellow-400' : 'text-red-400'}`}>
+                                      {p.rate}%
+                                    </span>
                                   </td>
                                 </tr>
                               ))}
