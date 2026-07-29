@@ -44,7 +44,22 @@ interface AnalyticsData {
     clicksUnattributed: number;
     bySource: { source: string; clicks: number; sessions: number; rate: number }[];
     byCampaign: { campaign: string; clicks: number }[];
+    byMedium: { medium: string; clicks: number }[];
+    byContent: { content: string; clicks: number }[];
+    // Cobertura: sem isso, toda leitura de atribuição pode estar medindo 1% do
+    // tráfego e parecendo completa (foi o que aconteceu até 28/07/2026).
+    cobertura: {
+      sessoes: number; comUtm: number; semUtm: number;
+      taxa: number; externoSemUtm: number;
+    };
   };
+  // Funil visita → clique → lead por origem. A tabela `leads` sempre teve os
+  // campos de UTM; o painel só não lia.
+  funnelByUtm?: {
+    source: string; sessions: number; clicks: number; leads: number;
+    valorLeads: number; taxaClique: number; taxaLead: number;
+  }[];
+  leadsSemUtm?: number;
   range: string;
   days: number;
 }
@@ -724,6 +739,123 @@ export default function Admin() {
                         </div>
                       )}
                     </div>
+
+                    {/* 📡 Cobertura de UTM — o número que faltava */}
+                    {analytics.attribution?.cobertura && (
+                      <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20 lg:col-span-2">
+                        <h3 className="text-lg font-bold text-white mb-2">📡 Cobertura de rastreamento (UTM)</h3>
+                        <p className="text-gray-500 text-xs mb-4">
+                          Quanto do tráfego chega identificável. Cobertura baixa invalida tudo que vem
+                          abaixo: dá pra ver conversão sem nunca saber que 99% das visitas não tinham origem.
+                        </p>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                          <div>
+                            <div className="text-3xl font-bold text-white">{analytics.attribution.cobertura.taxa}%</div>
+                            <div className="text-gray-500 text-xs mt-1">das sessões com UTM</div>
+                          </div>
+                          <div>
+                            <div className="text-3xl font-bold text-green-400">{analytics.attribution.cobertura.comUtm}</div>
+                            <div className="text-gray-500 text-xs mt-1">sessões identificadas</div>
+                          </div>
+                          <div>
+                            <div className="text-3xl font-bold text-gray-400">{analytics.attribution.cobertura.semUtm}</div>
+                            <div className="text-gray-500 text-xs mt-1">sem origem (direto/orgânico)</div>
+                          </div>
+                          <div>
+                            <div className={`text-3xl font-bold ${analytics.attribution.cobertura.externoSemUtm > 0 ? 'text-yellow-400' : 'text-gray-600'}`}>
+                              {analytics.attribution.cobertura.externoSemUtm}
+                            </div>
+                            <div className="text-gray-500 text-xs mt-1">
+                              vieram de fora <span className="text-yellow-500">sem</span> marcação
+                            </div>
+                          </div>
+                        </div>
+                        {analytics.attribution.cobertura.externoSemUtm > 0 && (
+                          <div className="mt-4 text-xs text-yellow-300/90 bg-yellow-500/10 border border-yellow-500/30 rounded-xl px-4 py-3">
+                            Há visitas com referrer externo mas sem UTM — ou alguém linkou pra você sem
+                            marcar, ou um link nosso está perdendo a UTM no caminho (foi exatamente esse
+                            o sintoma do bug do tema do blog, corrigido em 28/07/2026).
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* 🔻 Funil por origem: visita → clique → lead */}
+                    {analytics.funnelByUtm && analytics.funnelByUtm.length > 0 && (
+                      <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20 lg:col-span-2">
+                        <h3 className="text-lg font-bold text-white mb-2">🔻 Funil por origem (visita → clique → lead)</h3>
+                        <p className="text-gray-500 text-xs mb-4">
+                          Onde cada origem trava. Clique é intenção; lead é o que paga a conta.
+                          {typeof analytics.leadsSemUtm === 'number' && analytics.leadsSemUtm > 0 && (
+                            <> {analytics.leadsSemUtm} lead(s) chegaram sem UTM e ficam fora desta tabela.</>
+                          )}
+                        </p>
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-sm">
+                            <thead>
+                              <tr className="text-gray-400 text-xs uppercase tracking-wider border-b border-white/10">
+                                <th className="text-left py-2 pr-4">Origem</th>
+                                <th className="text-right py-2 px-3">Sessões</th>
+                                <th className="text-right py-2 px-3">Cliques</th>
+                                <th className="text-right py-2 px-3">% clique</th>
+                                <th className="text-right py-2 px-3">Leads</th>
+                                <th className="text-right py-2 px-3">% lead</th>
+                                <th className="text-right py-2 pl-3">Valor</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {analytics.funnelByUtm.map((f) => (
+                                <tr key={f.source} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                  <td className="py-2 pr-4 text-gray-200">{f.source === 'direct' ? '🔍 Direto' : f.source}</td>
+                                  <td className="py-2 px-3 text-right text-white font-semibold">{f.sessions}</td>
+                                  <td className="py-2 px-3 text-right text-purple-300">{f.clicks}</td>
+                                  <td className="py-2 px-3 text-right text-gray-400">{f.taxaClique}%</td>
+                                  <td className="py-2 px-3 text-right text-green-300 font-semibold">{f.leads}</td>
+                                  <td className="py-2 px-3 text-right text-gray-400">{f.taxaLead}%</td>
+                                  <td className="py-2 pl-3 text-right text-gray-300">
+                                    {f.valorLeads > 0 ? `R$ ${f.valorLeads.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '—'}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* 🏷️ Medium e Content — as duas dimensões que eram gravadas e nunca lidas */}
+                    {analytics.attribution && (analytics.attribution.byMedium?.length > 0 || analytics.attribution.byContent?.length > 0) && (
+                      <>
+                        {analytics.attribution.byMedium?.length > 0 && (
+                          <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20">
+                            <h3 className="text-lg font-bold text-white mb-2">🏷️ Cliques por meio (utm_medium)</h3>
+                            <p className="text-gray-500 text-xs mb-4">Como veio: conteúdo, social, e-mail, pago.</p>
+                            <div className="space-y-2">
+                              {analytics.attribution.byMedium.map((m) => (
+                                <div key={m.medium} className="flex items-center justify-between text-sm">
+                                  <span className="text-gray-200">{m.medium}</span>
+                                  <span className="text-purple-300 font-semibold">{m.clicks}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        {analytics.attribution.byContent?.length > 0 && (
+                          <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20">
+                            <h3 className="text-lg font-bold text-white mb-2">🎨 Cliques por peça (utm_content)</h3>
+                            <p className="text-gray-500 text-xs mb-4">Qual variação/criativo converteu, não só qual campanha.</p>
+                            <div className="space-y-2">
+                              {analytics.attribution.byContent.map((c) => (
+                                <div key={c.content} className="flex items-center justify-between text-sm">
+                                  <span className="text-gray-200 truncate mr-3">{c.content}</span>
+                                  <span className="text-purple-300 font-semibold shrink-0">{c.clicks}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    )}
 
                     {/* 🎯 Conversion by page × source — a pergunta que a de cima não responde */}
                     <div className="bg-[#111111] rounded-2xl p-6 border border-green-500/20 lg:col-span-2">

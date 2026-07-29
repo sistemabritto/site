@@ -150,10 +150,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     //
     // A campanha é o slug do artigo (ver `utm.py` no Nexus), então `byCampaign`
     // responde "qual post converteu" diretamente.
-    const sessionOrigin: Record<string, { source: string; campaign: string }> = {};
+    // `medium` e `content` vinham sendo gravados pelo tracker e descartados
+    // aqui — o painel media só source e campaign. Na convenção da esteira
+    // (ver utm.py no Nexus) `utm_content` identifica a peça/variação, então
+    // sem ele não dá pra saber QUAL criativo converteu, só qual artigo.
+    const sessionOrigin: Record<string, {
+      source: string; medium: string; campaign: string; content: string; referrer: string;
+    }> = {};
     const { data: originData } = await supabase
       .from('pageviews')
-      .select('session_id, utm_source, utm_campaign, created_at')
+      .select('session_id, utm_source, utm_medium, utm_campaign, utm_content, referrer, created_at')
       .gte('created_at', since)
       .order('created_at', { ascending: true });
 
@@ -163,13 +169,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (!sessionOrigin[row.session_id]) {
         sessionOrigin[row.session_id] = {
           source: row.utm_source || 'direct',
+          medium: row.utm_medium || '',
           campaign: row.utm_campaign || '',
+          content: row.utm_content || '',
+          referrer: row.referrer || '',
         };
       }
     }
 
     const clicksBySource: Record<string, number> = {};
     const clicksByCampaign: Record<string, number> = {};
+    const clicksByMedium: Record<string, number> = {};
+    const clicksByContent: Record<string, number> = {};
     let clicksAttributed = 0;
     for (const row of ctaData || []) {
       const origin = sessionOrigin[row.session_id];
@@ -178,6 +189,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       clicksBySource[origin.source] = (clicksBySource[origin.source] || 0) + 1;
       if (origin.campaign) {
         clicksByCampaign[origin.campaign] = (clicksByCampaign[origin.campaign] || 0) + 1;
+      }
+      if (origin.medium) {
+        clicksByMedium[origin.medium] = (clicksByMedium[origin.medium] || 0) + 1;
+      }
+      if (origin.content) {
+        clicksByContent[origin.content] = (clicksByContent[origin.content] || 0) + 1;
       }
     }
 
@@ -193,6 +210,31 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const src = sessionOrigin[sid].source;
       viewsBySourceCount[src] = (viewsBySourceCount[src] || 0) + 1;
     }
+    // Cobertura de UTM: que fatia das sessões chegou identificável.
+    //
+    // É o número que faltava. Até 28/07/2026 o tema do blog mandava tráfego
+    // sem marcação nenhuma e ninguém percebeu por semanas, porque o painel
+    // mostrava conversão mas nunca mostrava QUANTO do tráfego sequer tinha
+    // origem. Cobertura baixa invalida toda a leitura de atribuição abaixo —
+    // por isso ela vem junto, não numa aba escondida.
+    const totalSessoes = Object.keys(sessionOrigin).length;
+    const sessoesComUtm = Object.values(sessionOrigin).filter((o) => o.source !== 'direct').length;
+    // "direct" com referrer externo é tráfego que VEIO de algum lugar e
+    // perdeu a marcação no caminho — o sintoma exato do bug do tema.
+    const sessoesPerdidas = Object.values(sessionOrigin).filter(
+      (o) => o.source === 'direct' && o.referrer && !o.referrer.includes('sistemabritto.com.br')
+    ).length;
+
+    const cobertura = {
+      sessoes: totalSessoes,
+      comUtm: sessoesComUtm,
+      semUtm: totalSessoes - sessoesComUtm,
+      taxa: totalSessoes ? parseFloat(((sessoesComUtm / totalSessoes) * 100).toFixed(1)) : 0,
+      // Referrer externo sem UTM: alguém linkou pra você sem marcação, ou um
+      // link nosso perdeu a UTM no caminho. Vale investigar quando sobe.
+      externoSemUtm: sessoesPerdidas,
+    };
+
     const attribution = {
       clicksAttributed,
       clicksUnattributed: (ctaData || []).length - clicksAttributed,
@@ -204,7 +246,59 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           : 0,
       })),
       byCampaign: ordenar(clicksByCampaign, 'campaign'),
+      byMedium: ordenar(clicksByMedium, 'medium'),
+      byContent: ordenar(clicksByContent, 'content'),
+      cobertura,
     };
+
+    // 10b-2. Funil completo por UTM: visita → clique → LEAD.
+    //
+    // A tabela `leads` já grava utm_source/medium/campaign/content desde
+    // sempre e o painel nunca leu esses campos — a atribuição parava no
+    // clique. Sem isto o funil responde "essa origem gera clique?" mas não
+    // "essa origem gera LEAD?", que é a única das duas que paga a conta.
+    let funnelByUtm: any[] = [];
+    let leadsSemUtm = 0;
+    try {
+      const { data: leadsData } = await supabase
+        .from('leads')
+        .select('utm_source, utm_medium, utm_campaign, utm_content, value, created_at')
+        .gte('created_at', since);
+
+      const leadsPorSource: Record<string, { leads: number; valor: number }> = {};
+      for (const l of leadsData || []) {
+        const src = l.utm_source || '';
+        if (!src) { leadsSemUtm++; continue; }
+        if (!leadsPorSource[src]) leadsPorSource[src] = { leads: 0, valor: 0 };
+        leadsPorSource[src].leads++;
+        leadsPorSource[src].valor += Number(l.value) || 0;
+      }
+
+      // Uma linha por origem, com as três etapas lado a lado. Origem que
+      // aparece só em uma das etapas continua na lista (com zero nas outras)
+      // — sumir com ela esconderia justamente o gargalo.
+      const origens = new Set([
+        ...Object.keys(viewsBySourceCount),
+        ...Object.keys(clicksBySource),
+        ...Object.keys(leadsPorSource),
+      ]);
+      funnelByUtm = [...origens].map((source) => {
+        const sessions = viewsBySourceCount[source] || 0;
+        const clicks = clicksBySource[source] || 0;
+        const leads = leadsPorSource[source]?.leads || 0;
+        return {
+          source,
+          sessions,
+          clicks,
+          leads,
+          valorLeads: parseFloat((leadsPorSource[source]?.valor || 0).toFixed(2)),
+          taxaClique: sessions ? parseFloat(((clicks / sessions) * 100).toFixed(2)) : 0,
+          taxaLead: clicks ? parseFloat(((leads / clicks) * 100).toFixed(2)) : 0,
+        };
+      }).sort((a, b) => b.sessions - a.sessions).slice(0, 20);
+    } catch (err) {
+      console.error('funil por UTM (tabela leads pode não existir):', err);
+    }
 
     // 10c. Conversão cruzada: página × origem (utm_source) e página × campanha.
     //
@@ -338,6 +432,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     conversionByPage,
     conversionByPageAndSource,
     attribution,
+    funnelByUtm,
+    leadsSemUtm,
     quizFunnel,
     range,
     days,
