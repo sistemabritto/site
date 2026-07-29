@@ -9,9 +9,11 @@ const PIPELINE_ID = 'eb72af5c-28f7-4948-ae50-9c81922d161e';
 const STAGE_FECHADO = 'f6229e34-46c2-4a10-890b-df5969489033';
 
 const EVO_API_URL = process.env.EVO_API_URL || 'https://go.workflowapi.com.br';
-const EVO_INSTANCE = process.env.EVO_INSTANCE || 'sistema-britto-business';
-const EVO_TOKEN = process.env.EVO_TOKEN || '';
-const SDR_PHONE = '5511914088571';
+// Notificação de venda aprovada sai da instância "sistema-britto" (o número
+// de negócio), não da "felipe" que o OTP usa — por isso token dedicado, não
+// EVO_TOKEN (que é o da instância "felipe", ver lib/otp/enviarWhatsapp.ts).
+const EVO_VENDAS_TOKEN = process.env.EVO_INSTANCE_VENDAS_TOKEN || '';
+const ADMIN_PHONE = process.env.ADMIN_PHONE || '5571999841612';
 
 // AbacatePay webhook secret (configurado no dashboard ao criar webhook)
 const ABACATEPAY_WEBHOOK_SECRET = process.env.ABACATEPAY_WEBHOOK_SECRET || '';
@@ -50,16 +52,29 @@ function verifyAbacateSignature(rawBody: string, signatureFromHeader: string): b
   return A.length === B.length && require('crypto').timingSafeEqual(A, B);
 }
 
-async function sendWhatsApp(number: string, text: string) {
+// Rota correta é /send/text, sem instância no path — quem seleciona a
+// instância é o próprio token (ver .claude/rules/otp-whatsapp.md e
+// notifications.py::send_whatsapp no repo evo-nexus, mesmo bug corrigido lá
+// em 28/07/2026: endpoint antigo /send/text/{instance} nunca existiu nesta
+// API, sempre devolvia 404 silenciosamente tratado como falha de envio).
+async function sendWhatsApp(number: string, text: string, token: string = EVO_VENDAS_TOKEN) {
+  if (!token) {
+    console.error('[Evo API] token ausente — notificação não enviada');
+    return false;
+  }
   try {
-    const response = await fetch(`${EVO_API_URL}/send/text/${EVO_INSTANCE}`, {
+    const response = await fetch(`${EVO_API_URL}/send/text`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'apikey': EVO_TOKEN,
+        apikey: token,
+        'User-Agent': 'Mozilla/5.0 (compatible; SistemaBrittoBot/1.0)',
       },
       body: JSON.stringify({ number, text }),
     });
+    if (!response.ok) {
+      console.error('[Evo API Error]', response.status, await response.text());
+    }
     return response.ok;
   } catch (e) {
     console.error('[Evo API Error]', e);
@@ -224,6 +239,7 @@ async function notifyCRM(data: any) {
       'vps-gerenciada': 'VPS Gerenciada (R$ 297/mês)',
       'vps-gerenciada-combo-suporte': 'VPS Gerenciada + Suporte (R$ 547/mês)',
       'call-prd-sistema': 'Call de PRD — Sistema (R$ 147, avulso)',
+      'ferreira-vieira-etapa1': 'Ferreira Vieira — Site + Typebot, entrada (R$ 300 de R$ 600)',
     };
 
     const productName = productNames[externalId] || externalId || 'Produto';
@@ -297,7 +313,7 @@ async function notifyCRM(data: any) {
     // 2. Notificar SDR via Evolution API (WhatsApp)
     const sdrMessage = `🎉 *NOVO PAGAMENTO APROVADO!*\n\n*Produto:* ${productName}\n*Cliente:* ${customerName}\n*Email:* ${customerEmail || 'Não informado'}\n*Telefone:* ${customerPhone || 'Não informado'}\n*Valor:* R$ ${amount ? (amount / 100).toFixed(2) : '-'}${utms.utm_source ? `\n*UTM:* ${utms.utm_source} / ${utms.utm_medium || '-'} / ${utms.utm_campaign || '-'}` : ''}\n\n⚠️ Entrar em contato para onboarding!`;
 
-    await sendWhatsApp(SDR_PHONE, sdrMessage);
+    await sendWhatsApp(ADMIN_PHONE, sdrMessage);
 
     // 3. Enviar mensagem de boas-vindas pro cliente
     if (customerPhone) {
