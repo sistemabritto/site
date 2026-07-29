@@ -223,6 +223,7 @@ async function notifyCRM(data: any) {
       'evonexus-premium-combo-consultoria': 'EvoNexus Premium + Consultoria (R$ 2.750/mês)',
       'vps-gerenciada': 'VPS Gerenciada (R$ 297/mês)',
       'vps-gerenciada-combo-suporte': 'VPS Gerenciada + Suporte (R$ 547/mês)',
+      'call-prd-sistema': 'Call de PRD — Sistema (R$ 147, avulso)',
     };
 
     const productName = productNames[externalId] || externalId || 'Produto';

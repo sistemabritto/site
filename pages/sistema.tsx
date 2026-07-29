@@ -252,6 +252,15 @@ export default function Sistema() {
             <p className="text-gray-400 text-sm mt-4">
               R$ 147 pela call de 1h, <span className="text-white">abatidos do projeto</span> se fecharmos.
             </p>
+            <button
+              onClick={() => {
+                trackCta('/sistema', 'PAGAR R$147 AGORA', 'hero');
+                window.location.href = `/api/abacatepay/checkout/sistema${window.location.search}`;
+              }}
+              className="text-green-400 hover:text-green-300 text-sm font-semibold underline underline-offset-4 mt-2 transition-colors"
+            >
+              Já decidiu? Pague os R$ 147 agora e pule a fila →
+            </button>
           </div>
         </section>
 
