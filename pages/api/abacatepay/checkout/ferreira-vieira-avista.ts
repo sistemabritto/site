@@ -1,13 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-// Checkout avulso da primeira parcela do plano ALTERNATIVO Ferreira Vieira
-// (R$800 total = R$400 + R$400 em 30 dias) — mesmo escopo do plano de R$600
-// (checkout/ferreira-vieira.ts), preço diferente. Duas opções convivem de
-// propósito, o cliente escolhe.
+// Checkout À VISTA (R$600, 25% de desconto sobre os R$800) do pacote Ferreira
+// Vieira — a outra opção é a entrada parcelada (checkout/ferreira-vieira-
+// entrada.ts, R$400 de R$800). Uma proposta só, duas formas de pagamento.
 const ABACATEPAY_API = 'https://api.abacatepay.com/v2';
 const ABACATEPAY_KEY = process.env.ABACATEPAY_API_KEY || '';
-const PRODUCT_ID = 'prod_jyHWJqCJQfWZzB1DCmbUBUt3'; // ferreira-vieira-etapa1-v2, R$400
-const EXTERNAL_ID = 'ferreira-vieira-etapa1-v2';
+const PRODUCT_ID = 'prod_q5SruHTydTcxnGuqMbPXWELK'; // ferreira-vieira-avista, R$600
+const EXTERNAL_ID = 'ferreira-vieira-avista';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.sistemabritto.com.br';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -15,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ error: 'Method not allowed' });
   }
   if (!ABACATEPAY_KEY) {
-    console.error('[checkout/ferreira-vieira-v2] ABACATEPAY_API_KEY ausente');
+    console.error('[checkout/ferreira-vieira-avista] ABACATEPAY_API_KEY ausente');
     return res.status(500).json({ error: 'Checkout não configurado' });
   }
 
@@ -52,10 +51,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(200).json({ url: data.data.url });
     }
 
-    console.error('[checkout/ferreira-vieira-v2 Error]', JSON.stringify(data));
+    console.error('[checkout/ferreira-vieira-avista Error]', JSON.stringify(data));
     return res.status(400).json({ error: data.error || 'Erro ao criar checkout' });
   } catch (error) {
-    console.error('[checkout/ferreira-vieira-v2 Exception]', error);
+    console.error('[checkout/ferreira-vieira-avista Exception]', error);
     return res.status(500).json({ error: 'Erro interno' });
   }
 }
