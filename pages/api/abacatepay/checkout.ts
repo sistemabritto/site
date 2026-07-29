@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
 import crypto from 'crypto';
-import { enviarEvento } from '../../../lib/metaCapi';
+import { enviarEvento, clientInfoFromReq } from '../../../lib/metaCapi';
 
 // Preço mensal de cada produto — só pra dar `value` ao InitiateCheckout;
 // a cobrança de verdade usa o productId (AbacatePay já sabe o preço real).
@@ -167,6 +167,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         contentName: productId,
         email: customerData?.email ? String(customerData.email) : undefined,
         phone: customerData?.cellphone ? String(customerData.cellphone) : undefined,
+        ...clientInfoFromReq(req),
       }).catch((e) => console.error('[checkout] CAPI InitiateCheckout falhou', e));
 
       res.status(200).json({ url: data.data.url });

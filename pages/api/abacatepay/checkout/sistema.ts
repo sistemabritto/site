@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
 import crypto from 'crypto';
-import { enviarEvento } from '../../../../lib/metaCapi';
+import { enviarEvento, clientInfoFromReq } from '../../../../lib/metaCapi';
 
 // Checkout avulso (não assinatura) para a call de PRD de R$147 — a oferta
 // principal de /sistema desde 27/07/2026. Diferente de checkout/zapclub.ts e
@@ -103,6 +103,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         contentName: EXTERNAL_ID,
         email: customer_email ? String(customer_email) : undefined,
         phone: customer_cellphone ? String(customer_cellphone) : undefined,
+        ...clientInfoFromReq(req),
       }).catch((e) => console.error('[checkout/sistema] CAPI InitiateCheckout falhou', e));
 
       if (req.method === 'GET') {

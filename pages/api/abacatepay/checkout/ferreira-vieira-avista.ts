@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import crypto from 'crypto';
-import { enviarEvento } from '../../../../lib/metaCapi';
+import { enviarEvento, clientInfoFromReq } from '../../../../lib/metaCapi';
 
 // Checkout À VISTA (R$600, 25% de desconto sobre os R$800) do pacote Ferreira
 // Vieira — a outra opção é a entrada parcelada (checkout/ferreira-vieira-
@@ -58,6 +58,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         contentName: EXTERNAL_ID,
         email: customer_email ? String(customer_email) : undefined,
         phone: customer_cellphone ? String(customer_cellphone) : undefined,
+        ...clientInfoFromReq(req),
       }).catch((e) => console.error('[checkout/ferreira-vieira-avista] CAPI InitiateCheckout falhou', e));
 
       if (req.method === 'GET') return res.redirect(302, data.data.url);

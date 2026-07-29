@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import crypto from 'crypto';
-import { enviarEvento } from '../../../../lib/metaCapi';
+import { enviarEvento, clientInfoFromReq } from '../../../../lib/metaCapi';
 
 const ABACATEPAY_API = 'https://api.abacatepay.com/v2';
 const ABACATEPAY_KEY = process.env.ABACATEPAY_API_KEY || '';   // sem fallback: ver checkout.ts
@@ -78,6 +78,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         contentName: EXTERNAL_ID,
         email: customer_email ? String(customer_email) : undefined,
         phone: customer_cellphone ? String(customer_cellphone) : undefined,
+        ...clientInfoFromReq(req),
       }).catch((e) => console.error('[checkout/zapclub] CAPI InitiateCheckout falhou', e));
 
       return res.status(200).json({ url: data.data.url });

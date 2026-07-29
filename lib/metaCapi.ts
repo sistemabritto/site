@@ -60,6 +60,23 @@ export async function statusCapi(): Promise<{ pixel_id: string; configurado: boo
   };
 }
 
+/** IP + user-agent do request — o Graph API rejeita ("Invalid parameter")
+ * um evento `action_source: website` cujo user_data fique totalmente vazio,
+ * o que acontece sempre que o checkout inicia sem e-mail ainda coletado. */
+export function clientInfoFromReq(req: {
+  headers: Record<string, string | string[] | undefined>;
+  socket?: { remoteAddress?: string };
+}): { clientIp?: string; clientUserAgent?: string } {
+  const fwd = req.headers['x-forwarded-for'];
+  const fwdStr = Array.isArray(fwd) ? fwd[0] : fwd;
+  const ip = fwdStr?.split(',')[0]?.trim() || req.socket?.remoteAddress;
+  const ua = req.headers['user-agent'];
+  return {
+    clientIp: ip || undefined,
+    clientUserAgent: Array.isArray(ua) ? ua[0] : ua,
+  };
+}
+
 function sha256(valor: string): string {
   return crypto.createHash('sha256').update(valor.trim().toLowerCase()).digest('hex');
 }
