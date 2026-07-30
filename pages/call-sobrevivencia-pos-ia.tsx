@@ -163,7 +163,7 @@ export default function VideoCompleto() {
                     </>
                   ) : (
                     <>
-                      <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 flex-shrink-0" />
+                      <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 flex-shrink-0 brightness-0" />
                       <span>Receber código</span>
                     </>
                   )}

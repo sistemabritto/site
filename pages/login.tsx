@@ -160,7 +160,7 @@ export default function Login() {
               <div className="w-5 h-5 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin" />
             ) : (
               <>
-                <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg className="w-5 h-5 flex-shrink-0 brightness-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.6 5.6 0 0 1-2.43 3.68v3.07h3.94c2.3-2.12 3.63-5.24 3.63-8.76z" fill="#4285F4"/>
                   <path d="M12 24c3.24 0 5.95-1.07 7.93-2.91l-3.94-3.07a6.36 6.36 0 0 1-9.4-3.24H2.17v3.08C4.15 21.7 7.78 24 12 24z" fill="#34A853"/>
                   <path d="M5.59 14.78a7.64 7.64 0 0 1 0-5.56L2.17 6.14C.8 8.08 0 10.3 0 12.72c0 2.42.8 4.64 2.17 6.57l3.42-2.66z" fill="#FBBC05"/>
@@ -191,7 +191,7 @@ export default function Login() {
               ${isLoading ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}
             `}
           >
-            <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 flex-shrink-0" />
+            <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 flex-shrink-0 brightness-0" />
             <span>Entrar com WhatsApp</span>
           </button>
 
@@ -245,7 +245,7 @@ export default function Login() {
                     </>
                   ) : (
                     <>
-                      <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 flex-shrink-0" />
+                      <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 flex-shrink-0 brightness-0" />
                       <span>Receber código</span>
                     </>
                   )}
