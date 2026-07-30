@@ -173,7 +173,7 @@ export default function VideoCompleto() {
               <>
                 <p className="text-gray-400 text-sm mb-4 text-left">
                   Enviamos um código de 6 dígitos para{' '}
-                  <span className="text-white font-medium">+55 {phoneNumber}</span>
+                  <span className="text-white font-medium">{phoneNumber}</span>
                 </p>
                 <input
                   type="text"
