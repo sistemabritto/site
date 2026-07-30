@@ -3,6 +3,7 @@ import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PhoneInput from '../components/PhoneInput';
+import WhatsAppIcon from '../components/WhatsAppIcon';
 import { trackCta } from './_app';
 
 // Vídeo completo da call, publicado via Nexus share (raw view — content-type
@@ -275,7 +276,7 @@ export default function VideoCompleto() {
                     </>
                   ) : (
                     <>
-                      <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 flex-shrink-0 brightness-0" />
+                      <WhatsAppIcon className="w-5 h-5 flex-shrink-0 text-black" />
                       <span>Receber código</span>
                     </>
                   )}

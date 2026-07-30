@@ -4,6 +4,7 @@ import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PhoneInput from '../components/PhoneInput';
+import WhatsAppIcon from '../components/WhatsAppIcon';
 
 // Dynamic import helper - only loads Supabase at runtime (browser), never at build time
 async function getSupabase() {
@@ -191,7 +192,7 @@ export default function Login() {
               ${isLoading ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}
             `}
           >
-            <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 flex-shrink-0 brightness-0" />
+            <WhatsAppIcon className="w-5 h-5 flex-shrink-0 text-black" />
             <span>Entrar com WhatsApp</span>
           </button>
 
@@ -245,7 +246,7 @@ export default function Login() {
                     </>
                   ) : (
                     <>
-                      <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 flex-shrink-0 brightness-0" />
+                      <WhatsAppIcon className="w-5 h-5 flex-shrink-0 text-black" />
                       <span>Receber código</span>
                     </>
                   )}
