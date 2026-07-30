@@ -93,7 +93,7 @@ export default function VideoCompleto() {
         }),
       }).catch((e) => console.error('[video] lead create failed:', e));
 
-      trackCta('/video', 'otp-verificado', 'unlock');
+      trackCta('/call-sobrevivencia-pos-ia', 'otp-verificado', 'unlock');
       sessionStorage.setItem(SESSION_KEY, '1');
       setVerificado(true);
     } catch (e) {
@@ -109,7 +109,7 @@ export default function VideoCompleto() {
       <Meta
         title={`${VIDEO_TITULO} | Sistema Britto`}
         description="Confirme seu WhatsApp para assistir ao vídeo completo."
-        path="/video"
+        path="/call-sobrevivencia-pos-ia"
         noIndex={true}
       />
       <Navbar />
