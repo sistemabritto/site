@@ -185,7 +185,7 @@ export default function Login() {
             className={`
               w-full px-6 py-3 rounded-lg font-medium 
               flex items-center justify-center gap-3 
-              bg-[#25D366] text-white
+              bg-[#25D366] text-black
               transition-all duration-200 
               ${!isLoading ? 'hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0' : ''}
               ${isLoading ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}
@@ -233,14 +233,14 @@ export default function Login() {
                   className={`
                     w-full px-6 py-3 rounded-lg font-medium 
                     flex items-center justify-center gap-3 
-                    bg-[#25D366] text-white
+                    bg-[#25D366] text-black
                     transition-all duration-200 
                     ${otpLoading || !phoneNumber ? 'opacity-60 cursor-not-allowed' : 'hover:bg-[#1ebe57]'}
                   `}
                 >
                   {otpLoading ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
                       <span>Enviando...</span>
                     </>
                   ) : (
@@ -277,14 +277,14 @@ export default function Login() {
                   className={`
                     w-full px-6 py-3 rounded-lg font-medium 
                     flex items-center justify-center gap-3 
-                    bg-[#25D366] text-white
+                    bg-[#25D366] text-black
                     transition-all duration-200 
                     ${otpLoading || otpCode.length !== 6 ? 'opacity-60 cursor-not-allowed' : 'hover:bg-[#1ebe57]'}
                   `}
                 >
                   {otpLoading ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
                       <span>Verificando...</span>
                     </>
                   ) : (

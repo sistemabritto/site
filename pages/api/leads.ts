@@ -83,11 +83,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   // ── 2. Criar lead no EvoCRM ────────────────────────────────────
+  // Achado ao vivo em 30/07/2026: contact.email é OBRIGATÓRIO na API do
+  // EvoCRM — sem ele, todo POST volta 422 "contact.email is required".
+  // O código antigo tratava QUALQUER 422 como "duplicado = sucesso", então
+  // esse erro de validação ficava mascarado e o lead NUNCA era criado pra
+  // quem chegava só com WhatsApp (ex.: gate de OTP da página de vídeo, que
+  // não pede e-mail). Gera um e-mail sintético determinístico a partir do
+  // telefone quando o usuário não informou — determinístico é o que garante
+  // que a MESMA pessoa sempre bate no MESMO e-mail sintético, então o
+  // dedupe por telefone do EvoCRM (confirmado por teste real: "Phone number
+  // ... already registered to another contact") continua funcionando.
+  const emailEfetivo = email || (phoneNumber ? `whatsapp-${phoneNumber.replace(/\D/g, '')}@sem-email.sistemabritto.com.br` : '');
+
   try {
     const dealName = `${name || 'Lead'} · ${source || 'site'}`;
     const payload: any = {
       contact: {
         name: name || 'Lead sem nome',
+        email: emailEfetivo,
       },
       deal: {
         pipeline_id: PIPELINE_ID,
@@ -100,7 +113,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
     };
 
-    if (email) payload.contact.email = email;
     if (phoneNumber) payload.contact.phone_number = phoneNumber;
 
     // UTM fields
@@ -117,9 +129,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       body: JSON.stringify(payload),
     });
 
-    if (response.ok || response.status === 422) {
-      // 201 = created, 422 = duplicate (lead already exists) — both are success
+    if (response.ok) {
       results.evocrm = true;
+    } else if (response.status === 422) {
+      // 422 cobre dois casos bem diferentes: contato já existe (dedupe de
+      // verdade, mesma pessoa reconhecida pelo telefone — sucesso) ou um
+      // campo obrigatório faltando (erro de verdade, precisa aparecer no
+      // log). Só o primeiro conta como sucesso.
+      const body = await response.text();
+      const jaExiste = /already registered|already exists|duplicate/i.test(body);
+      if (jaExiste) {
+        results.evocrm = true;
+      } else {
+        console.error('[EvoCRM] lead create falhou por validação (não é dedupe):', body);
+      }
     } else {
       const body = await response.text();
       console.error('[EvoCRM] lead create failed:', response.status, body);

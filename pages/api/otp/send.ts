@@ -35,8 +35,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ success: false, message: 'Method not allowed' });
   }
 
-  const { phone } = req.body as { phone?: string };
+  const { phone, name } = req.body as { phone?: string; name?: string };
   const numero = phone ? validarTelefoneBrasil(phone) : null;
+  // Nome é só personalização da mensagem — nunca vira critério de validação
+  // nem afeta rate limit, senão viraria um jeito de burlar o limite por
+  // número mudando o nome enviado.
+  const nome = (name || '').trim().slice(0, 60) || undefined;
   if (!numero) {
     return res.status(400).json({ success: false, message: 'Informe um WhatsApp válido com DDD (+55).' });
   }
@@ -103,7 +107,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(500).json({ success: false, message: 'Erro interno.' });
   }
 
-  const envio = await enviarCodigoWhatsapp(numero, codigo);
+  const envio = await enviarCodigoWhatsapp(numero, codigo, nome);
   if (envio.status === 'erro') {
     console.error('[otp/send] falha no envio:', envio.mensagem);
     return res.status(502).json({ success: false, message: 'Não conseguimos enviar o código. Tente novamente.' });

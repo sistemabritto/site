@@ -55,13 +55,13 @@ async function enviarComFallback(numero: string, texto: string) {
   return postar(`${EVO_API_URL}/message/sendText/${EVO_INSTANCE}`, payload);
 }
 
-export async function enviarCodigoWhatsapp(numero: string, codigo: string): Promise<ResultadoEnvio> {
+export async function enviarCodigoWhatsapp(numero: string, codigo: string, nome?: string): Promise<ResultadoEnvio> {
   if (!EVO_TOKEN || !EVO_INSTANCE) {
     return { status: 'erro', mensagem: 'EVO_TOKEN/EVO_INSTANCE não configurados' };
   }
 
   const texto = [
-    '🔐 *Sistema Britto* — código de acesso',
+    nome ? `🔐 *Sistema Britto* — oi, ${nome}! Aqui está seu código de acesso` : '🔐 *Sistema Britto* — código de acesso',
     '',
     `*${codigo}*`,
     '',

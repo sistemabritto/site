@@ -47,7 +47,7 @@ export default function VideoCompleto() {
       const res = await fetch('/api/otp/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: numeroCompleto() }),
+        body: JSON.stringify({ phone: numeroCompleto(), name: nome || undefined }),
       });
       const data = await res.json();
       if (data.success) {
@@ -152,13 +152,13 @@ export default function VideoCompleto() {
                   className={`
                     w-full px-6 py-3 rounded-lg font-medium mt-4
                     flex items-center justify-center gap-3
-                    bg-[#25D366] text-white transition-all duration-200
+                    bg-[#25D366] text-black transition-all duration-200
                     ${otpLoading || !phoneNumber ? 'opacity-60 cursor-not-allowed' : 'hover:bg-[#1ebe57]'}
                   `}
                 >
                   {otpLoading ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
                       <span>Enviando...</span>
                     </>
                   ) : (
@@ -190,13 +190,13 @@ export default function VideoCompleto() {
                   className={`
                     w-full px-6 py-3 rounded-lg font-medium
                     flex items-center justify-center gap-3
-                    bg-[#25D366] text-white transition-all duration-200
+                    bg-[#25D366] text-black transition-all duration-200
                     ${otpLoading || otpCode.length !== 6 ? 'opacity-60 cursor-not-allowed' : 'hover:bg-[#1ebe57]'}
                   `}
                 >
                   {otpLoading ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
                       <span>Verificando...</span>
                     </>
                   ) : (
