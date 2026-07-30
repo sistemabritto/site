@@ -56,8 +56,6 @@ export default function Login() {
     setOtpCode('');
   };
 
-  const [sentOtp, setSentOtp] = useState('');
-
   const handleSendOTP = async () => {
     const cleanPhone = phoneNumber.replace(/[^0-9]/g, '');
     if (cleanPhone.length < 10) {
@@ -76,12 +74,11 @@ export default function Login() {
         body: JSON.stringify({ phone: fullNumber }),
       });
       const data = await res.json();
-      if (data.success && data.otp) {
-        setSentOtp(data.otp); // Store OTP for client-side verification
+      if (data.success) {
         setOtpSent(true);
       } else {
         console.error('OTP error:', data);
-        alert('⚠️ Falha ao enviar OTP. Verifique o número e tente novamente.');
+        alert(data.message || '⚠️ Falha ao enviar OTP. Verifique o número e tente novamente.');
       }
     } catch (e) {
       console.error('OTP request failed:', e);
@@ -97,13 +94,32 @@ export default function Login() {
       return;
     }
 
-    // Client-side OTP verification (demo mode)
-    if (otpCode === sentOtp) {
-      setShowPhoneModal(false);
-      // Use window.location for reliable redirect
-      window.location.href = target;
-    } else {
-      alert('❌ Código inválido. Tente novamente.');
+    // 29/07/2026: /api/otp/send parou de devolver o código pra comparação no
+    // cliente (correto — devolver o OTP na resposta anula o próprio OTP) e
+    // esta página nunca foi atualizada pra chamar /api/otp/verify de
+    // verdade. Login por WhatsApp estava quebrado desde então: qualquer
+    // código digitado comparava contra `sentOtp` undefined e sempre falhava.
+    setOtpLoading(true);
+    const cleanPhone = phoneNumber.replace(/[^0-9]/g, '');
+    const fullNumber = cleanPhone.startsWith('55') ? cleanPhone : `55${cleanPhone}`;
+    try {
+      const res = await fetch('/api/otp/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: fullNumber, otp: otpCode }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setShowPhoneModal(false);
+        window.location.href = target;
+      } else {
+        alert(data.message || '❌ Código inválido. Tente novamente.');
+      }
+    } catch (e) {
+      console.error('OTP verify failed:', e);
+      alert('⚠️ Erro ao verificar o código. Tente novamente.');
+    } finally {
+      setOtpLoading(false);
     }
   };
 
