@@ -9,7 +9,7 @@ import { trackCta } from './_app';
 // video/mp4, compatível com <video src>). Token fixo porque hoje é um único
 // vídeo; se isso virar recorrente, o caminho certo é receber o token por
 // query param ou por um registro no Supabase, não hardcode por vídeo novo.
-const VIDEO_SRC = 'https://nexus.workflowapi.com.br/api/shares/KcvU9yzVHYFZL8QcIpobgZQRO8we29j5gF4rme8ggDQ/view';
+const VIDEO_SRC = 'https://nexus.workflowapi.com.br/api/shares/y-mt5gH2iVv3NQxlRa0glP_SMwWdKS7adO21ISdUjLw/view';
 const VIDEO_TITULO = 'Call de Sobrevivência pós-IA';
 const SESSION_KEY = 'sb_video_verificado';
 
