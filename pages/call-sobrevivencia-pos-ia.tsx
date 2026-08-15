@@ -11,6 +11,7 @@ import { trackCta } from './_app';
 // vídeo; se isso virar recorrente, o caminho certo é receber o token por
 // query param ou por um registro no Supabase, não hardcode por vídeo novo.
 const VIDEO_SRC = 'https://nexus.workflowapi.com.br/api/shares/y-mt5gH2iVv3NQxlRa0glP_SMwWdKS7adO21ISdUjLw/view';
+const VIDEO_POSTER = 'https://nexus.workflowapi.com.br/api/shares/XQUz2BCKx0qqb2-dpJNrMiiHE9iQ04GroNp7VciaKDM/view';
 const VIDEO_TITULO = 'Call de Sobrevivência pós-IA';
 const SESSION_KEY = 'sb_video_verificado';
 
@@ -192,8 +193,10 @@ export default function VideoCompleto() {
             <h1 className="text-2xl md:text-3xl font-bold mb-6">{VIDEO_TITULO}</h1>
             <video
               src={VIDEO_SRC}
+              poster={VIDEO_POSTER}
               controls
               playsInline
+              preload="metadata"
               onTimeUpdate={handleTimeUpdate}
               className="w-full rounded-2xl border border-[#D4AF37]/20 bg-black"
             />
