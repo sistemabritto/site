@@ -15,9 +15,12 @@ const VIDEO_TITULO = 'Call de Sobrevivência pós-IA';
 const SESSION_KEY = 'sb_video_verificado';
 
 // Prazo pedido pelo Felipe em 30/07/2026: acesso encerra terça 04/08/2026 às
-// 23:59 (horário de Brasília). new Date com offset explícito -03:00 evita
-// depender do timezone do servidor de build/render.
-const PRAZO_FINAL = new Date('2026-08-04T23:59:00-03:00');
+// 23:59 (horário de Brasília). Estendido pelo Felipe em 15/08/2026 até
+// segunda-feira 31/08/2026 às 23:59, pra dar tempo do fluxo de OTP
+// funcionar de ponta a ponta antes do prazo real fechar. new Date com
+// offset explícito -03:00 evita depender do timezone do servidor de
+// build/render.
+const PRAZO_FINAL = new Date('2026-08-31T23:59:00-03:00');
 
 // Depois de 30min assistidos o CTA de checkout aparece — pedido do Felipe,
 // mesmo link usado no botão "Já decidiu?" de pages/sistema.tsx.
@@ -175,7 +178,7 @@ export default function VideoCompleto() {
           <div className="max-w-md mx-auto bg-[#111111] p-8 rounded-2xl border border-[#D4AF37]/20 text-center">
             <h1 className="text-2xl font-bold mb-2">O prazo pra assistir acabou</h1>
             <p className="text-gray-400 text-sm">
-              O acesso a este vídeo encerrou em 04/08/2026. Fala com a gente no WhatsApp se quiser saber os próximos passos.
+              O acesso a este vídeo encerrou em 31/08/2026. Fala com a gente no WhatsApp se quiser saber os próximos passos.
             </p>
             <a
               href="https://sistemabritto.com.br/whatsapp"
