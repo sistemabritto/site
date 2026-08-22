@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PhoneInput from '../components/PhoneInput';
 import WhatsAppIcon from '../components/WhatsAppIcon';
-import { trackCta } from './_app';
+import { trackCta, getStoredUtms } from './_app';
 
 // Vídeo completo da call, publicado via Nexus share (raw view — content-type
 // video/mp4, compatível com <video src>). Token fixo porque hoje é um único
@@ -144,6 +144,7 @@ export default function VideoCompleto() {
           name: nome || undefined,
           whatsapp: numeroCompleto(),
           source: 'video-completo',
+          utm: getStoredUtms(),
         }),
       }).catch((e) => console.error('[video] lead create failed:', e));
 

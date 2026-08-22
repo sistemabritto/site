@@ -25,16 +25,44 @@ function getSessionId(): string {
   return newSid;
 }
 
-// Extract UTM params from URL
+const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'] as const;
+const UTM_STORE_KEY = 'sb_utm';
+
+// Extrai UTM da URL atual e PERSISTE na sessão.
+//
+// Antes isto lia só window.location.search, sem guardar nada: quem chegava em
+// /links?utm_source=instagram e clicava num card perdia a atribuição na
+// primeira navegação, e o lead do OTP (que acontece 2–3 páginas depois)
+// chegava sempre sem origem. Agora a primeira URL com UTM da sessão manda —
+// gravamos uma vez e não sobrescrevemos com vazio, então navegar internamente
+// não apaga a origem, mas uma nova campanha (nova URL com utm_source) sim.
 function getUtms(): Record<string, string> {
   if (typeof window === 'undefined') return {};
   const params = new URLSearchParams(window.location.search);
-  return {
-    utm_source: params.get('utm_source') || '',
-    utm_medium: params.get('utm_medium') || '',
-    utm_campaign: params.get('utm_campaign') || '',
-    utm_content: params.get('utm_content') || '',
-  };
+  const fromUrl: Record<string, string> = {};
+  for (const k of UTM_KEYS) {
+    const v = params.get(k);
+    if (v) fromUrl[k] = v;
+  }
+
+  try {
+    if (fromUrl.utm_source) {
+      sessionStorage.setItem(UTM_STORE_KEY, JSON.stringify(fromUrl));
+      return fromUrl;
+    }
+    const stored = sessionStorage.getItem(UTM_STORE_KEY);
+    if (stored) return { ...JSON.parse(stored), ...fromUrl };
+  } catch {
+    // sessionStorage indisponível (modo privado / cookies bloqueados):
+    // segue com o que veio na URL em vez de quebrar o pageview.
+  }
+  return fromUrl;
+}
+
+// UTM da sessão, pra anexar no payload de lead. Use isto em qualquer
+// formulário que chame /api/leads — a API já aceita o objeto aninhado.
+export function getStoredUtms(): Record<string, string> {
+  return getUtms();
 }
 
 // Fire-and-forget tracking call

@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PhoneInput from '../components/PhoneInput';
 import WhatsAppIcon from '../components/WhatsAppIcon';
-import { trackCta } from './_app';
+import { trackCta, getStoredUtms } from './_app';
 
 // Vídeo completo da aula, publicado via Nexus share (raw view — content-type
 // video/mp4, compatível com <video src>). Mesmo padrão de
@@ -173,6 +173,7 @@ export default function AulaVpsCrmDoZero() {
           name: nome || undefined,
           whatsapp: numeroCompleto(),
           source: 'aula-vps-crm-do-zero',
+          utm: getStoredUtms(),
         }),
       }).catch((e) => console.error('[aula-vps-crm] lead create failed:', e));
 
