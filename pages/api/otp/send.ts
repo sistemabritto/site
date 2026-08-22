@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
 import { gerarCodigoOtp, hashCodigoOtp } from '@/lib/otp/crypto';
 import { enviarCodigoWhatsapp } from '@/lib/otp/enviarWhatsapp';
+import { registrarOtpNoCrm } from '@/lib/otp/registrarNoCrm';
 import {
   validarTelefoneBrasil, OTP_TTL_MINUTOS,
   LIMITE_POR_NUMERO_HORA, LIMITE_POR_NUMERO_DIA, LIMITE_POR_IP_HORA, TETO_GLOBAL_HORA,
@@ -112,6 +113,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.error('[otp/send] falha no envio:', envio.mensagem);
     return res.status(502).json({ success: false, message: 'Não conseguimos enviar o código. Tente novamente.' });
   }
+
+  // Espelha a conversa no inbox whatsapp-cloud do CRM, pra acompanhar o lead
+  // por lá. Deliberadamente SEM o código: quem abrir o CRM não precisa (nem
+  // deve) conseguir ler um OTP válido de outra pessoa — a conversa serve pra
+  // saber que a pessoa passou por aqui e pra receber a resposta dela.
+  await registrarOtpNoCrm({
+    numero,
+    nome,
+    wamid: envio.wamid,
+    conteudo: 'Código de verificação enviado pelo site (template otp_acesso_video). Código omitido por segurança.',
+  });
 
   return res.status(200).json(RESPOSTA_GENERICA);
 }

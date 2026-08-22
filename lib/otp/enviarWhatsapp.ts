@@ -13,7 +13,10 @@ const WA_CLOUD_API_KEY = process.env.WA_CLOUD_API_KEY || '';
 const WA_CLOUD_OTP_TEMPLATE = process.env.WA_CLOUD_OTP_TEMPLATE || 'otp_acesso_video';
 const WA_CLOUD_GRAPH_VERSION = process.env.WA_CLOUD_GRAPH_VERSION || 'v23.0';
 
-export type ResultadoEnvio = { status: 'enviado' } | { status: 'erro'; mensagem: string };
+// wamid é o id que a Meta devolve pra mensagem enviada. Ele volta daqui porque
+// é o que o espelho no CRM usa como source_id — sem ele o CRM trataria a
+// mensagem como nova e tentaria mandar de novo. Ver lib/otp/registrarNoCrm.ts.
+export type ResultadoEnvio = { status: 'enviado'; wamid: string } | { status: 'erro'; mensagem: string };
 
 export async function enviarCodigoWhatsapp(numero: string, codigo: string, _nome?: string): Promise<ResultadoEnvio> {
   if (!WA_CLOUD_PHONE_NUMBER_ID || !WA_CLOUD_API_KEY) {
@@ -55,7 +58,17 @@ export async function enviarCodigoWhatsapp(numero: string, codigo: string, _nome
       return { status: 'erro', mensagem: `HTTP ${resposta.status}: ${corpo.slice(0, 300)}` };
     }
 
-    return { status: 'enviado' };
+    // Formato da Graph: { messages: [{ id: "wamid...." }] }. Se por algum
+    // motivo não vier, o envio ainda foi um sucesso — só o espelho no CRM é
+    // que fica de fora (registrarOtpNoCrm sai cedo com wamid vazio).
+    let wamid = '';
+    try {
+      wamid = JSON.parse(corpo)?.messages?.[0]?.id || '';
+    } catch {
+      wamid = '';
+    }
+
+    return { status: 'enviado', wamid };
   } catch (erro) {
     return { status: 'erro', mensagem: erro instanceof Error ? erro.message : 'erro desconhecido' };
   }
