@@ -6,8 +6,31 @@ const EVOCRM_BASE_URL = 'https://evoapi.workflowapi.com.br';
 // PÚBLICO, e sem sequer consultar o ambiente — trocar o token no CRM
 // derrubaria a gravação de leads sem ninguém entender por quê.
 const EVOCRM_API_TOKEN = process.env.EVOCRM_API_TOKEN || '';
-const PIPELINE_ID = 'eb72af5c-28f7-4948-ae50-9c81922d161e'; // pipeline "Leads do Site"
-const DEFAULT_STAGE_ID = '0e31e649-af37-4a6f-87fb-cd25d52225e5'; // "Novo Lead"
+// Um pipeline por ORIGEM de lead, criados no CRM em 22/08/2026.
+//
+// Antes tudo caía em "Leads do Site" — que já tem 52 leads de uma lista
+// importada à mão. Misturar quem confirmou o WhatsApp por OTP numa aula com
+// uma lista fria torna o funil ilegível: a taxa de resposta de um não diz nada
+// sobre a do outro. Separar por ESTÁGIO não resolveria, porque os estágios ali
+// são passos de funil (Novo Lead → Contato → … → Fechado): assim que o lead
+// avançasse, a origem sumia.
+//
+// "Leads do Site" continua sendo o fallback pra qualquer origem nova que
+// apareça sem mapeamento — melhor cair num pipeline conhecido que sumir.
+const PIPELINES: Record<string, { pipeline: string; stage: string }> = {
+  'aula-vps-crm-do-zero': {
+    pipeline: '2b861a13-4809-45c7-ba6f-fd8be6e050ee', // "Aula CRM (VPS)"
+    stage: 'bc435c12-47fd-4a2a-a13c-1648210cc84c',
+  },
+  'video-completo': {
+    pipeline: 'f31954fb-e5bf-4639-9cb0-0c8de6e2cb30', // "Call Pós-IA"
+    stage: 'f026c5bb-d85a-471d-92b1-abce11161f8c',
+  },
+};
+const PIPELINE_PADRAO = {
+  pipeline: 'eb72af5c-28f7-4948-ae50-9c81922d161e', // "Leads do Site"
+  stage: '0e31e649-af37-4a6f-87fb-cd25d52225e5', // "Novo Lead"
+};
 
 // ─── Suporte Supabase ─────────────────────────────────────────────
 let supabaseClient: any = null;
@@ -108,14 +131,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const dealName = `${name || 'Lead'} · ${source || 'site'}`;
+    const destino = PIPELINES[source] || PIPELINE_PADRAO;
     const payload: any = {
       contact: {
         name: name || 'Lead sem nome',
         email: emailEfetivo,
       },
       deal: {
-        pipeline_id: PIPELINE_ID,
-        stage_id: DEFAULT_STAGE_ID,
+        pipeline_id: destino.pipeline,
+        stage_id: destino.stage,
         name: dealName,
       },
       custom_fields: {
