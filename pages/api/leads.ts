@@ -15,9 +15,20 @@ async function getSupabaseClient() {
   if (supabaseClient) return supabaseClient;
   try {
     const { createClient } = await import('@supabase/supabase-js');
+    // SUPABASE_SERVICE_ROLE_KEY não existe no ambiente da Vercel — as chaves
+    // configuradas são SUPABASE_SERVICE_KEY e SUPABASE_SECRET_KEY. Lendo só o
+    // nome errado, isto caía no anon key e TODO insert de lead era rejeitado
+    // pelo RLS ("new row violates row-level security policy"), silenciosamente:
+    // o catch abaixo engolia o erro e o lead sumia. Confirmado em 22/08/2026 —
+    // a tabela leads tinha 2 linhas enquanto pageviews (que já lia a variável
+    // certa em api/track.ts) tinha 267. Ordem espelha a de api/track.ts.
     supabaseClient = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-      process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+      process.env.SUPABASE_SERVICE_KEY ||
+        process.env.SUPABASE_SECRET_KEY ||
+        process.env.SUPABASE_SERVICE_ROLE_KEY ||
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+        ''
     );
   } catch {
     return null;
@@ -115,10 +126,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (phoneNumber) payload.contact.phone_number = phoneNumber;
 
-    // UTM fields
-    if (utm_source) payload.custom_fields.utm_source = utm_source;
-    if (utm_medium) payload.custom_fields.utm_medium = utm_medium;
-    if (utm_campaign) payload.custom_fields.utm_campaign = utm_campaign;
+    // UTM: usa as variáveis JÁ NORMALIZADAS lá em cima, que aceitam tanto o
+    // formato flat (utm_source) quanto o aninhado (utm: { utm_source }) usado
+    // pelo quiz. Antes isto lia utm_source/utm_medium/utm_campaign crus, então
+    // lead vindo com UTM aninhado gravava a origem no Supabase e chegava SEM
+    // atribuição nenhuma no CRM — e utm_content/utm_term não chegavam nunca.
+    if (utmSource) payload.custom_fields.utm_source = utmSource;
+    if (utmMedium) payload.custom_fields.utm_medium = utmMedium;
+    if (utmCampaign) payload.custom_fields.utm_campaign = utmCampaign;
+    if (utmContent) payload.custom_fields.utm_content = utmContent;
+    if (utmTerm) payload.custom_fields.utm_term = utmTerm;
 
     const response = await fetch(`${EVOCRM_BASE_URL}/public/api/v1/leads`, {
       method: 'POST',
