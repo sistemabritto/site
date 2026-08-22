@@ -8,16 +8,93 @@ import { trackCta } from './_app';
 
 // Vídeo completo da aula, publicado via Nexus share (raw view — content-type
 // video/mp4, compatível com <video src>). Mesmo padrão de
-// pages/call-sobrevivencia-pos-ia.tsx: token fixo porque hoje é um único
-// vídeo.
+// pages/call-sobrevivencia-pos-ia.tsx: token fixo porque hoje é um único vídeo.
 const VIDEO_SRC = 'https://nexus.workflowapi.com.br/api/shares/-r1VfIEHQ8ZUnm-LE1a6Jd7hKY9DWpShBALeFBG-ZRo/view';
 const VIDEO_POSTER = 'https://nexus.workflowapi.com.br/api/shares/2ixI_7hUeoItjExBKmXEFWmlFwMswpZsP_xC1QQwJpQ/view';
-const VIDEO_TITULO = 'Monte seu CRM do zero (VPS + Docker + Evo CRM)';
+const VIDEO_TITULO = 'Monte seu CRM do zero';
+const VIDEO_SUBTITULO = 'Do servidor vazio ao Evo CRM no ar — VPS, Docker, DNS e Traefik, passo a passo.';
 const SESSION_KEY = 'sb_aula_vps_crm_verificado';
 
-// Sem prazo de expiração nesta página — pedido do Felipe em 21/08/2026:
-// é conteúdo/aula, não uma call com data de validade, então fica sempre
-// disponível pra quem confirmar o WhatsApp.
+// Comunidade Evolution Alliance (grupo no WhatsApp). Link informado pelo
+// Felipe em 22/08/2026.
+const COMUNIDADE_URL = 'https://chat.whatsapp.com/IXPNhwhT8C0GSGxV0b5LMS';
+
+// Sem prazo de expiração nesta página — pedido do Felipe em 21/08/2026: é
+// conteúdo/aula, não uma call com data de validade.
+
+const ETAPAS = [
+  'Comprar e subir a VPS do zero',
+  'Rodar o Setup Orion e instalar o Docker Swarm',
+  'Apontar o DNS e configurar o Traefik com SSL',
+  'Subir o Evo CRM e criar sua primeira instância',
+];
+
+/** Passos numerados da aula — o que a pessoa leva ao assistir. */
+function Etapas() {
+  return (
+    <ol className="grid gap-3 sm:grid-cols-2">
+      {ETAPAS.map((etapa, i) => (
+        <li
+          key={etapa}
+          className="flex items-start gap-3 rounded-xl border border-surface-700 bg-surface-900 p-4"
+        >
+          <span
+            aria-hidden="true"
+            className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg bg-green-400/10 font-heading text-sm font-bold text-green-400"
+          >
+            {i + 1}
+          </span>
+          <span className="text-sm leading-relaxed text-gray-300">{etapa}</span>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+/** CTA da comunidade Evolution Alliance — aparece depois do vídeo liberado. */
+function ComunidadeCta() {
+  return (
+    <section
+      aria-labelledby="cta-comunidade"
+      className="relative overflow-hidden rounded-2xl border border-green-400/30 bg-surface-900 p-6 sm:p-8"
+    >
+      {/* brilho decorativo — puramente visual */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-green-400/10 blur-3xl"
+      />
+
+      <div className="relative">
+        <p className="font-heading text-xs font-bold uppercase tracking-[0.2em] text-green-400">
+          Evolution Alliance
+        </p>
+
+        <h2 id="cta-comunidade" className="mt-2 font-heading text-2xl font-bold text-white sm:text-3xl">
+          Travou em algum passo?
+        </h2>
+
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-400 sm:text-base">
+          A Evolution Alliance é a comunidade de quem constrói com a Evolution API. Dúvida de
+          VPS, Docker, DNS ou CRM: pergunta lá que tem gente que já passou por isso — e
+          costuma responder rápido.
+        </p>
+
+        <a
+          href={COMUNIDADE_URL}
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => trackCta('/aula-vps-crm-do-zero', 'entrar-evolution-alliance', 'comunidade')}
+          className="mt-6 inline-flex min-h-[48px] items-center justify-center gap-3 rounded-lg bg-whatsapp-500 px-7 py-3 font-heading font-bold text-black transition-colors duration-200 hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400"
+        >
+          <WhatsAppIcon className="h-5 w-5 flex-shrink-0 text-black" />
+          <span>Entrar na comunidade</span>
+        </a>
+
+        <p className="mt-3 text-xs text-gray-500">Grupo no WhatsApp · Entrada gratuita</p>
+      </div>
+    </section>
+  );
+}
 
 export default function AulaVpsCrmDoZero() {
   const [nome, setNome] = useState('');
@@ -119,117 +196,162 @@ export default function AulaVpsCrmDoZero() {
         noIndex={true}
       />
       <Navbar />
-      <main className="min-h-screen bg-[#0a0a0a] text-white px-4 py-20">
+
+      <main className="min-h-screen bg-surface-950 px-4 py-16 text-white sm:py-20">
         {verificado ? (
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-2xl md:text-3xl font-bold mb-6">{VIDEO_TITULO}</h1>
+          <div className="mx-auto max-w-4xl">
+            <header className="mb-8">
+              <p className="font-heading text-xs font-bold uppercase tracking-[0.2em] text-green-400">
+                VPS · Docker · Traefik · Evo CRM
+              </p>
+              <h1 className="mt-2 font-heading text-3xl font-bold leading-tight sm:text-4xl">
+                {VIDEO_TITULO}
+              </h1>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-400 sm:text-base">
+                {VIDEO_SUBTITULO}
+              </p>
+            </header>
+
             <video
               src={VIDEO_SRC}
               poster={VIDEO_POSTER}
               controls
               playsInline
               preload="metadata"
-              className="w-full rounded-2xl border border-[#D4AF37]/20 bg-black"
+              className="w-full rounded-2xl border border-surface-700 bg-black shadow-2xl shadow-green-400/5"
             />
 
-            <div className="mt-8 rounded-2xl border border-[#21262d] bg-[#111111] p-6">
-              <h2 className="text-lg font-semibold mb-2">Sobre essa aula</h2>
-              <p className="text-gray-400 text-sm">
-                Passo a passo completo: comprar a VPS, instalar o Setup Orion, configurar
-                DNS e Traefik, e subir seu próprio Evo CRM do zero.
-              </p>
+            <div className="mt-10">
+              <h2 className="mb-4 font-heading text-lg font-semibold text-white">
+                O que você monta nessa aula
+              </h2>
+              <Etapas />
+            </div>
+
+            <div className="mt-10">
+              <ComunidadeCta />
             </div>
           </div>
         ) : (
-          <div className="max-w-md mx-auto bg-[#111111] p-8 rounded-2xl border border-[#D4AF37]/20 text-center">
-            <h1 className="text-2xl font-bold mb-2">{VIDEO_TITULO}</h1>
-            <p className="text-gray-400 text-sm mb-8">
-              Confirme seu WhatsApp pra liberar o acesso à aula completa.
-            </p>
-
-            {!otpSent ? (
-              <>
-                <input
-                  type="text"
-                  value={nome}
-                  onChange={(e) => setNome(e.target.value)}
-                  placeholder="Seu nome"
-                  className="w-full bg-[#1a1a1a] border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#D4AF37] transition mb-4"
-                />
-                <PhoneInput
-                  value={phoneNumber}
-                  onChange={(v) => setPhoneNumber(v)}
-                  accentColor="#D4AF37"
-                  required
-                />
-                <button
-                  onClick={handleSendOTP}
-                  disabled={otpLoading || !phoneNumber}
-                  className={`
-                    w-full px-6 py-3 rounded-lg font-medium mt-4
-                    flex items-center justify-center gap-3
-                    bg-[#25D366] text-black transition-all duration-200
-                    ${otpLoading || !phoneNumber ? 'opacity-60 cursor-not-allowed' : 'hover:bg-[#1ebe57]'}
-                  `}
-                >
-                  {otpLoading ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
-                      <span>Enviando...</span>
-                    </>
-                  ) : (
-                    <>
-                      <WhatsAppIcon className="w-5 h-5 flex-shrink-0 text-black" />
-                      <span>Receber código</span>
-                    </>
-                  )}
-                </button>
-              </>
-            ) : (
-              <>
-                <p className="text-gray-400 text-sm mb-4 text-left">
-                  Enviamos um código de 6 dígitos para{' '}
-                  <span className="text-white font-medium">{phoneNumber}</span>
+          <div className="mx-auto max-w-md">
+            <div className="rounded-2xl border border-surface-700 bg-surface-900 p-7 sm:p-8">
+              <div className="mb-6 text-center">
+                <p className="font-heading text-xs font-bold uppercase tracking-[0.2em] text-green-400">
+                  Aula liberada
                 </p>
-                <input
-                  type="text"
-                  value={otpCode}
-                  onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                  placeholder="123456"
-                  className="w-full bg-[#1a1a1a] border border-gray-700 rounded-lg px-4 py-3 text-white text-center text-2xl tracking-[0.5em] placeholder-gray-600 focus:outline-none focus:border-[#D4AF37] transition mb-4"
-                  maxLength={6}
-                  autoFocus
-                />
-                <button
-                  onClick={handleVerifyOTP}
-                  disabled={otpLoading || otpCode.length !== 6}
-                  className={`
-                    w-full px-6 py-3 rounded-lg font-medium
-                    flex items-center justify-center gap-3
-                    bg-[#25D366] text-black transition-all duration-200
-                    ${otpLoading || otpCode.length !== 6 ? 'opacity-60 cursor-not-allowed' : 'hover:bg-[#1ebe57]'}
-                  `}
-                >
-                  {otpLoading ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
-                      <span>Verificando...</span>
-                    </>
-                  ) : (
-                    <span>Assistir agora</span>
-                  )}
-                </button>
-                <button
-                  onClick={() => { setOtpSent(false); setOtpCode(''); }}
-                  className="mt-4 text-gray-400 text-sm hover:text-white transition"
-                >
-                  ← Voltar e editar número
-                </button>
-              </>
-            )}
+                <h1 className="mt-2 font-heading text-2xl font-bold leading-tight text-white">
+                  {VIDEO_TITULO}
+                </h1>
+                <p className="mt-3 text-sm leading-relaxed text-gray-400">
+                  Confirme seu WhatsApp pra liberar o acesso à aula completa.
+                </p>
+              </div>
+
+              {!otpSent ? (
+                <>
+                  <label htmlFor="nome" className="mb-2 block text-xs font-medium text-gray-400">
+                    Seu nome
+                  </label>
+                  <input
+                    id="nome"
+                    type="text"
+                    value={nome}
+                    onChange={(e) => setNome(e.target.value)}
+                    placeholder="Como podemos te chamar?"
+                    className="mb-5 min-h-[48px] w-full rounded-lg border border-surface-700 bg-surface-800 px-4 py-3 text-white placeholder-gray-600 transition-colors focus:border-green-400 focus:outline-none"
+                  />
+                  <PhoneInput
+                    value={phoneNumber}
+                    onChange={(v) => setPhoneNumber(v)}
+                    accentColor="#4ADE80"
+                    required
+                  />
+                  <button
+                    onClick={handleSendOTP}
+                    disabled={otpLoading || !phoneNumber}
+                    className={`mt-5 flex min-h-[48px] w-full items-center justify-center gap-3 rounded-lg bg-whatsapp-500 px-6 py-3 font-heading font-bold text-black transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400 ${
+                      otpLoading || !phoneNumber
+                        ? 'cursor-not-allowed opacity-60'
+                        : 'hover:bg-green-600'
+                    }`}
+                  >
+                    {otpLoading ? (
+                      <>
+                        <span
+                          aria-hidden="true"
+                          className="h-5 w-5 animate-spin rounded-full border-2 border-black/30 border-t-black"
+                        />
+                        <span>Enviando...</span>
+                      </>
+                    ) : (
+                      <>
+                        <WhatsAppIcon className="h-5 w-5 flex-shrink-0 text-black" />
+                        <span>Receber código</span>
+                      </>
+                    )}
+                  </button>
+                  <p className="mt-4 text-center text-xs leading-relaxed text-gray-500">
+                    Enviamos um código de 6 dígitos no seu WhatsApp. Sem spam.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="mb-4 text-sm leading-relaxed text-gray-400">
+                    Enviamos um código de 6 dígitos para{' '}
+                    <span className="font-medium text-white">{phoneNumber}</span>
+                  </p>
+                  <label htmlFor="otp" className="sr-only">
+                    Código de 6 dígitos
+                  </label>
+                  <input
+                    id="otp"
+                    type="text"
+                    inputMode="numeric"
+                    autoComplete="one-time-code"
+                    value={otpCode}
+                    onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    placeholder="123456"
+                    className="mb-4 min-h-[56px] w-full rounded-lg border border-surface-700 bg-surface-800 px-4 py-3 text-center text-2xl tracking-[0.5em] text-white placeholder-gray-600 transition-colors focus:border-green-400 focus:outline-none"
+                    maxLength={6}
+                    autoFocus
+                  />
+                  <button
+                    onClick={handleVerifyOTP}
+                    disabled={otpLoading || otpCode.length !== 6}
+                    className={`flex min-h-[48px] w-full items-center justify-center gap-3 rounded-lg bg-whatsapp-500 px-6 py-3 font-heading font-bold text-black transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400 ${
+                      otpLoading || otpCode.length !== 6
+                        ? 'cursor-not-allowed opacity-60'
+                        : 'hover:bg-green-600'
+                    }`}
+                  >
+                    {otpLoading ? (
+                      <>
+                        <span
+                          aria-hidden="true"
+                          className="h-5 w-5 animate-spin rounded-full border-2 border-black/30 border-t-black"
+                        />
+                        <span>Verificando...</span>
+                      </>
+                    ) : (
+                      <span>Assistir agora</span>
+                    )}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setOtpSent(false);
+                      setOtpCode('');
+                    }}
+                    className="mt-4 min-h-[44px] w-full text-sm text-gray-400 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400"
+                  >
+                    ← Voltar e editar número
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         )}
       </main>
+
       <Footer />
     </>
   );
