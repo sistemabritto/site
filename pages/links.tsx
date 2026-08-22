@@ -80,6 +80,15 @@ const SERVICOS: Servico[] = [
     preco: 'Operação mensal',
   },
   {
+    slug: 'whatsapp',
+    href: '/whatsapp',
+    img: '/images/links/whatsapp.png',
+    titulo: 'WhatsApp que responde 24h',
+    descricao:
+      'A mensagem que chega às 22h47 é respondida às 22h47. IA que qualifica, agenda e vende.',
+    preco: 'Assinatura mensal',
+  },
+  {
     slug: 'sistema',
     href: '/sistema',
     img: '/images/links/sistema.png',
