@@ -6,7 +6,7 @@ Sistema Britto é a operação de Felipe Britto para rastrear oportunidades de n
 
 **Rastrear → Vibe Codar → Monetizar.**
 
-Um Vibe Seller não começa perguntando apenas o que consegue construir. Primeiro procura valor não capturado — receita, economia, margem ou equity — e só então decide entre construir, comprar, ajustar processo ou não fazer nada.
+Um Vibe Seller não começa perguntando apenas o que consegue construir. Primeiro procura onde uma operação perde tempo, margem ou vendas — e só então decide entre construir, comprar, ajustar processo ou não fazer nada.
 
 ## Entidades e links
 
@@ -33,12 +33,12 @@ Um Vibe Seller não começa perguntando apenas o que consegue construir. Primeir
 ### Sprint Vibe Seller
 
 - URL: https://www.sistemabritto.com.br/sprint-vibe-seller
-- Acompanhamento individual de 9 semanas: “eu faço com você”. Inclui WhatsApp e checkpoints para direção, construção e validação.
+- Acompanhamento individual de 9 semanas: “eu faço com você”. Inclui suporte individualizado no WhatsApp e cinco checkpoints individuais para direção, construção e validação.
 
 ### Implementação Vibe Seller
 
 - URL: https://www.sistemabritto.com.br/implementacao-vibe-seller
-- Implementação sob medida de 9 semanas: “eu faço para você”. Pode incluir estratégia, arquitetura, código, integrações, documentação e plano de escala, conforme escopo.
+- Implementação sob medida de 9 semanas: “eu faço para você”. Pode incluir estratégia, arquitetura, código, integrações, documentação e plano de escala, conforme escopo. O modelo de pagamento é apresentado após a Sessão de Arquitetura, com entrega ready-to-market como marco da parcela final.
 
 ### WhatsApp com IA
 

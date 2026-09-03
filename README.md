@@ -41,6 +41,15 @@ O repositório usa o Pages Router. Mudanças em `main` disparam o deploy de prod
 - Evolution API: contagem da Evolution Alliance e mensagens operacionais
 - Ghost: blog em `blog.sistemabritto.com.br`
 
+### Contador de lote do Desafio
+
+O componente de lote consulta `/api/instagram/followers`, que usa a Instagram Graph API apenas no servidor e mantém resposta em cache de 15 minutos. Para ativar o contador realmente atualizado na Vercel, configure estas variáveis de produção (nunca com prefixo `NEXT_PUBLIC`):
+
+- `INSTAGRAM_BUSINESS_ACCOUNT_ID`
+- `INSTAGRAM_GRAPH_ACCESS_TOKEN`
+
+Sem elas, a página não inventa uma contagem; ela apenas mostra o lote inicial até 5.000 seguidores.
+
 O pós-compra das ofertas novas não depende de n8n. A Cakto chama
 `cakto-webhook`, que registra o evento e cria jobs na outbox. O cron nativo do
 Supabase chama `fulfillment-worker` a cada minuto para confirmação por
