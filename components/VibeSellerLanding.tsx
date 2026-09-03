@@ -102,11 +102,11 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     eyebrow: '9 semanas · eu faço com você',
     headline: 'Você não precisa tocar',
     emphasis: 'seu projeto sozinho.',
-    lead: 'No Sprint, eu acompanho a execução com você por 9 semanas: decisões, prioridades, construção e validação. Você continua dono do projeto — mas para de destravar tudo no escuro.',
+    lead: 'No Sprint, eu acompanho a execução com você por 9 semanas: decisões, prioridades, construção e validação. Você continua dono do projeto — mas para de destravar tudo no escuro. O primeiro passo é comprar a Sessão de Arquitetura de R$ 150.',
     price: 'Comece pela Sessão de Arquitetura · R$ 150',
-    primaryCta: 'Reservar sessão de arquitetura',
-    formTitle: 'Reserve sua Sessão de Arquitetura',
-    formLead: 'É a porta de entrada comum para Sprint e Implementação. Você paga R$ 150 hoje, recebe o link de agenda após a confirmação e esse valor é abatido se avançarmos.',
+    primaryCta: 'Comprar sessão de arquitetura · R$ 150',
+    formTitle: 'Comprar Sessão de Arquitetura',
+    formLead: 'É a porta de entrada comum para Sprint e Implementação. Você compra a sessão por R$ 150, recebe o link de agenda após a confirmação e esse valor é abatido se avançarmos.',
     submitLabel: 'Ir para o checkout de R$ 150 →',
     checkoutUrl: 'https://pay.cakto.com.br/35xvemn',
     processTitle: 'Nove semanas para fazer a solução avançar com você.',
@@ -157,18 +157,18 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     metaTitle: 'Implementação Vibe Seller | Sistema sob medida pronto para operar',
     metaDescription: 'Em 9 semanas, eu construo sua solução e entrego código, estrutura pronta para operar e plano de escala. Comece pela Sessão de Arquitetura por R$ 150, abatida se avançar.',
     eyebrow: '9 semanas · eu faço para você',
-    headline: 'Você não precisa virar',
-    emphasis: 'uma software house para resolver isso.',
-    lead: 'Na Implementação, eu assumo a construção da solução certa para a sua oportunidade: estratégia, arquitetura, código e plano de escala. Você recebe um ativo pronto para operar — não uma pilha de ferramentas.',
+    headline: 'Você pediu orçamento de uma solução.',
+    emphasis: 'Mas o projeto ainda não foi definido.',
+    lead: 'Sem escopo, tudo parece caber e qualquer orçamento vira chute. Você compra primeiro a Sessão de Arquitetura de R$ 150; nela definimos o problema, a rota, as integrações e os custos antes de decidir se eu construo para você.',
     price: 'Comece pela Sessão de Arquitetura · R$ 150',
-    primaryCta: 'Reservar sessão de arquitetura',
-    formTitle: 'Reserve sua Sessão de Arquitetura',
-    formLead: 'Preencha os dados para abrir o checkout. Depois da confirmação, você recebe por e-mail o link para escolher o horário.',
+    primaryCta: 'Comprar sessão de arquitetura · R$ 150',
+    formTitle: 'Comprar Sessão de Arquitetura',
+    formLead: 'Você compra a sessão por R$ 150. Depois da confirmação, recebe o link para escolher o horário; se avançarmos para a implementação, esse valor é abatido.',
     submitLabel: 'Ir para o checkout de R$ 150 →',
     checkoutUrl: 'https://pay.cakto.com.br/35xvemn',
     processTitle: 'Primeiro a arquitetura. Depois, nove semanas de execução para você.',
     deliverablesTitle: 'Você sai da sessão com clareza. Avançando, recebe o produto pronto.',
-    proof: 'A Sessão de Arquitetura evita orçamento no escuro. Se a Implementação fizer sentido, os R$ 150 são abatidos do projeto, que começa a partir de R$ 5.000 conforme escopo.',
+    proof: 'Uma sessão individual para sair com o projeto documentado antes de ser orçado. Se a Implementação fizer sentido, os R$ 150 são abatidos do projeto, que começa a partir de R$ 5.000 conforme escopo.',
     steps: [
       { label: 'Sessão', title: 'Arquitetura e decisão', copy: 'Documentamos problema, critério de sucesso, escopo, integrações, custos e o nível de entrega adequado.' },
       { label: 'Semanas 1–6', title: 'Construção', copy: 'Eu construo a solução: produto, automação, dados, integrações e experiência necessários para capturar o valor.' },
@@ -219,13 +219,38 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
   const [error, setError] = useState('');
   const [utms, setUtms] = useState<Record<string, string>>({});
   const [form, setForm] = useState({ name: '', email: '', whatsapp: '', context: '' });
-  const modalId = `aplicar-${kind}`;
+  const modalId = `checkout-${kind}`;
 
   useEffect(() => setUtms(getStoredUtms()), []);
 
   const source = useMemo(() => `${kind}-vibe-seller`, [kind]);
 
+  const goToCheckout = (placement: string) => {
+    if (!offer.checkoutUrl) return;
+    const checkoutValue = kind === 'desafio' ? 97 : 150;
+    trackCta(offer.path, `${kind}-checkout`, placement);
+    const browserWindow = window as typeof window & { fbq?: (...args: unknown[]) => void; dataLayer?: Record<string, unknown>[] };
+    browserWindow.fbq?.('track', 'InitiateCheckout', {
+      content_name: kind === 'desafio' ? 'Desafio Monetizar com IA' : 'Sessão de Arquitetura Vibe Seller',
+      content_category: 'Vibe Seller',
+      currency: 'BRL',
+      value: checkoutValue,
+    });
+    browserWindow.dataLayer?.push({ event: 'begin_checkout', offer: kind, value: checkoutValue, currency: 'BRL' });
+    const checkoutUrl = new URL(offer.checkoutUrl);
+    Object.entries(utms).forEach(([key, value]) => {
+      if (key.startsWith('utm_') && value) checkoutUrl.searchParams.set(key, value);
+    });
+    checkoutUrl.searchParams.set('utm_content', `${kind}-checkout`);
+    window.location.assign(checkoutUrl.toString());
+  };
+
   const openForm = (placement: string) => {
+    // Sprint e Implementação não são aplicação: a compra é da Sessão de Arquitetura.
+    if (kind !== 'desafio') {
+      goToCheckout(placement);
+      return;
+    }
     trackCta(offer.path, offer.primaryCta, placement);
     setError('');
     setFormOpen(true);
@@ -261,22 +286,7 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
       }
 
       if (offer.checkoutUrl) {
-        trackCta(offer.path, `${kind}-checkout`, 'checkout-cakto');
-        const checkoutValue = kind === 'desafio' ? 97 : 150;
-        const browserWindow = window as typeof window & { fbq?: (...args: unknown[]) => void; dataLayer?: Record<string, unknown>[] };
-        browserWindow.fbq?.('track', 'InitiateCheckout', {
-          content_name: kind === 'desafio' ? 'Desafio Monetizar com IA' : 'Sessão de Arquitetura Vibe Seller',
-          content_category: 'Vibe Seller',
-          currency: 'BRL',
-          value: checkoutValue,
-        });
-        browserWindow.dataLayer?.push({ event: 'begin_checkout', offer: kind, value: checkoutValue, currency: 'BRL' });
-        const checkoutUrl = new URL(offer.checkoutUrl);
-        Object.entries(utms).forEach(([key, value]) => {
-          if (key.startsWith('utm_') && value) checkoutUrl.searchParams.set(key, value);
-        });
-        checkoutUrl.searchParams.set('utm_content', `${kind}-checkout`);
-        window.location.assign(checkoutUrl.toString());
+        goToCheckout('checkout-cakto');
         return;
       }
 
@@ -364,6 +374,13 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
               ].map(([title, copy]) => <article key={title} className="rounded-2xl border border-cyan-300/20 bg-cyan-300/[0.045] p-6"><h3 className="font-heading text-xl font-bold text-cyan-100">{title}</h3><p className="mt-3 text-sm leading-relaxed text-slate-300">{copy}</p></article>)}
             </div>
             <p className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-sm leading-relaxed text-slate-300"><strong className="text-white">Importante:</strong> a sessão não serve para carimbar uma ideia. Se comprar, adaptar uma ferramenta ou mudar o processo for melhor do que construir, essa será a recomendação.</p>
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
+              {[
+                ['O que entra agora', 'A menor versão que resolve o gargalo e pode ser entregue em um ciclo de nove semanas.'],
+                ['O que fica de fora', 'Funcionalidades que parecem urgentes, mas não provam valor nem mudam a decisão agora.'],
+                ['Quanto custa operar', 'Estimativa de construção, infraestrutura, integrações e premissas que sustentam a proposta.'],
+              ].map(([title, copy]) => <article key={title} className="rounded-2xl border border-white/10 bg-[#080b12] p-6"><h3 className="font-heading text-xl font-bold text-white">{title}</h3><p className="mt-3 text-sm leading-relaxed text-slate-300">{copy}</p></article>)}
+            </div>
             <div className="mt-14 grid gap-5 md:grid-cols-2">
               <article className="rounded-3xl border border-white/10 bg-[#0d1320] p-7">
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-cyan-300">Produto e operação</p>

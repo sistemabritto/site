@@ -44,6 +44,7 @@ Um Vibe Seller não começa perguntando apenas o que consegue construir. Primeir
 
 - URL: https://www.sistemabritto.com.br/whatsapp
 - Para operações cujo gargalo é captar, qualificar, responder ou fazer follow-up no WhatsApp.
+- Esta é uma solução comercial específica dentro da tese Vibe Seller; não é substituída pelo Desafio, Sprint ou Implementação quando o gargalo principal é atendimento e conversão no WhatsApp.
 
 ### VPS para quem vai operar
 
