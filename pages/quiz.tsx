@@ -123,8 +123,14 @@ export default function Quiz() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
-      // Source param
-      const source = params.get('source');
+      // Source param. `?source=` é a origem explícita ("aula-vps", "links");
+      // sem ela, cai para `utm_source`, que é o formato que todo CTA do
+      // blog e das redes já usa (`?utm_source=blog&utm_medium=content&...`).
+      // Sem este fallback, `quiz_source` ficava vazio em 100% dos registros
+      // de `quiz_funnel` — confirmado 03/09/2026, os 16 eventos existentes
+      // não tinham como dizer se a pessoa veio do blog, do Instagram ou de
+      // onde, e nenhum experimento de atribuição por canal era possível.
+      const source = params.get('source') || params.get('utm_source');
       if (source) {
         setQuizSource(source);
         sessionStorage.setItem('quiz_source', source);
