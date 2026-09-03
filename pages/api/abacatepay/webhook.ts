@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createHmac } from 'crypto';
 import { createClient } from '@supabase/supabase-js';
+import { enviarEvento } from '../../../lib/metaCapi';
 
 // ── Config ──────────────────────────────────────────────────
 const EVOCRM_API_URL = process.env.EVOCRM_API_URL || 'https://evoapi.workflowapi.com.br';
@@ -163,7 +164,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case 'checkout.completed':
     case 'subscription.completed':
     case 'transparent.completed':
-      await notifyCRM(data);
+      await notifyCRM(data, event);
       break;
 
     case 'subscription.cancelled':
@@ -196,7 +197,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 
 // ── CRM Notification ────────────────────────────────────────
-async function notifyCRM(data: any) {
+async function notifyCRM(data: any, eventName = 'payment.completed') {
   try {
     // Payload do webhook AbacatePay: { checkout|transparent, customer, payerInformation }
     // checkout.completed → data.checkout
@@ -243,12 +244,19 @@ async function notifyCRM(data: any) {
       'call-prd-sistema': 'Call de PRD — Sistema (R$ 147, avulso)',
       'ferreira-vieira-entrada': 'Ferreira Vieira — Site + Chatbot, entrada parcelada (R$ 400 de R$ 800)',
       'ferreira-vieira-avista': 'Ferreira Vieira — Site + Chatbot, à vista com 25% off (R$ 600)',
+      'desafio-monetizar-com-ia': 'Desafio Monetizar com IA — 21 dias (R$ 97)',
     };
 
     const productName = productNames[externalId] || externalId || 'Produto';
     const customerName = customer.name || payerInfo?.PIX?.name || 'Cliente';
     const customerEmail = customer.email || '';
     const customerPhone = customer.cellphone || customer.phone || payerInfo?.PIX?.phone || '';
+
+    const eventKey = `${eventName}:${checkoutId || externalId || customerEmail}`;
+    if (await claimPaymentEvent(eventKey, eventName, checkoutId, externalId, data)) {
+      console.log('[AbacatePay] evento duplicado ignorado:', eventKey);
+      return;
+    }
 
     // Busca UTMs do checkout_metadata (salvo quando o cliente clicou no CTA)
     const dbUtms = await getUtmsForCustomer(customerEmail);
@@ -318,26 +326,62 @@ async function notifyCRM(data: any) {
 
     await sendWhatsApp(ADMIN_PHONE, sdrMessage);
 
-    // Purchase pro Meta Conversions API: REMOVIDO em 29/07/2026. A própria
-    // AbacatePay já dispara esse evento (token configurado direto no painel
-    // deles, confirmado com evento de teste) — mandar daqui também duplicava
-    // a venda no Meta, sem event_id compartilhado entre as duas fontes pra
-    // deduplicar (o checkoutId aqui não é o mesmo id que a AbacatePay usa do
-    // lado dela). InitiateCheckout continua só aqui (ver checkout/*.ts) —
-    // isso a AbacatePay não dispara, é exclusivo nosso.
+    const purchaseTracking = await enviarEvento({
+      eventName: 'Purchase',
+      eventId: `abacatepay:${checkoutId || eventKey}:purchase`,
+      sourceUrl: 'https://www.sistemabritto.com.br/desafio-monetizar-com-ia',
+      value: amount ? amount / 100 : undefined,
+      currency: 'BRL', contentName: productName,
+      email: customerEmail, phone: customerPhone,
+    });
+    console.log('[Meta CAPI Purchase]', purchaseTracking);
 
-    // 3. Enviar mensagem de boas-vindas pro cliente
-    if (customerPhone) {
-      const phone = customerPhone.replace(/\D/g, '');
-      const welcomeMessage = `🎉 *Pagamento aprovado!*\n\nOlá ${customerName.split(' ')[0]}!\n\nSeu plano *${productName}* foi ativado com sucesso.\n\nEm breve um de nossos especialistas vai entrar em contato pra configurar tudo pra você.\n\nEnquanto isso, se tiver qualquer dúvida, é só responder essa mensagem.`;
-
-      await sendWhatsApp(phone, welcomeMessage);
-    }
+    await enqueueFulfillmentJobs({ eventKey, checkoutId, externalId, productName,
+      customerName, customerEmail, customerPhone, amount, utms });
 
     console.log('[CRM Notified]', customerEmail || customerName);
   } catch (error) {
     console.error('[NotifyCRM Error]', error);
   }
+}
+
+async function claimPaymentEvent(eventKey: string, eventType: string, checkoutId: string, externalId: string, payload: unknown): Promise<boolean> {
+  if (!supabaseKey || !eventKey) return false;
+  try {
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    const { data, error } = await supabase.from('payment_events').insert({
+      provider: 'abacatepay', provider_event_id: eventKey, event_type: eventType,
+      checkout_id: checkoutId || null, external_id: externalId || null, status: 'received', payload,
+    }).select('id').single();
+    if (error?.code === '23505') return true;
+    if (error) console.error('[Payment idempotency]', error.message);
+    return !data && !error;
+  } catch (error) {
+    console.error('[Payment idempotency exception]', error);
+    return false;
+  }
+}
+
+async function enqueueFulfillmentJobs(input: { eventKey: string; checkoutId: string; externalId: string; productName: string; customerName: string; customerEmail: string; customerPhone: string; amount: number; utms: Record<string, string> }) {
+  if (!supabaseKey) return;
+  try {
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    const { data: purchase, error } = await supabase.from('purchases').upsert({
+      provider: 'abacatepay', provider_checkout_id: input.checkoutId || input.eventKey,
+      external_id: input.externalId || null, product_name: input.productName,
+      customer_name: input.customerName, customer_email: input.customerEmail || null,
+      customer_phone: input.customerPhone || null, amount_brl: input.amount ? input.amount / 100 : null,
+      currency: 'BRL', status: 'paid', utm: input.utms, paid_at: new Date().toISOString(),
+    }, { onConflict: 'provider,provider_checkout_id' }).select('id').single();
+    if (error || !purchase) { console.error('[Fulfillment purchase]', error?.message || 'not returned'); return; }
+    const jobs = [
+      { purchase_id: purchase.id, job_type: 'buyer_confirmation', channel: 'email', idempotency_key: `${input.eventKey}:email` },
+      { purchase_id: purchase.id, job_type: 'buyer_onboarding', channel: 'whatsapp', idempotency_key: `${input.eventKey}:whatsapp` },
+      { purchase_id: purchase.id, job_type: 'internal_onboarding', channel: 'internal', idempotency_key: `${input.eventKey}:onboarding` },
+    ];
+    const { error: jobsError } = await supabase.from('fulfillment_jobs').upsert(jobs, { onConflict: 'idempotency_key', ignoreDuplicates: true });
+    if (jobsError) console.error('[Fulfillment jobs]', jobsError.message);
+  } catch (error) { console.error('[Fulfillment enqueue exception]', error); }
 }
 
 async function handleCancellation(data: any) {
