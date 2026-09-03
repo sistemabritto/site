@@ -12,9 +12,9 @@ import { trackCta, getStoredUtms } from './_app';
  * utm_content, então dá pra saber qual link da bio virou lead lá no CRM. Num
  * Linktree o tráfego morre num domínio de terceiro e chega no site sem origem.
  *
- * Atualização Vibe Seller de 03/09/2026: o Desafio Monetizar com IA é a
- * primeira oferta para a audiência já aquecida do Instagram. Aulas gratuitas
- * continuam abaixo para quem ainda precisa de prova e contexto antes da compra.
+ * Atualização Vibe Seller de 03/09/2026: a página conduz da prova gratuita
+ * para a execução autônoma no Desafio e, só depois, para os níveis de entrega
+ * assistida. Assim cada oferta aparece quando a pessoa já entendeu seu valor.
  */
 
 const WHATSAPP_DIRETO =
@@ -57,7 +57,7 @@ type Servico = {
   img: string;
   titulo: string;
   descricao: string;
-  preco: string;
+  nivel: string;
 };
 
 const SERVICOS: Servico[] = [
@@ -66,16 +66,16 @@ const SERVICOS: Servico[] = [
     href: '/sprint-vibe-seller',
     img: '/covers/sprint-vibe-seller.png',
     titulo: 'Sprint Vibe Seller',
-    descricao: 'Diagnóstico, decisão, mini-PRD e plano de 30 dias para uma oportunidade real.',
-    preco: 'R$ 1.497',
+    descricao: 'Tire sua ideia do improviso com acompanhamento individual, decisões guiadas e checkpoints para avançar do problema validado à solução pronta para crescer.',
+    nivel: 'Eu faço com você',
   },
   {
     slug: 'implementacao-vibe-seller',
     href: '/implementacao-vibe-seller',
     img: '/covers/implementacao-vibe-seller.png',
-    titulo: 'Sessão de Arquitetura',
-    descricao: 'Uma conversa individual; você sai com arquitetura, escopo e custos estimados. Só 3 agendas promocionais por semana.',
-    preco: 'de R$ 300 por R$ 150',
+    titulo: 'Implementação Vibe Seller',
+    descricao: 'Transforme uma oportunidade validada em um sistema pronto para operar: estratégia, arquitetura, construção e plano de escala entregues para você.',
+    nivel: 'Eu faço para você',
   },
 ];
 
@@ -146,7 +146,7 @@ function ServicoCard({ servico, utms }: { servico: Servico; utms: Record<string,
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <h3 className="font-heading font-bold text-white">{servico.titulo}</h3>
           <span className="rounded-full border border-green-400/30 bg-green-400/10 px-2 py-0.5 text-[11px] font-semibold text-green-400">
-            {servico.preco}
+            {servico.nivel}
           </span>
         </div>
         <p className="mt-1 text-sm leading-relaxed text-gray-400">{servico.descricao}</p>
@@ -231,24 +231,7 @@ export default function Links() {
             <span className="mt-5 inline-flex font-heading text-sm font-bold text-green-400">Entrar na comunidade agora →</span>
           </a>
 
-          {/* ===== Oferta de entrada: o destino principal da audiência do Instagram ===== */}
-          <section aria-labelledby="sec-desafio" className="mt-8">
-            <a
-              href={hrefComUtm('/desafio-monetizar-com-ia', 'desafio-21-dias', utms)}
-              onClick={() => trackCta('/links', 'desafio-monetizar-com-ia', 'oferta-entrada')}
-              className="group block overflow-hidden rounded-3xl border border-[#a3ff12]/45 bg-[radial-gradient(circle_at_top_right,rgba(163,255,18,0.22),transparent_48%),linear-gradient(135deg,#111b19,#10121d)] p-6 shadow-[0_18px_45px_rgba(0,0,0,0.28)] transition hover:-translate-y-0.5 hover:border-[#a3ff12]/75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a3ff12]"
-            >
-              <div className="relative -mx-6 -mt-6 mb-6 aspect-square overflow-hidden">
-                <Image src="/covers/desafio-monetizar-com-ia.png" alt="Desafio Monetizar com IA — 21 dias" fill sizes="(max-width: 640px) 100vw, 520px" priority className="object-cover transition-transform duration-300 group-hover:scale-[1.02]" />
-              </div>
-              <span className="inline-flex rounded-full border border-[#a3ff12]/35 bg-[#a3ff12]/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#c4ff72]">Novo · 21 dias · R$ 97</span>
-              <h2 id="sec-desafio" className="mt-4 font-heading text-2xl font-bold leading-tight text-white">Desafio Monetizar com IA</h2>
-              <p className="mt-2 text-sm leading-relaxed text-gray-300">Pare de caçar a próxima ferramenta. Encontre um problema caro, transforme em oferta testável e leve a primeira validação ao mercado.</p>
-              <span className="mt-5 inline-flex items-center gap-2 font-heading text-sm font-bold text-[#c4ff72]">Quero entrar no desafio <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span></span>
-            </a>
-          </section>
-
-          {/* ===== Aulas gratuitas (topo, como pedido) ===== */}
+          {/* ===== Aulas gratuitas: prova e contexto antes da oferta ===== */}
           <section aria-labelledby="sec-aulas" className="mt-10">
             <div className="mb-4 flex items-center gap-3">
               <h2
@@ -266,6 +249,23 @@ export default function Links() {
               ))}
             </div>
 
+          </section>
+
+          {/* ===== Oferta de entrada: primeiro passo pago depois das aulas ===== */}
+          <section aria-labelledby="sec-desafio" className="mt-10">
+            <a
+              href={hrefComUtm('/desafio-monetizar-com-ia', 'desafio-21-dias', utms)}
+              onClick={() => trackCta('/links', 'desafio-monetizar-com-ia', 'oferta-entrada')}
+              className="group block overflow-hidden rounded-3xl border border-[#a3ff12]/45 bg-[radial-gradient(circle_at_top_right,rgba(163,255,18,0.22),transparent_48%),linear-gradient(135deg,#111b19,#10121d)] p-6 shadow-[0_18px_45px_rgba(0,0,0,0.28)] transition hover:-translate-y-0.5 hover:border-[#a3ff12]/75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a3ff12]"
+            >
+              <div className="relative -mx-6 -mt-6 mb-6 aspect-square overflow-hidden">
+                <Image src="/covers/desafio-monetizar-com-ia.png" alt="Desafio Monetizar com IA — 21 dias" fill sizes="(max-width: 640px) 100vw, 520px" className="object-cover transition-transform duration-300 group-hover:scale-[1.02]" />
+              </div>
+              <span className="inline-flex rounded-full border border-[#a3ff12]/35 bg-[#a3ff12]/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#c4ff72]">Eu ensino · você faz · 21 dias</span>
+              <h2 id="sec-desafio" className="mt-4 font-heading text-2xl font-bold leading-tight text-white">Desafio Monetizar com IA</h2>
+              <p className="mt-2 text-sm leading-relaxed text-gray-300">Encontre valor escondido em um problema real, transforme-o em uma oferta testável e saia do consumo de ferramentas para a validação no mercado.</p>
+              <span className="mt-5 inline-flex items-center gap-2 font-heading text-sm font-bold text-[#c4ff72]">Conhecer o caminho de 21 dias <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span></span>
+            </a>
           </section>
 
           {/* ===== Serviços ===== */}
