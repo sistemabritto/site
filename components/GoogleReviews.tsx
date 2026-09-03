@@ -108,7 +108,7 @@ export default function GoogleReviews() {
             <span className="gold-text"> recomenda</span>
           </h2>
           <p className="text-white text-lg max-w-2xl mx-auto font-medium">
-            Mais de 50 negócios já automatizaram o atendimento no WhatsApp com a Sistema Britto.
+            Avaliações públicas de clientes sobre o trabalho da Sistema Britto.
           </p>
         </div>
 

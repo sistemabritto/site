@@ -1,147 +1,67 @@
-import React from 'react';
 import Link from 'next/link';
 
-const footerLinks = [
- { label: 'WhatsApp', href: '/whatsapp' },
- { label: 'SocialJobs', href: '/socialjobs' },
- { label: 'Sessão + Implementação', href: '/implementacao-vibe-seller' },
- { label: 'ZapClub', href: '/zapclub' },
- { label: 'VPS', href: '/vps' },
- { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
- { label: 'Política de Privacidade', href: '/politicas-de-privacidade' },
- { label: 'Termos de Uso', href: '/termos-de-uso' },
- { label: 'Exclusão de Dados', href: '/exclusao-dos-dados' },
+const groups = [
+  {
+    title: 'Comece aqui',
+    links: [
+      { label: 'Desafio Monetizar com IA', href: '/desafio-monetizar-com-ia' },
+      { label: 'Sessão de Arquitetura', href: '/sprint-vibe-seller' },
+      { label: 'Sprint Vibe Seller', href: '/sprint-vibe-seller' },
+      { label: 'Implementação Vibe Seller', href: '/implementacao-vibe-seller' },
+    ],
+  },
+  {
+    title: 'Soluções',
+    links: [
+      { label: 'WhatsApp com IA', href: '/whatsapp' },
+      { label: 'VPS para quem vai operar', href: '/vps' },
+      { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
+    ],
+  },
+  {
+    title: 'Institucional',
+    links: [
+      { label: 'Política de privacidade', href: '/politicas-de-privacidade' },
+      { label: 'Termos de uso', href: '/termos-de-uso' },
+      { label: 'Exclusão de dados', href: '/exclusao-dos-dados' },
+    ],
+  },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-surface-900 border-t border-white/15 py-12 sm:py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-      <div>
-        <div className="mb-6">
-          <img 
-            src="/images/logo-sistema-britto.png" 
-            alt="Sistema Britto" 
-            className="w-56 h-auto"
-          />
-        </div>
-        <p className="text-white text-sm leading-relaxed font-medium">
-          Rastreie oportunidades, desenhe a solução certa e capture valor com IA.
-        </p>
-      </div>
-
+    <footer className="border-t border-white/10 bg-[#080b12] px-5 py-14 sm:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-10 lg:grid-cols-[1.25fr_repeat(3,1fr)]">
           <div>
-            <h4 className="text-white text-xs font-bold uppercase tracking-wider mb-4">
-              Links
-            </h4>
-            <ul className="space-y-2">
-              {footerLinks.map((link) => (
-                <li key={link.label}>
-                  {link.external ? (
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-white hover:text-white font-medium transition-colors"
-                    >
-                      {link.label}
-                      <span className="ml-1 text-xs opacity-70">↗</span>
-                    </a>
-                  ) : (
-                    <Link
-                      href={link.href}
-                      className="text-sm text-white hover:text-white font-medium transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  )}
-                </li>
-              ))}
-            </ul>
+            <img src="/images/logo-sistema-britto.png" alt="Sistema Britto" className="h-12 w-auto" />
+            <p className="mt-6 max-w-sm text-sm leading-relaxed text-slate-300">Rastreie valor não capturado, decida o que vale construir e transforme oportunidade em receita, margem, economia ou equity.</p>
+            <a href="https://wa.me/5511914088571?text=Olá!%20Quero%20entender%20qual%20caminho%20faz%20sentido%20para%20a%20minha%20oportunidade." target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex rounded-lg text-sm font-bold text-[#c4ff72] underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#a3ff12]">
+              Falar sobre uma oportunidade <span aria-hidden="true">→</span>
+            </a>
           </div>
-
-          <div>
-            <h4 className="text-white text-xs font-bold uppercase tracking-wider mb-4">
-              Contato
-            </h4>
-            <ul className="space-y-2">
-              <li>
-                <a href="mailto:felipe@sistemabritto.com.br" className="text-sm text-white hover:text-white font-medium transition-colors">
-                  felipe@sistemabritto.com.br
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://wa.me/5511914088571?text=Olá!%20Vi%20o%20site%20de%20vocês%20e%20gostaria%20de%20mais%20informações"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-white hover:text-white font-medium transition-colors"
-                >
-                  +55 11 91408-8571
-                </a>
-              </li>
-            </ul>
-          </div>
+          {groups.map((group) => (
+            <section key={group.title} aria-label={group.title}>
+              <h2 className="text-xs font-bold uppercase tracking-[.14em] text-white">{group.title}</h2>
+              <ul className="mt-5 space-y-3">
+                {group.links.map((link) => (
+                  <li key={link.label}>
+                    {link.external ? (
+                      <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-sm text-slate-300 transition hover:text-[#c4ff72] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#a3ff12]">{link.label} <span aria-hidden="true">↗</span></a>
+                    ) : (
+                      <Link href={link.href} className="text-sm text-slate-300 transition hover:text-[#c4ff72] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#a3ff12]">{link.label}</Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
         </div>
-
-        <div className="pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p className="text-xs text-gray-100 font-medium">
-            © {new Date().getFullYear()} Sistema Britto. Todos os direitos reservados.
-          </p>
-          
-          <div className="flex items-center gap-6">
-            {/* Links Legais */}
-            <div className="flex items-center gap-4">
-              <Link href="/politicas-de-privacidade" className="text-xs text-gray-100 hover:text-white font-medium transition-colors">
-                Privacidade
-              </Link>
-              <Link href="/termos-de-uso" className="text-xs text-gray-100 hover:text-white font-medium transition-colors">
-              Termos
-              </Link>
-              <Link href="/exclusao-dos-dados" className="text-xs text-gray-100 hover:text-white font-medium transition-colors">
-              Exclusão
-              </Link>
-            </div>
-            
-            {/* Redes Sociais */}
-            <div className="flex items-center gap-4 border-l border-white/15 pl-6">
-              <a 
-                href="https://instagram.com/sistemabritto" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="text-gray-400 hover:text-pink-500 transition-colors transform hover:scale-110"
-                aria-label="Instagram"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-              </a>
-              
-              <a 
-                href="https://youtube.com/@sistemabritto" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="text-gray-400 hover:text-red-500 transition-colors transform hover:scale-110"
-                aria-label="YouTube"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                </svg>
-              </a>
-              
-              <a 
-                href="https://www.linkedin.com/in/fsbritto/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="text-gray-400 hover:text-blue-600 transition-colors transform hover:scale-110"
-                aria-label="LinkedIn"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              </a>
-            </div>
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} Sistema Britto. Todos os direitos reservados.</p>
+          <div className="flex items-center gap-4">
+            <a href="https://instagram.com/sistemabritto" target="_blank" rel="noopener noreferrer" className="hover:text-[#c4ff72] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#a3ff12]">Instagram</a>
+            <a href="https://www.linkedin.com/in/fsbritto/" target="_blank" rel="noopener noreferrer" className="hover:text-[#c4ff72] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#a3ff12]">LinkedIn</a>
           </div>
         </div>
       </div>

@@ -16,7 +16,8 @@ const nextConfig = {
     { source: '/resultado-whatsapp', destination: '/resultado', permanent: true },
     { source: '/resultado-workforce', destination: '/implementacao-vibe-seller', permanent: true },
     // Old product pages → new architecture
-    { source: '/socialforce', destination: '/socialjobs', permanent: true },
+    { source: '/socialforce', destination: '/implementacao-vibe-seller', permanent: true },
+    { source: '/socialjobs', destination: '/implementacao-vibe-seller', permanent: true },
     { source: '/evonexus', destination: '/implementacao-vibe-seller', permanent: true },
     { source: '/hermes', destination: '/implementacao-vibe-seller', permanent: true },
     { source: '/workforce', destination: '/implementacao-vibe-seller', permanent: true },
@@ -26,10 +27,9 @@ const nextConfig = {
     { source: '/consultoria-devops', destination: '/implementacao-vibe-seller', permanent: true },
     // Gamificacao redirect
     { source: '/gamificacao', destination: '/implementacao-vibe-seller', permanent: true },
-    // ZapCurso renamed to ZapClub
-    { source: '/zapcurso', destination: '/zapclub', permanent: true },
-    // ZapCurso API redirect
-    { source: '/api/abacatepay/checkout/zapcurso', destination: '/api/abacatepay/checkout/zapclub', permanent: true },
+    // Produtos descontinuados: preserva tráfego e evita páginas órfãs.
+    { source: '/zapclub', destination: '/desafio-monetizar-com-ia', permanent: true },
+    { source: '/zapcurso', destination: '/desafio-monetizar-com-ia', permanent: true },
     // Data deletion canonical URL (Meta requirement)
     { source: '/exclusao-de-dados', destination: '/exclusao-dos-dados', permanent: true },
     ];
