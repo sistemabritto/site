@@ -29,6 +29,16 @@ export default function ZapClub() {
         title="ZapClub | Comunidade de IA para Negócios no WhatsApp | Sistema Britto"
         description="Comunidade no WhatsApp com moderador de IA 24h. Pare de fazer tudo sozinho. R$ 50/mês, 7 dias de garantia."
         path="/zapclub"
+        schema={[
+          {
+            "@type": "Service",
+            "@id": "https://www.sistemabritto.com.br/zapclub#service",
+            name: "ZapClub",
+            description: "Comunidade no WhatsApp com moderador de IA para empresários que querem aplicar IA nos negócios.",
+            provider: { "@id": "https://www.sistemabritto.com.br/#organization" },
+            url: "https://www.sistemabritto.com.br/zapclub"
+          }
+        ]}
       />
 
       <Navbar />

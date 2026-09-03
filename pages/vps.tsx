@@ -79,6 +79,16 @@ export default function VPS() {
       title="VPS Estruturada | Servidor pronto. Você só faz deploy."
       description="Docker configurado, SSL automático, backup diário, firewall. Setup em 24h. A partir de R$ 297/mês."
       path="/vps"
+      schema={[
+        {
+          "@type": "Service",
+          "@id": "https://www.sistemabritto.com.br/vps#service",
+          name: "VPS Estruturada",
+          description: "Estrutura de VPS com Docker, SSL, backup, firewall e monitoramento para fazer deploy de aplicações.",
+          provider: { "@id": "https://www.sistemabritto.com.br/#organization" },
+          url: "https://www.sistemabritto.com.br/vps"
+        }
+      ]}
     />
     <Navbar />
     <main className="min-h-screen bg-[#0a0a0a] overflow-x-hidden" style={{ color: '#ffffff' }}>

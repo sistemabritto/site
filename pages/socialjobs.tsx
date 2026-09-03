@@ -219,7 +219,17 @@ export default function SocialJobs() {
  title="A operação de conteúdo que roda sem você lembrar | SocialJobs"
  description="LinkedIn que traz consultoria, YouTube que constrói autoridade, Instagram que vende. Os agentes pesquisam o tema por volume de busca real, publicam no blog e derivam o post de cada rede. Você aprova e sai."
  path="/socialjobs"
- />
+ schema={[
+   {
+     "@type": "Service",
+     "@id": "https://www.sistemabritto.com.br/socialjobs#service",
+     name: "SocialJobs",
+     description: "Operação de conteúdo com agentes para pesquisa, blog e distribuição em LinkedIn, YouTube e Instagram.",
+     provider: { "@id": "https://www.sistemabritto.com.br/#organization" },
+     url: "https://www.sistemabritto.com.br/socialjobs"
+   }
+ ]}
+/>
 
  <Navbar />
  <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>
