@@ -8,6 +8,7 @@ type OfferKind = 'desafio' | 'sprint' | 'implementacao';
 
 type OfferConfig = {
   kind: OfferKind;
+  cover: string;
   path: string;
   metaTitle: string;
   metaDescription: string;
@@ -34,6 +35,7 @@ type OfferConfig = {
 const OFFERS: Record<OfferKind, OfferConfig> = {
   desafio: {
     kind: 'desafio',
+    cover: '/covers/desafio-monetizar-com-ia.png',
     path: '/desafio-monetizar-com-ia',
     metaTitle: 'Desafio Monetizar com IA | 21 dias para validar uma oportunidade',
     metaDescription: 'Em 21 dias, encontre um problema caro, transforme-o em uma oferta ou solução testável e coloque a primeira validação no mundo. R$ 97.',
@@ -89,6 +91,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
   },
   sprint: {
     kind: 'sprint',
+    cover: '/covers/sprint-vibe-seller.png',
     path: '/sprint-vibe-seller',
     metaTitle: 'Sprint Vibe Seller | Diagnóstico, decisão e mini-PRD',
     metaDescription: 'Em até 7 dias, transforme uma oportunidade plausível em uma decisão de negócio, mapa de captura de valor e roadmap de 30 dias. R$ 1.497.',
@@ -144,6 +147,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
   },
   implementacao: {
     kind: 'implementacao',
+    cover: '/covers/implementacao-vibe-seller.png',
     path: '/implementacao-vibe-seller',
     metaTitle: 'Implementação Vibe Seller | Sistemas que capturam valor',
     metaDescription: 'Implementação de sistemas, automações e operações de IA a partir de R$ 5.000, com oportunidade, escopo e critério de sucesso definidos.',
@@ -268,7 +272,7 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
 
   return (
     <>
-      <Meta title={offer.metaTitle} description={offer.metaDescription} path={offer.path} ogImage="/felipe-autoridade.webp" schema={offer.schema} />
+      <Meta title={offer.metaTitle} description={offer.metaDescription} path={offer.path} ogImage={offer.cover} schema={offer.schema} />
       <main className="min-h-screen overflow-x-hidden bg-[#080b12] text-white">
         <header className="relative z-20 mx-auto flex max-w-6xl items-center justify-between px-5 py-5 sm:px-8">
           <a href="/" className="inline-flex items-center gap-3 font-heading font-bold tracking-tight text-white" aria-label="Sistema Britto">
@@ -294,12 +298,15 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
                 <p className="mt-3 text-sm text-slate-400">{offer.kind === 'desafio' ? 'Pagamento único · acesso às instruções após confirmação' : 'Aplicação sem compromisso · contexto antes de proposta'}</p>
               </div>
             </div>
-            <aside className="rounded-3xl border border-white/10 bg-white/[0.045] p-6 shadow-2xl backdrop-blur sm:p-8">
+            <aside className="rounded-3xl border border-white/10 bg-white/[0.045] p-4 shadow-2xl backdrop-blur sm:p-6">
+              <Image src={offer.cover} alt={`Capa ${offer.metaTitle}`} width={1024} height={1024} className="mb-6 w-full rounded-2xl object-cover" priority />
+              <div className="px-2 pb-2 sm:px-2">
               <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#c4ff72]">A transformação</p>
               <p className="mt-4 font-heading text-2xl font-bold leading-tight text-white">{offer.proof}</p>
               <div className="mt-8 border-t border-white/10 pt-6">
                 <p className="text-sm text-slate-400">Investimento</p>
                 <p className="mt-1 font-heading text-4xl font-bold text-white">{offer.price}</p>
+              </div>
               </div>
             </aside>
           </div>
