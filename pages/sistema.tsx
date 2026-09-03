@@ -141,6 +141,16 @@ export default function Sistema() {
         title="Seu projeto definido antes de orçado | Sistema Britto"
         description="Uma hora de call e você sai com o PRD do seu projeto: o que entra, o que fica fora, prazo por etapa e o preço calculado sobre o escopo. R$ 147, abatidos do projeto se fecharmos. O documento é seu."
         path="/sistema"
+        schema={[
+          {
+            "@type": "Service",
+            "@id": "https://www.sistemabritto.com.br/sistema#service",
+            name: "Sistema sob medida",
+            description: "Definição de projeto e desenvolvimento de sistema sob medida, com escopo, prazo por etapa e PRD.",
+            provider: { "@id": "https://www.sistemabritto.com.br/#organization" },
+            url: "https://www.sistemabritto.com.br/sistema"
+          }
+        ]}
       />
       <Navbar />
       <main className="min-h-screen bg-[#0a0a0a]" style={{ color: '#ffffff' }}>

@@ -47,6 +47,16 @@ export default function WhatsApp() {
         title="Seu WhatsApp respondendo às 22h47 | Sistema Britto"
         description="A mensagem que chega às 22h47 é respondida às 22h47. IA que qualifica, agenda e vende no seu WhatsApp enquanto você dorme. Sem fidelidade, com garantia de 7 dias."
         path="/whatsapp"
+        schema={[
+          {
+            "@type": "Service",
+            "@id": "https://www.sistemabritto.com.br/whatsapp#service",
+            name: "WhatsApp com IA",
+            description: "Atendimento no WhatsApp com IA para qualificar leads, agendar e apoiar vendas.",
+            provider: { "@id": "https://www.sistemabritto.com.br/#organization" },
+            url: "https://www.sistemabritto.com.br/whatsapp"
+          }
+        ]}
       />
 
       <Navbar />
