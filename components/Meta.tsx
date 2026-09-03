@@ -6,9 +6,10 @@ interface MetaProps {
  path?: string;
  ogImage?: string;
  noIndex?: boolean;
+ schema?: Record<string, unknown>[];
 }
 
-export default function Meta({ title, description, path = '', ogImage = '/og-image.jpg', noIndex = false }: MetaProps) {
+export default function Meta({ title, description, path = '', ogImage = '/og-image.jpg', noIndex = false, schema = [] }: MetaProps) {
   const baseUrl = 'https://www.sistemabritto.com.br';
   const url = `${baseUrl}${path}`;
   const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`;
@@ -57,7 +58,11 @@ export default function Meta({ title, description, path = '', ogImage = '/og-ima
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       
-      {/* Schema JSON-LD — Organization + Service + FAQ */}
+      {/*
+        Schema base is intentionally limited to the organization and this WebPage.
+        Services, Offers, FAQ and Article belong only to pages whose visible
+        content supports them; callers can provide those through `schema`.
+      */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{
         __html: JSON.stringify({
           "@context": "https://schema.org",
@@ -68,127 +73,32 @@ export default function Meta({ title, description, path = '', ogImage = '/og-ima
               "name": "Sistema Britto",
               "url": "https://www.sistemabritto.com.br",
               "logo": "https://www.sistemabritto.com.br/images/logo-sistema-britto.png",
-              "description": "Empresa brasileira que implementa automação com IA, infraestrutura DevOps e sistemas sob medida. WhatsApp com IA, SocialJobs, Sistema Sob Medida, VPS Estruturada.",
-              "foundingDate": "2024",
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+55-11-91408-8571",
-                "contactType": "sales",
-                "availableLanguage": ["Portuguese", "English", "Spanish"]
-              },
+              "description": "Sistema Britto cria soluções de IA, automação e software sob medida para operações comerciais.",
               "sameAs": [
-                "https://wa.me/5511914088571",
                 "https://github.com/sistemabritto",
-                "https://blog.sistemabritto.com.br"
+                "https://blog.sistemabritto.com.br",
+                "https://www.instagram.com/sistemabritto/"
               ]
             },
             {
-              "@type": "Service",
-              "@id": "https://www.sistemabritto.com.br/whatsapp#service",
-              "name": "WhatsApp com IA (Evolution API)",
-              "url": "https://www.sistemabritto.com.br/whatsapp",
-              "provider": { "@id": "https://www.sistemabritto.com.br/#organization" },
-              "description": "Implementação de IA no WhatsApp Business. Qualificação automática de leads, agendamento 24h, CRM integrado.",
-              "category": "AI Automation",
-              "offers": {
-                "@type": "Offer",
-                "price": "297",
-                "priceCurrency": "BRL",
-                "priceValidUntil": "2027-12-31",
-                "availability": "https://schema.org/InStock"
-              }
+              "@type": "WebSite",
+              "@id": "https://www.sistemabritto.com.br/#website",
+              "url": "https://www.sistemabritto.com.br/",
+              "name": "Sistema Britto",
+              "inLanguage": "pt-BR",
+              "publisher": { "@id": "https://www.sistemabritto.com.br/#organization" }
             },
             {
-            "@type": "Service",
-            "@id": "https://www.sistemabritto.com.br/sistema#service",
-            "name": "Sistema Sob Medida",
-            "url": "https://www.sistemabritto.com.br/sistema",
-            "provider": { "@id": "https://www.sistemabritto.com.br/#organization" },
-            "description": "Sistemas web sob encomenda: SaaS, apps, infraestrutura, funis, integrações e white-label. Stack: Claude Code, Hermes Agent, EvoNexus, n8n, Supabase, Next.js.",
-            "category": "Custom Software Development",
-            "offers": {
-            "@type": "Offer",
-            "price": "1500",
-            "priceCurrency": "BRL",
-            "availability": "https://schema.org/InStock"
-            }
+              "@type": "WebPage",
+              "@id": `${url}#webpage`,
+              "url": url,
+              "name": title,
+              "description": description,
+              "inLanguage": "pt-BR",
+              "isPartOf": { "@id": "https://www.sistemabritto.com.br/#website" },
+              "about": { "@id": "https://www.sistemabritto.com.br/#organization" }
             },
-            {
-            "@type": "Service",
-            "@id": "https://www.sistemabritto.com.br/socialjobs#service",
-            "name": "SocialJobs | Conteúdo Infinito em 5 Redes com IA",
-            "url": "https://www.sistemabritto.com.br/socialjobs",
-            "provider": { "@id": "https://www.sistemabritto.com.br/#organization" },
-            "description": "Dezenas de agentes de IA criando posts diários em YouTube, TikTok, Instagram, LinkedIn e X automaticamente.",
-            "category": "AI Content Automation",
-            "offers": {
-            "@type": "Offer",
-            "price": "500",
-            "priceCurrency": "BRL",
-            "availability": "https://schema.org/InStock"
-            }
-            },
-            {
-            "@type": "Service",
-            "@id": "https://www.sistemabritto.com.br/vps#service",
-            "name": "VPS Estruturada",
-            "url": "https://www.sistemabritto.com.br/vps",
-            "provider": { "@id": "https://www.sistemabritto.com.br/#organization" },
-            "description": "Infraestrutura pronta com Docker, SSL automático, backups diários e monitoramento. Setup em 24h.",
-            "category": "Managed Infrastructure",
-            "offers": {
-            "@type": "Offer",
-            "price": "297",
-            "priceCurrency": "BRL",
-            "availability": "https://schema.org/InStock"
-            }
-            },
-            {
-              "@type": "FAQPage",
-              "@id": "https://www.sistemabritto.com.br/#faq",
-              "mainEntity": [
-                {
-                "@type": "Question",
-                "name": "O que é o Sistema Britto?",
-                "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Empresa brasileira que implementa automação com IA, infraestrutura DevOps e sistemas sob medida. Serviços: WhatsApp com IA, SocialJobs (conteúdo automático em 5 redes), Sistema Sob Medida (SaaS, apps, infra) e VPS Estruturada."
-                }
-                },
-                {
-                "@type": "Question",
-                "name": "Quanto custa?",
-                "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "WhatsApp com IA a partir de R$ 297/mês. SocialJobs a partir de R$ 500/mês. Sistema Sob Medida a partir de R$ 1500. VPS Estruturada a partir de R$ 297/mês. Sem fidelidade, cancela quando quiser."
-                }
-                },
-                {
-                  "@type": "Question",
-                  "name": "Em quanto tempo fica pronto?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "WhatsApp com IA em 48 horas. SocialJobs em até 7 dias. Sistema Sob Medida e VPS Estruturada sob consulta, conforme a complexidade."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "Precisa de contrato de fidelidade?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Não. Todos os planos são mensais, sem fidelidade. Cancele quando quiser."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "Funciona fora do Brasil?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Sim. Suporte em português, inglês e espanhol. Atendemos clientes na América Latina, EUA e Europa."
-                  }
-                }
-              ]
-            }
+            ...schema
           ]
         })
       }} />
