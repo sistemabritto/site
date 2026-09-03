@@ -62,40 +62,20 @@ type Servico = {
 
 const SERVICOS: Servico[] = [
   {
-    slug: 'zapclub',
-    href: '/zapclub',
-    img: '/images/links/zapclub.png',
-    titulo: 'ZapClub',
-    descricao:
-      'Comunidade no WhatsApp com moderador de IA 24h. Você pergunta, alguém que já fez responde.',
-    preco: 'R$ 50/mês',
+    slug: 'sprint-vibe-seller',
+    href: '/sprint-vibe-seller',
+    img: '/covers/sprint-vibe-seller.png',
+    titulo: 'Sprint Vibe Seller',
+    descricao: 'Diagnóstico, decisão, mini-PRD e plano de 30 dias para uma oportunidade real.',
+    preco: 'R$ 1.497',
   },
   {
-    slug: 'socialjobs',
-    href: '/socialjobs',
-    img: '/images/links/socialjobs.png',
-    titulo: 'SocialJobs',
-    descricao:
-      'Agentes de IA que pesquisam o tema, escrevem e publicam em cada rede. Você só aprova.',
-    preco: 'Operação mensal',
-  },
-  {
-    slug: 'whatsapp',
-    href: '/whatsapp',
-    img: '/images/links/whatsapp.png',
-    titulo: 'WhatsApp que responde 24h',
-    descricao:
-      'A mensagem que chega às 22h47 é respondida às 22h47. IA que qualifica, agenda e vende.',
-    preco: 'Assinatura mensal',
-  },
-  {
-    slug: 'sistema',
-    href: '/sistema',
-    img: '/images/links/sistema.png',
-    titulo: 'Seu sistema sob medida',
-    descricao:
-      'Uma hora de call e você sai com o PRD do projeto: escopo, prazo por etapa e preço fechado.',
-    preco: 'R$ 147 a call',
+    slug: 'implementacao-vibe-seller',
+    href: '/implementacao-vibe-seller',
+    img: '/covers/implementacao-vibe-seller.png',
+    titulo: 'Implementação Vibe Seller',
+    descricao: 'Sistema e automação sob medida para capturar uma oportunidade já validada.',
+    preco: 'R$ 5.000+',
   },
 ];
 
@@ -231,6 +211,9 @@ export default function Links() {
               onClick={() => trackCta('/links', 'desafio-monetizar-com-ia', 'oferta-entrada')}
               className="group block overflow-hidden rounded-3xl border border-[#a3ff12]/45 bg-[radial-gradient(circle_at_top_right,rgba(163,255,18,0.22),transparent_48%),linear-gradient(135deg,#111b19,#10121d)] p-6 shadow-[0_18px_45px_rgba(0,0,0,0.28)] transition hover:-translate-y-0.5 hover:border-[#a3ff12]/75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a3ff12]"
             >
+              <div className="relative -mx-6 -mt-6 mb-6 aspect-square overflow-hidden">
+                <Image src="/covers/desafio-monetizar-com-ia.png" alt="Desafio Monetizar com IA — 21 dias" fill sizes="(max-width: 640px) 100vw, 520px" priority className="object-cover transition-transform duration-300 group-hover:scale-[1.02]" />
+              </div>
               <span className="inline-flex rounded-full border border-[#a3ff12]/35 bg-[#a3ff12]/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#c4ff72]">Novo · 21 dias · R$ 97</span>
               <h2 id="sec-desafio" className="mt-4 font-heading text-2xl font-bold leading-tight text-white">Desafio Monetizar com IA</h2>
               <p className="mt-2 text-sm leading-relaxed text-gray-300">Pare de caçar a próxima ferramenta. Encontre um problema caro, transforme em oferta testável e leve a primeira validação ao mercado.</p>
