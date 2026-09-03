@@ -12,9 +12,9 @@ import { trackCta, getStoredUtms } from './_app';
  * utm_content, então dá pra saber qual link da bio virou lead lá no CRM. Num
  * Linktree o tráfego morre num domínio de terceiro e chega no site sem origem.
  *
- * Ordem pedida pelo Felipe em 22/08/2026: aulas gratuitas primeiro, serviços
- * (todos com mensalidade) depois. Quem chega da bio não conhece o trabalho —
- * o conteúdo grátis é o que qualifica antes de qualquer oferta.
+ * Atualização Vibe Seller de 03/09/2026: o Desafio Monetizar com IA é a
+ * primeira oferta para a audiência já aquecida do Instagram. Aulas gratuitas
+ * continuam abaixo para quem ainda precisa de prova e contexto antes da compra.
  */
 
 const WHATSAPP_DIRETO =
@@ -192,8 +192,8 @@ export default function Links() {
   return (
     <>
       <Meta
-        title="Sistema Britto | Aulas grátis, comunidade e sistemas de IA"
-        description="Aulas gratuitas de IA aplicada a negócio, comunidade no WhatsApp e os sistemas que a gente constrói. Comece pelo conteúdo grátis."
+        title="Sistema Britto | Oportunidades, IA e sistemas que capturam valor"
+        description="Desafio Monetizar com IA, aulas gratuitas e sistemas para transformar oportunidades em receita, economia, margem ou equity."
         path="/links"
         ogImage="/images/links/aula-vps-crm.jpg"
       />
@@ -220,10 +220,23 @@ export default function Links() {
               Sistema Britto
             </h1>
             <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-gray-400 sm:text-base">
-              Sistemas de IA que postam, engajam e atendem sozinhos — e o passo a passo pra você
-              montar o seu.
+              Rastrear oportunidades, vibe codar soluções e capturar valor com IA.
             </p>
           </header>
+
+          {/* ===== Oferta de entrada: o destino principal da audiência do Instagram ===== */}
+          <section aria-labelledby="sec-desafio" className="mt-8">
+            <a
+              href={hrefComUtm('/desafio-monetizar-com-ia', 'desafio-21-dias', utms)}
+              onClick={() => trackCta('/links', 'desafio-monetizar-com-ia', 'oferta-entrada')}
+              className="group block overflow-hidden rounded-3xl border border-[#a3ff12]/45 bg-[radial-gradient(circle_at_top_right,rgba(163,255,18,0.22),transparent_48%),linear-gradient(135deg,#111b19,#10121d)] p-6 shadow-[0_18px_45px_rgba(0,0,0,0.28)] transition hover:-translate-y-0.5 hover:border-[#a3ff12]/75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a3ff12]"
+            >
+              <span className="inline-flex rounded-full border border-[#a3ff12]/35 bg-[#a3ff12]/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#c4ff72]">Novo · 21 dias · R$ 97</span>
+              <h2 id="sec-desafio" className="mt-4 font-heading text-2xl font-bold leading-tight text-white">Desafio Monetizar com IA</h2>
+              <p className="mt-2 text-sm leading-relaxed text-gray-300">Pare de caçar a próxima ferramenta. Encontre um problema caro, transforme em oferta testável e leve a primeira validação ao mercado.</p>
+              <span className="mt-5 inline-flex items-center gap-2 font-heading text-sm font-bold text-[#c4ff72]">Quero entrar no desafio <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span></span>
+            </a>
+          </section>
 
           {/* ===== Aulas gratuitas (topo, como pedido) ===== */}
           <section aria-labelledby="sec-aulas" className="mt-10">
