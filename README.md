@@ -1,120 +1,57 @@
-# Sistema Britto - Site Standalone
+# Sistema Britto — Site
 
-Site oficial da Sistema Britto, migrado do Plasmic para Next.js puro.
+Site comercial e funil da Sistema Britto, construído com Next.js e publicado na Vercel.
 
-## 🚀 Deploy na Vercel
+## Arquitetura atual
 
-### 1. Conectar repositório na Vercel
+- `/` — posicionamento Vibe Seller e escada de ofertas
+- `/links` — página da bio com atribuição por UTM
+- `/desafio-monetizar-com-ia` — produto coletivo de entrada (R$ 97)
+- `/sprint-vibe-seller` — diagnóstico estratégico e mini-PRD (R$ 1.497)
+- `/implementacao-vibe-seller` — sessão de arquitetura e entrada para projetos sob medida
+- `/whatsapp`, `/socialjobs`, `/vps` e `/zapclub` — soluções comerciais específicas
+- `/admin` — leads, analytics e configuração operacional
+- `pages/api` — captura, tracking, checkout, webhooks e integrações server-side
 
-```bash
-# Acessar Vercel
-https://vercel.com/new
+`/sistema` é uma URL legada e redireciona para `/implementacao-vibe-seller`.
 
-# Importar repositório: sistemabritto/site
-# Configurar pasta raiz: /
-```
-
-### 2. Variáveis de Ambiente (se necessário)
-
-Nenhuma variável necessária no momento.
-
-### 3. Deploy
+## Desenvolvimento
 
 ```bash
-# Push para main aciona deploy automático
-git push origin main
-
-# Ou deploy manual
-vercel --prod
-```
-
-## 🛠️ Desenvolvimento Local
-
-```bash
-# Instalar dependências
-npm install
-
-# Rodar em modo desenvolvimento
-npm run dev
-
-# Build de produção
+npm ci
 npm run build
-
-# Start em produção
-npm start
+npm run dev
 ```
 
-## 📁 Estrutura
+O repositório usa o Pages Router. Mudanças em `main` disparam o deploy de produção; trabalhe em branch, valide o build e faça revisão antes do merge.
 
-```
-site-sistemabritto/
-├── components/          # Componentes React
-│   ├── Hero.tsx
-│   ├── AgentCard.tsx
-│   ├── Benefits.tsx
-│   ├── ROICalculator.tsx
-│   ├── ClubPlugPlay.tsx
-│   ├── WhatsAppCTA.tsx
-│   ├── Mission.tsx
-│   └── Footer.tsx
-├── pages/
-│   ├── index.tsx       # Homepage
-│   ├── _app.tsx        # App wrapper
-│   └── api/            # API routes (opcional)
-├── public/
-│   ├── images/         # Imagens otimizadas
-│   └── favicon.ico
-├── styles/
-│   └── globals.css     # Estilos globais
-├── next.config.mjs     # Config Next.js
-├── package.json
-└── tsconfig.json       # TypeScript config
-```
+## Integrações
 
-## 🔄 Migração do Plasmic
+- Supabase: leads, eventos, configuração e fulfillment
+- Meta Pixel + CAPI: configuração lida no servidor; nunca exponha token
+- GTM: ID público servido por endpoint de configuração
+- Cakto: checkouts das ofertas e webhook idempotente em Supabase Edge Functions
+- Evolution API: contagem da Evolution Alliance e mensagens operacionais
+- Ghost: blog em `blog.sistemabritto.com.br`
 
-### O que foi migrado:
-- ✅ Hero section com 4 agentes
-- ✅ Benefits (3 cards)
-- ✅ Calculadora de ROI
-- ✅ Clube Plug & Play CTA
-- ✅ WhatsApp CTA principal
-- ✅ Mission section
-- ✅ Footer
+O pós-compra das ofertas novas não depende de n8n. A Cakto chama
+`cakto-webhook`, que registra o evento e cria jobs na outbox. O cron nativo do
+Supabase chama `fulfillment-worker` a cada minuto para confirmação por
+WhatsApp, sincronização com o EvoCRM e Meta CAPI, com retry e idempotência.
 
-### Próximos passos:
-- [ ] Otimizar imagens (baixar do Plasmic CDN)
-- [ ] Adicionar analytics (GA4)
-- [ ] Manter Facebook Pixel
-- [ ] Linkar blog Ghost (blog.sistemabritto.com.br)
-- [ ] Adicionar /llms.txt + robots.txt
+As credenciais ficam em variáveis da Vercel e/ou configuração server-side no Supabase. Não copie segredos para o repositório, logs ou respostas de API públicas.
 
-## 📊 Links Importantes
+## Tracking
 
-- **Produção:** https://sistemabritto.com.br
-- **Blog:** https://blog.sistemabritto.com.br
-- **GitHub:** https://github.com/sistemabritto/site
-- **Vercel:** https://vercel.com/sistemabritto
+Os CTAs usam `trackCta` em `pages/_app.tsx`. UTMs são preservadas na sessão e enviadas ao checkout quando aplicável. Ao criar ou alterar um CTA, valide:
 
-## 🎨 Design System
+1. evento no site;
+2. UTMs no destino;
+3. origem no lead/pedido;
+4. webhook após pagamento.
 
-### Cores
-- Primary: `#667eea` → `#764ba2` (gradient)
-- Background: `#f8f9fa`
-- Text: `#1a1a1a`
-- Muted: `#666`, `#999`
+## Produção
 
-### Fontes
-- Padrão: Arial, Helvetica, sans-serif
-- Títulos: Bold, 2rem+
-- Corpo: 1rem, line-height 1.5
-
-## 📞 Contato
-
-- Email: felipe@sistemabritto.com.br
-- WhatsApp: +55 11 91408-8571
-
----
-
-**Responsável:** @excarplex (CTO)
-**Última atualização:** 11/05/2026
+- Site: https://www.sistemabritto.com.br
+- Blog: https://blog.sistemabritto.com.br
+- Repositório: https://github.com/sistemabritto/site

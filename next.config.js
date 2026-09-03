@@ -3,6 +3,7 @@ const nextConfig = {
   // Redirect old funnel stubs to canonical pages
   async redirects() {
     return [
+      { source: '/sistema', destination: '/implementacao-vibe-seller', permanent: true },
     // Quiz variants → canonical quiz
     { source: '/quiz-infra', destination: '/quiz', permanent: true },
     { source: '/quiz-workforce', destination: '/quiz', permanent: true },
@@ -13,18 +14,18 @@ const nextConfig = {
     { source: '/qualificar-workforce', destination: '/quiz', permanent: true },
     // Resultado variants → canonical resultado
     { source: '/resultado-whatsapp', destination: '/resultado', permanent: true },
-    { source: '/resultado-workforce', destination: '/sistema', permanent: true },
+    { source: '/resultado-workforce', destination: '/implementacao-vibe-seller', permanent: true },
     // Old product pages → new architecture
     { source: '/socialforce', destination: '/socialjobs', permanent: true },
-    { source: '/evonexus', destination: '/sistema', permanent: true },
-    { source: '/hermes', destination: '/sistema', permanent: true },
-        { source: '/workforce', destination: '/sistema', permanent: true },
-    { source: '/devops', destination: '/sistema', permanent: true },
-    { source: '/saas', destination: '/sistema', permanent: true },
-    { source: '/engineering', destination: '/sistema', permanent: true },
-    { source: '/consultoria-devops', destination: '/sistema', permanent: true },
+    { source: '/evonexus', destination: '/implementacao-vibe-seller', permanent: true },
+    { source: '/hermes', destination: '/implementacao-vibe-seller', permanent: true },
+    { source: '/workforce', destination: '/implementacao-vibe-seller', permanent: true },
+    { source: '/devops', destination: '/implementacao-vibe-seller', permanent: true },
+    { source: '/saas', destination: '/implementacao-vibe-seller', permanent: true },
+    { source: '/engineering', destination: '/implementacao-vibe-seller', permanent: true },
+    { source: '/consultoria-devops', destination: '/implementacao-vibe-seller', permanent: true },
     // Gamificacao redirect
-    { source: '/gamificacao', destination: '/sistema', permanent: true },
+    { source: '/gamificacao', destination: '/implementacao-vibe-seller', permanent: true },
     // ZapCurso renamed to ZapClub
     { source: '/zapcurso', destination: '/zapclub', permanent: true },
     // ZapCurso API redirect
