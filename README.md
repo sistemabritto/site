@@ -6,14 +6,21 @@ Site comercial e funil da Sistema Britto, construído com Next.js e publicado na
 
 - `/` — posicionamento Vibe Seller e escada de ofertas
 - `/links` — página da bio com atribuição por UTM
-- `/desafio-monetizar-com-ia` — produto coletivo de entrada (R$ 97)
-- `/sprint-vibe-seller` — diagnóstico estratégico e mini-PRD (R$ 1.497)
-- `/implementacao-vibe-seller` — sessão de arquitetura e entrada para projetos sob medida
-- `/whatsapp`, `/socialjobs`, `/vps` e `/zapclub` — soluções comerciais específicas
+- `/desafio-monetizar-com-ia` — caminho assíncrono de 21 dias para quem executa sozinho
+- `/sprint-vibe-seller` — acompanhamento individual de 9 semanas: “eu faço com você”
+- `/implementacao-vibe-seller` — implementação sob medida de 9 semanas: “eu faço para você”
+- `/whatsapp` e `/vps` — soluções específicas; VPS é alternativa para quem vai operar a própria infraestrutura
 - `/admin` — leads, analytics e configuração operacional
 - `pages/api` — captura, tracking, checkout, webhooks e integrações server-side
 
-`/sistema` é uma URL legada e redireciona para `/implementacao-vibe-seller`.
+`/sistema`, `/socialjobs`, `/zapclub` e `/zapcurso` são URLs legadas e redirecionam para a oferta canônica mais próxima. Não devem voltar a ser usadas em links internos, menu, rodapé ou sitemap.
+
+## Escada comercial
+
+1. **Desafio Monetizar com IA**: a pessoa aprende e executa de forma assíncrona.
+2. **Sessão de Arquitetura**: porta de entrada compartilhada do Sprint e da Implementação; documenta problema, escopo, custos e próximos passos. O valor pago vira crédito se a pessoa avançar.
+3. **Sprint**: 9 semanas em que Felipe acompanha a execução individualmente.
+4. **Implementação**: 9 semanas em que Felipe constrói e entrega a solução pronta para operar.
 
 ## Desenvolvimento
 

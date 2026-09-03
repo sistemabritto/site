@@ -64,7 +64,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
       'Mapa Vibe Seller para priorizar oportunidade, comprador e captura de valor',
       'Matriz Build / Buy / Ignore para não criar software commodity',
       'Roteiros de conversa, pré-venda, página e teste mínimo',
-      'Checkpoints coletivos gravados — sem consultoria individual disfarçada',
+      'Aulas gravadas e uma sequência assíncrona de 21 mensagens para guiar sua execução',
     ],
     fit: [
       'Você constrói, vende ou opera e tem acesso a um nicho, negócio ou audiência.',
@@ -80,9 +80,9 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
       { question: 'Vou faturar em 21 dias?', answer: 'Não existe promessa de faturamento em prazo fixo. O resultado do Desafio é uma oportunidade priorizada, uma oferta ou solução testável e uma validação real; faturamento depende de problema, comprador, proposta e execução.' },
       { question: 'Preciso saber programar?', answer: 'Não. Construir é uma das decisões possíveis. Em alguns casos a resposta correta será comprar, ajustar processo ou vender serviço antes de escrever código.' },
       { question: 'O que é o Mapa Vibe Seller?', answer: 'É a ferramenta de decisão do Desafio. Ela organiza dor, custo da inação, comprador, distribuição, build versus buy, risco de comoditização e próximo teste.' },
-      { question: 'E se eu encontrar uma oportunidade maior?', answer: 'Quem tiver uma operação, dor comprovada e poder de decisão pode aplicar para o Sprint Vibe Seller, que transforma a oportunidade em plano e mini-PRD.' },
+      { question: 'E se eu encontrar uma oportunidade maior?', answer: 'Quando você precisa de acompanhamento ou quer que alguém execute junto/com você, o próximo passo é a Sessão de Arquitetura. Ela decide qual nível de entrega faz sentido.' },
     ],
-    nextStep: { title: 'Encontrou uma oportunidade maior?', copy: 'Se ela atravessa áreas, integrações ou investimento, o Sprint Vibe Seller transforma a hipótese em decisão de negócio e roadmap.', href: '/sprint-vibe-seller', cta: 'Conhecer o Sprint →' },
+    nextStep: { title: 'Encontrou uma oportunidade maior?', copy: 'Se a validação pede acompanhamento ou execução, comece pela Sessão de Arquitetura. Ela transforma o contexto em plano e mostra o nível de entrega certo.', href: '/sprint-vibe-seller', cta: 'Ver acompanhamento →' },
     schema: [{
       '@type': 'Course',
       '@id': 'https://www.sistemabritto.com.br/desafio-monetizar-com-ia#course',
@@ -97,107 +97,108 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     kind: 'sprint',
     cover: '/covers/sprint-vibe-seller.png',
     path: '/sprint-vibe-seller',
-    metaTitle: 'Sprint Vibe Seller | Diagnóstico, decisão e mini-PRD',
-    metaDescription: 'Em até 7 dias, transforme uma oportunidade plausível em uma decisão de negócio, mapa de captura de valor e roadmap de 30 dias. R$ 1.497.',
-    eyebrow: 'Diagnóstico produtizado · R$ 1.497',
-    headline: 'Você encontrou um problema.',
-    emphasis: 'Agora precisa decidir se vale atacar.',
-    lead: 'O Sprint Vibe Seller transforma uma oportunidade plausível em uma decisão de negócio: construir, comprar, vender serviço, licenciar ou descartar antes de gastar energia no caminho errado.',
-    price: 'R$ 1.497',
-    primaryCta: 'Quero aplicar para o Sprint',
-    formTitle: 'Aplicação para o Sprint',
-    formLead: 'Conte qual processo está travando sua operação. A aplicação existe para garantir que o Sprint é o nível certo antes de qualquer pagamento.',
-    submitLabel: 'Enviar aplicação →',
-    processTitle: 'Uma investigação curta para evitar um projeto longo e errado.',
-    deliverablesTitle: 'Um documento de decisão que sua equipe consegue executar.',
-    proof: 'Não é uma call solta. Você termina com um ativo de decisão: problema, vazamento, escolha build/buy, recomendação e plano de 30 dias.',
+    metaTitle: 'Sprint Vibe Seller | Acompanhamento de 9 semanas para tirar sua solução do papel',
+    metaDescription: 'Você não toca seu projeto sozinho: 9 semanas de acompanhamento individual, checkpoints e decisões guiadas. Comece pela Sessão de Arquitetura por R$ 150, abatida se avançar.',
+    eyebrow: '9 semanas · eu faço com você',
+    headline: 'Você não precisa tocar',
+    emphasis: 'seu projeto sozinho.',
+    lead: 'No Sprint, eu acompanho a execução com você por 9 semanas: decisões, prioridades, construção e validação. Você continua dono do projeto — mas para de destravar tudo no escuro.',
+    price: 'Comece pela Sessão de Arquitetura · R$ 150',
+    primaryCta: 'Reservar sessão de arquitetura',
+    formTitle: 'Reserve sua Sessão de Arquitetura',
+    formLead: 'É a porta de entrada comum para Sprint e Implementação. Você paga R$ 150 hoje, recebe o link de agenda após a confirmação e esse valor é abatido se avançarmos.',
+    submitLabel: 'Ir para o checkout de R$ 150 →',
+    checkoutUrl: 'https://pay.cakto.com.br/35xvemn',
+    processTitle: 'Nove semanas para fazer a solução avançar com você.',
+    deliverablesTitle: 'Clareza na sessão. Acompanhamento para executar depois.',
+    proof: 'A Sessão de Arquitetura define a rota. Se o Sprint for o nível certo, entramos em três sprints de três semanas para sair da ideia travada para uma solução validada e pronta para crescer.',
     steps: [
-      { label: 'Etapa 1', title: 'Diagnóstico', copy: 'Mapeamos o processo atual, onde o valor vaza e quais premissas precisam ser verificadas.' },
-      { label: 'Etapa 2', title: 'Decisão', copy: 'Comparamos construir, comprar, ajustar processo, vender serviço ou não fazer nada.' },
-      { label: 'Etapa 3', title: 'Roadmap', copy: 'Você recebe mini-PRD e plano de 30 dias para executar ou contratar com clareza.' },
+      { label: 'Semanas 1–3', title: 'Rota e escopo', copy: 'Fechamos problema, comprador, métrica, solução mínima e o que não entra agora.' },
+      { label: 'Semanas 4–6', title: 'Construir e validar', copy: 'Você executa com acompanhamento individual pelo WhatsApp e checkpoints para destravar as decisões importantes.' },
+      { label: 'Semanas 7–9', title: 'Lançar e ajustar', copy: 'Organizamos a primeira versão, a forma de apresentar ao mercado e os próximos testes de escala.' },
     ],
     deliverables: [
-      'Sessão de diagnóstico estruturada',
-      'Mapa do processo atual e do vazamento de valor',
-      'Estimativa de ordem de grandeza com premissas visíveis',
-      'Decisão Build / Buy / Processo / Ignore',
-      'Mini-PRD e roadmap de 30 dias',
-      'Recomendação explícita: seguir, pausar ou descartar',
+      'Sessão de Arquitetura individual, com escopo e custos estimados',
+      '9 semanas de acompanhamento individual pelo WhatsApp',
+      'Três checkpoints quinzenais no Meet para decidir e destravar',
+      'Prioridades, mini-PRD e plano de execução vivo',
+      'Direção de build, buy, processo e distribuição conforme o projeto evolui',
     ],
     fit: [
       'Você tem uma operação real, uma dor recorrente e alguém que pode decidir.',
-      'O problema envolve mais de uma etapa, pessoa, integração ou investimento.',
-      'Você quer reduzir escopo errado antes de contratar desenvolvimento.',
+      'Você quer executar, mas precisa de alguém experiente para acompanhar decisões e destravar o caminho.',
+      'Você aceita fazer a parte que é sua com ritmo e checkpoints claros.',
     ],
     notFit: [
       'Você só quer indicação de ferramenta.',
-      'Você ainda não consegue apontar uma dor ou processo concreto.',
-      'Você espera desenvolvimento ou suporte diário dentro do Sprint.',
+      'Você quer terceirizar todo o desenvolvimento e receber o código pronto.',
+      'Você não consegue reservar tempo para executar entre os checkpoints.',
     ],
     faqs: [
-      { question: 'O Sprint inclui desenvolvimento?', answer: 'Não. Ele resolve a decisão e o escopo. Desenvolvimento, implantação e operação fazem parte da implementação quando há oportunidade validada.' },
-      { question: 'Por que não contratar direto a implementação?', answer: 'Porque construir sem problema, métrica e escopo transforma projeto em tentativa cara. O Sprint diminui esse risco e deixa um documento utilizável mesmo se você não continuar com a Sistema Britto.' },
-      { question: 'A aplicação me obriga a comprar?', answer: 'Não. Ela serve para entender contexto e confirmar que o Sprint é adequado. Uma aplicação não é cobrança.' },
+      { question: 'O Sprint começa pelo checkout de R$ 150?', answer: 'Sim. A Sessão de Arquitetura é a porta de entrada: você sai com arquitetura, escopo e custos estimados. Se o Sprint for o próximo passo, os R$ 150 são abatidos do acompanhamento.' },
+      { question: 'Qual é a diferença para implementação?', answer: 'No Sprint eu faço com você: acompanho, destravo e direciono sua execução. Na Implementação eu faço para você: construo e entrego o código, a estrutura e o plano de escala.' },
+      { question: 'O Sprint inclui desenvolvimento completo?', answer: 'Não como serviço terceirizado. Ele inclui direção e acompanhamento para você executar com velocidade; se a melhor decisão for eu construir, a proposta correta é a Implementação.' },
     ],
-    nextStep: { title: 'Oportunidade validada e pronta para sair do papel?', copy: 'A implementação começa quando existe responsável, escopo e critério de sucesso — não antes.', href: '/implementacao-vibe-seller', cta: 'Ver implementação →' },
+    nextStep: { title: 'Prefere receber a solução pronta?', copy: 'A mesma Sessão de Arquitetura também define se a Implementação é o nível adequado. Se avançar, o valor da sessão entra como crédito.', href: '/implementacao-vibe-seller', cta: 'Ver implementação →' },
     schema: [{
       '@type': 'Service',
       '@id': 'https://www.sistemabritto.com.br/sprint-vibe-seller#service',
       name: 'Sprint Vibe Seller',
-      description: 'Diagnóstico produtizado com decisão de oportunidade, mapa de captura de valor e mini-PRD.',
+      description: 'Acompanhamento individual de 9 semanas para transformar uma oportunidade em solução validada e pronta para crescer.',
       provider: { '@id': 'https://www.sistemabritto.com.br/#organization' },
       url: 'https://www.sistemabritto.com.br/sprint-vibe-seller',
-      offers: { '@type': 'Offer', price: '1497.00', priceCurrency: 'BRL' },
+      offers: { '@type': 'Offer', price: '150.00', priceCurrency: 'BRL', description: 'Sessão de Arquitetura, abatida se o cliente avançar para o Sprint.' },
     }],
   },
   implementacao: {
     kind: 'implementacao',
     cover: '/covers/implementacao-vibe-seller.png',
     path: '/implementacao-vibe-seller',
-    metaTitle: 'Sessão de Arquitetura + Implementação Vibe Seller | Sistema Britto',
-    metaDescription: 'Saia de uma sessão individual com arquitetura, escopo, integrações e custos estimados. De R$ 300 por R$ 150 nas 3 primeiras agendas da semana.',
-    eyebrow: 'Sessão individual · só 3 agendas promocionais por semana',
-    headline: 'Pare de pedir orçamento',
-    emphasis: 'para um projeto que ainda não foi desenhado.',
-    lead: 'Em uma sessão individual, transformamos sua ideia, gargalo ou oportunidade em uma arquitetura documentada. Você sai sabendo o que construir, como integrar e quanto tende a custar antes de contratar a implementação.',
-    price: 'R$ 150 nesta semana',
+    metaTitle: 'Implementação Vibe Seller | Sistema sob medida pronto para operar',
+    metaDescription: 'Em 9 semanas, eu construo sua solução e entrego código, estrutura pronta para operar e plano de escala. Comece pela Sessão de Arquitetura por R$ 150, abatida se avançar.',
+    eyebrow: '9 semanas · eu faço para você',
+    headline: 'Você não precisa virar',
+    emphasis: 'uma software house para resolver isso.',
+    lead: 'Na Implementação, eu assumo a construção da solução certa para a sua oportunidade: estratégia, arquitetura, código e plano de escala. Você recebe um ativo pronto para operar — não uma pilha de ferramentas.',
+    price: 'Comece pela Sessão de Arquitetura · R$ 150',
     primaryCta: 'Reservar sessão de arquitetura',
     formTitle: 'Reserve sua Sessão de Arquitetura',
     formLead: 'Preencha os dados para abrir o checkout. Depois da confirmação, você recebe por e-mail o link para escolher o horário.',
     submitLabel: 'Ir para o checkout de R$ 150 →',
     checkoutUrl: 'https://pay.cakto.com.br/35xvemn',
-    processTitle: 'Da conversa à arquitetura que orienta a implementação.',
-    deliverablesTitle: 'Você sai da sessão com o projeto no papel.',
-    proof: 'De R$ 300 por R$ 150 para as 3 primeiras agendas da semana. Se avançarmos para a implementação, o diagnóstico já vira insumo do projeto.',
+    processTitle: 'Primeiro a arquitetura. Depois, nove semanas de execução para você.',
+    deliverablesTitle: 'Você sai da sessão com clareza. Avançando, recebe o produto pronto.',
+    proof: 'A Sessão de Arquitetura evita orçamento no escuro. Se a Implementação fizer sentido, os R$ 150 são abatidos do projeto, que começa a partir de R$ 5.000 conforme escopo.',
     steps: [
-      { label: '01', title: 'Escopo de valor', copy: 'Aproveitamos diagnóstico ou validamos contexto para fechar problema, critério de sucesso e responsável.' },
-      { label: '02', title: 'Construção certa', copy: 'Sistema, WhatsApp, agentes, dados, conteúdo ou infraestrutura entram porque servem ao resultado — não porque estão na moda.' },
-      { label: '03', title: 'Medição e handoff', copy: 'Testamos o fluxo, documentamos o que foi feito e definimos como o resultado continuará sendo acompanhado.' },
+      { label: 'Sessão', title: 'Arquitetura e decisão', copy: 'Documentamos problema, critério de sucesso, escopo, integrações, custos e o nível de entrega adequado.' },
+      { label: 'Semanas 1–6', title: 'Construção', copy: 'Eu construo a solução: produto, automação, dados, integrações e experiência necessários para capturar o valor.' },
+      { label: 'Semanas 7–9', title: 'Entrega e escala', copy: 'Testamos, colocamos para operar, entregamos código/documentação e um plano objetivo para o próximo ciclo.' },
     ],
     deliverables: [
-      'Arquitetura recomendada e fluxo principal documentados',
+      'Sessão de Arquitetura individual, com fluxo e custos estimados',
       'Escopo inicial: o que entra, o que fica fora e em qual ordem',
       'Integrações, dependências e principais riscos mapeados',
       'Estimativa de custos de construção e operação, com premissas visíveis',
-      'Próximo passo recomendado, mesmo que não seja contratar a Sistema Britto',
+      'Se avançar: código, configurações e documentação entregues para sua operação',
+      'Se avançar: plano de lançamento, medição e escala pronto para executar',
     ],
     fit: [
       'Você tem uma ideia, gargalo ou processo concreto para discutir.',
-      'Você quer clareza técnica e financeira antes de contratar desenvolvimento.',
+      'Você quer receber uma solução sob medida, em vez de montar tudo sozinho.',
       'Você pode tomar ou influenciar a decisão do projeto.',
     ],
     notFit: [
       'Você quer somente uma cotação rápida sem diagnóstico.',
-      'Você ainda não consegue explicar qual situação precisa mudar.',
-      'Você espera que a sessão inclua o desenvolvimento completo.',
+      'Você quer começar desenvolvimento sem definir o problema, métrica ou escopo.',
+      'Você busca uma ferramenta genérica quando uma solução específica não é necessária.',
     ],
     faqs: [
       { question: 'O que acontece depois da compra?', answer: 'A Cakto confirma o pagamento e envia o link de acesso para você escolher o horário disponível. Antes da conversa, você recebe uma orientação curta para trazer o contexto certo.' },
-      { question: 'Qual é a diferença para o Sprint?', answer: 'A Sessão de Arquitetura desenha um projeto específico e estima custos. O Sprint investiga uma oportunidade de negócio mais ampla, compara caminhos de monetização e entrega um mini-PRD e um plano de 30 dias.' },
-      { question: 'A sessão inclui desenvolvimento?', answer: 'Não. Ela entrega clareza, arquitetura e estimativas. A implementação é uma contratação separada, normalmente a partir de R$ 5.000, e só é recomendada quando construir realmente faz sentido.' },
+      { question: 'Qual é a diferença para o Sprint?', answer: 'Os dois passam pela mesma Sessão de Arquitetura. No Sprint eu faço com você durante 9 semanas; na Implementação eu faço para você e entrego a solução pronta para operar.' },
+      { question: 'A sessão inclui desenvolvimento?', answer: 'A sessão entrega clareza, arquitetura e estimativas. Se o diagnóstico apontar Implementação, a proposta começa a partir de R$ 5.000 e os R$ 150 pagos na sessão são abatidos.' },
       { question: 'Por que o preço está em R$ 150?', answer: 'O valor normal é R$ 300. Como a sessão é individual e depende da agenda do Felipe, apenas as 3 primeiras agendas liberadas na semana entram no valor promocional.' },
     ],
-    nextStep: { title: 'Com a arquitetura aprovada, a gente também constrói.', copy: 'Implementações sob medida começam normalmente em R$ 5.000. A sessão evita que esse investimento seja feito sobre um escopo improvisado.', href: '/sprint-vibe-seller', cta: 'Minha oportunidade ainda precisa de diagnóstico →' },
+    nextStep: { title: 'Ainda quer participar ativamente da construção?', copy: 'Se você prefere fazer com acompanhamento em vez de terceirizar a execução, o Sprint é o nível certo. A Sessão de Arquitetura continua sendo a mesma porta de entrada.', href: '/sprint-vibe-seller', cta: 'Ver Sprint →' },
     schema: [{
       '@type': 'Service',
       '@id': 'https://www.sistemabritto.com.br/implementacao-vibe-seller#service',
@@ -314,7 +315,7 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
                 <button onClick={() => openForm('hero')} className="min-h-12 rounded-xl bg-[#a3ff12] px-7 py-4 text-base font-extrabold text-black shadow-[0_12px_35px_rgba(163,255,18,0.22)] transition hover:-translate-y-0.5 hover:bg-[#c4ff72] focus:outline-none focus:ring-4 focus:ring-[#a3ff12]/30">
                   {offer.primaryCta} →
                 </button>
-                <p className="mt-3 text-sm text-slate-400">{offer.kind === 'desafio' ? 'Primeiro você entende o método. O investimento aparece logo abaixo.' : offer.kind === 'implementacao' ? 'Pagamento único · agendamento enviado após a confirmação' : 'Aplicação sem compromisso · contexto antes de proposta'}</p>
+                <p className="mt-3 text-sm text-slate-400">{offer.kind === 'desafio' ? 'Primeiro você entende o método. O investimento aparece logo abaixo.' : 'Pagamento único · agenda enviada após a confirmação · valor abatido se você avançar.'}</p>
               </div>
             </div>
             <aside className="rounded-3xl border border-white/10 bg-white/[0.045] p-4 shadow-2xl backdrop-blur sm:p-6">
@@ -323,9 +324,10 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
               <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#c4ff72]">A transformação</p>
               <p className="mt-4 font-heading text-2xl font-bold leading-tight text-white">{offer.proof}</p>
               {offer.kind !== 'desafio' && <div className="mt-8 border-t border-white/10 pt-6">
-                <p className="text-sm text-slate-400">Investimento</p>
-                {offer.kind === 'implementacao' && <p className="mt-1 text-sm text-slate-500 line-through">Valor normal: R$ 300</p>}
-                <p className="mt-1 font-heading text-4xl font-bold text-white">{offer.price}</p>
+                <p className="text-sm text-slate-400">Porta de entrada</p>
+                <p className="mt-1 text-sm text-slate-500 line-through">Valor normal: R$ 300</p>
+                <p className="mt-1 font-heading text-4xl font-bold text-white">R$ 150</p>
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">Válido para as 3 primeiras agendas da semana. Vira crédito se você avançar.</p>
               </div>}
               </div>
             </aside>
@@ -334,14 +336,14 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
 
         {offer.kind === 'sprint' && <section className="px-5 py-16 sm:px-8 sm:py-24">
           <div className="mx-auto max-w-6xl">
-            <p className="text-sm font-bold uppercase tracking-[0.14em] text-violet-300">O resultado não é sempre “construir”</p>
-            <h2 className="mt-3 max-w-3xl font-heading text-3xl font-bold tracking-[-0.04em] sm:text-5xl">O Sprint termina com uma decisão defendida por evidência.</h2>
+            <p className="text-sm font-bold uppercase tracking-[0.14em] text-violet-300">Você executa. Eu acompanho.</p>
+            <h2 className="mt-3 max-w-3xl font-heading text-3xl font-bold tracking-[-0.04em] sm:text-5xl">Acompanhamento individual para o projeto não morrer entre uma ideia e a próxima decisão.</h2>
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                ['BUILD', 'Existe vantagem em construir algo específico.'],
-                ['BUY', 'Uma solução existente resolve melhor e mais barato.'],
-                ['PROCESSO', 'O gargalo está na operação, não no software.'],
-                ['IGNORE', 'O retorno provável não justifica o esforço agora.'],
+                ['WHATSAPP', 'Acompanhamento individual para priorizar a próxima ação e não acumular dúvidas.'],
+                ['CHECKPOINTS', 'Três encontros no Meet ao longo de nove semanas para decisões que exigem contexto.'],
+                ['3 SPRINTS', 'Rota, construção e lançamento em ciclos de três semanas com entregas visíveis.'],
+                ['DECISÃO', 'Build, buy, processo ou pausa: a resposta segue evidência, não apego à ideia.'],
               ].map(([title, copy]) => <article key={title} className="rounded-2xl border border-violet-300/20 bg-violet-300/[0.05] p-6"><p className="font-heading text-xl font-black text-violet-300">{title}</p><p className="mt-3 text-sm leading-relaxed text-slate-300">{copy}</p></article>)}
             </div>
           </div>
@@ -349,8 +351,8 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
 
         {offer.kind === 'implementacao' && <section className="px-5 py-16 sm:px-8 sm:py-24">
           <div className="mx-auto max-w-6xl">
-            <p className="text-sm font-bold uppercase tracking-[0.14em] text-cyan-300">O que podemos arquitetar</p>
-            <h2 className="mt-3 max-w-4xl font-heading text-3xl font-bold tracking-[-0.04em] sm:text-5xl">A sessão começa pelo seu processo. A tecnologia vem depois.</h2>
+            <p className="text-sm font-bold uppercase tracking-[0.14em] text-cyan-300">O que eu posso construir para você</p>
+            <h2 className="mt-3 max-w-4xl font-heading text-3xl font-bold tracking-[-0.04em] sm:text-5xl">O projeto começa pelo seu processo. A tecnologia vem depois.</h2>
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 ['SaaS e produto digital', 'MVP, recorrência, onboarding, billing e risco de comoditização.'],
@@ -471,7 +473,7 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
                 <button disabled={loading} type="submit" className="min-h-12 w-full rounded-xl bg-[#a3ff12] px-6 py-4 font-extrabold text-black transition hover:bg-[#c4ff72] disabled:cursor-not-allowed disabled:opacity-60">{loading ? 'Preparando…' : offer.submitLabel}</button>
                 <p className="text-center text-xs leading-relaxed text-slate-400">Ao continuar, você concorda com os <a className="underline hover:text-white" href="/termos-de-uso" target="_blank" rel="noreferrer">termos</a> e a <a className="underline hover:text-white" href="/politicas-de-privacidade" target="_blank" rel="noreferrer">política de privacidade</a>.</p>
               </form>
-            </> : <div className="py-10 text-center"><p className="text-4xl">✓</p><h2 className="mt-5 font-heading text-3xl font-bold">Aplicação recebida.</h2><p className="mx-auto mt-3 max-w-sm leading-relaxed text-slate-300">Seu contexto foi registrado. A próxima etapa será alinhada pelo contato informado, se o projeto tiver o perfil certo.</p><button onClick={() => setFormOpen(false)} className="mt-7 rounded-xl border border-white/20 px-5 py-3 font-bold transition hover:border-[#a3ff12] hover:text-[#c4ff72]">Fechar</button></div>}
+            </> : <div className="py-10 text-center"><p className="text-4xl">✓</p><h2 className="mt-5 font-heading text-3xl font-bold">Dados recebidos.</h2><p className="mx-auto mt-3 max-w-sm leading-relaxed text-slate-300">Você será encaminhado para o checkout. Depois da confirmação, enviamos o link para escolher a agenda e os próximos passos.</p><button onClick={() => setFormOpen(false)} className="mt-7 rounded-xl border border-white/20 px-5 py-3 font-bold transition hover:border-[#a3ff12] hover:text-[#c4ff72]">Fechar</button></div>}
           </div>
         </div>
       )}
