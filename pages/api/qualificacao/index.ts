@@ -10,7 +10,9 @@ function getEnv(name: string): string | undefined {
   return (globalThis as any).__env_cache?.[name] || (typeof process !== 'undefined' ? (process as any).env?.[name] : undefined);
 }
 const EVOCRM_API_URL = getEnv('EVOCRM_API_URL') || 'https://evoapi.workflowapi.com.br';
-const EVOCRM_API_TOKEN = getEnv('EVOCRM' + '_API_TOKEN') || '3e21328779b31ad40f791f18126b86ffd41cb9739b7a9c3fde42bc296f20f20a';
+// Segredo deve existir somente no ambiente de execução; nunca use fallback
+// hardcoded em código versionado.
+const EVOCRM_API_TOKEN = getEnv('EVOCRM' + '_API_TOKEN') || '';
 const PIPELINE_ID = 'eb72af5c-28f7-4948-ae50-9c81922d161e';
 const STAGE_QUALIFICACAO = '534893fe-843e-4731-9783-e26064ac8498';
 const STAGE_NOVO_LEAD = '0e31e649-af37-4a6f-87fb-cd25d52225e5';

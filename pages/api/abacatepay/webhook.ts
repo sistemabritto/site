@@ -4,7 +4,9 @@ import { createClient } from '@supabase/supabase-js';
 
 // ── Config ──────────────────────────────────────────────────
 const EVOCRM_API_URL = process.env.EVOCRM_API_URL || 'https://evoapi.workflowapi.com.br';
-const EVOCRM_API_TOKEN = process.env.EVOCRM_API_TOKEN || '3e21328779b31ad40f791f18126b86ffd41cb9739b7a9c3fde42bc296f20f20a';
+// Segredo deve existir somente no ambiente de execução; nunca use fallback
+// hardcoded em código versionado.
+const EVOCRM_API_TOKEN = process.env.EVOCRM_API_TOKEN || '';
 const PIPELINE_ID = 'eb72af5c-28f7-4948-ae50-9c81922d161e';
 const STAGE_FECHADO = 'f6229e34-46c2-4a10-890b-df5969489033';
 
