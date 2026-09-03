@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 import Meta from './Meta';
 import PhoneInput from './PhoneInput';
+import FollowerLot from './FollowerLot';
 import { getStoredUtms, trackCta } from '../pages/_app';
 
 type OfferKind = 'desafio' | 'sprint' | 'implementacao';
@@ -98,7 +99,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     cover: '/covers/sprint-vibe-seller.png',
     path: '/sprint-vibe-seller',
     metaTitle: 'Sprint Vibe Seller | Acompanhamento de 9 semanas para tirar sua solução do papel',
-    metaDescription: 'Você não toca seu projeto sozinho: 9 semanas de acompanhamento individual, checkpoints e decisões guiadas. Comece pela Sessão de Arquitetura por R$ 150, abatida se avançar.',
+    metaDescription: 'Você não toca seu projeto sozinho: 9 semanas de suporte individual pelo WhatsApp, 5 checkpoints e uma garantia de repescagem. Comece pela Sessão de Arquitetura por R$ 150.',
     eyebrow: '9 semanas · eu faço com você',
     headline: 'Você não precisa tocar',
     emphasis: 'seu projeto sozinho.',
@@ -109,25 +110,26 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     formLead: 'É a porta de entrada comum para Sprint e Implementação. Você compra a sessão por R$ 150, recebe o link de agenda após a confirmação e esse valor é abatido se avançarmos.',
     submitLabel: 'Ir para o checkout de R$ 150 →',
     checkoutUrl: 'https://pay.cakto.com.br/35xvemn',
-    processTitle: 'Nove semanas para fazer a solução avançar com você.',
-    deliverablesTitle: 'Clareza na sessão. Acompanhamento para executar depois.',
-    proof: 'A Sessão de Arquitetura define a rota. Se o Sprint for o nível certo, entramos em três sprints de três semanas para sair da ideia travada para uma solução validada e pronta para crescer.',
+    processTitle: 'Nove semanas, cinco checkpoints e suporte individual de verdade.',
+    deliverablesTitle: 'Clareza na sessão. Direção individual até a solução virar venda.',
+    proof: 'A Sessão de Arquitetura define a rota. Se o Sprint for o nível certo, entramos em três sprints de três semanas com suporte individual no WhatsApp e cinco checkpoints para fazer o projeto sair da ideia, ganhar forma e chegar ao mercado.',
     steps: [
       { label: 'Semanas 1–3', title: 'Rota e escopo', copy: 'Fechamos problema, comprador, métrica, solução mínima e o que não entra agora.' },
-      { label: 'Semanas 4–6', title: 'Construir e validar', copy: 'Você executa com acompanhamento individual pelo WhatsApp e checkpoints para destravar as decisões importantes.' },
+      { label: 'Semanas 4–6', title: 'Construir e validar', copy: 'Você executa com suporte individualizado pelo WhatsApp e checkpoints para destravar as decisões importantes.' },
       { label: 'Semanas 7–9', title: 'Lançar e ajustar', copy: 'Organizamos a primeira versão, a forma de apresentar ao mercado e os próximos testes de escala.' },
     ],
     deliverables: [
       'Sessão de Arquitetura individual, com escopo e custos estimados',
-      '9 semanas de acompanhamento individual pelo WhatsApp',
-      'Três checkpoints quinzenais no Meet para decidir e destravar',
+      '9 semanas de suporte individualizado pelo WhatsApp — não é grupo e não é comunidade genérica',
+      'Cinco checkpoints individuais no Meet para decidir, ajustar e destravar',
       'Prioridades, mini-PRD e plano de execução vivo',
       'Direção de build, buy, processo e distribuição conforme o projeto evolui',
+      'Garantia de 7 dias de arrependimento e 1 mês de repescagem sem custo se, cumpridos os combinados, o projeto não recuperar o investimento em 9 semanas',
     ],
     fit: [
       'Você tem uma operação real, uma dor recorrente e alguém que pode decidir.',
       'Você quer executar, mas precisa de alguém experiente para acompanhar decisões e destravar o caminho.',
-      'Você aceita fazer a parte que é sua com ritmo e checkpoints claros.',
+      'Você aceita fazer a parte que é sua entre os cinco checkpoints, com ritmo e acordos claros.',
     ],
     notFit: [
       'Você só quer indicação de ferramenta.',
@@ -135,7 +137,9 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
       'Você não consegue reservar tempo para executar entre os checkpoints.',
     ],
     faqs: [
-      { question: 'O Sprint começa pelo checkout de R$ 150?', answer: 'Sim. A Sessão de Arquitetura é a porta de entrada: você sai com arquitetura, escopo e custos estimados. Se o Sprint for o próximo passo, os R$ 150 são abatidos do acompanhamento.' },
+      { question: 'O Sprint começa pelo checkout de R$ 150?', answer: 'Sim. Você compra a Sessão de Arquitetura diretamente por R$ 150. Ela define escopo, prioridades e custos. Se o Sprint for o próximo passo, esse valor é abatido do acompanhamento.' },
+      { question: 'O acompanhamento é em grupo?', answer: 'Não. O suporte é individualizado pelo WhatsApp durante as 9 semanas e existem cinco checkpoints individuais no Meet. A ideia é olhar seu contexto, destravar a próxima decisão e manter o projeto em movimento.' },
+      { question: 'Como funcionam as duas garantias?', answer: 'A primeira é de 7 dias: se você entrar e perceber que o Sprint não é para você, pode pedir cancelamento dentro desse prazo. A segunda é de execução: se você cumprir os combinados do projeto e, ao fim das 9 semanas, ainda não tiver recuperado o investimento com as vendas da solução, ganha 1 mês de repescagem sem custo para acelerar a comercialização. A repescagem não é reembolso; é extensão individual de acompanhamento e depende de evidências das ações e vendas combinadas.' },
       { question: 'Qual é a diferença para implementação?', answer: 'No Sprint eu faço com você: acompanho, destravo e direciono sua execução. Na Implementação eu faço para você: construo e entrego o código, a estrutura e o plano de escala.' },
       { question: 'O Sprint inclui desenvolvimento completo?', answer: 'Não como serviço terceirizado. Ele inclui direção e acompanhamento para você executar com velocidade; se a melhor decisão for eu construir, a proposta correta é a Implementação.' },
     ],
@@ -155,7 +159,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     cover: '/covers/implementacao-vibe-seller.png',
     path: '/implementacao-vibe-seller',
     metaTitle: 'Implementação Vibe Seller | Sistema sob medida pronto para operar',
-    metaDescription: 'Em 9 semanas, eu construo sua solução e entrego código, estrutura pronta para operar e plano de escala. Comece pela Sessão de Arquitetura por R$ 150, abatida se avançar.',
+    metaDescription: 'Em 9 semanas, eu construo sua solução e entrego código, estrutura pronta para operar e plano de escala. R$ 150 na sessão, R$ 2.350 na entrada e R$ 2.500 quando estiver ready to market.',
     eyebrow: '9 semanas · eu faço para você',
     headline: 'Você pediu orçamento de uma solução.',
     emphasis: 'Mas o projeto ainda não foi definido.',
@@ -166,9 +170,9 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     formLead: 'Você compra a sessão por R$ 150. Depois da confirmação, recebe o link para escolher o horário; se avançarmos para a implementação, esse valor é abatido.',
     submitLabel: 'Ir para o checkout de R$ 150 →',
     checkoutUrl: 'https://pay.cakto.com.br/35xvemn',
-    processTitle: 'Primeiro a arquitetura. Depois, nove semanas de execução para você.',
-    deliverablesTitle: 'Você sai da sessão com clareza. Avançando, recebe o produto pronto.',
-    proof: 'Uma sessão individual para sair com o projeto documentado antes de ser orçado. Se a Implementação fizer sentido, os R$ 150 são abatidos do projeto, que começa a partir de R$ 5.000 conforme escopo.',
+    processTitle: 'Primeiro a arquitetura. Depois, nove semanas para colocar uma solução pronta para vender no mundo.',
+    deliverablesTitle: 'Você sai da sessão com clareza. Avançando, recebe a solução pronta para operar e fazer dinheiro.',
+    proof: 'Uma sessão individual para sair com o projeto documentado antes de ser orçado. Para a Implementação de R$ 5.000, você paga R$ 150 na sessão, R$ 2.350 na entrada e deixa R$ 2.500 para quando a solução estiver ready to market.',
     steps: [
       { label: 'Sessão', title: 'Arquitetura e decisão', copy: 'Documentamos problema, critério de sucesso, escopo, integrações, custos e o nível de entrega adequado.' },
       { label: 'Semanas 1–6', title: 'Construção', copy: 'Eu construo a solução: produto, automação, dados, integrações e experiência necessários para capturar o valor.' },
@@ -181,6 +185,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
       'Estimativa de custos de construção e operação, com premissas visíveis',
       'Se avançar: código, configurações e documentação entregues para sua operação',
       'Se avançar: plano de lançamento, medição e escala pronto para executar',
+      'Garantia de 7 dias de arrependimento e 1 mês de repescagem sem custo se, cumpridos os combinados, o projeto não recuperar o investimento em 9 semanas',
     ],
     fit: [
       'Você tem uma ideia, gargalo ou processo concreto para discutir.',
@@ -195,7 +200,8 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     faqs: [
       { question: 'O que acontece depois da compra?', answer: 'A Cakto confirma o pagamento e envia o link de acesso para você escolher o horário disponível. Antes da conversa, você recebe uma orientação curta para trazer o contexto certo.' },
       { question: 'Qual é a diferença para o Sprint?', answer: 'Os dois passam pela mesma Sessão de Arquitetura. No Sprint eu faço com você durante 9 semanas; na Implementação eu faço para você e entrego a solução pronta para operar.' },
-      { question: 'A sessão inclui desenvolvimento?', answer: 'A sessão entrega clareza, arquitetura e estimativas. Se o diagnóstico apontar Implementação, a proposta começa a partir de R$ 5.000 e os R$ 150 pagos na sessão são abatidos.' },
+      { question: 'Como funciona o investimento de R$ 5.000?', answer: 'A Sessão de Arquitetura custa R$ 150 e conta como parte do projeto. Se decidirmos avançar, você paga R$ 2.350 de entrada. Isso deixa R$ 2.500 para a etapa em que a solução estiver ready to market: pronta para ser apresentada, vendida ou colocada para operar conforme o escopo combinado. Não é uma cobrança escondida; é uma forma de dividir o risco e alinhar a entrega ao momento em que ela pode fazer dinheiro.' },
+      { question: 'Como funcionam as duas garantias?', answer: 'A primeira é de 7 dias: se você entrar e perceber que a Implementação não é para você, pode pedir cancelamento nesse prazo. A segunda é de execução: se cumprirmos os combinados e, ao fim das 9 semanas, a solução ainda não tiver recuperado o investimento com as vendas, você ganha 1 mês de repescagem sem custo para acelerar a comercialização. A repescagem é uma extensão de acompanhamento, não um reembolso, e usa evidências das ações e vendas combinadas.' },
       { question: 'Por que o preço está em R$ 150?', answer: 'O valor normal é R$ 300. Como a sessão é individual e depende da agenda do Felipe, apenas as 3 primeiras agendas liberadas na semana entram no valor promocional.' },
     ],
     nextStep: { title: 'Ainda quer participar ativamente da construção?', copy: 'Se você prefere fazer com acompanhamento em vez de terceirizar a execução, o Sprint é o nível certo. A Sessão de Arquitetura continua sendo a mesma porta de entrada.', href: '/sprint-vibe-seller', cta: 'Ver Sprint →' },
@@ -351,7 +357,7 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 ['WHATSAPP', 'Acompanhamento individual para priorizar a próxima ação e não acumular dúvidas.'],
-                ['CHECKPOINTS', 'Três encontros no Meet ao longo de nove semanas para decisões que exigem contexto.'],
+                ['5 CHECKPOINTS', 'Cinco encontros individuais no Meet ao longo de nove semanas para decisões que exigem contexto.'],
                 ['3 SPRINTS', 'Rota, construção e lançamento em ciclos de três semanas com entregas visíveis.'],
                 ['DECISÃO', 'Build, buy, processo ou pausa: a resposta segue evidência, não apego à ideia.'],
               ].map(([title, copy]) => <article key={title} className="rounded-2xl border border-violet-300/20 bg-violet-300/[0.05] p-6"><p className="font-heading text-xl font-black text-violet-300">{title}</p><p className="mt-3 text-sm leading-relaxed text-slate-300">{copy}</p></article>)}
@@ -428,12 +434,25 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
           </div>
         </section>
 
+        {offer.kind !== 'desafio' && <section className="border-y border-[#a3ff12]/20 bg-[#a3ff12]/[0.045] px-5 py-16 sm:px-8">
+          <div className="mx-auto max-w-6xl">
+            <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#c4ff72]">Dupla garantia</p>
+            <h2 className="mt-3 max-w-3xl font-heading text-3xl font-bold tracking-[-0.04em] sm:text-5xl">Você não fica preso a uma decisão ruim — e eu não desapareço quando o projeto precisa vender.</h2>
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              <article className="rounded-2xl border border-white/10 bg-[#080b12] p-6"><p className="font-heading text-xl font-bold text-white">7 dias de arrependimento</p><p className="mt-3 leading-relaxed text-slate-300">Entrou e percebeu que esse não é o caminho certo? Você pode pedir cancelamento dentro de 7 dias.</p></article>
+              <article className="rounded-2xl border border-white/10 bg-[#080b12] p-6"><p className="font-heading text-xl font-bold text-white">1 mês de repescagem</p><p className="mt-3 leading-relaxed text-slate-300">Cumpriu os combinados e, em 9 semanas, o projeto ainda não recuperou o investimento com vendas? Você ganha mais 1 mês de acompanhamento sem custo para acelerar a comercialização.</p></article>
+            </div>
+            <p className="mt-5 text-sm leading-relaxed text-slate-400">A repescagem é uma extensão individual de acompanhamento, não reembolso, e usa as evidências de execução e vendas combinadas no projeto.</p>
+          </div>
+        </section>}
+
         {offer.kind === 'desafio' && <section className="px-5 pb-20 sm:px-8">
           <div className="mx-auto max-w-4xl rounded-3xl border border-[#a3ff12]/35 bg-[#a3ff12]/[0.07] p-8 text-center sm:p-12">
             <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#c4ff72]">Primeira turma · pagamento único</p>
             <p className="mt-4 font-heading text-5xl font-bold">R$ 97</p>
             <p className="mx-auto mt-4 max-w-xl text-slate-300">Menos que uma assinatura de ferramenta que você talvez nem use. Aqui você passa 21 dias decidindo onde existe valor antes de construir.</p>
             <button onClick={() => openForm('price-context')} className="mt-7 min-h-12 rounded-xl bg-[#a3ff12] px-7 py-4 font-extrabold text-black transition hover:bg-[#c4ff72]">Quero entrar no Desafio →</button>
+            <FollowerLot />
           </div>
         </section>}
 

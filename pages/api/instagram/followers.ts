@@ -1,0 +1,30 @@
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+const CACHE_MS = 15 * 60 * 1000;
+let cached: { followers: number; username: string; expiresAt: number } | null = null;
+
+export default async function handler(_req: NextApiRequest, res: NextApiResponse) {
+  res.setHeader('Cache-Control', 'public, s-maxage=900, stale-while-revalidate=3600');
+
+  if (cached && cached.expiresAt > Date.now()) {
+    return res.status(200).json({ followers: cached.followers, username: cached.username, source: 'instagram_graph', cached: true });
+  }
+
+  const accountId = process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID;
+  const accessToken = process.env.INSTAGRAM_GRAPH_ACCESS_TOKEN;
+  if (!accountId || !accessToken) {
+    return res.status(503).json({ error: 'instagram_graph_not_configured' });
+  }
+
+  try {
+    const response = await fetch(`https://graph.facebook.com/v25.0/${encodeURIComponent(accountId)}?fields=followers_count,username&access_token=${encodeURIComponent(accessToken)}`);
+    if (!response.ok) throw new Error(`Instagram Graph returned ${response.status}`);
+    const payload = await response.json() as { followers_count?: number; username?: string };
+    if (typeof payload.followers_count !== 'number') throw new Error('followers_count unavailable');
+
+    cached = { followers: payload.followers_count, username: payload.username || 'sistemabritto', expiresAt: Date.now() + CACHE_MS };
+    return res.status(200).json({ followers: cached.followers, username: cached.username, source: 'instagram_graph', cached: false });
+  } catch {
+    return res.status(502).json({ error: 'instagram_graph_collection_failed' });
+  }
+}
