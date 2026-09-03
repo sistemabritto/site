@@ -73,9 +73,9 @@ const SERVICOS: Servico[] = [
     slug: 'implementacao-vibe-seller',
     href: '/implementacao-vibe-seller',
     img: '/covers/implementacao-vibe-seller.png',
-    titulo: 'Implementação Vibe Seller',
-    descricao: 'Sistema e automação sob medida para capturar uma oportunidade já validada.',
-    preco: 'R$ 5.000+',
+    titulo: 'Sessão de Arquitetura',
+    descricao: 'Uma conversa individual; você sai com arquitetura, escopo e custos estimados. Só 3 agendas promocionais por semana.',
+    preco: 'de R$ 300 por R$ 150',
   },
 ];
 
@@ -164,9 +164,14 @@ function ServicoCard({ servico, utms }: { servico: Servico; utms: Record<string,
 
 export default function Links() {
   const [utms, setUtms] = useState<Record<string, string>>({});
+  const [community, setCommunity] = useState({ count: 9, goal: 100, priceAfterGoal: 20 });
 
   useEffect(() => {
     setUtms(getStoredUtms());
+    fetch('/api/community/evolution-alliance')
+      .then((response) => response.ok ? response.json() : Promise.reject())
+      .then((data) => setCommunity({ count: data.count, goal: data.goal, priceAfterGoal: data.priceAfterGoal }))
+      .catch(() => undefined);
   }, []);
 
   return (
@@ -204,6 +209,28 @@ export default function Links() {
             </p>
           </header>
 
+          <a
+            href={COMUNIDADE_URL}
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => trackCta('/links', 'evolution-alliance', 'banner-topo')}
+            className="group mt-8 block overflow-hidden rounded-3xl border border-green-400/45 bg-[radial-gradient(circle_at_top_right,rgba(34,197,94,0.25),transparent_46%),linear-gradient(135deg,#0c2118,#10121d)] p-6 shadow-[0_18px_45px_rgba(0,0,0,0.28)] transition hover:-translate-y-0.5 hover:border-green-400/80"
+          >
+            <div className="flex items-start gap-4">
+              <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-whatsapp-500"><WhatsAppIcon className="h-6 w-6 text-black" /></span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-xs font-bold uppercase tracking-[0.16em] text-green-400">Evolution Alliance</span>
+                <span className="mt-2 block font-heading text-xl font-bold text-white">Entre grátis antes dos 100 membros.</span>
+                <span className="mt-2 block text-sm leading-relaxed text-gray-300">Ao atingir 100 membros fundadores, a entrada passa a custar R$ {community.priceAfterGoal}. Quem entrou antes continua dentro.</span>
+              </span>
+            </div>
+            <div className="mt-5">
+              <div className="mb-2 flex justify-between text-xs font-semibold text-gray-300"><span>{community.count} membros agora</span><span>{community.goal} vagas fundadoras</span></div>
+              <div className="h-2 overflow-hidden rounded-full bg-white/10"><div className="h-full rounded-full bg-green-400 transition-all duration-700" style={{ width: `${Math.min(100, (community.count / community.goal) * 100)}%` }} /></div>
+            </div>
+            <span className="mt-5 inline-flex font-heading text-sm font-bold text-green-400">Entrar na comunidade agora →</span>
+          </a>
+
           {/* ===== Oferta de entrada: o destino principal da audiência do Instagram ===== */}
           <section aria-labelledby="sec-desafio" className="mt-8">
             <a
@@ -239,30 +266,6 @@ export default function Links() {
               ))}
             </div>
 
-            {/* Comunidade — também gratuita, então fica junto do bloco grátis */}
-            <a
-              href={COMUNIDADE_URL}
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => trackCta('/links', 'evolution-alliance', 'comunidade')}
-              className="group mt-4 flex items-center gap-4 rounded-2xl border border-green-400/30 bg-green-400/5 p-4 transition-colors duration-200 hover:border-green-400/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400"
-            >
-              <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-whatsapp-500">
-                <WhatsAppIcon className="h-6 w-6 text-black" />
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="block font-heading font-bold text-white">Evolution Alliance</span>
-                <span className="mt-1 block text-sm leading-relaxed text-gray-400">
-                  Comunidade de quem constrói com a Evolution API. Entrada gratuita.
-                </span>
-              </span>
-              <span
-                aria-hidden="true"
-                className="flex-shrink-0 text-green-400 transition-transform duration-200 group-hover:translate-x-1"
-              >
-                →
-              </span>
-            </a>
           </section>
 
           {/* ===== Serviços ===== */}

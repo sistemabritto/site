@@ -59,7 +59,7 @@ const products = [
  'Setup em 48h, sem contrato longo',
  ],
  cta: 'Ver Sistema Completo',
- href: '/sistema',
+ href: '/implementacao-vibe-seller',
  },
 ];
 

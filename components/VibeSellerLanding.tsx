@@ -21,7 +21,9 @@ type OfferConfig = {
   formTitle: string;
   formLead: string;
   submitLabel: string;
-  checkout: boolean;
+  checkoutUrl?: string;
+  processTitle: string;
+  deliverablesTitle: string;
   proof: string;
   steps: { label: string; title: string; copy: string }[];
   deliverables: string[];
@@ -39,7 +41,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     path: '/desafio-monetizar-com-ia',
     metaTitle: 'Desafio Monetizar com IA | 21 dias para validar uma oportunidade',
     metaDescription: 'Em 21 dias, encontre um problema caro, transforme-o em uma oferta ou solução testável e coloque a primeira validação no mundo. R$ 97.',
-    eyebrow: '21 dias · R$ 97 · Método Mapa Vibe Seller',
+    eyebrow: '21 dias · uma oportunidade real · Método Mapa Vibe Seller',
     headline: 'Não procure a próxima ideia de SaaS.',
     emphasis: 'Encontre uma forma de monetizar valor com IA.',
     lead: 'Você não entra para colecionar ferramenta, prompt ou aula. Entra para rastrear um problema caro, decidir se vale construir e colocar uma hipótese real no mercado.',
@@ -48,7 +50,9 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     formTitle: 'Sua inscrição no Desafio',
     formLead: 'Preencha seus dados para abrir o checkout. Você receberá as instruções da turma no contato informado após a confirmação.',
     submitLabel: 'Ir para o checkout →',
-    checkout: true,
+    checkoutUrl: 'https://pay.cakto.com.br/oko7cox',
+    processTitle: '21 dias para sair da ideia e chegar a um teste real.',
+    deliverablesTitle: 'Você termina com uma decisão e uma oferta testável.',
     proof: 'A tese vem de operação real: produto que não reteve, diferencial que a IA commoditizou e tecnologia que virou equity. O método existe para você não construir no escuro.',
     steps: [
       { label: 'Dias 1–7', title: 'Rastrear', copy: 'Escolha uma dor, estime o custo da inação e defina quem sente e quem paga.' },
@@ -86,7 +90,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
       description: 'Desafio de 21 dias para rastrear uma oportunidade, decidir build versus buy e validar uma forma de capturar valor com IA.',
       provider: { '@id': 'https://www.sistemabritto.com.br/#organization' },
       url: 'https://www.sistemabritto.com.br/desafio-monetizar-com-ia',
-      offers: { '@type': 'Offer', price: '97.00', priceCurrency: 'BRL', availability: 'https://schema.org/PreOrder' },
+      offers: { '@type': 'Offer', price: '97.00', priceCurrency: 'BRL', availability: 'https://schema.org/InStock' },
     }],
   },
   sprint: {
@@ -104,7 +108,8 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     formTitle: 'Aplicação para o Sprint',
     formLead: 'Conte qual processo está travando sua operação. A aplicação existe para garantir que o Sprint é o nível certo antes de qualquer pagamento.',
     submitLabel: 'Enviar aplicação →',
-    checkout: false,
+    processTitle: 'Uma investigação curta para evitar um projeto longo e errado.',
+    deliverablesTitle: 'Um documento de decisão que sua equipe consegue executar.',
     proof: 'Não é uma call solta. Você termina com um ativo de decisão: problema, vazamento, escolha build/buy, recomendação e plano de 30 dias.',
     steps: [
       { label: 'Etapa 1', title: 'Diagnóstico', copy: 'Mapeamos o processo atual, onde o valor vaza e quais premissas precisam ser verificadas.' },
@@ -149,55 +154,58 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     kind: 'implementacao',
     cover: '/covers/implementacao-vibe-seller.png',
     path: '/implementacao-vibe-seller',
-    metaTitle: 'Implementação Vibe Seller | Sistemas que capturam valor',
-    metaDescription: 'Implementação de sistemas, automações e operações de IA a partir de R$ 5.000, com oportunidade, escopo e critério de sucesso definidos.',
-    eyebrow: 'Projeto sob medida · A partir de R$ 5.000',
-    headline: 'A oportunidade já está clara.',
-    emphasis: 'Agora vamos transformar valor em operação.',
-    lead: 'A implementação Vibe Seller não começa por uma lista de telas. Começa pela oportunidade validada, pelo processo que precisa mudar e pela métrica que provará resultado.',
-    price: 'A partir de R$ 5.000',
-    primaryCta: 'Quero discutir uma implementação',
-    formTitle: 'Aplicação para implementação',
-    formLead: 'Conte o processo, o impacto esperado e onde você acredita que está o gargalo. Vamos avaliar escopo, não empurrar ferramenta.',
-    submitLabel: 'Enviar contexto do projeto →',
-    checkout: false,
-    proof: 'O projeto é um meio para capturar valor: receita recuperada, custo removido, margem ampliada, ativo criado ou operação que finalmente escala.',
+    metaTitle: 'Sessão de Arquitetura + Implementação Vibe Seller | Sistema Britto',
+    metaDescription: 'Saia de uma sessão individual com arquitetura, escopo, integrações e custos estimados. De R$ 300 por R$ 150 nas 3 primeiras agendas da semana.',
+    eyebrow: 'Sessão individual · só 3 agendas promocionais por semana',
+    headline: 'Pare de pedir orçamento',
+    emphasis: 'para um projeto que ainda não foi desenhado.',
+    lead: 'Em uma sessão individual, transformamos sua ideia, gargalo ou oportunidade em uma arquitetura documentada. Você sai sabendo o que construir, como integrar e quanto tende a custar antes de contratar a implementação.',
+    price: 'R$ 150 nesta semana',
+    primaryCta: 'Reservar sessão de arquitetura',
+    formTitle: 'Reserve sua Sessão de Arquitetura',
+    formLead: 'Preencha os dados para abrir o checkout. Depois da confirmação, você recebe por e-mail o link para escolher o horário.',
+    submitLabel: 'Ir para o checkout de R$ 150 →',
+    checkoutUrl: 'https://pay.cakto.com.br/35xvemn',
+    processTitle: 'Da conversa à arquitetura que orienta a implementação.',
+    deliverablesTitle: 'Você sai da sessão com o projeto no papel.',
+    proof: 'De R$ 300 por R$ 150 para as 3 primeiras agendas da semana. Se avançarmos para a implementação, o diagnóstico já vira insumo do projeto.',
     steps: [
       { label: '01', title: 'Escopo de valor', copy: 'Aproveitamos diagnóstico ou validamos contexto para fechar problema, critério de sucesso e responsável.' },
       { label: '02', title: 'Construção certa', copy: 'Sistema, WhatsApp, agentes, dados, conteúdo ou infraestrutura entram porque servem ao resultado — não porque estão na moda.' },
       { label: '03', title: 'Medição e handoff', copy: 'Testamos o fluxo, documentamos o que foi feito e definimos como o resultado continuará sendo acompanhado.' },
     ],
     deliverables: [
-      'Escopo e critério de sucesso documentados',
-      'Construção ou integração proporcional ao problema validado',
-      'Testes e instrumentação de eventos relevantes',
-      'Documentação e handoff operacional',
-      'Primeiro ciclo de medição depois de entrar no ar',
+      'Arquitetura recomendada e fluxo principal documentados',
+      'Escopo inicial: o que entra, o que fica fora e em qual ordem',
+      'Integrações, dependências e principais riscos mapeados',
+      'Estimativa de custos de construção e operação, com premissas visíveis',
+      'Próximo passo recomendado, mesmo que não seja contratar a Sistema Britto',
     ],
     fit: [
-      'Você tem uma oportunidade validada e uma pessoa responsável pela decisão.',
-      'O problema tem impacto relevante em receita, economia, margem ou ativo.',
-      'Você aceita medir resultado e ajustar a operação depois da entrega.',
+      'Você tem uma ideia, gargalo ou processo concreto para discutir.',
+      'Você quer clareza técnica e financeira antes de contratar desenvolvimento.',
+      'Você pode tomar ou influenciar a decisão do projeto.',
     ],
     notFit: [
-      'Você quer “um app de IA” sem problema, usuário ou distribuição definidos.',
-      'Você quer orçamento por tela antes de explicar o valor que a tela precisa gerar.',
-      'Você precisa de uma tarefa pequena que pode ser resolvida por processo ou ferramenta existente.',
+      'Você quer somente uma cotação rápida sem diagnóstico.',
+      'Você ainda não consegue explicar qual situação precisa mudar.',
+      'Você espera que a sessão inclua o desenvolvimento completo.',
     ],
     faqs: [
-      { question: 'Quais tipos de projeto entram?', answer: 'Recuperação de lead e WhatsApp, CRM e sistemas, automação de conteúdo, dados/agentes e infraestrutura. O diagnóstico define se esses são os meios certos.' },
-      { question: 'O projeto começa sempre em R$ 5.000?', answer: 'Esse é o ponto de partida público. O investimento final depende de escopo, risco, integrações, critério de sucesso e responsabilidade operacional.' },
-      { question: 'Preciso fazer o Sprint antes?', answer: 'Para oportunidades complexas, sim. Se o problema já tiver escopo e evidência suficientes, podemos avaliar direto na aplicação.' },
+      { question: 'O que acontece depois da compra?', answer: 'A Cakto confirma o pagamento e envia o link de acesso para você escolher o horário disponível. Antes da conversa, você recebe uma orientação curta para trazer o contexto certo.' },
+      { question: 'Qual é a diferença para o Sprint?', answer: 'A Sessão de Arquitetura desenha um projeto específico e estima custos. O Sprint investiga uma oportunidade de negócio mais ampla, compara caminhos de monetização e entrega um mini-PRD e um plano de 30 dias.' },
+      { question: 'A sessão inclui desenvolvimento?', answer: 'Não. Ela entrega clareza, arquitetura e estimativas. A implementação é uma contratação separada, normalmente a partir de R$ 5.000, e só é recomendada quando construir realmente faz sentido.' },
+      { question: 'Por que o preço está em R$ 150?', answer: 'O valor normal é R$ 300. Como a sessão é individual e depende da agenda do Felipe, apenas as 3 primeiras agendas liberadas na semana entram no valor promocional.' },
     ],
-    nextStep: { title: 'Ainda não tem escopo suficiente?', copy: 'O Sprint Vibe Seller existe para tomar a decisão antes de transformar incerteza em projeto.', href: '/sprint-vibe-seller', cta: 'Começar pelo Sprint →' },
+    nextStep: { title: 'Com a arquitetura aprovada, a gente também constrói.', copy: 'Implementações sob medida começam normalmente em R$ 5.000. A sessão evita que esse investimento seja feito sobre um escopo improvisado.', href: '/sprint-vibe-seller', cta: 'Minha oportunidade ainda precisa de diagnóstico →' },
     schema: [{
       '@type': 'Service',
       '@id': 'https://www.sistemabritto.com.br/implementacao-vibe-seller#service',
       name: 'Implementação Vibe Seller',
-      description: 'Implementação de sistemas e automações de IA baseada em oportunidade validada, escopo e critério de sucesso.',
+      description: 'Sessão individual de arquitetura para documentar escopo, integrações, riscos e custos estimados antes de uma implementação sob medida.',
       provider: { '@id': 'https://www.sistemabritto.com.br/#organization' },
       url: 'https://www.sistemabritto.com.br/implementacao-vibe-seller',
-      offers: { '@type': 'Offer', price: '5000.00', priceCurrency: 'BRL' },
+      offers: { '@type': 'Offer', price: '150.00', priceCurrency: 'BRL', availability: 'https://schema.org/LimitedAvailability' },
     }],
   },
 };
@@ -232,35 +240,46 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
     setLoading(true);
     setError('');
     try {
-      const lead = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          whatsapp: form.whatsapp,
-          source,
-          answers: { context: form.context, offer: kind },
-          utm: utms,
-        }),
-      });
-      if (!lead.ok) throw new Error('Não foi possível registrar seus dados.');
-
-      if (offer.checkout) {
-        const params = new URLSearchParams({
-          ...utms,
-          customer_name: form.name,
-          customer_email: form.email,
-          customer_cellphone: form.whatsapp,
+      let leadSaved = false;
+      try {
+        const lead = await fetch('/api/leads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            whatsapp: form.whatsapp,
+            source,
+            answers: { context: form.context, offer: kind },
+            utm: utms,
+          }),
         });
-        const checkout = await fetch(`/api/abacatepay/checkout/desafio-monetizar-com-ia?${params}`);
-        const data = await checkout.json();
-        if (!checkout.ok || !data.url) {
-          throw new Error(data.error || 'O checkout ainda não está disponível.');
-        }
-        window.location.assign(data.url);
+        leadSaved = lead.ok;
+      } catch {
+        // A captura ajuda o CRM, mas nunca deve bloquear uma compra pronta.
+      }
+
+      if (offer.checkoutUrl) {
+        trackCta(offer.path, `${kind}-checkout`, 'checkout-cakto');
+        const checkoutValue = kind === 'desafio' ? 97 : 150;
+        const browserWindow = window as typeof window & { fbq?: (...args: unknown[]) => void; dataLayer?: Record<string, unknown>[] };
+        browserWindow.fbq?.('track', 'InitiateCheckout', {
+          content_name: kind === 'desafio' ? 'Desafio Monetizar com IA' : 'Sessão de Arquitetura Vibe Seller',
+          content_category: 'Vibe Seller',
+          currency: 'BRL',
+          value: checkoutValue,
+        });
+        browserWindow.dataLayer?.push({ event: 'begin_checkout', offer: kind, value: checkoutValue, currency: 'BRL' });
+        const checkoutUrl = new URL(offer.checkoutUrl);
+        Object.entries(utms).forEach(([key, value]) => {
+          if (key.startsWith('utm_') && value) checkoutUrl.searchParams.set(key, value);
+        });
+        checkoutUrl.searchParams.set('utm_content', `${kind}-checkout`);
+        window.location.assign(checkoutUrl.toString());
         return;
       }
+
+      if (!leadSaved) throw new Error('Não foi possível registrar seus dados. Tente novamente.');
 
       setSubmitted(true);
     } catch (cause) {
@@ -276,8 +295,8 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
       <main className="min-h-screen overflow-x-hidden bg-[#080b12] text-white">
         <header className="relative z-20 mx-auto flex max-w-6xl items-center justify-between px-5 py-5 sm:px-8">
           <a href="/" className="inline-flex items-center gap-3 font-heading font-bold tracking-tight text-white" aria-label="Sistema Britto">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#a3ff12] font-black text-black">SB</span>
-            <span>Sistema Britto</span>
+            <Image src="/images/logo-sistema-britto.png" alt="Sistema Britto" width={180} height={60} className="h-11 w-auto object-contain" priority />
+            <span className="sr-only">Sistema Britto</span>
           </a>
           <a href="https://instagram.com/sistemabritto" target="_blank" rel="noreferrer" className="text-sm font-semibold text-slate-300 transition hover:text-[#a3ff12]">@sistemabritto ↗</a>
         </header>
@@ -295,7 +314,7 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
                 <button onClick={() => openForm('hero')} className="min-h-12 rounded-xl bg-[#a3ff12] px-7 py-4 text-base font-extrabold text-black shadow-[0_12px_35px_rgba(163,255,18,0.22)] transition hover:-translate-y-0.5 hover:bg-[#c4ff72] focus:outline-none focus:ring-4 focus:ring-[#a3ff12]/30">
                   {offer.primaryCta} →
                 </button>
-                <p className="mt-3 text-sm text-slate-400">{offer.kind === 'desafio' ? 'Pagamento único · acesso às instruções após confirmação' : 'Aplicação sem compromisso · contexto antes de proposta'}</p>
+                <p className="mt-3 text-sm text-slate-400">{offer.kind === 'desafio' ? 'Primeiro você entende o método. O investimento aparece logo abaixo.' : offer.kind === 'implementacao' ? 'Pagamento único · agendamento enviado após a confirmação' : 'Aplicação sem compromisso · contexto antes de proposta'}</p>
               </div>
             </div>
             <aside className="rounded-3xl border border-white/10 bg-white/[0.045] p-4 shadow-2xl backdrop-blur sm:p-6">
@@ -303,20 +322,68 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
               <div className="px-2 pb-2 sm:px-2">
               <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#c4ff72]">A transformação</p>
               <p className="mt-4 font-heading text-2xl font-bold leading-tight text-white">{offer.proof}</p>
-              <div className="mt-8 border-t border-white/10 pt-6">
+              {offer.kind !== 'desafio' && <div className="mt-8 border-t border-white/10 pt-6">
                 <p className="text-sm text-slate-400">Investimento</p>
+                {offer.kind === 'implementacao' && <p className="mt-1 text-sm text-slate-500 line-through">Valor normal: R$ 300</p>}
                 <p className="mt-1 font-heading text-4xl font-bold text-white">{offer.price}</p>
-              </div>
+              </div>}
               </div>
             </aside>
           </div>
         </section>
 
+        {offer.kind === 'sprint' && <section className="px-5 py-16 sm:px-8 sm:py-24">
+          <div className="mx-auto max-w-6xl">
+            <p className="text-sm font-bold uppercase tracking-[0.14em] text-violet-300">O resultado não é sempre “construir”</p>
+            <h2 className="mt-3 max-w-3xl font-heading text-3xl font-bold tracking-[-0.04em] sm:text-5xl">O Sprint termina com uma decisão defendida por evidência.</h2>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                ['BUILD', 'Existe vantagem em construir algo específico.'],
+                ['BUY', 'Uma solução existente resolve melhor e mais barato.'],
+                ['PROCESSO', 'O gargalo está na operação, não no software.'],
+                ['IGNORE', 'O retorno provável não justifica o esforço agora.'],
+              ].map(([title, copy]) => <article key={title} className="rounded-2xl border border-violet-300/20 bg-violet-300/[0.05] p-6"><p className="font-heading text-xl font-black text-violet-300">{title}</p><p className="mt-3 text-sm leading-relaxed text-slate-300">{copy}</p></article>)}
+            </div>
+          </div>
+        </section>}
+
+        {offer.kind === 'implementacao' && <section className="px-5 py-16 sm:px-8 sm:py-24">
+          <div className="mx-auto max-w-6xl">
+            <p className="text-sm font-bold uppercase tracking-[0.14em] text-cyan-300">O que podemos arquitetar</p>
+            <h2 className="mt-3 max-w-4xl font-heading text-3xl font-bold tracking-[-0.04em] sm:text-5xl">A sessão começa pelo seu processo. A tecnologia vem depois.</h2>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                ['SaaS e produto digital', 'MVP, recorrência, onboarding, billing e risco de comoditização.'],
+                ['WhatsApp e agentes de IA', 'Atendimento, qualificação, follow-up, agenda e CRM.'],
+                ['Funil e checkout', 'Landing page, quiz, pagamento, eventos e atribuição.'],
+                ['Integrações customizadas', 'ERP, CRM, n8n, APIs, dados e automações entre sistemas.'],
+                ['E-commerce e assinatura', 'Catálogo, carrinho, pagamento, pedidos e operação.'],
+                ['White-label', 'Produto com sua marca, domínio, operação e modelo de revenda.'],
+              ].map(([title, copy]) => <article key={title} className="rounded-2xl border border-cyan-300/20 bg-cyan-300/[0.045] p-6"><h3 className="font-heading text-xl font-bold text-cyan-100">{title}</h3><p className="mt-3 text-sm leading-relaxed text-slate-300">{copy}</p></article>)}
+            </div>
+            <p className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-sm leading-relaxed text-slate-300"><strong className="text-white">Importante:</strong> a sessão não serve para carimbar uma ideia. Se comprar, adaptar uma ferramenta ou mudar o processo for melhor do que construir, essa será a recomendação.</p>
+            <div className="mt-14 grid gap-5 md:grid-cols-2">
+              <article className="rounded-3xl border border-white/10 bg-[#0d1320] p-7">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-cyan-300">Produto e operação</p>
+                <h3 className="mt-3 font-heading text-2xl font-bold">ZapMágico</h3>
+                <p className="mt-4 leading-relaxed text-slate-300">Automação de WhatsApp para pequenos negócios com experiência white-label, fluxos prontos e cobrança recorrente.</p>
+                <a className="mt-5 inline-flex text-sm font-bold text-cyan-300 hover:text-cyan-100" href="https://zapmagico.com.br" target="_blank" rel="noreferrer">Conhecer o projeto ↗</a>
+              </article>
+              <article className="rounded-3xl border border-white/10 bg-[#0d1320] p-7">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-cyan-300">Tecnologia, empresa e equity</p>
+                <h3 className="mt-3 font-heading text-2xl font-bold">Voice Dream</h3>
+                <p className="mt-4 leading-relaxed text-slate-300">Tecnologia de voz criada com IA que evoluiu para ativo, empresa, investimento seed e participação societária.</p>
+                <a className="mt-5 inline-flex text-sm font-bold text-cyan-300 hover:text-cyan-100" href="https://voicedream.com.br" target="_blank" rel="noreferrer">Conhecer o projeto ↗</a>
+              </article>
+            </div>
+          </div>
+        </section>}
+
         <section className="border-y border-white/10 bg-[#0d1320] px-5 py-16 sm:px-8 sm:py-20">
           <div className="mx-auto max-w-6xl">
             <div className="max-w-2xl">
               <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#c4ff72]">Como funciona</p>
-              <h2 className="mt-3 font-heading text-3xl font-bold tracking-[-0.04em] sm:text-5xl">Uma sequência de decisões. Não uma pilha de ferramentas.</h2>
+              <h2 className="mt-3 font-heading text-3xl font-bold tracking-[-0.04em] sm:text-5xl">{offer.processTitle}</h2>
             </div>
             <div className="mt-10 grid gap-4 md:grid-cols-3">
               {offer.steps.map((step) => (
@@ -334,13 +401,22 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#c4ff72]">O que você leva</p>
-              <h2 className="mt-3 font-heading text-3xl font-bold tracking-[-0.04em] sm:text-5xl">Algo que continua útil depois da página fechar.</h2>
+              <h2 className="mt-3 font-heading text-3xl font-bold tracking-[-0.04em] sm:text-5xl">{offer.deliverablesTitle}</h2>
             </div>
             <ul className="space-y-4">
               {offer.deliverables.map((item) => <li key={item} className="flex gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-4 text-slate-200"><span className="mt-0.5 font-bold text-[#a3ff12]">✓</span><span>{item}</span></li>)}
             </ul>
           </div>
         </section>
+
+        {offer.kind === 'desafio' && <section className="px-5 pb-20 sm:px-8">
+          <div className="mx-auto max-w-4xl rounded-3xl border border-[#a3ff12]/35 bg-[#a3ff12]/[0.07] p-8 text-center sm:p-12">
+            <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#c4ff72]">Primeira turma · pagamento único</p>
+            <p className="mt-4 font-heading text-5xl font-bold">R$ 97</p>
+            <p className="mx-auto mt-4 max-w-xl text-slate-300">Menos que uma assinatura de ferramenta que você talvez nem use. Aqui você passa 21 dias decidindo onde existe valor antes de construir.</p>
+            <button onClick={() => openForm('price-context')} className="mt-7 min-h-12 rounded-xl bg-[#a3ff12] px-7 py-4 font-extrabold text-black transition hover:bg-[#c4ff72]">Quero entrar no Desafio →</button>
+          </div>
+        </section>}
 
         <section className="bg-[#0d1320] px-5 py-16 sm:px-8 sm:py-20">
           <div className="mx-auto grid max-w-6xl gap-5 lg:grid-cols-2">

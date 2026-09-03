@@ -215,6 +215,12 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <MetaPixel />
       <GoogleTagManager />
+      <Script
+        defer
+        data-domain="www.sistemabritto.com.br"
+        src="https://track.workflowapi.com.br/js/script.js"
+        strategy="afterInteractive"
+      />
       <Component {...pageProps} />
     </>
   );

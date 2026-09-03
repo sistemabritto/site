@@ -4,7 +4,7 @@ import Link from 'next/link';
 const footerLinks = [
  { label: 'WhatsApp', href: '/whatsapp' },
  { label: 'SocialJobs', href: '/socialjobs' },
- { label: 'Sistema', href: '/sistema' },
+ { label: 'Sessão + Implementação', href: '/implementacao-vibe-seller' },
  { label: 'ZapClub', href: '/zapclub' },
  { label: 'VPS', href: '/vps' },
  { label: 'Blog', href: 'https://blog.sistemabritto.com.br', external: true },
@@ -27,7 +27,7 @@ export default function Footer() {
           />
         </div>
         <p className="text-white text-sm leading-relaxed font-medium">
-          Workforces de IA que operam seu negócio, do WhatsApp à engenharia de software.
+          Rastreie oportunidades, desenhe a solução certa e capture valor com IA.
         </p>
       </div>
 

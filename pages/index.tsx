@@ -7,7 +7,7 @@ import { trackCta } from './_app';
 const offers = [
   { name: 'Desafio Monetizar com IA', price: 'R$ 97', tag: 'Comece aqui · 21 dias', image: '/covers/desafio-monetizar-com-ia.png', href: '/desafio-monetizar-com-ia', copy: 'Rastreie um problema caro, transforme-o em uma oferta testável e leve a primeira validação ao mercado.', cta: 'Entrar no desafio' },
   { name: 'Sprint Vibe Seller', price: 'R$ 1.497', tag: 'Diagnóstico e decisão', image: '/covers/sprint-vibe-seller.png', href: '/sprint-vibe-seller', copy: 'Transforme uma oportunidade plausível em decisão, mapa de valor, mini-PRD e plano de 30 dias.', cta: 'Aplicar para o Sprint' },
-  { name: 'Implementação Vibe Seller', price: 'A partir de R$ 5.000', tag: 'Sistema sob medida', image: '/covers/implementacao-vibe-seller.png', href: '/implementacao-vibe-seller', copy: 'Converta uma oportunidade validada em sistema, automação e operação com critério de sucesso.', cta: 'Discutir implementação' },
+  { name: 'Sessão + Implementação', price: 'Sessão por R$ 150', tag: 'Arquitetura antes do código', image: '/covers/implementacao-vibe-seller.png', href: '/implementacao-vibe-seller', copy: 'Saia com arquitetura, escopo e custos estimados. Se fizer sentido avançar, implementações começam em R$ 5.000.', cta: 'Reservar uma das 3 agendas' },
 ];
 
 const cases = [
