@@ -15,9 +15,10 @@ const VIDEO_TITULO = 'Monte seu CRM do zero';
 const VIDEO_SUBTITULO = 'Do servidor vazio ao Evo CRM no ar — VPS, Docker, DNS e Traefik, passo a passo.';
 const SESSION_KEY = 'sb_aula_vps_crm_verificado';
 
-// Comunidade Evolution Alliance (grupo no WhatsApp). Link informado pelo
-// Felipe em 22/08/2026.
-const COMUNIDADE_URL = 'https://chat.whatsapp.com/IXPNhwhT8C0GSGxV0b5LMS';
+// Próximo passo para quem terminou a aula: desafio de 21 dias, com origem
+// própria para separar os cliques que vieram desta página de vídeo.
+const DESAFIO_URL =
+  'https://www.sistemabritto.com.br/desafio-monetizar-com-ia?utm_source=video&utm_medium=content&utm_campaign=desafio-monetizar-com-ia&utm_content=aula-vps-crm-do-zero';
 
 // Sem prazo de expiração nesta página — pedido do Felipe em 21/08/2026: é
 // conteúdo/aula, não uma call com data de validade.
@@ -51,11 +52,11 @@ function Etapas() {
   );
 }
 
-/** CTA da comunidade Evolution Alliance — aparece depois do vídeo liberado. */
-function ComunidadeCta() {
+/** CTA do Desafio — aparece depois do vídeo liberado. */
+function DesafioCta() {
   return (
     <section
-      aria-labelledby="cta-comunidade"
+      aria-labelledby="cta-desafio"
       className="relative overflow-hidden rounded-2xl border border-green-400/30 bg-surface-900 p-6 sm:p-8"
     >
       {/* brilho decorativo — puramente visual */}
@@ -66,31 +67,30 @@ function ComunidadeCta() {
 
       <div className="relative">
         <p className="font-heading text-xs font-bold uppercase tracking-[0.2em] text-green-400">
-          Evolution Alliance
+          Próximo passo
         </p>
 
-        <h2 id="cta-comunidade" className="mt-2 font-heading text-2xl font-bold text-white sm:text-3xl">
-          Travou em algum passo?
+        <h2 id="cta-desafio" className="mt-2 font-heading text-2xl font-bold text-white sm:text-3xl">
+          Pare de só construir. Comece a monetizar.
         </h2>
 
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-400 sm:text-base">
-          A Evolution Alliance é a comunidade de quem constrói com a Evolution API. Dúvida de
-          VPS, Docker, DNS ou CRM: pergunta lá que tem gente que já passou por isso — e
-          costuma responder rápido.
+          No Desafio Monetizar com IA, você usa o que aprendeu para encontrar um gargalo de
+          alto valor, testar uma intervenção e começar a transformar valor em receita.
         </p>
 
         <a
-          href={COMUNIDADE_URL}
+          href={DESAFIO_URL}
           target="_blank"
           rel="noreferrer"
-          onClick={() => trackCta('/aula-vps-crm-do-zero', 'entrar-evolution-alliance', 'comunidade')}
-          className="mt-6 inline-flex min-h-[48px] items-center justify-center gap-3 rounded-lg bg-whatsapp-500 px-7 py-3 font-heading font-bold text-black transition-colors duration-200 hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400"
+          onClick={() => trackCta('/aula-vps-crm-do-zero', 'conhecer-desafio', 'video-crm')}
+          className="mt-6 inline-flex min-h-[48px] items-center justify-center gap-3 rounded-lg bg-green-400 px-7 py-3 font-heading font-bold text-black transition-colors duration-200 hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400"
         >
-          <WhatsAppIcon className="h-5 w-5 flex-shrink-0 text-black" />
-          <span>Entrar na comunidade</span>
+          <span>Conhecer o Desafio</span>
+          <span aria-hidden="true">→</span>
         </a>
 
-        <p className="mt-3 text-xs text-gray-500">Grupo no WhatsApp · Entrada gratuita</p>
+        <p className="mt-3 text-xs text-gray-500">21 dias · rastrear, testar e monetizar com IA</p>
       </div>
     </section>
   );
@@ -230,7 +230,7 @@ export default function AulaVpsCrmDoZero() {
             </div>
 
             <div className="mt-10">
-              <ComunidadeCta />
+              <DesafioCta />
             </div>
           </div>
         ) : (
