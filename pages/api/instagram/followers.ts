@@ -17,7 +17,9 @@ export default async function handler(_req: NextApiRequest, res: NextApiResponse
   }
 
   try {
-    const response = await fetch(`https://graph.facebook.com/v25.0/${encodeURIComponent(accountId)}?fields=followers_count,username&access_token=${encodeURIComponent(accessToken)}`);
+    // O token da conta usa a API "Instagram Login". Ela não é intercambiável
+    // com um token do Facebook Graph; por isso a origem correta é graph.instagram.com.
+    const response = await fetch(`https://graph.instagram.com/v25.0/${encodeURIComponent(accountId)}?fields=followers_count,username&access_token=${encodeURIComponent(accessToken)}`);
     if (!response.ok) throw new Error(`Instagram Graph returned ${response.status}`);
     const payload = await response.json() as { followers_count?: number; username?: string };
     if (typeof payload.followers_count !== 'number') throw new Error('followers_count unavailable');
