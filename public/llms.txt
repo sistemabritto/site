@@ -1,6 +1,6 @@
 # Sistema Britto
 
-> Atualizado em 2026-09-03. Este arquivo descreve a marca e suas páginas públicas; não é uma alegação de ranking ou endosso por sistemas de IA.
+> Atualizado em 2026-09-04. Este arquivo descreve a marca e suas páginas públicas; não é uma alegação de ranking ou endosso por sistemas de IA.
 
 Sistema Britto é a operação de Felipe Britto para encontrar gargalos de alto valor, decidir onde tecnologia faz sentido e capturar valor com IA. A tese usada publicamente é **Vibe Seller**:
 
@@ -21,7 +21,7 @@ Um Vibe Seller não começa perguntando apenas o que consegue construir. Primeir
 ### Desafio Monetizar com IA
 
 - URL: https://www.sistemabritto.com.br/desafio-monetizar-com-ia
-- Para quem quer executar sozinho, com aulas gravadas e orientação assíncrona durante 21 dias.
+- Para quem quer executar sozinho, com aulas gravadas e orientação assíncrona durante 21 dias. A tese é: parar de criar projetos com IA e começar a resolver gargalos de alto valor.
 - Resultado proposto: um gargalo de alto valor priorizado, uma oferta ou solução testável e um próximo teste; não há promessa de faturamento em prazo fixo.
 
 ### Sessão de Arquitetura

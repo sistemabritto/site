@@ -1,4 +1,4 @@
-import { trackCta } from './_app';
+import { getStoredUtms, trackCta } from './_app';
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -18,34 +18,25 @@ const cases = [
   { name: 'Delivery', result: '3x mais pedidos, mesma equipe', desc: 'Do pedido ao delivery, tudo automático. Cliente elogia a velocidade.' },
 ];
 
-const WHATSAPP_NUMBER = '5511914088571';
-const WHATSAPP_LABEL = encodeURIComponent('Olá! Vi o site e gostaria de mais informações sobre o WhatsApp + IA');
+const CRM_CHECKOUT_URL = 'https://pay.cakto.com.br/y8xetf8';
 
 export default function WhatsApp() {
-  const whatsappFallback = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_LABEL}`;
-
-  // `origem` distingue os dois botões da página. Sem isso o painel diria
-  // "houve um clique em /whatsapp" e não qual seção converteu.
+  // `origem` distingue os botões da página sem tirar o visitante do fluxo de compra.
   function handleCheckout(origem: string) {
     trackCta('/whatsapp', 'ATIVAR MEU WHATSAPP IA', origem);
-    fetch('/api/abacatepay/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ productId: 'whatsapp-ia-basico' })
-    })
-      .then(r => r.json())
-      .then(data => {
-        if (data.url) window.location.href = data.url;
-        else window.location.href = whatsappFallback;
-      })
-      .catch(() => { window.location.href = whatsappFallback; });
+    const checkoutUrl = new URL(CRM_CHECKOUT_URL);
+    Object.entries(getStoredUtms()).forEach(([key, value]) => {
+      if (key.startsWith('utm_') && value) checkoutUrl.searchParams.set(key, value);
+    });
+    checkoutUrl.searchParams.set('utm_content', `whatsapp-${origem}`);
+    window.location.assign(checkoutUrl.toString());
   }
 
   return (
     <>
       <Meta
         title="Seu WhatsApp respondendo às 22h47 | Sistema Britto"
-        description="A mensagem que chega às 22h47 é respondida às 22h47. IA que qualifica, agenda e vende no seu WhatsApp enquanto você dorme. Sem fidelidade, com garantia de 7 dias."
+        description="CRM com IA no WhatsApp para organizar atendimentos, qualificar oportunidades e acelerar vendas com automação humana."
         path="/whatsapp"
         schema={[
           {
@@ -103,7 +94,7 @@ export default function WhatsApp() {
               </button>
             </div>
 
-            <p className="text-gray-400 text-sm mt-4">Sem fidelidade. Cancele quando quiser. 7 dias de garantia incondicional.</p>
+            <p className="text-gray-400 text-sm mt-4">Assinatura mensal. Pagamento por Pix ou cartão.</p>
           </div>
         </section>
 

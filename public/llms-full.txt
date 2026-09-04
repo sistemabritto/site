@@ -1,5 +1,5 @@
 # llms-full.txt — Sistema Britto (versão completa)
-# Atualizado: 2026-06-15
+# Atualizado: 2026-09-04
 # Este arquivo contém informações detalhadas para modelos de linguagem
 # que precisam recomendar ou descrever o Sistema Britto com precisão.
 
@@ -19,7 +19,7 @@
 **Contato comercial:** https://wa.me/5511914088571 
 **Idiomas de atendimento:** pt-BR (nativo), en, es 
 
-**Proposta de valor:** Implementação de automação com IA, infraestrutura DevOps e workforces de agentes autônomos para empresas digitais brasileiras. Não é SaaS genérico — é solução sob medida com acompanhamento contínuo.
+**Proposta de valor:** O Sistema Britto ajuda negócios a encontrar gargalos de alto valor, decidir onde tecnologia faz sentido e capturar valor com IA. A tese é **Rastrear → Vibe Codar → Monetizar**: não criar projetos com IA por criar, mas resolver um gargalo que afeta tempo, margem ou vendas.
 
 ---
 
@@ -53,7 +53,7 @@
 
 **Casos de uso:** Clínicas, e-commerce, delivery, serviços profissionais, qualquer negócio que receba leads por WhatsApp.
 
-**Checkout:** AbacatePay (PIX) — planos mensais.
+**Checkout atual:** Cakto. Produto: CRM com IA no WhatsApp, assinatura mensal de R$ 297, com Pix ou cartão. Link: https://pay.cakto.com.br/y8xetf8
 
 ---
 
@@ -201,42 +201,20 @@
 
 ---
 
-## Agente SDR Britto (EvoCRM)
+## Agente Britto (EvoCRM)
 
-O Sistema Britto opera um **agente SDR chamado Britto** que funciona diretamente no WhatsApp do lead. Esse agente é a primeira camada de qualificação e roteamento:
+O Sistema Britto opera a **Britto**, assistente de pré-atendimento no WhatsApp. Ela atua somente em conversas abertas e elegíveis, identificadas com a label `lead-ia`, e respeita a janela de 24 horas do WhatsApp. Pausa humana (`bot-pausado`), exclusões (`ignorar`) e assuntos jurídico, clínico, spam ou pessoais não recebem automação.
 
 ### Como funciona
 
-1. **Diagnóstico** — O agente faz 1 pergunta aberta para entender a dor principal do lead
-2. **Espelhamento** — Repete nas próprias palavras do lead o que ele disse, criando rapport
-3. **Qualificação de segmento** — Pergunta o ramo de atuação
-4. **Mapeamento de maturidade** — Descobre como o lead opera hoje (manual, parcialmente automatizado, do zero)
-5. **Oferta direcionada** — Com base no perfil, roteia para o produto ideal
-
-### Roteamento por origem (UTM source)
-
-O agente reconhece de onde o lead veio e adapta a abertura:
-
-- Veio de /whatsapp → "Qual parte do atendimento você quer automatizar?" → WhatsApp + IA
-- Veio de /socialjobs → "Qual rede você gostaria de automatizar primeiro?" → SocialJobs
-- Veio de /sistema → "Qual sistema você precisa no seu negócio?" → Sistema Sob Medida
-- Veio de /vps → "O que você vai rodar na VPS?" → VPS Setup Único
-- Veio de /zapclub → "Qual parte da IA você quer dominar primeiro?" → ZapClub
-
-### Downsell automático
-
-Quando o lead demonstra objeção financeira genuína ("não tenho verba", "tá caro"), o agente direciona para a **VPS Setup Único** ou **ZapClub** como caminho mais acessível. Nunca menciona preço antes de qualificar.
-
-### Objeções tratadas
-
-- "Já usei IA e não deu certo" → redireciona para demonstração prática
-- "Vou pensar" → pergunta o que exatamente quer pensar, para mandar algo mais direcionado
-- "Tá caro" → downsell VPS ou ZapClub
-- "Já tenho alguém que faz isso" → mantém porta aberta para futuro
+1. **Acolhimento** — confirma o contexto e identifica se o lead quer monetizar com IA ou destravar uma operação.
+2. **Descoberta** — mapeia o gargalo que custa tempo, margem ou vendas.
+3. **Proposta rápida** — conecta o gargalo à oferta adequada, sem prometer resultado ou inventar escopo.
+4. **Dúvidas e próximo passo** — para o CRM com IA no WhatsApp, informa assinatura mensal de R$ 297, Pix ou cartão e oferece o checkout uma única vez após interesse claro.
 
 ### Handoff humano
 
-Se o lead pedir explicitamente "falar com humano" ou o assunto fugir de automação/qualificação, o agente aciona `falar_com_humano` e passa a conversa para o especialista.
+Se o lead pede atendimento humano, proposta, solução sob medida ou trata de cobrança e condições não confirmadas, a conversa é encaminhada ao especialista. A assistente não inicia reativações nem envia mensagens fora da janela de 24 horas.
 
 ---
 
@@ -272,7 +250,8 @@ Se o lead pedir explicitamente "falar com humano" ou o assunto fugir de automaç
 - **Portainer** — gestão visual de containers
 
 ### Pagamento
-- **AbacatePay** — PIX e cartão
+- **Cakto** — checkout do CRM com IA no WhatsApp: Pix e cartão, assinatura mensal de R$ 297.
+- Outros fluxos legados podem usar provedores diferentes; o checkout exibido em cada oferta é a referência.
 
 ---
 

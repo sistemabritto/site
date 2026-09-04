@@ -217,6 +217,26 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
   },
 };
 
+function weeklyAgendaCountdown(now = Date.now()) {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Sao_Paulo',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    weekday: 'short',
+  }).formatToParts(new Date(now));
+  const value = (type: string) => Number(parts.find((part) => part.type === type)?.value);
+  const weekday = parts.find((part) => part.type === 'weekday')?.value ?? 'Sun';
+  const weekdayIndex = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 }[weekday] ?? 0;
+  const daysUntilSunday = (7 - weekdayIndex) % 7 || 7;
+  // Domingo às 00h em São Paulo equivale a 03h UTC.
+  const resetAt = Date.UTC(value('year'), value('month') - 1, value('day') + daysUntilSunday, 3, 0, 0);
+  const remaining = Math.max(0, resetAt - now);
+  const hours = Math.floor(remaining / 3_600_000);
+  const minutes = Math.floor((remaining % 3_600_000) / 60_000);
+  return `${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}min`;
+}
+
 export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
   const offer = OFFERS[kind];
   const [formOpen, setFormOpen] = useState(false);
@@ -225,9 +245,18 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
   const [error, setError] = useState('');
   const [utms, setUtms] = useState<Record<string, string>>({});
   const [form, setForm] = useState({ name: '', email: '', whatsapp: '', context: '' });
+  const [agendaCountdown, setAgendaCountdown] = useState('');
   const modalId = `checkout-${kind}`;
 
   useEffect(() => setUtms(getStoredUtms()), []);
+
+  useEffect(() => {
+    if (kind === 'desafio') return;
+    const updateCountdown = () => setAgendaCountdown(weeklyAgendaCountdown());
+    updateCountdown();
+    const intervalId = window.setInterval(updateCountdown, 60_000);
+    return () => window.clearInterval(intervalId);
+  }, [kind]);
 
   const source = useMemo(() => `${kind}-vibe-seller`, [kind]);
 
@@ -340,10 +369,24 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
               <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#c4ff72]">A transformação</p>
               <p className="mt-4 font-heading text-2xl font-bold leading-tight text-white">{offer.proof}</p>
               {offer.kind !== 'desafio' && <div className="mt-8 border-t border-white/10 pt-6">
-                <p className="text-sm text-slate-400">Porta de entrada</p>
-                <p className="mt-1 text-sm text-slate-500 line-through">Valor normal: R$ 300</p>
-                <p className="mt-1 font-heading text-4xl font-bold text-white">R$ 150</p>
-                <p className="mt-2 text-sm leading-relaxed text-slate-400">Válido para as 3 primeiras agendas da semana. Vira crédito se você avançar.</p>
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-violet-200">Porta de entrada</p>
+                <div className="mt-3 flex items-end gap-3">
+                  <p className="font-heading text-5xl font-black leading-none tracking-[-0.06em] text-white">R$ 150</p>
+                  <p className="mb-1 text-sm text-slate-500 line-through">R$ 300</p>
+                </div>
+                <p className="mt-2 text-sm font-medium text-slate-300">O valor vira crédito se você avançar.</p>
+                <div className="mt-5 rounded-2xl border border-violet-300/25 bg-violet-300/[0.08] p-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="text-sm font-bold text-white">3 agendas nesta condição</p>
+                    <span className="rounded-full border border-violet-200/30 bg-violet-200/10 px-2.5 py-1 text-xs font-bold text-violet-100">semanal</span>
+                  </div>
+                  <div className="mt-3 grid grid-cols-3 gap-1.5" aria-label="Condição limitada a três agendas por semana">
+                    <span className="h-1.5 rounded-full bg-violet-200" />
+                    <span className="h-1.5 rounded-full bg-violet-200" />
+                    <span className="h-1.5 rounded-full bg-violet-200" />
+                  </div>
+                  <p className="mt-3 text-xs text-violet-100/85">Novo ciclo domingo, 00h · {agendaCountdown ? `renova em ${agendaCountdown}` : 'calculando horário…'}</p>
+                </div>
               </div>}
               </div>
             </aside>

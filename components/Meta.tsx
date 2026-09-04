@@ -20,7 +20,7 @@ export default function Meta({ title, description, path = '', ogImage = '/og-ima
       <title>{title}</title>
       <meta name="description" content={description} />
       {noIndex && <meta name="robots" content="noindex, nofollow" />}
-      <meta name="keywords" content="WhatsApp Business, automação, IA, agentes autônomos, EvoNexus, Claude Code, Hermes, CRM, evolução API, Sistema Britto" />
+      <meta name="keywords" content="gargalos de alto valor, IA para negócios, monetização com IA, CRM com IA no WhatsApp, automação comercial, Vibe Seller, Sistema Britto" />
       <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       <meta name="theme-color" content="#0a0a0a" />
       
@@ -33,9 +33,7 @@ export default function Meta({ title, description, path = '', ogImage = '/og-ima
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={absoluteOgImage} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="Sistema Britto | Workforce de IA" />
+      <meta property="og:image:alt" content={title} />
       <meta property="og:locale" content="pt_BR" />
       <meta property="og:site_name" content="Sistema Britto" />
       
