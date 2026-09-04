@@ -265,12 +265,8 @@ export default function WhatsApp() {
         {/* OFERTA */}
         <section id="plano" className="py-20 px-4 bg-[#0a0a0a]">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-white mb-2">Oferta de lançamento</h2>
-            <p className="text-gray-400 mb-8">Preço válido enquanto durarem as vagas.</p>
-
-            <div className="inline-flex items-center gap-2 bg-primary-500/20 text-green-500 px-3 py-1 rounded-full text-sm font-bold mb-4">
-              7 dias de garantia incondicional
-            </div>
+            <h2 className="text-3xl font-bold text-white mb-2">CRM com IA no WhatsApp</h2>
+            <p className="text-gray-400 mb-8">Assinatura mensal para organizar atendimento, oportunidades e próximos passos comerciais.</p>
 
             <div className="bg-gradient-to-br from-green-500/20 to-green-900/10 rounded-3xl p-8 border border-green-500/30 mb-8">
               <ul className="space-y-4 text-left mb-8">
@@ -293,9 +289,6 @@ export default function WhatsApp() {
 
               <div className="pt-8 border-t border-green-500/30">
                 <div className="flex items-baseline justify-center gap-2 mb-6">
-                  <span className="text-gray-300 text-lg">De</span>
-                  <span className="text-gray-400 text-2xl line-through">R$ 750</span>
-                  <span className="text-gray-300 text-lg">por</span>
                   <span className="text-white text-6xl font-bold">R$ 297</span>
                   <span className="text-gray-300 text-xl">/mês</span>
                 </div>
