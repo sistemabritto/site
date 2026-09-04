@@ -40,29 +40,29 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     kind: 'desafio',
     cover: '/covers/desafio-monetizar-com-ia.png',
     path: '/desafio-monetizar-com-ia',
-    metaTitle: 'Desafio Monetizar com IA | 21 dias para validar uma oportunidade',
-    metaDescription: 'Em 21 dias, encontre um problema caro, transforme-o em uma oferta ou solução testável e coloque a primeira validação no mundo. R$ 97.',
-    eyebrow: '21 dias · uma oportunidade real · Método Mapa Vibe Seller',
-    headline: 'Não procure a próxima ideia de SaaS.',
-    emphasis: 'Encontre uma forma de monetizar valor com IA.',
-    lead: 'Você não entra para colecionar ferramenta, prompt ou aula. Entra para rastrear um problema caro, decidir se vale construir e colocar uma hipótese real no mercado.',
+    metaTitle: 'Desafio Monetizar com IA | 21 dias para encontrar gargalos de alto valor',
+    metaDescription: 'Em 21 dias, encontre um gargalo de alto valor, transforme-o em uma oferta ou solução testável e leve a primeira validação ao mercado. R$ 97.',
+    eyebrow: '21 dias · um gargalo de alto valor · Método Mapa Vibe Seller',
+    headline: 'Pare de criar projetos com IA.',
+    emphasis: 'Comece a resolver gargalos de alto valor.',
+    lead: 'Você não entra para colecionar ferramenta, prompt ou aula. Entra para encontrar um gargalo de alto valor, decidir se vale construir e levar uma hipótese real ao mercado.',
     price: 'R$ 97',
     primaryCta: 'Quero entrar no Desafio',
     formTitle: 'Sua inscrição no Desafio',
     formLead: 'Preencha seus dados para abrir o checkout. Você receberá as instruções da turma no contato informado após a confirmação.',
     submitLabel: 'Ir para o checkout →',
     checkoutUrl: 'https://pay.cakto.com.br/oko7cox',
-    processTitle: '21 dias para sair da ideia e chegar a um teste real.',
+    processTitle: '21 dias para sair do projeto aleatório e chegar a um teste real.',
     deliverablesTitle: 'Você termina com uma decisão e uma oferta testável.',
     proof: 'A tese vem de operação real: produto que não reteve, diferencial que a IA commoditizou e tecnologia que virou equity. O método existe para você não construir no escuro.',
     steps: [
-      { label: 'Dias 1–7', title: 'Rastrear', copy: 'Escolha uma dor, estime o custo da inação e defina quem sente e quem paga.' },
+      { label: 'Dias 1–7', title: 'Rastrear', copy: 'Encontre um gargalo de alto valor, estime o custo da inação e defina quem sente e quem paga.' },
       { label: 'Dias 8–14', title: 'Vibe Codar', copy: 'Decida build, buy ou ignore; monte a menor oferta, proposta ou solução capaz de ser testada.' },
       { label: 'Dias 15–21', title: 'Monetizar', copy: 'Leve a hipótese ao mercado, leia a resposta e decida com evidência: seguir, ajustar ou matar.' },
     ],
     deliverables: [
       '21 missões curtas organizadas em três sprints',
-      'Mapa Vibe Seller para priorizar oportunidade, comprador e captura de valor',
+      'Mapa Vibe Seller para priorizar gargalo, comprador e captura de valor',
       'Matriz Build / Buy / Ignore para não criar software commodity',
       'Roteiros de conversa, pré-venda, página e teste mínimo',
       'Aulas gravadas e uma sequência assíncrona de 21 mensagens para guiar sua execução',
@@ -78,17 +78,17 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
       'Você quer acompanhamento individual diário por R$ 97.',
     ],
     faqs: [
-      { question: 'Vou faturar em 21 dias?', answer: 'Não existe promessa de faturamento em prazo fixo. O resultado do Desafio é uma oportunidade priorizada, uma oferta ou solução testável e uma validação real; faturamento depende de problema, comprador, proposta e execução.' },
+      { question: 'Vou faturar em 21 dias?', answer: 'Não existe promessa de faturamento em prazo fixo. O resultado do Desafio é um gargalo de alto valor priorizado, uma oferta ou solução testável e uma validação real; faturamento depende de problema, comprador, proposta e execução.' },
       { question: 'Preciso saber programar?', answer: 'Não. Construir é uma das decisões possíveis. Em alguns casos a resposta correta será comprar, ajustar processo ou vender serviço antes de escrever código.' },
       { question: 'O que é o Mapa Vibe Seller?', answer: 'É a ferramenta de decisão do Desafio. Ela organiza dor, custo da inação, comprador, distribuição, build versus buy, risco de comoditização e próximo teste.' },
       { question: 'E se eu encontrar uma oportunidade maior?', answer: 'Quando você precisa de acompanhamento ou quer que alguém execute junto/com você, o próximo passo é a Sessão de Arquitetura. Ela decide qual nível de entrega faz sentido.' },
     ],
-    nextStep: { title: 'Encontrou uma oportunidade maior?', copy: 'Se a validação pede acompanhamento ou execução, comece pela Sessão de Arquitetura. Ela transforma o contexto em plano e mostra o nível de entrega certo.', href: '/sprint-vibe-seller', cta: 'Ver acompanhamento →' },
+    nextStep: { title: 'Encontrou um gargalo maior?', copy: 'Se a validação pede acompanhamento ou execução, comece pela Sessão de Arquitetura. Ela transforma o contexto em plano e mostra o nível de entrega certo.', href: '/sprint-vibe-seller', cta: 'Ver acompanhamento →' },
     schema: [{
       '@type': 'Course',
       '@id': 'https://www.sistemabritto.com.br/desafio-monetizar-com-ia#course',
       name: 'Desafio Monetizar com IA',
-      description: 'Desafio de 21 dias para rastrear uma oportunidade, decidir build versus buy e validar uma forma de capturar valor com IA.',
+      description: 'Desafio de 21 dias para encontrar gargalos de alto valor, decidir build versus buy e validar uma forma de capturar valor com IA.',
       provider: { '@id': 'https://www.sistemabritto.com.br/#organization' },
       url: 'https://www.sistemabritto.com.br/desafio-monetizar-com-ia',
       offers: { '@type': 'Offer', price: '97.00', priceCurrency: 'BRL', availability: 'https://schema.org/InStock' },
@@ -453,7 +453,7 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
               <span className="mr-2 align-[0.18em] text-2xl text-[#d8ff91] sm:text-3xl">R$</span>
               <span className="bg-gradient-to-b from-white via-[#e7ffc0] to-[#a3ff12] bg-clip-text text-6xl text-transparent drop-shadow-[0_8px_28px_rgba(163,255,18,0.25)] sm:text-7xl">97</span>
             </p>
-            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-slate-200 sm:text-lg">Não procure uma ideia. Encontre um gargalo que alguém pagaria para resolver — e use 21 dias para encontrar o que vale construir e começar a monetizar.</p>
+            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-slate-200 sm:text-lg">Em 21 dias, encontre um gargalo de alto valor e comece a validar o que vale construir para monetizar.</p>
             <button onClick={() => openForm('price-context')} className="mt-7 min-h-12 rounded-xl bg-[#a3ff12] px-7 py-4 font-extrabold text-black transition hover:bg-[#c4ff72]">Quero entrar no Desafio →</button>
             <FollowerLot />
           </div>

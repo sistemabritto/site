@@ -178,7 +178,7 @@ export default function Links() {
     <>
       <Meta
         title="Sistema Britto | Oportunidades, IA e sistemas que capturam valor"
-        description="Desafio Monetizar com IA, aulas gratuitas e sistemas para transformar oportunidades em receita, economia, margem ou equity."
+        description="Desafio Monetizar com IA, aulas gratuitas e sistemas para transformar gargalos de alto valor em receita, economia, margem ou equity."
         path="/links"
         ogImage="/images/links/aula-vps-crm.jpg"
       />
@@ -205,7 +205,7 @@ export default function Links() {
               Sistema Britto
             </h1>
             <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-gray-400 sm:text-base">
-              Rastrear oportunidades, vibe codar soluções e capturar valor com IA.
+              Encontrar gargalos de alto valor, vibe codar soluções e capturar valor com IA.
             </p>
           </header>
 
