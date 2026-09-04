@@ -453,7 +453,7 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
               <span className="mr-2 align-[0.18em] text-2xl text-[#d8ff91] sm:text-3xl">R$</span>
               <span className="bg-gradient-to-b from-white via-[#e7ffc0] to-[#a3ff12] bg-clip-text text-6xl text-transparent drop-shadow-[0_8px_28px_rgba(163,255,18,0.25)] sm:text-7xl">97</span>
             </p>
-            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-slate-200 sm:text-lg">Não procure uma ideia. Encontre um gargalo que alguém pagaria para resolver — e use 21 dias para decidir o que vale construir.</p>
+            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-slate-200 sm:text-lg">Não procure uma ideia. Encontre um gargalo que alguém pagaria para resolver — e use 21 dias para encontrar o que vale construir e começar a monetizar.</p>
             <button onClick={() => openForm('price-context')} className="mt-7 min-h-12 rounded-xl bg-[#a3ff12] px-7 py-4 font-extrabold text-black transition hover:bg-[#c4ff72]">Quero entrar no Desafio →</button>
             <FollowerLot />
           </div>
