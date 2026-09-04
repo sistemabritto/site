@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Meta from '../components/Meta';
 import WhatsAppIcon from '../components/WhatsAppIcon';
-import FollowerLot from '../components/FollowerLot';
 import { trackCta, getStoredUtms } from './_app';
 
 /**
@@ -267,7 +266,6 @@ export default function Links() {
               <p className="mt-2 text-sm leading-relaxed text-gray-300">Encontre valor escondido em um problema real, transforme-o em uma oferta testável e saia do consumo de ferramentas para a validação no mercado.</p>
               <span className="mt-5 inline-flex items-center gap-2 font-heading text-sm font-bold text-[#c4ff72]">Conhecer o caminho de 21 dias <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span></span>
             </a>
-            <FollowerLot />
           </section>
 
           {/* ===== Serviços ===== */}
