@@ -3,6 +3,13 @@
 # IA, automação e infraestrutura sob medida para empresas digitais brasileiras.
 
 User-agent: *
+# Reserva de direito sob o Art. 4 da Diretiva UE 2019/790: pode indexar e
+# citar (search=yes, use=reference), não pode treinar modelo com isto
+# (ai-train=no). Não é bloqueio técnico — é sinal declarado, o mesmo formato
+# que blog.sistemabritto.com.br usava antes de perder o sinal ao desativar o
+# robots.txt gerenciado da Cloudflare (04/09/2026). Aqui a origem é nossa,
+# então o sinal fica sem depender de terceiro.
+Content-Signal: search=yes,ai-train=no,use=reference
 Allow: /
 
 # ── Páginas Principais ────────────────────────────────
