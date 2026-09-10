@@ -177,8 +177,8 @@ export default function Links() {
   return (
     <>
       <Meta
-        title="Sistema Britto | Oportunidades, IA e sistemas que capturam valor"
-        description="Desafio Monetizar com IA, aulas gratuitas e sistemas para transformar gargalos de alto valor em receita, economia, margem ou equity."
+        title="Sistema Britto | IA e CRM aplicados à sua empresa"
+        description="Materiais para donos e gestores: presença digital, CRM e uma Sessão de Arquitetura para definir o próximo passo da empresa."
         path="/links"
         ogImage="/images/links/aula-vps-crm.jpg"
       />
@@ -205,9 +205,76 @@ export default function Links() {
               Sistema Britto
             </h1>
             <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-gray-400 sm:text-base">
-              Encontrar gargalos de alto valor, vibe codar soluções e capturar valor com IA.
+              IA e CRM para sua empresa ser encontrada, organizar oportunidades e melhorar a operação.
             </p>
           </header>
+
+          <section aria-label="Aplicar na sua empresa" className="mt-8 space-y-4">
+            <a href={hrefComUtm('/sessao-de-arquitetura', 'bio-arquitetura-v1', utms)}
+              onClick={() => trackCta('/links', 'sessao-arquitetura', 'bio-principal-v1')}
+              className="block rounded-2xl border border-green-400/50 bg-surface-900 p-5 focus-visible:outline focus-visible:outline-4 focus-visible:outline-green-300 hover:border-green-300">
+              <span className="text-xs font-bold uppercase tracking-wider text-green-400">Quero ajuda para aplicar</span>
+              <h2 className="mt-2 font-heading text-xl font-bold">Defina o próximo passo da sua empresa.</h2>
+              <p className="mt-2 text-sm leading-relaxed text-gray-300">Sessão de Arquitetura com Felipe: prioridade, escopo e custos antes de investir em tecnologia.</p>
+              <span className="mt-4 block font-bold text-green-400">Ver a sessão e o investimento →</span>
+            </a>
+            <a href="https://nexus.workflowapi.com.br/share/JmqUbtpIsv8eU8Gif-9XzmuU9w2O7S95M_g1pCxYMQ4"
+              onClick={() => trackCta('/links', 'guia-visibilidade-ia', 'bio-material-v3')}
+              className="block rounded-2xl border border-surface-700 bg-surface-900 p-5 focus-visible:outline focus-visible:outline-4 focus-visible:outline-green-300 hover:border-green-400/50">
+              <span className="text-xs font-bold uppercase tracking-wider text-green-400">Material gratuito · donos e gestores</span>
+              <h2 className="mt-2 font-heading text-xl font-bold">Sua empresa nas buscas com IA</h2>
+              <p className="mt-2 text-sm leading-relaxed text-gray-300">Checklist e prompt para revisar acesso, clareza e o caminho até o contato. Sem promessa de citação.</p>
+              <span className="mt-4 block font-bold text-green-400">Abrir o guia →</span>
+            </a>
+          </section>
+
+          {/* ===== Aulas gratuitas: prova e contexto antes da oferta ===== */}
+          <section aria-labelledby="sec-aulas" className="mt-10">
+            <div className="mb-4 flex items-center gap-3">
+              <h2
+                id="sec-aulas"
+                className="font-heading text-xs font-bold uppercase tracking-[0.2em] text-green-400"
+              >
+                Comece grátis
+              </h2>
+              <span aria-hidden="true" className="h-px flex-1 bg-surface-700" />
+            </div>
+
+            <div className="grid gap-4">
+              {AULAS.map((aula) => (
+                <AulaCard key={aula.slug} aula={aula} utms={utms} />
+              ))}
+            </div>
+
+          </section>
+
+          {/* ===== Serviços ===== */}
+          <section aria-labelledby="sec-servicos" className="mt-10">
+            <div className="mb-4 flex items-center gap-3">
+              <h2
+                id="sec-servicos"
+                className="font-heading text-xs font-bold uppercase tracking-[0.2em] text-gray-400"
+              >
+                Trabalhar comigo
+              </h2>
+              <span aria-hidden="true" className="h-px flex-1 bg-surface-700" />
+            </div>
+
+            <div className="grid gap-3">
+              {SERVICOS.map((servico) => (
+                <ServicoCard key={servico.slug} servico={servico} utms={utms} />
+              ))}
+            </div>
+          </section>
+
+          <section aria-label="Aprender por conta própria" className="mt-8">
+            <a href={hrefComUtm('/desafio-monetizar-com-ia', 'bio-desafio-opcional', utms)}
+              onClick={() => trackCta('/links', 'desafio-monetizar-com-ia', 'aprendizado-opcional-v1')}
+              className="block rounded-xl border border-surface-700 p-5 text-sm leading-relaxed text-gray-300 focus-visible:outline focus-visible:outline-green-300">
+              <span className="block font-bold text-white">Prefere aprender a validar uma oferta?</span>
+              <span className="mt-2 block">Conheça o Desafio de 21 dias. É um caminho de aprendizado, não uma etapa obrigatória para contratar a sessão. →</span>
+            </a>
+          </section>
 
           <a
             href={COMUNIDADE_URL}
@@ -230,62 +297,6 @@ export default function Links() {
             </div>
             <span className="mt-5 inline-flex font-heading text-sm font-bold text-green-400">Entrar na comunidade agora →</span>
           </a>
-
-          {/* ===== Aulas gratuitas: prova e contexto antes da oferta ===== */}
-          <section aria-labelledby="sec-aulas" className="mt-10">
-            <div className="mb-4 flex items-center gap-3">
-              <h2
-                id="sec-aulas"
-                className="font-heading text-xs font-bold uppercase tracking-[0.2em] text-green-400"
-              >
-                Comece grátis
-              </h2>
-              <span aria-hidden="true" className="h-px flex-1 bg-surface-700" />
-            </div>
-
-            <div className="grid gap-4">
-              {AULAS.map((aula) => (
-                <AulaCard key={aula.slug} aula={aula} utms={utms} />
-              ))}
-            </div>
-
-          </section>
-
-          {/* ===== Oferta de entrada: primeiro passo pago depois das aulas ===== */}
-          <section aria-labelledby="sec-desafio" className="mt-10">
-            <a
-              href={hrefComUtm('/desafio-monetizar-com-ia', 'desafio-21-dias', utms)}
-              onClick={() => trackCta('/links', 'desafio-monetizar-com-ia', 'oferta-entrada')}
-              className="group block overflow-hidden rounded-3xl border border-[#a3ff12]/45 bg-[radial-gradient(circle_at_top_right,rgba(163,255,18,0.22),transparent_48%),linear-gradient(135deg,#111b19,#10121d)] p-6 shadow-[0_18px_45px_rgba(0,0,0,0.28)] transition hover:-translate-y-0.5 hover:border-[#a3ff12]/75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a3ff12]"
-            >
-              <div className="relative -mx-6 -mt-6 mb-6 aspect-square overflow-hidden">
-                <Image src="/covers/desafio-monetizar-com-ia.png" alt="Desafio Monetizar com IA — 21 dias" fill sizes="(max-width: 640px) 100vw, 520px" className="object-cover transition-transform duration-300 group-hover:scale-[1.02]" />
-              </div>
-              <span className="inline-flex rounded-full border border-[#a3ff12]/35 bg-[#a3ff12]/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#c4ff72]">Eu ensino · você faz · 21 dias</span>
-              <h2 id="sec-desafio" className="mt-4 font-heading text-2xl font-bold leading-tight text-white">Desafio Monetizar com IA</h2>
-              <p className="mt-2 text-sm leading-relaxed text-gray-300">Encontre valor escondido em um problema real, transforme-o em uma oferta testável e saia do consumo de ferramentas para a validação no mercado.</p>
-              <span className="mt-5 inline-flex items-center gap-2 font-heading text-sm font-bold text-[#c4ff72]">Conhecer o caminho de 21 dias <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span></span>
-            </a>
-          </section>
-
-          {/* ===== Serviços ===== */}
-          <section aria-labelledby="sec-servicos" className="mt-10">
-            <div className="mb-4 flex items-center gap-3">
-              <h2
-                id="sec-servicos"
-                className="font-heading text-xs font-bold uppercase tracking-[0.2em] text-gray-400"
-              >
-                Trabalhar comigo
-              </h2>
-              <span aria-hidden="true" className="h-px flex-1 bg-surface-700" />
-            </div>
-
-            <div className="grid gap-3">
-              {SERVICOS.map((servico) => (
-                <ServicoCard key={servico.slug} servico={servico} utms={utms} />
-              ))}
-            </div>
-          </section>
 
           {/* ===== Contato direto ===== */}
           <a

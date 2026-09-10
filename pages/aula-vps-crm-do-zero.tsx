@@ -15,10 +15,8 @@ const VIDEO_TITULO = 'Monte seu CRM do zero';
 const VIDEO_SUBTITULO = 'Do servidor vazio ao Evo CRM no ar — VPS, Docker, DNS e Traefik, passo a passo.';
 const SESSION_KEY = 'sb_aula_vps_crm_verificado';
 
-// Próximo passo para quem terminou a aula: desafio de 21 dias, com origem
-// própria para separar os cliques que vieram desta página de vídeo.
-const DESAFIO_URL =
-  'https://www.sistemabritto.com.br/desafio-monetizar-com-ia?utm_source=video&utm_medium=content&utm_campaign=desafio-monetizar-com-ia&utm_content=aula-vps-crm-do-zero';
+// Preserva origem da sessão; identifica a ponte comercial na chegada.
+const ARQUITETURA_URL = '/sessao-de-arquitetura?utm_content=aula-crm-arquitetura-v1';
 
 // Sem prazo de expiração nesta página — pedido do Felipe em 21/08/2026: é
 // conteúdo/aula, não uma call com data de validade.
@@ -52,11 +50,11 @@ function Etapas() {
   );
 }
 
-/** CTA do Desafio — aparece depois do vídeo liberado. */
-function DesafioCta() {
+/** Ponte comercial para donos: planejamento antes de implementar. */
+function ArquiteturaCta() {
   return (
     <section
-      aria-labelledby="cta-desafio"
+      aria-labelledby="cta-arquitetura"
       className="relative overflow-hidden rounded-2xl border border-green-400/30 bg-surface-900 p-6 sm:p-8"
     >
       {/* brilho decorativo — puramente visual */}
@@ -70,27 +68,28 @@ function DesafioCta() {
           Próximo passo
         </p>
 
-        <h2 id="cta-desafio" className="mt-2 font-heading text-2xl font-bold text-white sm:text-3xl">
-          Pare de só construir. Comece a monetizar.
+        <h2 id="cta-arquitetura" className="mt-2 font-heading text-2xl font-bold text-white sm:text-3xl">
+          O CRM no ar é o começo. Agora organize o caminho até a venda.
         </h2>
 
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-400 sm:text-base">
-          No Desafio Monetizar com IA, você usa o que aprendeu para encontrar um gargalo de
-          alto valor, testar uma intervenção e começar a transformar valor em receita.
+          Na Sessão de Arquitetura, olhamos o processo da sua empresa: entrada dos contatos,
+          atendimento, oportunidades e próximas ações. Você sai com prioridades, escopo
+          e uma rota de aplicação antes de contratar implementação.
         </p>
 
         <a
-          href={DESAFIO_URL}
+          href={ARQUITETURA_URL}
           target="_blank"
           rel="noreferrer"
-          onClick={() => trackCta('/aula-vps-crm-do-zero', 'conhecer-desafio', 'video-crm')}
+          onClick={() => trackCta('/aula-vps-crm-do-zero', 'conhecer-arquitetura', 'aula-crm-ponte-v1')}
           className="mt-6 inline-flex min-h-[48px] items-center justify-center gap-3 rounded-lg bg-green-400 px-7 py-3 font-heading font-bold text-black transition-colors duration-200 hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400"
         >
-          <span>Conhecer o Desafio</span>
+          <span>Ver a Sessão de Arquitetura</span>
           <span aria-hidden="true">→</span>
         </a>
 
-        <p className="mt-3 text-xs text-gray-500">21 dias · rastrear, testar e monetizar com IA</p>
+        <p className="mt-3 text-xs text-gray-500">Sessão individual · planejamento · execução contratada separadamente</p>
       </div>
     </section>
   );
@@ -222,6 +221,8 @@ export default function AulaVpsCrmDoZero() {
               className="w-full rounded-2xl border border-surface-700 bg-black shadow-2xl shadow-green-400/5"
             />
 
+            <div className="mt-6"><ArquiteturaCta /></div>
+
             <div className="mt-10">
               <h2 className="mb-4 font-heading text-lg font-semibold text-white">
                 O que você monta nessa aula
@@ -229,9 +230,7 @@ export default function AulaVpsCrmDoZero() {
               <Etapas />
             </div>
 
-            <div className="mt-10">
-              <DesafioCta />
-            </div>
+
           </div>
         ) : (
           <div className="mx-auto max-w-md">

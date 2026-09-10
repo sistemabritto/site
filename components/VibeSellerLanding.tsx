@@ -4,6 +4,7 @@ import Meta from './Meta';
 import PhoneInput from './PhoneInput';
 import FollowerLot from './FollowerLot';
 import { getStoredUtms, trackCta } from '../pages/_app';
+import { ARCHITECTURE_SESSION } from '../lib/architecture-session';
 
 type OfferKind = 'desafio' | 'sprint' | 'implementacao';
 
@@ -109,7 +110,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     formTitle: 'Comprar Sessão de Arquitetura',
     formLead: 'É a porta de entrada comum para Sprint e Implementação. Você compra a sessão por R$ 150, recebe o link de agenda após a confirmação e esse valor é abatido se avançarmos.',
     submitLabel: 'Ir para o checkout de R$ 150 →',
-    checkoutUrl: 'https://pay.cakto.com.br/35xvemn',
+    checkoutUrl: ARCHITECTURE_SESSION.checkoutUrl,
     processTitle: 'Nove semanas, cinco checkpoints e suporte individual de verdade.',
     deliverablesTitle: 'Clareza na sessão. Direção individual até a solução virar venda.',
     proof: 'A Sessão de Arquitetura define a rota. Se o Sprint for o nível certo, entramos em três sprints de três semanas com suporte individual no WhatsApp e cinco checkpoints para fazer o projeto sair da ideia, ganhar forma e chegar ao mercado.',
@@ -169,7 +170,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     formTitle: 'Comprar Sessão de Arquitetura',
     formLead: 'Você compra a sessão por R$ 150. Depois da confirmação, recebe o link para escolher o horário; se avançarmos para a implementação, esse valor é abatido.',
     submitLabel: 'Ir para o checkout de R$ 150 →',
-    checkoutUrl: 'https://pay.cakto.com.br/35xvemn',
+    checkoutUrl: ARCHITECTURE_SESSION.checkoutUrl,
     processTitle: 'Primeiro a arquitetura. Depois, nove semanas para colocar uma solução pronta para vender no mundo.',
     deliverablesTitle: 'Você sai da sessão com clareza. Avançando, recebe a solução pronta para operar e fazer dinheiro.',
     proof: 'Uma sessão individual para sair com o projeto documentado antes de ser orçado. Para a Implementação de R$ 5.000, você paga R$ 150 na sessão, R$ 2.350 na entrada e deixa R$ 2.500 para quando a solução estiver ready to market.',
