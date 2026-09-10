@@ -3,7 +3,6 @@ import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PhoneInput from '../components/PhoneInput';
-import WhatsAppIcon from '../components/WhatsAppIcon';
 import { trackCta, getStoredUtms } from './_app';
 
 // Vídeo completo da aula, publicado via Nexus share (raw view — content-type
@@ -98,100 +97,53 @@ function ArquiteturaCta() {
 export default function AulaVpsCrmDoZero() {
   const [nome, setNome] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [otpCode, setOtpCode] = useState('');
-  const [otpSent, setOtpSent] = useState(false);
   const [otpLoading, setOtpLoading] = useState(false);
   const [verificado, setVerificado] = useState(false);
+  const [formError, setFormError] = useState('');
 
-  // Sessão do navegador, não persistente — mesmo racional de
-  // call-sobrevivencia-pos-ia.tsx: reforçar o WhatsApp a cada nova sessão é
-  // aceitável aqui e evita reconstruir um fluxo de auth completo pra uma
-  // única página.
+  // Convenience for free material, not an authentication credential.
   useEffect(() => {
-    if (typeof window !== 'undefined' && sessionStorage.getItem(SESSION_KEY) === '1') {
-      setVerificado(true);
-    }
+    try {
+      const until = Number(localStorage.getItem('sb_aula_crm_access_until'));
+      if (until > Date.now() || sessionStorage.getItem(SESSION_KEY) === '1') setVerificado(true);
+    } catch { /* Storage can be disabled; the form still works. */ }
   }, []);
 
-  const numeroCompleto = () => {
-    const limpo = phoneNumber.replace(/[^0-9]/g, '');
-    return limpo.startsWith('55') ? limpo : `55${limpo}`;
-  };
-
-  const handleSendOTP = async () => {
-    const limpo = phoneNumber.replace(/[^0-9]/g, '');
-    if (limpo.length < 10) {
-      alert('Digite um WhatsApp válido com DDD.');
+  const handleCapture = async () => {
+    if (otpLoading) return;
+    const digits = phoneNumber.replace(/\D/g, '');
+    const phone = digits.length === 10 || digits.length === 11 ? '55' + digits : digits;
+    if (!nome.trim() || !/^55\d{10,11}$/.test(phone)) {
+      setFormError('Informe seu nome e um WhatsApp brasileiro com DDD.');
       return;
     }
+    setFormError('');
     setOtpLoading(true);
+    try { trackCta('/aula-vps-crm-do-zero', 'cadastro-iniciado', 'formulario-v2'); } catch {}
     try {
-      const res = await fetch('/api/otp/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: numeroCompleto(), name: nome || undefined }),
+      const response = await fetch('/api/leads', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: nome.trim(), whatsapp: phone,
+          source: 'aula-vps-crm-do-zero', utm: getStoredUtms() }),
       });
-      const data = await res.json();
-      if (data.success) {
-        setOtpSent(true);
-      } else {
-        alert(data.message || 'Não conseguimos enviar o código. Tente novamente.');
-      }
-    } catch (e) {
-      console.error('OTP send failed:', e);
-      alert('Erro ao enviar o código. Tente novamente.');
-    } finally {
-      setOtpLoading(false);
-    }
-  };
-
-  const handleVerifyOTP = async () => {
-    if (otpCode.length !== 6) {
-      alert('Digite o código de 6 dígitos.');
-      return;
-    }
-    setOtpLoading(true);
-    try {
-      const res = await fetch('/api/otp/verify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: numeroCompleto(), otp: otpCode }),
-      });
-      const data = await res.json();
-      if (!data.success) {
-        alert(data.message || 'Código inválido ou expirado.');
-        return;
-      }
-
-      // Lead + deal no EvoCRM — best effort. Falhar aqui não pode travar
-      // quem já provou o número por WhatsApp de assistir o vídeo.
-      fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: nome || undefined,
-          whatsapp: numeroCompleto(),
-          source: 'aula-vps-crm-do-zero',
-          utm: getStoredUtms(),
-        }),
-      }).catch((e) => console.error('[aula-vps-crm] lead create failed:', e));
-
-      trackCta('/aula-vps-crm-do-zero', 'otp-verificado', 'unlock');
-      sessionStorage.setItem(SESSION_KEY, '1');
+      const result = await response.json();
+      if (!response.ok || result.success !== true) throw new Error('save failed');
+      // Never declare a phone verified: this is an unverified lead capture.
       setVerificado(true);
-    } catch (e) {
-      console.error('OTP verify failed:', e);
-      alert('Erro ao verificar o código. Tente novamente.');
-    } finally {
-      setOtpLoading(false);
-    }
+      try { localStorage.setItem('sb_aula_crm_access_until', String(Date.now() + 30 * 86400000)); } catch {}
+      try { trackCta('/aula-vps-crm-do-zero', 'cadastro-salvo', 'unlock'); } catch {}
+    } catch {
+      setFormError('Não conseguimos salvar seu cadastro. Seus dados continuam aqui; tente novamente.');
+      try { trackCta('/aula-vps-crm-do-zero', 'cadastro-erro', 'formulario-v2'); } catch {}
+    } finally { setOtpLoading(false); }
   };
+
 
   return (
     <>
       <Meta
         title={`${VIDEO_TITULO} | Sistema Britto`}
-        description="Confirme seu WhatsApp para assistir à aula completa."
+        description="Acesse a aula gratuita com nome e WhatsApp, sem senha ou código de verificação."
         path="/aula-vps-crm-do-zero"
         noIndex={true}
       />
@@ -243,110 +195,23 @@ export default function AulaVpsCrmDoZero() {
                   {VIDEO_TITULO}
                 </h1>
                 <p className="mt-3 text-sm leading-relaxed text-gray-400">
-                  Confirme seu WhatsApp pra liberar o acesso à aula completa.
+                  Deixe seu nome e WhatsApp para assistir. Sem senha, sem esperar um código.
                 </p>
               </div>
 
-              {!otpSent ? (
-                <>
-                  <label htmlFor="nome" className="mb-2 block text-xs font-medium text-gray-400">
-                    Seu nome
-                  </label>
-                  <input
-                    id="nome"
-                    type="text"
-                    value={nome}
-                    onChange={(e) => setNome(e.target.value)}
-                    placeholder="Como podemos te chamar?"
-                    className="mb-5 min-h-[48px] w-full rounded-lg border border-surface-700 bg-surface-800 px-4 py-3 text-white placeholder-gray-600 transition-colors focus:border-green-400 focus:outline-none"
-                  />
-                  <PhoneInput
-                    value={phoneNumber}
-                    onChange={(v) => setPhoneNumber(v)}
-                    accentColor="#4ADE80"
-                    required
-                  />
-                  <button
-                    onClick={handleSendOTP}
-                    disabled={otpLoading || !phoneNumber}
-                    className={`mt-5 flex min-h-[48px] w-full items-center justify-center gap-3 rounded-lg bg-whatsapp-500 px-6 py-3 font-heading font-bold text-black transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400 ${
-                      otpLoading || !phoneNumber
-                        ? 'cursor-not-allowed opacity-60'
-                        : 'hover:bg-green-600'
-                    }`}
-                  >
-                    {otpLoading ? (
-                      <>
-                        <span
-                          aria-hidden="true"
-                          className="h-5 w-5 animate-spin rounded-full border-2 border-black/30 border-t-black"
-                        />
-                        <span>Enviando...</span>
-                      </>
-                    ) : (
-                      <>
-                        <WhatsAppIcon className="h-5 w-5 flex-shrink-0 text-black" />
-                        <span>Receber código</span>
-                      </>
-                    )}
-                  </button>
-                  <p className="mt-4 text-center text-xs leading-relaxed text-gray-500">
-                    Enviamos um código de 6 dígitos no seu WhatsApp. Sem spam.
-                  </p>
-                </>
-              ) : (
-                <>
-                  <p className="mb-4 text-sm leading-relaxed text-gray-400">
-                    Enviamos um código de 6 dígitos para{' '}
-                    <span className="font-medium text-white">{phoneNumber}</span>
-                  </p>
-                  <label htmlFor="otp" className="sr-only">
-                    Código de 6 dígitos
-                  </label>
-                  <input
-                    id="otp"
-                    type="text"
-                    inputMode="numeric"
-                    autoComplete="one-time-code"
-                    value={otpCode}
-                    onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                    placeholder="123456"
-                    className="mb-4 min-h-[56px] w-full rounded-lg border border-surface-700 bg-surface-800 px-4 py-3 text-center text-2xl tracking-[0.5em] text-white placeholder-gray-600 transition-colors focus:border-green-400 focus:outline-none"
-                    maxLength={6}
-                    autoFocus
-                  />
-                  <button
-                    onClick={handleVerifyOTP}
-                    disabled={otpLoading || otpCode.length !== 6}
-                    className={`flex min-h-[48px] w-full items-center justify-center gap-3 rounded-lg bg-whatsapp-500 px-6 py-3 font-heading font-bold text-black transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400 ${
-                      otpLoading || otpCode.length !== 6
-                        ? 'cursor-not-allowed opacity-60'
-                        : 'hover:bg-green-600'
-                    }`}
-                  >
-                    {otpLoading ? (
-                      <>
-                        <span
-                          aria-hidden="true"
-                          className="h-5 w-5 animate-spin rounded-full border-2 border-black/30 border-t-black"
-                        />
-                        <span>Verificando...</span>
-                      </>
-                    ) : (
-                      <span>Assistir agora</span>
-                    )}
-                  </button>
-                  <button
-                    onClick={() => {
-                      setOtpSent(false);
-                      setOtpCode('');
-                    }}
-                    className="mt-4 min-h-[44px] w-full text-sm text-gray-400 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400"
-                  >
-                    ← Voltar e editar número
-                  </button>
-                </>
-              )}
+              <form onSubmit={(event) => { event.preventDefault(); void handleCapture(); }} aria-busy={otpLoading}>
+                <label htmlFor="nome" className="mb-2 block text-sm text-gray-300">Seu nome</label>
+                <input id="nome" autoComplete="name" required maxLength={100} value={nome}
+                  onChange={event => setNome(event.target.value)}
+                  className="mb-5 min-h-12 w-full rounded-lg border border-surface-700 bg-surface-800 px-4 py-3 text-white focus:outline focus:outline-2 focus:outline-green-400" />
+                <PhoneInput value={phoneNumber} onChange={setPhoneNumber} accentColor="#4ADE80" required />
+                {formError && <p role="alert" className="mt-4 rounded-lg border border-red-400/40 p-3 text-sm text-red-200">{formError}</p>}
+                <button type="submit" disabled={otpLoading}
+                  className="mt-5 min-h-12 w-full rounded-lg bg-[#a3ff12] px-5 py-3 font-bold text-black hover:bg-lime-300 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-lime-300 disabled:opacity-60">
+                  {otpLoading ? 'Salvando seu acesso…' : 'Quero assistir à aula gratuita'}
+                </button>
+                <p className="mt-4 text-center text-sm leading-relaxed text-gray-400">Sem senha e sem código por WhatsApp. Usamos os dados para registrar seu interesse e dar continuidade ao atendimento. <a href="/politicas-de-privacidade" className="underline">Privacidade</a>.</p>
+              </form>
             </div>
           </div>
         )}

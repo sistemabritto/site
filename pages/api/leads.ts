@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { attachExistingCrmLead } from '../../lib/lead-crm';
 
 // ─── Config ──────────────────────────────────────────────────────
 const EVOCRM_BASE_URL = 'https://evoapi.workflowapi.com.br';
@@ -50,7 +51,6 @@ async function getSupabaseClient() {
       process.env.SUPABASE_SERVICE_KEY ||
         process.env.SUPABASE_SECRET_KEY ||
         process.env.SUPABASE_SERVICE_ROLE_KEY ||
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
         ''
     );
   } catch {
@@ -77,7 +77,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { name, email, whatsapp, source, answers, utm, utm_source, utm_medium, utm_campaign } = req.body;
+  const { name, email, whatsapp, source, answers, utm, utm_source, utm_medium, utm_campaign } = req.body || {};
+  if ([name, email, whatsapp, source, utm_source, utm_medium, utm_campaign].some(v => v != null && (typeof v !== 'string' || v.length > 500)) ||
+      (utm != null && (typeof utm !== 'object' || Array.isArray(utm) || Object.values(utm).some(v => typeof v !== 'string' || v.length > 500)))) {
+    return res.status(400).json({ success: false, error: 'Dados inválidos.' });
+  }
 
   // Validação mínima
   if (!email && !whatsapp) {
@@ -85,6 +89,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const phoneNumber = normalizePhone(whatsapp || '');
+  if ((email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) ||
+      (whatsapp && !/^\+[1-9]\d{7,14}$/.test(phoneNumber))) {
+    return res.status(400).json({ success: false, error: 'Informe um contato válido.' });
+  }
+  // leads.email is UNIQUE and NOT NULL. An empty string made every phone-only
+  // submission after the first fail with 23505. This internal identifier must
+  // never be used as a deliverable email address.
+  const emailEfetivo = email?.trim().toLowerCase() || `whatsapp-${phoneNumber.replace(/\D/g, '')}@sem-email.sistemabritto.com.br`;
   const results: { supabase?: boolean; evocrm?: boolean } = {};
 
   // Extrai UTM do objeto "utm" (formato do quiz) ou dos campos flat
@@ -98,22 +110,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const supabase = await getSupabaseClient();
     if (supabase) {
-      const { error } = await supabase.from('leads').insert({
+      const { error } = await supabase.from('leads').upsert({
         name: name || '',
-        email: email || '',
+        email: emailEfetivo,
         phone: phoneNumber,  // coluna correta é "phone", não "whatsapp"
         source: source || 'site',
-        answers: answers ? JSON.stringify(answers) : null,
+        answers: answers || null,
         utm_source: utmSource,
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
         utm_content: utmContent,
         created_at: new Date().toISOString(),
-      });
+      }, { onConflict: 'email', ignoreDuplicates: true });
       if (!error) results.supabase = true;
+      else console.error('[Supabase] lead save failed', { code: error.code });
     }
-  } catch (err) {
-    console.error('[Supabase] lead save failed:', err);
+  } catch {
+    console.error('[Supabase] lead save unavailable');
   }
 
   // ── 2. Criar lead no EvoCRM ────────────────────────────────────
@@ -127,7 +140,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // que a MESMA pessoa sempre bate no MESMO e-mail sintético, então o
   // dedupe por telefone do EvoCRM (confirmado por teste real: "Phone number
   // ... already registered to another contact") continua funcionando.
-  const emailEfetivo = email || (phoneNumber ? `whatsapp-${phoneNumber.replace(/\D/g, '')}@sem-email.sistemabritto.com.br` : '');
 
   try {
     const dealName = `${name || 'Lead'} · ${source || 'site'}`;
@@ -140,7 +152,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       deal: {
         pipeline_id: destino.pipeline,
         stage_id: destino.stage,
-        name: dealName,
+        title: dealName,
       },
       custom_fields: {
         source: source || 'site',
@@ -161,8 +173,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (utmContent) payload.custom_fields.utm_content = utmContent;
     if (utmTerm) payload.custom_fields.utm_term = utmTerm;
 
+    if (!EVOCRM_API_TOKEN) throw new Error('CRM unavailable');
+    const existing = await attachExistingCrmLead({ phone: phoneNumber, email: emailEfetivo,
+      pipeline: destino.pipeline, stage: destino.stage, fields: payload.custom_fields }, EVOCRM_API_TOKEN);
+    if (existing === 'saved') {
+      results.evocrm = true;
+    } else if (existing === 'missing') {
     const response = await fetch(`${EVOCRM_BASE_URL}/public/api/v1/leads`, {
       method: 'POST',
+      signal: AbortSignal.timeout(8000),
       headers: {
         'Content-Type': 'application/json',
         'api_access_token': EVOCRM_API_TOKEN,
@@ -171,7 +190,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     if (response.ok) {
-      results.evocrm = true;
+      const body = await response.json();
+      results.evocrm = body.success === true && Boolean(body.lead_id && body.deal_id);
     } else if (response.status === 422) {
       // 422 cobre dois casos bem diferentes: contato já existe (dedupe de
       // verdade, mesma pessoa reconhecida pelo telefone — sucesso) ou um
@@ -180,16 +200,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const body = await response.text();
       const jaExiste = /already registered|already exists|duplicate/i.test(body);
       if (jaExiste) {
-        results.evocrm = true;
+        results.evocrm = await attachExistingCrmLead({ phone: phoneNumber, email: emailEfetivo,
+          pipeline: destino.pipeline, stage: destino.stage, fields: payload.custom_fields }, EVOCRM_API_TOKEN) === 'saved';
       } else {
-        console.error('[EvoCRM] lead create falhou por validação (não é dedupe):', body);
+        console.error('[EvoCRM] lead validation failed', { status: response.status });
       }
     } else {
-      const body = await response.text();
-      console.error('[EvoCRM] lead create failed:', response.status, body);
+      console.error('[EvoCRM] lead create failed:', response.status);
     }
-  } catch (err) {
-    console.error('[EvoCRM] network error:', err);
+    } else console.error('[EvoCRM] existing lead lookup failed');
+  } catch {
+    console.error('[EvoCRM] lead sync unavailable');
   }
 
   // ── Sucesso se pelo menos um salvou ─────────────────────────────

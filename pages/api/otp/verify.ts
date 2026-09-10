@@ -18,9 +18,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ success: false, message: 'Method not allowed' });
   }
 
-  const { phone, otp } = req.body as { phone?: string; otp?: string };
-  const numero = phone ? validarTelefoneBrasil(phone) : null;
-  if (!numero || !otp || !/^\d{6}$/.test(otp)) {
+  const { phone, otp } = req.body || {};
+  const numero = typeof phone === 'string' ? validarTelefoneBrasil(phone) : null;
+  if (!numero || typeof otp !== 'string' || !/^\d{6}$/.test(otp)) {
     return res.status(400).json({ success: false, message: 'Dados inválidos.' });
   }
 
@@ -31,18 +31,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const supabase = createClient(supabaseUrl, supabaseKey);
 
-  const { data: registro } = await supabase
+  const { data: registro, error: readError } = await supabase
     .from('otp_codes')
     .select('id, code_hash, attempts, expires_at, used_at')
     .eq('phone', numero)
-    .is('used_at', null)
     .order('created_at', { ascending: false })
     .limit(1)
     .maybeSingle<{ id: string; code_hash: string; attempts: number; expires_at: string; used_at: string | null }>();
 
   // Mesma resposta pra "não existe código" e "código errado" — não revela
   // qual das duas coisas aconteceu.
-  if (!registro) {
+  if (readError) return res.status(503).json({ success: false, message: 'Serviço indisponível. Tente novamente.' });
+  if (!registro || registro.used_at) {
     return res.status(400).json(RESPOSTA_INVALIDO);
   }
 
@@ -55,12 +55,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   if (!verificarCodigoOtp(otp, registro.code_hash)) {
-    await supabase.from('otp_codes').update({ attempts: registro.attempts + 1 }).eq('id', registro.id);
+    const { error } = await supabase.from('otp_codes').update({ attempts: registro.attempts + 1 })
+      .eq('id', registro.id).eq('attempts', registro.attempts).is('used_at', null);
+    if (error) return res.status(503).json({ success: false, message: 'Serviço indisponível.' });
     return res.status(400).json(RESPOSTA_INVALIDO);
   }
 
   // Uso único: consumir na primeira validação bem-sucedida.
-  await supabase.from('otp_codes').update({ used_at: new Date().toISOString() }).eq('id', registro.id);
+  const { data: consumed, error: consumeError } = await supabase.from('otp_codes')
+    .update({ used_at: new Date().toISOString() }).eq('id', registro.id)
+    .eq('attempts', registro.attempts).is('used_at', null)
+    .gt('expires_at', new Date().toISOString()).select('id').maybeSingle();
+  if (consumeError) return res.status(503).json({ success: false, message: 'Serviço indisponível.' });
+  if (!consumed) return res.status(400).json(RESPOSTA_INVALIDO);
 
   return res.status(200).json({ success: true, message: 'Verificado.' });
 }

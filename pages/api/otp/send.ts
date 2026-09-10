@@ -36,12 +36,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ success: false, message: 'Method not allowed' });
   }
 
-  const { phone, name } = req.body as { phone?: string; name?: string };
-  const numero = phone ? validarTelefoneBrasil(phone) : null;
+  const { phone, name } = req.body || {};
+  const numero = typeof phone === 'string' ? validarTelefoneBrasil(phone) : null;
   // Nome é só personalização da mensagem — nunca vira critério de validação
   // nem afeta rate limit, senão viraria um jeito de burlar o limite por
   // número mudando o nome enviado.
-  const nome = (name || '').trim().slice(0, 60) || undefined;
+  const nome = typeof name === 'string' ? name.trim().slice(0, 60) || undefined : undefined;
   if (!numero) {
     return res.status(400).json({ success: false, message: 'Informe um WhatsApp válido com DDD (+55).' });
   }
@@ -59,30 +59,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   // 1. Teto global — o disjuntor. Checa primeiro porque é o que protege
   // mesmo contra ataque distribuído por muitos IPs/números diferentes.
-  const { count: totalGlobal } = await supabase
+  const { count: totalGlobal, error: globalError } = await supabase
     .from('otp_codes').select('id', { count: 'exact', head: true }).gte('created_at', umaHoraAtras);
-  if ((totalGlobal ?? 0) >= TETO_GLOBAL_HORA) {
+  if (globalError || totalGlobal == null) return res.status(503).json({ success: false, message: 'Serviço indisponível.' });
+  if (totalGlobal >= TETO_GLOBAL_HORA) {
     console.error(`[otp/send] TETO GLOBAL atingido: ${totalGlobal}/${TETO_GLOBAL_HORA} na última hora`);
     return res.status(429).json({ success: false, message: 'Serviço temporariamente indisponível. Tente mais tarde.' });
   }
 
   // 2. Limite por IP.
-  const { count: porIp } = await supabase
+  const { count: porIp, error: ipError } = await supabase
     .from('otp_codes').select('id', { count: 'exact', head: true }).eq('ip', ip).gte('created_at', umaHoraAtras);
-  if ((porIp ?? 0) >= LIMITE_POR_IP_HORA) {
-    return res.status(429).json(RESPOSTA_GENERICA);
+  if (ipError || porIp == null) return res.status(503).json({ success: false, message: 'Serviço indisponível.' });
+  if (porIp >= LIMITE_POR_IP_HORA) {
+    return res.status(429).json({ success: false, message: 'Limite temporário. Tente mais tarde.' });
   }
 
   // 3. Limite por número (hora e dia) + cooldown com backoff.
-  const { data: recentesDoNumero } = await supabase
+  const { data: recentesDoNumero, error: recentError } = await supabase
     .from('otp_codes').select('created_at').eq('phone', numero).gte('created_at', umDiaAtras)
     .order('created_at', { ascending: false });
-  const lista = recentesDoNumero ?? [];
+  if (recentError || !recentesDoNumero) return res.status(503).json({ success: false, message: 'Serviço indisponível.' });
+  const lista = recentesDoNumero;
   const doDia = lista.length;
   const daHora = lista.filter((r) => r.created_at >= umaHoraAtras).length;
 
   if (doDia >= LIMITE_POR_NUMERO_DIA || daHora >= LIMITE_POR_NUMERO_HORA) {
-    return res.status(429).json(RESPOSTA_GENERICA);
+    return res.status(429).json({ success: false, message: 'Limite temporário. Tente mais tarde.' });
   }
 
   if (lista.length > 0) {
@@ -104,7 +107,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     phone: numero, code_hash: hashCodigoOtp(codigo), ip, expires_at: expiresAt, attempts: 0,
   });
   if (dbError) {
-    console.error('[otp/send] erro ao gravar código:', dbError);
+    console.error('[otp/send] erro ao gravar código:', { code: dbError.code });
     return res.status(500).json({ success: false, message: 'Erro interno.' });
   }
 
