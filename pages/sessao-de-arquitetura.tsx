@@ -32,7 +32,7 @@ export default function ArchitectureSession() {
   return <>
     <Meta title={`${ARCHITECTURE_SESSION.name} com Felipe Britto | PRD do seu projeto em uma sessão`}
       description={`Saia com o PRD do seu projeto — prioridade, escopo, integrações e custos — antes de investir em IA, CRM ou desenvolvimento. R$ ${ARCHITECTURE_SESSION.price} (de R$ ${ARCHITECTURE_SESSION.originalPrice}), só ${ARCHITECTURE_SESSION.weeklySlots} agendas por semana nessa condição.`}
-      path={ARCHITECTURE_SESSION.path} />
+      path={ARCHITECTURE_SESSION.path} ogImage="/consultoria-a-laser-hero.jpg" />
     <main className="min-h-screen bg-surface-950 px-5 py-5 text-white sm:py-8">
       <div className="mx-auto max-w-5xl">
         <nav aria-label="Marca" className="flex items-center justify-between border-b border-white/10 pb-5">
@@ -47,7 +47,9 @@ export default function ArchitectureSession() {
           <div className="mt-6"><a href={checkout} onClick={() => onCheckout('sessao-hero-v2')} className={button}>Quero meu PRD · R$ {ARCHITECTURE_SESSION.price} →</a></div>
           <p className="mt-3 text-sm text-gray-400">Sessão individual de planejamento. Implementação à parte. Pagamento via Cakto; agendamento após confirmação.</p>
           </div>
-          <aside aria-label="Condição da semana" className="relative rounded-2xl border border-lime-400/25 bg-gradient-to-br from-lime-400/10 via-surface-900 to-surface-900 p-6 sm:p-8">
+          <aside aria-label="Condição da semana" className="relative">
+            <Image src="/consultoria-a-laser-hero.jpg" alt="Felipe Britto — Consultoria a Laser" width={1024} height={1024} className="mb-5 w-full rounded-2xl border border-lime-400/25 object-cover" priority />
+            <div className="rounded-2xl border border-lime-400/25 bg-gradient-to-br from-lime-400/10 via-surface-900 to-surface-900 p-6 sm:p-8">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-violet-200">Porta de entrada</p>
             <div className="mt-3 flex items-end gap-3">
               <p className="font-heading text-5xl font-black leading-none tracking-[-0.06em] text-white">R$ {ARCHITECTURE_SESSION.price}</p>
@@ -67,6 +69,7 @@ export default function ArchitectureSession() {
               <p className="mt-3 text-xs text-violet-100/85">Novo ciclo domingo, 00h · {agendaCountdown ? `renova em ${agendaCountdown}` : 'calculando horário…'}</p>
             </div>
             <ol className="mt-6 space-y-5 border-t border-white/10 pt-6">{[['01', 'Encontrar o ponto de perda', 'O visitante chega, entende a oferta e consegue avançar?'], ['02', 'Escolher a correção prioritária', 'Copy, formulário, atendimento ou integração: o que vem primeiro?'], ['03', 'Documentar o PRD', 'Seu Gambito de Valor: escopo, dependências, custos e critério de sucesso, prontos pra executar.']].map(([n, title, copy]) => <li key={n} className="flex gap-4"><span className="text-sm font-bold text-[#a3ff12]">{n}</span><div><h3 className="font-semibold">{title}</h3><p className="mt-1 text-sm leading-relaxed text-gray-300">{copy}</p></div></li>)}</ol>
+            </div>
           </aside>
         </header>
         <section className="border-t border-surface-700 py-10" aria-labelledby="gargalos">
