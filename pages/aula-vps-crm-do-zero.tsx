@@ -72,7 +72,7 @@ function ArquiteturaCta() {
         </h2>
 
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-400 sm:text-base">
-          Na Sessão de Arquitetura, olhamos o processo da sua empresa: entrada dos contatos,
+          Na Consultoria a Laser, olhamos o processo da sua empresa: entrada dos contatos,
           atendimento, oportunidades e próximas ações. Você sai com prioridades, escopo
           e uma rota de aplicação antes de contratar implementação.
         </p>
@@ -84,7 +84,7 @@ function ArquiteturaCta() {
           onClick={() => trackCta('/aula-vps-crm-do-zero', 'conhecer-arquitetura', 'aula-crm-ponte-v1')}
           className="mt-6 inline-flex min-h-[48px] items-center justify-center gap-3 rounded-lg bg-green-400 px-7 py-3 font-heading font-bold text-black transition-colors duration-200 hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400"
         >
-          <span>Ver a Sessão de Arquitetura</span>
+          <span>Ver a Consultoria a Laser</span>
           <span aria-hidden="true">→</span>
         </a>
 

@@ -178,7 +178,7 @@ export default function Links() {
     <>
       <Meta
         title="Sistema Britto | IA e CRM aplicados à sua empresa"
-        description="Materiais para donos e gestores: presença digital, CRM e uma Sessão de Arquitetura para definir o próximo passo da empresa."
+        description="Materiais para donos e gestores: presença digital, CRM e uma Consultoria a Laser para definir o próximo passo da empresa."
         path="/links"
         ogImage="/images/links/aula-vps-crm.jpg"
       />
@@ -215,7 +215,7 @@ export default function Links() {
               className="block rounded-2xl border border-green-400/50 bg-surface-900 p-5 focus-visible:outline focus-visible:outline-4 focus-visible:outline-green-300 hover:border-green-300">
               <span className="text-xs font-bold uppercase tracking-wider text-green-400">Quero ajuda para aplicar</span>
               <h2 className="mt-2 font-heading text-xl font-bold">Defina o próximo passo da sua empresa.</h2>
-              <p className="mt-2 text-sm leading-relaxed text-gray-300">Sessão de Arquitetura com Felipe: prioridade, escopo e custos antes de investir em tecnologia.</p>
+              <p className="mt-2 text-sm leading-relaxed text-gray-300">Consultoria a Laser com Felipe: prioridade, escopo e custos antes de investir em tecnologia.</p>
               <span className="mt-4 block font-bold text-green-400">Ver a sessão e o investimento →</span>
             </a>
             <a href="https://nexus.workflowapi.com.br/share/JmqUbtpIsv8eU8Gif-9XzmuU9w2O7S95M_g1pCxYMQ4"

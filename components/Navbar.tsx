@@ -68,7 +68,7 @@ export default function Navbar() {
             </Link>
           ))}
           <Link href="/sprint-vibe-seller" onClick={closeMenu} className="mt-3 flex min-h-12 items-center justify-center rounded-xl bg-[#a3ff12] px-5 py-3 font-extrabold text-black transition hover:bg-[#c4ff72] focus-visible:outline focus-visible:outline-4 focus-visible:outline-[#a3ff12]/40">
-            Reservar sessão de arquitetura
+            Reservar Consultoria a Laser
           </Link>
           <a href="https://blog.sistemabritto.com.br" target="_blank" rel="noopener noreferrer" className="block rounded-lg px-4 py-3 text-base font-semibold text-slate-200 transition hover:text-[#c4ff72] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#a3ff12]">
             Blog <span aria-hidden="true">↗</span>

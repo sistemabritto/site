@@ -1,5 +1,12 @@
 # Sprint: Qualificação + VSL + Downsell
 
+> **Arquivado em 10/09/2026.** Este documento descreve um fluxo antigo
+> (`/workforce`, `/whatsapp-ia`) que não existe mais no site — o funil real
+> hoje é `/sessao-de-arquitetura` (Consultoria a Laser) → `/sprint-vibe-seller`
+> / `/implementacao-vibe-seller`, implementado em
+> `components/VibeSellerLanding.tsx`. Mantido só como histórico; não seguir
+> os próximos passos abaixo.
+
 ## Status
 - ✅ Carta de vendas escrita (COPY_VENDAS_WORKFORCE.md)
 - ✅ LP VSL criada (/workforce) — copy completa, design LP Wizard
