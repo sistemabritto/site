@@ -108,8 +108,8 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     emphasis: 'seu projeto sozinho.',
     lead: 'No Sprint, eu acompanho a execução com você por 9 semanas: decisões, prioridades, construção e validação. Você continua dono do projeto, mas para de destravar tudo no escuro. O primeiro passo é a Sessão de Start.',
     price: 'Comece pela Sessão de Start · R$ 150',
-    primaryCta: 'Comprar Sessão de Start',
-    formTitle: 'Comprar Sessão de Start',
+    primaryCta: 'Agendar Sessão de Start',
+    formTitle: 'Agendar Sessão de Start',
     formLead: 'É a porta de entrada comum para Sprint e Implementação. Você compra a sessão por R$ 150, recebe o link de agenda após a confirmação e esse valor é abatido se avançarmos.',
     submitLabel: 'Ir para o checkout de R$ 150 →',
     checkoutUrl: ARCHITECTURE_SESSION.checkoutUrl,
@@ -168,8 +168,8 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     emphasis: 'Mas o projeto ainda não foi definido.',
     lead: 'Sem escopo, tudo parece caber e qualquer orçamento vira chute. Você começa pela Sessão de Start: nela definimos o problema, a rota, as integrações e os custos antes de decidir se eu construo para você.',
     price: 'Comece pela Sessão de Start · R$ 150',
-    primaryCta: 'Comprar Sessão de Start',
-    formTitle: 'Comprar Sessão de Start',
+    primaryCta: 'Agendar Sessão de Start',
+    formTitle: 'Agendar Sessão de Start',
     formLead: 'Você compra a sessão por R$ 150. Depois da confirmação, recebe o link para escolher o horário; se avançarmos para a implementação, esse valor é abatido.',
     submitLabel: 'Ir para o checkout de R$ 150 →',
     checkoutUrl: ARCHITECTURE_SESSION.checkoutUrl,
@@ -267,9 +267,13 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
   };
 
   const openForm = (placement: string) => {
-    // Sprint e Implementação não são aplicação: a compra é da Sessão de Start.
+    // Sprint e Implementação não vendem direto: o CTA leva pra Sessão de
+    // Start, que tem a narrativa completa (dores, inimigo comum, escassez,
+    // FAQ da própria oferta) antes do checkout real — pular direto pro
+    // Cakto perderia toda essa página de conversão.
     if (kind !== 'desafio') {
-      goToCheckout(placement);
+      trackCta(offer.path, `${kind}-sessao-de-start`, placement);
+      window.location.assign(ARCHITECTURE_SESSION.path);
       return;
     }
     trackCta(offer.path, offer.primaryCta, placement);
