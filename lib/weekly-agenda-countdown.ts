@@ -1,7 +1,6 @@
-// Extraído de VibeSellerLanding.tsx — usado pela Sessão de Start, pelo
-// Sprint e pela Implementação, que compartilham a mesma condição semanal
-// (3 vagas, ciclo renova domingo 00h em São Paulo). Uma função só evita que
-// as três páginas divirjam no cálculo do horário de reset.
+// Usado pela Sessão de Start, pelo Sprint e pela Implementação, que
+// compartilham a mesma condição semanal (3 vagas, ciclo renova domingo 00h
+// em São Paulo). Uma função só evita que as páginas divirjam no cálculo.
 export function weeklyAgendaCountdown(now = Date.now()): string {
   const parts = new Intl.DateTimeFormat('en-US', {
     timeZone: 'America/Sao_Paulo',
@@ -19,5 +18,30 @@ export function weeklyAgendaCountdown(now = Date.now()): string {
   const remaining = Math.max(0, resetAt - now);
   const hours = Math.floor(remaining / 3_600_000);
   const minutes = Math.floor((remaining % 3_600_000) / 60_000);
-  return `${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}min`;
+  const seconds = Math.floor((remaining % 60_000) / 1_000);
+  return `${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}min ${String(seconds).padStart(2, '0')}s`;
+}
+
+// Dia da semana (fuso São Paulo), índice com segunda-feira em 0 — pra exibir
+// a tira SEG..DOM na ordem que o brasileiro lê, mesmo o ciclo resetando
+// domingo de manhã.
+function weekdayIndexMondayFirst(now: number): number {
+  const parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short' }).formatToParts(new Date(now));
+  const weekday = parts.find((part) => part.type === 'weekday')?.value ?? 'Sun';
+  const map: Record<string, number> = { Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6 };
+  return map[weekday] ?? 6;
+}
+
+export type DayState = 'past' | 'today' | 'future';
+const WEEKDAY_LABELS = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
+
+// Tira visual da semana: dias já passados ficam apagados, hoje em destaque,
+// os que faltam na cor normal — só pra dar clareza visual, não é o cálculo
+// oficial do reset (esse continua em weeklyAgendaCountdown).
+export function weekProgress(now = Date.now()): { label: string; state: DayState }[] {
+  const todayIndex = weekdayIndexMondayFirst(now);
+  return WEEKDAY_LABELS.map((label, i) => ({
+    label,
+    state: i < todayIndex ? 'past' : i === todayIndex ? 'today' : 'future',
+  }));
 }
