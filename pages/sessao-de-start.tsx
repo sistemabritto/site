@@ -32,7 +32,7 @@ export default function ArchitectureSession() {
   return <>
     <Meta title={`${ARCHITECTURE_SESSION.name} com Felipe Britto | PRD do seu projeto em uma sessão`}
       description={`Saia com o PRD do seu projeto — prioridade, escopo, integrações e custos — antes de investir em IA, CRM ou desenvolvimento. R$ ${ARCHITECTURE_SESSION.price} (de R$ ${ARCHITECTURE_SESSION.originalPrice}), só ${ARCHITECTURE_SESSION.weeklySlots} agendas por semana nessa condição.`}
-      path={ARCHITECTURE_SESSION.path} ogImage="/consultoria-a-laser-hero.jpg" />
+      path={ARCHITECTURE_SESSION.path} ogImage="/covers/sessao-de-start.png" />
     <main className="min-h-screen bg-surface-950 px-5 py-5 text-white sm:py-8">
       <div className="mx-auto max-w-5xl">
         <nav aria-label="Marca" className="flex items-center justify-between border-b border-white/10 pb-5">
@@ -48,7 +48,7 @@ export default function ArchitectureSession() {
           <p className="mt-3 text-sm text-gray-400">Sessão individual de planejamento. Implementação à parte. Pagamento via Cakto; agendamento após confirmação.</p>
           </div>
           <aside aria-label="Condição da semana" className="relative">
-            <Image src="/consultoria-a-laser-hero.jpg" alt="Felipe Britto — Consultoria a Laser" width={1024} height={1024} className="mb-5 w-full rounded-2xl border border-lime-400/25 object-cover" priority />
+            <Image src="/covers/sessao-de-start.png" alt="Sessão de Start — Sistema Britto" width={1024} height={1024} className="mb-5 w-full rounded-2xl border border-lime-400/25 object-cover" priority />
             <div className="rounded-2xl border border-lime-400/25 bg-gradient-to-br from-lime-400/10 via-surface-900 to-surface-900 p-6 sm:p-8">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-violet-200">Porta de entrada</p>
             <div className="mt-3 flex items-end gap-3">
