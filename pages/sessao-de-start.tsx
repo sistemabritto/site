@@ -116,18 +116,25 @@ export default function ArchitectureSession() {
         </section>
 
         {/* 12. 1º CTA DE URGÊNCIA — escassez real, ainda sem preço */}
-        <section className="rounded-2xl border border-violet-300/25 bg-violet-300/[0.08] p-6 sm:p-8" aria-label="Condição da semana">
-          <div className="flex items-center justify-between gap-3">
-            <p className="text-sm font-bold text-white">{ARCHITECTURE_SESSION.weeklySlots} agendas nesta condição</p>
-            <span className="rounded-full border border-violet-200/30 bg-violet-200/10 px-2.5 py-1 text-xs font-bold text-violet-100">semanal</span>
+        <section className="relative overflow-hidden rounded-2xl border border-violet-300/30 bg-gradient-to-br from-violet-500/15 via-surface-900 to-surface-900 p-6 sm:p-10" aria-label="Condição da semana">
+          <div className="flex flex-col gap-8 sm:flex-row sm:items-center">
+            <div className="flex shrink-0 flex-col items-center justify-center rounded-2xl border border-violet-300/30 bg-violet-300/10 px-6 py-5 text-center">
+              <p className="font-heading text-5xl font-black leading-none text-white">{ARCHITECTURE_SESSION.weeklySlots}<span className="text-2xl font-bold text-violet-200"> de {ARCHITECTURE_SESSION.weeklySlots}</span></p>
+              <p className="mt-2 text-xs font-bold uppercase tracking-[0.14em] text-violet-200">vagas com condição especial</p>
+            </div>
+            <div className="flex-1">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-violet-200">Essa semana</p>
+              <h3 className="mt-1 font-heading text-2xl font-bold text-white">A agenda do Felipe não escala.</h3>
+              <p className="mt-2 max-w-xl leading-relaxed text-gray-300">A condição especial vale só pra essas {ARCHITECTURE_SESSION.weeklySlots} conversas — não é número de marketing, é o limite real da semana dele. Depois de domingo à 00h, o ciclo fecha e reabre com um lote novo, do zero.</p>
+              <div className="mt-4 grid grid-cols-3 gap-2" aria-hidden="true">
+                <span className="h-2 rounded-full bg-violet-300" />
+                <span className="h-2 rounded-full bg-violet-300" />
+                <span className="h-2 rounded-full bg-violet-300" />
+              </div>
+              <p className="mt-3 text-sm font-semibold text-violet-100">⏳ {agendaCountdown ? `Fecha em ${agendaCountdown}` : 'calculando horário…'}</p>
+              <div className="mt-5"><a href="#investimento" className={buttonGhost}>Ver como funciona a agenda ↓</a></div>
+            </div>
           </div>
-          <div className="mt-3 grid grid-cols-3 gap-1.5" aria-label={`Condição limitada a ${ARCHITECTURE_SESSION.weeklySlots} agendas por semana`}>
-            <span className="h-1.5 rounded-full bg-violet-200" />
-            <span className="h-1.5 rounded-full bg-violet-200" />
-            <span className="h-1.5 rounded-full bg-violet-200" />
-          </div>
-          <p className="mt-3 text-xs text-violet-100/85">Novo ciclo domingo, 00h · {agendaCountdown ? `renova em ${agendaCountdown}` : 'calculando horário…'}</p>
-          <div className="mt-5"><a href="#investimento" className={buttonGhost}>Ver como funciona a agenda ↓</a></div>
         </section>
 
         {/* 13. AS 3 PARTES — provocante / racional / misteriosa */}
