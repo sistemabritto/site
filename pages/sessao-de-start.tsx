@@ -31,6 +31,24 @@ export default function ArchitectureSession() {
     // Analytics must never prevent a ready buyer from following the real anchor.
     try { trackCta(ARCHITECTURE_SESSION.path, 'arquitetura-checkout', placement); } catch { /* best effort */ }
   };
+  // Dispara só no clique que de fato vai pro checkout real (não no scroll do
+  // hero) — este é o InitiateCheckout que o funil inteiro (Meta Ads, CAPI)
+  // espera receber. Antes só existia em VibeSellerLanding.tsx; como o CTA do
+  // Sprint/Implementação agora manda pra esta página, o evento tinha que
+  // existir aqui também, ou o funil inteiro parava de disparar o sinal.
+  const onRealCheckout = (placement: string) => {
+    onCheckout(placement);
+    try {
+      const browserWindow = window as typeof window & { fbq?: (...args: unknown[]) => void; dataLayer?: Record<string, unknown>[] };
+      browserWindow.fbq?.('track', 'InitiateCheckout', {
+        content_name: ARCHITECTURE_SESSION.name,
+        content_category: 'Vibe Seller',
+        currency: 'BRL',
+        value: ARCHITECTURE_SESSION.price,
+      });
+      browserWindow.dataLayer?.push({ event: 'begin_checkout', offer: 'sessao-de-start', value: ARCHITECTURE_SESSION.price, currency: 'BRL' });
+    } catch { /* best effort */ }
+  };
   const button = 'inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-[#a3ff12] px-6 py-4 text-center font-bold text-black transition-colors hover:bg-lime-300 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-lime-300 sm:w-auto';
   const buttonGhost = 'inline-flex min-h-11 items-center justify-center rounded-xl border border-[#a3ff12]/40 px-6 py-3 text-center font-bold text-[#a3ff12] transition-colors hover:bg-[#a3ff12]/10 sm:w-auto';
 
@@ -186,7 +204,7 @@ export default function ArchitectureSession() {
           </div>
           <p className="mt-2 text-sm font-semibold text-violet-200">50% de desconto, condição válida só pros {ARCHITECTURE_SESSION.weeklySlots} primeiros a decidir dar o start nesta semana. Depois disso, volta a R$ {ARCHITECTURE_SESSION.originalPrice}.</p>
           <p className="mt-2 text-sm font-medium text-slate-300">Se você avançar pro Sprint ou pra Implementação, o valor pago aqui vira crédito total no projeto.</p>
-          <div className="mt-6"><a href={checkout} onClick={() => onCheckout('sessao-investimento-v2')} className={button}>Quero dar o start no meu projeto →</a></div>
+          <div className="mt-6"><a href={checkout} onClick={() => onRealCheckout('sessao-investimento-v2')} className={button}>Quero dar o start no meu projeto →</a></div>
         </section>
 
         <section aria-labelledby="duvidas" className="py-10">
