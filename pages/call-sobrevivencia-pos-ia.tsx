@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import PhoneInput from '../components/PhoneInput';
 import WhatsAppIcon from '../components/WhatsAppIcon';
 import { trackCta, getStoredUtms } from './_app';
+import { ARCHITECTURE_SESSION } from '../lib/architecture-session';
 
 // Vídeo completo da call, publicado via Nexus share (raw view — content-type
 // video/mp4, compatível com <video src>). Token fixo porque hoje é um único
@@ -81,8 +82,12 @@ export default function VideoCompleto() {
   };
 
   const irParaCheckout = () => {
-    trackCta('/call-sobrevivencia-pos-ia', 'PAGAR R$147 AGORA', 'pos-video');
-    window.location.href = `/api/abacatepay/checkout/sistema${typeof window !== 'undefined' ? window.location.search : ''}`;
+    // Rota pra Sessão de Start (Cakto), não mais o checkout avulso de R$147
+    // via AbacatePay — a oferta de "call que produz o PRD" hoje é a mesma
+    // Sessão de Start vendida no resto do site, e a página carrega a
+    // narrativa completa (dores, garantia, FAQ) antes do checkout real.
+    trackCta('/call-sobrevivencia-pos-ia', 'sessao-de-start-pos-video', 'pos-video');
+    window.location.href = ARCHITECTURE_SESSION.path;
   };
 
   const numeroCompleto = () => {
@@ -206,13 +211,13 @@ export default function VideoCompleto() {
               <div className="mt-6 rounded-2xl border border-[#25D366]/40 bg-[#25D366]/10 p-6 text-center">
                 <p className="text-white font-medium mb-1">Curtindo o conteúdo?</p>
                 <p className="text-gray-400 text-sm mb-4">
-                  A call de 1h que produz o PRD do seu projeto, R$ 147, abatidos se fecharmos.
+                  A {ARCHITECTURE_SESSION.name} é a call de 1h que produz o PRD do seu projeto, R$ {ARCHITECTURE_SESSION.price} (de R$ {ARCHITECTURE_SESSION.originalPrice}), abatidos se avançarmos.
                 </p>
                 <button
                   onClick={irParaCheckout}
                   className="bg-[#25D366] text-black px-8 py-3 rounded-lg font-bold hover:bg-[#1ebe57] transition"
                 >
-                  Pagar R$ 147 agora →
+                  Agendar {ARCHITECTURE_SESSION.name} →
                 </button>
               </div>
             )}
