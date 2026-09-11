@@ -46,7 +46,7 @@ const AULAS: Aula[] = [
     img: '/images/links/call-pos-ia.jpg',
     titulo: 'Sobrevivência pós-IA',
     descricao:
-      'O que muda no seu negócio com a IA no meio do jogo — e o que dá pra fazer agora, não em 2030.',
+      'O que muda no seu negócio com a IA no meio do jogo, e o que dá pra fazer agora, não em 2030.',
     duracao: 'Call completa',
   },
 ];

@@ -40,18 +40,18 @@ export default function VPS() {
     } finally { setLoading(false); }
   }
   return <>
-    <Meta title="VPS Estruturada | Infraestrutura para sua operação — Sistema Britto"
+    <Meta title="VPS Estruturada | Infraestrutura para sua operação, Sistema Britto"
       description="Estruture o ambiente para CRM, automações e aplicações. Conheça o plano de R$ 297/mês e confirme o dimensionamento e o suporte necessário." path="/vps" />
     <main className="min-h-screen bg-surface-950 px-5 text-white">
       <nav aria-label="Navegação" className="mx-auto flex max-w-5xl items-center justify-between gap-4 border-b border-white/10 py-5">
-        <a href="/" aria-label="Sistema Britto — início"><Image src="/images/logo-sistema-britto.png" alt="Sistema Britto" width={180} height={60} priority className="h-11 w-auto" /></a>
+        <a href="/" aria-label="Sistema Britto, início"><Image src="/images/logo-sistema-britto.png" alt="Sistema Britto" width={180} height={60} priority className="h-11 w-auto" /></a>
         <a href="#plano" className="inline-flex min-h-11 items-center text-sm text-gray-300 underline underline-offset-4">Plano e escopo</a>
       </nav>
       <div className="mx-auto max-w-5xl">
         <header className="grid gap-10 py-10 sm:py-16 lg:grid-cols-[1.2fr_1fr] lg:items-center">
           <div><p className="text-xs font-bold uppercase tracking-widest text-[#a3ff12]">VPS Estruturada · Sistema Britto</p>
             <h1 className="mt-4 text-4xl font-bold leading-[1.1] tracking-tight sm:text-6xl">Sua operação merece mais que um servidor improvisado.</h1>
-            <p className="mt-5 text-lg leading-relaxed text-gray-300">CRM, automações e aplicações precisam de uma base organizada. Estruture o ambiente com Docker, HTTPS, backup e monitoramento — sabendo o que está incluído e quem cuida de cada parte.</p>
+            <p className="mt-5 text-lg leading-relaxed text-gray-300">CRM, automações e aplicações precisam de uma base organizada. Estruture o ambiente com Docker, HTTPS, backup e monitoramento, sabendo o que está incluído e quem cuida de cada parte.</p>
             <a href="#plano" className={`${button} mt-6 w-full sm:w-auto`}>Quero conhecer o plano · R$ 297/mês →</a>
             <p className="mt-3 text-sm text-gray-400">Dimensionamento e condições confirmados antes da contratação. Desenvolvimento de aplicações não está incluído.</p>
           </div>

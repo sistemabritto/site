@@ -11,7 +11,7 @@ import { trackCta, getStoredUtms } from './_app';
 const VIDEO_SRC = 'https://nexus.workflowapi.com.br/api/shares/-r1VfIEHQ8ZUnm-LE1a6Jd7hKY9DWpShBALeFBG-ZRo/view';
 const VIDEO_POSTER = 'https://nexus.workflowapi.com.br/api/shares/2ixI_7hUeoItjExBKmXEFWmlFwMswpZsP_xC1QQwJpQ/view';
 const VIDEO_TITULO = 'Monte seu CRM do zero';
-const VIDEO_SUBTITULO = 'Do servidor vazio ao Evo CRM no ar — VPS, Docker, DNS e Traefik, passo a passo.';
+const VIDEO_SUBTITULO = 'Do servidor vazio ao Evo CRM no ar: VPS, Docker, DNS e Traefik, passo a passo.';
 const SESSION_KEY = 'sb_aula_vps_crm_verificado';
 
 // Preserva origem da sessão; identifica a ponte comercial na chegada.

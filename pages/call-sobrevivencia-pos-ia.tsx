@@ -206,7 +206,7 @@ export default function VideoCompleto() {
               <div className="mt-6 rounded-2xl border border-[#25D366]/40 bg-[#25D366]/10 p-6 text-center">
                 <p className="text-white font-medium mb-1">Curtindo o conteúdo?</p>
                 <p className="text-gray-400 text-sm mb-4">
-                  A call de 1h que produz o PRD do seu projeto — R$ 147, abatidos se fecharmos.
+                  A call de 1h que produz o PRD do seu projeto, R$ 147, abatidos se fecharmos.
                 </p>
                 <button
                   onClick={irParaCheckout}

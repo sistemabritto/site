@@ -1,12 +1,12 @@
 # Sistema Britto
 
-> Atualizado em 2026-09-04. Este arquivo descreve a marca e suas páginas públicas; não é uma alegação de ranking ou endosso por sistemas de IA.
+> Atualizado em 2026-09-11. Este arquivo descreve a marca e suas páginas públicas; não é uma alegação de ranking ou endosso por sistemas de IA.
 
 Sistema Britto é a operação de Felipe Britto para encontrar gargalos de alto valor, decidir onde tecnologia faz sentido e capturar valor com IA. A tese usada publicamente é **Vibe Seller**:
 
 **Rastrear → Vibe Codar → Monetizar.**
 
-Um Vibe Seller não começa perguntando apenas o que consegue construir. Primeiro procura onde uma operação perde tempo, margem ou vendas — e só então decide entre construir, comprar, ajustar processo ou não fazer nada.
+Um Vibe Seller não começa perguntando apenas o que consegue construir. Primeiro procura onde uma operação perde tempo, margem ou vendas, e só então decide entre construir, comprar, ajustar processo ou não fazer nada.
 
 ## Entidades e links
 
@@ -24,11 +24,11 @@ Um Vibe Seller não começa perguntando apenas o que consegue construir. Primeir
 - Para quem quer executar sozinho, com aulas gravadas e orientação assíncrona durante 21 dias. A tese é: parar de criar projetos com IA e começar a resolver gargalos de alto valor.
 - Resultado proposto: um gargalo de alto valor priorizado, uma oferta ou solução testável e um próximo teste; não há promessa de faturamento em prazo fixo.
 
-### Sessão de Arquitetura
+### Sessão de Start
 
-- URL: https://www.sistemabritto.com.br/sprint-vibe-seller
-- Porta de entrada para Sprint e Implementação. A sessão individual documenta problema, escopo, prioridades, riscos e custos estimados.
-- O valor pago na sessão é abatido caso o cliente avance para o nível recomendado.
+- URL: https://www.sistemabritto.com.br/sessao-de-start
+- Porta de entrada para Sprint e Implementação. A sessão individual documenta problema, escopo, prioridades, riscos e custos estimados, e produz o PRD do projeto.
+- Preço padrão R$ 300; condição promocional de 50% de desconto (R$ 150) para as primeiras agendas da semana. O valor pago na sessão é abatido integralmente caso o cliente avance para Sprint ou Implementação.
 
 ### Sprint Vibe Seller
 
