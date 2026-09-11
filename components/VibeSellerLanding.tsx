@@ -6,7 +6,7 @@ import PhoneInput from './PhoneInput';
 import FollowerLot from './FollowerLot';
 import { getStoredUtms, trackCta } from '../pages/_app';
 import { ARCHITECTURE_SESSION } from '../lib/architecture-session';
-import { weeklyAgendaCountdown } from '../lib/weekly-agenda-countdown';
+import { weeklyAgendaCountdown, weekProgress, type DayState } from '../lib/weekly-agenda-countdown';
 
 type OfferKind = 'desafio' | 'sprint' | 'implementacao';
 
@@ -106,9 +106,9 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     eyebrow: '9 semanas · eu faço com você',
     headline: 'Você não precisa tocar',
     emphasis: 'seu projeto sozinho.',
-    lead: 'No Sprint, eu acompanho a execução com você por 9 semanas: decisões, prioridades, construção e validação. Você continua dono do projeto, mas para de destravar tudo no escuro. O primeiro passo é comprar a Sessão de Start de R$ 150.',
+    lead: 'No Sprint, eu acompanho a execução com você por 9 semanas: decisões, prioridades, construção e validação. Você continua dono do projeto, mas para de destravar tudo no escuro. O primeiro passo é a Sessão de Start.',
     price: 'Comece pela Sessão de Start · R$ 150',
-    primaryCta: 'Comprar Sessão de Start · R$ 150',
+    primaryCta: 'Comprar Sessão de Start',
     formTitle: 'Comprar Sessão de Start',
     formLead: 'É a porta de entrada comum para Sprint e Implementação. Você compra a sessão por R$ 150, recebe o link de agenda após a confirmação e esse valor é abatido se avançarmos.',
     submitLabel: 'Ir para o checkout de R$ 150 →',
@@ -166,9 +166,9 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     eyebrow: '9 semanas · eu faço para você',
     headline: 'Você pediu orçamento de uma solução.',
     emphasis: 'Mas o projeto ainda não foi definido.',
-    lead: 'Sem escopo, tudo parece caber e qualquer orçamento vira chute. Você compra primeiro a Sessão de Start de R$ 150; nela definimos o problema, a rota, as integrações e os custos antes de decidir se eu construo para você.',
+    lead: 'Sem escopo, tudo parece caber e qualquer orçamento vira chute. Você começa pela Sessão de Start: nela definimos o problema, a rota, as integrações e os custos antes de decidir se eu construo para você.',
     price: 'Comece pela Sessão de Start · R$ 150',
-    primaryCta: 'Comprar Sessão de Start · R$ 150',
+    primaryCta: 'Comprar Sessão de Start',
     formTitle: 'Comprar Sessão de Start',
     formLead: 'Você compra a sessão por R$ 150. Depois da confirmação, recebe o link para escolher o horário; se avançarmos para a implementação, esse valor é abatido.',
     submitLabel: 'Ir para o checkout de R$ 150 →',
@@ -229,15 +229,18 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
   const [utms, setUtms] = useState<Record<string, string>>({});
   const [form, setForm] = useState({ name: '', email: '', whatsapp: '', context: '' });
   const [agendaCountdown, setAgendaCountdown] = useState('');
+  const [weekDays, setWeekDays] = useState<{ label: string; state: DayState }[]>([]);
   const modalId = `checkout-${kind}`;
 
   useEffect(() => setUtms(getStoredUtms()), []);
 
   useEffect(() => {
     if (kind === 'desafio') return;
-    const updateCountdown = () => setAgendaCountdown(weeklyAgendaCountdown());
-    updateCountdown();
-    const intervalId = window.setInterval(updateCountdown, 60_000);
+    const update = () => { setAgendaCountdown(weeklyAgendaCountdown()); setWeekDays(weekProgress()); };
+    update();
+    // A cada segundo, de propósito: o contador com segundos dá sensação de
+    // movimento real, não só marca hora e minuto.
+    const intervalId = window.setInterval(update, 1_000);
     return () => window.clearInterval(intervalId);
   }, [kind]);
 
@@ -353,22 +356,21 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
               <p className="mt-4 font-heading text-2xl font-bold leading-tight text-white">{offer.proof}</p>
               {offer.kind !== 'desafio' && <div className="mt-8 border-t border-white/10 pt-6">
                 <p className="text-xs font-bold uppercase tracking-[0.14em] text-violet-200">Porta de entrada</p>
-                <div className="mt-3 flex items-end gap-3">
-                  <p className="font-heading text-5xl font-black leading-none tracking-[-0.06em] text-white">R$ 150</p>
-                  <p className="mb-1 text-sm text-slate-500 line-through">R$ 300</p>
-                </div>
-                <p className="mt-2 text-sm font-medium text-slate-300">O valor vira crédito se você avançar.</p>
-                <div className="mt-5 rounded-2xl border border-violet-300/25 bg-violet-300/[0.08] p-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <p className="text-sm font-bold text-white">3 agendas nesta condição</p>
-                    <span className="rounded-full border border-violet-200/30 bg-violet-200/10 px-2.5 py-1 text-xs font-bold text-violet-100">semanal</span>
+                <p className="mt-2 max-w-sm text-sm leading-relaxed text-slate-300">A {ARCHITECTURE_SESSION.name} é o primeiro passo, com condição especial e crédito total se você avançar.</p>
+                <div className="mt-5 rounded-2xl border border-violet-300/30 bg-gradient-to-br from-violet-500/15 via-transparent to-transparent p-4">
+                  <div className="flex items-center gap-4">
+                    <div className="flex shrink-0 flex-col items-center justify-center rounded-xl border border-violet-300/30 bg-violet-300/10 px-4 py-3 text-center">
+                      <p className="font-heading text-3xl font-black leading-none text-white">{ARCHITECTURE_SESSION.weeklySlots}<span className="text-base font-bold text-violet-200"> de {ARCHITECTURE_SESSION.weeklySlots}</span></p>
+                      <p className="mt-1 text-[10px] font-bold uppercase tracking-wide text-violet-200">vagas na condição</p>
+                    </div>
+                    <p className="text-sm leading-relaxed text-slate-300">A agenda não escala: são {ARCHITECTURE_SESSION.weeklySlots} conversas por semana, sem garantia de que o próximo lote sai com o mesmo valor.</p>
                   </div>
-                  <div className="mt-3 grid grid-cols-3 gap-1.5" aria-label="Condição limitada a três agendas por semana">
-                    <span className="h-1.5 rounded-full bg-violet-200" />
-                    <span className="h-1.5 rounded-full bg-violet-200" />
-                    <span className="h-1.5 rounded-full bg-violet-200" />
+                  <div className="mt-4 flex gap-1" aria-hidden="true">
+                    {(weekDays.length ? weekDays : Array.from({ length: 7 }, (_, i) => ({ label: ['SEG','TER','QUA','QUI','SEX','SAB','DOM'][i], state: 'future' as DayState }))).map((day) => (
+                      <div key={day.label} className={`flex-1 rounded-md py-1 text-center text-[9px] font-bold tracking-wide ${day.state === 'today' ? 'bg-[#a3ff12] text-black' : day.state === 'past' ? 'bg-white/5 text-white/25' : 'bg-violet-300/15 text-violet-100'}`}>{day.label}</div>
+                    ))}
                   </div>
-                  <p className="mt-3 text-xs text-violet-100/85">Novo ciclo domingo, 00h · {agendaCountdown ? `renova em ${agendaCountdown}` : 'calculando horário…'}</p>
+                  <p className="mt-3 text-xs text-violet-100/85">⏳ {agendaCountdown ? `Fecha em ${agendaCountdown}` : 'calculando horário…'}</p>
                 </div>
               </div>}
               </div>
