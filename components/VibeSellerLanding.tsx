@@ -69,6 +69,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
       'Matriz Build / Buy / Ignore para não criar software commodity',
       'Roteiros de conversa, pré-venda, página e teste mínimo',
       'Aulas gravadas e uma sequência assíncrona de 21 mensagens para guiar sua execução',
+      'Garantia de 7 dias de arrependimento e garantia de conclusão: cumpriu as 21 missões e decidiu não continuar? Devolvemos o valor investido',
     ],
     fit: [
       'Você constrói, vende ou opera e tem acesso a um nicho, negócio ou audiência.',
@@ -85,6 +86,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
       { question: 'Preciso saber programar?', answer: 'Não. Construir é uma das decisões possíveis. Em alguns casos a resposta correta será comprar, ajustar processo ou vender serviço antes de escrever código.' },
       { question: 'O que é o Mapa Vibe Seller?', answer: 'É a ferramenta de decisão do Desafio. Ela organiza dor, custo da inação, comprador, distribuição, build versus buy, risco de comoditização e próximo teste.' },
       { question: 'E se eu encontrar uma oportunidade maior?', answer: 'Quando você precisa de acompanhamento ou quer que alguém execute junto/com você, o próximo passo é a Sessão de Start. Ela decide qual nível de entrega faz sentido.' },
+      { question: 'Existe garantia?', answer: 'Duas. A primeira é de 7 dias: entrou e percebeu que o Desafio não é para você, pode pedir cancelamento nesse prazo. A segunda é de conclusão: se você cumprir as 21 missões, mantiver os combinados e ainda decidir que não quer continuar tentando, devolvemos o valor investido, sem exigir comprovação de faturamento. A garantia é sobre cumprir o método, não sobre um resultado de mercado que ninguém controla sozinho.' },
     ],
     nextStep: { title: 'Encontrou um gargalo maior?', copy: 'Se a validação pede acompanhamento ou execução, comece pela Sessão de Start. Ela transforma o contexto em plano e mostra o nível de entrega certo.', href: '/sprint-vibe-seller', cta: 'Ver acompanhamento →' },
     schema: [{
@@ -382,6 +384,41 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
           </div>
         </section>
 
+        {offer.kind === 'desafio' && <section className="px-5 py-16 sm:px-8 sm:py-20">
+          <div className="mx-auto max-w-6xl">
+            <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#c4ff72]">Talvez isso já seja familiar</p>
+            <h2 className="mt-3 max-w-3xl font-heading text-3xl font-bold tracking-[-0.04em] sm:text-5xl">Você não tem falta de ferramenta. Tem falta de gargalo certo.</h2>
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
+              {[
+                ['🌀', 'Projeto que não sai do Notion', 'Já testou uma dúzia de ideias com IA e nenhuma chegou perto de um comprador real.'],
+                ['🎲', 'Aposta sem crivo', 'Sem saber quem sente a dor e quem paga por ela, cada projeto novo repete a mesma aposta do anterior.'],
+                ['⏱️', '21 dias que virariam 6 meses', 'Sem prazo e sem método, "só mais um teste" nunca termina, e a validação nunca chega.'],
+              ].map(([icon, title, copy]) => (
+                <article key={title} className="rounded-2xl border border-white/10 bg-[#080b12] p-6">
+                  <p className="text-3xl" aria-hidden="true">{icon}</p>
+                  <h3 className="mt-4 font-heading text-xl font-bold text-white">{title}</h3>
+                  <p className="mt-3 leading-relaxed text-slate-300">{copy}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>}
+
+        {offer.kind === 'desafio' && <section className="border-y border-white/10 bg-[#0d1320] px-5 py-16 sm:px-8 sm:py-20">
+          <div className="mx-auto grid max-w-6xl gap-5 lg:grid-cols-2">
+            <article className="rounded-3xl border border-white/10 bg-[#080b12] p-7">
+              <p className="text-3xl" aria-hidden="true">🎯</p>
+              <h2 className="mt-4 font-heading text-2xl font-bold">O inimigo comum não é falta de IA.</h2>
+              <p className="mt-4 leading-relaxed text-slate-300">O mercado já está saturado de gente que sabe construir com IA e não sabe o que vale a pena construir. O inimigo é continuar criando projeto atrás de projeto sem antes achar quem sente a dor e quem paga por ela.</p>
+            </article>
+            <article className="rounded-3xl border border-white/10 bg-[#080b12] p-7">
+              <p className="text-3xl" aria-hidden="true">⏳</p>
+              <h2 className="mt-4 font-heading text-2xl font-bold">O custo da inação</h2>
+              <p className="mt-4 leading-relaxed text-slate-300">Cada mês sem um teste real de mercado é um mês de operação, tempo e atenção que continuam presos no mesmo lugar. O Desafio não promete faturamento; promete que, em 21 dias, você sai com uma resposta em vez de mais uma ideia parada.</p>
+            </article>
+          </div>
+        </section>}
+
         {offer.kind === 'sprint' && <section className="px-5 py-16 sm:px-8 sm:py-24">
           <div className="mx-auto max-w-6xl">
             <p className="text-sm font-bold uppercase tracking-[0.14em] text-violet-300">Você executa. Eu acompanho.</p>
@@ -475,6 +512,18 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
               <article className="rounded-2xl border border-white/10 bg-[#080b12] p-6"><p className="font-heading text-xl font-bold text-white">1 mês de repescagem</p><p className="mt-3 leading-relaxed text-slate-300">Cumpriu os combinados e, em 9 semanas, o projeto ainda não recuperou o investimento com vendas? Você ganha mais 1 mês de acompanhamento sem custo para acelerar a comercialização.</p></article>
             </div>
             <p className="mt-5 text-sm leading-relaxed text-slate-400">A repescagem é uma extensão individual de acompanhamento, não reembolso, e usa as evidências de execução e vendas combinadas no projeto.</p>
+          </div>
+        </section>}
+
+        {offer.kind === 'desafio' && <section className="border-y border-[#a3ff12]/20 bg-[#a3ff12]/[0.045] px-5 py-16 sm:px-8">
+          <div className="mx-auto max-w-6xl">
+            <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#c4ff72]">Garantia dupla</p>
+            <h2 className="mt-3 max-w-3xl font-heading text-3xl font-bold tracking-[-0.04em] sm:text-5xl">Você não fica preso a uma decisão ruim, e cumprir o método vale mais do que prometer resultado.</h2>
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              <article className="rounded-2xl border border-white/10 bg-[#080b12] p-6"><p className="font-heading text-xl font-bold text-white">7 dias de arrependimento</p><p className="mt-3 leading-relaxed text-slate-300">Entrou e percebeu que esse não é o caminho certo agora? Você pode pedir cancelamento dentro de 7 dias.</p></article>
+              <article className="rounded-2xl border border-white/10 bg-[#080b12] p-6"><p className="font-heading text-xl font-bold text-white">Garantia de conclusão</p><p className="mt-3 leading-relaxed text-slate-300">Cumpriu as 21 missões, manteve os combinados e ainda assim decidiu que não quer continuar tentando? Devolvemos o valor investido, sem exigir comprovação de faturamento.</p></article>
+            </div>
+            <p className="mt-5 text-sm leading-relaxed text-slate-400">A garantia é sobre cumprir o método, não sobre um resultado de mercado que ninguém controla sozinho. Ela existe para quem tentou de verdade, não para quem só quer o desconto do próprio tempo.</p>
           </div>
         </section>}
 
