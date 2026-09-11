@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 import Meta from './Meta';
+import Footer from './Footer';
 import PhoneInput from './PhoneInput';
 import FollowerLot from './FollowerLot';
 import { getStoredUtms, trackCta } from '../pages/_app';
@@ -517,8 +518,8 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
           </div>
         </section>
 
-        <footer className="border-t border-white/10 px-5 py-8 text-center text-sm text-slate-400"><a className="hover:text-white" href="/politicas-de-privacidade">Privacidade</a><span className="mx-3">·</span><a className="hover:text-white" href="/termos-de-uso">Termos</a><span className="mx-3">·</span>© {new Date().getFullYear()} Sistema Britto</footer>
       </main>
+      <Footer />
 
       {formOpen && (
         <div id={modalId} className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label={offer.formTitle}>
