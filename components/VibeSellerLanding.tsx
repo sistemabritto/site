@@ -72,7 +72,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     ],
     fit: [
       'Você constrói, vende ou opera e tem acesso a um nicho, negócio ou audiência.',
-      'Você quer encontrar receita, economia, margem ou equity — não só uma ferramenta nova.',
+      'Você quer encontrar receita, economia, margem ou equity, não só uma ferramenta nova.',
       'Você aceita falar com mercado e testar uma hipótese antes de construir por semanas.',
     ],
     notFit: [
@@ -106,7 +106,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     eyebrow: '9 semanas · eu faço com você',
     headline: 'Você não precisa tocar',
     emphasis: 'seu projeto sozinho.',
-    lead: 'No Sprint, eu acompanho a execução com você por 9 semanas: decisões, prioridades, construção e validação. Você continua dono do projeto — mas para de destravar tudo no escuro. O primeiro passo é comprar a Sessão de Start de R$ 150.',
+    lead: 'No Sprint, eu acompanho a execução com você por 9 semanas: decisões, prioridades, construção e validação. Você continua dono do projeto, mas para de destravar tudo no escuro. O primeiro passo é comprar a Sessão de Start de R$ 150.',
     price: 'Comece pela Sessão de Start · R$ 150',
     primaryCta: 'Comprar Sessão de Start · R$ 150',
     formTitle: 'Comprar Sessão de Start',
@@ -123,7 +123,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     ],
     deliverables: [
       'Sessão de Start individual, com escopo e custos estimados',
-      '9 semanas de suporte individualizado pelo WhatsApp — não é grupo e não é comunidade genérica',
+      '9 semanas de suporte individualizado pelo WhatsApp: não é grupo e não é comunidade genérica',
       'Cinco checkpoints individuais no Meet para decidir, ajustar e destravar',
       'Prioridades, mini-PRD e plano de execução vivo',
       'Direção de build, buy, processo e distribuição conforme o projeto evolui',
@@ -463,7 +463,7 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
         {offer.kind !== 'desafio' && <section className="border-y border-[#a3ff12]/20 bg-[#a3ff12]/[0.045] px-5 py-16 sm:px-8">
           <div className="mx-auto max-w-6xl">
             <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#c4ff72]">Dupla garantia</p>
-            <h2 className="mt-3 max-w-3xl font-heading text-3xl font-bold tracking-[-0.04em] sm:text-5xl">Você não fica preso a uma decisão ruim — e eu não desapareço quando o projeto precisa vender.</h2>
+            <h2 className="mt-3 max-w-3xl font-heading text-3xl font-bold tracking-[-0.04em] sm:text-5xl">Você não fica preso a uma decisão ruim, e eu não desapareço quando o projeto precisa vender.</h2>
             <div className="mt-8 grid gap-4 md:grid-cols-2">
               <article className="rounded-2xl border border-white/10 bg-[#080b12] p-6"><p className="font-heading text-xl font-bold text-white">7 dias de arrependimento</p><p className="mt-3 leading-relaxed text-slate-300">Entrou e percebeu que esse não é o caminho certo? Você pode pedir cancelamento dentro de 7 dias.</p></article>
               <article className="rounded-2xl border border-white/10 bg-[#080b12] p-6"><p className="font-heading text-xl font-bold text-white">1 mês de repescagem</p><p className="mt-3 leading-relaxed text-slate-300">Cumpriu os combinados e, em 9 semanas, o projeto ainda não recuperou o investimento com vendas? Você ganha mais 1 mês de acompanhamento sem custo para acelerar a comercialização.</p></article>

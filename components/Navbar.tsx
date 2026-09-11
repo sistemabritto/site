@@ -29,7 +29,7 @@ export default function Navbar() {
       }`}
     >
       <div className="mx-auto flex min-h-[72px] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Link href="/" aria-label="Sistema Britto — página inicial" className="flex shrink-0 items-center rounded-md focus-visible:outline focus-visible:outline-4 focus-visible:outline-[#a3ff12]/40">
+        <Link href="/" aria-label="Sistema Britto, página inicial" className="flex shrink-0 items-center rounded-md focus-visible:outline focus-visible:outline-4 focus-visible:outline-[#a3ff12]/40">
           <img src="/images/logo-sistema-britto.png" alt="Sistema Britto" className="h-10 w-auto sm:h-11" />
         </Link>
 
