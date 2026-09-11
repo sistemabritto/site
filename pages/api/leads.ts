@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { attachExistingCrmLead } from '../../lib/lead-crm';
+import { alertarNexus } from '../../lib/alertaNexus';
 
 // ─── Config ──────────────────────────────────────────────────────
 const EVOCRM_BASE_URL = 'https://evoapi.workflowapi.com.br';
@@ -98,6 +99,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // never be used as a deliverable email address.
   const emailEfetivo = email?.trim().toLowerCase() || `whatsapp-${phoneNumber.replace(/\D/g, '')}@sem-email.sistemabritto.com.br`;
   const results: { supabase?: boolean; evocrm?: boolean } = {};
+  // Motivo de cada falha, pra compor o alerta no fim — sem isto o Telegram
+  // recebe "falhou" sem dizer o quê, e vira ticket manual de investigação
+  // toda vez que dispara.
+  const motivosFalha: string[] = [];
 
   // Extrai UTM do objeto "utm" (formato do quiz) ou dos campos flat
   const utmSource = utm_source || utm?.utm_source || '';
@@ -123,10 +128,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         created_at: new Date().toISOString(),
       }, { onConflict: 'email', ignoreDuplicates: true });
       if (!error) results.supabase = true;
-      else console.error('[Supabase] lead save failed', { code: error.code });
+      else {
+        console.error('[Supabase] lead save failed', { code: error.code });
+        motivosFalha.push(`Supabase: ${error.code || 'erro desconhecido'}`);
+      }
     }
   } catch {
     console.error('[Supabase] lead save unavailable');
+    motivosFalha.push('Supabase: indisponível (exceção)');
   }
 
   // ── 2. Criar lead no EvoCRM ────────────────────────────────────
@@ -204,17 +213,41 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           pipeline: destino.pipeline, stage: destino.stage, fields: payload.custom_fields }, EVOCRM_API_TOKEN) === 'saved';
       } else {
         console.error('[EvoCRM] lead validation failed', { status: response.status });
+        motivosFalha.push(`EvoCRM: validação falhou (HTTP 422, não era duplicata)`);
       }
     } else {
       console.error('[EvoCRM] lead create failed:', response.status);
+      motivosFalha.push(`EvoCRM: HTTP ${response.status} ao criar lead`);
     }
-    } else console.error('[EvoCRM] existing lead lookup failed');
+    } else {
+      console.error('[EvoCRM] existing lead lookup failed');
+      motivosFalha.push('EvoCRM: busca de contato existente falhou');
+    }
   } catch {
     console.error('[EvoCRM] lead sync unavailable');
+    motivosFalha.push('EvoCRM: indisponível (exceção ou token ausente)');
   }
 
   // ── Sucesso se pelo menos um salvou ─────────────────────────────
   const saved = results.supabase || results.evocrm;
+
+  // Lead perdido de verdade: nem Supabase nem EvoCRM salvaram, e isso hoje
+  // não chega a ninguém — o frontend de quiz.tsx/call-sobrevivencia-pos-ia.tsx
+  // dispara `fetch('/api/leads')` sem checar a resposta (fire-and-forget), e
+  // mesmo quando o frontend checa, o erro só aparece no console do navegador
+  // de quem preencheu o formulário. Alerta aqui, no servidor, é o único ponto
+  // que sempre sabe se a persistência falhou, não importa quem chamou.
+  if (!saved) {
+    void alertarNexus(
+      'Lead perdido — /api/leads falhou nos dois destinos',
+      [
+        `source: ${source || '(vazio)'}`,
+        `contato: ${email || phoneNumber || '(sem email/whatsapp)'}`,
+        ...motivosFalha,
+      ].join('\n')
+    );
+  }
+
   return res.status(saved ? 200 : 500).json({
     success: saved,
     results,
