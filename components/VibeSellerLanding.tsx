@@ -83,9 +83,9 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
       { question: 'Vou faturar em 21 dias?', answer: 'Não existe promessa de faturamento em prazo fixo. O resultado do Desafio é um gargalo de alto valor priorizado, uma oferta ou solução testável e uma validação real; faturamento depende de problema, comprador, proposta e execução.' },
       { question: 'Preciso saber programar?', answer: 'Não. Construir é uma das decisões possíveis. Em alguns casos a resposta correta será comprar, ajustar processo ou vender serviço antes de escrever código.' },
       { question: 'O que é o Mapa Vibe Seller?', answer: 'É a ferramenta de decisão do Desafio. Ela organiza dor, custo da inação, comprador, distribuição, build versus buy, risco de comoditização e próximo teste.' },
-      { question: 'E se eu encontrar uma oportunidade maior?', answer: 'Quando você precisa de acompanhamento ou quer que alguém execute junto/com você, o próximo passo é a Consultoria a Laser. Ela decide qual nível de entrega faz sentido.' },
+      { question: 'E se eu encontrar uma oportunidade maior?', answer: 'Quando você precisa de acompanhamento ou quer que alguém execute junto/com você, o próximo passo é a Sessão de Start. Ela decide qual nível de entrega faz sentido.' },
     ],
-    nextStep: { title: 'Encontrou um gargalo maior?', copy: 'Se a validação pede acompanhamento ou execução, comece pela Consultoria a Laser. Ela transforma o contexto em plano e mostra o nível de entrega certo.', href: '/sprint-vibe-seller', cta: 'Ver acompanhamento →' },
+    nextStep: { title: 'Encontrou um gargalo maior?', copy: 'Se a validação pede acompanhamento ou execução, comece pela Sessão de Start. Ela transforma o contexto em plano e mostra o nível de entrega certo.', href: '/sprint-vibe-seller', cta: 'Ver acompanhamento →' },
     schema: [{
       '@type': 'Course',
       '@id': 'https://www.sistemabritto.com.br/desafio-monetizar-com-ia#course',
@@ -101,27 +101,27 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     cover: '/covers/sprint-vibe-seller.png',
     path: '/sprint-vibe-seller',
     metaTitle: 'Sprint Vibe Seller | Acompanhamento de 9 semanas para tirar sua solução do papel',
-    metaDescription: 'Você não toca seu projeto sozinho: 9 semanas de suporte individual pelo WhatsApp, 5 checkpoints e uma garantia de repescagem. Comece pela Consultoria a Laser por R$ 150.',
+    metaDescription: 'Você não toca seu projeto sozinho: 9 semanas de suporte individual pelo WhatsApp, 5 checkpoints e uma garantia de repescagem. Comece pela Sessão de Start por R$ 150.',
     eyebrow: '9 semanas · eu faço com você',
     headline: 'Você não precisa tocar',
     emphasis: 'seu projeto sozinho.',
-    lead: 'No Sprint, eu acompanho a execução com você por 9 semanas: decisões, prioridades, construção e validação. Você continua dono do projeto — mas para de destravar tudo no escuro. O primeiro passo é comprar a Consultoria a Laser de R$ 150.',
-    price: 'Comece pela Consultoria a Laser · R$ 150',
-    primaryCta: 'Comprar Consultoria a Laser · R$ 150',
-    formTitle: 'Comprar Consultoria a Laser',
+    lead: 'No Sprint, eu acompanho a execução com você por 9 semanas: decisões, prioridades, construção e validação. Você continua dono do projeto — mas para de destravar tudo no escuro. O primeiro passo é comprar a Sessão de Start de R$ 150.',
+    price: 'Comece pela Sessão de Start · R$ 150',
+    primaryCta: 'Comprar Sessão de Start · R$ 150',
+    formTitle: 'Comprar Sessão de Start',
     formLead: 'É a porta de entrada comum para Sprint e Implementação. Você compra a sessão por R$ 150, recebe o link de agenda após a confirmação e esse valor é abatido se avançarmos.',
     submitLabel: 'Ir para o checkout de R$ 150 →',
     checkoutUrl: ARCHITECTURE_SESSION.checkoutUrl,
     processTitle: 'Nove semanas, cinco checkpoints e suporte individual de verdade.',
     deliverablesTitle: 'Clareza na sessão. Direção individual até a solução virar venda.',
-    proof: 'A Consultoria a Laser define a rota. Se o Sprint for o nível certo, entramos em três sprints de três semanas com suporte individual no WhatsApp e cinco checkpoints para fazer o projeto sair da ideia, ganhar forma e chegar ao mercado.',
+    proof: 'A Sessão de Start define a rota. Se o Sprint for o nível certo, entramos em três sprints de três semanas com suporte individual no WhatsApp e cinco checkpoints para fazer o projeto sair da ideia, ganhar forma e chegar ao mercado.',
     steps: [
       { label: 'Semanas 1–3', title: 'Rota e escopo', copy: 'Fechamos problema, comprador, métrica, solução mínima e o que não entra agora.' },
       { label: 'Semanas 4–6', title: 'Construir e validar', copy: 'Você executa com suporte individualizado pelo WhatsApp e checkpoints para destravar as decisões importantes.' },
       { label: 'Semanas 7–9', title: 'Lançar e ajustar', copy: 'Organizamos a primeira versão, a forma de apresentar ao mercado e os próximos testes de escala.' },
     ],
     deliverables: [
-      'Consultoria a Laser individual, com escopo e custos estimados',
+      'Sessão de Start individual, com escopo e custos estimados',
       '9 semanas de suporte individualizado pelo WhatsApp — não é grupo e não é comunidade genérica',
       'Cinco checkpoints individuais no Meet para decidir, ajustar e destravar',
       'Prioridades, mini-PRD e plano de execução vivo',
@@ -139,13 +139,13 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
       'Você não consegue reservar tempo para executar entre os checkpoints.',
     ],
     faqs: [
-      { question: 'O Sprint começa pelo checkout de R$ 150?', answer: 'Sim. Você compra a Consultoria a Laser diretamente por R$ 150. Ela define escopo, prioridades e custos. Se o Sprint for o próximo passo, esse valor é abatido do acompanhamento.' },
+      { question: 'O Sprint começa pelo checkout de R$ 150?', answer: 'Sim. Você compra a Sessão de Start diretamente por R$ 150. Ela define escopo, prioridades e custos. Se o Sprint for o próximo passo, esse valor é abatido do acompanhamento.' },
       { question: 'O acompanhamento é em grupo?', answer: 'Não. O suporte é individualizado pelo WhatsApp durante as 9 semanas e existem cinco checkpoints individuais no Meet. A ideia é olhar seu contexto, destravar a próxima decisão e manter o projeto em movimento.' },
       { question: 'Como funcionam as duas garantias?', answer: 'A primeira é de 7 dias: se você entrar e perceber que o Sprint não é para você, pode pedir cancelamento dentro desse prazo. A segunda é de execução: se você cumprir os combinados do projeto e, ao fim das 9 semanas, ainda não tiver recuperado o investimento com as vendas da solução, ganha 1 mês de repescagem sem custo para acelerar a comercialização. A repescagem não é reembolso; é extensão individual de acompanhamento e depende de evidências das ações e vendas combinadas.' },
       { question: 'Qual é a diferença para implementação?', answer: 'No Sprint eu faço com você: acompanho, destravo e direciono sua execução. Na Implementação eu faço para você: construo e entrego o código, a estrutura e o plano de escala.' },
       { question: 'O Sprint inclui desenvolvimento completo?', answer: 'Não como serviço terceirizado. Ele inclui direção e acompanhamento para você executar com velocidade; se a melhor decisão for eu construir, a proposta correta é a Implementação.' },
     ],
-    nextStep: { title: 'Prefere receber a solução pronta?', copy: 'A mesma Consultoria a Laser também define se a Implementação é o nível adequado. Se avançar, o valor da sessão entra como crédito.', href: '/implementacao-vibe-seller', cta: 'Ver implementação →' },
+    nextStep: { title: 'Prefere receber a solução pronta?', copy: 'A mesma Sessão de Start também define se a Implementação é o nível adequado. Se avançar, o valor da sessão entra como crédito.', href: '/implementacao-vibe-seller', cta: 'Ver implementação →' },
     schema: [{
       '@type': 'Service',
       '@id': 'https://www.sistemabritto.com.br/sprint-vibe-seller#service',
@@ -153,7 +153,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
       description: 'Acompanhamento individual de 9 semanas para transformar uma oportunidade em solução validada e pronta para crescer.',
       provider: { '@id': 'https://www.sistemabritto.com.br/#organization' },
       url: 'https://www.sistemabritto.com.br/sprint-vibe-seller',
-      offers: { '@type': 'Offer', price: '150.00', priceCurrency: 'BRL', description: 'Consultoria a Laser, abatida se o cliente avançar para o Sprint.' },
+      offers: { '@type': 'Offer', price: '150.00', priceCurrency: 'BRL', description: 'Sessão de Start, abatida se o cliente avançar para o Sprint.' },
     }],
   },
   implementacao: {
@@ -165,10 +165,10 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     eyebrow: '9 semanas · eu faço para você',
     headline: 'Você pediu orçamento de uma solução.',
     emphasis: 'Mas o projeto ainda não foi definido.',
-    lead: 'Sem escopo, tudo parece caber e qualquer orçamento vira chute. Você compra primeiro a Consultoria a Laser de R$ 150; nela definimos o problema, a rota, as integrações e os custos antes de decidir se eu construo para você.',
-    price: 'Comece pela Consultoria a Laser · R$ 150',
-    primaryCta: 'Comprar Consultoria a Laser · R$ 150',
-    formTitle: 'Comprar Consultoria a Laser',
+    lead: 'Sem escopo, tudo parece caber e qualquer orçamento vira chute. Você compra primeiro a Sessão de Start de R$ 150; nela definimos o problema, a rota, as integrações e os custos antes de decidir se eu construo para você.',
+    price: 'Comece pela Sessão de Start · R$ 150',
+    primaryCta: 'Comprar Sessão de Start · R$ 150',
+    formTitle: 'Comprar Sessão de Start',
     formLead: 'Você compra a sessão por R$ 150. Depois da confirmação, recebe o link para escolher o horário; se avançarmos para a implementação, esse valor é abatido.',
     submitLabel: 'Ir para o checkout de R$ 150 →',
     checkoutUrl: ARCHITECTURE_SESSION.checkoutUrl,
@@ -181,7 +181,7 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
       { label: 'Semanas 7–9', title: 'Entrega e escala', copy: 'Testamos, colocamos para operar, entregamos código/documentação e um plano objetivo para o próximo ciclo.' },
     ],
     deliverables: [
-      'Consultoria a Laser individual, com fluxo e custos estimados',
+      'Sessão de Start individual, com fluxo e custos estimados',
       'Escopo inicial: o que entra, o que fica fora e em qual ordem',
       'Integrações, dependências e principais riscos mapeados',
       'Estimativa de custos de construção e operação, com premissas visíveis',
@@ -201,12 +201,12 @@ const OFFERS: Record<OfferKind, OfferConfig> = {
     ],
     faqs: [
       { question: 'O que acontece depois da compra?', answer: 'A Cakto confirma o pagamento e envia o link de acesso para você escolher o horário disponível. Antes da conversa, você recebe uma orientação curta para trazer o contexto certo.' },
-      { question: 'Qual é a diferença para o Sprint?', answer: 'Os dois passam pela mesma Consultoria a Laser. No Sprint eu faço com você durante 9 semanas; na Implementação eu faço para você e entrego a solução pronta para operar.' },
-      { question: 'Como funciona o investimento de R$ 5.000?', answer: 'A Consultoria a Laser custa R$ 150 e conta como parte do projeto. Se decidirmos avançar, você paga R$ 2.350 de entrada. Isso deixa R$ 2.500 para a etapa em que a solução estiver ready to market: pronta para ser apresentada, vendida ou colocada para operar conforme o escopo combinado. Não é uma cobrança escondida; é uma forma de dividir o risco e alinhar a entrega ao momento em que ela pode fazer dinheiro.' },
+      { question: 'Qual é a diferença para o Sprint?', answer: 'Os dois passam pela mesma Sessão de Start. No Sprint eu faço com você durante 9 semanas; na Implementação eu faço para você e entrego a solução pronta para operar.' },
+      { question: 'Como funciona o investimento de R$ 5.000?', answer: 'A Sessão de Start custa R$ 150 e conta como parte do projeto. Se decidirmos avançar, você paga R$ 2.350 de entrada. Isso deixa R$ 2.500 para a etapa em que a solução estiver ready to market: pronta para ser apresentada, vendida ou colocada para operar conforme o escopo combinado. Não é uma cobrança escondida; é uma forma de dividir o risco e alinhar a entrega ao momento em que ela pode fazer dinheiro.' },
       { question: 'Como funcionam as duas garantias?', answer: 'A primeira é de 7 dias: se você entrar e perceber que a Implementação não é para você, pode pedir cancelamento nesse prazo. A segunda é de execução: se cumprirmos os combinados e, ao fim das 9 semanas, a solução ainda não tiver recuperado o investimento com as vendas, você ganha 1 mês de repescagem sem custo para acelerar a comercialização. A repescagem é uma extensão de acompanhamento, não um reembolso, e usa evidências das ações e vendas combinadas.' },
       { question: 'Por que o preço está em R$ 150?', answer: 'O valor normal é R$ 300. Como a sessão é individual e depende da agenda do Felipe, apenas as 3 primeiras agendas liberadas na semana entram no valor promocional.' },
     ],
-    nextStep: { title: 'Ainda quer participar ativamente da construção?', copy: 'Se você prefere fazer com acompanhamento em vez de terceirizar a execução, o Sprint é o nível certo. A Consultoria a Laser continua sendo a mesma porta de entrada.', href: '/sprint-vibe-seller', cta: 'Ver Sprint →' },
+    nextStep: { title: 'Ainda quer participar ativamente da construção?', copy: 'Se você prefere fazer com acompanhamento em vez de terceirizar a execução, o Sprint é o nível certo. A Sessão de Start continua sendo a mesma porta de entrada.', href: '/sprint-vibe-seller', cta: 'Ver Sprint →' },
     schema: [{
       '@type': 'Service',
       '@id': 'https://www.sistemabritto.com.br/implementacao-vibe-seller#service',
@@ -248,7 +248,7 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
     trackCta(offer.path, `${kind}-checkout`, placement);
     const browserWindow = window as typeof window & { fbq?: (...args: unknown[]) => void; dataLayer?: Record<string, unknown>[] };
     browserWindow.fbq?.('track', 'InitiateCheckout', {
-      content_name: kind === 'desafio' ? 'Desafio Monetizar com IA' : 'Consultoria a Laser Vibe Seller',
+      content_name: kind === 'desafio' ? 'Desafio Monetizar com IA' : 'Sessão de Start Vibe Seller',
       content_category: 'Vibe Seller',
       currency: 'BRL',
       value: checkoutValue,
@@ -263,7 +263,7 @@ export default function VibeSellerLanding({ kind }: { kind: OfferKind }) {
   };
 
   const openForm = (placement: string) => {
-    // Sprint e Implementação não são aplicação: a compra é da Consultoria a Laser.
+    // Sprint e Implementação não são aplicação: a compra é da Sessão de Start.
     if (kind !== 'desafio') {
       goToCheckout(placement);
       return;

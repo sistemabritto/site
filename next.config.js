@@ -32,6 +32,9 @@ const nextConfig = {
     { source: '/zapcurso', destination: '/desafio-monetizar-com-ia', permanent: true },
     // Data deletion canonical URL (Meta requirement)
     { source: '/exclusao-de-dados', destination: '/exclusao-dos-dados', permanent: true },
+    // Sessão de Arquitetura renomeada para Sessão de Start (11/09/2026) —
+    // preserva UTM/qualquer link antigo já compartilhado (Nexus, redes, etc.)
+    { source: '/sessao-de-arquitetura', destination: '/sessao-de-start', permanent: true },
     ];
   },
 };

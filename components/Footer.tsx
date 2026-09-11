@@ -5,7 +5,7 @@ const groups = [
     title: 'Comece aqui',
     links: [
       { label: 'Desafio Monetizar com IA', href: '/desafio-monetizar-com-ia' },
-      { label: 'Consultoria a Laser', href: '/sprint-vibe-seller' },
+      { label: 'Sessão de Start', href: '/sprint-vibe-seller' },
       { label: 'Sprint Vibe Seller', href: '/sprint-vibe-seller' },
       { label: 'Implementação Vibe Seller', href: '/implementacao-vibe-seller' },
     ],

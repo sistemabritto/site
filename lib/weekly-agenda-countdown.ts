@@ -1,4 +1,4 @@
-// Extraído de VibeSellerLanding.tsx — usado pela Consultoria a Laser, pelo
+// Extraído de VibeSellerLanding.tsx — usado pela Sessão de Start, pelo
 // Sprint e pela Implementação, que compartilham a mesma condição semanal
 // (3 vagas, ciclo renova domingo 00h em São Paulo). Uma função só evita que
 // as três páginas divirjam no cálculo do horário de reset.

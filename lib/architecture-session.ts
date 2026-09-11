@@ -2,8 +2,8 @@
 // `name` é o único lugar que define o nome público do produto — mudar aqui
 // muda em todo lugar que importa esta constante, sem precisar caçar string solta.
 export const ARCHITECTURE_SESSION = {
-  path: '/sessao-de-arquitetura',
-  name: 'Consultoria a Laser',
+  path: '/sessao-de-start',
+  name: 'Sessão de Start',
   checkoutUrl: 'https://pay.cakto.com.br/35xvemn',
   price: 150,
   originalPrice: 300,
@@ -16,6 +16,6 @@ export function architectureCheckoutUrl(utms: Record<string, string> = {}): stri
     if (utms[key]) url.searchParams.set(key, utms[key]);
   }
   // Keep the originating magnet/content; do not overwrite it with the checkout name.
-  if (!url.searchParams.has('utm_content')) url.searchParams.set('utm_content', 'sessao-arquitetura');
+  if (!url.searchParams.has('utm_content')) url.searchParams.set('utm_content', 'sessao-de-start');
   return url.toString();
 }
