@@ -38,17 +38,15 @@ const nextConfig = {
     ];
   },
   // Iscas/guias publicados como share no Nexus (workflowapi.com.br) mas
-  // divulgados com a cara do Sistema Britto — proxy (não redirect) pra
-  // manter www.sistemabritto.com.br na barra de endereço em vez de expor a
-  // ferramenta interna. Os CTAs de dentro do guia continuam apontando pro
-  // domínio do Nexus (é lá que o clique é registrado); só a leitura do
-  // material em si troca de domínio visível.
+  // divulgados com a cara do Sistema Britto. Rewrite interno pra
+  // pages/api/guia-ia-proxy.ts — não externo direto: só passando pela nossa
+  // própria API dá pra gravar o pageview em `pageviews` (mesma tabela do
+  // resto do site, mesmo /admin) e repassar o CSP do Nexus. Ver
+  // pages/api/guia-ia-proxy.ts e .claude/rules/artifacts.md (repo evo-nexus)
+  // pra replicar esse padrão no próximo guia.
   async rewrites() {
     return [
-      {
-        source: '/guia-ia',
-        destination: 'https://nexus.workflowapi.com.br/api/shares/S-cWKBHHyY3u3hZKrlFVs3i1Ine0oz7Y1ZTMeMH9MO8/view',
-      },
+      { source: '/guia-ia', destination: '/api/guia-ia-proxy' },
     ];
   },
 };
