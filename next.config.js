@@ -47,6 +47,7 @@ const nextConfig = {
   async rewrites() {
     return [
       { source: '/guia-ia', destination: '/api/guia-ia-proxy' },
+      { source: '/guia-vps', destination: '/api/guia-vps-proxy' },
     ];
   },
 };
