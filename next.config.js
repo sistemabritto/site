@@ -48,6 +48,7 @@ const nextConfig = {
     return [
       { source: '/guia-ia', destination: '/api/guia-ia-proxy' },
       { source: '/guia-vps', destination: '/api/guia-vps-proxy' },
+      { source: '/guia-openreply', destination: '/api/guia-openreply-proxy' },
     ];
   },
 };
