@@ -326,6 +326,17 @@ async function notifyCRM(data: any, eventName = 'payment.completed') {
 
     await sendWhatsApp(ADMIN_PHONE, sdrMessage);
 
+    // Produto da empresa (tracking_profiles). Sem mapeamento → compra do
+    // produto principal do site, cai no pixel global.
+    const companyByExternalId: Record<string, string> = {
+      'remox-crm-mensal': 'remox',
+      'zapclub': 'zapclub',
+      'call-prd-sistema': 'sistema-britto',
+      'desafio-monetizar-com-ia': 'desafio-monetizar-ia',
+      'ferreira-vieira-entrada': 'ferreira-vieira',
+      'ferreira-vieira-avista': 'ferreira-vieira',
+    };
+
     const purchaseTracking = await enviarEvento({
       eventName: 'Purchase',
       eventId: `abacatepay:${checkoutId || eventKey}:purchase`,
@@ -333,6 +344,7 @@ async function notifyCRM(data: any, eventName = 'payment.completed') {
       value: amount ? amount / 100 : undefined,
       currency: 'BRL', contentName: productName,
       email: customerEmail, phone: customerPhone,
+      companySlug: companyByExternalId[externalId],
     });
     console.log('[Meta CAPI Purchase]', purchaseTracking);
 

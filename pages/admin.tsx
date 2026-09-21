@@ -95,8 +95,17 @@ export default function Admin() {
    const [capiValidating, setCapiValidating] = useState(false);
    const [capiValidation, setCapiValidation] = useState<{ ok: boolean; detalhe: string } | null>(null);
 
+  // Tracking por empresa (tracking_profiles)
+  type EmpresaTracking = {
+    slug: string; nome: string; meta_pixel_id: string; google_tag_id: string;
+    ativo: boolean; ordem: number; token_configurado: boolean; token_preview: string | null;
+  };
+  const [empresas, setEmpresas] = useState<EmpresaTracking[] | null>(null);
+  const [empresasSalvando, setEmpresasSalvando] = useState<string | null>(null);
+  const [empresasFeedback, setEmpresasFeedback] = useState<{ slug: string; ok: boolean } | null>(null);
+
   // Active tab
-  const [activeTab, setActiveTab] = useState<'leads' | 'analytics' | 'config'>('leads');
+  const [activeTab, setActiveTab] = useState<'leads' | 'analytics' | 'config' | 'empresas'>('leads');
 
   // Analytics
   const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
@@ -177,6 +186,48 @@ export default function Admin() {
       setEvoApiStatus('error');
     } finally {
       setDataLoading(false);
+    }
+  };
+
+  const loadEmpresas = async (token: string) => {
+    try {
+      const res = await fetch('/api/admin/tracking', { headers: { Authorization: `Bearer ${token}` } });
+      if (res.ok) {
+        const data = await res.json();
+        setEmpresas(data.companies || []);
+      }
+    } catch {
+      // silently fail
+    }
+  };
+
+  const salvarEmpresa = async (empresa: EmpresaTracking) => {
+    setEmpresasSalvando(empresa.slug);
+    try {
+      const res = await fetch('/api/admin/tracking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${adminToken}` },
+        body: JSON.stringify({
+          slug: empresa.slug,
+          nome: empresa.nome,
+          meta_pixel_id: empresa.meta_pixel_id,
+          google_tag_id: empresa.google_tag_id,
+          ativo: empresa.ativo,
+        }),
+      });
+      if (res.ok) {
+        loadEmpresas(adminToken);
+        setEmpresasFeedback({ slug: empresa.slug, ok: true });
+        setTimeout(() => setEmpresasFeedback(null), 2000);
+      } else {
+        setEmpresasFeedback({ slug: empresa.slug, ok: false });
+        setTimeout(() => setEmpresasFeedback(null), 4000);
+      }
+    } catch {
+      setEmpresasFeedback({ slug: empresa.slug, ok: false });
+      setTimeout(() => setEmpresasFeedback(null), 4000);
+    } finally {
+      setEmpresasSalvando(null);
     }
   };
 
@@ -362,6 +413,19 @@ export default function Admin() {
               }`}
             >
               📡 Tracking
+            </button>
+            <button
+              onClick={() => {
+                setActiveTab('empresas')
+                if (!empresas) loadEmpresas(adminToken)
+              }}
+              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                activeTab === 'empresas'
+                  ? 'bg-green-500 text-black'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              }`}
+            >
+              🏢 Empresas
             </button>
           </div>
         </div>
@@ -1156,6 +1220,112 @@ export default function Admin() {
               </div>
             </div>
           )}
+
+          {/* === EMPRESAS TAB — tracking por empresa === */}
+          {activeTab === 'empresas' && (
+            <div className="max-w-3xl">
+              <div className="mb-6">
+                <h2 className="text-xl font-bold text-white mb-1">Tracking por Empresa</h2>
+                <p className="text-gray-400 text-sm">
+                  Cada empresa do funil tem seu próprio Meta Pixel e seu GA4/GTM. Conversões
+                  (InitiateCheckout / Purchase nos checkouts) disparam pro pixel da empresa dona
+                  da oferta — dá pra separar resultado por marca no Ads Manager. Só o Sistema Britto
+                  está pré-preenchido; as demais ficam em aberto até colar os IDs de cada uma.
+                </p>
+              </div>
+
+              {empresas === null && (
+                <div className="bg-[#111111] rounded-2xl p-6 border border-white/10 text-gray-400 text-sm">
+                  Carregando perfis...
+                </div>
+              )}
+
+              {empresas?.map((empresa) => {
+                const feedback = empresasFeedback?.slug === empresa.slug ? empresasFeedback : null;
+                return (
+                  <div key={empresa.slug} className="bg-[#111111] rounded-2xl p-6 border border-green-500/20 mb-4">
+                    <div className="flex items-center justify-between gap-3 mb-4">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center text-xl shrink-0">🏢</div>
+                        <div className="min-w-0">
+                          <input
+                            type="text"
+                            value={empresa.nome}
+                            onChange={(e) => setEmpresas(empresas.map((x) => x.slug === empresa.slug ? { ...x, nome: e.target.value } : x))}
+                            className="w-full bg-transparent border-b border-transparent hover:border-white/20 focus:border-blue-500 focus:outline-none text-white font-bold text-base leading-tight"
+                          />
+                          <p className="text-gray-500 text-xs mt-0.5 truncate">{empresa.slug}</p>
+                        </div>
+                      </div>
+                      <label className="flex items-center gap-2 cursor-pointer shrink-0">
+                        <span className={`text-xs ${empresa.ativo ? 'text-green-400' : 'text-gray-500'}`}>
+                          {empresa.ativo ? 'ATIVO' : 'EM ABERTO'}
+                        </span>
+                        <button
+                          onClick={() => setEmpresas(empresas.map((x) => x.slug === empresa.slug ? { ...x, ativo: !x.ativo } : x))}
+                          className={`w-11 h-6 rounded-full relative transition-colors ${empresa.ativo ? 'bg-green-500' : 'bg-white/20'}`}
+                        >
+                          <span className={`absolute top-0.5 w-5 h-5 rounded-full bg-white transition-all ${empresa.ativo ? 'left-[22px]' : 'left-0.5'}`} />
+                        </button>
+                      </label>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label className="text-xs text-gray-400 block mb-1">Meta Pixel ID</label>
+                        <input
+                          type="text"
+                          value={empresa.meta_pixel_id}
+                          onChange={(e) => setEmpresas(empresas.map((x) => x.slug === empresa.slug ? { ...x, meta_pixel_id: e.target.value } : x))}
+                          placeholder="Ex: 1047639217757176"
+                          className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none text-sm font-mono"
+                        />
+                        <p className="text-[11px] text-gray-500 mt-1">Token CAPI: {empresa.token_configurado ? <span className="text-green-400 font-mono">{empresa.token_preview}</span> : 'herda o token global (aba Tracking)'}</p>
+                      </div>
+                      <div>
+                        <label className="text-xs text-gray-400 block mb-1">GA4 / Google Tag ID</label>
+                        <input
+                          type="text"
+                          value={empresa.google_tag_id}
+                          onChange={(e) => setEmpresas(empresas.map((x) => x.slug === empresa.slug ? { ...x, google_tag_id: e.target.value } : x))}
+                          placeholder="Ex: G-XXXXXX ou GTM-XXXXXXX"
+                          className="w-full bg-black/80 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-green-500 focus:outline-none text-sm font-mono"
+                        />
+                        <p className="text-[11px] text-gray-500 mt-1">G- carrega GA4 direto; GTM- carrega o container do Tag Manager.</p>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => salvarEmpresa(empresa)}
+                      disabled={empresasSalvando === empresa.slug}
+                      className={`w-full py-3 rounded-full font-bold text-sm transition-all disabled:opacity-50 ${
+                        feedback && !feedback.ok
+                          ? 'bg-red-600 hover:bg-red-700 text-white'
+                          : feedback
+                            ? 'bg-green-600 hover:bg-green-700 text-white'
+                            : 'bg-blue-600 hover:bg-blue-700 text-white'
+                      }`}
+                    >
+                      {empresasSalvando === empresa.slug
+                        ? 'Salvando...'
+                        : feedback && !feedback.ok
+                          ? '❌ Erro ao salvar — tente de novo'
+                          : feedback
+                            ? '✅ Salvo!'
+                            : 'Salvar Empresa'}
+                    </button>
+                  </div>
+                );
+              })}
+
+              <p className="text-gray-500 text-xs">
+                Pixel/GA4 das empresas ATIVAS são injetados em todas as páginas. No checkout, o
+                evento vai pro pixel da empresa dona da oferta — se ela ainda não tem pixel, o
+                evento cai no pixel global do site (nunca se perde venda).
+              </p>
+            </div>
+          )}
+
 
         </div>
       </main>

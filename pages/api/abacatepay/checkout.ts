@@ -167,6 +167,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         contentName: productId,
         email: customerData?.email ? String(customerData.email) : undefined,
         phone: customerData?.cellphone ? String(customerData.cellphone) : undefined,
+        companySlug: 'sistema-britto',
         ...clientInfoFromReq(req),
       }).catch((e) => console.error('[checkout] CAPI InitiateCheckout falhou', e));
 

@@ -2,7 +2,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import '../styles/globals.css';
 
 // Generate or retrieve a session ID (persists for 30 min in sessionStorage)
@@ -83,97 +83,135 @@ export function trackCta(page: string, label: string, action: string = '') {
   track('cta', { page, cta_label: label, cta_action: action });
 }
 
-// Meta Pixel component — reads ID from Supabase via /api/config/pixel
-function MetaPixel() {
- const [pixelId, setPixelId] = useState<string>('');
+// Tracking por empresa — cada empresa tem seu próprio Meta Pixel e seu
+// próprio GA4/GTM. Injeta todos os perfis ATIVOS em tracking_profiles;
+// se a tabela ainda não existe em produção (lista vazia), cai nos
+// endpoints globais antigos (/api/config/pixel + /api/config/gtm).
+type PerfilTracking = { slug: string; nome: string; meta_pixel_id: string; google_tag_id: string };
 
- useEffect(() => {
- fetch('/api/config/pixel')
- .then(r => r.json())
- .then(data => {
- if (data.pixel_id) setPixelId(data.pixel_id);
- })
- .catch(() => {
- const fallback = localStorage.getItem('meta_pixel_id');
- if (fallback) setPixelId(fallback);
- });
- }, []);
+function CompanyTracking() {
+  const [perfis, setPerfis] = useState<PerfilTracking[]>([]);
+  const [legado, setLegado] = useState<{ pixelId: string; tagId: string } | null>(null);
 
- if (!pixelId) return null;
+  useEffect(() => {
+    let cancelado = false;
+    fetch('/api/config/tracking')
+      .then((r) => r.json())
+      .then(async (data) => {
+        const lista: PerfilTracking[] = Array.isArray(data?.companies) ? data.companies : [];
+        if (cancelado) return;
+        if (lista.length > 0) {
+          setPerfis(lista);
+          return;
+        }
+        // Migração ainda não aplicada → fallback global original
+        try {
+          const [px, gt] = await Promise.all([
+            fetch('/api/config/pixel').then((r) => r.json()),
+            fetch('/api/config/gtm').then((r) => r.json()),
+          ]);
+          if (!cancelado && (px.pixel_id || gt.gtm_id)) {
+            setLegado({ pixelId: px.pixel_id || '', tagId: gt.gtm_id || '' });
+          }
+        } catch {}
+      })
+      .catch(() => {});
+    return () => { cancelado = true; };
+  }, []);
 
- return (
- <>
- <Script
- id="meta-pixel-init"
- strategy="afterInteractive"
- dangerouslySetInnerHTML={{
- __html: `
- !function(f,b,e,v,n,t,s)
- {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
- n.callMethod.apply(n,arguments):n.queue.push(arguments)};
- if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
- n.queue=[];t=b.createElement(e);t.async=!0;
- t.src=v;s=b.getElementsByTagName(e)[0];
- s.parentNode.insertBefore(t,s)}(window, document,'script',
- 'https://connect.facebook.net/en_US/fbevents.js');
- fbq('init', '${pixelId}');
- fbq('track', 'PageView');
- `,
- }}
- />
- <noscript>
- <img
- height="1"
- width="1"
- style={{ display: 'none' }}
- src={`https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1`}
- alt=""
- />
- </noscript>
- </>
- );
-}
+  // Normaliza para o mesmo formato: perfis por empresa OU o legado global
+  const ativos: PerfilTracking[] =
+    perfis.length > 0 ? perfis : legado ? [{ slug: 'sistema-britto', nome: 'Sistema Britto', meta_pixel_id: legado.pixelId, google_tag_id: legado.tagId }] : [];
+  const pixels = ativos.filter((p) => p.meta_pixel_id);
+  const tags = ativos.filter((p) => p.google_tag_id);
 
-// Google Tag Manager component — reads ID from Supabase via /api/config/gtm
-function GoogleTagManager() {
- const [gtmId, setGtmId] = useState<string>('');
+  if (ativos.length === 0) return null;
 
- useEffect(() => {
- fetch('/api/config/gtm')
- .then(r => r.json())
- .then(data => {
- if (data.gtm_id) setGtmId(data.gtm_id);
- })
- .catch(() => {});
- }, []);
-
- if (!gtmId) return null;
-
- return (
- <>
- <Script
- id="gtm-script"
- strategy="afterInteractive"
- dangerouslySetInnerHTML={{
- __html: `
- (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
- new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
- j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
- 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
- })(window,document,'script','dataLayer','${gtmId}');
- `,
- }}
- />
- <noscript>
- <iframe
- src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
- height="0"
- width="0"
- style={{ display: 'none', visibility: 'hidden' }}
- />
- </noscript>
- </>
- );
+  return (
+    <>
+      {pixels.map((p) => (
+        <Fragment key={`pixel-${p.slug}`}>
+          <Script
+            id={`meta-pixel-${p.slug}`}
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', '${p.meta_pixel_id}');
+              fbq('track', 'PageView');
+              `,
+            }}
+          />
+          <noscript>
+            <img
+              height="1"
+              width="1"
+              style={{ display: 'none' }}
+              src={`https://www.facebook.com/tr?id=${p.meta_pixel_id}&ev=PageView&noscript=1`}
+              alt=""
+            />
+          </noscript>
+        </Fragment>
+      ))}
+      {tags.map((p) =>
+        p.google_tag_id.startsWith('G-') ? (
+          // GA4 direto: hoje o G-NC93NWMZC8 quebra porque era carregado via
+          // gtm.js (container que não existe). GA4 pede gtag/js + config.
+          <Fragment key={`ga4-${p.slug}`}>
+            <Script
+              id={`ga4-${p.slug}`}
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${p.google_tag_id}`}
+            />
+            <Script
+              id={`ga4-config-${p.slug}`}
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${p.google_tag_id}');
+                `,
+              }}
+            />
+          </Fragment>
+        ) : (
+          // Container GTM de verdade
+          <Fragment key={`gtm-${p.slug}`}>
+            <Script
+              id={`gtm-${p.slug}`}
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','${p.google_tag_id}');
+                `,
+              }}
+            />
+            <noscript>
+              <iframe
+                src={`https://www.googletagmanager.com/ns.html?id=${p.google_tag_id}`}
+                height="0"
+                width="0"
+                style={{ display: 'none', visibility: 'hidden' }}
+              />
+            </noscript>
+          </Fragment>
+        )
+      )}
+    </>
+  );
 }
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -213,8 +251,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </Head>
-      <MetaPixel />
-      <GoogleTagManager />
+      <CompanyTracking />
       <Script
         defer
         data-domain="www.sistemabritto.com.br"

@@ -58,7 +58,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         contentName: EXTERNAL_ID,
         email: customer_email ? String(customer_email) : undefined,
         phone: customer_cellphone ? String(customer_cellphone) : undefined,
-        ...clientInfoFromReq(req),
+              companySlug: 'ferreira-vieira',
+      ...clientInfoFromReq(req),
       }).catch((e) => console.error('[checkout/ferreira-vieira-avista] CAPI InitiateCheckout falhou', e));
 
       if (req.method === 'GET') return res.redirect(302, data.data.url);

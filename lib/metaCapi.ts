@@ -50,6 +50,32 @@ async function lerPixelId(): Promise<string> {
   return data.value || '';
 }
 
+// --- Por empresa (tracking_profiles) -------------------------------------
+// Cada empresa tem SEU pixel + SEU token CAPI. Quando um checkout passa
+// companySlug, usamos o perfil daquela empresa; senão cai no pixel global.
+
+async function lerPerfilEmpresa(slug: string): Promise<{ meta_pixel_id: string; google_tag_id: string } | null> {
+  const supabase = getSupabase();
+  const { data, error } = await supabase
+    .from('tracking_profiles')
+    .select('slug, nome, meta_pixel_id, google_tag_id, ativo')
+    .eq('slug', slug)
+    .single();
+  if (error || !data) return null;
+  return { meta_pixel_id: data.meta_pixel_id || '', google_tag_id: data.google_tag_id || '' };
+}
+
+async function lerTokenCapiEmpresa(slug: string): Promise<string> {
+  const supabase = getSupabase();
+  const { data, error } = await supabase
+    .from('secret_config')
+    .select('value')
+    .eq('key', `meta_capi_access_token_${slug}`)
+    .maybeSingle();
+  if (error || !data) return '';
+  return data.value || '';
+}
+
 /** Estado seguro pra exibir no admin — nunca o token inteiro. */
 export async function statusCapi(): Promise<{ pixel_id: string; configurado: boolean; token_preview: string | null }> {
   const [token, pixelId] = await Promise.all([lerTokenCapi(), lerPixelId()]);
@@ -94,12 +120,32 @@ interface EventoCapi {
   phone?: string;
   clientIp?: string;
   clientUserAgent?: string;
+  /** Empresa dona do checkout/oferta. Quando presente e com perfil CAPI
+   * configurado, usa o pixel + token daquela empresa; senão cai no global. */
+  companySlug?: string;
 }
 
 /** Envia um evento real (InitiateCheckout, Purchase, etc.) pro Graph API.
  * Nunca lança — falha de tracking não pode derrubar um checkout ou webhook. */
 export async function enviarEvento(evento: EventoCapi): Promise<{ ok: boolean; detalhe: string }> {
-  const [token, pixelId] = await Promise.all([lerTokenCapi(), lerPixelId()]);
+  let token = '';
+  let pixelId = '';
+
+  // Resolve por empresa primeiro — cada empresa tem seu próprio pixel/token.
+  // O par (pixel, token) é atômico: pixel da empresa SEM token dela não deve
+  // ser combinado com o token global (a Meta rejeita por permissão). Sem o
+  // par completo da empresa, usa o par global inteiro.
+  if (evento.companySlug) {
+    const perfil = await lerPerfilEmpresa(evento.companySlug);
+    const tokenEmpresa = await lerTokenCapiEmpresa(evento.companySlug);
+    if (perfil?.meta_pixel_id && tokenEmpresa) {
+      pixelId = perfil.meta_pixel_id;
+      token = tokenEmpresa;
+    }
+  }
+  if (!token || !pixelId) {
+    [token, pixelId] = await Promise.all([lerTokenCapi(), lerPixelId()]);
+  }
   if (!token || !pixelId) return { ok: false, detalhe: 'CAPI não configurada (token ou pixel_id ausente)' };
 
   const userData: Record<string, string> = {};

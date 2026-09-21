@@ -67,6 +67,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       contentName: EXTERNAL_ID,
       email: customer_email ? String(customer_email) : undefined,
       phone: customer_cellphone ? String(customer_cellphone) : undefined,
+            companySlug: 'desafio-monetizar-ia',
       ...clientInfoFromReq(req),
     }).catch((error) => console.error('[checkout/desafio-monetizar-com-ia] CAPI falhou', error));
 

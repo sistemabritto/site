@@ -78,7 +78,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         contentName: EXTERNAL_ID,
         email: customer_email ? String(customer_email) : undefined,
         phone: customer_cellphone ? String(customer_cellphone) : undefined,
-        ...clientInfoFromReq(req),
+              companySlug: 'zapclub',
+      ...clientInfoFromReq(req),
       }).catch((e) => console.error('[checkout/zapclub] CAPI InitiateCheckout falhou', e));
 
       return res.status(200).json({ url: data.data.url });
