@@ -35,4 +35,12 @@ Ordem de publicação:
 3. Publicar o site depois das migrações. Com a versão antiga do site, as novas tabelas ficam ociosas; com o site novo antes das migrações, a aplicação recebe erro 503.
 4. Antes de tráfego, fazer uma aplicação controlada e conferir o mesmo ID no Supabase, fila, CRM e `/admin`; repetir o mesmo envio, simular falha/recuperação e conferir o pagamento da Cakto. A ligação automática do pedido Cakto à aplicação e a atribuição de responsável/próxima tarefa comercial ainda são etapas pendentes.
 
+Auditoria de grants em 23/09/2026: a consulta ao banco ativo encontrou três tabelas
+legadas que não constavam das migrações locais (`quiz_funnel`, `checkout_metadata` e
+`clientes_base`). A migração `20260923163922_explicit_data_api_grants.sql` cobre as
+três quando presentes; `quiz_funnel` recebe somente `INSERT` para `anon` e
+`authenticated`, pois `/api/track` pode usar a chave pública. As outras duas
+ficam acessíveis apenas ao `service_role` por esta matriz. Para uma tabela nova,
+coloque o `GRANT` no próprio arquivo que a cria e confira RLS e políticas.
+
 As tabelas novas não concedem acesso a `anon` ou `authenticated`; somente rotas e workers com credencial de serviço leem dados pessoais. A função RPC exposta tem `EXECUTE` exclusivo do `service_role`.

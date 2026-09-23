@@ -9,7 +9,8 @@ BEGIN
   FOREACH table_name IN ARRAY ARRAY[
     'leads', 'customers', 'otp_codes', 'admin_logs', 'secret_config',
     'payment_events', 'purchases', 'fulfillment_jobs',
-    'site_config', 'tracking_profiles', 'pageviews', 'cta_clicks'
+    'site_config', 'tracking_profiles', 'pageviews', 'cta_clicks',
+    'quiz_funnel', 'checkout_metadata', 'clientes_base'
   ] LOOP
     IF to_regclass(format('public.%I', table_name)) IS NULL THEN
       RAISE NOTICE 'Tabela public.% ausente; privilégios não aplicados', table_name;
@@ -27,7 +28,7 @@ BEGIN
     END IF;
   END LOOP;
 
-  FOREACH table_name IN ARRAY ARRAY['pageviews', 'cta_clicks'] LOOP
+  FOREACH table_name IN ARRAY ARRAY['pageviews', 'cta_clicks', 'quiz_funnel'] LOOP
     IF to_regclass(format('public.%I', table_name)) IS NOT NULL THEN
       EXECUTE format('GRANT INSERT ON public.%I TO anon, authenticated', table_name);
     END IF;
