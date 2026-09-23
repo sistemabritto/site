@@ -26,6 +26,19 @@ function text(value: unknown): string | null {
   return typeof value === "string" && value.trim() ? value.trim() : null;
 }
 
+async function abandonmentId(data: Record<string, any>): Promise<string | null> {
+  const createdAt = text(data.createdAt);
+  const customer = text(data.customerEmail)?.toLowerCase() || text(data.customerCellphone);
+  const offer = text(data.offer?.id) || text(data.checkoutUrl);
+  if (!createdAt || !customer || !offer) return null;
+
+  // A Cakto não envia ID de pedido no abandono. A chave composta permite
+  // reconhecer reenvios sem expor o contato no identificador do evento.
+  const bytes = new TextEncoder().encode(JSON.stringify([createdAt, customer, offer]));
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
 Deno.serve(async (request) => {
   if (request.method !== "POST") return json({ error: "method_not_allowed" }, 405);
 
@@ -38,9 +51,11 @@ Deno.serve(async (request) => {
   const event = text(payload.event);
   const data = payload.data || {};
   const orderId = text(data.id) || text(data.refId);
-  if (!event || !orderId) return json({ error: "missing_event_or_order" }, 400);
+  if (!event) return json({ error: "missing_event" }, 400);
+  const eventId = orderId || (event === "checkout_abandonment" ? await abandonmentId(data) : null);
+  if (!eventId) return json({ error: "missing_event_or_order" }, 400);
 
-  const providerEventId = `${event}:${orderId}`;
+  const providerEventId = `${event}:${eventId}`;
   const { error: eventError } = await supabase.from("payment_events").insert({
     provider: "cakto", provider_event_id: providerEventId, event_type: event,
     checkout_id: text(data.checkoutUrl), external_id: text(data.refId), status: "processing",
@@ -59,6 +74,15 @@ Deno.serve(async (request) => {
       .eq("provider", "cakto").eq("provider_event_id", providerEventId);
   } else if (eventError) {
     return json({ error: "event_persist_failed" }, 500);
+  }
+
+  // Abandono é um evento de interesse, não uma compra; não cria purchase nem jobs.
+  if (event === "checkout_abandonment") {
+    const { error: processedError } = await supabase.from("payment_events")
+      .update({ status: "processed", processed_at: new Date().toISOString() })
+      .eq("provider", "cakto").eq("provider_event_id", providerEventId);
+    if (processedError) return json({ error: "event_update_failed" }, 500);
+    return json({ ok: true });
   }
 
   const product = data.product || {};
