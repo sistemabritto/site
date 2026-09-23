@@ -18,6 +18,9 @@ CREATE TABLE IF NOT EXISTS secret_config (
 
 ALTER TABLE secret_config ENABLE ROW LEVEL SECURITY;
 
+REVOKE ALL ON public.secret_config FROM anon, authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.secret_config TO service_role;
+
 CREATE POLICY "Only service_role can read secret config"
   ON secret_config FOR SELECT
   USING (auth.role() = 'service_role');

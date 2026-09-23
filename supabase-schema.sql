@@ -30,6 +30,12 @@ CREATE TABLE IF NOT EXISTS customers (
   last_checkout_at TIMESTAMPTZ
 );
 
+-- Data API: apenas as rotas server-side usam estes dados pessoais.
+ALTER TABLE public.leads ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.customers ENABLE ROW LEVEL SECURITY;
+REVOKE ALL ON public.leads, public.customers FROM anon, authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.leads, public.customers TO service_role;
+
 -- Índices para performance
 CREATE INDEX IF NOT EXISTS leads_source_idx ON leads(source);
 CREATE INDEX IF NOT EXISTS leads_email_idx ON leads(email);

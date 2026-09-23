@@ -29,6 +29,10 @@ CREATE TABLE IF NOT EXISTS tracking_profiles (
 
 ALTER TABLE tracking_profiles ENABLE ROW LEVEL SECURITY;
 
+REVOKE ALL ON public.tracking_profiles FROM anon, authenticated;
+GRANT SELECT ON public.tracking_profiles TO anon, authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.tracking_profiles TO service_role;
+
 CREATE POLICY "Tracking profiles are publicly readable"
   ON tracking_profiles FOR SELECT
   USING (true);

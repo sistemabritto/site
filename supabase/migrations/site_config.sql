@@ -14,6 +14,10 @@ CREATE TABLE IF NOT EXISTS site_config (
 -- Habilitar RLS
 ALTER TABLE site_config ENABLE ROW LEVEL SECURITY;
 
+REVOKE ALL ON public.site_config FROM anon, authenticated;
+GRANT SELECT ON public.site_config TO anon, authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.site_config TO service_role;
+
 -- Policy: leitura pública (o _app.tsx precisa ler o pixel ID sem auth)
 CREATE POLICY "Site config is publicly readable"
   ON site_config FOR SELECT
@@ -46,6 +50,9 @@ CREATE TABLE IF NOT EXISTS admin_logs (
 );
 
 ALTER TABLE admin_logs ENABLE ROW LEVEL SECURITY;
+
+REVOKE ALL ON public.admin_logs FROM anon, authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.admin_logs TO service_role;
 
 CREATE POLICY "Only service_role can read admin logs"
   ON admin_logs FOR SELECT

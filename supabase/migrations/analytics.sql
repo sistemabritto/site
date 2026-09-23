@@ -26,6 +26,11 @@ CREATE INDEX IF NOT EXISTS idx_pageviews_utm_source ON pageviews (utm_source);
 -- RLS — leitura só service_role, escrita pública (o tracker do site precisa inserir sem auth)
 ALTER TABLE pageviews ENABLE ROW LEVEL SECURITY;
 
+-- O tracker pode usar a chave pública para inserir; leitura fica no backend.
+REVOKE ALL ON public.pageviews FROM anon, authenticated;
+GRANT INSERT ON public.pageviews TO anon, authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.pageviews TO service_role;
+
 CREATE POLICY "Anyone can insert pageviews"
   ON pageviews FOR INSERT
   WITH CHECK (true);
@@ -51,6 +56,10 @@ CREATE INDEX IF NOT EXISTS idx_cta_clicks_page ON cta_clicks (page);
 CREATE INDEX IF NOT EXISTS idx_cta_clicks_session ON cta_clicks (session_id);
 
 ALTER TABLE cta_clicks ENABLE ROW LEVEL SECURITY;
+
+REVOKE ALL ON public.cta_clicks FROM anon, authenticated;
+GRANT INSERT ON public.cta_clicks TO anon, authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.cta_clicks TO service_role;
 
 CREATE POLICY "Anyone can insert cta clicks"
   ON cta_clicks FOR INSERT

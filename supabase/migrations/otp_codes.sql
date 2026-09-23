@@ -22,6 +22,9 @@ CREATE INDEX IF NOT EXISTS idx_otp_codes_created ON otp_codes(created_at DESC);
 
 ALTER TABLE otp_codes ENABLE ROW LEVEL SECURITY;
 
+REVOKE ALL ON public.otp_codes FROM anon, authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.otp_codes TO service_role;
+
 -- Só o backend (SUPABASE_SERVICE_KEY) toca nesta tabela — nunca o browser.
 CREATE POLICY "Only service_role can access otp_codes"
   ON otp_codes FOR ALL

@@ -52,4 +52,6 @@ CREATE INDEX IF NOT EXISTS fulfillment_jobs_pending_idx ON fulfillment_jobs(stat
 ALTER TABLE payment_events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE purchases ENABLE ROW LEVEL SECURITY;
 ALTER TABLE fulfillment_jobs ENABLE ROW LEVEL SECURITY;
+REVOKE ALL ON public.payment_events, public.purchases, public.fulfillment_jobs FROM anon, authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.payment_events, public.purchases, public.fulfillment_jobs TO service_role;
 -- Sem policy pública: leitura/escrita apenas com service_role/worker.
