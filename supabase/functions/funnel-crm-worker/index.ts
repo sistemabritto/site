@@ -12,7 +12,8 @@ const supabase = createClient(Deno.env.get("SUPABASE_URL") || "", Deno.env.get("
   auth: { persistSession: false, autoRefreshToken: false },
 });
 const secret = Deno.env.get("FULFILLMENT_WORKER_SECRET") || "";
-const crmUrl = (Deno.env.get("EVO_CRM_URL") || "").replace(/\/$/, "");
+// O domínio crm.workflowapi.com.br entrega o app HTML; a API JSON é evoapi.
+const crmUrl = (Deno.env.get("EVO_CRM_API_URL") || "https://evoapi.workflowapi.com.br").replace(/\/$/, "");
 const crmToken = Deno.env.get("EVO_CRM_TOKEN") || "";
 const pipelineId = "57599c7e-e678-4807-ade8-07efca578616";
 const firstStageId = "a8814c54-7668-434b-ac1b-52d7bb655528";
@@ -42,6 +43,16 @@ function asItems(payload: any): CrmItem[] {
   throw new Error("crm_items_shape_unexpected");
 }
 
+function normalizedPhone(raw: string): string {
+  let digits = raw.replace(/\D/g, "");
+  // Espelha a normalização brasileira do EvoCRM/WhatsApp: alguns contatos
+  // antigos já estão gravados sem o nono dígito, embora o formulário o envie.
+  if (digits.startsWith("55") && digits.length === 13 && Number(digits.slice(2, 4)) >= 31 && Number(digits[5]) >= 7) {
+    digits = digits.slice(0, 4) + digits.slice(5);
+  }
+  return digits;
+}
+
 function crmFields(application: Application, previous: Record<string, unknown> = {}) {
   const ids = Array.isArray(previous.application_ids) ? previous.application_ids.filter((id: unknown): id is string => typeof id === "string") : [];
   if (!ids.includes(application.id)) ids.push(application.id);
@@ -62,16 +73,22 @@ function crmFields(application: Application, previous: Record<string, unknown> =
 }
 
 async function findContact(application: Application): Promise<string | null> {
-  const phone = application.lead_phone.replace(/\D/g, "");
+  const phone = normalizedPhone(application.lead_phone);
+  const email = application.lead_email.trim().toLowerCase();
+  const matches = new Set<string>();
   for (const query of [application.lead_phone, application.lead_email]) {
     const payload = await crm("GET", `/api/v1/contacts/search?q=${encodeURIComponent(query)}`);
-    const contacts = Array.isArray(payload.data) ? payload.data : [];
-    const contact = contacts.find((row: any) =>
-      String(row.phone_number || "").replace(/\D/g, "") === phone ||
-      String(row.email || "").toLowerCase() === application.lead_email.toLowerCase());
-    if (contact?.id) return contact.id;
+    const contacts = Array.isArray(payload.data) ? payload.data : Array.isArray(payload.data?.payload) ? payload.data.payload : null;
+    if (!contacts) throw new Error("crm_contacts_shape_unexpected");
+    for (const row of contacts) {
+      if ((phone && normalizedPhone(String(row.phone_number || "")) === phone) ||
+          (email && String(row.email || "").trim().toLowerCase() === email)) {
+        if (row.id) matches.add(String(row.id));
+      }
+    }
   }
-  return null;
+  if (matches.size > 1) throw new Error("crm_contact_identity_conflict");
+  return [...matches][0] || null;
 }
 
 async function sync(application: Application): Promise<{ contactId: string; itemId: string }> {
