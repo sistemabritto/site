@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { createHash } from 'node:crypto';
 import { attachExistingCrmLead } from '../../lib/lead-crm';
 import { alertarNexus } from '../../lib/alertaNexus';
 
@@ -33,6 +34,10 @@ const PIPELINE_PADRAO = {
   pipeline: 'eb72af5c-28f7-4948-ae50-9c81922d161e', // "Leads do Site"
   stage: '0e31e649-af37-4a6f-87fb-cd25d52225e5', // "Novo Lead"
 };
+
+// A sincronização com os dois destinos e o alerta de divergência terminam
+// antes da resposta, inclusive quando uma chamada externa esgota seu timeout.
+export const config = { maxDuration: 30 };
 
 // ─── Suporte Supabase ─────────────────────────────────────────────
 let supabaseClient: any = null;
@@ -215,6 +220,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         console.error('[Supabase] lead save failed', { code: error.code });
         motivosFalha.push(`Supabase: ${error.code || 'erro desconhecido'}`);
       }
+    } else {
+      motivosFalha.push('Supabase: cliente indisponível');
     }
   } catch {
     console.error('[Supabase] lead save unavailable');
@@ -284,6 +291,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (response.ok) {
       const body = await response.json();
       results.evocrm = body.success === true && Boolean(body.lead_id && body.deal_id);
+      if (!results.evocrm) motivosFalha.push('EvoCRM: resposta sem confirmação de lead e oportunidade');
     } else if (response.status === 422) {
       // 422 cobre dois casos bem diferentes: contato já existe (dedupe de
       // verdade, mesma pessoa reconhecida pelo telefone — sucesso) ou um
@@ -294,6 +302,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (jaExiste) {
         results.evocrm = await attachExistingCrmLead({ phone: phoneNumber, email: emailEfetivo,
           pipeline: destino.pipeline, stage: destino.stage, fields: payload.custom_fields }, EVOCRM_API_TOKEN) === 'saved';
+        if (!results.evocrm) motivosFalha.push('EvoCRM: contato duplicado sem vínculo confirmado no pipeline');
       } else {
         console.error('[EvoCRM] lead validation failed', { status: response.status });
         motivosFalha.push(`EvoCRM: validação falhou (HTTP 422, não era duplicata)`);
@@ -314,18 +323,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // ── Sucesso se pelo menos um salvou ─────────────────────────────
   const saved = Boolean(results.supabase || results.evocrm);
 
-  // Lead perdido de verdade: nem Supabase nem EvoCRM salvaram, e isso hoje
-  // não chega a ninguém — o frontend de quiz.tsx/call-sobrevivencia-pos-ia.tsx
-  // dispara `fetch('/api/leads')` sem checar a resposta (fire-and-forget), e
-  // mesmo quando o frontend checa, o erro só aparece no console do navegador
-  // de quem preencheu o formulário. Alerta aqui, no servidor, é o único ponto
-  // que sempre sabe se a persistência falhou, não importa quem chamou.
-  if (!saved) {
-    void alertarNexus(
-      'Lead perdido — /api/leads falhou nos dois destinos',
+  // Toda divergência precisa ser visível: um 200 com só um destino salvo
+  // também exige reconciliação antes de usar o pipeline para decisões.
+  if (!results.supabase || !results.evocrm) {
+    const contatoRef = createHash('sha256').update(emailEfetivo).digest('hex').slice(0, 12);
+    await alertarNexus(
+      saved ? 'Lead parcialmente salvo — reconciliar Supabase/EvoCRM'
+        : 'Lead perdido — /api/leads falhou nos dois destinos',
       [
-        `source: ${source || '(vazio)'}`,
-        `contato: ${email || phoneNumber || '(sem email/whatsapp)'}`,
+        `source: ${typeof source === 'string' && /^[a-z0-9-]{1,80}$/.test(source) ? source : '(outro)'}`,
+        `contato_ref_sha256_12: ${contatoRef}`,
+        `supabase: ${Boolean(results.supabase)}`,
+        `evocrm: ${Boolean(results.evocrm)}`,
         ...motivosFalha,
       ].join('\n')
     );
