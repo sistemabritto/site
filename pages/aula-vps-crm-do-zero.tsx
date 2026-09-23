@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import Meta from '../components/Meta';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -16,6 +17,7 @@ const SESSION_KEY = 'sb_aula_vps_crm_verificado';
 
 // Preserva origem da sessão; identifica a ponte comercial na chegada.
 const ARQUITETURA_URL = '/sessao-de-start?utm_content=aula-crm-arquitetura-v1';
+const CONTINUACAO_URL = '/aula-evo-crm-em-operacao?utm_source=site&utm_medium=internal&utm_campaign=aula-crm&utm_content=pos-aula-gratuita';
 
 // Sem prazo de expiração nesta página — pedido do Felipe em 21/08/2026: é
 // conteúdo/aula, não uma call com data de validade.
@@ -90,6 +92,18 @@ function ArquiteturaCta() {
 
         <p className="mt-3 text-xs text-gray-500">Sessão individual · planejamento · execução contratada separadamente</p>
       </div>
+    </section>
+  );
+}
+
+/** Continuação prática em preparação; ainda não há checkout ou acesso pago. */
+function ContinuacaoCta() {
+  return (
+    <section aria-labelledby="cta-continuacao" className="rounded-2xl border border-[#a3ff12]/30 bg-[#a3ff12]/5 p-6 sm:p-8">
+      <p className="font-heading text-xs font-bold uppercase tracking-[0.2em] text-[#c4ff72]">Próxima aula prática</p>
+      <h2 id="cta-continuacao" className="mt-2 font-heading text-2xl font-bold text-white sm:text-3xl">O CRM está no ar. Agora faça uma oportunidade andar.</h2>
+      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-300 sm:text-base">Estou preparando a continuação desta aula: entrada de um contato, responsável definido e próximo retorno visível no Evo CRM. A primeira edição terá preço de R$ 29. O vídeo novo e os arquivos ainda não estão disponíveis para compra.</p>
+      <a href={CONTINUACAO_URL} onClick={() => trackCta('/aula-vps-crm-do-zero', 'interesse-continuacao-crm', 'pos-video')} className="mt-5 inline-flex min-h-12 items-center justify-center rounded-xl bg-[#a3ff12] px-6 py-3 font-bold text-black transition hover:bg-[#c4ff72] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#a3ff12]">Receber aviso da aula de R$ 29 →</a>
     </section>
   );
 }
@@ -173,6 +187,7 @@ export default function AulaVpsCrmDoZero() {
               className="w-full rounded-2xl border border-surface-700 bg-black shadow-2xl shadow-green-400/5"
             />
 
+            <div className="mt-6"><ContinuacaoCta /></div>
             <div className="mt-6"><ArquiteturaCta /></div>
 
             <div className="mt-10">
@@ -210,7 +225,7 @@ export default function AulaVpsCrmDoZero() {
                   className="mt-5 min-h-12 w-full rounded-lg bg-[#a3ff12] px-5 py-3 font-bold text-black hover:bg-lime-300 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-lime-300 disabled:opacity-60">
                   {otpLoading ? 'Salvando seu acesso…' : 'Quero assistir à aula gratuita'}
                 </button>
-                <p className="mt-4 text-center text-sm leading-relaxed text-gray-400">Sem senha e sem código por WhatsApp. Usamos os dados para registrar seu interesse e dar continuidade ao atendimento. <a href="/politicas-de-privacidade" className="underline">Privacidade</a>.</p>
+                <p className="mt-4 text-center text-sm leading-relaxed text-gray-400">Sem senha e sem código por WhatsApp. Usamos os dados para registrar seu interesse e dar continuidade ao atendimento. <Link href="/politicas-de-privacidade" className="underline">Privacidade</Link>.</p>
               </form>
             </div>
           </div>
