@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import Link from 'next/link';
 import Meta from '../../components/Meta';
 import Navbar from '../../components/Navbar';
@@ -52,6 +52,8 @@ export default function AulaCrmProximoPasso() {
   const [consent, setConsent] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
+  const submission = useRef<{ id: string; signature: string } | null>(null);
+  const [decision, setDecision] = useState<string | null>(null);
   const [checkout, setCheckout] = useState(architectureCheckoutUrl({
     utm_source: 'site', utm_medium: 'estudo-de-caso', utm_campaign: 'aula-evo-crm', utm_content: 'aplicacao',
   }));
@@ -83,14 +85,21 @@ export default function AulaCrmProximoPasso() {
     setError('');
     setSending(true);
     try {
+      const signature = JSON.stringify({ name: name.trim(), email: email.trim().toLowerCase(), whatsapp: whatsapp.trim(), answers });
+      if (!submission.current || submission.current.signature !== signature) {
+        submission.current = { id: crypto.randomUUID(), signature };
+      }
       const response = await fetch('/api/leads', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: name.trim(), email: email.trim().toLowerCase(),
           whatsapp: whatsapp.trim(), source: 'sessao-start-caso-crm-aplicacao', answers,
+          submission_id: submission.current.id, session_id: visitId(), consent,
           utm: { ...getStoredUtms(), utm_medium: 'estudo-de-caso', utm_campaign: 'aula-evo-crm' } }),
       });
       const result = await response.json();
+      if (response.status === 409) submission.current = null;
       if (!response.ok || result.success !== true) throw new Error('save_failed');
+      setDecision(result.decision);
       trackStage('application-submitted');
       setStep(QUESTIONS.length + 1);
     } catch {
@@ -98,8 +107,7 @@ export default function AulaCrmProximoPasso() {
     } finally { setSending(false); }
   };
 
-  const recommended = answers.channels !== 'none' && answers.timing !== 'later'
-    && answers.bottleneck !== 'learning' && answers.investment !== 'not-now';
+  const recommended = decision === 'session_checkout' || decision === 'session_details';
 
   const onCheckout = () => {
     trackStage('session-checkout-clicked');

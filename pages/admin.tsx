@@ -21,6 +21,21 @@ interface StageCount {
   count: number;
 }
 
+interface CaseApplication {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  submitted_at: string;
+  answers: { business?: string; desiredResult?: string; channels?: string; owner?: string; bottleneck?: string; timing?: string; investment?: string };
+  attribution: { utm_source?: string; utm_campaign?: string };
+  decision: string;
+  crm_opportunity_id: string | null;
+  crm_synced_at: string | null;
+  crm_stage: string | null;
+  sync: { state: string; attempts: number; last_error: string | null };
+}
+
 interface AnalyticsData {
   totalPageviews: number;
   uniqueVisitors: number;
@@ -76,6 +91,10 @@ export default function Admin() {
   const [stages, setStages] = useState<StageCount[]>([]);
   const [totalLeads, setTotalLeads] = useState(0);
   const [dataLoading, setDataLoading] = useState(false);
+  const [applications, setApplications] = useState<CaseApplication[]>([]);
+  const [applicationsLoading, setApplicationsLoading] = useState(false);
+  const [applicationsError, setApplicationsError] = useState('');
+  const [applicationsCrmAvailable, setApplicationsCrmAvailable] = useState(false);
 
   // Config — now from Supabase, not localStorage
    const [pixelId, setPixelId] = useState('');
@@ -105,7 +124,7 @@ export default function Admin() {
   const [empresasFeedback, setEmpresasFeedback] = useState<{ slug: string; ok: boolean } | null>(null);
 
   // Active tab
-  const [activeTab, setActiveTab] = useState<'leads' | 'analytics' | 'config' | 'empresas'>('leads');
+  const [activeTab, setActiveTab] = useState<'leads' | 'applications' | 'analytics' | 'config' | 'empresas'>('leads');
 
   // Analytics
   const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
@@ -186,6 +205,22 @@ export default function Admin() {
       setEvoApiStatus('error');
     } finally {
       setDataLoading(false);
+    }
+  };
+
+  const loadApplications = async (token: string) => {
+    setApplicationsLoading(true);
+    setApplicationsError('');
+    try {
+      const response = await fetch('/api/admin/applications', { headers: { Authorization: `Bearer ${token}` } });
+      if (!response.ok) throw new Error('applications_unavailable');
+      const data = await response.json();
+      setApplications(data.applications || []);
+      setApplicationsCrmAvailable(data.crm_available === true);
+    } catch {
+      setApplicationsError('Não foi possível carregar as aplicações. Tente novamente.');
+    } finally {
+      setApplicationsLoading(false);
     }
   };
 
@@ -387,6 +422,14 @@ export default function Admin() {
               📋 Leads
             </button>
             <button
+              onClick={() => { setActiveTab('applications'); loadApplications(adminToken); }}
+              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                activeTab === 'applications' ? 'bg-green-500 text-black' : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              }`}
+            >
+              📝 Aplicações
+            </button>
+            <button
               onClick={() => { setActiveTab('analytics'); if (!analytics) loadAnalytics(adminToken, analyticsRange); }}
               className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
                 activeTab === 'analytics'
@@ -431,6 +474,43 @@ export default function Admin() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 pb-8">
+          {activeTab === 'applications' && <section aria-labelledby="applications-title" className="rounded-2xl border border-green-500/20 bg-[#111111] p-5 sm:p-6">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h2 id="applications-title" className="text-xl font-bold text-white">Aplicações · Sessão de Start</h2>
+                <p className="mt-1 text-sm text-gray-400">Respostas originais no Supabase e situação comercial no EvoCRM.</p>
+              </div>
+              <button type="button" onClick={() => loadApplications(adminToken)} className="rounded-lg border border-white/20 px-4 py-2 text-sm text-white hover:bg-white/10">Atualizar</button>
+            </div>
+            {!applicationsCrmAvailable && !applicationsLoading && !applicationsError && <p role="status" className="mt-4 rounded-lg border border-yellow-500/30 bg-yellow-500/10 p-3 text-sm text-yellow-200">CRM indisponível agora. As aplicações e o estado da fila continuam visíveis; a etapa comercial pode estar desatualizada.</p>}
+            {applicationsError && <p role="alert" className="mt-4 rounded-lg border border-red-400/40 bg-red-400/10 p-3 text-sm text-red-200">{applicationsError}</p>}
+            {applicationsLoading ? <p role="status" className="mt-5 text-sm text-gray-400">Carregando aplicações…</p>
+              : applications.length === 0 && !applicationsError ? <p className="mt-5 text-sm text-gray-400">Nenhuma aplicação registrada.</p>
+              : <div className="mt-5 grid gap-4 lg:grid-cols-2">{applications.map(application => {
+                const whatsapp = application.phone.replace(/\D/g, '');
+                const syncLabel = application.sync.state === 'delivered' ? 'Sincronizada no CRM'
+                  : application.sync.state === 'dead' ? 'Integração exige atenção'
+                  : application.sync.state === 'processing' ? 'Enviando ao CRM'
+                  : 'Aguardando sincronização';
+                return <article key={application.id} className="rounded-xl border border-white/10 bg-black/30 p-4">
+                  <div className="flex flex-wrap items-start justify-between gap-2">
+                    <div><h3 className="font-semibold text-white">{application.name}</h3><p className="text-xs text-gray-400">{new Date(application.submitted_at).toLocaleString('pt-BR')}</p></div>
+                    <span className={`rounded-full px-2 py-1 text-xs ${application.sync.state === 'delivered' ? 'bg-green-500/15 text-green-300' : application.sync.state === 'dead' ? 'bg-red-500/15 text-red-300' : 'bg-yellow-500/15 text-yellow-200'}`}>{syncLabel}</span>
+                  </div>
+                  <p className="mt-3 text-sm text-gray-200"><strong>Negócio:</strong> {application.answers.business || '—'}</p>
+                  <p className="mt-2 text-sm text-gray-200"><strong>Resultado desejado:</strong> {application.answers.desiredResult || '—'}</p>
+                  <p className="mt-3 text-xs text-gray-400">Canais: {application.answers.channels || '—'} · Responsável: {application.answers.owner || '—'} · Gargalo: {application.answers.bottleneck || '—'} · Prazo: {application.answers.timing || '—'} · Investimento: {application.answers.investment || '—'}</p>
+                  <p className="mt-2 text-xs text-gray-400">Destino: {application.decision} · Origem: {application.attribution?.utm_source || 'direto'} · Campanha: {application.attribution?.utm_campaign || '—'}</p>
+                  <p className="mt-2 text-xs text-gray-400">CRM: {application.crm_stage || (application.crm_opportunity_id ? 'etapa indisponível' : 'ainda sem oportunidade')} · Tentativas: {application.sync.attempts}</p>
+                  {application.sync.last_error && <p role="status" className="mt-2 text-xs text-red-200">Erro da integração: {application.sync.last_error}</p>}
+                  <div className="mt-3 flex flex-wrap gap-3 text-sm">
+                    {whatsapp && <a href={`https://wa.me/${whatsapp.replace(/^\+/, '')}`} target="_blank" rel="noopener noreferrer" className="text-green-300 underline">Abrir WhatsApp</a>}
+                    {application.email && <a href={`mailto:${application.email}`} className="text-green-300 underline">Enviar e-mail</a>}
+                  </div>
+                  <p className="mt-3 break-all text-[11px] text-gray-500">Aplicação: {application.id}{application.crm_opportunity_id ? ` · Oportunidade: ${application.crm_opportunity_id}` : ''}</p>
+                </article>;
+              })}</div>}
+          </section>}
           {/* === LEADS TAB === */}
           {activeTab === 'leads' && (
             <>

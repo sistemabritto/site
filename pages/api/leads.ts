@@ -113,6 +113,56 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   )) {
     return res.status(400).json({ success: false, error: 'Respostas da aplicação inválidas.' });
   }
+  if (isCrmCaseApplication) {
+    const submissionId = req.body?.submission_id;
+    const sessionId = req.body?.session_id;
+    if (typeof submissionId !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(submissionId) ||
+        req.body?.consent !== true || !name?.trim() || name.length > 100 || !whatsapp ||
+        (sessionId != null && (typeof sessionId !== 'string' || sessionId.length > 100)) ||
+        JSON.stringify(answers).length > 5000 ||
+        Object.keys(answers).some(key => !['channels', 'owner', 'bottleneck', 'timing', 'investment', 'business', 'desiredResult'].includes(key))) {
+      return res.status(400).json({ success: false, error: 'Aplicação inválida.' });
+    }
+    const serviceKey = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !serviceKey) {
+      return res.status(503).json({ success: false, error: 'Não foi possível receber sua aplicação agora.' });
+    }
+    const utmSource = utm_source || utm?.utm_source || '';
+    const utmMedium = utm_medium || utm?.utm_medium || '';
+    const utmCampaign = utm_campaign || utm?.utm_campaign || '';
+    const recommended = answers.channels !== 'none' && answers.timing !== 'later'
+      && answers.bottleneck !== 'learning' && answers.investment !== 'not-now';
+    const decision = recommended
+      ? answers.investment === 'details' ? 'session_details' : 'session_checkout'
+      : 'low_ticket_waitlist';
+    try {
+      const { createClient } = await import('@supabase/supabase-js');
+      const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, serviceKey);
+      const { data, error } = await supabase.rpc('record_case_application', {
+        p_id: submissionId,
+        p_name: name.trim(),
+        p_email: emailEfetivo,
+        p_phone: phoneNumber,
+        p_session_id: sessionId || null,
+        p_answers: answers,
+        p_attribution: {
+          utm_source: utmSource, utm_medium: utmMedium, utm_campaign: utmCampaign,
+          utm_content: utm?.utm_content || '', utm_term: utm?.utm_term || '',
+        },
+        p_decision: decision,
+      });
+      if (error) {
+        console.error('[CRM application] intake failed', { code: error.code });
+        if (error.code === '23505') return res.status(409).json({ success: false, error: 'Aplicação alterada; envie novamente.' });
+        void alertarNexus('Aplicação CRM não persistida', `submission_id: ${submissionId}\nSupabase: ${error.code || 'erro desconhecido'}`);
+        return res.status(503).json({ success: false, error: 'Não foi possível receber sua aplicação agora.' });
+      }
+      return res.status(200).json({ success: true, application_id: data, decision, crm_sync: 'pending' });
+    } catch {
+      void alertarNexus('Aplicação CRM não persistida', `submission_id: ${submissionId}\nSupabase: exceção`);
+      return res.status(503).json({ success: false, error: 'Não foi possível receber sua aplicação agora.' });
+    }
+  }
   const results: { supabase?: boolean; evocrm?: boolean } = {};
   // Motivo de cada falha, pra compor o alerta no fim — sem isto o Telegram
   // recebe "falhou" sem dizer o quê, e vira ticket manual de investigação
@@ -262,8 +312,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   // ── Sucesso se pelo menos um salvou ─────────────────────────────
-  // Mostrar o resultado da aplicação só depois de persistir as respostas.
-  const saved = isCrmCaseApplication ? Boolean(results.supabase) : Boolean(results.supabase || results.evocrm);
+  const saved = Boolean(results.supabase || results.evocrm);
 
   // Lead perdido de verdade: nem Supabase nem EvoCRM salvaram, e isso hoje
   // não chega a ninguém — o frontend de quiz.tsx/call-sobrevivencia-pos-ia.tsx

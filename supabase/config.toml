@@ -15,3 +15,9 @@ enabled = true
 verify_jwt = false
 import_map = "./functions/fulfillment-worker/deno.json"
 entrypoint = "./functions/fulfillment-worker/index.ts"
+
+[functions.funnel-crm-worker]
+enabled = true
+verify_jwt = false
+import_map = "./functions/funnel-crm-worker/deno.json"
+entrypoint = "./functions/funnel-crm-worker/index.ts"

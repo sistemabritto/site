@@ -23,3 +23,16 @@ Tabelas com dados pessoais, pagamentos, OTPs e segredos ficam sem `GRANT` para `
 Os arquivos SQL legados deste projeto são aplicados pelo SQL Editor; `supabase-schema.sql` cria `leads` e `customers`. Ao adicionar uma tabela, registre seu SQL de criação e seus privilégios no controle de versão. Confirme no painel **Project Settings → Data API** quais schemas estão expostos e use o Security Advisor antes de aplicar em produção.
 
 Fonte: [aviso oficial de mudança](https://supabase.com/changelog/45329-breaking-change-tables-not-exposed-to-data-and-graphql-api-automatically) e [guia de segurança da Data API](https://supabase.com/docs/guides/api/securing-your-api).
+
+## Aplicações do estudo de caso CRM
+
+O funil usa `funnel_applications` como histórico imutável de envios e `funnel_integration_outbox` para entregar cada envio ao pipeline **Sessão de Start · Aplicação CRM** (`57599c7e-e678-4807-ade8-07efca578616`). A rota `/api/leads` recebe `submission_id` e só confirma depois de `record_case_application` gravar aplicação + tarefa na mesma transação. `/admin` lê a aplicação, a fila e a etapa atual do CRM. O worker `funnel-crm-worker` reaproveita contato/oportunidade quando cabível e registra o vínculo de IDs no Supabase.
+
+Ordem de publicação:
+
+1. Conferir no projeto ligado os grants, RLS e segredo `fulfillment_worker_secret` do Vault; a função usa `FULFILLMENT_WORKER_SECRET` e os segredos `EVO_CRM_URL`/`EVO_CRM_TOKEN` já usados pelo worker de pagamentos. Confirmar que a URL do CRM é acessível **da Edge Function**. O código local ainda não prova essa conectividade.
+2. Publicar `funnel-crm-worker`, depois aplicar `20260923173448_funnel_applications_outbox.sql` e `20260923174215_schedule_funnel_crm_worker.sql`. A migração de agendamento chama a função a cada minuto. Não executar `db reset --linked` em produção.
+3. Publicar o site depois das migrações. Com a versão antiga do site, as novas tabelas ficam ociosas; com o site novo antes das migrações, a aplicação recebe erro 503.
+4. Antes de tráfego, fazer uma aplicação controlada e conferir o mesmo ID no Supabase, fila, CRM e `/admin`; repetir o mesmo envio, simular falha/recuperação e conferir o pagamento da Cakto. A ligação automática do pedido Cakto à aplicação e a atribuição de responsável/próxima tarefa comercial ainda são etapas pendentes.
+
+As tabelas novas não concedem acesso a `anon` ou `authenticated`; somente rotas e workers com credencial de serviço leem dados pessoais. A função RPC exposta tem `EXECUTE` exclusivo do `service_role`.
