@@ -98,6 +98,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // submission after the first fail with 23505. This internal identifier must
   // never be used as a deliverable email address.
   const emailEfetivo = email?.trim().toLowerCase() || `whatsapp-${phoneNumber.replace(/\D/g, '')}@sem-email.sistemabritto.com.br`;
+  const isCrmCaseApplication = source === 'sessao-start-caso-crm-aplicacao';
+  if (isCrmCaseApplication && (!answers || typeof answers !== 'object' || Array.isArray(answers))) {
+    return res.status(400).json({ success: false, error: 'Respostas da aplicação ausentes.' });
+  }
+  if (isCrmCaseApplication && (
+    !['none', 'one', 'many'].includes(answers.channels) ||
+    !['defined', 'self', 'unclear'].includes(answers.owner) ||
+    !['intake', 'followup', 'learning'].includes(answers.bottleneck) ||
+    !['30', '90', 'later'].includes(answers.timing) ||
+    !['yes', 'details', 'not-now'].includes(answers.investment) ||
+    typeof answers.business !== 'string' || answers.business.trim().length < 15 || answers.business.length > 1200 ||
+    typeof answers.desiredResult !== 'string' || answers.desiredResult.trim().length < 15 || answers.desiredResult.length > 1200
+  )) {
+    return res.status(400).json({ success: false, error: 'Respostas da aplicação inválidas.' });
+  }
   const results: { supabase?: boolean; evocrm?: boolean } = {};
   // Motivo de cada falha, pra compor o alerta no fim — sem isto o Telegram
   // recebe "falhou" sem dizer o quê, e vira ticket manual de investigação
@@ -115,7 +130,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const supabase = await getSupabaseClient();
     if (supabase) {
-      const { error } = await supabase.from('leads').upsert({
+      // Uma aplicação precisa atualizar as respostas mesmo quando a pessoa já
+      // entrou pela aula gratuita. Preservamos a origem e UTMs do primeiro lead.
+      const { data: existing, error: lookupError } = isCrmCaseApplication
+        ? await supabase.from('leads').select('id, answers').eq('email', emailEfetivo).maybeSingle()
+        : { data: null, error: null };
+      const leadData = {
         name: name || '',
         email: emailEfetivo,
         phone: phoneNumber,  // coluna correta é "phone", não "whatsapp"
@@ -126,7 +146,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         utm_campaign: utmCampaign,
         utm_content: utmContent,
         created_at: new Date().toISOString(),
-      }, { onConflict: 'email', ignoreDuplicates: true });
+      };
+      const previousAnswers = existing?.answers && typeof existing.answers === 'object' && !Array.isArray(existing.answers)
+        ? existing.answers : {};
+      const { error } = lookupError
+        ? { error: lookupError }
+        : existing
+          ? await supabase.from('leads').update({
+              answers: { ...previousAnswers, crm_case_application: answers, crm_case_applied_at: new Date().toISOString() },
+              name: name || '', phone: phoneNumber,
+            }).eq('id', existing.id)
+          : await supabase.from('leads').upsert(isCrmCaseApplication
+              ? { ...leadData, answers: { crm_case_application: answers, crm_case_applied_at: new Date().toISOString() } }
+              : leadData,
+            { onConflict: 'email', ignoreDuplicates: !isCrmCaseApplication });
       if (!error) results.supabase = true;
       else {
         console.error('[Supabase] lead save failed', { code: error.code });
@@ -229,7 +262,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   // ── Sucesso se pelo menos um salvou ─────────────────────────────
-  const saved = results.supabase || results.evocrm;
+  // Mostrar o resultado da aplicação só depois de persistir as respostas.
+  const saved = isCrmCaseApplication ? Boolean(results.supabase) : Boolean(results.supabase || results.evocrm);
 
   // Lead perdido de verdade: nem Supabase nem EvoCRM salvaram, e isso hoje
   // não chega a ninguém — o frontend de quiz.tsx/call-sobrevivencia-pos-ia.tsx
