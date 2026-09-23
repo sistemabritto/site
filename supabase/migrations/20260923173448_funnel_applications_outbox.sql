@@ -78,8 +78,13 @@ begin
   select * into existing from public.funnel_applications where id = p_id;
   if existing.id is null or existing.company_key <> 'sistema-britto'
      or existing.funnel_key <> 'sessao-start-caso-crm'
-     or existing.lead_email <> p_email or existing.lead_phone <> p_phone
-     or existing.answers <> p_answers or existing.routing_decision <> p_decision then
+     or existing.lead_name is distinct from p_name
+     or existing.lead_email is distinct from p_email
+     or existing.lead_phone is distinct from p_phone
+     or existing.session_id is distinct from p_session_id
+     or existing.answers is distinct from p_answers
+     or existing.attribution is distinct from coalesce(p_attribution, '{}'::jsonb)
+     or existing.routing_decision is distinct from p_decision then
     raise exception 'submission_id_conflict' using errcode = '23505';
   end if;
 
@@ -97,7 +102,7 @@ grant execute on function public.record_case_application(uuid, text, text, text,
 
 -- Claiming and updating in one statement avoids two workers taking the same
 -- job. A crashed claim can be reclaimed after ten minutes.
-create function public.claim_funnel_integration_outbox(p_limit integer default 20)
+create function public.claim_funnel_integration_outbox(p_limit integer default 5)
 returns setof public.funnel_integration_outbox
 language sql
 set search_path = ''
@@ -109,7 +114,7 @@ as $$
     where (state in ('pending', 'retry') and next_attempt_at <= now())
        or (state = 'processing' and claimed_at < now() - interval '10 minutes')
     order by created_at
-    limit least(greatest(p_limit, 1), 20)
+    limit least(greatest(p_limit, 1), 5)
     for update skip locked
   ) as candidate
   where target.id = candidate.id

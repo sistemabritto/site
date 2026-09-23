@@ -124,7 +124,7 @@ Deno.serve(async request => {
   if (request.method !== "POST") return json({ error: "method_not_allowed" }, 405);
   if (!secret || request.headers.get("x-worker-secret") !== secret) return json({ error: "unauthorized" }, 401);
 
-  const { data: jobs, error } = await supabase.rpc("claim_funnel_integration_outbox", { p_limit: 20 });
+  const { data: jobs, error } = await supabase.rpc("claim_funnel_integration_outbox", { p_limit: 5 });
   if (error) return json({ error: "outbox_claim_failed" }, 500);
 
   const result = { claimed: 0, delivered: 0, retry: 0, dead: 0 };
