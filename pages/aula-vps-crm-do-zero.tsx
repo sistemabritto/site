@@ -197,6 +197,15 @@ export default function AulaVpsCrmDoZero() {
               <Etapas />
             </div>
 
+            <details className="mt-8 rounded-xl border border-surface-700 bg-surface-900 p-5 text-sm leading-relaxed text-gray-300">
+              <summary className="cursor-pointer font-semibold text-white">A instalação travou com “Illegal instruction”?</summary>
+              <p className="mt-3">
+                Na gravação, uma VPS com CPU antiga não executou a versão mais recente do ClickHouse. A correção aplicada naquele ambiente fixa uma versão compatível; ela está documentada no{' '}
+                <a href="https://github.com/oriondesign2015/SetupOrion/pull/170" target="_blank" rel="noopener noreferrer" className="text-[#a3ff12] underline">PR #170 do SetupOrion</a>.
+                Confira no PR se a correção já foi incorporada ao instalador principal, além do processador e da versão do ClickHouse, antes de repetir a instalação nessa VPS.
+              </p>
+            </details>
+
 
           </div>
         ) : (
