@@ -73,22 +73,35 @@ function crmFields(application: Application, previous: Record<string, unknown> =
 }
 
 async function findContact(application: Application): Promise<string | null> {
+  const exactPhone = application.lead_phone.replace(/\D/g, "");
   const phone = normalizedPhone(application.lead_phone);
   const email = application.lead_email.trim().toLowerCase();
-  const matches = new Set<string>();
-  for (const query of [application.lead_phone, application.lead_email]) {
+  const candidates = new Map<string, { phone_number?: string; email?: string }>();
+  for (const query of new Set([application.lead_phone, exactPhone, phone, application.lead_email].filter(Boolean))) {
     const payload = await crm("GET", `/api/v1/contacts/search?q=${encodeURIComponent(query)}`);
     const contacts = Array.isArray(payload.data) ? payload.data : Array.isArray(payload.data?.payload) ? payload.data.payload : null;
     if (!contacts) throw new Error("crm_contacts_shape_unexpected");
     for (const row of contacts) {
-      if ((phone && normalizedPhone(String(row.phone_number || "")) === phone) ||
-          (email && String(row.email || "").trim().toLowerCase() === email)) {
-        if (row.id) matches.add(String(row.id));
-      }
+      if (row.id) candidates.set(String(row.id), row);
     }
   }
-  if (matches.size > 1) throw new Error("crm_contact_identity_conflict");
-  return [...matches][0] || null;
+  const byEmail = new Set<string>();
+  const byExactPhone = new Set<string>();
+  const byLegacyPhone = new Set<string>();
+  for (const [id, row] of candidates) {
+    const candidatePhone = String(row.phone_number || "").replace(/\D/g, "");
+    if (email && String(row.email || "").trim().toLowerCase() === email) byEmail.add(id);
+    if (exactPhone && candidatePhone === exactPhone) byExactPhone.add(id);
+    if (phone && normalizedPhone(candidatePhone) === phone) byLegacyPhone.add(id);
+  }
+  if (byEmail.size > 1 || byExactPhone.size > 1) throw new Error("crm_contact_identity_conflict");
+  const emailId = [...byEmail][0];
+  const exactId = [...byExactPhone][0];
+  if (emailId && exactId && emailId !== exactId) throw new Error("crm_contact_identity_conflict");
+  if (emailId && byLegacyPhone.size && !byLegacyPhone.has(emailId)) throw new Error("crm_contact_identity_conflict");
+  if (emailId || exactId) return emailId || exactId;
+  if (byLegacyPhone.size > 1) throw new Error("crm_contact_identity_conflict");
+  return [...byLegacyPhone][0] || null;
 }
 
 async function sync(application: Application): Promise<{ contactId: string; itemId: string }> {

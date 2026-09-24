@@ -133,25 +133,39 @@ function crmItems(payload: any): Array<{ id: string; contact_id?: string; comple
 }
 
 async function findCrmContact(purchase: Purchase): Promise<string | null> {
+  const exactPhone = digits(purchase.customer_phone);
   const phone = normalizedPhone(purchase.customer_phone);
   const email = purchase.customer_email?.trim().toLowerCase() || "";
-  const matches = new Set<string>();
-  for (const query of [purchase.customer_phone, purchase.customer_email]) {
-    if (!query) continue;
+  const candidates = new Map<string, { phone_number?: string; email?: string }>();
+  const queries = [purchase.customer_phone, exactPhone, phone, purchase.customer_email]
+    .filter((value): value is string => typeof value === "string" && Boolean(value.trim()));
+  for (const query of new Set(queries)) {
     const found = await crmRequest("GET", `/api/v1/contacts/search?q=${encodeURIComponent(query)}`);
     if (!found.ok) throw new Error(`crm_search_http_${found.status}`);
     const rows = Array.isArray((found.payload as any).data) ? (found.payload as any).data
       : Array.isArray((found.payload as any).data?.payload) ? (found.payload as any).data.payload : null;
     if (!rows) throw new Error("crm_contacts_shape_unexpected");
     for (const row of rows) {
-      if ((phone && normalizedPhone(row.phone_number || null) === phone) ||
-          (email && String(row.email || "").toLowerCase() === email)) {
-        if (row.id) matches.add(String(row.id));
-      }
+      if (row.id) candidates.set(String(row.id), row);
     }
   }
-  if (matches.size > 1) throw new Error("crm_contact_identity_conflict");
-  return [...matches][0] || null;
+  const byEmail = new Set<string>();
+  const byExactPhone = new Set<string>();
+  const byLegacyPhone = new Set<string>();
+  for (const [id, row] of candidates) {
+    const candidatePhone = digits(row.phone_number || null);
+    if (email && String(row.email || "").trim().toLowerCase() === email) byEmail.add(id);
+    if (exactPhone && candidatePhone === exactPhone) byExactPhone.add(id);
+    if (phone && normalizedPhone(candidatePhone) === phone) byLegacyPhone.add(id);
+  }
+  if (byEmail.size > 1 || byExactPhone.size > 1) throw new Error("crm_contact_identity_conflict");
+  const emailId = [...byEmail][0];
+  const exactId = [...byExactPhone][0];
+  if (emailId && exactId && emailId !== exactId) throw new Error("crm_contact_identity_conflict");
+  if (emailId && byLegacyPhone.size && !byLegacyPhone.has(emailId)) throw new Error("crm_contact_identity_conflict");
+  if (emailId || exactId) return emailId || exactId;
+  if (byLegacyPhone.size > 1) throw new Error("crm_contact_identity_conflict");
+  return [...byLegacyPhone][0] || null;
 }
 
 async function syncCrm(purchase: Purchase): Promise<void> {
